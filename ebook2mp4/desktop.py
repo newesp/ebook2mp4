@@ -47,6 +47,7 @@ class Workbench(ttk.Frame):
         self._build()
         self.root.protocol('WM_DELETE_WINDOW', self.close)
         self.root.bind('<Control-s>', lambda e: self.save())
+        self.root.bind('<Control-f>', lambda e: self.find_entry.focus_set())
         self.refresh()
 
     def _build(self):
@@ -145,14 +146,57 @@ class Workbench(ttk.Frame):
         right.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox('all')))
         canvas.bind('<Configure>', lambda e: canvas.itemconfigure(window, width=e.width))
         ttk.Label(right, text='校對與朗讀確認', style='Heading.TLabel').pack(anchor='w', pady=(0, 20))
+        ttk.Label(right, text='搜尋文字（完全相符）').pack(anchor='w')
+        self.find_text = tk.StringVar()
+        self.find_entry = ttk.Entry(right, textvariable=self.find_text, width=18)
+        self.find_entry.pack(fill='x', pady=4)
+        self.find_entry.bind('<Return>', lambda e: self.find_next())
+        self.find_button = ttk.Button(right, text='尋找下一個  Ctrl+F', command=self.find_next)
+        self.find_button.pack(fill='x', pady=(0, 8))
+        ttk.Label(right, text='取代為').pack(anchor='w')
+        self.replace_text = tk.StringVar()
+        ttk.Entry(right, textvariable=self.replace_text, width=18).pack(fill='x', pady=4)
+        replacements = ttk.Frame(right)
+        replacements.pack(fill='x')
+        replacements.columnconfigure((0, 1), weight=1, uniform='replace')
+        self.replace_button = ttk.Button(replacements, text='取代一處', width=6, command=self.replace_one)
+        self.replace_button.grid(row=0, column=0, sticky='ew', padx=(0, 2))
+        self.replace_all_button = ttk.Button(replacements, text='全部取代', width=6, command=self.replace_all)
+        self.replace_all_button.grid(row=0, column=1, sticky='ew', padx=(2, 0))
+        self.undo_button = ttk.Button(right, text='復原  Ctrl+Z', command=self.undo)
+        self.undo_button.pack(fill='x', pady=(6, 8))
+        self.export_button = ttk.Button(right, text='匯出目前校對稿 TXT', command=self.export_txt)
+        self.export_button.pack(fill='x', pady=3)
+        self.reload_button = ttk.Button(right, text='重載外部校對稿', command=partial(self.import_txt, True))
+        self.reload_button.pack(fill='x', pady=3)
+        ttk.Label(right, text='朗讀稿確認', style='Heading.TLabel').pack(anchor='w', pady=(16, 8))
+        self.reading_status = ttk.Label(right, text='', wraplength=220, foreground=MUTED)
+        self.reading_status.pack(anchor='w')
+        self.confirm_button = ttk.Button(right, text='確認朗讀稿', command=self.confirm_reading, style='Primary.TButton')
+        self.confirm_button.pack(fill='x', pady=(8, 4))
+        self.issues_button = ttk.Button(right, text='檢查／略過來源異常', command=self.review_source_issues)
+        self.issues_button.pack(fill='x', pady=3)
+        self.versions_button = ttk.Button(right, text='檢視保存版本與副本', command=self.show_versions)
+        self.versions_button.pack(fill='x', pady=(3, 16))
         for title, reason, action in (
             ('Gemini 校對', 'T07 將提供金鑰設定與候選差異。\n目前可直接人工編輯校對稿。', '提出校對建議'),
-            ('朗讀稿確認', 'T03 將提供確認與版本快照。\n目前保存的是校對稿。', '確認朗讀稿'),
-            ('語音與影片', 'T09 起提供語音，T16 起提供影片。\n尚無已確認朗讀稿或有效音訊。', '產生成品'),
+            ('語音與影片', 'T09 起提供語音，T16 起提供影片。\n目前尚無有效音訊。', '產生成品'),
         ):
             ttk.Label(right, text=title, style='Heading.TLabel').pack(anchor='w', pady=(0, 8))
             ttk.Label(right, text=reason, wraplength=220, foreground=MUTED).pack(anchor='w')
             ttk.Button(right, text=action, state='disabled').pack(fill='x', pady=(10, 24))
+
+        def scroll_tools(event):
+            canvas.yview_scroll(-int(event.delta / 120) if abs(event.delta) >= 120
+                                else (-1 if event.delta > 0 else 1), 'units')
+            return 'break'
+
+        def bind_scroll(widget):
+            widget.bind('<MouseWheel>', scroll_tools)
+            for child in widget.winfo_children():
+                bind_scroll(child)
+
+        bind_scroll(canvas)
 
         self.status = ttk.Label(self, text='', padding=(8, 10))
         self.status.grid(row=4, column=0, sticky='ew')
@@ -170,6 +214,11 @@ class Workbench(ttk.Frame):
         if self.editor.edit_modified():
             self.editor.edit_modified(False)
             if not self._loading:
+                if self.flow and self.batch_id:
+                    try:
+                        self.flow.invalidate_reading(self.batch_id)
+                    except ProjectError as e:
+                        self.report(e)
                 self.update_stats()
 
     def update_stats(self):
@@ -181,14 +230,28 @@ class Workbench(ttk.Frame):
         self.stats.configure(text=f'{len(text):,} 字元 · {paragraphs:,} 段 · 版本 {revision} · '
                              + ('尚未儲存' if self.dirty else '已儲存' if self.batch_id else '等待匯入'))
         self.save_button.configure(state='normal' if self.dirty else 'disabled')
+        enabled = 'normal' if batch else 'disabled'
+        for button in (self.find_button, self.replace_button, self.replace_all_button, self.undo_button,
+                       self.export_button, self.reload_button, self.versions_button):
+            button.configure(state=enabled)
+        blockers = self.flow.confirmation_blockers(self.batch_id) if batch and self.flow and self.batch_id else []
+        self.confirm_button.configure(state='normal' if batch and text.strip() and not blockers else 'disabled',
+                                      text='儲存並確認朗讀稿' if self.dirty else '確認朗讀稿')
+        self.issues_button.configure(state='normal' if blockers else 'disabled')
+        snapshot = next((s for s in batch.get('readings', []) if s['id'] == batch.get('current_reading')), None) if batch else None
+        reading = ('已確認 · 校對稿 v' + str(snapshot['revision']) + '\nSHA-256 ' + snapshot['sha256'][:16]
+                   if snapshot and not self.dirty else '尚未確認目前朗讀稿\n修改後須重新確認；舊快照保留。')
+        if blockers:
+            reading = '來源異常阻擋確認：\n' + '\n'.join(blockers)
+        self.reading_status.configure(text=reading if batch else '匯入批次後可確認朗讀稿。')
         self.root.title(('＊' if self.dirty else '') + (self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4')
 
     def show_step(self, n):
         self.step = n
         reasons = {
             1: '來源：建立書籍專案後新增 TXT 批次。支援 UTF-8／UTF-16 BOM 與手動 Big5／CP950；PDF／OCR 將於 T04／T05 提供。',
-            2: '校對：左欄保留來源原文，右欄編輯校對稿。按 Ctrl+S 儲存；朗讀稿確認將於 T03 提供。',
-            3: '語音尚未提供：需要 T03 的朗讀稿確認及 T09 的語音服務。可返回來源或校對繼續編輯。',
+            2: '校對：對照來源原文編輯，Ctrl+S 儲存。右側可搜尋取代、匯出／重載及明確確認朗讀稿；工具區可向下捲動。',
+            3: '語音尚未提供：T09 將接入語音服務。請先確認朗讀稿；可返回來源或校對繼續編輯。',
             4: '影片尚未提供：需要有效音訊與視覺素材，T16 起提供製片。可返回校對，已輸入文字仍保留。',
         }
         self.notice.configure(text=reasons[n])
@@ -350,17 +413,18 @@ class Workbench(ttk.Frame):
         except ProjectError as e:
             self.report(e)
 
-    def import_txt(self):
-        if not self.flow or not self.may_leave():
+    def import_txt(self, reload=False):
+        if not self.flow or (reload and not self.batch_id) or (not reload and not self.may_leave()):
             return
         flow = self.flow
-        path = filedialog.askopenfilename(title='選擇 TXT 新增製作批次', filetypes=[('文字檔', '*.txt')], parent=self.root)
+        batch_id = self.batch_id
+        path = filedialog.askopenfilename(title='選擇外部校對稿' if reload else '選擇 TXT 新增製作批次', filetypes=[('文字檔', '*.txt')], parent=self.root)
         if not path:
             return
         preview: ImportPreview | None = None
         enough = False
         dialog = tk.Toplevel(self.root)
-        dialog.title('匯入前預覽')
+        dialog.title('重載前預覽' if reload else '匯入前預覽')
         dialog.geometry('760x680')
         dialog.minsize(640, 580)
         dialog.transient(self.root)
@@ -377,7 +441,7 @@ class Workbench(ttk.Frame):
         detail_label = ttk.Label(dialog, wraplength=700, padding=(16, 4))
         detail_label.grid(row=1, column=0, sticky='ew')
         dialog.bind('<Configure>', lambda e: detail_label.configure(wraplength=max(200, dialog.winfo_width() - 40)))
-        frame, text = text_pane(dialog, '來源預覽 · 請核對文字，確認後建立新批次')
+        frame, text = text_pane(dialog, '外部校對稿預覽 · 確認後取消目前朗讀確認' if reload else '來源預覽 · 請核對文字，確認後建立新批次')
         frame.grid(row=2, column=0, sticky='nsew')
         warning_accepted = tk.BooleanVar(value=False)
         warning_check = ttk.Checkbutton(dialog, text='已核對異常字元，確認原文確實如此', variable=warning_accepted)
@@ -390,14 +454,26 @@ class Workbench(ttk.Frame):
             if not preview or not enough or (preview.warnings and not warning_accepted.get()):
                 return
             try:
-                self.batch_id = flow.import_txt(preview, accept_warnings=warning_accepted.get())
+                if reload:
+                    assert batch_id is not None
+                    conflict = 'cancel'
+                    if self.dirty:
+                        answer = messagebox.askyesnocancel(
+                            '重載遇到未存校對稿', '是否保留未存編輯的副本？\n是：將副本存入專案後重載。\n否：明確捨棄未存編輯並以外部稿取代。\n取消：保留目前內容，不重載。', parent=dialog)
+                        if answer is None:
+                            return
+                        conflict = 'keep-copy' if answer else 'replace'
+                    flow.reload_draft(batch_id, preview, unsaved_text=self.current_text,
+                                      conflict=conflict, accept_warnings=warning_accepted.get())
+                else:
+                    self.batch_id = flow.import_txt(preview, accept_warnings=warning_accepted.get())
                 dialog.destroy()
                 self.step = 2
                 self.refresh()
             except ProjectError as e:
                 self.report(e)
 
-        confirm = ttk.Button(actions, text='確認匯入', command=commit, style='Primary.TButton', state='disabled')
+        confirm = ttk.Button(actions, text='確認重載' if reload else '確認匯入', command=commit, style='Primary.TButton', state='disabled')
         confirm.pack(side='right')
 
         def update_confirm(*_args):
@@ -413,9 +489,11 @@ class Workbench(ttk.Frame):
                 selection = 'auto' if encoding.current() == 0 else encoding.get()
                 preview = flow.inspect_txt(path, encoding=selection)
                 info = flow.import_requirements(preview)
+                if reload and self.dirty:
+                    info['required_bytes'] += len(self.current_text.encode('utf-8'))
                 enough = info['free_bytes'] >= info['required_bytes'] + 65536
                 details = (f'檔名：{preview.path.name}\n大小：{preview.size:,} 位元組 · {preview.encoding} · 可讀\n'
-                           f'專案位置：{info["project_location"]}\n來源副本所需空間：{preview.size:,} 位元組\n'
+                           f'專案位置：{info["project_location"]}\n' + ('重載只更新校對稿，未存稿可保留副本。\n' if reload else f'來源副本所需空間：{preview.size:,} 位元組\n') +
                            f'本次保存估計：{info["required_bytes"]:,} 位元組 + 65,536 安全餘額\n'
                            f'磁碟可用：{info["free_bytes"]:,} 位元組 · 原始來源檔保持不變。')
                 if not enough:
@@ -435,6 +513,141 @@ class Workbench(ttk.Frame):
         encoding.bind('<<ComboboxSelected>>', update_preview)
         update_preview()
         dialog.bind('<Escape>', lambda e: dialog.destroy())
+
+    def find_next(self):
+        needle = self.find_text.get()
+        if not self.batch_id or not needle:
+            return False
+        start = self.editor.index('insert')
+        found = self.editor.search(needle, start, stopindex='end', exact=True)
+        if not found:
+            found = self.editor.search(needle, '1.0', stopindex='end', exact=True)
+        self.editor.tag_remove('sel', '1.0', 'end')
+        if not found:
+            self.status.configure(text='找不到完全相符的文字。')
+            return False
+        end = f'{found}+{len(needle)}c'
+        self.editor.tag_add('sel', found, end)
+        self.editor.mark_set('insert', end)
+        self.editor.see(found)
+        return True
+
+    def replace_one(self):
+        if not self.batch_id or not self.find_text.get():
+            return
+        selected = self.editor.tag_ranges('sel')
+        if not selected or self.editor.get(*selected) != self.find_text.get():
+            if not self.find_next():
+                return
+            selected = self.editor.tag_ranges('sel')
+        self.editor.edit_separator()
+        self.editor.configure(autoseparators=False)
+        self.editor.delete(*selected)
+        self.editor.insert(selected[0], self.replace_text.get())
+        self.editor.configure(autoseparators=True)
+        self.editor.edit_separator()
+        self.edited()
+
+    def replace_all(self):
+        needle = self.find_text.get()
+        if not self.batch_id or not needle:
+            return
+        text = self.current_text
+        count = text.count(needle)
+        if count:
+            self.editor.edit_separator()
+            self.editor.configure(autoseparators=False)
+            self.editor.delete('1.0', 'end')
+            self.editor.insert('1.0', text.replace(needle, self.replace_text.get()))
+            self.editor.configure(autoseparators=True)
+            self.editor.edit_separator()
+            self.edited()
+        self.status.configure(text=f'已取代 {count:,} 處；可按 Ctrl+Z 復原。')
+
+    def undo(self):
+        try:
+            self.editor.edit_undo()
+            self.edited()
+        except tk.TclError:
+            self.status.configure(text='目前沒有可復原的編輯。')
+
+    def export_txt(self):
+        if not self.flow or not self.batch_id:
+            return
+        path = filedialog.asksaveasfilename(title='匯出目前校對稿（請用新檔名）', defaultextension='.txt',
+                                          filetypes=[('UTF-8 文字檔', '*.txt')], parent=self.root)
+        if path:
+            try:
+                self.flow.export_txt(self.batch_id, path, text=self.current_text)
+                self.status.configure(text=f'已匯出 UTF-8 TXT：{path}；專案儲存狀態不變。', foreground=GREEN)
+            except ProjectError as e:
+                self.report(e)
+
+    def confirm_reading(self):
+        if not self.flow or not self.batch_id:
+            return
+        if not messagebox.askyesno('確認朗讀稿', '確認目前完整文字供朗讀使用？\n將先儲存校對稿，再建立不可變快照。後續修改須重新確認。', parent=self.root):
+            return
+        if not self.save():
+            return
+        try:
+            self.flow.confirm_reading(self.batch_id)
+            self.update_stats()
+            self.status.configure(text='朗讀稿已確認；快照與完整雜湊可由「檢視保存版本與副本」查閱。', foreground=GREEN)
+        except ProjectError as e:
+            self.report(e)
+
+    def review_source_issues(self):
+        if not self.flow or not self.batch_id:
+            return
+        batch = next(b for b in self.flow.state['batches'] if b['id'] == self.batch_id)
+        for index, issue in enumerate(batch.get('source_issues', [])):
+            if issue['status'] == 'pending' and messagebox.askyesno(
+                    '明確略過來源異常', f'{issue["reason"]}\n\n已核對來源，仍要略過此異常？', parent=self.root):
+                try:
+                    self.flow.resolve_source_issue(self.batch_id, index, 'skipped')
+                except ProjectError as e:
+                    self.report(e)
+                    break
+        self.update_stats()
+
+    def show_versions(self):
+        if not self.flow or not self.batch_id:
+            return
+        flow, batch_id = self.flow, self.batch_id
+        batch = next(b for b in flow.state['batches'] if b['id'] == batch_id)
+        versions = [(f'朗讀稿 · 校對 v{s["revision"]} · {s["confirmed_at"]}', s, True)
+                    for s in batch.get('readings', [])]
+        versions += [(f'未存稿副本 · {s["created_at"]}', s, False) for s in batch.get('draft_copies', [])]
+        if not versions:
+            messagebox.showinfo('保存版本與副本', '尚無已確認的朗讀稿或重載保留的未存稿副本。', parent=self.root)
+            return
+        dialog = tk.Toplevel(self.root)
+        dialog.title('保存版本與副本 · 唯讀')
+        dialog.geometry('760x580')
+        dialog.minsize(600, 420)
+        dialog.columnconfigure(0, weight=1)
+        dialog.rowconfigure(2, weight=1)
+        selector = ttk.Combobox(dialog, values=[v[0] for v in versions], state='readonly')
+        selector.grid(row=0, column=0, sticky='ew', padx=12, pady=12)
+        details = ttk.Label(dialog, wraplength=700, padding=12)
+        details.grid(row=1, column=0, sticky='ew')
+        dialog.bind('<Configure>', lambda e: details.configure(wraplength=max(200, dialog.winfo_width() - 40)))
+        frame, text = text_pane(dialog, '保存文字 · 可選取複製')
+        frame.grid(row=2, column=0, sticky='nsew')
+        def select(_event=None):
+            _, ref, reading = versions[selector.current()]
+            try:
+                content = (flow.reading_text(batch_id, ref['id']) if reading
+                           else flow.draft_copy_text(batch_id, ref['id']))
+                self.fill(text, content)
+                details.configure(text=f'{ref["path"]}\nSHA-256：{ref["sha256"]}')
+            except ProjectError as e:
+                self.fill(text, '')
+                details.configure(text=str(e))
+        selector.bind('<<ComboboxSelected>>', select)
+        selector.current(len(versions) - 1)
+        select()
 
     def save(self):
         if not self.batch_id or not self.flow:

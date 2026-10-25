@@ -8,4 +8,5 @@ dist/
 .scratch/pyinstaller-cache/
 .scratch/t02-baseline/
 .scratch/t02-visual/
+.scratch/t03-visual/
 .mypy_cache/

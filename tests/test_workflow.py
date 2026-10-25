@@ -27,6 +27,106 @@ class ProjectJourney(unittest.TestCase):
         batch = flow.import_txt(preview)
         return flow, batch
 
+    def test_reading_confirmation_is_immutable_and_local_to_batch(self):
+        flow, first = self.imported()
+        second = flow.import_txt(flow.inspect_txt(self.source))
+        old = flow.confirm_reading(first)
+        other = flow.confirm_reading(second)
+        self.assertEqual(flow.reading_text(first), self.text)
+        self.assertEqual(old['sha256'], hashlib.sha256(self.text.encode('utf-8')).hexdigest())
+        flow.save_draft(first, '新的校對稿。')
+        reopened = ProjectWorkflow.open(flow.root)
+        with self.assertRaisesRegex(ProjectError, '確認'):
+            reopened.reading_text(first)
+        self.assertEqual(reopened.reading_text(first, old['id']), self.text)
+        self.assertEqual(reopened.reading_text(second), self.text)
+        self.assertEqual(reopened.state['batches'][1]['current_reading'], other['id'])
+        fresh = reopened.confirm_reading(first)
+        self.assertNotEqual(fresh['id'], old['id'])
+        self.assertEqual(reopened.reading_text(first), '新的校對稿。')
+
+    def test_export_external_reload_conflict_copy_and_reconfirm(self):
+        flow, batch = self.imported()
+        snapshot = flow.confirm_reading(batch)
+        exported = self.root / '外部校對.txt'
+        flow.export_txt(batch, exported)
+        self.assertEqual(exported.read_bytes(), self.text.encode('utf-8'))
+        exported.write_bytes('外部修改。\r\n\r\nEnglish 3.14!'.encode('utf-8'))
+        preview = flow.inspect_txt(exported)
+        with self.assertRaisesRegex(ProjectError, '未存'):
+            flow.reload_draft(batch, preview, unsaved_text='未存稿')
+        self.assertEqual(flow.reading_text(batch), self.text)
+        copy_id = flow.reload_draft(batch, preview, unsaved_text='未存稿', conflict='keep-copy')
+        reopened = ProjectWorkflow.open(flow.root)
+        self.assertEqual(reopened.draft_copy_text(batch, copy_id), '未存稿')
+        self.assertEqual(reopened.texts(batch), (self.text, '外部修改。\r\n\r\nEnglish 3.14!'))
+        with self.assertRaises(ProjectError):
+            reopened.reading_text(batch)
+        self.assertEqual(reopened.reading_text(batch, snapshot['id']), self.text)
+        reopened.confirm_reading(batch)
+        self.assertEqual(reopened.reading_text(batch), preview.text)
+        # Identical external reload is still an explicit cancellation of confirmation.
+        reopened.reload_draft(batch, preview)
+        with self.assertRaises(ProjectError):
+            reopened.reading_text(batch)
+        with self.assertRaises(ProjectError):
+            reopened.export_txt(batch, self.source)
+        self.assertEqual(self.source.read_bytes(), self.text.encode('utf-8'))
+
+    def test_source_anomalies_block_confirmation_until_resolved_or_skipped(self):
+        flow, batch = self.imported()
+        old = flow.confirm_reading(batch)
+        flow.record_source_issues(batch, ['第 2 頁擷取失敗', '第 3 頁空白待確認'])
+        self.assertEqual(flow.confirmation_blockers(batch), ['第 2 頁擷取失敗', '第 3 頁空白待確認'])
+        with self.assertRaisesRegex(ProjectError, '第 2 頁'):
+            flow.confirm_reading(batch)
+        with self.assertRaises(ProjectError):
+            flow.reading_text(batch)
+        flow.resolve_source_issue(batch, 0, 'resolved')
+        flow.resolve_source_issue(batch, 1, 'skipped')
+        reopened = ProjectWorkflow.open(flow.root)
+        self.assertEqual(reopened.confirmation_blockers(batch), [])
+        reopened.confirm_reading(batch)
+        self.assertEqual(reopened.reading_text(batch, old['id']), self.text)
+
+    def test_reading_snapshot_tampering_is_rejected_when_reopening(self):
+        flow, batch = self.imported()
+        snapshot = flow.confirm_reading(batch)
+        (flow.root / snapshot['path']).write_bytes(b'changed')
+        with self.assertRaisesRegex(ProjectError, '內容已變更'):
+            ProjectWorkflow.open(flow.root)
+
+    def test_confirmation_failure_retry_unsaved_invalidation_and_metadata_changes(self):
+        flow, batch = self.imported()
+        with patch('ebook2mp4.workflow.os.replace', side_effect=PermissionError()):
+            with self.assertRaises(ProjectError):
+                flow.confirm_reading(batch)
+        reopened = ProjectWorkflow.open(flow.root)
+        with self.assertRaises(ProjectError):
+            reopened.reading_text(batch)
+        snapshot = flow.confirm_reading(batch)
+        flow.rename_batch(batch, '改名稱不改內容')
+        flow.reorder_batches([batch])
+        flow.save_draft(batch, self.text)
+        self.assertEqual(flow.reading_text(batch), self.text)
+        flow.invalidate_reading(batch)
+        with self.assertRaises(ProjectError):
+            ProjectWorkflow.open(flow.root).reading_text(batch)
+        self.assertEqual(flow.reading_text(batch, snapshot['id']), self.text)
+
+    def test_reload_warnings_require_acknowledgement_and_empty_cannot_confirm(self):
+        flow, batch = self.imported()
+        self.source.write_bytes('外部稿含 � 字元'.encode('utf-8'))
+        preview = flow.inspect_txt(self.source)
+        with self.assertRaisesRegex(ProjectError, '亂碼'):
+            flow.reload_draft(batch, preview)
+        self.assertEqual(flow.texts(batch)[1], self.text)
+        flow.reload_draft(batch, preview, accept_warnings=True)
+        self.assertEqual(flow.texts(batch)[1], '外部稿含 � 字元')
+        flow.save_draft(batch, '\r\n \t')
+        with self.assertRaisesRegex(ProjectError, '空'):
+            flow.confirm_reading(batch)
+
     def test_utf8_and_bom_create_import_edit_save_reopen_move(self):
         for bom in (b'', b'\xef\xbb\xbf'):
             with self.subTest(bom=bom):

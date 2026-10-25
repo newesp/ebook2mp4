@@ -6,6 +6,7 @@ import unittest
 from unittest.mock import patch
 
 from ebook2mp4.desktop import make_app
+from ebook2mp4.workflow import ProjectError, ProjectWorkflow
 
 
 def descendants(widget):
@@ -69,6 +70,97 @@ class DesktopJourney(unittest.TestCase):
         self.assertEqual(self.app.current_text, '第一章。\n\nHello!\n校對完成。')
         self.assertEqual(self.source.read_bytes(), original)
         self.assertIn('無 PDF 頁碼', self.app.source_meta.cget('text'))
+
+    def test_proofread_search_replace_undo_confirm_and_unsaved_edit_invalidation(self):
+        self.create_import()
+        self.app.find_text.set('第一章')
+        self.app.replace_text.set('序章')
+        self.app.find_button.invoke()
+        self.assertEqual(self.app.editor.get('sel.first', 'sel.last'), '第一章')
+        self.app.replace_button.invoke()
+        self.root.update()
+        self.assertEqual(self.app.current_text, '序章。\n\nHello!')
+        self.app.undo_button.invoke()
+        self.root.update()
+        self.assertEqual(self.app.current_text, '第一章。\n\nHello!')
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True):
+            self.app.confirm_button.invoke()
+        self.root.update()
+        self.assertIn('已確認', self.app.reading_status.cget('text'))
+        self.app.editor.insert('end', '新增')
+        self.root.update()
+        self.assertIn('尚未確認', self.app.reading_status.cget('text'))
+        with self.assertRaisesRegex(ProjectError, '確認'):
+            self.app.flow.reading_text(self.app.batch_id)
+        self.app.undo_button.invoke()
+        self.root.update()
+        self.assertIn('尚未確認', self.app.reading_status.cget('text'))
+
+    def test_external_reload_cancel_failure_copy_versions_and_explicit_replace(self):
+        self.create_import()
+        self.app.editor.insert('end', '未存編輯')
+        self.root.update()
+        pending = self.app.current_text
+        external = self.directory / '外部稿.txt'
+        external.write_bytes('外部校對內容'.encode('utf-8'))
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(external)):
+            self.app.reload_button.invoke()
+        self.root.update()
+        reload_button = next(w for w in descendants(self.root)
+                             if w.winfo_class() == 'TButton' and w.cget('text') == '確認重載')
+        with patch('ebook2mp4.desktop.messagebox.askyesnocancel', return_value=None):
+            reload_button.invoke()
+        self.assertEqual(self.app.current_text, pending)
+        with patch('ebook2mp4.desktop.messagebox.askyesnocancel', return_value=True), \
+             patch('ebook2mp4.workflow.os.replace', side_effect=PermissionError()), \
+             patch('ebook2mp4.desktop.messagebox.showerror'):
+            reload_button.invoke()
+        self.assertEqual(self.app.current_text, pending)
+        self.assertEqual(ProjectWorkflow.open(self.app.flow.root).texts(self.app.batch_id)[1], '第一章。\n\nHello!')
+        with patch('ebook2mp4.desktop.messagebox.askyesnocancel', return_value=True):
+            reload_button.invoke()
+        self.assertEqual(self.app.current_text, '外部校對內容')
+        self.app.versions_button.invoke()
+        self.root.update()
+        copies = [w for w in descendants(self.root) if w.winfo_class() == 'Text'
+                  and '未存編輯' in w.get('1.0', 'end-1c')]
+        self.assertEqual(len(copies), 1)
+        self.app.editor.insert('end', '明確取代這段')
+        self.root.update()
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(external)):
+            self.app.reload_button.invoke()
+        reload_button = next(w for w in descendants(self.root)
+                             if w.winfo_class() == 'TButton' and w.cget('text') == '確認重載')
+        with patch('ebook2mp4.desktop.messagebox.askyesnocancel', return_value=False):
+            reload_button.invoke()
+        self.assertEqual(self.app.current_text, '外部校對內容')
+        self.assertEqual(len(self.app.flow.state['batches'][0]['draft_copies']), 1)
+
+    def test_replace_all_is_single_undo_and_export_includes_unsaved_text(self):
+        self.create_import()
+        self.app.find_text.set('l')
+        self.app.replace_text.set('L')
+        self.app.replace_all_button.invoke()
+        self.assertEqual(self.app.current_text, '第一章。\n\nHeLLo!')
+        export = self.directory / '輸出稿.txt'
+        with patch('ebook2mp4.desktop.filedialog.asksaveasfilename', return_value=str(export)):
+            self.app.export_button.invoke()
+        self.assertEqual(export.read_bytes(), '第一章。\n\nHeLLo!'.encode('utf-8'))
+        self.assertTrue(self.app.dirty)
+        self.app.undo_button.invoke()
+        self.assertEqual(self.app.current_text, '第一章。\n\nHello!')
+
+    def test_tool_panel_mousewheel_reveals_versions_at_minimum_window(self):
+        self.create_import()
+        self.root.geometry('1040x640')
+        self.root.update()
+        before = self.app.versions_button.winfo_rooty()
+        self.app.find_entry.event_generate('<MouseWheel>', delta=-1200)
+        self.root.update()
+        after = self.app.versions_button.winfo_rooty()
+        self.assertLess(after, before)
+        self.assertLess(after + self.app.versions_button.winfo_height(),
+                        self.root.winfo_rooty() + self.root.winfo_height())
 
     def test_ui_failure_retains_unsaved_text_and_cancel_close(self):
         self.create_import()

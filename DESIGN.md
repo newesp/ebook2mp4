@@ -168,6 +168,8 @@ Four equal-width numbered buttons read 來源 / 校對 / 語音 / 影片. The se
 
 Plain labeled text panes provide the signature comparison surface, without decorative cards or fabricated TXT page numbers. The inspector groups Gemini, reading confirmation, and production dependencies vertically. Unimplemented controls are disabled with adjacent reasons; scrolling keeps the full inspector reachable at shorter heights. Statistics and bottom status remain outside manuscript scrolling.
 
+T03 adds exact-text search and replacement, undo, UTF-8 export and external reload above confirmation. Search/replace entries request 18 characters; the replacement actions occupy two equal grid columns with width 6. These controls stay inside the existing 240px canvas rather than widening the manuscript's parent grid. Mouse-wheel bindings on the inspector and its descendants scroll only this canvas. The primary confirmation action shows draft revision and a shortened hash nearby; the read-only versions dialog exposes the full hash and text for every reading snapshot or retained unsaved copy. Unresolved source issues list their reasons and disable confirmation; explicit skip requires a separate native confirmation. At shorter heights, use the wheel or vertical scrollbar to reach lower actions.
+
 ## Do's and Don'ts
 
 ### Do:

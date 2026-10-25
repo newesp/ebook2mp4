@@ -169,6 +169,36 @@ class ProjectWorkflow:
                     raise ValueError()
                 decode_txt(source, batch['source']['encoding'])
                 flow._read(batch['draft']).decode('utf-8')
+                readings = batch.get('readings', [])
+                copies = batch.get('draft_copies', [])
+                issues = batch.get('source_issues', [])
+                if not all(isinstance(items, list) for items in (readings, copies, issues)):
+                    raise ValueError()
+                ids = set()
+                for ref in readings + copies:
+                    if not isinstance(ref['id'], str) or not ref['id'] or ref['id'] in ids:
+                        raise ValueError()
+                    ids.add(ref['id'])
+                    flow._read(ref).decode('utf-8')
+                for ref in readings:
+                    if type(ref['revision']) is not int or not 1 <= ref['revision'] <= batch['revision']:
+                        raise ValueError()
+                    if not isinstance(ref['confirmed_at'], str):
+                        raise ValueError()
+                if any(not isinstance(ref['created_at'], str) for ref in copies):
+                    raise ValueError()
+                for issue in issues:
+                    if not isinstance(issue['reason'], str) or not issue['reason'].strip():
+                        raise ValueError()
+                    if issue['status'] not in ('pending', 'resolved', 'skipped'):
+                        raise ValueError()
+                current = batch.get('current_reading')
+                if current is not None:
+                    snapshot = next((s for s in readings if s['id'] == current), None)
+                    if (snapshot is None or snapshot['revision'] != batch['revision']
+                            or snapshot['sha256'] != batch['draft']['sha256']
+                            or flow.confirmation_blockers(batch['id'])):
+                        raise ValueError()
             return flow
         except ProjectError:
             raise
@@ -282,4 +312,123 @@ class ProjectWorkflow:
         path = f'batches/{batch_id}/draft-{uuid.uuid4().hex}.txt'
         batch['draft'] = dict(path=path, sha256=digest(content))
         batch['revision'] += 1
+        batch['current_reading'] = None
         self._commit(manifest, [(path, content)])
+
+    def invalidate_reading(self, batch_id: str) -> None:
+        """Persist cancellation even when an editor change has not been saved."""
+        if self._batch(batch_id).get('current_reading') is None:
+            return
+        manifest = self.state
+        next(b for b in manifest['batches'] if b['id'] == batch_id)['current_reading'] = None
+        self._commit(manifest, [])
+
+    def confirmation_blockers(self, batch_id: str) -> list[str]:
+        return [issue['reason'] for issue in self._batch(batch_id).get('source_issues', [])
+                if issue['status'] == 'pending']
+
+    def record_source_issues(self, batch_id: str, reasons: list[str]) -> None:
+        """PDF/OCR adapters report unresolved source problems through this rule."""
+        self._batch(batch_id)
+        if not all(isinstance(reason, str) and reason.strip() for reason in reasons):
+            raise ProjectError('每項來源異常都必須提供原因。')
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        batch.setdefault('source_issues', []).extend(dict(reason=r, status='pending') for r in reasons)
+        if reasons:
+            batch['current_reading'] = None
+        self._commit(manifest, [])
+
+    def resolve_source_issue(self, batch_id: str, index: int, disposition: str) -> None:
+        issues = self._batch(batch_id).get('source_issues', [])
+        if disposition not in ('resolved', 'skipped') or not 0 <= index < len(issues):
+            raise ProjectError('請選擇有效的來源異常及處理方式。')
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        batch['source_issues'][index]['status'] = disposition
+        self._commit(manifest, [])
+
+    def confirm_reading(self, batch_id: str) -> dict:
+        blockers = self.confirmation_blockers(batch_id)
+        if blockers:
+            raise ProjectError('來源異常尚未處理，不能確認朗讀稿：\n' + '\n'.join(blockers))
+        _, text = self.texts(batch_id)
+        if not text.strip():
+            raise ProjectError('校對稿為空，請加入內容後再確認朗讀稿。')
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        snapshot_id = uuid.uuid4().hex
+        content = text.encode('utf-8')
+        snapshot = dict(id=snapshot_id, revision=batch['revision'], confirmed_at=now(),
+                        path=f'batches/{batch_id}/reading-{snapshot_id}.txt', sha256=digest(content))
+        batch.setdefault('readings', []).append(snapshot)
+        batch['current_reading'] = snapshot_id
+        self._commit(manifest, [(snapshot['path'], content)])
+        return deepcopy(snapshot)
+
+    def reading_text(self, batch_id: str, snapshot_id: str | None = None) -> str:
+        batch = self._batch(batch_id)
+        selected = snapshot_id if snapshot_id is not None else batch.get('current_reading')
+        for snapshot in batch.get('readings', []):
+            if snapshot['id'] == selected:
+                return self._read(snapshot).decode('utf-8')
+        raise ProjectError('此批次尚未確認目前朗讀稿，請回到校對並明確確認。')
+
+    def export_txt(self, batch_id: str, filename: str | Path, *, text: str | None = None) -> None:
+        """Export saved or explicitly supplied editor text without overwriting a file."""
+        _, saved = self.texts(batch_id)
+        path = Path(filename).resolve()
+        if path.suffix.lower() != '.txt':
+            raise ProjectError('請使用 .txt 副檔名。')
+        created = False
+        try:
+            content = (saved if text is None else text).encode('utf-8')
+            self._space(path.parent, len(content))
+            # Exclusive creation protects source files and exports, including races.
+            with path.open('xb') as f:
+                created = True
+                f.write(content)
+                f.flush()
+                os.fsync(f.fileno())
+            created = False
+        except FileExistsError:
+            raise ProjectError('匯出檔案已存在。請選擇新檔名，以保留來源與既有內容。') from None
+        except OSError:
+            raise ProjectError('無法匯出 TXT。請檢查目標資料夾、寫入權限與磁碟空間。') from None
+        finally:
+            if created:
+                path.unlink(missing_ok=True)
+
+    def reload_draft(self, batch_id: str, preview: ImportPreview, *, unsaved_text: str | None = None,
+                     conflict: str = 'cancel', accept_warnings: bool = False) -> str | None:
+        _, saved = self.texts(batch_id)
+        dirty = unsaved_text is not None and unsaved_text != saved
+        if dirty and conflict not in ('keep-copy', 'replace'):
+            raise ProjectError('校對稿有未存編輯，請保留副本或明確取代；目前尚未重載。')
+        if preview.warnings and not accept_warnings:
+            raise ProjectError('文字疑似亂碼，請核對並明確確認原文後再重載。')
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        content = preview.text.encode('utf-8')
+        path = f'batches/{batch_id}/draft-{uuid.uuid4().hex}.txt'
+        files = [(path, content)]
+        copy_id = None
+        if dirty and conflict == 'keep-copy':
+            assert unsaved_text is not None
+            copy_id = uuid.uuid4().hex
+            copy_path = f'batches/{batch_id}/copy-{copy_id}.txt'
+            copy = unsaved_text.encode('utf-8')
+            batch.setdefault('draft_copies', []).append(dict(
+                id=copy_id, path=copy_path, sha256=digest(copy), created_at=now()))
+            files.append((copy_path, copy))
+        batch['draft'] = dict(path=path, sha256=digest(content))
+        batch['revision'] += 1
+        batch['current_reading'] = None
+        self._commit(manifest, files)
+        return copy_id
+
+    def draft_copy_text(self, batch_id: str, copy_id: str) -> str:
+        for copy in self._batch(batch_id).get('draft_copies', []):
+            if copy['id'] == copy_id:
+                return self._read(copy).decode('utf-8')
+        raise ProjectError('找不到保留的未存稿副本。')
