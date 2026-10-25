@@ -84,6 +84,70 @@ class DesktopJourney(unittest.TestCase):
         self.assertTrue(self.root.winfo_exists())
         self.assertTrue(self.app.save())
 
+    def test_multiple_batches_encoding_recovery_switch_rename_reorder(self):
+        self.create_import()
+        first = self.app.batch_id
+        self.app.editor.insert('end', '\n第一批的修改。')
+        self.assertTrue(self.app.save())
+        second_source = self.directory / '第二章 CP950.txt'
+        second_source.write_bytes('第二章，碁。'.encode('cp950'))
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(second_source)), \
+             patch('ebook2mp4.desktop.messagebox.showerror'):
+            self.app.import_txt()
+        self.root.update()
+        selector = next(w for w in descendants(self.root) if w.winfo_class() == 'TCombobox')
+        confirm = next(w for w in descendants(self.root)
+                       if w.winfo_class() == 'TButton' and w.cget('text') == '確認匯入')
+        self.assertTrue(confirm.instate(['disabled']))
+        self.assertEqual(len(self.app.flow.state['batches']), 1)
+        selector.set('CP950')
+        selector.event_generate('<<ComboboxSelected>>')
+        self.root.update()
+        self.assertFalse(confirm.instate(['disabled']))
+        confirm.invoke()
+        self.root.update()
+        second = self.app.batch_id
+        self.assertNotEqual(first, second)
+        self.assertEqual(self.app.current_text, '第二章，碁。')
+        with patch('ebook2mp4.desktop.simpledialog.askstring', return_value='第二章新名稱'):
+            self.app.rename_button.invoke()
+        self.app.up_button.invoke()
+        self.assertEqual([b['id'] for b in self.app.flow.state['batches']], [second, first])
+        self.app.batch_list.selection_set(first)
+        self.app.batch_list.event_generate('<<TreeviewSelect>>')
+        self.root.update()
+        self.assertEqual(self.app.current_text, '第一章。\n\nHello!\n第一批的修改。')
+        project = self.app.flow.root / 'project.json'
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(project)):
+            self.app.open()
+        self.assertEqual(self.app.current_text, '第二章，碁。')
+        self.assertEqual(self.app.flow.state['batches'][0]['name'], '第二章新名稱')
+
+    def test_cancel_or_failed_save_during_batch_switch_keeps_unsaved_editor(self):
+        self.create_import()
+        first = self.app.batch_id
+        self.source.write_bytes('另一批原文'.encode('utf-8'))
+        second = self.app.flow.import_txt(self.app.flow.inspect_txt(self.source))
+        self.app.refresh()
+        self.app.editor.insert('end', '尚未儲存的修改')
+        pending = self.app.current_text
+        for answer in (None, True):
+            with patch('ebook2mp4.desktop.messagebox.askyesnocancel', return_value=answer), \
+                 patch('ebook2mp4.desktop.messagebox.showerror'), \
+                 patch('ebook2mp4.workflow.os.replace', side_effect=PermissionError()):
+                self.app.batch_list.selection_set(second)
+                self.app.batch_list.event_generate('<<TreeviewSelect>>')
+                self.root.update()
+            self.assertEqual(self.app.batch_id, first)
+            self.assertEqual(self.app.batch_list.selection(), (first,))
+            self.assertEqual(self.app.current_text, pending)
+        with patch('ebook2mp4.desktop.messagebox.askyesnocancel', return_value=True):
+            self.app.batch_list.selection_set(second)
+            self.app.batch_list.event_generate('<<TreeviewSelect>>')
+            self.root.update()
+        self.assertEqual(self.app.current_text, '另一批原文')
+        self.assertEqual(self.app.flow.texts(first)[1], pending)
+
 
 if __name__ == '__main__':
     unittest.main()

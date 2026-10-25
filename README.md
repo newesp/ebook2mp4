@@ -1,6 +1,6 @@
 # ebook2mp4
 
-Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.1](docs/pdf-txt-audiobook-video-spec.md)；目前實作 T01：建立一本書、匯入第一份 UTF-8 TXT、編輯校對稿並保存重開。
+Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.1](docs/pdf-txt-audiobook-video-spec.md)；目前實作 T01／T02：建立一本書、匯入多份 TXT 成為獨立批次、編輯校對稿並保存重開。
 
 ## 啟動
 
@@ -12,12 +12,13 @@ Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.1](docs/pdf
 python -m ebook2mp4
 ```
 
-## T01 操作
+## 書籍與 TXT 批次操作
 
 1. 按「建立書籍專案」，輸入書名、選擇上層資料夾，再指定新的空資料夾名稱。
-2. 按「匯入第一份 TXT」。預覽來源文字、檔名、大小、可讀編碼、專案位置及副本所需空間後，按「確認匯入」。支援 UTF-8／UTF-8 BOM，不猜測其他編碼。
+2. 按「新增 TXT 批次」。預覽來源文字、檔名、大小、可讀編碼、專案位置及副本所需空間後，按「確認匯入」。自動讀取 UTF-8／UTF-8 BOM／UTF-16 BOM；Big5／CP950 請在編碼下拉清單手動選擇。解碼失敗時留在預覽視窗切換編碼，不會保存失敗結果。疑似亂碼需更換編碼或核對並勾選確認後才可匯入。
 3. 中間左欄為唯讀來源原文，右欄為校對稿。編輯後按「儲存校對稿」或 Ctrl+S；Ctrl+Z 可復原未存編輯。
 4. 關閉程式後，按「開啟專案」選擇專案內的 `project.json`。整個專案資料夾可搬移；來源外部原檔不再是重開的必要條件。
+5. 左側清單切換批次；「命名」「上移」「下移」會立即保存名稱與順序，各批校對稿互不覆蓋。切換或新增批次時若有未存文字，須先保存、明確捨棄或取消；命名及排序保留目前未存的文字。
 
 四步驟皆可返回，不會因切換遺失輸入。未實作的 PDF／OCR、Gemini、朗讀確認、語音及影片會列出原因；不提供模擬產出。TXT 不產生 PDF 頁碼。建立及人工校對不需任何外部服務或媒體工具。
 
@@ -42,4 +43,6 @@ python -m compileall -q ebook2mp4 tests
 python packaging/build.py --install-tools
 ```
 
-執行階段僅使用 Python 標準函式庫；PyInstaller 是專案內的隔離建置依賴。`packaging/installer.iss` 是供 T23 使用的 Inno Setup 安裝配方，本次沒有編譯或驗證安裝程式。完整證據與限制見 [T01 驗證紀錄](docs/verification/T01.md)。
+型別檢查使用 `python -m mypy ebook2mp4 --check-untyped-defs`；開發工具可安裝至專案內的隔離目錄，參見 `packaging/requirements-dev.txt`。實作告一段落後依 AGENTS.md 清理暫存與測試程序。
+
+執行階段僅使用 Python 標準函式庫；PyInstaller 是專案內的隔離建置依賴。`packaging/installer.iss` 是供 T23 使用的 Inno Setup 安裝配方，本次沒有編譯或驗證安裝程式。完整證據與限制見 [T01](docs/verification/T01.md) 與 [T02 驗證紀錄](docs/verification/T02.md)。

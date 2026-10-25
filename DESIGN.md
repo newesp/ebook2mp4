@@ -130,7 +130,9 @@ The left frame uses padding **4,10,16,10** (left, top, right, bottom). Book text
 
 Source and editor sit in a horizontal `ttk.Panedwindow` with equal expansion weights and a native draggable divider. Each wrapper has **12px** padding; each manuscript has **16px** inset, word wrapping, and its own vertical scrollbar. They scroll independently. The inspector is a separately scrollable canvas containing a padded frame (**12,10,4,10**); explanatory labels wrap at **220px**. Group actions have **10px** top and **24px** bottom separation.
 
-Import preview uses native geometry **720×560**, minimum **600×420**, a flexible source preview, and persistent bottom actions. Its details wrap with the dialog width.
+Import preview uses native geometry **760×680**, minimum **640×580**, a flexible source preview, and persistent bottom actions. Its details wrap with the dialog width. A read-only encoding selector stays at the top; failures clear the old preview and disable import. Suspected corrupt characters require explicit acknowledgment before import.
+
+The batch sidebar uses a vertically scrollable native Treeview. Selected batch names and revisions appear in wrapping center metadata; the tree remains fixed within its column for long names. Naming and up/down actions use a three-column button row. The batch list expands vertically; project-location text requests four lines so actions remain reachable at the native minimum size.
 
 **The Comparison Rule.** Keep source and draft independently readable and scrollable while retaining batch context and reachable inspector actions.
 

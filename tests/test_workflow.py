@@ -65,6 +65,20 @@ class ProjectJourney(unittest.TestCase):
         batch = flow.import_txt(preview)
         self.assertEqual(flow.texts(batch), (self.text, self.text))
 
+    def test_two_txt_batches_keep_independent_drafts_names_and_order(self):
+        flow, first = self.imported()
+        self.source.write_bytes('第二章，另一份中文原稿。'.encode('utf-8'))
+        second = flow.import_txt(flow.inspect_txt(self.source))
+        flow.save_draft(first, '第一批已校對。')
+        flow.rename_batch(second, '第二章 校對中')
+        flow.reorder_batches([second, first])
+        reopened = ProjectWorkflow.open(flow.root)
+        self.assertEqual([b['id'] for b in reopened.state['batches']], [second, first])
+        self.assertEqual(reopened.state['batches'][0]['name'], '第二章 校對中')
+        self.assertEqual(reopened.texts(first), (self.text, '第一批已校對。'))
+        self.assertEqual(reopened.texts(second), ('第二章，另一份中文原稿。', '第二章，另一份中文原稿。'))
+        self.assertEqual(reopened.state['batches'][0]['revision'], 1)
+
     def test_failed_publication_preserves_last_save_and_allows_retry(self):
         flow, batch = self.imported()
         previous = (flow.root / 'project.json').read_bytes()
@@ -137,6 +151,45 @@ class ProjectJourney(unittest.TestCase):
         self.source.write_bytes('繁體中文'.encode('cp950'))
         with self.assertRaisesRegex(ProjectError, 'UTF-8'):
             ProjectWorkflow.inspect_txt(self.source)
+
+    def test_supported_encodings_preview_and_reopen_exact_originals(self):
+        flow = ProjectWorkflow.create(self.root / '編碼書籍', '不同編碼')
+        examples = [
+            ('UTF-8', 'utf-8', '繁體、简体 and English。', 'auto'),
+            ('UTF-8 BOM', 'utf-8-sig', '繁體中文。', 'auto'),
+            ('UTF-16 BOM', 'utf-16', '繁體、简体 and English。', 'auto'),
+            ('Big5', 'big5', '第一章，繁體中文。', 'Big5'),
+            ('CP950', 'cp950', '第二章，碁。', 'CP950'),
+        ]
+        for label, codec, text, selection in examples:
+            with self.subTest(encoding=label):
+                data = text.encode(codec)
+                self.source.write_bytes(data)
+                preview = flow.inspect_txt(self.source, encoding=selection)
+                self.assertEqual(preview.text, text)
+                self.assertEqual(preview.encoding, label)
+                batch = flow.import_txt(preview)
+                reopened = ProjectWorkflow.open(flow.root)
+                self.assertEqual(reopened.texts(batch), (text, text))
+                self.assertEqual(self.source.read_bytes(), data)
+        # Wrong selection never returns a successful preview or changes the project.
+        before = flow.state
+        with self.assertRaises(ProjectError):
+            flow.inspect_txt(self.source, encoding='UTF-8')
+        self.assertEqual(flow.state, before)
+        self.assertEqual(flow.inspect_txt(self.source, encoding='CP950').text, '第二章，碁。')
+
+    def test_suspected_garbled_text_needs_explicit_acknowledgment(self):
+        flow, first = self.imported()
+        self.source.write_bytes('來源真的含有 � 字元。'.encode('utf-8'))
+        preview = flow.inspect_txt(self.source)
+        self.assertTrue(preview.warnings)
+        with self.assertRaisesRegex(ProjectError, '確認'):
+            flow.import_txt(preview)
+        self.assertEqual(len(ProjectWorkflow.open(flow.root).state['batches']), 1)
+        second = flow.import_txt(preview, accept_warnings=True)
+        self.assertEqual(flow.texts(second), ('來源真的含有 � 字元。', '來源真的含有 � 字元。'))
+        self.assertEqual(flow.texts(first), (self.text, self.text))
 
     def test_empty_file_and_100k_manuscript_round_trip(self):
         for text in ('', '長篇 English, 段落。\n\n' * 7000):

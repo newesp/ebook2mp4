@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import shutil
 import tempfile
+import unicodedata
 import uuid
 
 
@@ -33,11 +34,30 @@ def encode(value: dict) -> bytes:
     return json.dumps(value, ensure_ascii=False, indent=2).encode('utf-8')
 
 
-def decode_txt(data: bytes) -> str:
+def text_encoding(data: bytes, selection: str) -> str:
+    if selection in ('auto', 'UTF-8', 'UTF-8 BOM'):
+        if data.startswith(b'\xef\xbb\xbf'):
+            return 'UTF-8 BOM'
+        if selection == 'auto' and data.startswith((b'\xff\xfe', b'\xfe\xff')):
+            return 'UTF-16 BOM'
+        return 'UTF-8'
+    if selection not in ('UTF-16 BOM', 'Big5', 'CP950'):
+        raise ProjectError('不支援的文字編碼，請從清單重新選擇。')
+    return selection
+
+
+def decode_txt(data: bytes, encoding: str = 'auto') -> str:
+    encoding = text_encoding(data, encoding)
+    if encoding == 'UTF-16 BOM' and not data.startswith((b'\xff\xfe', b'\xfe\xff')):
+        raise ProjectError('UTF-16 來源缺少 BOM。請選擇正確編碼或另存含 BOM 的 UTF-16。')
     try:
-        return data.decode('utf-8-sig')
+        text = data.decode({'UTF-8': 'utf-8', 'UTF-8 BOM': 'utf-8-sig',
+                            'UTF-16 BOM': 'utf-16', 'Big5': 'big5', 'CP950': 'cp950'}[encoding])
     except UnicodeError:
-        raise ProjectError('無法以 UTF-8 讀取。請先另存為 UTF-8 TXT；其他編碼將於 T02 提供。') from None
+        raise ProjectError(f'無法以 {encoding} 讀取。請切換編碼重新預覽，或將來源另存為 UTF-8 TXT。') from None
+    if '\x00' in text:
+        raise ProjectError('來源含有 NUL 字元，可能選錯編碼。請切換編碼重新預覽。')
+    return text
 
 
 @dataclass(frozen=True)
@@ -47,6 +67,7 @@ class ImportPreview:
     text: str
     sha256: str
     encoding: str
+    warnings: tuple[str, ...] = ()
 
     @property
     def size(self) -> int:
@@ -144,7 +165,7 @@ class ProjectWorkflow:
                 source = flow._read(batch['source'])
                 if len(source) != batch['source']['size']:
                     raise ValueError()
-                decode_txt(source)
+                decode_txt(source, batch['source']['encoding'])
                 flow._read(batch['draft']).decode('utf-8')
             return flow
         except ProjectError:
@@ -153,19 +174,20 @@ class ProjectWorkflow:
             raise ProjectError('無法開啟專案：索引遺失、損壞或欄位不完整。請選擇含 project.json 的資料夾或還原備份。') from None
 
     @staticmethod
-    def inspect_txt(filename: str | Path) -> ImportPreview:
+    def inspect_txt(filename: str | Path, encoding: str = 'auto') -> ImportPreview:
         path = Path(filename).resolve()
         if path.suffix.lower() != '.txt':
-            raise ProjectError('T01 僅支援 TXT。PDF 擷取與 OCR 將於 T04／T05 提供。')
+            raise ProjectError('目前僅支援 TXT。PDF 擷取與 OCR 將於 T04／T05 提供。')
         try:
             data = path.read_bytes()
         except OSError:
             raise ProjectError('無法讀取來源檔。請檢查檔案是否存在及讀取權限，再重新選擇。') from None
-        text = decode_txt(data)
-        if '\x00' in text:
-            raise ProjectError('來源含有 NUL 字元，可能不是 UTF-8 文字檔。請確認編碼後重試。')
-        return ImportPreview(path, data, text, digest(data),
-                             'UTF-8 BOM' if data.startswith(b'\xef\xbb\xbf') else 'UTF-8')
+        selected = text_encoding(data, encoding)
+        text = decode_txt(data, selected)
+        warnings: tuple[str, ...] = ()
+        if '\ufffd' in text or any(unicodedata.category(c) == 'Cc' and c not in '\t\r\n' for c in text):
+            warnings = ('文字含替代符號或異常控制字元，可能為亂碼；請換編碼，或確認原文確實如此。',)
+        return ImportPreview(path, data, text, digest(data), selected, warnings)
 
     def import_requirements(self, preview: ImportPreview) -> dict:
         required = preview.size + len(preview.text.encode('utf-8')) + len(encode(self._manifest)) + 8192
@@ -202,9 +224,9 @@ class ProjectWorkflow:
                 os.close(lock)
                 (self.root / '.write.lock').unlink(missing_ok=True)
 
-    def import_txt(self, preview: ImportPreview) -> str:
-        if self._manifest['batches']:
-            raise ProjectError('T01 已有第一個製作批次。新增多份 TXT 將於 T02 提供。')
+    def import_txt(self, preview: ImportPreview, *, accept_warnings: bool = False) -> str:
+        if preview.warnings and not accept_warnings:
+            raise ProjectError('文字疑似亂碼，請更換編碼，或核對並明確確認原文後再匯入。')
         # Import the exact bytes the user reviewed, even if the external file changes.
         batch_id = uuid.uuid4().hex
         source_path = f'sources/{batch_id}.txt'
@@ -219,9 +241,26 @@ class ProjectWorkflow:
         self._commit(manifest, [(source_path, preview.data), (draft_path, draft)])
         return batch_id
 
+    def rename_batch(self, batch_id: str, name: str) -> None:
+        self._batch(batch_id)
+        if not name.strip():
+            raise ProjectError('請輸入製作批次名稱。')
+        manifest = self.state
+        next(b for b in manifest['batches'] if b['id'] == batch_id)['name'] = name.strip()
+        self._commit(manifest, [])
+
+    def reorder_batches(self, batch_ids: list[str]) -> None:
+        current = {b['id']: b for b in self._manifest['batches']}
+        if len(batch_ids) != len(current) or set(batch_ids) != set(current):
+            raise ProjectError('排序必須包含每個製作批次各一次，請重新選擇。')
+        manifest = self.state
+        manifest['batches'] = [deepcopy(current[batch_id]) for batch_id in batch_ids]
+        self._commit(manifest, [])
+
     def texts(self, batch_id: str) -> tuple[str, str]:
         batch = self._batch(batch_id)
-        return decode_txt(self._read(batch['source'])), self._read(batch['draft']).decode('utf-8')
+        return (decode_txt(self._read(batch['source']), batch['source']['encoding']),
+                self._read(batch['draft']).decode('utf-8'))
 
     def _batch(self, batch_id: str) -> dict:
         for batch in self._manifest['batches']:
