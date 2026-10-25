@@ -297,6 +297,14 @@ class ProjectWorkflow:
         manifest['batches'] = [deepcopy(current[batch_id]) for batch_id in batch_ids]
         self._commit(manifest, [])
 
+    def remove_pdf_batch(self, batch_id: str) -> None:
+        """Detach one PDF batch atomically; retain immutable files as project history."""
+        if self._batch(batch_id)['kind'] != 'pdf':
+            raise ProjectError('請選擇要移除的 PDF 文件批次。')
+        manifest = self.state
+        manifest['batches'] = [b for b in manifest['batches'] if b['id'] != batch_id]
+        self._commit(manifest, [])
+
     def texts(self, batch_id: str) -> tuple[str, str]:
         batch = self._batch(batch_id)
         original = ('\n\n'.join(p['text'] for p in self.pdf_pages(batch_id)) if batch['kind'] == 'pdf'

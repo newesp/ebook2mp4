@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-26",
+  "targets": [
+    {
+      "path": ".scratch/build-tools",
+      "removed": true
+    },
+    {
+      "path": ".scratch/test-runs",
+      "removed": true
+    },
+    {
+      "path": ".scratch/ocr-runtime",
+      "removed": true
+    },
+    {
+      "path": ".scratch/pyinstaller-build",
+      "removed": true
+    },
+    {
+      "path": ".scratch/t04-visual",
+      "removed": true
+    },
+    {
+      "path": ".mypy_cache",
+      "removed": true
+    },
+    {
+      "path": "ebook2mp4/__pycache__",
+      "removed": true
+    },
+    {
+      "path": "tests/__pycache__",
+      "removed": true
+    }
+  ],
+  "remaining_task_processes": 0
+}

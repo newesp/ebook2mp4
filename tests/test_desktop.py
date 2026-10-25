@@ -48,6 +48,45 @@ class DesktopJourney(unittest.TestCase):
         button.invoke()
         self.root.update()
 
+    def test_pdf_remove_cancel_failure_success_and_empty_state(self):
+        from test_pdf import pdf_bytes
+        self.assertEqual(self.app.pdf_button.cget('text'), '新增 PDF 文件')
+        self.assertTrue(self.app.remove_pdf_button.instate(['disabled']))
+        flow = ProjectWorkflow.create(self.directory / 'remove-pdf', 'Book')
+        pdf = self.directory / 'book.pdf'
+        pdf.write_bytes(pdf_bytes(1))
+        for _ in range(2):
+            job = flow.start_pdf_extraction(flow.inspect_pdf(pdf), 1, 1)
+            job.wait()
+            flow.finish_pdf_extraction(job)
+        first, second = [b['id'] for b in flow.state['batches']]
+        self.app.flow, self.app.batch_id = flow, first
+        self.app.refresh()
+        self.app.editor.insert('end', 'Unsaved correction')
+        self.root.update()
+        pending = self.app.current_text
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=False):
+            self.app.remove_pdf_button.invoke()
+        self.assertEqual(self.app.current_text, pending)
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True), \
+             patch('ebook2mp4.workflow.os.replace', side_effect=OSError('disk full')), \
+             patch('ebook2mp4.desktop.messagebox.showerror'):
+            self.app.remove_pdf_button.invoke()
+        self.assertEqual(self.app.current_text, pending)
+        self.assertEqual(self.app.batch_id, first)
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True):
+            self.app.remove_pdf_button.invoke()
+        self.root.update()
+        self.assertEqual(self.app.batch_id, second)
+        self.assertEqual(list(self.app.batch_list.get_children()), [second])
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True):
+            self.app.remove_pdf_button.invoke()
+        self.root.update()
+        self.assertIsNone(self.app.batch_id)
+        self.assertEqual(self.app.current_text, '')
+        self.assertTrue(self.app.remove_pdf_button.instate(['disabled']))
+        self.assertEqual(ProjectWorkflow.open(flow.root).state['batches'], [])
+
     def test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo(self):
         from test_pdf import pdf_bytes
         self.app.flow = ProjectWorkflow.create(self.directory / 'PDF project', 'PDF Book')

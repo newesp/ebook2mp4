@@ -33,6 +33,48 @@ class PdfJourney(unittest.TestCase):
         self.pdf.write_bytes(pdf_bytes())
         self.flow = ProjectWorkflow.create(self.root / 'project', 'Book')
 
+    def test_remove_selected_pdf_preserves_other_batches_and_source(self):
+        original = self.pdf.read_bytes()
+        preview = self.flow.inspect_pdf(self.pdf)
+        ids = []
+        for _ in range(2):
+            job = self.flow.start_pdf_extraction(preview, 1, 1)
+            job.wait()
+            ids.append(self.flow.finish_pdf_extraction(job))
+        self.flow.save_draft(ids[1], 'Other corrected batch')
+        self.flow.confirm_reading(ids[1])
+        txt = self.root / 'chapter.txt'
+        txt.write_text('TXT retained', encoding='utf-8')
+        txt_id = self.flow.import_txt(self.flow.inspect_txt(txt))
+        with self.assertRaises(ProjectError):
+            self.flow.remove_pdf_batch(txt_id)
+        stale = ProjectWorkflow.open(self.flow.root)
+        self.flow.remove_pdf_batch(ids[0])
+        reopened = ProjectWorkflow.open(self.flow.root)
+        self.assertEqual([b['id'] for b in reopened.state['batches']], [ids[1], txt_id])
+        self.assertEqual(reopened.reading_text(ids[1]), 'Other corrected batch')
+        self.assertEqual(reopened.texts(txt_id)[1], 'TXT retained')
+        self.assertEqual(self.pdf.read_bytes(), original)
+        with self.assertRaises(ProjectError):
+            reopened.texts(ids[0])
+        with self.assertRaisesRegex(ProjectError, '另一個視窗'):
+            stale.remove_pdf_batch(ids[1])
+        reopened.remove_pdf_batch(ids[1])
+        self.assertEqual([b['id'] for b in ProjectWorkflow.open(self.flow.root).state['batches']], [txt_id])
+
+    def test_failed_pdf_removal_retains_previous_project(self):
+        job = self.flow.start_pdf_extraction(self.flow.inspect_pdf(self.pdf), 1, 1)
+        job.wait()
+        batch = self.flow.finish_pdf_extraction(job)
+        before = self.flow.state
+        with patch('ebook2mp4.workflow.os.replace', side_effect=OSError('disk full')):
+            with self.assertRaises(ProjectError):
+                self.flow.remove_pdf_batch(batch)
+        self.assertEqual(self.flow.state, before)
+        self.assertEqual(ProjectWorkflow.open(self.flow.root).state, before)
+        self.flow.remove_pdf_batch(batch)
+        self.assertEqual(ProjectWorkflow.open(self.flow.root).state['batches'], [])
+
     def test_selected_pages_are_independent_persistent_batches_with_txt(self):
         preview = self.flow.inspect_pdf(self.pdf)
         self.assertEqual(preview.page_count, 20)

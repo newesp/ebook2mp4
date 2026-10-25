@@ -136,8 +136,11 @@ class Workbench(ttk.Frame):
         self.import_button.grid(row=1, column=0, sticky='ew', pady=(6, 12))
         pdf_actions = ttk.Frame(tools)
         pdf_actions.grid(row=2, column=0, sticky='ew', pady=8)
-        self.pdf_button = ttk.Button(pdf_actions, text='新增 PDF 範圍', command=self.import_pdf)
+        self.pdf_button = ttk.Button(pdf_actions, text='新增 PDF 文件', command=self.import_pdf)
         self.pdf_button.pack(fill='x')
+        self.remove_pdf_button = ttk.Button(pdf_actions, text='移除 PDF 文件', command=self.remove_pdf,
+                                            style='Destructive.TButton')
+        self.remove_pdf_button.pack(fill='x', pady=(4, 0))
         self.pages_button = ttk.Button(pdf_actions, text='逐頁原稿／頁圖', command=self.compare_pdf_pages)
         self.pages_button.pack(fill='x', pady=4)
         self.cleanup_button = ttk.Button(pdf_actions, text='預覽換行整理', command=self.cleanup_line_breaks)
@@ -304,6 +307,7 @@ class Workbench(ttk.Frame):
         self.cleanup_button.configure(state='normal' if batches else 'disabled')
         selected = next((b for b in batches if b['id'] == self.batch_id), batches[0] if batches else {})
         self.pages_button.configure(state='normal' if selected.get('kind') == 'pdf' else 'disabled')
+        self.remove_pdf_button.configure(state='normal' if selected.get('kind') == 'pdf' else 'disabled')
         self.batch_list.delete(*self.batch_list.get_children())
         for item in batches:
             self.batch_list.insert('', 'end', iid=item['id'], text=f'{item["name"]} · v{item["revision"]}')
@@ -321,6 +325,7 @@ class Workbench(ttk.Frame):
         else:
             self.batch_id = None
             self.saved_text = ''
+            self.source_heading.configure(text='來源原文 · TXT')
             self.source_meta.configure(text='建立專案後新增 TXT 批次；原文與校對稿分開保存。')
             self.fill(self.source, '匯入後在此查看來源原文。')
             self.fill(self.editor, '')
@@ -380,6 +385,32 @@ class Workbench(ttk.Frame):
             self.flow.rename_batch(self.batch_id, name)
             self.batch_list.item(self.batch_id, text=f'{name.strip()} · v{batch["revision"]}')
             self.update_source_metadata()
+        except ProjectError as e:
+            self.report(e)
+
+    def remove_pdf(self):
+        if not self.flow or not self.batch_id:
+            return
+        batches = self.flow.state['batches']
+        selected = next(b for b in batches if b['id'] == self.batch_id)
+        if selected['kind'] != 'pdf':
+            return
+        pdf = selected['pdf']
+        warning = '\n目前未儲存的編輯也會捨棄。' if self.dirty else ''
+        if not messagebox.askyesno('移除 PDF 文件',
+                f'從專案移除所選批次？\n{selected["name"]}\n'
+                f'{selected["source"]["original_name"]} · 第 {pdf["start"]}–{pdf["end"]} 頁\n'
+                '此批次的校對稿與朗讀確認將不再列出；專案內歷史檔案保留。\n'
+                '外部原始 PDF、其他批次與匯出檔案保留。' + warning,
+                parent=self.root, icon='warning', default='no'):
+            return
+        try:
+            index = next(i for i, b in enumerate(batches) if b['id'] == self.batch_id)
+            self.flow.remove_pdf_batch(self.batch_id)
+            remaining = self.flow.state['batches']
+            self.batch_id = remaining[min(index, len(remaining) - 1)]['id'] if remaining else None
+            self.refresh()
+            self.status.configure(text='已從專案移除所選 PDF 批次；原始 PDF 與其他批次保留。')
         except ProjectError as e:
             self.report(e)
 
@@ -783,6 +814,7 @@ def make_app():
     style.map('Treeview', background=[('selected', GREEN)], foreground=[('selected', '#ffffff')])
     style.map('TButton', background=[('active', '#e9f0e5')], foreground=[('disabled', '#68736c')])
     style.configure('Primary.TButton', background=GREEN, foreground='#ffffff')
+    style.configure('Destructive.TButton', foreground='#963b32')
     style.map('Primary.TButton', background=[('disabled', '#e1e5de'), ('active', '#264d35')],
               foreground=[('disabled', '#68736c')])
     style.configure('Title.TLabel', font=('Microsoft JhengHei', 19, 'bold'))
