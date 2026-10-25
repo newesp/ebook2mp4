@@ -1,0 +1,164 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-25T00:00:00+08:00",
+  "title": "Design System: 書籍製作工作台",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Workbench Green",
+        "tonalRamp": [
+          "oklch(15% 0.05 150)",
+          "oklch(26% 0.05 150)",
+          "oklch(38% 0.05 150)",
+          "oklch(49% 0.05 150)",
+          "oklch(61% 0.05 150)",
+          "oklch(72% 0.05 150)",
+          "oklch(84% 0.05 150)",
+          "oklch(95% 0.05 150)"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "tonalRamp": [
+          "oklch(15% 0.006 95)",
+          "oklch(26% 0.006 95)",
+          "oklch(38% 0.006 95)",
+          "oklch(49% 0.006 95)",
+          "oklch(61% 0.006 95)",
+          "oklch(72% 0.006 95)",
+          "oklch(84% 0.006 95)",
+          "oklch(95% 0.006 95)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Native application title",
+        "purpose": "19-point bold Microsoft JhengHei; Tk points scale with Windows."
+      },
+      "manuscript": {
+        "displayName": "Manuscript",
+        "purpose": "12-point Microsoft JhengHei, Tk spacing1=3 and spacing3=8 pixels; no CSS line-height authored."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [],
+    "native": {
+      "toolkit": "Tkinter / ttk",
+      "theme": "clam",
+      "mode": "Operate; extension of pinned A workbench",
+      "defaultWindow": [
+        1360,
+        820
+      ],
+      "minimumWindow": [
+        1040,
+        640
+      ],
+      "bodyColumnMinimums": [
+        190,
+        470,
+        240
+      ],
+      "centerExpansionWeight": 1,
+      "manuscriptPaneWeights": [
+        1,
+        1
+      ],
+      "scrolling": "Independent vertical manuscript scrollbars; separate inspector canvas scrollbar.",
+      "cornerRadius": "Not authored; native theme owns control geometry.",
+      "focus": "Text highlightcolor is primary with 1px highlightthickness. Buttons use native theme focus. HTML tile focus is an illustrative viewer affordance.",
+      "ramps": "Synthesized viewer-only ramps for accent and paper; not adopted application colors. Frontmatter hex values are authoritative.",
+      "htmlDetector": "Not applicable to native Tkinter.",
+      "engine": "Unavailable; not represented as executed."
+    },
+    "verification": {
+      "disposition": "ship",
+      "scope": "Static saved-state visual review only",
+      "evidence": [
+        ".impeccable/review/desktop.png",
+        ".impeccable/review/narrow.png",
+        "docs/verification/T01-visual-review.md"
+      ],
+      "limits": "Does not establish keyboard traversal, all dialog/state behavior, persistence, or clean Windows installation."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Save or confirm import. Illustrative HTML translation; actual control is native Tkinter.",
+      "html": "<button class=\"ds-primary\">儲存校對稿 Ctrl+S</button>",
+      "css": ".ds-primary{font:10pt \"Microsoft JhengHei\",sans-serif;background:#315d43;color:#fff;padding:8px 10px;border:1px solid #c7d2c6;border-radius:0}.ds-primary:hover,.ds-primary:active{background:#264d35}.ds-primary:focus-visible{outline:2px solid #315d43;outline-offset:2px}.ds-primary:disabled{background:#e1e5de;color:#68736c}"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Create or open a book project. Illustrative HTML translation; actual control is native Tkinter.",
+      "html": "<button class=\"ds-secondary\">開啟專案</button>",
+      "css": ".ds-secondary{font:10pt \"Microsoft JhengHei\",sans-serif;background:#fff;color:#263d34;padding:8px 10px;border:1px solid #c7d2c6;border-radius:0}.ds-secondary:hover,.ds-secondary:active{background:#e9f0e5}.ds-secondary:focus-visible{outline:2px solid #315d43;outline-offset:2px}.ds-secondary:disabled{color:#68736c}"
+    },
+    {
+      "name": "Editable manuscript",
+      "kind": "input",
+      "refersTo": "manuscript-editor",
+      "description": "Word-wrapped draft with a visible text boundary. Illustrative HTML translation; actual control is native Tkinter.",
+      "html": "<textarea class=\"ds-editor\" aria-label=\"校對稿\">第一章　風與樹\n\n清晨，山谷裡的風帶著露水的氣息。</textarea>",
+      "css": ".ds-editor{font:12pt \"Microsoft JhengHei\",sans-serif;min-height:170px;width:260px;padding:16px;background:#fff;color:#263d34;border:1px solid #dfe5dd;border-radius:0;caret-color:#315d43;white-space:pre-wrap}.ds-editor:focus{outline:none;border-color:#315d43}.ds-editor::selection{background:#c5ddc8}"
+    },
+    {
+      "name": "Source manuscript",
+      "kind": "custom",
+      "refersTo": "manuscript-source",
+      "description": "Read-only source remains beside the editable draft. Illustrative HTML translation; actual control is native Tkinter.",
+      "html": "<div class=\"ds-source\" role=\"region\" aria-label=\"來源原文 · TXT\" tabindex=\"0\">第一章　風與樹<br><br>清晨，山谷裡的風帶著露水的氣息。</div>",
+      "css": ".ds-source{font:12pt \"Microsoft JhengHei\",sans-serif;width:260px;min-height:170px;padding:16px;background:#fffef9;color:#263d34;border:1px solid #dfe5dd;overflow:auto}.ds-source:focus-visible{outline:1px solid #315d43}.ds-source::selection{background:#c5ddc8}"
+    },
+    {
+      "name": "Workflow navigation",
+      "kind": "nav",
+      "refersTo": "button-primary",
+      "description": "Numbered steps preserve the workbench context. Illustrative HTML translation; actual control is native Tkinter.",
+      "html": "<nav class=\"ds-steps\" aria-label=\"製作流程\"><button>1 來源</button><button aria-current=\"step\">2 校對</button><button>3 語音</button><button>4 影片</button></nav>",
+      "css": ".ds-steps{display:flex;gap:4px}.ds-steps button{font:10pt \"Microsoft JhengHei\",sans-serif;flex:1;padding:8px 10px;background:#fff;color:#263d34;border:1px solid #c7d2c6;border-radius:0}.ds-steps button[aria-current]{background:#315d43;color:#fff}.ds-steps button:hover{background:#e9f0e5;color:#263d34}.ds-steps button:focus-visible{outline:2px solid #315d43;outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Calm manuscript workbench",
+    "overview": "This documents the existing A workbench in Operate mode. It extends the selected green and paper visual system into native Windows Tkinter; it does not establish a new visual world. Clear Traditional Chinese labels, quiet surfaces, and simultaneous source/draft comparison support sustained proofreading.\n\nThe current implementation is the authority for native values. `prototype.css` preserves the inherited direction; its browser radii, shadows, serif paper styling, and responsive rules are reference material rather than Tkinter requirements. Product scope comes from `PRODUCT.md`; the selected composition is recorded in ADR 0003.",
+    "keyCharacteristics": [
+      "Muted green actions and dark green text on quiet light surfaces.",
+      "Paper source beside a white editable manuscript.",
+      "Persistent book/batch context and a separate confirmation inspector.",
+      "Native controls with explicit status and disabled-function explanations."
+    ],
+    "rules": [
+      {
+        "name": "The Action Green Rule",
+        "body": "Reserve solid green for the active step and meaningful primary actions; manuscript surfaces stay light.",
+        "section": "colors"
+      },
+      {
+        "name": "The Comparison Rule",
+        "body": "Keep source and draft independently readable and scrollable while retaining batch context and reachable inspector actions.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "**Do** retain the calm green/paper system and native Microsoft JhengHei hierarchy.",
+      "**Do** preserve independent manuscript scrolling and a separately scrollable inspector.",
+      "**Do** keep unavailable actions legible and explain their dependencies nearby.",
+      "**Do** verify supported window sizes with real native captures and treat source/draft distinction as functional hierarchy."
+    ],
+    "donts": [
+      "**Don't** replace the selected A workbench with wizard or batch-console composition without a new design decision.",
+      "**Don't** import browser-specific shadows, radii, serif typography, or mobile breakpoints as if they were native tokens.",
+      "**Don't** imply online proofreading, reading confirmation, audio, or video succeeds before those functions exist."
+    ]
+  }
+}

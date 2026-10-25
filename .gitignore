@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+dist/
+.scratch/test-runs/
+.scratch/t01-visual/
+.scratch/build-tools/
+.scratch/pyinstaller-build/
+.scratch/pyinstaller-cache/
+.scratch/t02-baseline/
+.scratch/t02-visual/
+.mypy_cache/

@@ -1,0 +1,19 @@
+<!doctype html>
+<!-- THROWAWAY UI PROTOTYPE. Question: which layout best supports one book, multiple independent batches, proofreading and total-video assembly? Three variants on /prototype?variant=A|B|C. No production architecture decision is implied. -->
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>ebook2mp4 · 書籍製作介面原型</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+  <div id="app"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="dialog"><div id="dialog-content"></div></dialog>
+  <input id="file-picker" type="file" accept=".txt" hidden>
+  <script src="prototype.js"></script>
+</body>
+</html>
