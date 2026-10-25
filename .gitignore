@@ -16,3 +16,5 @@ dist/
 .scratch/ocr-runtime/
 .scratch/t05-real-book-project/
 outputs/
+.scratch/t06-*/
+.scratch/t06-*.log

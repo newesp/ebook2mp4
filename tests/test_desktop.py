@@ -106,6 +106,7 @@ class DesktopJourney(unittest.TestCase):
         self.assertEqual((dialog.start.get(), dialog.end.get()), ('1', '20'))
         dialog.start.set('3')
         dialog.end.set('5')
+        dialog.mode.set('文字層')
         dialog.extract_button.invoke()
         until(lambda: self.app.batch_id is not None)
         self.assertIn('Chapter 3:', self.app.current_text)
@@ -141,6 +142,7 @@ class DesktopJourney(unittest.TestCase):
             self.root.update()
             time.sleep(.01)
         self.assertTrue(dialog.ready)
+        dialog.mode.set('文字層')
         dialog.extract_button.invoke()
         job = dialog.job
         deadline = time.monotonic() + 5

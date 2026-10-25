@@ -342,19 +342,67 @@ class ProjectWorkflow:
         self._pdf_job = PdfExtraction(preview, start, end, mode=mode, language=language)
         return self._pdf_job
 
+    def start_pdf_retry(self, batch_id: str, *, pages: list[int] | None = None,
+                        failed_only: bool = False, language: str = '繁中＋英文',
+                        rotation: int = 0) -> PdfExtraction:
+        """Retry selected physical pages into a candidate; never mutate the source batch."""
+        from .pdf import PdfExtraction, PdfPreview
+        if self._pdf_job is not None:
+            raise ProjectError('已有 PDF 擷取待完成或保存，請先完成或取消。')
+        self._check_current()
+        original = self.pdf_pages(batch_id)
+        batch = self._batch(batch_id)
+        if failed_only and pages is not None:
+            raise ProjectError('請選擇指定頁或只重試失敗頁其中一種。')
+        numbers = ([p['number'] for p in original if p['status'] == 'failed'] if failed_only else pages)
+        if numbers is None:
+            raise ProjectError('請指定要強制 OCR 的頁次，或選擇只重試失敗頁。')
+        data = self._read(batch['source'])
+        self._space(self.root, len(data) + 8192)
+        preview = PdfPreview(Path(batch['source']['original_name']), data, batch['pdf']['page_count'])
+        self._pdf_job = PdfExtraction(preview, batch['pdf']['start'], batch['pdf']['end'],
+                                      mode='ocr', language=language, numbers=numbers, rotation=rotation,
+                                      base_pages=original, base_issues=batch.get('source_issues', []),
+                                      source_batch=batch_id)
+        return self._pdf_job
+
+    def pdf_source_preview(self, batch_id: str) -> PdfPreview:
+        """Verified project source, usable even after the external PDF has moved."""
+        from .pdf import PdfPreview
+        self.pdf_pages(batch_id)
+        batch = self._batch(batch_id)
+        return PdfPreview(Path(batch['source']['original_name']), self._read(batch['source']), batch['pdf']['page_count'])
+
     def pdf_extraction_pages(self, job: PdfExtraction) -> list[dict]:
         """Completed candidate pages, including explicit placeholders for incomplete pages."""
         if job is not self._pdf_job or not job.wait(0):
             raise ProjectError('PDF 擷取仍在執行或不屬於此專案，請等待取消／完成。')
-        pages = job.pages
-        completed = len(pages)
-        for number in range(job.start + completed, job.end + 1):
-            pages.append(dict(number=number, method=job.mode, text='', status='cancelled',
-                              error='擷取已取消，此頁尚未處理完成。', settings=job.settings.copy()))
-        return pages
+        completed = {p['number']: p for p in job.pages}
+        pages = {p['number']: p for p in job.base_pages or []}
+        for number in job.numbers:
+            pages[number] = completed.get(number, dict(number=number,
+                method='ocr' if job.mode == 'ocr' else 'text-layer', text='', status='cancelled',
+                error='擷取已取消，此頁尚未處理完成。', settings=job.settings.copy()))
+        return [pages[n] for n in range(job.start, job.end + 1)]
 
-    def finish_pdf_extraction(self, job: PdfExtraction) -> str:
+    def finish_pdf_extraction(self, job: PdfExtraction, *, accepted_pages: list[int] | None = None) -> str:
         pages = self.pdf_extraction_pages(job)
+        accepted = set(job.numbers if accepted_pages is None else accepted_pages)
+        if (accepted_pages is not None and
+                (job.base_pages is None or any(type(n) is not int for n in accepted_pages)
+                 or not accepted <= set(job.numbers))):
+            raise ProjectError('只能採用本次重試的有效頁次。')
+        if job.base_pages is not None:
+            baseline = {p['number']: p for p in job.base_pages}
+            pages = [p if p['number'] in accepted else baseline[p['number']] for p in pages]
+        issues = []
+        for page in pages:
+            if page['status'] != 'success':
+                previous = next((i for i in job.base_issues if i.get('page') == page['number']), None)
+                issues.append(deepcopy(previous) if previous and page['number'] not in accepted else
+                              dict(page=page['number'], reason=f'PDF 第 {page["number"]} 頁：{page["error"]}', status='pending'))
+        # Batch-wide issues cannot be silently cleared by a page retry.
+        issues.extend(deepcopy(i) for i in job.base_issues if 'page' not in i)
         batch_id = uuid.uuid4().hex
         source_path = f'sources/{batch_id}.pdf'
         pages_path = f'batches/{batch_id}/extracted.json'
@@ -367,9 +415,9 @@ class ProjectWorkflow:
                      draft=dict(path=draft_path, sha256=digest(draft)),
                      pdf=dict(start=job.start, end=job.end, page_count=job.preview.page_count,
                               extraction_status=job.status, mapping_valid=True,
+                              mode=job.mode, language=job.language, source_batch=job.source_batch,
                               extracted=dict(path=pages_path, sha256=digest(extracted))),
-                     source_issues=[dict(page=p['number'], reason=f'PDF 第 {p["number"]} 頁：{p["error"]}',
-                                         status='pending') for p in pages if p['status'] != 'success'])
+                     source_issues=issues)
         manifest = self.state
         # Insert PDF batches in physical-page order; users can subsequently reorder.
         index = next((i for i, b in enumerate(manifest['batches'])
