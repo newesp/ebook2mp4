@@ -1,15 +1,19 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 from PyInstaller.utils.hooks import collect_all, copy_metadata
+from pathlib import Path
 
 pdf_datas, pdf_binaries, pdf_imports = collect_all('pypdfium2')
 raw_datas, raw_binaries, raw_imports = collect_all('pypdfium2_raw')
+ocr_runtime = Path(SPECPATH).parent / '.scratch' / 'ocr-runtime'
+if not (ocr_runtime / 'tesseract.exe').is_file():
+    raise RuntimeError('Run packaging/prepare_ocr.py with build dependencies before building.')
 
 a = Analysis(
     ['../run.pyw'],
     pathex=[],
     binaries=pdf_binaries + raw_binaries,
-    datas=pdf_datas + raw_datas + copy_metadata('pillow'),
+    datas=pdf_datas + raw_datas + copy_metadata('pillow') + [(str(ocr_runtime), 'tools/tesseract')],
     hiddenimports=pdf_imports + raw_imports,
     hookspath=[],
     hooksconfig={},

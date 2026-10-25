@@ -64,12 +64,13 @@ def validate_range(start, end, count):
         raise ProjectError(f'頁碼必須為整數，且 1 ≤ 起始頁 ≤ 結束頁 ≤ {count}。')
 
 
-def render(data: bytes, number: int, count: int) -> bytes:
+def render(data: bytes, number: int, count: int, *, ocr: bool = False) -> bytes:
     validate_range(number, number, count)
     with _native_lock, closing(open_document(data)) as doc, closing(doc[number - 1]) as page:
         width, height = page.get_size()
         # Bound dimensions and memory even for unusually large page boxes.
-        scale = min(900 / max(width, 1), 1100 / max(height, 1), 2)
+        scale = (min(300 / 72, (25_000_000 / max(width * height, 1)) ** .5) if ocr else
+                 min(900 / max(width, 1), 1100 / max(height, 1), 2))
         try:
             with closing(page.render(scale=scale)) as bitmap:
                 with bitmap.to_pil() as image, BytesIO() as output:
@@ -81,8 +82,19 @@ def render(data: bytes, number: int, count: int) -> bytes:
 
 class PdfExtraction:
     """A cancellable candidate; only the workflow publishes it as a new batch."""
-    def __init__(self, preview: PdfPreview, start: int, end: int):
+    def __init__(self, preview: PdfPreview, start: int, end: int, *, mode='text-layer', language='繁中＋英文'):
         validate_range(start, end, preview.page_count)
+        if mode not in ('text-layer', 'ocr'):
+            raise ProjectError('請選擇文字層或全部強制 OCR。')
+        self.mode, self.language = mode, language
+        self.settings: dict = dict(line_breaks='original')
+        if mode == 'ocr':
+            from .ocr import model_info, MODEL_REVISION
+            info = model_info(language)
+            if not info['ready']:
+                raise ProjectError(info['engine_error'] or '缺少或損壞 OCR 語言模型，請先從介面下載／安裝。')
+            self.settings.update(language=info['codes'], model_revision=MODEL_REVISION,
+                                 engine='Tesseract 5 LSTM', dpi=300, max_pixels=25_000_000, psm=6)
         self.preview, self.start, self.end = preview, start, end
         self._cancel = threading.Event()
         self._lock = threading.Lock()
@@ -115,9 +127,23 @@ class PdfExtraction:
         for number in range(self.start, self.end + 1):
             if self._cancel.is_set():
                 break
-            result = dict(number=number, method='text-layer', text='', status='failed', error='',
-                          settings=dict(line_breaks='original'))
+            result = dict(number=number, method=self.mode, text='', status='failed', error='',
+                          settings=self.settings.copy())
             try:
+                if self.mode == 'ocr':
+                    from .ocr import recognize, OcrCancelled
+                    try:
+                        text = recognize(render(self.preview.data, number, self.preview.page_count, ocr=True),
+                                         self.language, self._cancel)
+                    except OcrCancelled:
+                        break
+                    result['text'] = text
+                    result['status'] = 'success' if any(c.isalnum() for c in text) else 'pending'
+                    if result['status'] == 'pending':
+                        result['error'] = '空白／無可用 OCR 文字，請對照原頁後處理或明確略過。'
+                    with self._lock:
+                        self._pages.append(result)
+                    continue
                 with _native_lock, closing(open_document(self.preview.data)) as doc, closing(doc[number - 1]) as page:
                     with closing(page.get_textpage()) as textpage:
                         text = textpage.get_text_bounded(errors='strict')
@@ -129,8 +155,10 @@ class PdfExtraction:
                     elif '\ufffd' in text or any(unicodedata.category(c) == 'Cc' and c not in '\t\r\n' for c in text):
                         result['status'] = 'pending'
                         result['error'] = '文字層含替代符號或異常控制字元，請對照頁圖檢查。'
-            except Exception:
-                result['error'] = '文字層擷取失敗，請檢查頁圖或更換來源。'
+            except Exception as error:
+                result['error'] = (str(error) if isinstance(error, ProjectError) else
+                                   'OCR 辨識失敗，請檢查原頁或模型後重試。' if self.mode == 'ocr' else
+                                   '文字層擷取失敗，請檢查頁圖或更換來源。')
             with self._lock:
                 self._pages.append(result)
         with self._lock:

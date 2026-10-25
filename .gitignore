@@ -11,3 +11,6 @@ dist/
 .scratch/t03-visual/
 .scratch/t04-visual/
 .mypy_cache/
+.scratch/t05-tools/
+.scratch/t05-visual/
+.scratch/ocr-runtime/

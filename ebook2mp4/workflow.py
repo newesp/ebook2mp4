@@ -314,13 +314,24 @@ class ProjectWorkflow:
         from .pdf import render
         return render(preview.data, number, preview.page_count)
 
-    def start_pdf_extraction(self, preview: PdfPreview, start: int, end: int) -> PdfExtraction:
+    @staticmethod
+    def ocr_models(language: str) -> dict:
+        from .ocr import model_info
+        return model_info(language)
+
+    @staticmethod
+    def start_ocr_model_install(language: str):
+        from .ocr import ModelInstall
+        return ModelInstall(language)
+
+    def start_pdf_extraction(self, preview: PdfPreview, start: int, end: int, *,
+                             mode: str = 'text-layer', language: str = '繁中＋英文') -> PdfExtraction:
         from .pdf import PdfExtraction
         if self._pdf_job is not None:
             raise ProjectError('已有 PDF 擷取待完成或保存，請先完成或取消。')
         self._check_current()
         self._space(self.root, preview.size + 8192)
-        self._pdf_job = PdfExtraction(preview, start, end)
+        self._pdf_job = PdfExtraction(preview, start, end, mode=mode, language=language)
         return self._pdf_job
 
     def finish_pdf_extraction(self, job: PdfExtraction) -> str:
@@ -333,8 +344,8 @@ class ProjectWorkflow:
         pages = job.pages
         completed = len(pages)
         for number in range(job.start + completed, job.end + 1):
-            pages.append(dict(number=number, method='text-layer', text='', status='cancelled',
-                              error='擷取已取消，此頁尚未處理。', settings=dict(line_breaks='original')))
+            pages.append(dict(number=number, method=job.mode, text='', status='cancelled',
+                              error='擷取已取消，此頁尚未處理完成。', settings=job.settings.copy()))
         draft = '\n\n'.join(p['text'] for p in pages).encode('utf-8')
         extracted = encode(dict(pages=pages))
         batch = dict(id=batch_id, kind='pdf', name=f'{job.preview.path.stem} · {job.start}–{job.end}',
@@ -376,7 +387,7 @@ class ProjectWorkflow:
                 or pdf['extraction_status'] not in ('completed', 'cancelled')):
             raise ProjectError('PDF 逐頁記錄損壞，請還原專案備份。')
         for page in pages:
-            if (page['method'] != 'text-layer' or not isinstance(page['text'], str)
+            if (page['method'] not in ('text-layer', 'ocr') or not isinstance(page['text'], str)
                     or not isinstance(page['error'], str) or not isinstance(page['settings'], dict)
                     or page['status'] not in ('success', 'pending', 'failed', 'cancelled')):
                 raise ProjectError('PDF 逐頁記錄損壞，請還原專案備份。')
