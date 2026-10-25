@@ -67,3 +67,5 @@ python packaging/build.py --install-tools
 PDF 使用 pypdfium2／PDFium 及 Pillow，版本固定於 `packaging/requirements-runtime.txt`，封裝包含原生 PDFium DLL 與授權資料；TXT 工作流程不需要 PDF 元件。ReportLab 僅用於產生合成測試 PDF。PyInstaller 是專案內的隔離建置依賴。建置 OCR 需要 7-Zip（僅開發／建置時）；prepare_ocr.py 下載固定 SHA-256 的 UB Mannheim Tesseract 5.4.0，解壓引擎及必要 DLL 至 `.scratch/ocr-runtime`，不執行安裝程式。第三方來源與授權交付待辦見 [OCR-NOTICES](packaging/OCR-NOTICES.md)。
 
 開發／隔離驗證可設定 `EBOOK2MP4_TESSERACT` 為引擎完整路徑、`EBOOK2MP4_OCR_HOME` 為可寫模型目錄；一般封裝版不需設定。真實 OCR 測試另設 `EBOOK2MP4_REAL_OCR_HOME` 指向含三種已驗證模型的目錄，未設定時會明列跳過，不當成真實辨識通過。`packaging/installer.iss` 供 T23 使用，本次沒有編譯或驗證安裝程式。證據見 [T04](docs/verification/T04.md) 與 [T05](docs/verification/T05.md)。
+
+指定書稿基本測試另設 `EBOOK2MP4_BOOK_PDF` 指向 `book1-ch1.pdf`；此 9 頁掃描範例已實際以簡中＋英文轉成 `outputs/book1-ch1.txt`。`outputs/` 保留本機成品，排除 Git，不把使用者書稿全文提交到版本紀錄。

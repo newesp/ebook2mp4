@@ -334,18 +334,23 @@ class ProjectWorkflow:
         self._pdf_job = PdfExtraction(preview, start, end, mode=mode, language=language)
         return self._pdf_job
 
-    def finish_pdf_extraction(self, job: PdfExtraction) -> str:
+    def pdf_extraction_pages(self, job: PdfExtraction) -> list[dict]:
+        """Completed candidate pages, including explicit placeholders for incomplete pages."""
         if job is not self._pdf_job or not job.wait(0):
             raise ProjectError('PDF 擷取仍在執行或不屬於此專案，請等待取消／完成。')
-        batch_id = uuid.uuid4().hex
-        source_path = f'sources/{batch_id}.pdf'
-        pages_path = f'batches/{batch_id}/extracted.json'
-        draft_path = f'batches/{batch_id}/draft-{uuid.uuid4().hex}.txt'
         pages = job.pages
         completed = len(pages)
         for number in range(job.start + completed, job.end + 1):
             pages.append(dict(number=number, method=job.mode, text='', status='cancelled',
                               error='擷取已取消，此頁尚未處理完成。', settings=job.settings.copy()))
+        return pages
+
+    def finish_pdf_extraction(self, job: PdfExtraction) -> str:
+        pages = self.pdf_extraction_pages(job)
+        batch_id = uuid.uuid4().hex
+        source_path = f'sources/{batch_id}.pdf'
+        pages_path = f'batches/{batch_id}/extracted.json'
+        draft_path = f'batches/{batch_id}/draft-{uuid.uuid4().hex}.txt'
         draft = '\n\n'.join(p['text'] for p in pages).encode('utf-8')
         extracted = encode(dict(pages=pages))
         batch = dict(id=batch_id, kind='pdf', name=f'{job.preview.path.stem} · {job.start}–{job.end}',

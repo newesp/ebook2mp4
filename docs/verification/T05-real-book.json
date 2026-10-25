@@ -1,0 +1,78 @@
+{
+  "source": "E:\\Leo\\assets\\ebooks\\靈性開悟\\book1-ch1.pdf",
+  "source_sha256": "a1244d0eeb64bc3584d9299a19b83f67d1ee4310c673cff1a4805016a9bfb414",
+  "source_bytes": 1876424,
+  "source_pages": 9,
+  "mode": "ocr",
+  "language": "chi_sim+eng",
+  "elapsed_seconds": 30.619,
+  "pages": [
+    {
+      "number": 1,
+      "status": "success",
+      "characters": 464,
+      "error": ""
+    },
+    {
+      "number": 2,
+      "status": "success",
+      "characters": 640,
+      "error": ""
+    },
+    {
+      "number": 3,
+      "status": "success",
+      "characters": 815,
+      "error": ""
+    },
+    {
+      "number": 4,
+      "status": "success",
+      "characters": 766,
+      "error": ""
+    },
+    {
+      "number": 5,
+      "status": "success",
+      "characters": 658,
+      "error": ""
+    },
+    {
+      "number": 6,
+      "status": "success",
+      "characters": 759,
+      "error": ""
+    },
+    {
+      "number": 7,
+      "status": "success",
+      "characters": 702,
+      "error": ""
+    },
+    {
+      "number": 8,
+      "status": "success",
+      "characters": 825,
+      "error": ""
+    },
+    {
+      "number": 9,
+      "status": "success",
+      "characters": 594,
+      "error": ""
+    }
+  ],
+  "output": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\book1-ch1.txt",
+  "output_bytes": 16605,
+  "output_characters": 6239,
+  "blockers": [],
+  "reopened_matches": true,
+  "visual_spot_checks": {
+    "title": true,
+    "opening": true,
+    "all_pages": true,
+    "all_success": true
+  },
+  "output_sha256": "2bb7a9eb6f5b3c6061e5a1badc9551d2cd7e86b4d1921b82af4a2fa20828b925",
+  "line_endings": "Tesseract native CRLF preserved; validation decodes bytes without newline translation"
+}

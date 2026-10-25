@@ -1,0 +1,17 @@
+{
+  "install": {
+    "status": "completed",
+    "downloaded": 2469156,
+    "total": 2469156,
+    "phase": "安裝完成",
+    "error": ""
+  },
+  "models": {
+    "language": "簡中＋英文",
+    "codes": "chi_sim+eng",
+    "missing": [],
+    "download_bytes": 0,
+    "engine_error": "",
+    "ready": true
+  }
+}

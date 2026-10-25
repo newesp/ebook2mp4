@@ -17,6 +17,8 @@ class PdfDialog(tk.Toplevel):
         self.pending_job = None
         self.model_job = None
         self.candidate_pages = None
+        self.ocr_info_pending = batch_id is None
+        self.model_info_language = None
         self.future = None
         self.callback: Callable[[Any], None] | None = None
         self.closing = False
@@ -55,7 +57,7 @@ class PdfDialog(tk.Toplevel):
         self.language_select = ttk.Combobox(self.ocr_options, textvariable=self.language,
                                            values=['繁中＋英文', '簡中＋英文', '英文'], state='readonly', width=13)
         self.language_select.grid(row=0, column=1, padx=8)
-        self.install_button = ttk.Button(self.ocr_options, text='下載／安裝模型', command=self.install_models)
+        self.install_button = ttk.Button(self.ocr_options, text='下載／安裝模型', command=self.install_models, state='disabled')
         self.install_button.grid(row=0, column=2, sticky='w')
         self.model_info = ttk.Label(self.ocr_options, text='OCR 語言獨立於語音；全部強制 OCR 僅處理所選頁範圍。', wraplength=660)
         self.model_info.grid(row=1, column=0, columnspan=3, sticky='w', pady=4)
@@ -204,17 +206,29 @@ class PdfDialog(tk.Toplevel):
         self.install_button.configure(state='normal' if enabled else 'disabled')
 
     def ocr_changed(self):
+        self.ocr_info_pending = True
+        self.install_button.configure(state='disabled')
         if self.future is not None or self.job or self.pending_job or self.model_job:
             return
+        self.ocr_info_pending = False
         language = self.language.get()
         def show(info):
+            if language != self.language.get():
+                self.ocr_info_pending = True
+                return
+            self.model_info_language = language
             self.model_info.configure(text=(f'{info["codes"]} · 尚需下載 {info["download_bytes"]:,} 位元組\n'
                                             + (info['engine_error'] or ('模型已就緒。OCR 仍需人工校對。' if info['ready'] else
                                                '請按下載／安裝模型；需網路與模型目錄寫入權限。'))))
+            self.install_button.configure(state='normal')
+        self.model_info.configure(text='正在檢查所選 OCR 語言模型與下載大小…')
         self.submit(lambda: self.flow.ocr_models(language), show)
 
     def install_models(self):
         if self.future is not None or self.job or self.pending_job or self.model_job:
+            return
+        if self.model_info_language != self.language.get():
+            self.ocr_changed()
             return
         self.model_job = self.flow.start_ocr_model_install(self.language.get())
         self.ocr_controls(False)
@@ -265,11 +279,7 @@ class PdfDialog(tk.Toplevel):
                 if self.job.mode == 'ocr' and not self.closing:
                     self.pending_job, self.job = self.job, None
                     # Include cancelled pages with original page numbers in the comparison.
-                    self.candidate_pages = self.pending_job.pages
-                    for number in range(self.pending_job.start + len(self.candidate_pages), self.pending_job.end + 1):
-                        self.candidate_pages.append(dict(number=number, method='ocr', text='', status='cancelled',
-                                                         error='此頁未完成，採用後仍須處理或明確略過。',
-                                                         settings=self.pending_job.settings))
+                    self.candidate_pages = self.flow.pdf_extraction_pages(self.pending_job)
                     self.cancel_button.configure(text='關閉並捨棄候選')
                     self.accept_button = ttk.Button(self, text='採用為新批次', command=self.accept_candidate, style='Primary.TButton')
                     self.accept_button.grid(row=5, column=0, sticky='w', padx=12)
@@ -294,6 +304,9 @@ class PdfDialog(tk.Toplevel):
                     self.ready = False
                     self.retry_button = ttk.Button(self, text='重試保存', command=self.retry)
                     self.retry_button.grid(row=5, column=0, sticky='w', padx=12)
+        if (self.ocr_info_pending and not self.closing and self.future is None
+                and self.job is None and self.pending_job is None and self.model_job is None):
+            self.ocr_changed()
         if self.closing and self.future is None and self.job is None and self.model_job is None:
             self.destroy()
             return

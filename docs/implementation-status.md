@@ -1,25 +1,31 @@
 # 實作交接
 
-T01～T04 已完成。T01 基線 c45a51d、T02 ea10026、T03 c6d2a4b／a2b41b1；T04 實作 `579ccf6`、審查修正 `b487034`，最後視窗尺寸／封裝授權及驗證交接提交可由 `git log -1` 查看。目前分支 master，未設定或推送遠端。
+T01～T05 已實作。T05 起點 `df85a02`、主要實作 `09600e6`；模型狀態審查修正、實際書稿基本測試與最終交接見後續提交（`git log -1`）。目前分支 master，未設定或推送遠端。歷史 T04 詳見 docs/verification/T04.md。
 
-下一張是 **T05 — 掃描 PDF OCR 與語言模型安裝**，票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/05-scan-pdf-ocr-models.md`。**建議開新 session 再接 T05**，先讀 AGENTS.md、GLOSSARY.md、docs/adr、Spec v1.1、T05 票稿及 [T04 驗證紀錄](verification/T04.md)。
+下一張 **T06 — 混合 PDF 自動辨識、異常頁確認與旋轉重試**，票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/06-mixed-pdf-anomalies-retry.md`。**建議開新 session 再接 T06**；先讀 AGENTS.md、GLOSSARY.md、docs/adr、Spec v1.1、T06 票稿及 [T05 驗證](verification/T05.md)。
 
-主要測試邊界沿用已核定的 `ProjectWorkflow` 與真實 Tk UI。格式 v1 目前支援多 TXT／PDF 批次；來源副本、校對版本、歷史朗讀快照與重載副本各自成檔並帶 SHA-256。可選欄位 readings、current_reading、draft_copies、source_issues 保留 T03 行為：任何人工編輯、改稿及重載都取消目前朗讀確認，舊快照不可變，批次互不影響；reading_text 不傳 snapshot_id 時只接受有效目前確認，多視窗索引變更須重開。
+主要測試邊界沿用已核定的 ProjectWorkflow 與真實 Tk UI。格式 v1 支援同書多 TXT／PDF 批次，來源、不可變逐頁原稿、校對版本、朗讀快照及重載副本各自保存並帶 SHA-256。任何人工編輯、改稿與重載取消該批目前朗讀確認；舊快照及其他批次不變。多視窗索引變更須重開，寫入鎖及原子發布規則沿用 T01～T04。
 
-T04 新增 kind=pdf 與 pdf 欄位：start／end／page_count、extraction_status、mapping_valid、extracted 參照。`batches/<id>/extracted.json` 保存不可變逐頁 number、method、text、settings、status、error；原始 PDF 在 sources。專案應使用 T04 或更新版本續作。
+公開 PDF 流程：inspect_pdf → preview_pdf_page → start_pdf_extraction → pdf_extraction_pages → finish_pdf_extraction。start 新增 mode='text-layer'（預設）或 'ocr'，language='繁中＋英文'／'簡中＋英文'／'英文'；設定獨立於 TTS。每次 finish 建立新批次，不覆寫既有校對稿。pdf_extraction_pages 只接受所屬已停止候選，統一補齊取消頁，供 UI 比較及保存共用。PdfExtraction 的 pages 仍只回傳已完成頁副本，提供 status、cancel、wait。保存失敗保留候選供重試；discard_pdf_extraction 釋放已停止候選。
 
-公開 PDF 流程為 inspect_pdf → preview_pdf_page → start_pdf_extraction → finish_pdf_extraction。PdfExtraction 背景執行，提供 status、pages（副本）、cancel、wait；finish 只能發布此工作流程的完成候選，總是建立新批次，不覆寫既有校對稿。取消保留完整頁，未處理頁標 cancelled；若保存失敗，UI 保留候選供重試或明確捨棄。discard_pdf_extraction 取消並釋放已停止候選。原生 PDFium 呼叫有共用鎖，每頁操作明確關閉資源。
+OCR 完成先顯示候選圖文對照，再明確「採用為新批次」或關閉捨棄；取消擷取並保留完整頁會建立取消批次。method 支援 text-layer／ocr；逐頁設定保留語言代碼、模型 commit、引擎、300 DPI、25M pixels 上限與 psm=6。狀態 success／pending／failed／cancelled，異常沿用 source_issues、resolve_source_issue、confirmation_blockers。全文編輯使 mapping_valid=False，不自動恢復；原始逐頁資料不改寫，正文不加人工頁碼標籤。
 
-pdf_pages／pdf_page_image 供逐頁原稿與頁圖對照。預覽換頁前清空舊圖；失敗不得沿用上一頁圖片。編輯時立即持久化 mapping_valid=False，全文／外部重載後明示無精確對應；保守失效不因 Undo 自動恢復，原始逐頁資料始終保留。preview_line_breaks 是無副作用候選預覽；UI 明確套用後可一次復原，不刪頁首頁尾或改連字號，正文不加人工頁碼標籤。
+模型公開入口 ocr_models(language)、start_ocr_model_install(language)。安裝工作提供 state（status／downloaded／total／phase／error）、cancel、wait。模型為官方 tessdata_fast 4.1.0 commit `65727574dfcd264acbb0c3e07860e4e9e9b22185`，大小及 SHA-256 固定於 ebook2mp4/ocr.py；完整校驗後逐檔原子發布，取消保留已安裝模型，移除未完成下載及鎖。UI 首次查詢大小、忙碌期間語言變更補查，顯示與選擇一致前不准安裝。跨視窗採模型安裝鎖，中斷鎖需關閉視窗後移除。
 
-PDF 無文字、文字稀少、異常字元或失敗透過 source_issues 阻擋確認；每項異常包含 page／reason／status，可沿用 record_source_issues、resolve_source_issue、confirmation_blockers。T04 **尚未 OCR**，只提供文字層方法，頁面驗證目前接受 method=text-layer；T05 需擴充方法／設定與逐頁 OCR 判斷、模型交付、失敗重試與候選採用，不能把稀少文字門檻當 OCR 已驗收。逐頁原稿不可用 OCR 重試直接覆蓋已校對稿。
+Tesseract 5.4.0.20240606 隨包提供，預設 `_internal/tools/tesseract/tesseract.exe`。模型預設 `%LOCALAPPDATA%/ebook2mp4/ocr/<commit>`，只在介面明確操作時連網下載，不上傳書稿或頁圖。開發可設 EBOOK2MP4_TESSERACT／EBOOK2MP4_OCR_HOME。OCR 每頁 subprocess，不經 shell、無主控台、120 秒上限；取消 kill 並 communicate 等待，刪頁圖暫存。PDFium 共用鎖及逐頁資源關閉規則不變，TXT 仍惰性載入 PDF/OCR 元件。
 
-執行依賴固定於 packaging/requirements-runtime.txt：pypdfium2 5.14.0、Pillow 13.0.0；TXT 惰性載入 PDF 元件，缺元件不阻擋 TXT。建置／開發工具見 requirements-build.txt／requirements-dev.txt，ReportLab 僅供合成測試。工具可安裝至 `.scratch/build-tools`，命令先設定 PYTHONPATH 指向該目錄。PyInstaller spec 包含 PDFium DLL／授權與 Pillow 授權，排除未使用的 NumPy adapter。
+**T06 尚未實作**：自動模式逐頁判斷、指定頁／旋轉、只重試失敗頁、候選逐頁採用等須依票稿完成，不能把 T05 的全部強制 OCR 及新批次採用當成這些功能已驗收。不要直接用 OCR 重試覆寫校對稿。
 
-最近完整驗證為 **42 tests 全通過（70.922 秒）**、mypy 檢查 6 個來源檔案通過、語法編譯與 Windows onedir 重建通過。真實 PDFium／Tk 與替身／故障注入分開記錄，見 docs/verification/T04.md、T04-tests.txt、T04-code-review.md 及 images/T04-*.png。Standards／Spec 初審問題均修正並由原審查者確認解除，兩軸零項未解決。
+固定 Python 依賴見 packaging/requirements-runtime.txt／requirements-dev.txt。建置先安裝隔離工具至 `.scratch/build-tools` 並設 PYTHONPATH，再執行 packaging/prepare_ocr.py（建置時需 7-Zip，固定來源及雜湊，解壓而不執行安裝程式），最後 packaging/build.py。OCR 準備會放 27 個引擎／必要 DLL 至 `.scratch/ocr-runtime`；PyInstaller spec 必須有此目錄。Tesseract／模型及 DLL 授權來源見 packaging/OCR-NOTICES.md；T23 仍須完成授權／源碼交付與乾淨 Windows 安裝。
 
-封裝版已實際啟動並開啟／取消原生選檔視窗；完整原生選檔輸入與 PDF 匯入流程因自動化焦點／輸入不可靠，**仍待人工補驗**，不得宣稱已通過。其他 DPI／輔助工具及 T23 乾淨 Windows 安裝也未驗收。正式 dist 保留；最終 exe SHA-256 為 `857A5620945852C27E7E0C7625E571E5639655D320776069A3AF4556ABEFB83C`。
+2026-10-26 最終完整驗證 **50／50 tests 通過，74.073 秒，無跳過**；mypy 檢查 7 個來源檔案及語法編譯通過，修正後 onedir 重建及實際啟動通過。Standards／Spec 初審 P2 均由原審查者確認解除，兩軸零項未解決。原始結果、真實工具／替身範圍、視覺及審查證據見 docs/verification/T05*。
 
-已清理本次測試資料、合成書稿、隔離工具、建置暫存與快取，約 110.0 MiB；本次測試／建置／封裝驗證程序最後檢查為 0，桌面自動化階段已重設。需求、正式成品及最終驗證證據保留。
+使用者追加基本測試：`E:/Leo/assets/ebooks/靈性開悟/book1-ch1.pdf`，9 頁均無文字層。以簡中＋英文真實 OCR 9／9 成功，30.619 秒，首頁標題與正文開頭對照通過。正式輸出 **`outputs/book1-ch1.txt`**，UTF-8、16,605 bytes、6,239 字元（含原生換行），SHA-256 `2bb7a9eb6f5b3c6061e5a1badc9551d2cd7e86b4d1921b82af4a2fa20828b925`；專案重開與匯出解碼相同。outputs 排除 Git，保留本機成品而不提交書稿全文。報告 docs/verification/T05-real-book.json 不含全文。另有真實三語引擎搭配合成掃描頁及模型網路下載驗證，不能宣稱所有實體掃描零錯字。
 
-Windows 目錄擁有者使 Git 要求安全目錄設定，每次命令使用 `git -c safe.directory=E:/Leo/Projects/ebook2mp4 ...`，未修改全域設定。沙箱限制 .git 寫入，提交使用提升權限命令。
+可重跑測試：設 EBOOK2MP4_REAL_OCR_HOME 指向含 eng／chi_tra／chi_sim 的模型目錄，EBOOK2MP4_TESSERACT 指向包內引擎，EBOOK2MP4_BOOK_PDF 指向使用者檔案。未提供環境變數會明列跳過相關實際測試，不能當全套 OCR 通過。Windows 沙箱 TEMP 有寫入限制時，將 TEMP／TMP 指向專案內可寫測試目錄。
+
+正式新版在 **`dist/T05/ebook2mp4/ebook2mp4.exe`**，SHA-256 `4A9A568A3598A551E78977FD614B1F356E463FE266C838D96B072C73FD72EFED`。因使用者開著舊 dist/ebook2mp4，這次未覆寫舊版或關閉使用者程序。包內引擎已用完整測試驗證辨識，主程式已實際啟動；完整封裝原生選檔→匯入→下載→OCR 尚待人工補驗，其他 DPI／輔助工具及 T23 安裝也未驗收。
+
+已依 AGENTS.md 清除本次測試專案、下載副本、模型測試資料、合成書稿、隔離工具、建置暫存與快取，共 **560,798,951 bytes（約 534.8 MiB）**。清理目標先確認位於專案內；保留正式成品、指定書稿 TXT、需求及最終證據。最後本次測試／建置／OCR／封裝驗證程序為 **0**；詳見 docs/verification/T05-cleanup.json。桌面自動化階段在收尾重設，既有使用者舊版及 prototype-qa 未動。
+
+Windows 目錄擁有者使 Git 要求安全目錄設定，每次使用 `git -c safe.directory=E:/Leo/Projects/ebook2mp4 ...`；未改全域設定。沙箱限制 .git 寫入，提交使用提升權限命令。

@@ -14,3 +14,5 @@ dist/
 .scratch/t05-tools/
 .scratch/t05-visual/
 .scratch/ocr-runtime/
+.scratch/t05-real-book-project/
+outputs/

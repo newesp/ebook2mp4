@@ -91,6 +91,24 @@ class RealOcrJourney(unittest.TestCase):
         self.addCleanup(self.env.stop)
         self.flow = ProjectWorkflow.create(self.root / 'book', 'Scanned book')
 
+    @unittest.skipUnless(os.environ.get('EBOOK2MP4_BOOK_PDF'), 'requires the user-provided book1-ch1.pdf')
+    def test_user_book_nine_scanned_pages_export_to_utf8_txt(self):
+        preview = self.flow.inspect_pdf(os.environ['EBOOK2MP4_BOOK_PDF'])
+        self.assertEqual(preview.page_count, 9)
+        job = self.flow.start_pdf_extraction(preview, 1, 9, mode='ocr', language='簡中＋英文')
+        self.addCleanup(lambda: (job.cancel(), job.wait()))
+        self.assertTrue(job.wait(180))
+        batch = self.flow.finish_pdf_extraction(job)
+        pages = self.flow.pdf_pages(batch)
+        self.assertEqual([page['number'] for page in pages], list(range(1, 10)))
+        self.assertTrue(all(page['status'] == 'success' and page['text'].strip() for page in pages))
+        self.assertIn('再简单也不过了', pages[0]['text'].replace(' ', ''))
+        exported = self.root / 'book1-ch1.txt'
+        self.flow.export_txt(batch, exported)
+        reopened = ProjectWorkflow.open(self.flow.root)
+        self.assertEqual(exported.read_bytes().decode('utf-8'), reopened.texts(batch)[1])
+        self.assertFalse(reopened.confirmation_blockers(batch))
+
     def test_verified_model_install_and_cancel_release_download_resources(self):
         model = (Path(os.environ['EBOOK2MP4_REAL_OCR_HOME']) / 'eng.traineddata').read_bytes()
         home = self.root / 'installed-models'

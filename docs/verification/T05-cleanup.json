@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-26",
+  "targets": [
+    {
+      "path": ".scratch/test-runs",
+      "bytes": null,
+      "removed": true
+    },
+    {
+      "path": ".scratch/build-tools",
+      "bytes": 96858269.0,
+      "removed": true
+    },
+    {
+      "path": ".scratch/pyinstaller-build",
+      "bytes": 13670519.0,
+      "removed": true
+    },
+    {
+      "path": ".scratch/t05-tools",
+      "bytes": 308827167.0,
+      "removed": true
+    },
+    {
+      "path": ".scratch/t05-visual",
+      "bytes": 8994192.0,
+      "removed": true
+    },
+    {
+      "path": ".scratch/ocr-runtime",
+      "bytes": 121430992.0,
+      "removed": true
+    },
+    {
+      "path": ".scratch/t05-real-book-project",
+      "bytes": 5726649.0,
+      "removed": true
+    },
+    {
+      "path": ".mypy_cache",
+      "bytes": 4952293.0,
+      "removed": true
+    },
+    {
+      "path": "ebook2mp4/__pycache__",
+      "bytes": 191986.0,
+      "removed": true
+    },
+    {
+      "path": "tests/__pycache__",
+      "bytes": 140233.0,
+      "removed": true
+    },
+    {
+      "path": "packaging/__pycache__",
+      "bytes": 6651.0,
+      "removed": true
+    }
+  ],
+  "total_bytes": 560798951.0,
+  "preserved": [
+    "dist/T05/ebook2mp4",
+    "outputs/book1-ch1.txt",
+    "docs/verification",
+    ".scratch/pdf-txt-audiobook-video",
+    ".scratch/prototype-qa"
+  ],
+  "sandbox_empty_directories_removed": [],
+  "remaining_task_processes": 0
+}
