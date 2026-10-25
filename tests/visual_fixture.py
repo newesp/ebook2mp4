@@ -30,11 +30,19 @@ if '--narrow' in sys.argv:
 if '--empty' in sys.argv:
     app.flow = None
     app.refresh()
-if '--preview' in sys.argv:
+if '--preview' in sys.argv or '--preview-ready' in sys.argv:
     from unittest.mock import patch
 
     def open_preview():
         with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(base / '風與樹 第二章 CP950.txt')):
             app.import_txt()
+        if '--preview-ready' in sys.argv:
+            def children(widget):
+                for child in widget.winfo_children():
+                    yield child
+                    yield from children(child)
+            selector = next(w for w in children(root) if w.winfo_class() == 'TCombobox')
+            selector.set('CP950')
+            selector.event_generate('<<ComboboxSelected>>')
     root.after(200, open_preview)
 root.mainloop()

@@ -73,7 +73,35 @@
       "focus": "Text highlightcolor is primary with 1px highlightthickness. Buttons use native theme focus. HTML tile focus is an illustrative viewer affordance.",
       "ramps": "Synthesized viewer-only ramps for accent and paper; not adopted application colors. Frontmatter hex values are authoritative.",
       "htmlDetector": "Not applicable to native Tkinter.",
-      "engine": "Unavailable; not represented as executed."
+      "engine": "Unavailable; not represented as executed.",
+      "batchList": {
+        "widget": "ttk.Treeview",
+        "rowHeightPx": 25,
+        "selectedBackgroundToken": "colors.primary",
+        "selectedForegroundToken": "colors.surface",
+        "actionButtonWidthCharacters": 3
+      },
+      "projectLocation": {
+        "widthCharacters": 21,
+        "heightLines": 4,
+        "wrap": "char"
+      },
+      "importPreview": {
+        "defaultWindow": [760, 680],
+        "minimumWindow": [640, 580],
+        "encodingSelector": {
+          "state": "readonly",
+          "widthCharacters": 27,
+          "options": ["自動（UTF-8／BOM）", "UTF-8", "UTF-8 BOM", "UTF-16 BOM", "Big5", "CP950"]
+        },
+        "states": {
+          "ready": "Readable preview; import enabled only with sufficient disk space and any warning acknowledged.",
+          "error": "Empty preview, colors.error details, disabled acknowledgment and import; switch encoding to retry.",
+          "warning": "Acknowledgment enabled only when warnings exist; import waits for explicit acknowledgment.",
+          "encodingChanged": "Clear preview and reset acknowledgment before decoding again."
+        },
+        "stateEvidence": "Ready CP950 and failed automatic decoding captured; warning acknowledgment guard extracted from source without an enabled-warning capture."
+      }
     },
     "verification": {
       "disposition": "ship",
@@ -81,9 +109,15 @@
       "evidence": [
         ".impeccable/review/desktop.png",
         ".impeccable/review/narrow.png",
-        "docs/verification/T01-visual-review.md"
+        "docs/verification/T01-visual-review.md",
+        ".impeccable/review/t02/desktop.png",
+        ".impeccable/review/t02/narrow.png",
+        ".impeccable/review/t02/preview-ready.png",
+        ".impeccable/review/t02/preview-error.png",
+        "docs/verification/T02-visual-review.md"
       ],
-      "limits": "Does not establish keyboard traversal, all dialog/state behavior, persistence, or clean Windows installation."
+      "captureContext": "Independent T02 reviewer directly inspected all four native captures: 1360×780 workbench (configured default is 1360×820), 1040×640 minimum workbench, and two 760×680 import dialogs at approximately 125% Windows scaling.",
+      "limits": "Does not establish keyboard traversal/focus, hover, opened encoding choices, enabled warning acknowledgment, naming/reordering, unsaved-change prompts, large-list scrolling, arbitrary long names/paths, popup minimum-size resizing, other scaling settings, screen-reader behavior, persistence, or clean Windows installation. Engine unavailable and not rerun; HTML detector not applicable."
     }
   },
   "components": [
@@ -140,7 +174,7 @@
     "rules": [
       {
         "name": "The Action Green Rule",
-        "body": "Reserve solid green for the active step and meaningful primary actions; manuscript surfaces stay light.",
+        "body": "Reserve solid green for the active step, selected batch, and meaningful primary actions; manuscript surfaces stay light.",
         "section": "colors"
       },
       {

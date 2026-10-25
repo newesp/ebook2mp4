@@ -64,6 +64,10 @@ components:
     textColor: "{colors.ink}"
     typography: "{typography.manuscript}"
     padding: "16px"
+  batch-selected:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.surface}"
+    height: "25px"
 ---
 
 # Design System: 書籍製作工作台
@@ -89,7 +93,7 @@ The palette uses one restrained green accent with warm paper and pale neutral su
 
 ### Primary
 
-- **Workbench Green** (`primary`): active workflow step, primary save/import actions, text caret, and focused manuscript border.
+- **Workbench Green** (`primary`): active workflow step, primary save/import actions, selected batch row, text caret, and focused manuscript border.
 - **Deep Workbench Green** (`primary-active`): active primary-button state.
 - **Soft Leaf** (`hover`): active secondary-button background.
 - **Selection Leaf** (`selection`): manuscript text selection.
@@ -102,7 +106,7 @@ The palette uses one restrained green accent with warm paper and pale neutral su
 - **Fine Divider** (`line`) and **Control Border** (`button-line`): manuscript and control boundaries.
 - **Disabled Surface / Ink**: legible unavailable actions; **Error Clay** (`error`): failed-operation status.
 
-**The Action Green Rule.** Reserve solid green for the active step and meaningful primary actions; manuscript surfaces stay light.
+**The Action Green Rule.** Reserve solid green for the active step, selected batch, and meaningful primary actions; manuscript surfaces stay light.
 
 ## Typography
 
@@ -126,13 +130,13 @@ Native default client geometry is **1360×820**; minimum is **1040×640**. These
 
 The outer workbench has **16px** padding. Header bottom separation is **16px**. Four equal-weight numbered step buttons have **2px** horizontal grid padding. The instruction row uses **8px horizontal / 12px vertical** padding and wrap length **1000**. Source metadata uses **12px / 8px** padding and wrap length **500**. Statistics use **12px / 10px** padding; bottom status uses **8px / 10px** and adapts wrap length to available width.
 
-The left frame uses padding **4,10,16,10** (left, top, right, bottom). Book text wraps at **175px**; the project-location text uses character wrapping, width **21 characters**, and height **7 lines** so a long path remains selectable. The fixed batch label prevents filenames stretching the sidebar.
+The left frame uses padding **4,10,16,10** (left, top, right, bottom). Book text wraps at **175px**; the project-location text uses character wrapping, width **21 characters**, and height **4 lines** so a long path remains selectable. The fixed batch column prevents filenames stretching the sidebar.
 
 Source and editor sit in a horizontal `ttk.Panedwindow` with equal expansion weights and a native draggable divider. Each wrapper has **12px** padding; each manuscript has **16px** inset, word wrapping, and its own vertical scrollbar. They scroll independently. The inspector is a separately scrollable canvas containing a padded frame (**12,10,4,10**); explanatory labels wrap at **220px**. Group actions have **10px** top and **24px** bottom separation.
 
 Import preview uses native geometry **760×680**, minimum **640×580**, a flexible source preview, and persistent bottom actions. Its details wrap with the dialog width. A read-only encoding selector stays at the top; failures clear the old preview and disable import. Suspected corrupt characters require explicit acknowledgment before import.
 
-The batch sidebar uses a vertically scrollable native Treeview. Selected batch names and revisions appear in wrapping center metadata; the tree remains fixed within its column for long names. Naming and up/down actions use a three-column button row. The batch list expands vertically; project-location text requests four lines so actions remain reachable at the native minimum size.
+The batch sidebar uses a vertically scrollable native Treeview with **25px** rows and white text on Workbench Green for the selected row. Selected batch names and revisions appear in wrapping center metadata; the tree remains fixed within its column for long names. Naming and up/down actions use a three-column button row, each with native `width=3` character units. The batch list expands vertically; the four-line project location keeps actions reachable at the native minimum size.
 
 **The Comparison Rule.** Keep source and draft independently readable and scrollable while retaining batch context and reachable inspector actions.
 
@@ -153,6 +157,8 @@ Restrained native controls. `TButton` uses the frontmatter control padding and b
 ### Inputs / Fields
 
 The editable manuscript is a native `tk.Text` with undo, word wrapping, green caret, leaf selection, and a green focused highlight. The source uses the same text treatment on Warm Paper with editing disabled. Project location is selectable read-only text. Native file, folder, name, and message dialogs retain Windows conventions.
+
+The import preview uses a read-only encoding combobox with native width **27 characters**: automatic UTF-8/BOM, UTF-8, UTF-8 BOM, UTF-16 BOM, Big5, or CP950. Changing encoding clears the old preview and resets warning acknowledgment before decoding again. Readable details use Quiet Ink; decoding failures use Error Clay, an empty preview, disabled acknowledgment, and disabled import. A successful preview enables import only when disk space is sufficient and any corrupt-character warning has been acknowledged. The acknowledgment checkbox is enabled only when warnings exist; native theme rendering owns its checkbox and combobox states.
 
 ### Navigation
 
@@ -177,4 +183,4 @@ Plain labeled text panes provide the signature comparison surface, without decor
 - **Don't** import browser-specific shadows, radii, serif typography, or mobile breakpoints as if they were native tokens.
 - **Don't** imply online proofreading, reading confirmation, audio, or video succeeds before those functions exist.
 
-Evidence: `ebook2mp4/desktop.py`, `PRODUCT.md`, `prototype.css`, ADR 0003, and `docs/verification/T01-visual-review.md`; direct inspection of `.impeccable/review/desktop.png` and `narrow.png`. The saved-state captures support a **ship** disposition for static visual scope only. They do not establish keyboard traversal, every state/dialog, persistence, or clean-Windows installation. No HTML detector is applicable to native Tkinter. The unavailable Impeccable engine was not represented as run; the sidecar's HTML/CSS tiles are explicitly illustrative translations for its viewer, not application source.
+Evidence: `ebook2mp4/desktop.py`, `PRODUCT.md`, `prototype.css`, ADR 0003, `docs/verification/T01-visual-review.md`, and `docs/verification/T02-visual-review.md`. T01 retains `.impeccable/review/desktop.png` and `narrow.png`; the independent T02 review directly inspected all four native captures in `.impeccable/review/t02/`: `desktop.png`, `narrow.png`, `preview-ready.png`, and `preview-error.png`. T02 covers a 1360×780 workbench (shorter than the configured 1360×820 default), the 1040×640 minimum workbench, and two 760×680 import dialogs at approximately 125% Windows scaling. The reviewer gives a **ship** disposition for this static visual scope only. These captures do not establish keyboard traversal/focus, hover, opened encoding choices, enabled warning acknowledgment, naming/reordering, unsaved-change prompts, large-list scrolling, arbitrary long names/paths, popup minimum-size resizing, other scaling settings, screen-reader behavior, persistence, or clean-Windows installation. Warning-state behavior above is extracted from source; no enabled-warning capture was supplied. No HTML detector is applicable to native Tkinter. The unavailable Impeccable engine was not rerun or represented as executed; the sidecar's existing HTML/CSS tiles remain illustrative translations for its viewer, not application source.

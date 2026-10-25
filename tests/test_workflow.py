@@ -218,6 +218,16 @@ class ProjectJourney(unittest.TestCase):
         with self.assertRaisesRegex(ProjectError, '不安全'):
             ProjectWorkflow.open(flow.root)
 
+    def test_invalid_batch_identity_is_reported_before_ui_load(self):
+        flow, _ = self.imported()
+        for invalid in ('', 7):
+            with self.subTest(identity=invalid):
+                state = flow.state
+                state['batches'][0]['id'] = invalid
+                (flow.root / 'project.json').write_text(json.dumps(state), encoding='utf-8')
+                with self.assertRaisesRegex(ProjectError, '欄位不完整'):
+                    ProjectWorkflow.open(flow.root)
+
 
 if __name__ == '__main__':
     unittest.main()

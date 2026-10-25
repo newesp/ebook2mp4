@@ -221,8 +221,7 @@ class Workbench(ttk.Frame):
             self.saved_text = draft
             self.batch_list.selection_set(batch['id'])
             self.batch_list.see(batch['id'])
-            source = batch['source']
-            self.source_meta.configure(text=f'{batch["name"]} · 校對稿 v{batch["revision"]}\n{source["original_name"]} · {source["size"]:,} 位元組 · {source["encoding"]} · 可讀\nTXT 來源，無 PDF 頁碼')
+            self.update_source_metadata()
             self.fill(self.source, original)
             self.fill(self.editor, draft, True)
             self.editor.edit_reset()
@@ -238,6 +237,13 @@ class Workbench(ttk.Frame):
         self.update_stats()
         self.show_step(self.step)
         self.status.configure(text='所有書稿資料保存在本機。' if not self.flow else '已載入專案 · 原始來源檔不會被改寫')
+
+    def update_source_metadata(self):
+        if not self.flow or not self.batch_id:
+            return
+        batch = next(b for b in self.flow.state['batches'] if b['id'] == self.batch_id)
+        source = batch['source']
+        self.source_meta.configure(text=f'{batch["name"]} · 校對稿 v{batch["revision"]}\n{source["original_name"]} · {source["size"]:,} 位元組 · {source["encoding"]} · 可讀\nTXT 來源，無 PDF 頁碼')
 
     def update_batch_actions(self):
         ids = [b['id'] for b in self.flow.state['batches']] if self.flow else []
@@ -273,7 +279,7 @@ class Workbench(ttk.Frame):
         try:
             self.flow.rename_batch(self.batch_id, name)
             self.batch_list.item(self.batch_id, text=f'{name.strip()} · v{batch["revision"]}')
-            self.source_meta.configure(text=f'{name.strip()}\n' + '\n'.join(self.source_meta.cget('text').split('\n')[1:]))
+            self.update_source_metadata()
         except ProjectError as e:
             self.report(e)
 
@@ -439,6 +445,7 @@ class Workbench(ttk.Frame):
             self.update_stats()
             batch = next(b for b in self.flow.state['batches'] if b['id'] == self.batch_id)
             self.batch_list.item(self.batch_id, text=f'{batch["name"]} · v{batch["revision"]}')
+            self.update_source_metadata()
             self.status.configure(text='校對稿已儲存 · 可關閉並重新開啟繼續', foreground=GREEN)
             return True
         except ProjectError as e:

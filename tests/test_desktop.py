@@ -59,6 +59,7 @@ class DesktopJourney(unittest.TestCase):
             self.assertIn('校對完成', self.app.current_text)
         self.app.save_button.invoke()
         self.assertFalse(self.app.dirty)
+        self.assertIn('校對稿 v2', self.app.source_meta.cget('text'))
         project = self.app.flow.root / 'project.json'
         self.app.close()
         self.root, self.app = make_app()
@@ -111,6 +112,7 @@ class DesktopJourney(unittest.TestCase):
         self.assertEqual(self.app.current_text, '第二章，碁。')
         with patch('ebook2mp4.desktop.simpledialog.askstring', return_value='第二章新名稱'):
             self.app.rename_button.invoke()
+        self.assertIn('第二章新名稱 · 校對稿 v1', self.app.source_meta.cget('text'))
         self.app.up_button.invoke()
         self.assertEqual([b['id'] for b in self.app.flow.state['batches']], [second, first])
         self.app.batch_list.selection_set(first)

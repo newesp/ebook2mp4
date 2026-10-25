@@ -157,6 +157,8 @@ class ProjectWorkflow:
             flow = cls(root, manifest, digest(data))
             seen = set()
             for batch in manifest['batches']:
+                if not isinstance(batch['id'], str) or not batch['id']:
+                    raise ValueError()
                 if batch['id'] in seen or batch['kind'] != 'txt' or not isinstance(batch['name'], str):
                     raise ValueError()
                 seen.add(batch['id'])
