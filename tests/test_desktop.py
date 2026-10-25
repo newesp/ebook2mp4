@@ -88,6 +88,71 @@ class DesktopJourney(unittest.TestCase):
         self.root.update()
         self.assertEqual(self.app.current_text, before)
 
+    def test_cancelled_pdf_save_failure_keeps_candidate_for_retry(self):
+        from test_pdf import pdf_bytes
+        self.app.flow = ProjectWorkflow.create(self.directory / 'PDF retry', 'PDF Book')
+        self.app.refresh()
+        pdf = self.directory / 'book.pdf'
+        pdf.write_bytes(pdf_bytes())
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(pdf)):
+            self.app.import_pdf()
+        dialog = self.app.pdf_dialog
+        deadline = time.monotonic() + 10
+        while not dialog.ready and time.monotonic() < deadline:
+            self.root.update()
+            time.sleep(.01)
+        self.assertTrue(dialog.ready)
+        dialog.extract_button.invoke()
+        job = dialog.job
+        deadline = time.monotonic() + 5
+        while not job.pages and time.monotonic() < deadline:
+            time.sleep(.002)
+        with patch('ebook2mp4.workflow.os.replace', side_effect=OSError('disk full')):
+            dialog.close()
+            self.assertTrue(job.wait(10))
+            deadline = time.monotonic() + 5
+            while dialog.winfo_exists() and dialog.job is not None and time.monotonic() < deadline:
+                self.root.update()
+                time.sleep(.01)
+        self.assertTrue(dialog.winfo_exists(), 'Failed publication must retain completed page results for retry')
+        self.assertEqual(self.app.flow.state['batches'], [])
+        dialog.retry_button.invoke()
+        deadline = time.monotonic() + 5
+        while self.app.batch_id is None and time.monotonic() < deadline:
+            self.root.update()
+            time.sleep(.01)
+        self.assertIsNotNone(self.app.batch_id)
+        self.assertEqual(self.app.flow.pdf_pages(self.app.batch_id)[0]['status'], 'success')
+
+    def test_failed_pdf_page_preview_does_not_show_previous_page_image(self):
+        import pypdfium2
+        from test_pdf import pdf_bytes
+        flow = ProjectWorkflow.create(self.directory / 'PDF compare', 'Book')
+        pdf = self.directory / 'book.pdf'
+        pdf.write_bytes(pdf_bytes())
+        job = flow.start_pdf_extraction(flow.inspect_pdf(pdf), 3, 5)
+        job.wait()
+        self.app.flow = flow
+        self.app.batch_id = flow.finish_pdf_extraction(job)
+        self.app.refresh()
+        self.app.pages_button.invoke()
+        dialog = self.app.pdf_dialog
+        deadline = time.monotonic() + 10
+        while not dialog.ready and time.monotonic() < deadline:
+            self.root.update()
+            time.sleep(.01)
+        self.assertTrue(dialog.canvas.find_all())
+        with patch.object(pypdfium2.PdfPage, 'render', side_effect=RuntimeError('native failure')):
+            dialog.page.set('4')
+            dialog.view_button.invoke()
+            deadline = time.monotonic() + 10
+            while not dialog.ready and time.monotonic() < deadline:
+                self.root.update()
+                time.sleep(.01)
+        self.assertIn('Chapter 4:', dialog.text.get('1.0', 'end-1c'))
+        self.assertIn('無法', dialog.progress.cget('text'))
+        self.assertFalse(dialog.canvas.find_all(), 'A failed page must never retain the previous page image')
+
     def test_real_ui_create_preview_import_edit_save_close_reopen(self):
         original = self.source.read_bytes()
         self.create_import()

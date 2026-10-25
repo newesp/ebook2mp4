@@ -13,6 +13,19 @@ BG = '#f5f6f2'
 MUTED = '#58695f'
 
 
+def bind_canvas_wheel(canvas, widget=None):
+    """Keep local scroll areas usable with both wheel and small touchpad deltas."""
+    def scroll(event):
+        if event.delta:
+            units = -int(event.delta / 120) if abs(event.delta) >= 120 else (-1 if event.delta > 0 else 1)
+            canvas.yview_scroll(units, 'units')
+        return 'break'
+    widget = canvas if widget is None else widget
+    widget.bind('<MouseWheel>', scroll)
+    for child in widget.winfo_children():
+        bind_canvas_wheel(canvas, child)
+
+
 def text_pane(parent, heading, editable=False):
     frame = ttk.Frame(parent, padding=12)
     frame.rowconfigure(1, weight=1)
@@ -135,15 +148,7 @@ class Workbench(ttk.Frame):
         self.project_location.grid(row=4, column=0, sticky='ew', pady=8)
         self.folder_button = ttk.Button(tools, text='開啟專案資料夾', command=self.open_folder)
         self.folder_button.grid(row=5, column=0, sticky='ew')
-        def scroll_left(event):
-            tool_canvas.yview_scroll(-int(event.delta / 120), 'units')
-            return 'break'
-        def bind_left(widget):
-            widget.bind('<MouseWheel>', scroll_left)
-            for child in widget.winfo_children():
-                bind_left(child)
-        bind_left(tools)
-        tool_canvas.bind('<MouseWheel>', scroll_left)
+        bind_canvas_wheel(tool_canvas)
 
         center = ttk.Frame(body)
         center.grid(row=0, column=1, sticky='nsew')
@@ -216,17 +221,7 @@ class Workbench(ttk.Frame):
             ttk.Label(right, text=reason, wraplength=220, foreground=MUTED).pack(anchor='w')
             ttk.Button(right, text=action, state='disabled').pack(fill='x', pady=(10, 24))
 
-        def scroll_tools(event):
-            canvas.yview_scroll(-int(event.delta / 120) if abs(event.delta) >= 120
-                                else (-1 if event.delta > 0 else 1), 'units')
-            return 'break'
-
-        def bind_scroll(widget):
-            widget.bind('<MouseWheel>', scroll_tools)
-            for child in widget.winfo_children():
-                bind_scroll(child)
-
-        bind_scroll(canvas)
+        bind_canvas_wheel(canvas)
 
         self.status = ttk.Label(self, text='', padding=(8, 10))
         self.status.grid(row=4, column=0, sticky='ew')

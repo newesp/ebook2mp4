@@ -146,6 +146,8 @@ class PdfDialog(tk.Toplevel):
                 validate_range(number, number, preview.page_count)
                 task = lambda: self.flow.preview_pdf_page(preview, number)
                 self.page_info.configure(text=f'第 {number} 頁 · 原始頁圖')
+            self.canvas.delete('all')
+            self.image = None
             self.submit(task, self.show_image)
         except (ValueError, ProjectError) as error:
             self.progress.configure(text=str(error) if isinstance(error, ProjectError) else '頁次必須為整數。')
@@ -197,8 +199,9 @@ class PdfDialog(tk.Toplevel):
                     self.destroy()
                     return
                 except ProjectError as error:
+                    self.closing = False
                     self.progress.configure(text=str(error) + '\n可重試保存或關閉以捨棄候選；既有校對稿未改變。')
-                    self.cancel_button.configure(text='關閉並捨棄未存候選')
+                    self.cancel_button.configure(state='normal', text='關閉並捨棄未存候選')
                     self.pending_job = self.job
                     self.job = None
                     self.ready = False
