@@ -165,21 +165,14 @@ class PdfExtraction:
                                          self.language, self._cancel)
                     except OcrCancelled:
                         break
-                    result['text'] = text
-                    result['status'] = 'success' if any(c.isalnum() for c in text) else 'pending'
-                    if result['status'] == 'pending':
-                        result['error'] = '空白／無可用 OCR 文字，請對照原頁後處理或明確略過。'
-                    with self._lock:
-                        self._pages.append(result)
-                    continue
                 result['text'] = text
                 usable = sum(c.isalnum() for c in text)
                 result['status'] = 'success' if usable >= 20 else 'pending'
                 if usable < 20:
-                    result['error'] = '無可用文字或文字稀少，正文可能為圖片；請對照頁圖，必要時指定頁強制 OCR。'
+                    result['error'] = '空白／無可用文字或文字稀少，可能漏正文；請對照頁圖，必要時指定頁強制 OCR。'
                 elif '\ufffd' in text or any(unicodedata.category(c) == 'Cc' and c not in '\t\r\n' for c in text):
                     result['status'] = 'pending'
-                    result['error'] = '文字層含替代符號或異常控制字元，請對照頁圖檢查。'
+                    result['error'] = '擷取文字含替代符號或異常控制字元，請對照頁圖檢查。'
             except Exception as error:
                 result['error'] = (str(error) if isinstance(error, ProjectError) else
                                    'OCR 辨識失敗，請檢查原頁或模型後重試。' if self.mode == 'ocr' else

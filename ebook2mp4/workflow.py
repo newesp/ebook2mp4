@@ -360,9 +360,15 @@ class ProjectWorkflow:
         data = self._read(batch['source'])
         self._space(self.root, len(data) + 8192)
         preview = PdfPreview(Path(batch['source']['original_name']), data, batch['pdf']['page_count'])
+        issues = deepcopy(batch.get('source_issues', []))
+        if not batch['pdf']['mapping_valid']:
+            # Resolutions may depend on corrections absent from the raw-page new draft.
+            for issue in issues:
+                if issue['status'] == 'resolved':
+                    issue['status'] = 'pending'
         self._pdf_job = PdfExtraction(preview, batch['pdf']['start'], batch['pdf']['end'],
                                       mode='ocr', language=language, numbers=numbers, rotation=rotation,
-                                      base_pages=original, base_issues=batch.get('source_issues', []),
+                                      base_pages=original, base_issues=issues,
                                       source_batch=batch_id)
         return self._pdf_job
 

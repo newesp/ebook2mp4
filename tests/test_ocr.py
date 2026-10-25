@@ -134,7 +134,7 @@ class RealOcrJourney(unittest.TestCase):
 
     def test_real_cancellation_keeps_complete_pages_and_failed_engine_is_not_success(self):
         pdf = self.root / 'scan.pdf'
-        pdf.write_bytes(scanned_pdf(['English reading test.'] * 12))
+        pdf.write_bytes(scanned_pdf(['English reading test 123.'] * 12))
         preview = self.flow.inspect_pdf(pdf)
         job = self.flow.start_pdf_extraction(preview, 1, 12, mode='ocr', language='英文')
         self.addCleanup(lambda: (job.cancel(), job.wait()))

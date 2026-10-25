@@ -87,6 +87,32 @@ class DesktopJourney(unittest.TestCase):
         self.assertTrue(self.app.remove_pdf_button.instate(['disabled']))
         self.assertEqual(ProjectWorkflow.open(flow.root).state['batches'], [])
 
+    def test_missing_pdf_comparison_shows_error_and_releases_modal_on_close(self):
+        from test_pdf import pdf_bytes
+        flow = ProjectWorkflow.create(self.directory / 'missing-pdf', 'Book')
+        pdf = self.directory / 'source.pdf'
+        pdf.write_bytes(pdf_bytes(1))
+        job = flow.start_pdf_extraction(flow.inspect_pdf(pdf), 1, 1)
+        job.wait()
+        batch = flow.finish_pdf_extraction(job)
+        self.app.flow, self.app.batch_id = flow, batch
+        self.app.refresh()
+        source = next(b for b in flow.state['batches'] if b['id'] == batch)['source']['path']
+        (flow.root / source).unlink()
+        self.app.pages_button.invoke()
+        dialog = self.app.pdf_dialog
+        self.assertIsNotNone(dialog)
+        deadline = time.monotonic() + 10
+        while dialog.future is not None and time.monotonic() < deadline:
+            self.root.update()
+            time.sleep(.01)
+        self.assertTrue(dialog.progress.cget('text'))
+        self.assertFalse(dialog.ready)
+        dialog.close()
+        self.root.update()
+        self.assertIsNone(self.app.pdf_dialog)
+        self.assertIsNone(self.root.grab_current())
+
     def test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo(self):
         from test_pdf import pdf_bytes
         self.app.flow = ProjectWorkflow.create(self.directory / 'PDF project', 'PDF Book')

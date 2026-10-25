@@ -162,6 +162,35 @@ class MixedPdfJourney(unittest.TestCase):
                 self.assertIn('Rotated scan reading test.', page['text'], f'rotation {rotation}')
                 self.assertEqual(page['settings']['rotation'], rotation)
 
+    @unittest.skipUnless(os.environ.get('EBOOK2MP4_REAL_OCR_HOME'), 'requires real models and engine')
+    def test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections(self):
+        with patch.dict(os.environ, EBOOK2MP4_OCR_HOME=os.environ['EBOOK2MP4_REAL_OCR_HOME']):
+            batch = self.finish(self.flow.start_pdf_extraction(self.preview, 1, 4, mode='auto', language='英文'))
+            self.flow.save_draft(batch, 'Corrected manuscript including the previously missing body.')
+            self.flow.resolve_source_issue(batch, 0, 'resolved')
+            self.flow.resolve_source_issue(batch, 1, 'skipped')
+            self.flow.confirm_reading(batch)
+            second = self.finish(self.flow.start_pdf_retry(batch, pages=[1], language='英文'))
+        self.assertEqual(len(self.flow.confirmation_blockers(second)), 1)
+        with self.assertRaises(ProjectError):
+            self.flow.confirm_reading(second)
+        self.assertEqual(self.flow.reading_text(batch), 'Corrected manuscript including the previously missing body.')
+
+    @unittest.skipUnless(os.environ.get('EBOOK2MP4_REAL_OCR_HOME'), 'requires real models and engine')
+    def test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation(self):
+        from test_ocr import scanned_pdf
+        self.pdf.write_bytes(scanned_pdf(['3']))
+        with patch.dict(os.environ, EBOOK2MP4_OCR_HOME=os.environ['EBOOK2MP4_REAL_OCR_HOME']):
+            batch = self.finish(self.flow.start_pdf_extraction(self.flow.inspect_pdf(self.pdf), 1, 1,
+                                                              mode='auto', language='英文'))
+            page = self.flow.pdf_pages(batch)[0]
+            self.assertEqual(page['text'].strip(), '3')
+            self.assertEqual(page['status'], 'pending')
+            with self.assertRaises(ProjectError):
+                self.flow.confirm_reading(batch)
+            second = self.finish(self.flow.start_pdf_retry(batch, pages=[1], language='英文'))
+            self.assertTrue(self.flow.confirmation_blockers(second))
+
 
 if __name__ == '__main__':
     unittest.main()

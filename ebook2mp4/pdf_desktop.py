@@ -147,15 +147,16 @@ class PdfDialog(tk.Toplevel):
         if batch_id:
             batch = next(b for b in self.flow.state['batches'] if b['id'] == batch_id)
             pdf = batch['pdf']
-            self.pages = self.flow.pdf_pages(batch_id)
-            self.preview = self.flow.pdf_source_preview(batch_id)
+            self.pages: list[dict] = []
             self.start.set(str(pdf['start']))
             self.end.set(str(pdf['end']))
             self.page.set(str(pdf['start']))
             self.info.configure(text=f'{batch["source"]["original_name"]} · 共 {pdf["page_count"]} 頁 · 擷取 {pdf["start"]}–{pdf["end"]}（含兩端）\n逐頁原稿不隨全文校對變更；全文／外部編輯後無精確對應。')
-            self.ready = True
-            self.update_page_list()
-            self.view()
+            def loaded_batch(result):
+                self.pages, self.preview = result
+                self.update_page_list()
+                self.view()
+            self.submit(lambda: (self.flow.pdf_pages(batch_id), self.flow.pdf_source_preview(batch_id)), loaded_batch)
         else:
             self.load(path)
 
@@ -168,6 +169,7 @@ class PdfDialog(tk.Toplevel):
         self.view_button.configure(state='disabled')
         self.extract_button.configure(state='disabled')
         self.replace_button.configure(state='disabled')
+        self.page_list.configure(state='disabled')
 
     def toggle_settings(self):
         if self.options.winfo_ismapped():
@@ -287,7 +289,6 @@ class PdfDialog(tk.Toplevel):
         for widget in (self.retry_page_button, self.failed_button, self.retain_button, self.skip_button):
             widget.configure(state='normal' if enabled and self.batch_id else 'disabled')
         self.rotation_select.configure(state='readonly' if enabled else 'disabled')
-        self.page_list.configure(state='readonly' if enabled else 'disabled')
 
     def retry_page(self, *, failed_only=False):
         if not self.ready or not self.batch_id or self.pending_job or self.job or self.model_job:
@@ -395,11 +396,12 @@ class PdfDialog(tk.Toplevel):
             except Exception as error:
                 self.progress.configure(text=str(error) if isinstance(error, ProjectError) else 'PDF 處理失敗，請更換來源。')
             if self.future is None and not self.closing:
-                self.ready = self.preview is not None or self.batch_id is not None
+                self.ready = self.preview is not None
                 self.view_button.configure(state='normal' if self.ready else 'disabled')
+                self.page_list.configure(state='readonly' if self.ready else 'disabled')
                 self.extract_button.configure(state='normal' if self.preview and not self.pending_job and not self.model_job and not self.job else 'disabled')
                 self.replace_button.configure(state='disabled' if self.pending_job or self.model_job else 'normal')
-                self.retry_controls(not self.pending_job and not self.model_job and not self.job)
+                self.retry_controls(self.ready and not self.pending_job and not self.model_job and not self.job)
         if self.model_job is not None:
             state = self.model_job.state
             self.model_info.configure(text=f'{state["phase"]} · {state["downloaded"]:,}／{state["total"]:,} 位元組\n{state["error"]}')
