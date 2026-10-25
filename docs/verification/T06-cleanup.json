@@ -1,0 +1,67 @@
+{
+  "timezone": "Asia/Taipei",
+  "date": "2026-10-26",
+  "verification": "62/62 tests, no skips; typecheck and compile passed",
+  "resources": "All exec test/build/fixture jobs completed; native process inspection found no T06 test/build/OCR/packaged processes before cleanup.",
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-tools",
+      "bytes": 96858269.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-models",
+      "bytes": 8948886.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-build",
+      "bytes": 13700193.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-visual",
+      "bytes": 50346.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-mypy",
+      "bytes": 4968677.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "bytes": null
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-build.log",
+      "bytes": 7241
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t06-smoke-pid.txt",
+      "bytes": 7
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 218797.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 189189.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\packaging\\__pycache__",
+      "bytes": 6651.0
+    }
+  ],
+  "preserved": [
+    "dist/T06",
+    "all previous dist outputs",
+    "outputs/book1-ch1.txt",
+    "requirements and docs/verification/T06*",
+    "preexisting .scratch/prototype-qa",
+    "user-installed OCR models"
+  ],
+  "removed_bytes": 246358618.0,
+  "pip_temporary_paths_removed": [],
+  "remaining_task_processes": []
+}

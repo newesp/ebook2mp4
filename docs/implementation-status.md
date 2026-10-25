@@ -1,10 +1,33 @@
 # 實作交接
 
+## 目前：T01～T06 已完成
+
+2026-10-26，T06「混合 PDF 自動辨識、異常頁確認與旋轉重試」已實作。起點 `2ae4c03`，實作 `fbb225f`、審查修正 `a2a24f9`，最終文件提交見 `git log -1`。目前仍為 master，沒有設定或推送遠端。
+
+正式新版 **`dist/T06/ebook2mp4/ebook2mp4.exe`**，SHA-256 `9D9F1AF9C4882A2427BB174CB0755A2077EDAA2F05E6F53073706DD94F3BA5A5`；請一起搬移整個 ebook2mp4 目錄。最終完整套件 **62／62 通過，151.130 秒，無跳過**，包含三語真實 OCR 及指定 9 頁書稿；mypy 7 個來源檔案及語法編譯通過。雙軸審查原三項 P2 均由原審查者確認解除，Standards／Spec 零項未解決。詳見 [T06 驗證](verification/T06.md)、[審查](verification/T06-code-review.md)。
+
+下一張是 **T07 — Gemini 設定、指定範圍校對與差異採用**，票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/07-gemini-settings-review.md`。**建議開新 session 再接 T07**。先讀 AGENTS、GLOSSARY、docs/adr、Spec v1.1、T07 票稿及本次驗證；沿用已核定的 ProjectWorkflow／真實 Tk 測試邊界。Gemini、TTS、音訊／影片及 T23 安裝仍未完成。
+
+T06 入口與保存規則：
+
+- `start_pdf_extraction(..., mode='auto', language=...)` 逐頁優先文字層，沒有可用文字才 OCR。公開 API 的預設仍是舊文字層，UI 預設自動。所有模式結果不足 20 個字母／數字／中文字元或含異常字元會列待檢查；僅頁碼不得報正文完整。這是保守啟發式，不保證判別所有圖片正文。
+- `pdf_source_preview(batch_id)` 驗證並讀取專案內 PDF 副本；來源移走不影響重做。UI 背景讀取缺檔／損壞來源，顯示可行錯誤並可關閉釋放 grab／executor。
+- `start_pdf_retry(batch_id, pages=[...], language=..., rotation=0|90|180|270)` 或 `failed_only=True`。只執行目標頁，順時針旋轉，未選頁保留原逐頁狀態；`job.numbers` 為本次實際處理頁次。取消後只補齊目標未完成頁，成功與失敗進度保留。
+- `pdf_extraction_pages(job)` 提供整個批次範圍候選；`finish_pdf_extraction(job, accepted_pages=[...])` 針對重試逐頁採用，未採用／非目標頁沿用原逐頁原稿。每次採用建立新批次，**不搬入原批全文人工校對**；原校對稿及朗讀快照保持不變。原批已有人工改稿而 mapping_valid=False 時，其 `resolved` 異常在重建原稿的新批重新列 pending，避免人工補文消失卻通過確認；明確 `skipped` 可沿用。新採用異常頁重新確認，批次層級異常也保留。
+- UI「逐頁原稿／頁圖」可選頁、旋轉／本頁 OCR／只重試失敗，切換原逐頁原稿與原批校對全文比較，勾選是否採用本頁候選；範圍／OCR 設定可展開，修改範圍／語言／模式後另建候選。採用前保護未存編輯；取消儲存提示仍保留編輯與候選。明確保留／略過來源異常後才可確認相關朗讀稿；略過不會自動刪文。
+- 自動／OCR 取消按鈕先取消並保留候選供比較，必須明確採用才保存取消批次；再次關閉可捨棄候選。舊文字層匯入仍沿用 T04 直接發布新批次的行為。
+
+正式封裝已用 Windows 原生選檔走過開啟合成專案→對照→包內 OCR→候選→明確採用→關閉及重開驗證，另有 1040×640／740×570 最小視窗截圖。原設定區擠壓圖文區，已改成收合設定及分列控制。其他 DPI、輔助工具及乾淨機安裝仍待驗收。
+
+本次清除 **246,358,618 bytes（約 234.9 MiB）** 的測試模型副本、工具、建置資料、合成專案、測試資料及快取；正式成品、指定書稿 TXT、使用者既有模型、需求及最終證據保留。最終本次測試／OCR／建置／封裝程序 **0**，沒有未釋放資源；見 [清理紀錄](verification/T06-cleanup.json)。隔離依賴已清除，重跑請依驗證文件重新準備；目前版本的建置重用了已驗證 T05-ui 引擎／DLL，無需重新執行引擎安裝程式。
+
+## T05 歷史交接（下方狀態以當時為準）
+
 2026-10-26 UI 追加：基線 `75d37ea` 之後新增 `ProjectWorkflow.remove_pdf_batch` 及「移除 PDF 文件」，並將「新增 PDF 範圍」改為「新增 PDF 文件」。移除僅作用於所選 PDF 批次，確認後原子發布索引；取消或寫入失敗保留未存編輯與清單。外部原始 PDF、其他批次、匯出及專案內歷史檔案保留。最新成品改為 **`dist/T05-ui/ebook2mp4/ebook2mp4.exe`**，SHA-256 `A107E1E7D7A32A5DD35862F7624BDD4D5F740E955D1C169C350309D34CDE71BE`。完整套件 53 案例：48 通過、5 個需另設 OCR 環境的案例跳過，無失敗；mypy／編譯／重建及實際啟動通過，1040×640 真實 Tk 及確認提示可見。詳見 [PDF 文件操作驗證](verification/PDF-file-actions.md)，原 T05 的實際書稿輸出仍保留。本次追加驗證與建置暫存已於收尾清除，既有使用者程序不動；後續提交可由 git log -1 查看。
 
 T01～T05 已實作。T05 起點 `df85a02`、主要實作 `09600e6`；模型狀態審查修正、實際書稿基本測試與最終交接見後續提交（`git log -1`）。目前分支 master，未設定或推送遠端。歷史 T04 詳見 docs/verification/T04.md。
 
-下一張 **T06 — 混合 PDF 自動辨識、異常頁確認與旋轉重試**，票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/06-mixed-pdf-anomalies-retry.md`。**建議開新 session 再接 T06**；先讀 AGENTS.md、GLOSSARY.md、docs/adr、Spec v1.1、T06 票稿及 [T05 驗證](verification/T05.md)。
+當時下一張為 **T06 — 混合 PDF 自動辨識、異常頁確認與旋轉重試**，票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/06-mixed-pdf-anomalies-retry.md`；現已完成，請以上方目前狀態為準。
 
 主要測試邊界沿用已核定的 ProjectWorkflow 與真實 Tk UI。格式 v1 支援同書多 TXT／PDF 批次，來源、不可變逐頁原稿、校對版本、朗讀快照及重載副本各自保存並帶 SHA-256。任何人工編輯、改稿與重載取消該批目前朗讀確認；舊快照及其他批次不變。多視窗索引變更須重開，寫入鎖及原子發布規則沿用 T01～T04。
 
@@ -16,7 +39,7 @@ OCR 完成先顯示候選圖文對照，再明確「採用為新批次」或關�
 
 Tesseract 5.4.0.20240606 隨包提供，預設 `_internal/tools/tesseract/tesseract.exe`。模型預設 `%LOCALAPPDATA%/ebook2mp4/ocr/<commit>`，只在介面明確操作時連網下載，不上傳書稿或頁圖。開發可設 EBOOK2MP4_TESSERACT／EBOOK2MP4_OCR_HOME。OCR 每頁 subprocess，不經 shell、無主控台、120 秒上限；取消 kill 並 communicate 等待，刪頁圖暫存。PDFium 共用鎖及逐頁資源關閉規則不變，TXT 仍惰性載入 PDF/OCR 元件。
 
-**T06 尚未實作**：自動模式逐頁判斷、指定頁／旋轉、只重試失敗頁、候選逐頁採用等須依票稿完成，不能把 T05 的全部強制 OCR 及新批次採用當成這些功能已驗收。不要直接用 OCR 重試覆寫校對稿。
+**T05 交接當時 T06 尚未實作（現已完成，見上方）**：當時的自動模式逐頁判斷、指定頁／旋轉、只重試失敗頁、候選逐頁採用等仍待 T06；不能把 T05 的全部強制 OCR 及新批次採用當成這些功能的驗收。不要直接用 OCR 重試覆寫校對稿。
 
 固定 Python 依賴見 packaging/requirements-runtime.txt／requirements-dev.txt。建置先安裝隔離工具至 `.scratch/build-tools` 並設 PYTHONPATH，再執行 packaging/prepare_ocr.py（建置時需 7-Zip，固定來源及雜湊，解壓而不執行安裝程式），最後 packaging/build.py。OCR 準備會放 27 個引擎／必要 DLL 至 `.scratch/ocr-runtime`；PyInstaller spec 必須有此目錄。Tesseract／模型及 DLL 授權來源見 packaging/OCR-NOTICES.md；T23 仍須完成授權／源碼交付與乾淨 Windows 安裝。
 
