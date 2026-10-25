@@ -20,7 +20,9 @@ class PdfDialog(tk.Toplevel):
         self.closing = False
         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='PDF preview')
         self.title('逐頁原稿／頁圖' if batch_id else 'PDF 預覽與選頁')
-        self.geometry(f'{min(960, self.winfo_screenwidth() - 60)}x{min(720, self.winfo_screenheight() - 80)}+20+20')
+        width = max(740, min(960, app.root.winfo_width() - 60))
+        height = max(570, min(720, app.root.winfo_height() - 60))
+        self.geometry(f'{width}x{height}+20+20')
         self.minsize(740, 570)
         self.transient(app.root)
         self.grab_set()

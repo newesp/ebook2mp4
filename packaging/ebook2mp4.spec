@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-from PyInstaller.utils.hooks import collect_all
+from PyInstaller.utils.hooks import collect_all, copy_metadata
 
 pdf_datas, pdf_binaries, pdf_imports = collect_all('pypdfium2')
 raw_datas, raw_binaries, raw_imports = collect_all('pypdfium2_raw')
@@ -9,12 +9,12 @@ a = Analysis(
     ['../run.pyw'],
     pathex=[],
     binaries=pdf_binaries + raw_binaries,
-    datas=pdf_datas + raw_datas,
+    datas=pdf_datas + raw_datas + copy_metadata('pillow'),
     hiddenimports=pdf_imports + raw_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=[],
+    excludes=['numpy'],  # Optional PDFium array adapter; rendering uses Pillow.
     noarchive=False,
     optimize=0,
 )
