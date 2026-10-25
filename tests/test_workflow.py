@@ -127,6 +127,15 @@ class ProjectJourney(unittest.TestCase):
         with self.assertRaisesRegex(ProjectError, '空'):
             flow.confirm_reading(batch)
 
+    def test_other_window_invalidation_blocks_stale_current_reading_but_keeps_history(self):
+        flow, batch = self.imported()
+        snapshot = flow.confirm_reading(batch)
+        other = ProjectWorkflow.open(flow.root)
+        other.save_draft(batch, '另一個視窗修改了校對稿')
+        with self.assertRaisesRegex(ProjectError, '另一個視窗'):
+            flow.reading_text(batch)
+        self.assertEqual(flow.reading_text(batch, snapshot['id']), self.text)
+
     def test_utf8_and_bom_create_import_edit_save_reopen_move(self):
         for bom in (b'', b'\xef\xbb\xbf'):
             with self.subTest(bom=bom):

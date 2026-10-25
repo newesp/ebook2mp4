@@ -367,6 +367,11 @@ class ProjectWorkflow:
         return deepcopy(snapshot)
 
     def reading_text(self, batch_id: str, snapshot_id: str | None = None) -> str:
+        if snapshot_id is None:
+            try:
+                self._check_current()
+            except OSError:
+                raise ProjectError('無法檢查目前朗讀確認。請檢查專案索引後重新開啟。') from None
         batch = self._batch(batch_id)
         selected = snapshot_id if snapshot_id is not None else batch.get('current_reading')
         for snapshot in batch.get('readings', []):

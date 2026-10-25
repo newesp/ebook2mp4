@@ -34,6 +34,14 @@ if '--proofread' in sys.argv:
     app.replace_text.set('溪谷')
 if '--versions' in sys.argv:
     root.after(200, app.show_versions)
+if '--reload-preview' in sys.argv:
+    from unittest.mock import patch
+
+    def open_reload():
+        app.editor.insert('end', '\n\n這段未存編輯將在重載時保留副本或明確取代。')
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(source)):
+            app.import_txt(True)
+    root.after(200, open_reload)
 if '--narrow' in sys.argv:
     root.geometry('1040x640+0+0')
 if '--empty' in sys.argv:
