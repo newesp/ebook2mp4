@@ -51,4 +51,4 @@ python packaging/build.py --install-tools
 
 型別檢查使用 `python -m mypy ebook2mp4 --check-untyped-defs`；開發工具可安裝至專案內的隔離目錄，參見 `packaging/requirements-dev.txt`。實作告一段落後依 AGENTS.md 清理暫存與測試程序。
 
-執行階段僅使用 Python 標準函式庫；PyInstaller 是專案內的隔離建置依賴。`packaging/installer.iss` 是供 T23 使用的 Inno Setup 安裝配方，本次沒有編譯或驗證安裝程式。完整證據與限制見 [T01](docs/verification/T01.md) 與 [T02 驗證紀錄](docs/verification/T02.md)。
+執行階段僅使用 Python 標準函式庫；PyInstaller 是專案內的隔離建置依賴。`packaging/installer.iss` 是供 T23 使用的 Inno Setup 安裝配方，本次沒有編譯或驗證安裝程式。完整證據與限制見 [T01](docs/verification/T01.md)、[T02](docs/verification/T02.md) 與 [T03 驗證紀錄](docs/verification/T03.md)。
