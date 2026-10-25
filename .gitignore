@@ -9,4 +9,5 @@ dist/
 .scratch/t02-baseline/
 .scratch/t02-visual/
 .scratch/t03-visual/
+.scratch/t04-visual/
 .mypy_cache/

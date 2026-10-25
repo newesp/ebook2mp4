@@ -41,6 +41,7 @@ class Workbench(ttk.Frame):
         self.saved_text = ''
         self.step = 1
         self._loading = False
+        self.pdf_dialog = None
         self.pack(fill='both', expand=True)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(3, weight=1)
@@ -82,7 +83,8 @@ class Workbench(ttk.Frame):
         left = ttk.Frame(body, padding=(4, 10, 16, 10))
         left.grid(row=0, column=0, sticky='nsew')
         left.columnconfigure(0, weight=1)
-        left.rowconfigure(2, weight=1)
+        left.rowconfigure(2, weight=1, minsize=80)
+        left.rowconfigure(3, weight=1, minsize=160)
         ttk.Label(left, text='書籍與製作批次', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
         self.book = ttk.Label(left, wraplength=175, text='', style='Book.TLabel')
         self.book.grid(row=1, column=0, sticky='w', pady=(20, 10))
@@ -97,8 +99,18 @@ class Workbench(ttk.Frame):
         batch_scroll.grid(row=0, column=1, sticky='ns')
         self.batch_list.configure(yscrollcommand=batch_scroll.set)
         self.batch_list.bind('<<TreeviewSelect>>', self.select_batch)
-        batch_actions = ttk.Frame(left)
-        batch_actions.grid(row=3, column=0, sticky='ew')
+        tool_canvas = tk.Canvas(left, width=175, height=250, bg=BG, highlightthickness=0)
+        tool_canvas.grid(row=3, column=0, sticky='nsew')
+        left_scroll = ttk.Scrollbar(left, command=tool_canvas.yview)
+        left_scroll.grid(row=3, column=1, sticky='ns')
+        tool_canvas.configure(yscrollcommand=left_scroll.set)
+        tools = ttk.Frame(tool_canvas)
+        tools.columnconfigure(0, weight=1)
+        tool_window = tool_canvas.create_window(0, 0, window=tools, anchor='nw')
+        tool_canvas.bind('<Configure>', lambda e: tool_canvas.itemconfigure(tool_window, width=e.width))
+        tools.bind('<Configure>', lambda e: tool_canvas.configure(scrollregion=tool_canvas.bbox('all')))
+        batch_actions = ttk.Frame(tools)
+        batch_actions.grid(row=0, column=0, sticky='ew')
         for col in range(3):
             batch_actions.columnconfigure(col, weight=1)
         self.rename_button = ttk.Button(batch_actions, text='命名', width=3, command=self.rename_batch)
@@ -107,14 +119,31 @@ class Workbench(ttk.Frame):
         self.up_button.grid(row=0, column=1, sticky='ew')
         self.down_button = ttk.Button(batch_actions, text='下移', width=3, command=partial(self.move_batch, 1))
         self.down_button.grid(row=0, column=2, sticky='ew')
-        self.import_button = ttk.Button(left, text='新增 TXT 批次', command=self.import_txt)
-        self.import_button.grid(row=4, column=0, sticky='ew', pady=(6, 12))
-        ttk.Label(left, text='專案位置', style='Heading.TLabel').grid(row=5, column=0, sticky='w')
-        self.project_location = tk.Text(left, width=21, height=4, wrap='char', relief='flat', bg=BG,
+        self.import_button = ttk.Button(tools, text='新增 TXT 批次', command=self.import_txt)
+        self.import_button.grid(row=1, column=0, sticky='ew', pady=(6, 12))
+        pdf_actions = ttk.Frame(tools)
+        pdf_actions.grid(row=2, column=0, sticky='ew', pady=8)
+        self.pdf_button = ttk.Button(pdf_actions, text='新增 PDF 範圍', command=self.import_pdf)
+        self.pdf_button.pack(fill='x')
+        self.pages_button = ttk.Button(pdf_actions, text='逐頁原稿／頁圖', command=self.compare_pdf_pages)
+        self.pages_button.pack(fill='x', pady=4)
+        self.cleanup_button = ttk.Button(pdf_actions, text='預覽換行整理', command=self.cleanup_line_breaks)
+        self.cleanup_button.pack(fill='x')
+        ttk.Label(tools, text='專案位置', style='Heading.TLabel').grid(row=3, column=0, sticky='w')
+        self.project_location = tk.Text(tools, width=21, height=4, wrap='char', relief='flat', bg=BG,
                                 fg=MUTED, font=('Microsoft JhengHei', 10), takefocus=True)
-        self.project_location.grid(row=6, column=0, sticky='ew', pady=8)
-        self.folder_button = ttk.Button(left, text='開啟專案資料夾', command=self.open_folder)
-        self.folder_button.grid(row=7, column=0, sticky='ew')
+        self.project_location.grid(row=4, column=0, sticky='ew', pady=8)
+        self.folder_button = ttk.Button(tools, text='開啟專案資料夾', command=self.open_folder)
+        self.folder_button.grid(row=5, column=0, sticky='ew')
+        def scroll_left(event):
+            tool_canvas.yview_scroll(-int(event.delta / 120), 'units')
+            return 'break'
+        def bind_left(widget):
+            widget.bind('<MouseWheel>', scroll_left)
+            for child in widget.winfo_children():
+                bind_left(child)
+        bind_left(tools)
+        tool_canvas.bind('<MouseWheel>', scroll_left)
 
         center = ttk.Frame(body)
         center.grid(row=0, column=1, sticky='nsew')
@@ -125,6 +154,7 @@ class Workbench(ttk.Frame):
         panes = ttk.Panedwindow(center, orient='horizontal')
         panes.grid(row=1, column=0, sticky='nsew')
         source_frame, self.source = text_pane(panes, '來源原文 · TXT')
+        self.source_heading = source_frame.grid_slaves(row=0)[0]
         editor_frame, self.editor = text_pane(panes, '校對稿 · 可編輯', True)
         panes.add(source_frame, weight=1)
         panes.add(editor_frame, weight=1)
@@ -220,6 +250,7 @@ class Workbench(ttk.Frame):
                     except ProjectError as e:
                         self.report(e)
                 self.update_stats()
+                self.update_source_metadata()
 
     def update_stats(self):
         text = self.current_text if self.batch_id else ''
@@ -249,7 +280,7 @@ class Workbench(ttk.Frame):
     def show_step(self, n):
         self.step = n
         reasons = {
-            1: '來源：建立書籍專案後新增 TXT 批次。支援 UTF-8／UTF-16 BOM 與手動 Big5／CP950；PDF／OCR 將於 T04／T05 提供。',
+            1: '來源：新增 TXT 或 PDF 範圍批次。PDF 依實際頁次選頁，與印刷頁碼可能不同；OCR 將於 T05 提供。',
             2: '校對：對照來源原文編輯，Ctrl+S 儲存。右側可搜尋取代、匯出／重載及明確確認朗讀稿；工具區可向下捲動。',
             3: '語音尚未提供：T09 將接入語音服務。請先確認朗讀稿；可返回來源或校對繼續編輯。',
             4: '影片尚未提供：需要有效音訊與視覺素材，T16 起提供製片。可返回校對，已輸入文字仍保留。',
@@ -274,6 +305,10 @@ class Workbench(ttk.Frame):
         self.fill(self.project_location, str(self.flow.root) if self.flow else '建立後顯示保存位置')
         self.folder_button.configure(state='normal' if self.flow else 'disabled')
         self.import_button.configure(state='normal' if self.flow else 'disabled')
+        self.pdf_button.configure(state='normal' if self.flow else 'disabled')
+        self.cleanup_button.configure(state='normal' if batches else 'disabled')
+        selected = next((b for b in batches if b['id'] == self.batch_id), batches[0] if batches else {})
+        self.pages_button.configure(state='normal' if selected.get('kind') == 'pdf' else 'disabled')
         self.batch_list.delete(*self.batch_list.get_children())
         for item in batches:
             self.batch_list.insert('', 'end', iid=item['id'], text=f'{item["name"]} · v{item["revision"]}')
@@ -297,6 +332,7 @@ class Workbench(ttk.Frame):
         self.editor.edit_modified(False)
         self.update_batch_actions()
         self._loading = False
+        self.update_source_metadata()
         self.update_stats()
         self.show_step(self.step)
         self.status.configure(text='所有書稿資料保存在本機。' if not self.flow else '已載入專案 · 原始來源檔不會被改寫')
@@ -306,6 +342,12 @@ class Workbench(ttk.Frame):
             return
         batch = next(b for b in self.flow.state['batches'] if b['id'] == self.batch_id)
         source = batch['source']
+        self.source_heading.configure(text='逐頁擷取原稿 · 合併檢視' if batch['kind'] == 'pdf' else '來源原文 · TXT')
+        if batch['kind'] == 'pdf':
+            pdf = batch['pdf']
+            mapping = '精確對應原始頁次' if pdf['mapping_valid'] and not self.dirty else '無精確對應（全文／外部編輯）；逐頁原稿仍可查閱'
+            self.source_meta.configure(text=f'{batch["name"]} · 校對稿 v{batch["revision"]}\n{source["original_name"]} · {source["size"]:,} 位元組 · PDF 共 {pdf["page_count"]} 頁\n範圍 {pdf["start"]}–{pdf["end"]}（含兩端）· {mapping}')
+            return
         self.source_meta.configure(text=f'{batch["name"]} · 校對稿 v{batch["revision"]}\n{source["original_name"]} · {source["size"]:,} 位元組 · {source["encoding"]} · 可讀\nTXT 來源，無 PDF 頁碼')
 
     def update_batch_actions(self):
@@ -514,6 +556,57 @@ class Workbench(ttk.Frame):
         update_preview()
         dialog.bind('<Escape>', lambda e: dialog.destroy())
 
+    def import_pdf(self):
+        if not self.flow or not self.may_leave():
+            return
+        path = filedialog.askopenfilename(title='選擇 PDF（可在預覽內更換）',
+                                          filetypes=[('PDF', '*.pdf')], parent=self.root)
+        if path:
+            from .pdf_desktop import PdfDialog
+            self.pdf_dialog = PdfDialog(self, path=path)
+
+    def compare_pdf_pages(self):
+        if self.flow and self.batch_id:
+            from .pdf_desktop import PdfDialog
+            self.pdf_dialog = PdfDialog(self, batch_id=self.batch_id)
+
+    def cleanup_line_breaks(self):
+        if not self.flow or not self.batch_id:
+            return
+        original = self.current_text
+        candidate = self.flow.preview_line_breaks(original)
+        dialog = tk.Toplevel(self.root)
+        dialog.title('換行整理預覽 · 套用後可復原')
+        dialog.geometry('760x600')
+        dialog.minsize(600, 450)
+        dialog.transient(self.root)
+        dialog.grab_set()
+        dialog.columnconfigure(0, weight=1)
+        dialog.rowconfigure(1, weight=1)
+        ttk.Label(dialog, text='只將單一斷行換成空格；保留空白行與所有原字元。\n不刪頁首頁尾、不修正跨行連字號。請先核對。', padding=12).grid(row=0, column=0, sticky='w')
+        frame, text = text_pane(dialog, '候選預覽 · 尚未變更校對稿')
+        frame.grid(row=1, column=0, sticky='nsew')
+        self.fill(text, candidate)
+        actions = ttk.Frame(dialog, padding=12)
+        actions.grid(row=2, column=0, sticky='ew')
+        ttk.Button(actions, text='原始換行', command=lambda: self.fill(text, original)).pack(side='left')
+        ttk.Button(actions, text='整理預覽', command=lambda: self.fill(text, candidate)).pack(side='left', padx=4)
+        ttk.Button(actions, text='取消', command=dialog.destroy).pack(side='left')
+        def apply():
+            selected = text.get('1.0', 'end-1c')
+            if self.current_text != original:
+                self.report(ProjectError('編輯內容已變更，請重新預覽。'))
+                return
+            self.editor.edit_separator()
+            self.editor.configure(autoseparators=False)
+            self.editor.delete('1.0', 'end')
+            self.editor.insert('1.0', selected)
+            self.editor.edit_separator()
+            self.editor.configure(autoseparators=True)
+            dialog.destroy()
+        ttk.Button(actions, text='套用整理', command=apply, style='Primary.TButton').pack(side='right')
+        dialog.bind('<Escape>', lambda e: dialog.destroy())
+
     def find_next(self):
         needle = self.find_text.get()
         if not self.batch_id or not needle:
@@ -674,6 +767,9 @@ class Workbench(ttk.Frame):
                 self.report(ProjectError('無法開啟檔案總管。可從左側複製專案位置後手動開啟。'))
 
     def close(self):
+        if self.pdf_dialog is not None and self.pdf_dialog.winfo_exists():
+            self.pdf_dialog.close()
+            return
         if self.may_leave():
             self.root.destroy()
 

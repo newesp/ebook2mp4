@@ -1,12 +1,12 @@
 # ebook2mp4
 
-Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.1](docs/pdf-txt-audiobook-video-spec.md)；目前實作 T01～T03：建立一本書、匯入多份 TXT 成為獨立批次、人工校對、外部重載與朗讀稿確認。
+Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.1](docs/pdf-txt-audiobook-video-spec.md)；目前實作 T01～T04：同書多份 TXT／PDF 頁碼批次、人工校對、外部重載與朗讀稿確認。
 
 ## 啟動
 
 建置完成後，直接雙擊 `dist/ebook2mp4/ebook2mp4.exe`。搬移程式時請一起搬移整個 `dist/ebook2mp4`，其中 `_internal` 包含執行環境。此版本尚未完成 T23 的安裝與乾淨 Windows 驗收。
 
-開發環境使用 Python 3.11 以上且含 Tkinter；本次驗證為 Windows 11／Python 3.14.3。雙擊 `run.pyw`，或執行：
+開發環境使用 Python 3.11 以上且含 Tkinter，PDF 另需 `packaging/requirements-runtime.txt` 的依賴；本次驗證為 Windows 11／Python 3.14.3。安裝依賴後雙擊 `run.pyw`，或執行：
 
 ```powershell
 python -m ebook2mp4
@@ -24,7 +24,11 @@ python -m ebook2mp4
 8. 「確認朗讀稿」明確確認後，先保存目前校對稿，再建立獨立文字快照及 SHA-256。後續編輯（包含復原）或重載取消該批目前確認，舊快照與其他批次的確認保留；名稱及排序不影響確認。空稿或未處理來源異常不能確認。
 9. 右側工具區支援滑鼠滾輪與捲軸。「檢視保存版本與副本」可選取歷次朗讀稿與重載保留的未存稿，唯讀查閱完整文字、版本、時間及雜湊，並選取複製。
 
-四步驟皆可返回，不會因切換遺失輸入。未實作的 PDF／OCR、Gemini、語音及影片會列出原因；不提供模擬產出。TXT 不產生 PDF 頁碼。建立及人工校對不需任何外部服務或媒體工具。
+「新增 PDF 範圍」會在背景檢查來源並顯示總頁數與頁圖。預設整份，第一頁為 1，起訖皆包含；實際 PDF 頁次可能與印刷頁碼不同。輸入起訖後按「擷取為新批次」，可取消並保留已完成頁；未完成、空白、文字稀少或失敗頁會阻擋朗讀確認，須先核對並處理或明確略過。損毀、不可讀與密碼來源可更換，不提供解密。新 PDF 批次預設按起始頁插入，既有校對稿不被覆寫。
+
+「逐頁原稿／頁圖」可查看每頁原始文字、方法、狀態與錯誤，頁圖保留比例並可捲動。「預覽換行整理」提供原始／整理候選切換，確認套用後可一次復原；不刪頁首頁尾、不自動處理連字號。全文或外部編輯後明示「無精確對應」，原始逐頁資料仍保留；匯出正文不插入人工頁碼標籤。取消中的視窗會等目前頁完成並保存取消結果後關閉。
+
+四步驟皆可返回，不會因切換遺失輸入。OCR、Gemini、語音及影片尚未提供；TXT 不產生 PDF 頁碼。建立及人工校對不需任何外部服務或媒體工具。
 
 儲存失敗時請保持視窗開啟、釋放空間或修正資料夾權限後重試；前次成功資料仍可重開。關閉、建立或開啟其他專案遇到未存文字時，可選擇先存、明確捨棄或取消。遇到另一個視窗已更新的提示，請先將未存文字複製到安全位置後重新開啟。若程序意外中斷留下 `.write.lock`，確認所有該專案視窗已關閉後，再移除該鎖檔。
 
@@ -34,6 +38,8 @@ python -m ebook2mp4
 書籍專案/
   project.json                       # format_version、書籍識別、時間、各批次參照
   sources/<批次識別>.txt              # 原始位元組副本（包含 BOM 與原換行）
+  sources/<批次識別>.pdf              # PDF 原始位元組副本
+  batches/<批次識別>/extracted.json    # 不可變逐頁擷取原稿、方法、設定、狀態與錯誤
   batches/<批次識別>/draft-<識別>.txt  # UTF-8 校對版本
   batches/<批次識別>/reading-<識別>.txt # 不可變朗讀快照
   batches/<批次識別>/copy-<識別>.txt    # 重載時保留的未存稿
@@ -51,4 +57,4 @@ python packaging/build.py --install-tools
 
 型別檢查使用 `python -m mypy ebook2mp4 --check-untyped-defs`；開發工具可安裝至專案內的隔離目錄，參見 `packaging/requirements-dev.txt`。實作告一段落後依 AGENTS.md 清理暫存與測試程序。
 
-執行階段僅使用 Python 標準函式庫；PyInstaller 是專案內的隔離建置依賴。`packaging/installer.iss` 是供 T23 使用的 Inno Setup 安裝配方，本次沒有編譯或驗證安裝程式。完整證據與限制見 [T01](docs/verification/T01.md)、[T02](docs/verification/T02.md) 與 [T03 驗證紀錄](docs/verification/T03.md)。
+PDF 使用 pypdfium2／PDFium 及 Pillow，版本固定於 `packaging/requirements-runtime.txt`，封裝包含原生 PDFium DLL 與授權資料；TXT 工作流程不需要 PDF 元件。ReportLab 僅用於產生合成測試 PDF。PyInstaller 是專案內的隔離建置依賴。`packaging/installer.iss` 供 T23 使用，本次沒有編譯或驗證安裝程式。證據見 [T03](docs/verification/T03.md) 與 [T04](docs/verification/T04.md)。

@@ -16,6 +16,10 @@ import shutil
 import tempfile
 import unicodedata
 import uuid
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .pdf import PdfPreview, PdfExtraction
 
 
 class ProjectError(Exception):
@@ -81,6 +85,7 @@ class ProjectWorkflow:
         self.root = root
         self._manifest = manifest
         self._committed = committed
+        self._pdf_job: PdfExtraction | None = None
 
     @property
     def state(self) -> dict:
@@ -159,7 +164,7 @@ class ProjectWorkflow:
             for batch in manifest['batches']:
                 if not isinstance(batch['id'], str) or not batch['id']:
                     raise ValueError()
-                if batch['id'] in seen or batch['kind'] != 'txt' or not isinstance(batch['name'], str):
+                if batch['id'] in seen or batch['kind'] not in ('txt', 'pdf') or not isinstance(batch['name'], str):
                     raise ValueError()
                 seen.add(batch['id'])
                 if type(batch['revision']) is not int or batch['revision'] < 1:
@@ -167,7 +172,10 @@ class ProjectWorkflow:
                 source = flow._read(batch['source'])
                 if len(source) != batch['source']['size']:
                     raise ValueError()
-                decode_txt(source, batch['source']['encoding'])
+                if batch['kind'] == 'txt':
+                    decode_txt(source, batch['source']['encoding'])
+                else:
+                    flow.pdf_pages(batch['id'])
                 flow._read(batch['draft']).decode('utf-8')
                 readings = batch.get('readings', [])
                 copies = batch.get('draft_copies', [])
@@ -291,8 +299,105 @@ class ProjectWorkflow:
 
     def texts(self, batch_id: str) -> tuple[str, str]:
         batch = self._batch(batch_id)
-        return (decode_txt(self._read(batch['source']), batch['source']['encoding']),
+        original = ('\n\n'.join(p['text'] for p in self.pdf_pages(batch_id)) if batch['kind'] == 'pdf'
+                    else decode_txt(self._read(batch['source']), batch['source']['encoding']))
+        return (original,
                 self._read(batch['draft']).decode('utf-8'))
+
+    @staticmethod
+    def inspect_pdf(filename: str | Path) -> PdfPreview:
+        from .pdf import inspect
+        return inspect(filename)
+
+    @staticmethod
+    def preview_pdf_page(preview: PdfPreview, number: int) -> bytes:
+        from .pdf import render
+        return render(preview.data, number, preview.page_count)
+
+    def start_pdf_extraction(self, preview: PdfPreview, start: int, end: int) -> PdfExtraction:
+        from .pdf import PdfExtraction
+        if self._pdf_job is not None:
+            raise ProjectError('已有 PDF 擷取待完成或保存，請先完成或取消。')
+        self._check_current()
+        self._space(self.root, preview.size + 8192)
+        self._pdf_job = PdfExtraction(preview, start, end)
+        return self._pdf_job
+
+    def finish_pdf_extraction(self, job: PdfExtraction) -> str:
+        if job is not self._pdf_job or not job.wait(0):
+            raise ProjectError('PDF 擷取仍在執行或不屬於此專案，請等待取消／完成。')
+        batch_id = uuid.uuid4().hex
+        source_path = f'sources/{batch_id}.pdf'
+        pages_path = f'batches/{batch_id}/extracted.json'
+        draft_path = f'batches/{batch_id}/draft-{uuid.uuid4().hex}.txt'
+        pages = job.pages
+        completed = len(pages)
+        for number in range(job.start + completed, job.end + 1):
+            pages.append(dict(number=number, method='text-layer', text='', status='cancelled',
+                              error='擷取已取消，此頁尚未處理。', settings=dict(line_breaks='original')))
+        draft = '\n\n'.join(p['text'] for p in pages).encode('utf-8')
+        extracted = encode(dict(pages=pages))
+        batch = dict(id=batch_id, kind='pdf', name=f'{job.preview.path.stem} · {job.start}–{job.end}',
+                     revision=1, source=dict(path=source_path, original_name=job.preview.path.name,
+                     size=job.preview.size, sha256=digest(job.preview.data)),
+                     draft=dict(path=draft_path, sha256=digest(draft)),
+                     pdf=dict(start=job.start, end=job.end, page_count=job.preview.page_count,
+                              extraction_status=job.status, mapping_valid=True,
+                              extracted=dict(path=pages_path, sha256=digest(extracted))),
+                     source_issues=[dict(page=p['number'], reason=f'PDF 第 {p["number"]} 頁：{p["error"]}',
+                                         status='pending') for p in pages if p['status'] != 'success'])
+        manifest = self.state
+        # Insert PDF batches in physical-page order; users can subsequently reorder.
+        index = next((i for i, b in enumerate(manifest['batches'])
+                      if b['kind'] == 'pdf' and b['pdf']['start'] > job.start), len(manifest['batches']))
+        manifest['batches'].insert(index, batch)
+        self._commit(manifest, [(source_path, job.preview.data), (pages_path, extracted), (draft_path, draft)])
+        self._pdf_job = None
+        return batch_id
+
+    def discard_pdf_extraction(self, job: PdfExtraction) -> None:
+        if job is not self._pdf_job:
+            raise ProjectError('找不到此專案的 PDF 擷取任務。')
+        job.cancel()
+        if not job.wait(0):
+            raise ProjectError('正在取消 PDF 擷取，請等待目前頁完成。')
+        self._pdf_job = None
+
+    def pdf_pages(self, batch_id: str) -> list[dict]:
+        batch = self._batch(batch_id)
+        if batch['kind'] != 'pdf':
+            raise ProjectError('TXT 來源沒有 PDF 頁碼。')
+        pdf = batch['pdf']
+        from .pdf import validate_range
+        validate_range(pdf['start'], pdf['end'], pdf['page_count'])
+        pages = json.loads(self._read(pdf['extracted']))['pages']
+        if (not isinstance(pages, list) or [p['number'] for p in pages] != list(range(pdf['start'], pdf['end'] + 1))
+                or type(pdf['mapping_valid']) is not bool
+                or pdf['extraction_status'] not in ('completed', 'cancelled')):
+            raise ProjectError('PDF 逐頁記錄損壞，請還原專案備份。')
+        for page in pages:
+            if (page['method'] != 'text-layer' or not isinstance(page['text'], str)
+                    or not isinstance(page['error'], str) or not isinstance(page['settings'], dict)
+                    or page['status'] not in ('success', 'pending', 'failed', 'cancelled')):
+                raise ProjectError('PDF 逐頁記錄損壞，請還原專案備份。')
+        return pages
+
+    def pdf_page_image(self, batch_id: str, number: int) -> bytes:
+        from .pdf import render
+        batch = self._batch(batch_id)
+        self.pdf_pages(batch_id)
+        return render(self._read(batch['source']), number, batch['pdf']['page_count'])
+
+    @staticmethod
+    def preview_line_breaks(text: str, mode: str = 'layout') -> str:
+        """Only join single layout breaks; preserve all existing characters/spaces."""
+        if mode == 'original':
+            return text
+        if mode != 'layout':
+            raise ProjectError('請選擇原始換行或版面換行整理。')
+        import re
+        parts = re.split(r'(\n[ \t]*\n(?:[ \t]*\n)*)', text.replace('\r\n', '\n').replace('\r', '\n'))
+        return ''.join(part if index % 2 else part.replace('\n', ' ') for index, part in enumerate(parts))
 
     def _batch(self, batch_id: str) -> dict:
         for batch in self._manifest['batches']:
@@ -313,14 +418,20 @@ class ProjectWorkflow:
         batch['draft'] = dict(path=path, sha256=digest(content))
         batch['revision'] += 1
         batch['current_reading'] = None
+        if batch['kind'] == 'pdf':
+            batch['pdf']['mapping_valid'] = False
         self._commit(manifest, [(path, content)])
 
     def invalidate_reading(self, batch_id: str) -> None:
         """Persist cancellation even when an editor change has not been saved."""
-        if self._batch(batch_id).get('current_reading') is None:
+        current = self._batch(batch_id)
+        if current.get('current_reading') is None and not current.get('pdf', {}).get('mapping_valid'):
             return
         manifest = self.state
-        next(b for b in manifest['batches'] if b['id'] == batch_id)['current_reading'] = None
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        batch['current_reading'] = None
+        if batch['kind'] == 'pdf':
+            batch['pdf']['mapping_valid'] = False
         self._commit(manifest, [])
 
     def confirmation_blockers(self, batch_id: str) -> list[str]:
@@ -429,6 +540,8 @@ class ProjectWorkflow:
         batch['draft'] = dict(path=path, sha256=digest(content))
         batch['revision'] += 1
         batch['current_reading'] = None
+        if batch['kind'] == 'pdf':
+            batch['pdf']['mapping_valid'] = False
         self._commit(manifest, files)
         return copy_id
 

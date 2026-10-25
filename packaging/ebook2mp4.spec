@@ -1,12 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from PyInstaller.utils.hooks import collect_all
+
+pdf_datas, pdf_binaries, pdf_imports = collect_all('pypdfium2')
+raw_datas, raw_binaries, raw_imports = collect_all('pypdfium2_raw')
 
 a = Analysis(
     ['../run.pyw'],
     pathex=[],
-    binaries=[],
-    datas=[],
-    hiddenimports=[],
+    binaries=pdf_binaries + raw_binaries,
+    datas=pdf_datas + raw_datas,
+    hiddenimports=pdf_imports + raw_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

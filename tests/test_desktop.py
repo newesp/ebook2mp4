@@ -3,6 +3,7 @@ from pathlib import Path
 import tempfile
 import tkinter as tk
 import unittest
+import time
 from unittest.mock import patch
 
 from ebook2mp4.desktop import make_app
@@ -40,11 +41,52 @@ class DesktopJourney(unittest.TestCase):
         with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(self.source)):
             self.app.import_txt()
         self.root.update()
+
         self.assertFalse(self.app.flow.state['batches'], 'Preview must not import before confirmation')
         button = next(w for w in descendants(self.root)
                       if w.winfo_class() == 'TButton' and w.cget('text') == '確認匯入')
         button.invoke()
         self.root.update()
+
+    def test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo(self):
+        from test_pdf import pdf_bytes
+        self.app.flow = ProjectWorkflow.create(self.directory / 'PDF project', 'PDF Book')
+        self.app.refresh()
+        pdf = self.directory / 'book.pdf'
+        pdf.write_bytes(pdf_bytes())
+        with patch('ebook2mp4.desktop.filedialog.askopenfilename', return_value=str(pdf)):
+            self.app.import_pdf()
+        dialog = self.app.pdf_dialog
+        def until(predicate):
+            end = time.monotonic() + 15
+            while not predicate() and time.monotonic() < end:
+                self.root.update()
+                time.sleep(.01)
+            self.assertTrue(predicate())
+        until(lambda: dialog.ready)
+        self.assertEqual((dialog.start.get(), dialog.end.get()), ('1', '20'))
+        dialog.start.set('3')
+        dialog.end.set('5')
+        dialog.extract_button.invoke()
+        until(lambda: self.app.batch_id is not None)
+        self.assertIn('Chapter 3:', self.app.current_text)
+        self.assertNotIn('Chapter 6:', self.app.current_text)
+        self.assertIn('· 精確對應原始頁次', self.app.source_meta.cget('text'))
+        self.app.editor.insert('end', '\nsecond line')
+        self.root.update()
+        self.assertIn('無精確對應', self.app.source_meta.cget('text'))
+        before = self.app.current_text
+        self.app.cleanup_line_breaks()
+        preview_dialog = next(w for w in self.root.winfo_children()
+                              if w.winfo_class() == 'Toplevel')
+        apply = next(w for w in descendants(preview_dialog)
+                     if w.winfo_class() == 'TButton' and w.cget('text') == '套用整理')
+        apply.invoke()
+        self.root.update()
+        self.assertNotEqual(self.app.current_text, before)
+        self.app.undo()
+        self.root.update()
+        self.assertEqual(self.app.current_text, before)
 
     def test_real_ui_create_preview_import_edit_save_close_reopen(self):
         original = self.source.read_bytes()
