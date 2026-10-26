@@ -73,3 +73,30 @@ class ProofreadingOptimization(unittest.TestCase):
         self.review(batch, script='traditional')
         self.assertEqual(self.flow.gemini_reviews(batch)[0]['paragraphs'][0]['candidate'],
                          '他說：「請訪問 https://example.com/a?q=1.2,foo, 或輸入 `简体,代码()`！」')
+
+    def test_unicode_filenames_paths_and_english_apostrophes_survive(self):
+        text = "请打开 简体.txt,以及 E:\\资料\\头发.txt。 It's 中文, John's book."
+        batch = self.imported(text)
+        self.review(batch, script='traditional')
+        self.assertEqual(self.flow.gemini_reviews(batch)[0]['paragraphs'][0]['candidate'],
+                         "請打開 简体.txt，以及 E:\\资料\\头发.txt。 It's 中文， John's book.")
+
+    def test_model_cannot_change_protected_identifiers(self):
+        text = '请访问 https://example.com/original'
+        batch = self.imported(text)
+        with patch('ebook2mp4.gemini.generate', return_value=dict(paragraphs=['请访问 https://example.com/changed'], notes=[])), patch.dict('os.environ', GEMINI_API_KEY='fake'):
+            job = self.flow.start_gemini_review(batch)
+            self.assertTrue(job.wait(5))
+            self.flow.finish_gemini_review(job)
+        self.assertEqual(job.state['status'], 'failed')
+        self.assertEqual(self.flow.texts(batch)[1], text)
+
+    def test_shared_han_does_not_vote_and_ellipsis_is_one_mark(self):
+        batch = self.imported('公里公里公里公里。后干云台。')
+        self.assertEqual(self.flow.gemini_scope(batch)['normalization']['target'], 'preserve')
+        self.assertEqual(self.flow.gemini_scope(batch)['normalization']['simplified'], 0)
+        text = "It's一本中文書, that's true. 中文..."
+        batch = self.imported(text)
+        self.review(batch, script='preserve')
+        self.assertEqual(self.flow.gemini_reviews(batch)[0]['paragraphs'][0]['candidate'],
+                         "It's一本中文書， that's true。 中文……")

@@ -176,7 +176,7 @@ class PdfExtraction:
                 if self.mode == 'ocr' or (self.mode == 'auto' and not any(c.isalnum() for c in text)):
                     result['method'] = 'ocr'
                     result['settings'].update(self.ocr_settings())
-                    from .ocr import recognize_page, OcrCancelled
+                    from .ocr import recognize_page, OcrCancelled, suspicious_lines
                     try:
                         recognition = recognize_page(render(self.preview.data, number, self.preview.page_count, ocr=True,
                                                 rotation=self.rotation),
@@ -189,6 +189,7 @@ class PdfExtraction:
                             baseline = next(p['text'] for p in self.base_pages if p['number'] == number)
                             begin, end = self.text_range
                             text = baseline[:begin]+text+baseline[end:]
+                            result['settings']['suspicious_lines'] = suspicious_lines(text)
                     except OcrCancelled:
                         break
                 result['text'] = text
@@ -205,6 +206,9 @@ class PdfExtraction:
                 if result['settings'].get('confidence', 100) < 60:
                     result['status'] = 'pending'
                     result['error'] = 'OCR 信心偏低，請對照原圖與候選；可調整語言或框選局部重試。'
+                if self.region is not None and result['status'] == 'success':
+                    result['status'] = 'pending'
+                    result['error'] = '僅重辨框選區域，其他區域未重新確認；請對照整頁後確認保留或明確略過。'
             except Exception as error:
                 if self.region is not None:
                     result['text'] = next(p['text'] for p in self.base_pages if p['number'] == number)

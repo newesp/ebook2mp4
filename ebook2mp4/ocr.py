@@ -191,7 +191,7 @@ def suspicious_lines(text: str) -> list[str]:
 def _table_result(table: str, *, region=None, size=None) -> dict:
     lines: dict[tuple[str, ...], dict] = {}
     weight = confidence = 0.0
-    for row in csv.DictReader(StringIO(table), delimiter='\t'):
+    for row in csv.DictReader(StringIO(table), delimiter='\t', quoting=csv.QUOTE_NONE):
         if row.get('level') != '5' or not row.get('text', '').strip():
             continue
         if region is not None:
@@ -261,7 +261,7 @@ def recognize_page(image: bytes, language: str, cancelled: threading.Event, *, l
                 padded.save(output, format='PNG')
                 image = output.getvalue()
     deadline = time.monotonic() + 120
-    if language != '自動中英' and layout == 'block':
+    if language != '自動中英' and layout == 'block' and region is None:
         text = _execute(image, LANGUAGES[language], cancelled, psm=psm, tsv=False, deadline=deadline)
         return dict(text=text, selected_language=LANGUAGES[language], psm=psm,
                     suspicious_lines=suspicious_lines(text))

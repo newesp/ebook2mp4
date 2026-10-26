@@ -1,13 +1,18 @@
 """Deterministic, local Chinese normalization for review candidates only."""
 from collections import Counter
 from functools import lru_cache
+from importlib.resources import files
 import re
 
 from .workflow import ProjectError
 
 HAN = re.compile(r'[\u3400-\u9fff\U00020000-\U0003134f]')
 PROTECTED = re.compile(r'```[\s\S]*?```|`[^`\r\n]*`|https?://[^\s，。！？；「」『』（）]+|'
-                       r'[A-Za-z0-9_.+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}|[A-Za-z0-9_/-]+(?:\.[A-Za-z0-9_-]+)+')
+                       r'[A-Za-z]:[\\/][^\s,，。！？；「」『』（）"<>|]+|'
+                       r'[A-Za-z0-9_.+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}|(?:[A-Za-z]\.){2,}|'
+                       r'(?<![A-Za-z0-9])[-+]?(?:\d+\.\d+|\.\d+)(?:[eE][-+]?\d+)?|'
+                       r'(?:[\w.-]+[\\/])+[\w.-]+|[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)+|'
+                       r'[\w-]+(?:\.[A-Za-z_][A-Za-z0-9_-]*)+(?![\w.@])')
 
 
 @lru_cache(maxsize=2)
@@ -19,6 +24,21 @@ def converter(direction):
         raise ProjectError('缺少繁簡校對詞庫，請重新安裝完整程式；仍可人工校對。') from None
 
 
+@lru_cache(maxsize=1)
+def ambiguous_characters() -> frozenset[str]:
+    """OpenCC explicitly lists shared forms among alternatives, e.g. 里/后/干."""
+    shared = set()
+    try:
+        for name in ('STCharacters.txt', 'TSCharacters.txt'):
+            for line in files('opencc').joinpath('dictionary', name).read_text(encoding='utf-8').splitlines():
+                source, alternatives = line.split('\t', 1)
+                if source in alternatives.split():
+                    shared.add(source)
+    except (ImportError, OSError, ValueError):
+        raise ProjectError('繁簡證據詞庫遺失或損壞，請重新安裝完整程式。') from None
+    return frozenset(shared)
+
+
 def profile(text: str, script: str = 'auto', punctuation: bool = True) -> dict:
     if script not in ('auto', 'traditional', 'simplified', 'preserve') or type(punctuation) is not bool:
         raise ProjectError('請選擇有效的字體與中文標點統一設定。')
@@ -26,6 +46,8 @@ def profile(text: str, script: str = 'auto', punctuation: bool = True) -> dict:
     s2t, t2s = converter('s2t'), converter('t2s')
     traditional = simplified = 0
     for character, count in Counter(HAN.findall(plain)).items():
+        if character in ambiguous_characters():
+            continue
         if t2s.convert(character) != character and s2t.convert(character) == character:
             traditional += count
         elif s2t.convert(character) != character and t2s.convert(character) == character:
@@ -43,11 +65,16 @@ def punctuation_text(text: str, target: str) -> str:
             ('"', '"', '「' if target != 'simplified' else '“', '」' if target != 'simplified' else '”'),
             ("'", "'", '『' if target != 'simplified' else '‘', '』' if target != 'simplified' else '’')):
         pattern = re.escape(left) + r'([^' + re.escape(left+right) + r'\r\n]*)' + re.escape(right)
+        if left == "'":
+            pattern = r'(?<![A-Za-z0-9])' + pattern + r'(?![A-Za-z0-9])'
         text = re.sub(pattern, lambda m: replacement_left+m[1]+replacement_right if HAN.search(m[1]) else m[0], text)
+    text = re.sub(r'([\u3400-\u9fff）」』”’])([ \t]*)\.{3,}', r'\1\2……', text)
     marks = {',': '，', ':': '：', ';': '；', '?': '？', '!': '！', '.': '。'}
     result = list(text)
     for index, character in enumerate(text):
         if character not in marks:
+            continue
+        if character == '.' and (text[index-1:index] == '.' or text[index+1:index+2] == '.'):
             continue
         preceding, following_index = index-1, index+1
         while preceding >= 0 and text[preceding] in ' \t':

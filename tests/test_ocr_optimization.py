@@ -87,3 +87,22 @@ class OcrOptimization(unittest.TestCase):
         batch = self.flow.finish_pdf_extraction(job)
         self.assertEqual(self.flow.pdf_pages(batch)[0]['status'], 'pending')
         self.assertTrue(self.flow.confirmation_blockers(batch))
+
+    def test_high_confidence_bad_region_still_needs_check_in_chinese_context(self):
+        from unittest.mock import MagicMock
+        job = self.flow.start_pdf_extraction(self.preview,1,1,mode='ocr',language='繁中＋英文')
+        self.assertTrue(job.wait(40))
+        batch = self.flow.finish_pdf_extraction(job)
+        original = self.flow.pdf_pages(batch)[0]['text']
+        start = original.index('FR Pu Al')
+        process = MagicMock(returncode=0)
+        process.poll.return_value = 0
+        process.communicate.return_value = (b'level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n5\t1\t1\t1\t1\t1\t10\t10\t50\t20\t95\tFR\n5\t1\t1\t1\t1\t2\t60\t10\t50\t20\t95\tPu\n5\t1\t1\t1\t1\t3\t110\t10\t50\t20\t95\tAl\n', b'')
+        with patch('subprocess.Popen', return_value=process):
+            job = self.flow.start_pdf_retry(batch,pages=[1],language='繁中＋英文',layout='block',
+                  region=(.53,.325,.8,.36),text_range=(start,start+8))
+            self.assertTrue(job.wait(10))
+        page = self.flow.pdf_extraction_pages(job)[0]
+        self.assertEqual(page['status'], 'pending')
+        self.assertTrue(page['settings']['suspicious_lines'])
+        self.flow.discard_pdf_extraction(job)

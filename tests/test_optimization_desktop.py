@@ -76,14 +76,15 @@ class OptimizationDesktop(unittest.TestCase):
             self.assertIsNotNone(dialog.region)
             dialog.text.tag_add('sel', '1.0', '1.7')
             dialog.language.set('英文')
-            dialog.layout.set('單行標題')
+            dialog.layout.set('單一區塊')
             process = MagicMock(returncode=0)
             process.poll.return_value = 0
-            process.communicate.return_value = (b'level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n5\t1\t1\t1\t1\t1\t40\t40\t90\t20\t95\tRecovered\n', b'')
+            process.communicate.return_value = (b'level\tpage_num\tblock_num\tpar_num\tline_num\tword_num\tleft\ttop\twidth\theight\tconf\ttext\n5\t1\t1\t1\t1\t1\t40\t40\t90\t20\t95\t"Recovered\n5\t1\t1\t1\t1\t2\t130\t40\t90\t20\t95\tworld"\n', b'')
             with patch('subprocess.Popen', return_value=process):
                 dialog.region_button.invoke()
                 self.until(lambda: dialog.pending_job is not None and dialog.ready)
-            self.assertEqual(dialog.text.get('1.0', 'end-1c'), 'Recovered'+original[7:])
+            self.assertEqual(dialog.text.get('1.0', 'end-1c'), '"Recovered world"'+original[7:])
+            self.assertIn('confidence', dialog.candidate_pages[0]['settings'])
             self.assertEqual(flow.pdf_pages(batch)[0]['text'], original)
             for button in (dialog.region_button, dialog.accept_button):
                 self.assertLessEqual(button.winfo_rootx()+button.winfo_width(), dialog.winfo_rootx()+dialog.winfo_width())

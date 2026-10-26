@@ -153,7 +153,9 @@ class ReviewJob:
                 raise ProjectError('Gemini 候選段落不完整，原稿未變更；請縮小範圍重試。')
             for paragraph, text in zip(self._review['paragraphs'], values):
                 if 'normalization' in self._review:
-                    from .proofreading import normalize
+                    from .proofreading import normalize, PROTECTED
+                    if PROTECTED.findall(paragraph['original']) != PROTECTED.findall(text):
+                        raise ProjectError('候選改動網址、數字、檔名或程式碼等保護內容，未採用。請縮小範圍或人工校對。')
                     text = normalize(text, self._review['normalization'])
                 paragraph['candidate'] = text
             self._review['notes'] = notes
