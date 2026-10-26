@@ -18,3 +18,4 @@ dist/
 outputs/
 .scratch/t06-*/
 .scratch/t06-*.log
+.scratch/t07-*/

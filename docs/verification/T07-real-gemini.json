@@ -1,0 +1,25 @@
+{
+  "service": "Gemini",
+  "synthetic_only": true,
+  "checks": [
+    {
+      "check": "connection",
+      "status": "completed",
+      "error": "",
+      "seconds": 4.052
+    },
+    {
+      "check": "selected-proofreading",
+      "status": "completed",
+      "error": "",
+      "synthetic_original": "今天天氣很好。我們去公圜散步。",
+      "synthetic_candidate": "今天天氣很好。我們去公園散步。",
+      "notes": [
+        "「公圜」校正為「公園」"
+      ],
+      "outside_preserved_and_undo": true,
+      "seconds": 5.206
+    }
+  ],
+  "model": "gemini-3.8-flash"
+}

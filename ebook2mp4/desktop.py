@@ -55,6 +55,8 @@ class Workbench(ttk.Frame):
         self.step = 1
         self._loading = False
         self.pdf_dialog = None
+        self.gemini_dialog = None
+        self.gemini_settings_dialog = None
         self.pack(fill='both', expand=True)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(3, weight=1)
@@ -216,8 +218,15 @@ class Workbench(ttk.Frame):
         self.issues_button.pack(fill='x', pady=3)
         self.versions_button = ttk.Button(right, text='檢視保存版本與副本', command=self.show_versions)
         self.versions_button.pack(fill='x', pady=(3, 16))
+        ttk.Label(right, text='Gemini 校對', style='Heading.TLabel').pack(anchor='w', pady=(0, 8))
+        ttk.Button(right, text='Gemini 金鑰／模型設定', command=self.gemini_settings).pack(fill='x', pady=3)
+        self.gemini_all_button = ttk.Button(right, text='校對整批文字', command=self.gemini_review)
+        self.gemini_all_button.pack(fill='x', pady=3)
+        self.gemini_selected_button = ttk.Button(right, text='校對選取文字', command=partial(self.gemini_review, True))
+        self.gemini_selected_button.pack(fill='x', pady=3)
+        self.gemini_history_button = ttk.Button(right, text='候選差異／撤回採用', command=self.gemini_history)
+        self.gemini_history_button.pack(fill='x', pady=(3, 16))
         for title, reason, action in (
-            ('Gemini 校對', 'T07 將提供金鑰設定與候選差異。\n目前可直接人工編輯校對稿。', '提出校對建議'),
             ('語音與影片', 'T09 起提供語音，T16 起提供影片。\n目前尚無有效音訊。', '產生成品'),
         ):
             ttk.Label(right, text=title, style='Heading.TLabel').pack(anchor='w', pady=(0, 8))
@@ -261,7 +270,8 @@ class Workbench(ttk.Frame):
         self.save_button.configure(state='normal' if self.dirty else 'disabled')
         enabled = 'normal' if batch else 'disabled'
         for button in (self.find_button, self.replace_button, self.replace_all_button, self.undo_button,
-                       self.export_button, self.reload_button, self.versions_button):
+                       self.export_button, self.reload_button, self.versions_button,
+                       self.gemini_all_button, self.gemini_selected_button, self.gemini_history_button):
             button.configure(state=enabled)
         blockers = self.flow.confirmation_blockers(self.batch_id) if batch and self.flow and self.batch_id else []
         self.confirm_button.configure(state='normal' if batch and text.strip() and not blockers else 'disabled',
@@ -793,11 +803,67 @@ class Workbench(ttk.Frame):
                 self.report(ProjectError('無法開啟檔案總管。可從左側複製專案位置後手動開啟。'))
 
     def close(self):
+        for dialog in (self.gemini_dialog, self.gemini_settings_dialog):
+            if dialog is not None and dialog.winfo_exists():
+                dialog.close()
+                return
         if self.pdf_dialog is not None and self.pdf_dialog.winfo_exists():
             self.pdf_dialog.close()
             return
         if self.may_leave():
             self.root.destroy()
+
+    def gemini_settings(self):
+        from .gemini_desktop import SettingsDialog
+        if self.gemini_settings_dialog is not None:
+            self.gemini_settings_dialog.lift()
+            return
+        try:
+            self.gemini_settings_dialog = SettingsDialog(self)
+        except ProjectError as e:
+            self.report(e)
+
+    def gemini_review(self, selected=False):
+        from .gemini_desktop import ReviewDialog
+        if not self.flow or not self.batch_id:
+            return
+        if self.gemini_dialog is not None:
+            self.gemini_dialog.lift()
+            return
+        start, end = 0, len(self.current_text)
+        if selected:
+            ranges = self.editor.tag_ranges('sel')
+            if not ranges:
+                self.report(ProjectError('請先在校對稿選取要送出的文字。'))
+                return
+            start = len(self.editor.get('1.0', ranges[0]))
+            end = len(self.editor.get('1.0', ranges[1]))
+        if self.dirty:
+            if not messagebox.askyesno('儲存送出版本', '先保存目前編輯，作為本次 Gemini 校對原版本？', parent=self.root) or not self.save():
+                return
+        try:
+            scope = self.flow.gemini_scope(self.batch_id, start=start, end=end)
+            if not messagebox.askyesno('送出校對範圍',
+                    f'服務：Gemini\n模型：{scope["model"]}\n校對稿 v{scope["revision"]}\n'
+                    f'範圍：第 {start+1}～{end} 字元，共 {scope["characters"]:,} 字元\n'
+                    '只送上述文字；不傳 PDF 或素材。只修轉錄、標點及明顯斷行，疑點保留。\n送出並產生候選？', parent=self.root):
+                return
+            job = self.flow.start_gemini_review(self.batch_id, start=start, end=end)
+            self.gemini_dialog = ReviewDialog(self, job=job)
+        except ProjectError as e:
+            self.report(e)
+
+    def gemini_history(self):
+        from .gemini_desktop import ReviewDialog
+        if not self.flow or not self.batch_id:
+            return
+        if self.gemini_dialog is not None:
+            self.gemini_dialog.lift()
+            return
+        try:
+            self.gemini_dialog = ReviewDialog(self)
+        except ProjectError as e:
+            self.report(e)
 
 
 def make_app():

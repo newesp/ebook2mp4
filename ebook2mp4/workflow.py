@@ -20,6 +20,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .pdf import PdfPreview, PdfExtraction
+    from .gemini import ReviewJob
 
 
 class ProjectError(Exception):
@@ -86,6 +87,7 @@ class ProjectWorkflow:
         self._manifest = manifest
         self._committed = committed
         self._pdf_job: PdfExtraction | None = None
+        self._gemini_job: ReviewJob | None = None
 
     @property
     def state(self) -> dict:
@@ -177,6 +179,7 @@ class ProjectWorkflow:
                 else:
                     flow.pdf_pages(batch['id'])
                 flow._read(batch['draft']).decode('utf-8')
+                flow.gemini_reviews(batch['id'])
                 readings = batch.get('readings', [])
                 copies = batch.get('draft_copies', [])
                 issues = batch.get('source_issues', [])
@@ -628,3 +631,149 @@ class ProjectWorkflow:
             if copy['id'] == copy_id:
                 return self._read(copy).decode('utf-8')
         raise ProjectError('找不到保留的未存稿副本。')
+
+    @staticmethod
+    def gemini_settings() -> dict:
+        from .gemini import load_settings
+        return load_settings()
+
+    @staticmethod
+    def save_gemini_settings(key: str, model: str) -> None:
+        from .gemini import save_settings
+        save_settings(key, model)
+
+    @staticmethod
+    def test_gemini_connection():
+        from .gemini import load_settings, ReviewJob
+        settings = load_settings()
+        if not settings['key']:
+            raise ProjectError('請先設定 Gemini API Key；仍可人工校對。')
+        return ReviewJob(settings['key'], dict(model=settings['model'], paragraphs=[dict(original='連線測試。')]))
+
+    def gemini_scope(self, batch_id: str, *, start: int = 0, end: int | None = None) -> dict:
+        _, text = self.texts(batch_id)
+        end = len(text) if end is None else end
+        if type(start) is not int or type(end) is not int or not 0 <= start < end <= len(text) or not text[start:end].strip():
+            raise ProjectError('請選取有效且非空白的校對範圍。')
+        settings = self.gemini_settings()
+        return dict(service='Gemini', model=settings['model'], start=start, end=end,
+                    characters=end-start, revision=self._batch(batch_id)['revision'])
+
+    def start_gemini_review(self, batch_id: str, *, start: int = 0, end: int | None = None):
+        from .gemini import load_settings, ReviewJob
+        import re
+        if self._gemini_job is not None:
+            raise ProjectError('請先保存前次 Gemini 結果。')
+        scope = self.gemini_scope(batch_id, start=start, end=end)
+        settings = load_settings()
+        if not settings['key']:
+            raise ProjectError('請先設定 Gemini API Key；仍可人工校對。')
+        _, text = self.texts(batch_id)
+        # Keep separators outside paragraph edits, including CRLF and partial selections.
+        paragraphs = []
+        offset = scope['start']
+        for part in re.split(r'(\r?\n[ \t]*\r?\n(?:[ \t]*\r?\n)*)', text[scope['start']:scope['end']]):
+            if part.strip():
+                paragraphs.append(dict(start=offset, end=offset+len(part), original=part,
+                                       candidate=None, decision='pending'))
+            offset += len(part)
+        batch = self._batch(batch_id)
+        review = dict(id=uuid.uuid4().hex, batch_id=batch_id, created_at=now(), **scope,
+                      before=deepcopy(batch['draft']), expected=deepcopy(batch['draft']),
+                      expected_revision=batch['revision'], paragraphs=paragraphs,
+                      notes=[], history=[], status='running', error='')
+        self._gemini_job = ReviewJob(settings['key'], review)
+        return self._gemini_job
+
+    def finish_gemini_review(self, job: ReviewJob) -> str:
+        if job is not self._gemini_job or not job.wait(0):
+            raise ProjectError('Gemini 工作不屬於此專案或仍在執行。')
+        review = job.review
+        manifest = self.state
+        batch = next((b for b in manifest['batches'] if b['id'] == review['batch_id']), None)
+        if batch is None:
+            raise ProjectError('原批次已移除，請重新建立校對工作。')
+        self._write_review(manifest, batch, review, [])
+        self._gemini_job = None
+        return review['id']
+
+    def _write_review(self, manifest: dict, batch: dict, review: dict, files: list[tuple[str, bytes]]):
+        path = f'batches/{batch["id"]}/gemini-{uuid.uuid4().hex}.json'
+        data = encode(review)
+        refs = batch.setdefault('gemini_reviews', [])
+        refs[:] = [r for r in refs if r['id'] != review['id']]
+        refs.append(dict(id=review['id'], path=path, sha256=digest(data)))
+        self._commit(manifest, files + [(path, data)])
+
+    def gemini_reviews(self, batch_id: str) -> list[dict]:
+        """Validated, portable before/candidate/after records; never credentials."""
+        reviews = []
+        for ref in self._batch(batch_id).get('gemini_reviews', []):
+            review = json.loads(self._read(ref))
+            if review['id'] != ref['id'] or review['batch_id'] != batch_id:
+                raise ProjectError('Gemini 校對記錄與批次不符，請還原備份。')
+            text = self._read(review['before']).decode('utf-8')
+            self._read(review['expected']).decode('utf-8')
+            if not 0 <= review['start'] < review['end'] <= len(text):
+                raise ProjectError('Gemini 校對範圍損壞，請還原備份。')
+            for paragraph in review['paragraphs']:
+                if (not review['start'] <= paragraph['start'] < paragraph['end'] <= review['end']
+                        or text[paragraph['start']:paragraph['end']] != paragraph['original']
+                        or paragraph['decision'] not in ('pending', 'accepted', 'rejected')
+                        or (paragraph['candidate'] is not None and not isinstance(paragraph['candidate'], str))):
+                    raise ProjectError('Gemini 校對段落損壞，請還原備份。')
+            for item in review['history']:
+                self._read(item['before']).decode('utf-8')
+                self._read(item['after']).decode('utf-8')
+            review['stale'] = (review['expected'] != self._batch(batch_id)['draft']
+                               or review['expected_revision'] != self._batch(batch_id)['revision'])
+            reviews.append(review)
+        return reviews
+
+    def _gemini_record(self, batch_id: str, review_id: str) -> dict:
+        for review in self.gemini_reviews(batch_id):
+            if review['id'] == review_id:
+                if review.pop('stale'):
+                    raise ProjectError('原稿版本已變更，候選與目前稿有差異。請比較後重新送出，不能直接覆蓋。')
+                if review['status'] != 'completed':
+                    raise ProjectError('本次 Gemini 尚無完整有效候選，原稿未變更。')
+                return review
+        raise ProjectError('找不到 Gemini 候選校對稿。')
+
+    def decide_gemini(self, batch_id: str, review_id: str, paragraph: int | None, decision: str) -> None:
+        review = self._gemini_record(batch_id, review_id)
+        if decision not in ('accepted', 'rejected') or (paragraph is not None and
+                (type(paragraph) is not int or not 0 <= paragraph < len(review['paragraphs']))):
+            raise ProjectError('請選擇有效段落及採用或拒絕。')
+        for index, part in enumerate(review['paragraphs']):
+            if index == paragraph or (paragraph is None and part['decision'] == 'pending'):
+                part['decision'] = decision
+        text = self._read(review['before']).decode('utf-8')
+        for part in reversed(review['paragraphs']):
+            if part['decision'] == 'accepted':
+                text = text[:part['start']] + part['candidate'] + text[part['end']:]
+        self._publish_gemini_draft(batch_id, review, text, 'decision')
+
+    def undo_gemini(self, batch_id: str, review_id: str) -> None:
+        review = self._gemini_record(batch_id, review_id)
+        for part in review['paragraphs']:
+            part['decision'] = 'pending'
+        self._publish_gemini_draft(batch_id, review, self._read(review['before']).decode('utf-8'), 'undo')
+
+    def _publish_gemini_draft(self, batch_id: str, review: dict, text: str, action: str):
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        content = text.encode('utf-8')
+        before = deepcopy(batch['draft'])
+        files = []
+        if digest(content) != before['sha256']:
+            path = f'batches/{batch_id}/draft-{uuid.uuid4().hex}.txt'
+            files.append((path, content))
+            batch['draft'] = dict(path=path, sha256=digest(content))
+            batch['revision'] += 1
+            batch['current_reading'] = None
+            if batch['kind'] == 'pdf':
+                batch['pdf']['mapping_valid'] = False
+        review.update(expected=deepcopy(batch['draft']), expected_revision=batch['revision'])
+        review['history'].append(dict(action=action, before=before, after=deepcopy(batch['draft']), created_at=now()))
+        self._write_review(manifest, batch, review, files)
