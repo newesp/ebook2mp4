@@ -1,5 +1,25 @@
 # 實作交接
 
+## 目前：T01～T07 已完成
+
+2026-10-26，T07「Gemini 設定、指定範圍校對與差異採用」已實作。起點 `3226d3f`，主要實作 `7eae065`，審查修正 `acbd711`；最終文件提交見 `git log -1`。目前 master，無遠端推送。
+
+正式新版 **`dist/T07/ebook2mp4/ebook2mp4.exe`**，SHA-256 `44A88303F30A45A8211F3BD1FA41D005952CF473A369D69D79F54890803C9828`；一起搬移整個 ebook2mp4 目錄。完整套件 **72／72 通過，206.612 秒，無跳過**，包含真實三語 OCR 及原指定 9 頁書稿；mypy 9 個來源檔案與 compileall 通過。雙軸審查原問題皆由原審查者確認解除。詳見 [T07 驗證](verification/T07.md)、[審查](verification/T07-code-review.md)、[清理](verification/T07-cleanup.json)。
+
+本次清除 **246,553,970 bytes（約 235.1 MiB）**，隔離依賴與測試模型副本已刪；重跑請重新準備。正式成品、需求、outputs 及既有使用者 OCR 模型保留。最終本次測試／OCR／封裝程序 **0**，桌面自動化 kernel 已重設；封裝檔案以獨占讀取開啟後釋放，確認沒有殘留占用。桌面另有使用者操作，因此封裝驗證收尾只停止本次空白測試程序，未繼續搶占桌面。
+
+下一張 **T08 — Gemini 長稿分段、取消與部分失敗續作**，票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/08-gemini-long-draft-resume.md`。**建議開新 session 接 T08**，先讀 AGENTS、GLOSSARY、docs/adr、Spec v1.1、T07 驗證及 T08 票稿；沿用已核定 ProjectWorkflow／真實 Tk 測試邊界。TTS、音訊／影片及 T23 安裝仍未完成。
+
+T07 入口及延伸注意：
+
+- `gemini_settings`／`save_gemini_settings(key, model)`／`test_gemini_connection`。Windows DPAPI current-user 加密的金鑰在 `%LOCALAPPDATA%/ebook2mp4/gemini.json`，不進書籍專案，也支援 `GEMINI_API_KEY`。設定錯誤可由設定視窗重新保存；不要在日誌或文件記錄金鑰。
+- 預設 `gemini-3.8-flash` 真實合成短文連線及指定範圍校對通過；舊 `gemini-2.5-flash` 雖列在服務清單，實際生成 404，不可僅靠列出模型宣稱可用。UI 可調模型 ID；不自動切換使用者模型。
+- `gemini_scope(batch_id, start=0, end=None)` → `start_gemini_review(...)` → job `state/cancel/wait` → `finish_gemini_review(job)`；範圍為 Python 字元半開區間，UI 顯示 1-based 含尾。只傳所選文字與校對規則，未傳使用者書稿做真實驗證。T07 單次請求，需完整段落 JSON／STOP 才成功；T08 再做分請求、部分保存及重試，不把現有原子完整回應誤當長稿續作。
+- `gemini_reviews(batch_id)` 回傳來源版本／範圍／模型、原文／候選／疑點、逐段決定及 before/expected/history 參照，另推導 stale。review JSON 每次不可變保存，索引保留原記錄順序，避免操作較舊候選後跳到另一筆。重開驗證內容檔及歷史 SHA-256；相對路徑可搬移。
+- `decide_gemini(batch_id, review_id, paragraph, decision)`，decision 為 accepted/rejected，paragraph=None 只採用待確認段落，不覆蓋已拒絕段。`undo_gemini` 撤回本次全部採用。以 before 重建，保留選外與分隔符；先比對 expected 參照及 revision，舊候選不可覆蓋新稿。UI 未存人工稿也阻擋套用；採用改稿失效該批朗讀確認及 PDF mapping，舊快照保留。
+- 請求在背景，取消不套用晚到結果，關閉等待停止與保存。若保存因跨視窗變更／原批移除而永久失敗，關閉須可明確捨棄；`discard_gemini_review(job)` 只釋放所屬已停止工作。不要移除該出口。新增非同步流程保留 after token 取消與連線 finally.close 規則。
+- Tk UI 差異採可縮放獨立視窗、原文／候選左右等寬、字詞差異底色、疑點及分列操作；主視窗右側工具向下捲動可見 Gemini。已驗最小 1040×640 主窗／740×570 差異窗。封裝版啟動通過，原生選檔後完整校對路徑尚待人工補驗；其他 DPI／輔助工具與 T23 乾淨機安裝亦待驗。
+
 ## 目前：T01～T06 已完成
 
 2026-10-26，T06「混合 PDF 自動辨識、異常頁確認與旋轉重試」已實作。起點 `2ae4c03`，實作 `fbb225f`、審查修正 `a2a24f9`，最終文件提交見 `git log -1`。目前仍為 master，沒有設定或推送遠端。

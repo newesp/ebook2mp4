@@ -1,0 +1,61 @@
+{
+  "remaining_task_processes": 0,
+  "deleted": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t07-tools",
+      "bytes": 96843247
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t07-temp",
+      "bytes": 0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t07-models",
+      "bytes": 8948886
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t07-visual",
+      "bytes": 4762
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t07-mypy",
+      "bytes": 5046501
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t07-build",
+      "bytes": 13784978
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "bytes": 0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 280687
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 227896
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\packaging\\__pycache__",
+      "bytes": 6651
+    }
+  ],
+  "date": "2026-10-26",
+  "process_check": "Elevated Win32_Process check found no T07 app, Gemini visual fixture, unittest, T07 build, or OCR processes after stopping this task blank packaged verification process.",
+  "deleted_bytes": 246553970,
+  "preserved": [
+    "dist/T07",
+    "docs/verification/T07*",
+    "requirements and specs",
+    "outputs",
+    "existing user OCR models"
+  ],
+  "sandbox_pip_temps_removed": [],
+  "packaged_files_exclusively_opened_and_released": 1115
+}
