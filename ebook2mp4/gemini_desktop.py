@@ -1,7 +1,7 @@
 """Gemini settings and paragraph comparison in native, resizable Tk windows."""
 import difflib
 import tkinter as tk
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 from .desktop import text_pane
 from .workflow import ProjectError, ProjectWorkflow
@@ -18,6 +18,7 @@ class SettingsDialog(tk.Toplevel):
             error = str(e)
         super().__init__(app.root)
         self.app, self.job, self.closing = app, None, False
+        self.poll_token = None
         self.title('Gemini 本機設定')
         self.geometry('540x410')
         self.minsize(500, 390)
@@ -60,15 +61,18 @@ class SettingsDialog(tk.Toplevel):
             self.test_button.configure(state='disabled')
             self.save_button.configure(state='disabled')
             self.status.configure(text='Gemini 連線測試中…可取消；等待連線釋放。')
-            self.after(60, self.poll)
+            self.poll_token = self.after(60, self.poll)
         except ProjectError as e:
             self.status.configure(text=str(e))
 
     def poll(self):
+        if self.poll_token is not None:
+            self.after_cancel(self.poll_token)
+            self.poll_token = None
         if self.job is None:
             return
         if not self.job.wait(0):
-            self.after(60, self.poll)
+            self.poll_token = self.after(60, self.poll)
             return
         state = self.job.state
         self.job = None
@@ -85,6 +89,8 @@ class SettingsDialog(tk.Toplevel):
             self.status.configure(text='取消中，正在等待連線釋放…')
             return
         self.key.set('')
+        if self.poll_token is not None:
+            self.after_cancel(self.poll_token)
         self.app.gemini_settings_dialog = None
         self.destroy()
 
@@ -97,6 +103,7 @@ class ReviewDialog(tk.Toplevel):
         reviews = self.flow.gemini_reviews(self.batch_id)
         super().__init__(app.root)
         self.app, self.job, self.closing = app, job, False
+        self.poll_token = None
         self.reviews = reviews
         self.review = None
         self.title('Gemini 候選校對稿 · 原文與差異')
@@ -141,7 +148,7 @@ class ReviewDialog(tk.Toplevel):
         self.refresh()
         if job is not None:
             self.status.configure(text='Gemini 校對中…原稿仍可人工編輯；取消後不採用結果。')
-            self.after(60, self.poll)
+            self.poll_token = self.after(60, self.poll)
 
     def refresh(self):
         self.reviews = self.flow.gemini_reviews(self.batch_id)
@@ -182,8 +189,13 @@ class ReviewDialog(tk.Toplevel):
                 self.candidate.tag_add('diff', f'1.0+{c}c', f'1.0+{d}c')
 
     def poll(self):
+        if self.poll_token is not None:
+            self.after_cancel(self.poll_token)
+            self.poll_token = None
+        if self.job is None:
+            return
         if not self.job.wait(0):
-            self.after(60, self.poll)
+            self.poll_token = self.after(60, self.poll)
             return
         try:
             self.flow.finish_gemini_review(self.job)
@@ -195,6 +207,14 @@ class ReviewDialog(tk.Toplevel):
                 self.close()
         except ProjectError as e:
             self.status.configure(text=str(e) + ' 關閉時會重試保存。')
+            if self.closing:
+                if messagebox.askyesno('候選未能保存',
+                        str(e) + '\n捨棄尚未保存的候選並關閉？原稿不會變更。\n選「否」可保留候選視窗。', parent=self):
+                    self.flow.discard_gemini_review(self.job)
+                    self.job = None
+                    self.close()
+                else:
+                    self.closing = False
 
     def perform(self, operation):
         if self.review is None:
@@ -238,4 +258,6 @@ class ReviewDialog(tk.Toplevel):
                 self.poll()
             return
         self.app.gemini_dialog = None
+        if self.poll_token is not None:
+            self.after_cancel(self.poll_token)
         self.destroy()

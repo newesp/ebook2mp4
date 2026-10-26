@@ -697,12 +697,21 @@ class ProjectWorkflow:
         self._gemini_job = None
         return review['id']
 
+    def discard_gemini_review(self, job: ReviewJob) -> None:
+        if job is not self._gemini_job or not job.wait(0):
+            raise ProjectError('請先等待 Gemini 取消或完成，再捨棄候選。')
+        self._gemini_job = None
+
     def _write_review(self, manifest: dict, batch: dict, review: dict, files: list[tuple[str, bytes]]):
         path = f'batches/{batch["id"]}/gemini-{uuid.uuid4().hex}.json'
         data = encode(review)
         refs = batch.setdefault('gemini_reviews', [])
-        refs[:] = [r for r in refs if r['id'] != review['id']]
-        refs.append(dict(id=review['id'], path=path, sha256=digest(data)))
+        ref = dict(id=review['id'], path=path, sha256=digest(data))
+        index = next((i for i, existing in enumerate(refs) if existing['id'] == review['id']), None)
+        if index is None:
+            refs.append(ref)
+        else:
+            refs[index] = ref
         self._commit(manifest, files + [(path, data)])
 
     def gemini_reviews(self, batch_id: str) -> list[dict]:

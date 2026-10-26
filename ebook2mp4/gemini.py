@@ -55,6 +55,8 @@ def protect(data: bytes, *, decrypt: bool = False) -> bytes:
 def load_settings() -> dict:
     try:
         value = json.loads(settings_path().read_bytes()) if settings_path().exists() else {}
+        if not isinstance(value, dict):
+            raise ValueError()
         model = validate_model(value.get('model', DEFAULT_MODEL))
         key = protect(base64.b64decode(value['protected_key'], validate=True), decrypt=True).decode('utf-8') if value.get('protected_key') else ''
         return dict(model=model, key=key or os.environ.get('GEMINI_API_KEY', ''))

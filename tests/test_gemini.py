@@ -4,6 +4,7 @@ import tempfile
 import unittest
 import threading
 import json
+import shutil
 from unittest.mock import patch
 
 from ebook2mp4.workflow import ProjectWorkflow, ProjectError
@@ -110,3 +111,45 @@ class GeminiJourney(unittest.TestCase):
             with self.assertRaisesRegex(ProjectError, 'API Key'):
                 self.flow.start_gemini_review(self.batch)
             self.flow.save_draft(self.batch, '離線人工校對')
+
+    def test_pdf_batch_uses_same_review_and_portable_versions(self):
+        from io import BytesIO
+        from reportlab.pdfgen import canvas
+        data = BytesIO()
+        pdf = canvas.Canvas(data)
+        pdf.drawString(40, 700, 'The quik brown fox jumps over the lazy dog.')
+        pdf.save()
+        source = self.folder / 'source.pdf'
+        source.write_bytes(data.getvalue())
+        extraction = self.flow.start_pdf_extraction(self.flow.inspect_pdf(source), 1, 1)
+        self.addCleanup(lambda: (extraction.cancel(), extraction.wait()))
+        self.assertTrue(extraction.wait(5))
+        batch = self.flow.finish_pdf_extraction(extraction)
+        original = self.flow.texts(batch)[1]
+        with patch('ebook2mp4.gemini.generate', return_value=dict(paragraphs=['The quick brown fox jumps over the lazy dog.'], notes=[])), patch.dict('os.environ', GEMINI_API_KEY='fake'):
+            job = self.flow.start_gemini_review(batch)
+            self.assertTrue(job.wait(3))
+            review_id = self.flow.finish_gemini_review(job)
+        self.flow.decide_gemini(batch, review_id, None, 'accepted')
+        self.assertEqual(self.flow.texts(batch), (original, 'The quick brown fox jumps over the lazy dog.'))
+        self.assertFalse(self.flow.state['batches'][1]['pdf']['mapping_valid'])
+        moved = self.folder / 'moved-book'
+        shutil.move(str(self.flow.root), str(moved))
+        reopened = ProjectWorkflow.open(moved)
+        reopened.undo_gemini(batch, review_id)
+        self.assertEqual(reopened.texts(batch), (original, original))
+
+    def test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic(self):
+        original = self.flow.texts(self.batch)[1]
+        with patch('ebook2mp4.gemini.generate', return_value=dict(paragraphs=[
+                '外面保留。', '這是錯字。', '第二段。', '結尾保留。'], notes=[])), patch.dict('os.environ', GEMINI_API_KEY='fake'):
+            job = self.flow.start_gemini_review(self.batch)
+            self.assertTrue(job.wait(3))
+            review_id = self.flow.finish_gemini_review(job)
+        self.flow.decide_gemini(self.batch, review_id, 1, 'rejected')
+        with patch('os.replace', side_effect=OSError('disk full')):
+            with self.assertRaises(ProjectError):
+                self.flow.decide_gemini(self.batch, review_id, None, 'accepted')
+        self.assertEqual(ProjectWorkflow.open(self.flow.root).texts(self.batch)[1], original)
+        self.flow.decide_gemini(self.batch, review_id, None, 'accepted')
+        self.assertEqual(self.flow.texts(self.batch)[1], '外面保留。\n\n這是錯宇。\n\n第二段。\n\n結尾保留。')
