@@ -1,0 +1,62 @@
+{
+  "packaged_files_exclusively_opened_and_released": 1152,
+  "preserved": [
+    "dist/T07-optimized",
+    "previous formal builds",
+    "requirements/specifications",
+    "docs/examples/ocr-mixed-font-title.png",
+    "verification evidence",
+    "outputs",
+    "existing user OCR models"
+  ],
+  "deleted": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\optimization-tools",
+      "bytes": 98048834
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\optimization-temp",
+      "bytes": 17510782
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\optimization-models",
+      "bytes": 8948886
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\optimization-mypy",
+      "bytes": 15503589
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\optimization-build",
+      "bytes": 13898745
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "bytes": 0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 324572
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 281026
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\packaging\\__pycache__",
+      "bytes": 6651
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\dist\\T07-optimized\\ebook2mp4\\_internal\\opencc\\__pycache__",
+      "bytes": 13298
+    }
+  ],
+  "date": "2026-10-26",
+  "deleted_bytes": 275946745,
+  "remaining_task_processes": 0,
+  "failed_sandbox_probe_temp_removed": false
+}

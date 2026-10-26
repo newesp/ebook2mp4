@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-26",
+  "cloud_input": "synthetic selected text only",
+  "checks": [
+    {
+      "check": "live-traditional",
+      "status": "completed",
+      "error": "",
+      "seconds": 1.788,
+      "policy": {
+        "script": "auto",
+        "target": "traditional",
+        "detected": "traditional",
+        "traditional": 56,
+        "simplified": 5,
+        "punctuation": true,
+        "basis": "batch-draft",
+        "version": 1
+      },
+      "synthetic_candidate": "這裏有頭髮，請檢查（文字）。 Visit https://example.com/a?q=3.14 and U.S.A.",
+      "outside_and_undo": true
+    },
+    {
+      "check": "live-simplified",
+      "status": "completed",
+      "error": "",
+      "seconds": 1.795,
+      "policy": {
+        "script": "auto",
+        "target": "simplified",
+        "detected": "simplified",
+        "traditional": 6,
+        "simplified": 48,
+        "punctuation": true,
+        "basis": "batch-draft",
+        "version": 1
+      },
+      "synthetic_candidate": "这里有头发，请检查（文字）。 Visit https://example.com/a?q=3.14 and U.S.A.",
+      "outside_and_undo": true
+    },
+    {
+      "check": "local-book-title",
+      "language": "繁中＋英文",
+      "layout": "block",
+      "title": "1. FR Pu Al",
+      "status": "pending",
+      "settings": {
+        "line_breaks": "original",
+        "rotation": 0,
+        "requested_mode": "ocr",
+        "requested_language": "繁中＋英文",
+        "layout": "block",
+        "language": "chi_tra+eng",
+        "model_revision": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+        "engine": "Tesseract 5 LSTM",
+        "dpi": 300,
+        "max_pixels": 25000000,
+        "psm": 6,
+        "selected_language": "chi_tra+eng",
+        "suspicious_lines": [
+          "1. FR Pu Al"
+        ]
+      }
+    },
+    {
+      "check": "local-book-title",
+      "language": "自動中英",
+      "layout": "auto",
+      "title": "1. 再 简单 也 不 过 了",
+      "status": "success",
+      "settings": {
+        "line_breaks": "original",
+        "rotation": 0,
+        "requested_mode": "ocr",
+        "requested_language": "自動中英",
+        "layout": "auto",
+        "language": "chi_sim+chi_tra+eng",
+        "model_revision": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+        "engine": "Tesseract 5 LSTM",
+        "dpi": 300,
+        "max_pixels": 25000000,
+        "psm": 3,
+        "confidence": 88.59,
+        "suspicious_lines": [],
+        "selected_language": "chi_sim+eng",
+        "selected_source": "page",
+        "layout_fallbacks": 1,
+        "alternatives": [
+          {
+            "language": "chi_sim+eng",
+            "source": "page",
+            "confidence": 88.59
+          },
+          {
+            "language": "chi_sim+eng",
+            "source": "page",
+            "confidence": 87.83
+          },
+          {
+            "language": "chi_tra+eng",
+            "source": "page",
+            "confidence": 84.93
+          },
+          {
+            "language": "chi_tra+eng",
+            "source": "page",
+            "confidence": 84.74
+          }
+        ]
+      }
+    }
+  ]
+}

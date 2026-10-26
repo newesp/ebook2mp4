@@ -395,7 +395,8 @@ class DesktopJourney(unittest.TestCase):
              patch('ebook2mp4.desktop.messagebox.showerror'):
             self.app.import_txt()
         self.root.update()
-        selector = next(w for w in descendants(self.root) if w.winfo_class() == 'TCombobox')
+        selector = next(w for w in descendants(self.root) if w.winfo_class() == 'TCombobox'
+                        and w.winfo_toplevel().title() == '匯入前預覽')
         confirm = next(w for w in descendants(self.root)
                        if w.winfo_class() == 'TButton' and w.cget('text') == '確認匯入')
         self.assertTrue(confirm.instate(['disabled']))
