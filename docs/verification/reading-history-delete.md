@@ -13,3 +13,24 @@ UI 成功後更新版本選單與朗讀狀態，最後一筆刪完顯示空狀�
 ## 驗證
 
 新增公開工作流程案例驗證舊版本刪除、目前確認失效、其他批次確認與稿件保留、重開、實際快照檔移除、索引失敗保留及可重試、檔案占用警告。真實 Tk 案例驗證取消／失敗／成功、未存人工稿保留、刪空狀態，並在 600×420 最小視窗檢查刪除與關閉按鈕在可見範圍。未使用瀏覽器：本介面是原生 Tk；操作列獨立於可伸縮文字區，避免控制被正文擠出。其他 DPI／輔助工具仍需人工驗收。
+
+## 雙軸審查
+
+固定比較 `git -c safe.directory=E:/Leo/Projects/ebook2mp4 diff bedc585...5c82ce4`，提交 `5c82ce4 Add confirmed reading history deletion with safe draft preservation`。兩個獨立子代理依 code-review 技能並行審查，規範來源 AGENTS、GLOSSARY、ADR、README、Spec Testing Decisions 及技能 Fowler 氣味基線；Spec 依本次使用者明確選擇及本文行為範圍。
+
+### Standards
+
+未發現需修正項目。刪除流程先原子提交索引，再移除未被共用的內容檔；寫入失敗保留版本，實體刪檔失敗會明確警告。介面只更新清單與狀態，保留未儲存文字。使用者已明確要求刪除，符合本次核定範圍。
+
+### Spec
+
+未發現缺漏、錯誤或範圍外行為。確認後刪除、目前確認失效、原稿／來源／其他版本及批次保留、未存編輯不變、索引原子移除及清理警告，均符合本次授權。
+
+Standards：0 項，Spec：0 項。
+
+## 最終結果與成品
+
+- 完整套件 **76／76 通過，126.002 秒，無跳過**，包含既有三語真實 OCR 與指定 9 頁書稿回歸。[原始結果](reading-history-delete-tests.txt)。本次沒有連網送出書稿或重新呼叫 Gemini。
+- mypy 9 個來源檔案通過，[型別結果](reading-history-delete-typecheck.txt)；compileall 通過。
+- [封裝建置](reading-history-delete-build.txt) 通過；新版 **`dist/T07-reading-delete/ebook2mp4/ebook2mp4.exe`**，SHA-256 **`3BA969D9764D1D36AE3CB9590C5EC8C0E2FD4E81E663056C19C67264C63D9928`**，整個目錄一起搬移。保留原 T07 包。本次未開啟新 exe 搶占使用者桌面，封裝版實際操作與其他 DPI 仍待人工補驗。
+- 隔離依賴、模型副本、測試資料、建置暫存與快取已清除，正式成品、需求與最終證據保留。程序及檔案資源檢查詳見 [清理紀錄](reading-history-delete-cleanup.json)。

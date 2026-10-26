@@ -1,0 +1,56 @@
+{
+  "deleted": [
+    {
+      "bytes": 96887545,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools"
+    },
+    {
+      "bytes": 5312,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-temp"
+    },
+    {
+      "bytes": 8948886,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-models"
+    },
+    {
+      "bytes": 5046501,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-mypy"
+    },
+    {
+      "bytes": 13799434,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-build"
+    },
+    {
+      "bytes": 121410362,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime"
+    },
+    {
+      "bytes": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs"
+    },
+    {
+      "bytes": 287689,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__"
+    },
+    {
+      "bytes": 238025,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__"
+    },
+    {
+      "bytes": 6651,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\packaging\\__pycache__"
+    }
+  ],
+  "packaged_files_exclusively_opened_and_released": 1115,
+  "preserved": [
+    "dist/T07-reading-delete",
+    "dist/T07",
+    "docs/verification/reading-history-delete*",
+    "requirements and specs",
+    "outputs",
+    "existing user OCR models"
+  ],
+  "deleted_bytes": 246630405,
+  "date": "2026-10-26",
+  "remaining_task_processes": 0
+}

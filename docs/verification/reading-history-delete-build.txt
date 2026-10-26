@@ -1,0 +1,89 @@
+833 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+833 INFO: Python: 3.14.3
+858 INFO: Platform: Windows-11-10.0.26200-SP0
+859 INFO: Python environment: C:\Python314
+7617 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+9766 INFO: Appending 'binaries' from .spec
+9767 INFO: Appending 'datas' from .spec
+9818 INFO: checking Analysis
+9818 INFO: Building Analysis because Analysis-00.toc is non existent
+9819 INFO: Looking for Python shared library...
+9819 INFO: Using Python shared library: C:\Python314\python314.dll
+9819 INFO: Running Analysis Analysis-00.toc
+9819 INFO: Target bytecode optimization level: 0
+9819 INFO: Initializing module dependency graph...
+9825 INFO: Initializing module graph hook caches...
+9927 INFO: Analyzing modules for base_library.zip ...
+14064 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+15150 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+18870 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+18907 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+19206 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+23786 INFO: Caching module dependency graph...
+23878 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+24041 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks\\pre_find_module_path'
+24106 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+25137 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+25702 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+25797 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+25823 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+25942 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+26095 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+27142 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+27595 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+28821 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+28937 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+29756 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+30620 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+32465 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+33741 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+34969 INFO: Analyzing hidden import 'pypdfium2.__main__'
+35037 INFO: Processing module hooks (post-graph stage)...
+36089 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+36307 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks'
+36337 INFO: Performing binary vs. data reclassification (1015 entries)
+41234 INFO: Looking for ctypes DLLs
+41391 INFO: Analyzing run-time hooks ...
+41394 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks\\rthooks'
+41415 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks\\rthooks'
+41430 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks\\rthooks'
+41449 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\reading-delete-tools\\PyInstaller\\hooks\\rthooks'
+41532 INFO: Creating base_library.zip...
+41571 INFO: Looking for dynamic libraries
+42689 INFO: Extra DLL search directories (AddDllDirectory): []
+42689 INFO: Extra DLL search directories (PATH): []
+45426 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\reading-delete-build\ebook2mp4\warn-ebook2mp4.txt
+45458 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\reading-delete-build\ebook2mp4\xref-ebook2mp4.html
+45655 INFO: checking PYZ
+45656 INFO: Building PYZ because PYZ-00.toc is non existent
+45656 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\reading-delete-build\ebook2mp4\PYZ-00.pyz
+46223 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\reading-delete-build\ebook2mp4\PYZ-00.pyz completed successfully.
+46251 INFO: checking PKG
+46252 INFO: Building PKG because PKG-00.toc is non existent
+46252 INFO: Building PKG (CArchive) ebook2mp4.pkg
+46322 INFO: Building PKG (CArchive) ebook2mp4.pkg completed successfully.
+46324 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\reading-delete-tools\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+46324 INFO: checking EXE
+46324 INFO: Building EXE because EXE-00.toc is non existent
+46324 INFO: Building EXE from EXE-00.toc
+46325 INFO: Copying bootloader EXE to E:\Leo\Projects\ebook2mp4\.scratch\reading-delete-build\ebook2mp4\ebook2mp4.exe
+47007 INFO: Copying icon to EXE
+47121 INFO: Copying 0 resources to EXE
+47122 INFO: Embedding manifest in EXE
+47255 INFO: Appending PKG archive to EXE
+47429 INFO: Fixing EXE headers
+47896 INFO: Building EXE from EXE-00.toc completed successfully.
+47907 INFO: checking COLLECT
+47908 INFO: Building COLLECT because COLLECT-00.toc is non existent
+47908 INFO: Building COLLECT COLLECT-00.toc
+57526 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+57566 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist\T07-reading-delete
