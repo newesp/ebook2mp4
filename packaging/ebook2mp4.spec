@@ -5,6 +5,7 @@ from pathlib import Path
 
 pdf_datas, pdf_binaries, pdf_imports = collect_all('pypdfium2')
 raw_datas, raw_binaries, raw_imports = collect_all('pypdfium2_raw')
+conversion_datas, conversion_binaries, conversion_imports = collect_all('opencc')
 ocr_runtime = Path(SPECPATH).parent / '.scratch' / 'ocr-runtime'
 if not (ocr_runtime / 'tesseract.exe').is_file():
     raise RuntimeError('Run packaging/prepare_ocr.py with build dependencies before building.')
@@ -13,8 +14,8 @@ a = Analysis(
     ['../run.pyw'],
     pathex=[],
     binaries=pdf_binaries + raw_binaries,
-    datas=pdf_datas + raw_datas + copy_metadata('pillow') + [(str(ocr_runtime), 'tools/tesseract')],
-    hiddenimports=pdf_imports + raw_imports,
+    datas=pdf_datas + raw_datas + conversion_datas + copy_metadata('opencc-python-reimplemented') + copy_metadata('pillow') + [(str(ocr_runtime), 'tools/tesseract'), (str(Path(SPECPATH) / 'licenses'), 'licenses')],
+    hiddenimports=pdf_imports + raw_imports + conversion_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],

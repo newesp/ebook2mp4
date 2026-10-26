@@ -219,6 +219,11 @@ class Workbench(ttk.Frame):
         self.versions_button = ttk.Button(right, text='檢視保存版本與副本', command=self.show_versions)
         self.versions_button.pack(fill='x', pady=(3, 16))
         ttk.Label(right, text='Gemini 校對', style='Heading.TLabel').pack(anchor='w', pady=(0, 8))
+        ttk.Label(right, text='字體統一（依本批全文判斷）').pack(anchor='w')
+        self.script = tk.StringVar(value='自動')
+        ttk.Combobox(right, textvariable=self.script, values=('自動', '繁體', '簡體', '保留原樣'), state='readonly', width=18).pack(fill='x', pady=3)
+        self.normalize_punctuation = tk.BooleanVar(value=True)
+        ttk.Checkbutton(right, text='統一中文全形標點', variable=self.normalize_punctuation).pack(anchor='w', pady=3)
         ttk.Button(right, text='Gemini 金鑰／模型設定', command=self.gemini_settings).pack(fill='x', pady=3)
         self.gemini_all_button = ttk.Button(right, text='校對整批文字', command=self.gemini_review)
         self.gemini_all_button.pack(fill='x', pady=3)
@@ -889,13 +894,16 @@ class Workbench(ttk.Frame):
             if not messagebox.askyesno('儲存送出版本', '先保存目前編輯，作為本次 Gemini 校對原版本？', parent=self.root) or not self.save():
                 return
         try:
-            scope = self.flow.gemini_scope(self.batch_id, start=start, end=end)
+            from .proofreading import describe
+            script = {'自動': 'auto', '繁體': 'traditional', '簡體': 'simplified', '保留原樣': 'preserve'}[self.script.get()]
+            punctuation = self.normalize_punctuation.get()
+            scope = self.flow.gemini_scope(self.batch_id, start=start, end=end, script=script, punctuation=punctuation)
             if not messagebox.askyesno('送出校對範圍',
                     f'服務：Gemini\n模型：{scope["model"]}\n校對稿 v{scope["revision"]}\n'
                     f'範圍：第 {start+1}～{end} 字元，共 {scope["characters"]:,} 字元\n'
-                    '只送上述文字；不傳 PDF 或素材。只修轉錄、標點及明顯斷行，疑點保留。\n送出並產生候選？', parent=self.root):
+                    + describe(scope['normalization']) + '\n只送上述文字；不傳 PDF 或素材。\n字體／標點統一納入候選，仍須採用才改稿。送出？', parent=self.root):
                 return
-            job = self.flow.start_gemini_review(self.batch_id, start=start, end=end)
+            job = self.flow.start_gemini_review(self.batch_id, start=start, end=end, script=script, punctuation=punctuation)
             self.gemini_dialog = ReviewDialog(self, job=job)
         except ProjectError as e:
             self.report(e)

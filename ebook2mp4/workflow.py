@@ -336,18 +336,20 @@ class ProjectWorkflow:
         return ModelInstall(language)
 
     def start_pdf_extraction(self, preview: PdfPreview, start: int, end: int, *,
-                             mode: str = 'text-layer', language: str = '繁中＋英文') -> PdfExtraction:
+                             mode: str = 'text-layer', language: str = '繁中＋英文', layout: str = 'block') -> PdfExtraction:
         from .pdf import PdfExtraction
         if self._pdf_job is not None:
             raise ProjectError('已有 PDF 擷取待完成或保存，請先完成或取消。')
         self._check_current()
         self._space(self.root, preview.size + 8192)
-        self._pdf_job = PdfExtraction(preview, start, end, mode=mode, language=language)
+        self._pdf_job = PdfExtraction(preview, start, end, mode=mode, language=language, layout=layout)
         return self._pdf_job
 
     def start_pdf_retry(self, batch_id: str, *, pages: list[int] | None = None,
                         failed_only: bool = False, language: str = '繁中＋英文',
-                        rotation: int = 0) -> PdfExtraction:
+                        rotation: int = 0, layout: str = 'block',
+                        region: tuple[float, float, float, float] | None = None,
+                        text_range: tuple[int, int] | None = None) -> PdfExtraction:
         """Retry selected physical pages into a candidate; never mutate the source batch."""
         from .pdf import PdfExtraction, PdfPreview
         if self._pdf_job is not None:
@@ -372,7 +374,7 @@ class ProjectWorkflow:
         self._pdf_job = PdfExtraction(preview, batch['pdf']['start'], batch['pdf']['end'],
                                       mode='ocr', language=language, numbers=numbers, rotation=rotation,
                                       base_pages=original, base_issues=issues,
-                                      source_batch=batch_id)
+                                      source_batch=batch_id, layout=layout, region=region, text_range=text_range)
         return self._pdf_job
 
     def pdf_source_preview(self, batch_id: str) -> PdfPreview:
@@ -390,7 +392,8 @@ class ProjectWorkflow:
         pages = {p['number']: p for p in job.base_pages or []}
         for number in job.numbers:
             pages[number] = completed.get(number, dict(number=number,
-                method='ocr' if job.mode == 'ocr' else 'text-layer', text='', status='cancelled',
+                method='ocr' if job.mode == 'ocr' else 'text-layer',
+                text=pages.get(number, {}).get('text', '') if job.region is not None else '', status='cancelled',
                 error='擷取已取消，此頁尚未處理完成。', settings=job.settings.copy()))
         return [pages[n] for n in range(job.start, job.end + 1)]
 
@@ -677,21 +680,25 @@ class ProjectWorkflow:
             raise ProjectError('請先設定 Gemini API Key；仍可人工校對。')
         return ReviewJob(settings['key'], dict(model=settings['model'], paragraphs=[dict(original='連線測試。')]))
 
-    def gemini_scope(self, batch_id: str, *, start: int = 0, end: int | None = None) -> dict:
+    def gemini_scope(self, batch_id: str, *, start: int = 0, end: int | None = None,
+                     script: str = 'auto', punctuation: bool = True) -> dict:
+        from .proofreading import profile
         _, text = self.texts(batch_id)
         end = len(text) if end is None else end
         if type(start) is not int or type(end) is not int or not 0 <= start < end <= len(text) or not text[start:end].strip():
             raise ProjectError('請選取有效且非空白的校對範圍。')
         settings = self.gemini_settings()
         return dict(service='Gemini', model=settings['model'], start=start, end=end,
-                    characters=end-start, revision=self._batch(batch_id)['revision'])
+                    characters=end-start, revision=self._batch(batch_id)['revision'],
+                    normalization=profile(text, script, punctuation))
 
-    def start_gemini_review(self, batch_id: str, *, start: int = 0, end: int | None = None):
+    def start_gemini_review(self, batch_id: str, *, start: int = 0, end: int | None = None,
+                           script: str = 'auto', punctuation: bool = True):
         from .gemini import load_settings, ReviewJob
         import re
         if self._gemini_job is not None:
             raise ProjectError('請先保存前次 Gemini 結果。')
-        scope = self.gemini_scope(batch_id, start=start, end=end)
+        scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
         settings = load_settings()
         if not settings['key']:
             raise ProjectError('請先設定 Gemini API Key；仍可人工校對。')

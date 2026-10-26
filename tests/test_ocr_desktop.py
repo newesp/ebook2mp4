@@ -35,7 +35,7 @@ class OcrDesktopJourney(unittest.TestCase):
                         app.import_pdf()
                     dialog = app.pdf_dialog
                     self.until(lambda: dialog.ready)
-                    self.assertIn('6,479,730', dialog.model_info.cget('text'))
+                    self.assertIn('8,948,886', dialog.model_info.cget('text'))
                     dialog.language.set('簡中＋英文')
                     dialog.ocr_changed()
                     dialog.language.set('英文')

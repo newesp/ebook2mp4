@@ -10,11 +10,15 @@ import threading
 import urllib.request
 import subprocess
 import time
+import csv
+from io import StringIO, BytesIO
+import re
 
 from .workflow import ProjectError
 
 
-LANGUAGES = {'繁中＋英文': 'chi_tra+eng', '簡中＋英文': 'chi_sim+eng', '英文': 'eng'}
+LANGUAGES = {'繁中＋英文': 'chi_tra+eng', '簡中＋英文': 'chi_sim+eng', '英文': 'eng',
+             '自動中英': 'chi_sim+chi_tra+eng'}
 # Official tessdata_fast 4.1.0, pinned to its commit (Apache-2.0).
 MODEL_REVISION = '65727574dfcd264acbb0c3e07860e4e9e9b22185'
 MODELS = {
@@ -137,18 +141,21 @@ class OcrCancelled(Exception):
 
 
 def recognize(image: bytes, language: str, cancelled: threading.Event) -> str:
+    return recognize_page(image, language, cancelled)['text']
+
+
+def _execute(image: bytes, codes: str, cancelled: threading.Event, *, psm: int, tsv: bool, deadline: float) -> str:
     with tempfile.TemporaryDirectory(prefix='ebook2mp4-ocr-') as directory:
         source = Path(directory) / 'page.png'
         source.write_bytes(image)
         command = [str(executable()), str(source), 'stdout', '--tessdata-dir', str(model_home()),
-                   '-l', LANGUAGES[language], '--oem', '1', '--psm', '6', '--dpi', '300']
+                   '-l', codes, '--oem', '1', '--psm', str(psm), '--dpi', '300'] + (['-c', 'tessedit_create_tsv=1'] if tsv else [])
         try:
             process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                        creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
         except OSError:
             raise ProjectError('OCR 引擎無法啟動，請重新安裝完整程式；TXT 仍可使用。') from None
         try:
-            deadline = time.monotonic() + 120
             while True:
                 if cancelled.is_set():
                     raise OcrCancelled()
@@ -171,3 +178,117 @@ def recognize(image: bytes, language: str, cancelled: threading.Event) -> str:
             if process.poll() is None:
                 process.kill()
             process.communicate()
+
+
+def suspicious_lines(text: str) -> list[str]:
+    han = sum('\u3400' <= c <= '\u9fff' for c in text)
+    if han < 8:
+        return []
+    return [line.strip() for line in text.splitlines() if re.fullmatch(
+        r'\s*(?:\d+[.、]\s*)?(?:[A-Za-z]{1,4}\s+){1,}[A-Za-z]{1,4}[.!?]?\s*', line)]
+
+
+def _table_result(table: str, *, region=None, size=None) -> dict:
+    lines: dict[tuple[str, ...], dict] = {}
+    weight = confidence = 0.0
+    for row in csv.DictReader(StringIO(table), delimiter='\t'):
+        if row.get('level') != '5' or not row.get('text', '').strip():
+            continue
+        if region is not None:
+            center_x = (int(row['left'])+int(row['width'])/2)/size[0]
+            center_y = (int(row['top'])+int(row['height'])/2)/size[1]
+            if not region[0] <= center_x <= region[2] or not region[1] <= center_y <= region[3]:
+                continue
+        token = row['text'].strip()
+        key = tuple(row[k] for k in ('block_num', 'par_num', 'line_num'))
+        token_weight = min(len(token), 32)
+        left, top, width, height = (int(row[k]) for k in ('left', 'top', 'width', 'height'))
+        line = lines.setdefault(key, dict(words=[], weight=0, total=0, box=[left, top, left+width, top+height]))
+        line['words'].append(token)
+        line['weight'] += token_weight
+        line['total'] += max(0, float(row['conf'])) * token_weight
+        box = line['box']
+        line['box'] = [min(box[0], left), min(box[1], top), max(box[2], left+width), max(box[3], top+height)]
+        weight += token_weight
+        confidence += max(0, float(row['conf'])) * token_weight
+    details = [dict(text=' '.join(line['words']), confidence=line['total']/line['weight'], box=line['box'])
+               for line in lines.values()]
+    text = '\n'.join(line['text'] for line in details)
+    suspicious = suspicious_lines(text)
+    mean = confidence / weight if weight else 0
+    return dict(text=text, confidence=round(mean, 2), suspicious_lines=suspicious,
+                score=mean - min(20, len(suspicious)*5), lines=details)
+
+
+def _combine_layouts(best: dict, choices: list[dict]) -> None:
+    """Use alternate layout only for a matching, substantially more confident line."""
+    count = 0
+    for line in best['lines']:
+        if line['confidence'] >= 85:
+            continue
+        x0, y0, x1, y1 = line['box']
+        alternatives = []
+        for candidate in choices:
+            if candidate is best or candidate['selected_language'] != best['selected_language']:
+                continue
+            for other in candidate['lines']:
+                a, b, c, d = other['box']
+                if (min(y1, d)-max(y0, b) >= .65*max(y1-y0, d-b)
+                        and min(x1, c)-max(x0, a) >= .65*max(x1-x0, c-a)
+                        and other['confidence'] >= line['confidence']+10):
+                    alternatives.append(other)
+        if alternatives:
+            selected = max(alternatives, key=lambda item: item['confidence'])
+            line.update(selected)
+            count += 1
+    best['text'] = '\n'.join(line['text'] for line in best['lines'])
+    weights = sum(len(line['text']) for line in best['lines'])
+    best['confidence'] = round(sum(line['confidence']*len(line['text']) for line in best['lines'])/weights, 2) if weights else 0
+    best['suspicious_lines'] = suspicious_lines(best['text'])
+    best['layout_fallbacks'] = count
+
+
+def recognize_page(image: bytes, language: str, cancelled: threading.Event, *, layout='block', region=None) -> dict:
+    psm = {'block': 6, 'auto': 3, 'line': 7}[layout]
+    full_image, size = image, None
+    if region is not None:
+        from PIL import Image, ImageOps
+        with Image.open(BytesIO(image)) as original:
+            size = original.size
+            x0, y0, x1, y1 = region
+            bounds = (int(x0*original.width), int(y0*original.height), int(x1*original.width), int(y1*original.height))
+            with original.crop(bounds) as crop, ImageOps.expand(crop, border=20, fill='white') as padded, BytesIO() as output:
+                padded.save(output, format='PNG')
+                image = output.getvalue()
+    deadline = time.monotonic() + 120
+    if language != '自動中英' and layout == 'block':
+        text = _execute(image, LANGUAGES[language], cancelled, psm=psm, tsv=False, deadline=deadline)
+        return dict(text=text, selected_language=LANGUAGES[language], psm=psm,
+                    suspicious_lines=suspicious_lines(text))
+    languages = ['chi_sim+eng', 'chi_tra+eng'] if language == '自動中英' else [LANGUAGES[language]]
+    choices = []
+    for codes in languages:
+        if cancelled.is_set():
+            raise OcrCancelled()
+        candidate = _table_result(_execute(image, codes, cancelled, psm=psm, tsv=True, deadline=deadline))
+        candidate.update(selected_language=codes, psm=psm, selected_source='crop' if region else 'page')
+        choices.append(candidate)
+        if layout == 'auto' and region is None:
+            block = _table_result(_execute(full_image, codes, cancelled, psm=6, tsv=True, deadline=deadline))
+            block.update(selected_language=codes, psm=6, selected_source='page')
+            choices.append(block)
+        if region is not None:
+            for context_psm in (3, 6):
+                contextual = _table_result(_execute(full_image, codes, cancelled, psm=context_psm, tsv=True, deadline=deadline),
+                                           region=region, size=size)
+                contextual.update(selected_language=codes, psm=context_psm, selected_source='page-context')
+                choices.append(contextual)
+    best = max(choices, key=lambda item: item['score'])
+    if cancelled.is_set():
+        raise OcrCancelled()
+    if layout == 'auto' and region is None:
+        _combine_layouts(best, choices)
+    best['alternatives'] = [dict(language=c['selected_language'], source=c['selected_source'], confidence=c['confidence']) for c in choices]
+    best.pop('score')
+    best.pop('lines')
+    return best

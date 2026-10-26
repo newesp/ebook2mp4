@@ -55,19 +55,25 @@ class PdfDialog(tk.Toplevel):
         self.extract_button = ttk.Button(options, text='擷取為新批次', command=self.extract, state='disabled', style='Primary.TButton')
         self.extract_button.grid(row=0, column=3, padx=8)
         self.mode = tk.StringVar(value='自動')
-        self.language = tk.StringVar(value='繁中＋英文')
+        self.language = tk.StringVar(value='自動中英')
+        self.layout = tk.StringVar(value='自動版面')
+        self.region = None
         self.ocr_options = ttk.Frame(options)
         self.ocr_options.grid(row=1, column=0, columnspan=4, sticky='ew', pady=(8, 0))
         self.mode_select = ttk.Combobox(self.ocr_options, textvariable=self.mode,
                                        values=['自動', '文字層', '全部強制 OCR'], state='readonly', width=15)
         self.mode_select.grid(row=0, column=0, sticky='w')
         self.language_select = ttk.Combobox(self.ocr_options, textvariable=self.language,
-                                           values=['繁中＋英文', '簡中＋英文', '英文'], state='readonly', width=13)
+                                           values=['自動中英', '繁中＋英文', '簡中＋英文', '英文'], state='readonly', width=13)
         self.language_select.grid(row=0, column=1, padx=8)
         self.install_button = ttk.Button(self.ocr_options, text='下載／安裝模型', command=self.install_models, state='disabled')
         self.install_button.grid(row=0, column=2, sticky='w')
         self.model_info = ttk.Label(self.ocr_options, text='OCR 語言獨立於語音；全部強制 OCR 僅處理所選頁範圍。', wraplength=660)
         self.model_info.grid(row=1, column=0, columnspan=3, sticky='w', pady=4)
+        self.layout_select = ttk.Combobox(self.ocr_options, textvariable=self.layout,
+                                         values=['自動版面', '單一區塊', '單行標題'], state='readonly', width=15)
+        self.layout_select.grid(row=2, column=0, sticky='w', pady=4)
+        ttk.Label(self.ocr_options, text='框選頁圖＋反白錯字，可只替換所選逐頁原文。', wraplength=430).grid(row=2, column=1, columnspan=2, sticky='w')
         self.mode_select.bind('<<ComboboxSelected>>', lambda e: self.ocr_changed())
         self.language_select.bind('<<ComboboxSelected>>', lambda e: self.ocr_changed())
         if batch_id:
@@ -104,6 +110,8 @@ class PdfDialog(tk.Toplevel):
         self.adopt_page = tk.BooleanVar(value=True)
         self.adopt_check = ttk.Checkbutton(self.retry_options, text='採用本頁候選', variable=self.adopt_page, command=self.choose_page)
         self.adopt_check.grid(row=1, column=3)
+        self.region_button = ttk.Button(self.retry_options, text='框選區域重辨（替換反白原文）', command=self.retry_region)
+        self.region_button.grid(row=2, column=0, columnspan=4, sticky='w', pady=3)
         if not batch_id:
             self.retry_options.grid_remove()
             self.page_list.grid_remove()
@@ -120,6 +128,9 @@ class PdfDialog(tk.Toplevel):
         horizontal = ttk.Scrollbar(image_frame, orient='horizontal', command=self.canvas.xview)
         horizontal.grid(row=1, column=0, sticky='ew')
         self.canvas.configure(xscrollcommand=horizontal.set)
+        self.canvas.bind('<ButtonPress-1>', self.begin_region)
+        self.canvas.bind('<B1-Motion>', self.drag_region)
+        self.canvas.bind('<ButtonRelease-1>', self.end_region)
         from .desktop import text_pane
         self.text_tabs = ttk.Notebook(panes)
         text_frame, self.text = text_pane(self.text_tabs, '逐頁擷取原稿／候選 · 唯讀')
@@ -220,7 +231,10 @@ class PdfDialog(tk.Toplevel):
                     disposition = ''
                 states = dict(success='成功', pending='待檢查', failed='擷取失敗', cancelled='已取消',
                               skipped='已明確略過', resolved='已處理')
-                method = 'OCR ' + selected['settings'].get('language', '') if selected['method'] == 'ocr' else '文字層'
+                method = ('OCR ' + selected['settings'].get('selected_language', selected['settings'].get('language', ''))
+                          if selected['method'] == 'ocr' else '文字層')
+                if 'confidence' in selected['settings']:
+                    method += f' · 信心指標 {selected["settings"]["confidence"]:.1f}'
                 rotation = selected['settings'].get('rotation', 0)
                 self.page_info.configure(text=f'第 {number} 頁 · {method} · {states[selected["status"]]} · {rotation}° {states.get(disposition, "")}')
                 self.progress.configure(text=selected['error'])
@@ -251,6 +265,51 @@ class PdfDialog(tk.Toplevel):
         self.canvas.delete('all')
         self.canvas.create_image(0, 0, image=self.image, anchor='nw')
         self.canvas.configure(scrollregion=self.canvas.bbox('all'))
+        self.region = None
+        if hasattr(self, 'region_origin'):
+            del self.region_origin
+        self.region_button.configure(text='框選區域重辨（替換反白原文）')
+
+    def begin_region(self, event):
+        if not self.ready or not self.batch_id or not self.image or self.pending_job:
+            return
+        self.region_origin = (max(0, min(self.image.width(), self.canvas.canvasx(event.x))),
+                              max(0, min(self.image.height(), self.canvas.canvasy(event.y))))
+        self.canvas.delete('region')
+
+    def drag_region(self, event):
+        if not hasattr(self, 'region_origin') or not self.ready:
+            return
+        x, y = self.region_origin
+        self.canvas.delete('region')
+        self.canvas.create_rectangle(x, y, self.canvas.canvasx(event.x), self.canvas.canvasy(event.y),
+                                     outline='#315d43', width=2, tags='region')
+
+    def end_region(self, event):
+        if not hasattr(self, 'region_origin') or not self.ready or self.image is None:
+            return
+        x, y = self.region_origin
+        del self.region_origin
+        right = max(0, min(self.image.width(), self.canvas.canvasx(event.x)))
+        bottom = max(0, min(self.image.height(), self.canvas.canvasy(event.y)))
+        x0, x1 = sorted((x, right))
+        y0, y1 = sorted((y, bottom))
+        if x1-x0 < 5 or y1-y0 < 5:
+            self.region = None
+            self.canvas.delete('region')
+            self.region_button.configure(text='框選區域重辨（替換反白原文）')
+            return
+        self.region = (x0/self.image.width(), y0/self.image.height(), x1/self.image.width(), y1/self.image.height())
+        self.region_button.configure(text='重辨框選區域（先反白要替換的原文）')
+
+    def retry_region(self):
+        ranges = self.text.tag_ranges('sel')
+        if self.region is None or not ranges:
+            self.progress.configure(text='請先在左側頁圖拖曳框選，並在「本次文字」反白要替換的錯字段落。')
+            return
+        begin = len(self.text.get('1.0', ranges[0]))
+        end = len(self.text.get('1.0', ranges[1]))
+        self.retry_page(region=self.region, text_range=(begin, end))
 
     def extract(self):
         if not self.ready or not self.preview or self.job or self.pending_job or self.model_job:
@@ -258,7 +317,7 @@ class PdfDialog(tk.Toplevel):
         try:
             self.job = self.flow.start_pdf_extraction(self.preview, int(self.start.get()), int(self.end.get()),
                                                        mode={'全部強制 OCR': 'ocr', '文字層': 'text-layer', '自動': 'auto'}[self.mode.get()],
-                                                       language=self.language.get())
+                                                       language=self.language.get(), layout=self.layout_code())
             self.ocr_controls(False)
             self.ready = False
             self.extract_button.configure(state='disabled')
@@ -286,17 +345,22 @@ class PdfDialog(tk.Toplevel):
             self.view()
 
     def retry_controls(self, enabled):
-        for widget in (self.retry_page_button, self.failed_button, self.retain_button, self.skip_button):
+        for widget in (self.retry_page_button, self.failed_button, self.retain_button, self.skip_button, self.region_button):
             widget.configure(state='normal' if enabled and self.batch_id else 'disabled')
         self.rotation_select.configure(state='readonly' if enabled else 'disabled')
 
-    def retry_page(self, *, failed_only=False):
+    def layout_code(self):
+        return {'自動版面': 'auto', '單一區塊': 'block', '單行標題': 'line'}[self.layout.get()]
+
+    def retry_page(self, *, failed_only=False, region=None, text_range=None):
         if not self.ready or not self.batch_id or self.pending_job or self.job or self.model_job:
             return
         try:
+            rotation = (next(p for p in self.pages if p['number'] == int(self.page.get()))['settings'].get('rotation', 0)
+                        if region else int(self.rotation.get()))
             self.job = self.flow.start_pdf_retry(self.batch_id, pages=None if failed_only else [int(self.page.get())],
                                                  failed_only=failed_only, language=self.language.get(),
-                                                 rotation=int(self.rotation.get()))
+                                                 rotation=rotation, layout=self.layout_code(), region=region, text_range=text_range)
             self.ready = False
             self.retry_controls(False)
             self.ocr_controls(False)
@@ -337,6 +401,7 @@ class PdfDialog(tk.Toplevel):
     def ocr_controls(self, enabled):
         self.mode_select.configure(state='readonly' if enabled else 'disabled')
         self.language_select.configure(state='readonly' if enabled else 'disabled')
+        self.layout_select.configure(state='readonly' if enabled else 'disabled')
         self.install_button.configure(state='normal' if enabled else 'disabled')
 
     def ocr_changed(self):

@@ -162,8 +162,10 @@ class ReviewDialog(tk.Toplevel):
         self.review = self.reviews[index] if index >= 0 else None
         review = self.review
         if review:
+            from .proofreading import describe
             self.info.configure(text=f'Gemini · {review["model"]} · 原校對稿 v{review["revision"]} · '
                 f'第 {review["start"]+1}～{review["end"]} 字元\n' +
+                (describe(review['normalization'])+'\n' if 'normalization' in review else '') +
                 ('原稿版本已變更；請對照目前編輯稿，重新送出校對。舊候選不可覆蓋。' if review['stale'] else '只採用明確確認的段落；採用後須重新確認朗讀稿。'))
             labels = {'pending': '待確認', 'accepted': '已採用', 'rejected': '已拒絕'}
             self.paragraph.configure(values=[f'第 {i+1} 段 · {labels[p["decision"]]}' for i, p in enumerate(review['paragraphs'])])
