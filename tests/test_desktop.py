@@ -87,6 +87,39 @@ class DesktopJourney(unittest.TestCase):
         self.assertTrue(self.app.remove_pdf_button.instate(['disabled']))
         self.assertEqual(ProjectWorkflow.open(flow.root).state['batches'], [])
 
+    def test_reading_history_delete_cancel_failure_and_unsaved_draft(self):
+        self.create_import()
+        flow, batch = self.app.flow, self.app.batch_id
+        snapshot = flow.confirm_reading(batch)
+        self.app.refresh()
+        self.app.editor.insert('end', '尚未儲存')
+        self.root.update()
+        pending = self.app.current_text
+        self.app.versions_button.invoke()
+        self.root.update()
+        button = next(w for w in descendants(self.root) if w.winfo_class() == 'TButton' and w.cget('text') == '刪除所選朗讀稿')
+        dialog = button.winfo_toplevel()
+        dialog.geometry('600x420')
+        self.root.update()
+        for widget in (button, next(w for w in descendants(dialog) if w.winfo_class() == 'TButton' and w.cget('text') == '關閉')):
+            self.assertGreaterEqual(widget.winfo_rootx(), dialog.winfo_rootx())
+            self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(), dialog.winfo_rootx()+dialog.winfo_width())
+            self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(), dialog.winfo_rooty()+dialog.winfo_height())
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=False):
+            button.invoke()
+        self.assertEqual(flow.reading_text(batch, snapshot['id']), '第一章。\n\nHello!')
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True), \
+                patch('os.replace', side_effect=OSError('disk full')), \
+                patch('ebook2mp4.desktop.messagebox.showerror'):
+            button.invoke()
+        self.assertEqual(len(flow.state['batches'][0]['readings']), 1)
+        with patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True):
+            button.invoke()
+        self.assertEqual(self.app.current_text, pending)
+        self.assertTrue(self.app.dirty)
+        self.assertEqual(ProjectWorkflow.open(flow.root).state['batches'][0]['readings'], [])
+        self.assertTrue(button.instate(['disabled']))
+
     def test_missing_pdf_comparison_shows_error_and_releases_modal_on_close(self):
         from test_pdf import pdf_bytes
         flow = ProjectWorkflow.create(self.directory / 'missing-pdf', 'Book')

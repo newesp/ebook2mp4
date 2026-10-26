@@ -752,7 +752,7 @@ class Workbench(ttk.Frame):
             messagebox.showinfo('保存版本與副本', '尚無已確認的朗讀稿或重載保留的未存稿副本。', parent=self.root)
             return
         dialog = tk.Toplevel(self.root)
-        dialog.title('保存版本與副本 · 唯讀')
+        dialog.title('保存版本與副本')
         dialog.geometry('760x580')
         dialog.minsize(600, 420)
         dialog.columnconfigure(0, weight=1)
@@ -764,8 +764,20 @@ class Workbench(ttk.Frame):
         dialog.bind('<Configure>', lambda e: details.configure(wraplength=max(200, dialog.winfo_width() - 40)))
         frame, text = text_pane(dialog, '保存文字 · 可選取複製')
         frame.grid(row=2, column=0, sticky='nsew')
+        actions = ttk.Frame(dialog, padding=12)
+        actions.grid(row=3, column=0, sticky='ew')
+        actions.columnconfigure(0, weight=1)
+        delete_button = ttk.Button(actions, text='刪除所選朗讀稿', style='Destructive.TButton')
+        delete_button.grid(row=0, column=0, sticky='w')
+        ttk.Button(actions, text='關閉', command=dialog.destroy).grid(row=0, column=1, sticky='e')
         def select(_event=None):
+            if not versions or selector.current() < 0:
+                self.fill(text, '')
+                details.configure(text='已無保存版本；目前校對稿與來源仍保留。')
+                delete_button.configure(state='disabled')
+                return
             _, ref, reading = versions[selector.current()]
+            delete_button.configure(state='normal' if reading else 'disabled')
             try:
                 content = (flow.reading_text(batch_id, ref['id']) if reading
                            else flow.draft_copy_text(batch_id, ref['id']))
@@ -774,6 +786,41 @@ class Workbench(ttk.Frame):
             except ProjectError as e:
                 self.fill(text, '')
                 details.configure(text=str(e))
+        def delete():
+            index = selector.current()
+            if index < 0 or not versions or not versions[index][2]:
+                return
+            label, ref, _reading = versions[index]
+            selected_batch = next((b for b in flow.state['batches'] if b['id'] == batch_id), None)
+            if selected_batch is None:
+                details.configure(text='原批次已移除，請關閉此版本視窗。')
+                delete_button.configure(state='disabled')
+                return
+            current = selected_batch.get('current_reading')
+            warning = '\n此版本是目前確認的朗讀稿；刪除後須重新確認朗讀稿。' if current == ref['id'] else ''
+            if not messagebox.askyesno('刪除朗讀稿版本',
+                    f'刪除以下已確認的朗讀稿歷史版本？\n{label}\n'
+                    '此操作無法復原。校對稿、原始來源及其他版本保留。' + warning,
+                    parent=dialog, icon='warning', default='no'):
+                return
+            try:
+                cleanup_warning = flow.delete_reading(batch_id, ref['id'])
+            except ProjectError as e:
+                self.report(e)
+                return
+            versions.pop(index)
+            selector.configure(values=[v[0] for v in versions])
+            if versions:
+                selector.current(min(index, len(versions) - 1))
+            else:
+                selector.set('')
+            select()
+            if cleanup_warning:
+                details.configure(text=cleanup_warning)
+            if self.flow is flow and self.batch_id == batch_id:
+                self.update_stats()
+            self.status.configure(text=cleanup_warning or '已刪除所選朗讀稿版本；校對稿與來源保留。')
+        delete_button.configure(command=delete)
         selector.bind('<<ComboboxSelected>>', select)
         selector.current(len(versions) - 1)
         select()

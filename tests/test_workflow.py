@@ -45,6 +45,55 @@ class ProjectJourney(unittest.TestCase):
         self.assertNotEqual(fresh['id'], old['id'])
         self.assertEqual(reopened.reading_text(first), '新的校對稿。')
 
+    def test_delete_reading_version_keeps_draft_and_other_confirmations(self):
+        flow, first = self.imported()
+        second = flow.import_txt(flow.inspect_txt(self.source))
+        old = flow.confirm_reading(first)
+        current = flow.confirm_reading(first)
+        other = flow.confirm_reading(second)
+        self.assertEqual(flow.delete_reading(first, old['id']), '')
+        reopened = ProjectWorkflow.open(flow.root)
+        with self.assertRaises(ProjectError):
+            reopened.reading_text(first, old['id'])
+        self.assertEqual(reopened.state['batches'][0]['current_reading'], current['id'])
+        reopened.delete_reading(first, current['id'])
+        reopened = ProjectWorkflow.open(flow.root)
+        self.assertEqual(reopened.state['batches'][0]['readings'], [])
+        self.assertIsNone(reopened.state['batches'][0]['current_reading'])
+        self.assertEqual(reopened.texts(first), (self.text, self.text))
+        self.assertEqual(reopened.state['batches'][1]['current_reading'], other['id'])
+        self.assertEqual(reopened.reading_text(second), self.text)
+        self.assertFalse((flow.root / old['path']).exists())
+        self.assertFalse((flow.root / current['path']).exists())
+
+    def test_delete_reading_storage_failure_keeps_version_and_can_retry(self):
+        flow, batch = self.imported()
+        snapshot = flow.confirm_reading(batch)
+        with patch('os.replace', side_effect=OSError('disk full')):
+            with self.assertRaises(ProjectError):
+                flow.delete_reading(batch, snapshot['id'])
+        self.assertEqual(ProjectWorkflow.open(flow.root).reading_text(batch), self.text)
+        flow.delete_reading(batch, snapshot['id'])
+        with self.assertRaises(ProjectError):
+            flow.delete_reading(batch, snapshot['id'])
+
+    def test_delete_reading_locked_file_reports_retained_file_after_version_removal(self):
+        flow, batch = self.imported()
+        snapshot = flow.confirm_reading(batch)
+        locked = flow.root / snapshot['path']
+        unlink = Path.unlink
+        def locked_unlink(path, *args, **kwargs):
+            if path == locked:
+                raise PermissionError('in use')
+            return unlink(path, *args, **kwargs)
+        with patch.object(Path, 'unlink', locked_unlink):
+            warning = flow.delete_reading(batch, snapshot['id'])
+        self.assertIn('版本已從專案刪除', warning)
+        self.assertTrue(locked.exists())
+        reopened = ProjectWorkflow.open(flow.root)
+        self.assertEqual(reopened.state['batches'][0]['readings'], [])
+        self.assertIsNone(reopened.state['batches'][0]['current_reading'])
+
     def test_export_external_reload_conflict_copy_and_reconfirm(self):
         flow, batch = self.imported()
         snapshot = flow.confirm_reading(batch)

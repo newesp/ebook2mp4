@@ -558,6 +558,33 @@ class ProjectWorkflow:
         self._commit(manifest, [(snapshot['path'], content)])
         return deepcopy(snapshot)
 
+    def delete_reading(self, batch_id: str, snapshot_id: str) -> str:
+        """Commit version removal first; never delete content on a failed index write."""
+        batch = self._batch(batch_id)
+        snapshot = next((s for s in batch.get('readings', []) if s['id'] == snapshot_id), None)
+        if snapshot is None:
+            raise ProjectError('找不到要刪除的朗讀稿版本，請重新開啟版本清單。')
+        path = self._path(snapshot['path'])
+        manifest = self.state
+        changed = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        changed['readings'] = [s for s in changed['readings'] if s['id'] != snapshot_id]
+        if changed.get('current_reading') == snapshot_id:
+            changed['current_reading'] = None
+        # A shared file must survive while any other project record still uses it.
+        def referenced(value):
+            if isinstance(value, dict):
+                return any((key == 'path' and self._path(item) == path) or referenced(item)
+                           for key, item in value.items())
+            return isinstance(value, list) and any(referenced(item) for item in value)
+        shared = referenced(manifest)
+        self._commit(manifest, [])
+        if not shared:
+            try:
+                path.unlink(missing_ok=True)
+            except OSError:
+                return f'版本已從專案刪除，但內容檔無法移除：{snapshot["path"]}。請解除檔案占用後再手動清理。'
+        return ''
+
     def reading_text(self, batch_id: str, snapshot_id: str | None = None) -> str:
         if snapshot_id is None:
             try:
