@@ -21,6 +21,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .pdf import PdfPreview, PdfExtraction
     from .gemini import ReviewJob
+    from .voice import VoiceJob
 
 
 class ProjectError(Exception):
@@ -88,6 +89,7 @@ class ProjectWorkflow:
         self._committed = committed
         self._pdf_job: PdfExtraction | None = None
         self._gemini_job: ReviewJob | None = None
+        self._voice_job: VoiceJob | None = None
 
     @property
     def state(self) -> dict:
@@ -243,6 +245,10 @@ class ProjectWorkflow:
 
     def _commit(self, manifest: dict, files: list[tuple[str, bytes]]):
         """Single-writer commit. Content paths are unique to this attempt."""
+        old_ids = {b['id'] for b in self._manifest['batches']}
+        for batch in manifest['batches']:
+            if batch['id'] not in old_ids:
+                batch['voice_settings'] = self.voice_settings()
         lock = None
         try:
             lock = os.open(self.root / '.write.lock', os.O_CREAT | os.O_EXCL | os.O_WRONLY)
@@ -661,6 +667,101 @@ class ProjectWorkflow:
             if copy['id'] == copy_id:
                 return self._read(copy).decode('utf-8')
         raise ProjectError('找不到保留的未存稿副本。')
+
+    @staticmethod
+    def voice_catalog() -> dict:
+        from .voice import catalog
+        return catalog()
+
+    @staticmethod
+    def start_voice_refresh():
+        from .voice import refresh
+        return refresh()
+
+    def voice_settings(self, batch_id: str | None = None) -> dict:
+        from .voice import DEFAULT_SETTINGS, settings
+        owner = self._batch(batch_id) if batch_id is not None else self._manifest
+        return settings(owner.get('voice_settings', DEFAULT_SETTINGS))
+
+    def save_voice_settings(self, voice: str, rate: str = '+0%', *, batch_id: str | None = None):
+        from .voice import require_voice, settings
+        value = self.voice_settings(batch_id)
+        value.update(voice=voice, rate=rate)
+        value = settings(value)
+        require_voice(voice)
+        manifest = self.state
+        owner = next(b for b in manifest['batches'] if b['id'] == batch_id) if batch_id is not None else manifest
+        owner['voice_settings'] = value
+        self._commit(manifest, [])
+
+    def start_voice_preview(self, batch_id: str, *, start: int | None = None, end: int | None = None,
+                            text: str | None = None):
+        from .voice import VoiceJob, EXAMPLE, require_voice
+        from .voice_media import ffmpeg, synthesize
+        if self._voice_job is not None:
+            raise ProjectError('已有試聽工作待完成，請先取消或保存。')
+        self._check_current()
+        batch = self._batch(batch_id)
+        value = self.voice_settings(batch_id)
+        require_voice(value['voice'])
+        tool = ffmpeg()
+        if start is None and end is None and text is None:
+            selected, source = EXAMPLE, 'example'
+        else:
+            draft = self.texts(batch_id)[1] if text is None else text
+            if (not isinstance(draft, str) or type(start) is not int or type(end) is not int
+                    or not 0 <= start < end <= len(draft)):
+                raise ProjectError('請在校對稿選取要試聽的文字範圍。')
+            selected, source = draft[start:end], 'selection'
+        if not selected.strip() or len(selected) > 3000:
+            raise ProjectError('試聽請選擇 1～3,000 字元；超過時請縮短範圍，不會自動截斷。')
+        self._space(self.root, 25_000_000)
+        snapshot = dict(id=uuid.uuid4().hex, batch_id=batch_id, created_at=now(), text=selected,
+                        source=source, start=start, end=end, revision=batch['revision'], settings=value)
+        async def operation():
+            audio = await synthesize(selected, value, tool)
+            return snapshot, audio
+        self._voice_job = VoiceJob(operation)
+        return self._voice_job
+
+    def finish_voice_preview(self, job: VoiceJob) -> dict:
+        if job is not self._voice_job or not job.wait(0):
+            raise ProjectError('請等待所屬試聽工作停止。')
+        snapshot, audio = job.result
+        batch_id = snapshot['batch_id']
+        self._batch(batch_id)
+        path = f'batches/{batch_id}/voice-preview-{snapshot["id"]}.mp3'
+        snapshot['audio'] = dict(path=path, sha256=digest(audio))
+        manifest = self.state
+        next(b for b in manifest['batches'] if b['id'] == batch_id)['voice_preview'] = snapshot
+        self._commit(manifest, [(path, audio)])
+        self._voice_job = None
+        return deepcopy(snapshot)
+
+    def discard_voice_preview(self, job: VoiceJob):
+        if job is not self._voice_job or not job.wait(0):
+            raise ProjectError('請等待所屬試聽工作停止後再捨棄。')
+        self._voice_job = None
+
+    def voice_preview(self, batch_id: str) -> dict | None:
+        value = self._batch(batch_id).get('voice_preview')
+        if value is None:
+            return None
+        from .voice import settings
+        try:
+            settings(value['settings'])
+            if not isinstance(value['text'], str) or not value['text'].strip() or not value['id']:
+                raise ValueError()
+            self._read(value['audio'])
+            return deepcopy(value)
+        except (KeyError, TypeError, ValueError):
+            raise ProjectError('試聽記錄損壞，請重新試聽。') from None
+
+    def voice_preview_path(self, batch_id: str) -> Path:
+        preview = self.voice_preview(batch_id)
+        if preview is None:
+            raise ProjectError('尚無成功試聽，請先產生試聽音訊。')
+        return self.root / preview['audio']['path']
 
     @staticmethod
     def gemini_settings() -> dict:

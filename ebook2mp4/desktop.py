@@ -57,6 +57,7 @@ class Workbench(ttk.Frame):
         self.pdf_dialog = None
         self.gemini_dialog = None
         self.gemini_settings_dialog = None
+        self.voice_dialog = None
         self.pack(fill='both', expand=True)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(3, weight=1)
@@ -79,7 +80,7 @@ class Workbench(ttk.Frame):
         nav = ttk.Frame(self)
         nav.grid(row=1, column=0, sticky='ew')
         self.steps = []
-        for index, name in enumerate(('來源', '校對', '語音', '影片'), 1):
+        for index, name in enumerate(('來源', '校對', '語音試聽', '影片'), 1):
             nav.columnconfigure(index - 1, weight=1)
             button = ttk.Button(nav, text=f'{index}  {name}', command=partial(self.show_step, index))
             button.grid(row=0, column=index - 1, sticky='ew', padx=2)
@@ -291,11 +292,13 @@ class Workbench(ttk.Frame):
         self.root.title(('＊' if self.dirty else '') + (self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4')
 
     def show_step(self, n):
+        if n == 3:
+            self.voice_settings()
         self.step = n
         reasons = {
             1: '來源：新增 TXT 或 PDF 範圍批次。PDF 可選文字層或全部強制 OCR；OCR 語言模型可從預覽介面下載。',
             2: '校對：對照來源原文編輯，Ctrl+S 儲存。右側可搜尋取代、匯出／重載及明確確認朗讀稿；工具區可向下捲動。',
-            3: '語音尚未提供：T09 將接入語音服務。請先確認朗讀稿；可返回來源或校對繼續編輯。',
+            3: '語音：選擇音色、語速與短文試聽；正式批次 MP3／SRT 將於 T10 提供。',
             4: '影片尚未提供：需要有效音訊與視覺素材，T16 起提供製片。可返回校對，已輸入文字仍保留。',
         }
         self.notice.configure(text=reasons[n])
@@ -855,6 +858,9 @@ class Workbench(ttk.Frame):
                 self.report(ProjectError('無法開啟檔案總管。可從左側複製專案位置後手動開啟。'))
 
     def close(self):
+        if self.voice_dialog is not None and self.voice_dialog.winfo_exists():
+            self.voice_dialog.close()
+            return
         for dialog in (self.gemini_dialog, self.gemini_settings_dialog):
             if dialog is not None and dialog.winfo_exists():
                 dialog.close()
@@ -864,6 +870,16 @@ class Workbench(ttk.Frame):
             return
         if self.may_leave():
             self.root.destroy()
+
+    def voice_settings(self):
+        from .voice_desktop import VoiceDialog
+        if self.voice_dialog is not None:
+            self.voice_dialog.lift()
+            return
+        if not self.flow:
+            self.notice.configure(text='請先建立或開啟書籍專案，再設定語音。')
+            return
+        self.voice_dialog = VoiceDialog(self)
 
     def gemini_settings(self):
         from .gemini_desktop import SettingsDialog
