@@ -58,6 +58,7 @@ class Workbench(ttk.Frame):
         self.gemini_dialog = None
         self.gemini_settings_dialog = None
         self.voice_dialog = None
+        self.narration_dialog = None
         self.pack(fill='both', expand=True)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(3, weight=1)
@@ -298,7 +299,7 @@ class Workbench(ttk.Frame):
         reasons = {
             1: '來源：新增 TXT 或 PDF 範圍批次。PDF 可選文字層或全部強制 OCR；OCR 語言模型可從預覽介面下載。',
             2: '校對：對照來源原文編輯，Ctrl+S 儲存。右側可搜尋取代、匯出／重載及明確確認朗讀稿；工具區可向下捲動。',
-            3: '語音：選擇音色、語速與短文試聽；正式批次 MP3／SRT 將於 T10 提供。',
+            3: '語音：選擇音色、語速與短文試聽；或從已確認朗讀稿產生批次 MP3／SRT。',
             4: '影片尚未提供：需要有效音訊與視覺素材，T16 起提供製片。可返回校對，已輸入文字仍保留。',
         }
         self.notice.configure(text=reasons[n])
@@ -858,6 +859,9 @@ class Workbench(ttk.Frame):
                 self.report(ProjectError('無法開啟檔案總管。可從左側複製專案位置後手動開啟。'))
 
     def close(self):
+        if self.narration_dialog is not None and self.narration_dialog.winfo_exists():
+            self.narration_dialog.close()
+            return
         if self.voice_dialog is not None and self.voice_dialog.winfo_exists():
             self.voice_dialog.close()
             return
@@ -880,6 +884,16 @@ class Workbench(ttk.Frame):
             self.notice.configure(text='請先建立或開啟書籍專案，再設定語音。')
             return
         self.voice_dialog = VoiceDialog(self)
+
+    def narration(self):
+        from .narration_desktop import NarrationDialog
+        if self.narration_dialog is not None:
+            self.narration_dialog.lift()
+            return
+        if not self.flow or not self.batch_id:
+            self.notice.configure(text='請先選擇批次，並確認朗讀稿。')
+            return
+        self.narration_dialog = NarrationDialog(self)
 
     def gemini_settings(self):
         from .gemini_desktop import SettingsDialog

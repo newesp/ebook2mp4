@@ -25,14 +25,14 @@ def ffmpeg() -> str:
     return target
 
 
-async def media_command(tool: str, arguments: list[str]):
+async def media_command(tool: str, arguments: list[str], *, timeout: float = 30):
     process = await asyncio.create_subprocess_exec(
         tool, '-nostdin', '-v', 'error', *arguments, stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL, creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
     try:
-        await asyncio.wait_for(process.communicate(), 30)
+        await asyncio.wait_for(process.communicate(), timeout)
         if process.returncode != 0:
-            raise ProjectError('試聽音訊無法解碼或組裝，請重試；上一份成功結果保留。')
+            raise ProjectError('音訊無法解碼或組裝，請重試；上一份成功結果保留。')
     finally:
         if process.returncode is None:
             try:

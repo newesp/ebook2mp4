@@ -39,6 +39,7 @@ class VoiceDialog(tk.Toplevel):
         self.filter = ttk.Combobox(header, textvariable=self.locale,
                                   values=('全部語系', '台灣華語', '中國普通話', '英文'), state='readonly', width=18)
         self.filter.grid(row=3, column=0, sticky='w', pady=(0, 5))
+        ttk.Button(header, text='批次 MP3／SRT…', command=self.app.narration).grid(row=3, column=1, sticky='e')
         self.filter.bind('<<ComboboxSelected>>', lambda e: self.load_catalog())
         table = ttk.Frame(self, padding=(16, 0))
         table.grid(row=1, column=0, sticky='nsew')
@@ -263,7 +264,7 @@ class VoiceDialog(tk.Toplevel):
                 value = preview['settings']
                 self.result_info.configure(text=f'上次成功：{value["voice"]} · {value["rate"]} · {len(preview["text"])} 字元 · {preview["source"]}')
             else:
-                self.result_info.configure(text='尚無成功試聽。正式批次 MP3／SRT 將於 T10 提供。')
+                self.result_info.configure(text='尚無成功試聽。正式合成請按上方「批次 MP3／SRT」。')
         except ProjectError as error:
             self.result_info.configure(text=str(error))
             self.play_button.configure(state='disabled')

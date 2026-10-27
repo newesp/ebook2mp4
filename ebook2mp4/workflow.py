@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from .pdf import PdfPreview, PdfExtraction
     from .gemini import ReviewJob
     from .voice import VoiceJob
+    from .narration import NarrationJob
 
 
 class ProjectError(Exception):
@@ -90,6 +91,7 @@ class ProjectWorkflow:
         self._pdf_job: PdfExtraction | None = None
         self._gemini_job: ReviewJob | None = None
         self._voice_job: VoiceJob | None = None
+        self._narration_job: NarrationJob | None = None
 
     @property
     def state(self) -> dict:
@@ -762,6 +764,126 @@ class ProjectWorkflow:
         if preview is None:
             raise ProjectError('尚無成功試聽，請先產生試聽音訊。')
         return self.root / preview['audio']['path']
+
+    def start_narration(self, batch_id: str):
+        from .narration import NarrationJob, plan
+        from .voice import require_voice
+        from .voice_media import ffmpeg
+        if self._narration_job is not None:
+            raise ProjectError('已有產生成品任務，請先保存或捨棄結果。')
+        text = self.reading_text(batch_id)
+        batch = self._batch(batch_id)
+        value = self.voice_settings(batch_id)
+        require_voice(value['voice'])
+        tool = ffmpeg()
+        snapshot = plan(text, value, batch['current_reading'], batch_id)
+        self._space(self.root, 25_000_000)
+        lock_path = self.root / '.production.lock'
+        lock = None
+        folder = self._path(f'batches/{batch_id}/narration-{snapshot["id"]}')
+        committed = False
+        try:
+            lock = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(lock, str(os.getpid()).encode('ascii'))
+            folder.mkdir()
+            progress = folder / 'progress.json'
+            self._atomic(progress, encode(dict(status='pending', chunks=[])))
+            data = encode(snapshot)
+            relative = (folder / 'plan.json').relative_to(self.root).as_posix()
+            ref = dict(id=snapshot['id'], path=relative, sha256=digest(data),
+                       progress_path=progress.relative_to(self.root).as_posix())
+            manifest = self.state
+            next(b for b in manifest['batches'] if b['id'] == batch_id).setdefault('narration_runs', []).append(ref)
+            self._commit(manifest, [(relative, data)])
+            committed = True
+            job = NarrationJob(snapshot, folder, tool, lock, lock_path)
+            self._narration_job = job
+            return job
+        except FileExistsError:
+            raise ProjectError('專案已有產生成品任務。若程序曾中斷，請關閉所有視窗後移除 .production.lock 再重開。') from None
+        except OSError:
+            raise ProjectError('無法準備合成任務，請檢查磁碟空間與寫入權限。') from None
+        finally:
+            if self._narration_job is None and lock is not None:
+                os.close(lock)
+                lock_path.unlink(missing_ok=True)
+                if not committed and folder.exists():
+                    shutil.rmtree(folder)
+
+    def narration_runs(self, batch_id: str) -> list[dict]:
+        from .narration import read_run
+        return [read_run(self, ref) for ref in self._batch(batch_id).get('narration_runs', [])]
+
+    def finish_narration(self, job: NarrationJob) -> dict:
+        if job is not self._narration_job or not job.wait(0):
+            raise ProjectError('請等待所屬合成任務停止。')
+        report = job.result
+        snapshot = deepcopy(job.snapshot)
+        batch_id = snapshot['batch_id']
+        self._batch(batch_id)
+        snapshot.update(chunks=report['chunks'], duration_ms=report['duration_ms'], completed_at=now())
+        for kind in ('mp3', 'srt'):
+            path = job.folder / 'media' / ('narration.' + kind)
+            snapshot[kind] = dict(path=path.relative_to(self.root).as_posix(), sha256=digest(path.read_bytes()))
+        manifest = self.state
+        next(b for b in manifest['batches'] if b['id'] == batch_id)['narration'] = snapshot
+        self._commit(manifest, [])
+        job.release(discard=False)
+        self._narration_job = None
+        return deepcopy(snapshot)
+
+    def discard_narration(self, job: NarrationJob):
+        if job is not self._narration_job or not job.wait(0):
+            raise ProjectError('請等待所屬合成任務停止後再捨棄。')
+        job.release(discard=True)
+        self._narration_job = None
+
+    def narration(self, batch_id: str) -> dict | None:
+        product = self._batch(batch_id).get('narration')
+        if product is None:
+            return None
+        try:
+            from .voice import settings
+            settings(product['settings'])
+            if (not product['chunks'] or any(c['status'] != 'completed' or c['duration_ms'] <= 0
+                                             for c in product['chunks'])
+                    or digest(product['text'].encode('utf-8')) != product['text_sha256']):
+                raise ValueError()
+            for kind in ('mp3', 'srt'):
+                if not self._read(product[kind]):
+                    raise ValueError()
+            return deepcopy(product)
+        except (KeyError, TypeError, ValueError):
+            raise ProjectError('批次音訊／字幕記錄損壞，請還原備份或重新合成。') from None
+
+    def narration_path(self, batch_id: str, kind: str = 'mp3') -> Path:
+        if kind not in ('mp3', 'srt'):
+            raise ProjectError('成品格式僅支援 MP3 或 SRT。')
+        product = self.narration(batch_id)
+        if product is None:
+            raise ProjectError('尚無成功批次成品，請先確認朗讀稿並合成。')
+        return self._path(product[kind]['path'])
+
+    def export_narration(self, batch_id: str, folder: str | Path):
+        """Export a pair into a new folder; never overwrite an existing destination."""
+        product = self.narration(batch_id)
+        if product is None:
+            raise ProjectError('尚無成功批次成品。')
+        target = Path(folder).resolve()
+        if target.exists():
+            raise ProjectError('另存資料夾已存在，請選擇新的資料夾名稱。')
+        temporary = None
+        try:
+            temporary = Path(tempfile.mkdtemp(prefix='.narration-export-', dir=target.parent))
+            for kind in ('mp3', 'srt'):
+                self._atomic(temporary / ('narration.' + kind), self._read(product[kind]))
+            temporary.rename(target)
+            temporary = None
+        except OSError:
+            raise ProjectError('無法另存成品，請檢查資料夾權限與磁碟空間。') from None
+        finally:
+            if temporary is not None:
+                shutil.rmtree(temporary)
 
     @staticmethod
     def gemini_settings() -> dict:

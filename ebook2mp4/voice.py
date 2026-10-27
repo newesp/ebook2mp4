@@ -68,7 +68,7 @@ def edge_module():
 
 class VoiceJob:
     """A bounded async operation with prompt cancellation and joined resources."""
-    def __init__(self, operation):
+    def __init__(self, operation, *, timeout: float | None = 90):
         self._lock = threading.Lock()
         self._cancel = threading.Event()
         self._state = dict(status='running', error='')
@@ -76,6 +76,7 @@ class VoiceJob:
         self._loop: asyncio.AbstractEventLoop | None = None
         self._task: asyncio.Task | None = None
         self._operation = operation
+        self._timeout = timeout
         self._thread = threading.Thread(target=self._run, name='ebook2mp4-voice')
         self._thread.start()
 
@@ -114,7 +115,7 @@ class VoiceJob:
                 self._task = asyncio.current_task()
             if self._cancel.is_set():
                 raise asyncio.CancelledError()
-            return await asyncio.wait_for(self._operation(), 90)
+            return await asyncio.wait_for(self._operation(), self._timeout)
         status, error, result = 'completed', '', None
         try:
             result = asyncio.run(run())
@@ -128,7 +129,7 @@ class VoiceJob:
             if self._cancel.is_set():
                 status, result = 'cancelled', None
             self._loop = self._task = None
-            self._state = dict(status=status, error=error)
+            self._state.update(status=status, error=error)
             self._result = result
 
 
