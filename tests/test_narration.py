@@ -128,9 +128,7 @@ class NarrationJourney(unittest.TestCase):
             self.flow.discard_narration(job)
         self.assertEqual(ProjectWorkflow.open(self.flow.root).narration(self.batch)['id'], previous['id'])
         self.assertFalse((self.flow.root / '.production.lock').exists())
-        for run in self.flow.narration_runs(self.batch)[1:]:
-            folder = self.flow.root / 'batches' / self.batch / ('narration-' + run['snapshot']['id'])
-            self.assertFalse((folder / 'media').exists())
+        self.assertEqual(list(self.flow.root.rglob('*.mp3')), [self.flow.narration_path(self.batch)])
 
     def test_long_paragraph_preserves_protected_spans_and_exact_content(self):
         sentence = 'Dr. Chen reads 3.14 at https://example.com/a?q=1.2, then says 「引文……（保持完整）」；結束。'
@@ -159,4 +157,43 @@ class NarrationJourney(unittest.TestCase):
         with self.assertRaisesRegex(ProjectError, '安全切分'):
             self.flow.start_narration(self.batch)
         self.assertEqual(self.flow.narration_runs(self.batch), [])
+        self.assertFalse((self.flow.root / '.production.lock').exists())
+
+    def test_long_english_prefers_complete_sentences_over_word_boundaries(self):
+        text = 'Dr. Chen reads the value 3.14 and a complete sentence. ' * 100
+        self.prepare(text)
+        audio, requests = self.audio(), []
+        class Service:
+            def __init__(self, text, *args, **options): requests.append(text)
+            async def stream(self): yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service):
+            job = self.flow.start_narration(self.batch)
+            self.assertTrue(job.wait(30))
+            self.flow.finish_narration(job)
+        self.assertGreater(len(requests), 1)
+        self.assertEqual(''.join(requests), text)
+        self.assertTrue(all(sent.rstrip().endswith('sentence.') for sent in requests), requests)
+
+    def test_lock_cleanup_failure_cannot_discard_a_published_product(self):
+        self.prepare('已發布成品必須保留。')
+        audio = self.audio()
+        class Service:
+            def __init__(self, *args, **options): pass
+            async def stream(self): yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service):
+            job = self.flow.start_narration(self.batch)
+            self.assertTrue(job.wait(15))
+        original_unlink = Path.unlink
+        def cannot_release(path, *args, **kwargs):
+            if path.name == '.production.lock':
+                raise PermissionError('lock cleanup injection')
+            return original_unlink(path, *args, **kwargs)
+        with patch.object(Path, 'unlink', cannot_release):
+            with self.assertRaises(ProjectError):
+                self.flow.finish_narration(job)
+        self.assertIsNotNone(self.flow.narration(self.batch))
+        self.flow.discard_narration(job)
+        reopened = ProjectWorkflow.open(self.flow.root)
+        self.assertTrue(reopened.narration_path(self.batch).is_file())
+        self.assertTrue(reopened.narration_path(self.batch, 'srt').is_file())
         self.assertFalse((self.flow.root / '.production.lock').exists())

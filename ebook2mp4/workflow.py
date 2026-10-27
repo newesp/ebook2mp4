@@ -821,6 +821,13 @@ class ProjectWorkflow:
         snapshot = deepcopy(job.snapshot)
         batch_id = snapshot['batch_id']
         self._batch(batch_id)
+        if job.published:
+            product = self.narration(batch_id)
+            if product is None:
+                raise ProjectError('已發布的成品記錄遺失，請重新開啟專案。')
+            job.release(discard=False)
+            self._narration_job = None
+            return product
         snapshot.update(chunks=report['chunks'], duration_ms=report['duration_ms'], completed_at=now())
         for kind in ('mp3', 'srt'):
             path = job.folder / 'media' / ('narration.' + kind)
@@ -828,6 +835,7 @@ class ProjectWorkflow:
         manifest = self.state
         next(b for b in manifest['batches'] if b['id'] == batch_id)['narration'] = snapshot
         self._commit(manifest, [])
+        job.published = True
         job.release(discard=False)
         self._narration_job = None
         return deepcopy(snapshot)

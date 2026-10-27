@@ -126,12 +126,13 @@ class NarrationDialog(tk.Toplevel):
     def poll(self):
         self.timer = None
         if self.job is not None:
-            state = self.job.state
             if not self.job.wait(0):
+                state = self.job.state
                 self.status.configure(text=f'{state.get("phase", "準備")} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
                                       f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
                 self.schedule()
                 return
+            state = self.job.state
             try:
                 if self.closing:
                     self.flow.discard_narration(self.job)

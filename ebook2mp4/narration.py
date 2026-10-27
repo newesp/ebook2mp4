@@ -21,29 +21,40 @@ RULES: dict = dict(version='natural-block-v1', request_escaped_utf8_bytes=3000,
              sentence_pause_ms=0, paragraph_pause_ms=500, timing='measured-block-pcm',
              sample_rate=24000, max_attempts=3)
 PARAGRAPH = re.compile(r'(?:\r?\n)[ \t]*(?:\r?\n)(?:[ \t]*\r?\n)*')
+CLOSERS = '\"\'”’」』）)]}》】'
+ABBREVIATIONS = frozenset(('dr.', 'mr.', 'mrs.', 'ms.', 'prof.', 'sr.', 'jr.', 'st.',
+                           'vs.', 'etc.', 'e.g.', 'i.e.', 'fig.', 'no.', 'pp.', 'vol.',
+                           'ch.', 'inc.', 'ltd.', 'ph.d.', 'a.m.', 'p.m.'))
 
 
 def request_size(text: str) -> int:
     return len(escape(text, quote=False).encode('utf-8'))
 
 
-def safe_boundaries(text: str) -> list[int]:
+def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
     """Only divide outside paired punctuation, at sentence/clause/word boundaries.
 
-    Periods are deliberately excluded: abbreviations, decimals and URLs remain
-    intact. An oversized indivisible span is rejected instead of silently split.
+    Sentence ends take precedence over clauses and word boundaries. Abbreviations,
+    decimals, URLs and paired punctuation are never divided internally.
     """
     pairs = {'(': ')', '[': ']', '{': '}', '「': '」', '『': '』',
              '（': '）', '【': '】', '“': '”', '‘': '’', '《': '》'}
     stack: list[str] = []
     result = []
+    sentences, clauses = [], []
     token_start = 0
     last_token = ''
+    urls = iter(re.finditer(r'(?:https?://|www\.)[^\s<>「」“”]+', text))
+    url = next(urls, None)
     for index, char in enumerate(text):
         if char.isspace() and (index == 0 or not text[index-1].isspace()):
             last_token = text[token_start:index]
         elif not char.isspace() and index > 0 and text[index-1].isspace():
             token_start = index
+        if url is not None and index >= url.end():
+            url = next(urls, None)
+        if url is not None and url.start() <= index < url.end():
+            continue
         if char in pairs:
             stack.append(pairs[char])
         elif stack and char == stack[-1]:
@@ -64,10 +75,26 @@ def safe_boundaries(text: str) -> list[int]:
             # Never divide a run of whitespace; keep it with the preceding text.
             if index + 1 == len(text) or not text[index+1].isspace():
                 token = last_token if char.isspace() else ''
+                word = token.rstrip(CLOSERS)
+                abbreviation = (word.lower() in ABBREVIATIONS or
+                                re.fullmatch(r'(?:[A-Za-z]\.)+', word) is not None)
                 # Avoid separating a title/abbreviation or an ellipsis from its context.
-                if not token.endswith(('.', '…')):
+                if not abbreviation and not word.endswith(('..', '…')):
                     result.append(index + 1)
-    return result
+                    if char in '。！？' or word.endswith(('.', '!', '?')):
+                        sentences.append(index + 1)
+                    elif char in '；，、' or word.endswith((',', ';', ':')):
+                        clauses.append(index + 1)
+        elif not stack and char in CLOSERS:
+            before = index - 1
+            while before >= 0 and text[before] in CLOSERS:
+                before -= 1
+            if before >= 0 and text[before] in '。！？.!?':
+                result.append(index + 1)
+                sentences.append(index + 1)
+        if not stack and char in '。！？；，、':
+            token_start = index + 1
+    return result, sentences, clauses
 
 
 def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
@@ -87,8 +114,8 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
         paragraph, separator = pieces[-1]
         pieces[-1] = (paragraph, separator + text[start:])
     for paragraph, separator in pieces:
-        boundaries = safe_boundaries(paragraph) + [len(paragraph)]
-        preferred = [b for b in boundaries if paragraph[b-1] in '。！？；，、']
+        boundaries, sentences, clauses = safe_boundaries(paragraph)
+        boundaries.append(len(paragraph))
         costs = [0]
         for char in paragraph:
             costs.append(costs[-1] + request_size(char))
@@ -99,8 +126,14 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
                 end = len(paragraph)
             else:
                 at = bisect_right(boundaries, limit) - 1
-                natural = bisect_right(preferred, limit) - 1
-                end = preferred[natural] if natural >= 0 and preferred[natural] > offset else boundaries[at] if at >= 0 else offset
+                sentence = bisect_right(sentences, limit) - 1
+                clause = bisect_right(clauses, limit) - 1
+                if sentence >= 0 and sentences[sentence] > offset:
+                    end = sentences[sentence]
+                elif clause >= 0 and clauses[clause] > offset:
+                    end = clauses[clause]
+                else:
+                    end = boundaries[at] if at >= 0 else offset
                 if end <= offset or not paragraph[offset:end].strip():
                     raise ProjectError('朗讀稿有過長且無法安全切分的引文、網址或句段。請加入自然分句後重新確認。')
             sent = paragraph[offset:end]
@@ -135,6 +168,7 @@ class NarrationJob(VoiceJob):
         self.snapshot, self.folder, self.tool = deepcopy(snapshot), folder, tool
         self.production_lock: int | None = lock
         self.lock_path = lock_path
+        self.published = False
         self.report: dict = dict(status='running', phase='準備', current=0, total=len(snapshot['chunks']),
                            completed=0, failed=0, error='', chunks=[dict(c, status='pending', attempts=0,
                            duration_ms=None) for c in snapshot['chunks']])
@@ -254,12 +288,15 @@ class NarrationJob(VoiceJob):
     def release(self, *, discard: bool):
         if not self.wait(0):
             raise ProjectError('請等待產生任務停止後再釋放。')
-        if discard and (self.folder / 'media').exists():
-            shutil.rmtree(self.folder / 'media')
-        if self.production_lock is not None:
-            os.close(self.production_lock)
-            self.production_lock = None
+        try:
+            if discard and not self.published and (self.folder / 'media').exists():
+                shutil.rmtree(self.folder / 'media')
+            if self.production_lock is not None:
+                os.close(self.production_lock)
+                self.production_lock = None
             self.lock_path.unlink(missing_ok=True)
+        except OSError:
+            raise ProjectError('無法清理合成暫存或任務鎖；已發布成品保留。請解除檔案占用後重試。') from None
 
 
 def read_run(flow: ProjectWorkflow, ref: dict) -> dict:
