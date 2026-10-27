@@ -84,9 +84,9 @@ def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
                 # Avoid separating a title/abbreviation or an ellipsis from its context.
                 if not abbreviation and not word.endswith(('..', '…')):
                     result.append(index + 1)
-                    if char in '。！？' or word.endswith(('.', '!', '?')):
+                    if char in '。！？' or word.endswith(tuple('。！？.!?')):
                         sentences.append(index + 1)
-                    elif char in '；，、' or word.endswith((',', ';', ':')):
+                    elif char in '；，、' or word.endswith(tuple('；，、,;:')):
                         clauses.append(index + 1)
         elif not stack and char in CLOSERS:
             before = index - 1
@@ -95,7 +95,8 @@ def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
             if before >= 0 and text[before] in '。！？.!?':
                 result.append(index + 1)
                 sentences.append(index + 1)
-        if not stack and char in '。！？；，、':
+        if (not stack and char in '。！？；，、' and
+                (index+1 == len(text) or not text[index+1].isspace())):
             token_start = index + 1
     return result, sentences, clauses
 

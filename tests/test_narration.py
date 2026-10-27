@@ -131,7 +131,7 @@ class NarrationJourney(unittest.TestCase):
         self.assertEqual(list(self.flow.root.rglob('*.mp3')), [self.flow.narration_path(self.batch)])
 
     def test_long_paragraph_preserves_protected_spans_and_exact_content(self):
-        sentence = 'Dr. Chen reads 3.14 at https://example.com/a?q=1.2, then says 「引文……（保持完整）」；結束。'
+        sentence = 'Dr. Chen reads 3.14 at https://example.com/a?q=1.2, then says 「引文……（保持完整）」；結束。 '
         text = (sentence * 35) + '\n\nSecond paragraph.\n\n'
         self.prepare(text)
         audio, requests = self.audio(), []
@@ -149,6 +149,7 @@ class NarrationJourney(unittest.TestCase):
         for sent in requests[:-1]:
             self.assertEqual(sent.count('「'), sent.count('」'))
             self.assertFalse(sent.rstrip().endswith('Dr.'))
+            self.assertTrue(sent.rstrip().endswith('結束。'))
             self.assertLessEqual(len(__import__('html').escape(sent, quote=False).encode('utf-8')), 3000)
         self.assertEqual(sum(c['pause_after_ms'] for c in result['chunks']), 500)
 
