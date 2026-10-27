@@ -1,0 +1,16 @@
+--- a/tests/test_terminology_desktop.py
++++ b/tests/test_terminology_desktop.py
+@@ -36,10 +36,9 @@
+         self.assertEqual(self.app.versions_button.cget('text'), '朗讀稿與重載備份')
+         self.assertEqual(self.app.pages_button.cget('text'), 'PDF 原頁與文字對照')
+         self.assertEqual(self.app.remove_pdf_button.cget('text'), '移除 PDF 批次')
+-        with patch('ebook2mp4.desktop.messagebox.showinfo') as show:
+-            self.app.versions_button.invoke()
+-        self.assertEqual(show.call_args.args[0], '朗讀稿與重載備份')
+-        self.assertIn('重載前的未存校對文字', show.call_args.args[1])
++        self.app.versions_button.invoke()
++        self.root.update()
++        self.assertIn('尚無已確認的朗讀稿或重載備份', self.app.status.history[-1])
+ 
+     def test_history_keeps_readings_and_reload_backups_distinct_and_read_only(self):
+         flow, batch = self.app.flow, self.app.batch_id

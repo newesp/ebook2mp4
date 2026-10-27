@@ -1,0 +1,15 @@
+test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content) ... FAIL
+
+======================================================================
+FAIL: test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 152, in test_long_paragraph_preserves_protected_spans_and_exact_content
+    self.assertTrue(sent.rstrip().endswith('結束。'))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 5.463s
+
+FAILED (failures=1)

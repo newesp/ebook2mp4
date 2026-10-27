@@ -1,0 +1,23 @@
+test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product) ... ERROR
+
+======================================================================
+ERROR: test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 193, in test_lock_cleanup_failure_cannot_discard_a_published_product
+    self.flow.finish_narration(job)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 894, in finish_narration
+    job.release(discard=False)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\narration.py", line 262, in release
+    self.lock_path.unlink(missing_ok=True)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 189, in cannot_release
+    raise PermissionError('lock cleanup injection')
+PermissionError: lock cleanup injection
+
+----------------------------------------------------------------------
+Ran 1 test in 3.449s
+
+FAILED (errors=1)

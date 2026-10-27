@@ -1,0 +1,120 @@
+1004 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+1005 INFO: Python: 3.14.3
+1088 INFO: Platform: Windows-11-10.0.26200-SP0
+1088 INFO: Python environment: C:\Python314
+15986 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools',
+ 'E:\\Leo\\Projects\\ebook2mp4',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+18258 INFO: Appending 'binaries' from .spec
+18258 INFO: Appending 'datas' from .spec
+18277 INFO: checking Analysis
+18278 INFO: Building Analysis because Analysis-00.toc is non existent
+18278 INFO: Looking for Python shared library...
+18278 INFO: Using Python shared library: C:\Python314\python314.dll
+18278 INFO: Running Analysis Analysis-00.toc
+18278 INFO: Target bytecode optimization level: 0
+18278 INFO: Initializing module dependency graph...
+18282 INFO: Initializing module graph hook caches...
+18380 INFO: Analyzing modules for base_library.zip ...
+22768 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+24115 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+29359 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+29401 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+29780 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+34481 INFO: Caching module dependency graph...
+34612 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+34960 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_find_module_path'
+35002 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+36614 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+37553 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+37716 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+37756 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+37901 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+38104 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+39794 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+40569 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+43470 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+43660 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+44883 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+47067 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+50204 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+51097 INFO: Processing standard module hook 'hook-opencc.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+52020 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+56815 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+57700 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+57735 INFO: SetuptoolsInfo: initializing cached setuptools info...
+60433 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+61945 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+67319 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+72119 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+72122 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+72167 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+72325 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+72500 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+72504 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+72581 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+72584 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+73132 INFO: Processing standard module hook 'hook-_osx_support.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+73239 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+74374 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+74379 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+76798 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+79939 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+79941 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+81921 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+82631 INFO: Analyzing hidden import 'pypdfium2.__main__'
+82796 INFO: Analyzing hidden import 'opencc.__main__'
+82808 INFO: Analyzing hidden import 'edge_tts.__main__'
+82899 INFO: Analyzing hidden import 'certifi.__main__'
+82919 INFO: Analyzing hidden import 'certifi.tests'
+82920 INFO: Analyzing hidden import 'certifi.tests.test_certify'
+83467 INFO: Processing module hooks (post-graph stage)...
+85966 INFO: Processing standard module hook 'hook-orjson.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+98237 WARNING: Hidden import "tzdata" not found!
+100130 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+108514 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks'
+108541 INFO: Performing binary vs. data reclassification (1092 entries)
+125977 INFO: Looking for ctypes DLLs
+126144 INFO: Analyzing run-time hooks ...
+126154 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\rthooks'
+126202 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\rthooks'
+126212 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\rthooks'
+126245 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools\\PyInstaller\\hooks\\rthooks'
+126325 INFO: Creating base_library.zip...
+126379 INFO: Looking for dynamic libraries
+128340 INFO: Extra DLL search directories (AddDllDirectory): []
+128340 INFO: Extra DLL search directories (PATH): []
+136282 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\T10-build\ebook2mp4\warn-ebook2mp4.txt
+136509 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\T10-build\ebook2mp4\xref-ebook2mp4.html
+136786 INFO: checking PYZ
+136786 INFO: Building PYZ because PYZ-00.toc is non existent
+136786 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\T10-build\ebook2mp4\PYZ-00.pyz
+137884 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\T10-build\ebook2mp4\PYZ-00.pyz completed successfully.
+137939 INFO: checking PKG
+137940 INFO: Building PKG because PKG-00.toc is non existent
+137940 INFO: Building PKG (CArchive) ebook2mp4.pkg
+138050 INFO: Building PKG (CArchive) ebook2mp4.pkg completed successfully.
+138053 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\T10-tools\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+138053 INFO: checking EXE
+138053 INFO: Building EXE because EXE-00.toc is non existent
+138053 INFO: Building EXE from EXE-00.toc
+138054 INFO: Copying bootloader EXE to E:\Leo\Projects\ebook2mp4\.scratch\T10-build\ebook2mp4\ebook2mp4.exe
+138260 INFO: Copying icon to EXE
+138387 INFO: Copying 0 resources to EXE
+138387 INFO: Embedding manifest in EXE
+138465 INFO: Appending PKG archive to EXE
+138611 INFO: Fixing EXE headers
+139121 INFO: Building EXE from EXE-00.toc completed successfully.
+139152 INFO: checking COLLECT
+139152 INFO: Building COLLECT because COLLECT-00.toc is non existent
+139153 INFO: Building COLLECT COLLECT-00.toc
+148195 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+148245 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist\T10

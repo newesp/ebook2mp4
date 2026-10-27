@@ -1,0 +1,12 @@
+test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens) ... ok
+test_failed_retries_cancel_and_conflict_keep_previous_product (test_narration.NarrationJourney.test_failed_retries_cancel_and_conflict_keep_previous_product) ... ok
+test_indivisible_long_quotation_is_rejected_before_any_online_request (test_narration.NarrationJourney.test_indivisible_long_quotation_is_rejected_before_any_online_request) ... ok
+test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product) ... ok
+test_long_english_prefers_complete_sentences_over_word_boundaries (test_narration.NarrationJourney.test_long_english_prefers_complete_sentences_over_word_boundaries) ... ok
+test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content) ... ok
+test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 24.312s
+
+OK

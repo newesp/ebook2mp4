@@ -1,0 +1,193 @@
+{
+  "modules": [
+    {
+      "module": "test_desktop.py",
+      "exit_code": 0,
+      "tests": 14,
+      "skipped": 0,
+      "seconds": 35.483
+    },
+    {
+      "module": "test_gemini.py",
+      "exit_code": 0,
+      "tests": 6,
+      "skipped": 0,
+      "seconds": 6.424
+    },
+    {
+      "module": "test_gemini_desktop.py",
+      "exit_code": 0,
+      "tests": 4,
+      "skipped": 0,
+      "seconds": 12.093
+    },
+    {
+      "module": "test_gemini_resume.py",
+      "exit_code": 0,
+      "tests": 9,
+      "skipped": 0,
+      "seconds": 10.494
+    },
+    {
+      "module": "test_gemini_resume_desktop.py",
+      "exit_code": 0,
+      "tests": 2,
+      "skipped": 0,
+      "seconds": 15.162
+    },
+    {
+      "module": "test_mixed_desktop.py",
+      "exit_code": 0,
+      "tests": 1,
+      "skipped": 0,
+      "seconds": 18.473
+    },
+    {
+      "module": "test_mixed_pdf.py",
+      "exit_code": 0,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 16.539
+    },
+    {
+      "module": "test_narration.py",
+      "exit_code": 1,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 27.756
+    },
+    {
+      "module": "test_narration_desktop.py",
+      "exit_code": 0,
+      "tests": 2,
+      "skipped": 0,
+      "seconds": 24.218
+    },
+    {
+      "module": "test_notifications.py",
+      "exit_code": 0,
+      "tests": 8,
+      "skipped": 0,
+      "seconds": 18.055
+    },
+    {
+      "module": "test_ocr.py",
+      "exit_code": 0,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 61.044
+    },
+    {
+      "module": "test_ocr_desktop.py",
+      "exit_code": 0,
+      "tests": 1,
+      "skipped": 0,
+      "seconds": 13.559
+    },
+    {
+      "module": "test_ocr_optimization.py",
+      "exit_code": 0,
+      "tests": 5,
+      "skipped": 0,
+      "seconds": 51.618
+    },
+    {
+      "module": "test_optimization_desktop.py",
+      "exit_code": 0,
+      "tests": 2,
+      "skipped": 0,
+      "seconds": 12.43
+    },
+    {
+      "module": "test_pdf.py",
+      "exit_code": 0,
+      "tests": 10,
+      "skipped": 0,
+      "seconds": 7.115
+    },
+    {
+      "module": "test_pdf_candidate_refinement.py",
+      "exit_code": 0,
+      "tests": 15,
+      "skipped": 0,
+      "seconds": 15.698
+    },
+    {
+      "module": "test_pdf_refinement_desktop.py",
+      "exit_code": 0,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 44.118
+    },
+    {
+      "module": "test_proofreading_optimization.py",
+      "exit_code": 0,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 5.767
+    },
+    {
+      "module": "test_status_help.py",
+      "exit_code": 0,
+      "tests": 3,
+      "skipped": 0,
+      "seconds": 6.994
+    },
+    {
+      "module": "test_terminology_desktop.py",
+      "exit_code": 1,
+      "tests": 2,
+      "skipped": 0,
+      "seconds": 5.7
+    },
+    {
+      "module": "test_ui_layout.py",
+      "exit_code": 0,
+      "tests": 5,
+      "skipped": 0,
+      "seconds": 12.707
+    },
+    {
+      "module": "test_ui_layout_gemini.py",
+      "exit_code": 0,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 27.17
+    },
+    {
+      "module": "test_ui_layout_pdf.py",
+      "exit_code": 0,
+      "tests": 3,
+      "skipped": 0,
+      "seconds": 27.648
+    },
+    {
+      "module": "test_voice.py",
+      "exit_code": 0,
+      "tests": 7,
+      "skipped": 0,
+      "seconds": 9.086
+    },
+    {
+      "module": "test_voice_desktop.py",
+      "exit_code": 0,
+      "tests": 3,
+      "skipped": 0,
+      "seconds": 10.766
+    },
+    {
+      "module": "test_workflow.py",
+      "exit_code": 0,
+      "tests": 26,
+      "skipped": 0,
+      "seconds": 13.388
+    }
+  ],
+  "tests": 170,
+  "skipped": 0,
+  "failed_modules": [
+    "test_narration.py",
+    "test_terminology_desktop.py"
+  ],
+  "seconds": 509.513
+}

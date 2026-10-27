@@ -1,0 +1,18 @@
+test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose) ... ERROR
+
+======================================================================
+ERROR: test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 210, in test_surrounding_quotes_and_brackets_do_not_block_long_url_prose
+    job = self.flow.start_narration(self.batch)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 842, in start_narration
+    snapshot = plan(text, value, batch['current_reading'], batch_id)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\narration.py", line 138, in plan
+    raise ProjectError('��Ū�Z���L���B�L�k�w���������ޤ�B���}�Υy�q�C�Х[�J�۵M���y�᭫�s�T�{�C')
+ebook2mp4.workflow.ProjectError: ��Ū�Z���L���B�L�k�w���������ޤ�B���}�Υy�q�C�Х[�J�۵M���y�᭫�s�T�{�C
+
+----------------------------------------------------------------------
+Ran 1 test in 3.976s
+
+FAILED (errors=1)

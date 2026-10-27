@@ -1,0 +1,81 @@
+{
+  "remaining_task_paths": [],
+  "computer_use_kernel_reset": true,
+  "package_files_checked": 1299,
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-baseline",
+      "bytes": 179120
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-build",
+      "bytes": 32555413
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-clean",
+      "bytes": 6107954
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-clean-final",
+      "bytes": 26334333
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-mypy",
+      "bytes": 20271333
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-real",
+      "bytes": 476616
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-real-voice-cache",
+      "bytes": 43414
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-tools",
+      "bytes": 104471466
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-fixes.patch",
+      "bytes": 1053
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-run-all.py",
+      "bytes": 1301
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T10-selected.patch",
+      "bytes": 10158
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 101457920
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 592500
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 655287
+    },
+    {
+      "bytes": 285478,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\OptaneIconOverlay.ico"
+    }
+  ],
+  "residual_task_processes": [],
+  "preserved_existing_processes": [
+    {
+      "ProcessId": 11436,
+      "ExecutablePath": "E:\\Leo\\Projects\\ebook2mp4\\dist\\T09-notifications\\ebook2mp4\\ebook2mp4.exe"
+    }
+  ],
+  "test_directory_children": [],
+  "package_locked_files": [],
+  "removed_bytes": 414853708.0
+}

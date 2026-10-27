@@ -1,5 +1,23 @@
 # 實作交接
 
+## 2026-10-27：T10 已確認朗讀稿產生批次 MP3／SRT 完成
+
+新版 **`dist/T10/ebook2mp4/ebook2mp4.exe`**，請搬移整個 ebook2mp4 資料夾。SHA-256 `412A9CEA32708B15350DB675E7CFA62D8FF621E28BF82C14938EE9FB59DEBF79`。
+
+從「語音試聽」進入「批次 MP3／SRT…」。核對已確認全文、音色與語速並勾選同意後才送 Edge。未確認稿不能開始；開始固定文字／設定／規則；跨視窗排他成品任務鎖。可顯示階段、目前／總區塊及完成／失敗數，取消、播放、停止、另存與開啟資料夾。主窗換書／批後阻擋舊視窗啟動；改稿後保留既有成功成品。
+
+長稿優先完整段落，必要時句尾→分句→詞間空白，保護段內成對引號／括號、縮寫、小數、網址與省略號；每請求上限3,000 escaped UTF-8 bytes，避免SDK再拆。無安全切點時送出前提示改稿，不硬切。精確保存原文字及段落分隔符、識別、順序、內容／設定／規則雜湊、狀態、嘗試及實測時長。網路／服務每塊最多3次，未全成功不報完成。自然句尾額外0／段落500 ms，末段不補；實測完整PCM區塊時間產生UTF-8 SRT，新增靜音無字幕，不虛構逐字。全解碼驗證後原子發布，失敗／取消與發布後清理失敗都保護成品。
+
+公開入口 `start_narration`／`finish_narration`／`discard_narration`、`narration`／`narration_path`／`export_narration`／`narration_runs`。計畫及進度保存在批次下，音訊／字幕相對路徑與SHA-256進索引。硬中斷殘留 `.production.lock` 須先關閉所有視窗後移除再重開；T12續作尚未實作。
+
+最終完整 **26模組、170／170通過、427.944秒、無跳過**，含真實三語OCR及原指定PDF。mypy17來源檔通過；最終提交內容的獨立副本另驗 **7項流程＋2項Tk全過**，mypy15來源檔通過，不依賴先前未提交UI／OCR工作。雙軸審查全部由原審查者複查解除。真實Edge7.3.1與最終封裝均只送合成三段範例，**19.048秒MP3／SRT**，FFmpeg完整解碼時間一致，原生選檔→合成→播放／停止→正常退出、重開及檔案釋放通過；700×580原生視窗無裁切。人工聽感、其他DPI及T23乾淨機仍待驗。
+
+詳見 [T10驗證](verification/T10.md)、[審查](verification/T10-code-review.md)、[最終封裝](verification/T10-packaged.json)、[清理](verification/T10-cleanup.json)。本次依implement提交master、不推送。既有未提交UI／OCR／通知工作保留；舊通知測試的messagebox假設已改驗現行通知記錄，最小修正證據保存在驗證文件。移除 **414,853,708 bytes** 本次依賴、建置、測試資料與快取；1,299封裝檔獨占開啟／釋放全通過，本次殘留程序0、暫存路徑0、測試目錄內容0，Computer Use kernel已重設。保留正式成品、需求、證據、使用者模型／outputs及正在使用的T09-notifications舊版。
+
+**接 T11「自然／舒緩節奏與自訂句尾、段落停頓」建議開新 session。** 票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/11-reading-rhythm-settings.md`。先讀本段、T10驗證與新 `narration.py`／`narration_desktop.py`。T10只有自然0／500；T11還須實作非零句尾的實際語音／時間、試聽與正式共用、原始音訊可重用；不能把字幕位移當成新節奏完成。
+
+以下為歷史紀錄，T10狀態以上方為準。
+
 ## 2026-10-27：T09 Edge-TTS 音色、語速與短文試聽完成
 
 新版 **`dist/T09/ebook2mp4/ebook2mp4.exe`**，搬移整個 ebook2mp4 資料夾；SHA-256 `A0ED11FD92B2B9A4BC5E994B761B0468AF041EFB0A2E94869470937F42B0A8CC`。

@@ -1,0 +1,7 @@
+test_entry_names_and_empty_history_explain_two_document_kinds (test_terminology_desktop.ManuscriptTerminology.test_entry_names_and_empty_history_explain_two_document_kinds) ... ok
+test_history_keeps_readings_and_reload_backups_distinct_and_read_only (test_terminology_desktop.ManuscriptTerminology.test_history_keeps_readings_and_reload_backups_distinct_and_read_only) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.255s
+
+OK
