@@ -1,0 +1,48 @@
+test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) ...
+  test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) (script='A') ... ERROR
+  test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) (script='9') ... ERROR
+
+======================================================================
+ERROR: test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) (script='A')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini_resume.py", line 196, in test_long_unbroken_text_scope_returns_without_freezing_the_caller
+    result = subprocess.run([sys.executable, '-c',
+        'import sys; from ebook2mp4.workflow import ProjectWorkflow; '
+        'f=ProjectWorkflow.open(sys.argv[1]); '
+        'assert f.gemini_scope(sys.argv[2])["characters"] == 100000',
+        str(self.flow.root), self.batch], timeout=10, capture_output=True)
+  File "C:\Python314\Lib\subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1220, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1663, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['C:\\Python314\\python.exe', '-c', 'import sys; from ebook2mp4.workflow import ProjectWorkflow; f=ProjectWorkflow.open(sys.argv[1]); assert f.gemini_scope(sys.argv[2])["characters"] == 100000', 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp1mz_7h7y\\book', '1d07c4dc488847ada69a37a1273b6c9d']' timed out after 10 seconds
+
+======================================================================
+ERROR: test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) (script='9')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini_resume.py", line 196, in test_long_unbroken_text_scope_returns_without_freezing_the_caller
+    result = subprocess.run([sys.executable, '-c',
+        'import sys; from ebook2mp4.workflow import ProjectWorkflow; '
+        'f=ProjectWorkflow.open(sys.argv[1]); '
+        'assert f.gemini_scope(sys.argv[2])["characters"] == 100000',
+        str(self.flow.root), self.batch], timeout=10, capture_output=True)
+  File "C:\Python314\Lib\subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1220, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 1663, in _communicate
+    raise TimeoutExpired(self.args, orig_timeout)
+subprocess.TimeoutExpired: Command '['C:\\Python314\\python.exe', '-c', 'import sys; from ebook2mp4.workflow import ProjectWorkflow; f=ProjectWorkflow.open(sys.argv[1]); assert f.gemini_scope(sys.argv[2])["characters"] == 100000', 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp1mz_7h7y\\book', '1d07c4dc488847ada69a37a1273b6c9d']' timed out after 10 seconds
+
+----------------------------------------------------------------------
+Ran 1 test in 21.072s
+
+FAILED (errors=2)

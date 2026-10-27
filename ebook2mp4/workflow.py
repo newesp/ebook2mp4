@@ -694,8 +694,7 @@ class ProjectWorkflow:
 
     def start_gemini_review(self, batch_id: str, *, start: int = 0, end: int | None = None,
                            script: str = 'auto', punctuation: bool = True):
-        from .gemini import load_settings, ReviewJob
-        import re
+        from .gemini import load_settings, plan_requests
         if self._gemini_job is not None:
             raise ProjectError('請先保存前次 Gemini 結果。')
         scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
@@ -703,32 +702,82 @@ class ProjectWorkflow:
         if not settings['key']:
             raise ProjectError('請先設定 Gemini API Key；仍可人工校對。')
         _, text = self.texts(batch_id)
-        # Keep separators outside paragraph edits, including CRLF and partial selections.
-        paragraphs = []
-        offset = scope['start']
-        for part in re.split(r'(\r?\n[ \t]*\r?\n(?:[ \t]*\r?\n)*)', text[scope['start']:scope['end']]):
-            if part.strip():
-                paragraphs.append(dict(start=offset, end=offset+len(part), original=part,
-                                       candidate=None, decision='pending'))
-            offset += len(part)
+        paragraphs, requests = plan_requests(text, scope['start'], scope['end'])
         batch = self._batch(batch_id)
         review = dict(id=uuid.uuid4().hex, batch_id=batch_id, created_at=now(), **scope,
                       before=deepcopy(batch['draft']), expected=deepcopy(batch['draft']),
-                      expected_revision=batch['revision'], paragraphs=paragraphs,
+                      expected_revision=batch['revision'], paragraphs=paragraphs, requests=requests,
                       notes=[], history=[], status='running', error='')
-        self._gemini_job = ReviewJob(settings['key'], review)
+        return self._start_gemini_job(settings['key'], review)
+
+    def _start_gemini_job(self, key: str, review: dict, targets=None):
+        from .gemini import ReviewJob
+        # The manifest pins the source and plan before any network request. Only this
+        # job writes its atomic progress journal, so manuscript commits stay on the UI thread.
+        review['progress_path'] = f'batches/{review["batch_id"]}/gemini-progress-{uuid.uuid4().hex}.json'
+        review.update(status='running', error='')
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == review['batch_id'])
+        self._write_review(manifest, batch, review, [])
+        path = self._path(review['progress_path'])
+        def checkpoint(value):
+            import time
+            data = encode(dict(review=value, sha256=digest(encode(value))))
+            for attempt in range(6):
+                try:
+                    self._atomic(path, data)
+                    return
+                except PermissionError:
+                    if attempt == 5:
+                        raise
+                    # A Windows reader may briefly deny replacement. Only the
+                    # background journal writer waits; the UI never waits here.
+                    time.sleep(.02)
+        self._gemini_job = ReviewJob(key, review, checkpoint=checkpoint, targets=targets)
         return self._gemini_job
+
+    def start_gemini_retry(self, batch_id: str, review_id: str, *, failed_only: bool = False):
+        from .gemini import load_settings
+        if self._gemini_job is not None:
+            raise ProjectError('請先保存前次 Gemini 結果。')
+        review = self._gemini_record(batch_id, review_id, require_candidate=False)
+        if 'requests' not in review:
+            raise ProjectError('此舊版候選沒有分段計畫，請重新送出校對。')
+        targets = [i for i, r in enumerate(review['requests'])
+                   if r['status'] == 'failed' or (not failed_only and r['status'] != 'completed')]
+        if not targets:
+            raise ProjectError('沒有需要重試的範圍。')
+        settings = load_settings()
+        if not settings['key']:
+            raise ProjectError('請先設定 Gemini API Key；仍可人工校對。')
+        old_path = review.pop('progress_path', None)
+        job = self._start_gemini_job(settings['key'], review, targets)
+        if old_path:
+            # Old journal is no longer referenced; cleanup must not lose a running job.
+            try:
+                self._path(old_path).unlink(missing_ok=True)
+            except OSError:
+                pass
+        return job
 
     def finish_gemini_review(self, job: ReviewJob) -> str:
         if job is not self._gemini_job or not job.wait(0):
             raise ProjectError('Gemini 工作不屬於此專案或仍在執行。')
         review = job.review
+        progress_path = review.pop('progress_path', None)
+        if review.pop('checkpoint_error', False):
+            review['error'] = '' if review['status'] == 'completed' else '進度曾中斷；成功候選已保存，可續作未完成範圍。'
         manifest = self.state
         batch = next((b for b in manifest['batches'] if b['id'] == review['batch_id']), None)
         if batch is None:
             raise ProjectError('原批次已移除，請重新建立校對工作。')
         self._write_review(manifest, batch, review, [])
         self._gemini_job = None
+        if progress_path:
+            try:
+                self._path(progress_path).unlink(missing_ok=True)
+            except OSError:
+                pass  # Final immutable review is already committed.
         return review['id']
 
     def discard_gemini_review(self, job: ReviewJob) -> None:
@@ -755,6 +804,7 @@ class ProjectWorkflow:
             review = json.loads(self._read(ref))
             if review['id'] != ref['id'] or review['batch_id'] != batch_id:
                 raise ProjectError('Gemini 校對記錄與批次不符，請還原備份。')
+            review = self._gemini_progress(review)
             text = self._read(review['before']).decode('utf-8')
             self._read(review['expected']).decode('utf-8')
             if not 0 <= review['start'] < review['end'] <= len(text):
@@ -765,6 +815,7 @@ class ProjectWorkflow:
                         or paragraph['decision'] not in ('pending', 'accepted', 'rejected')
                         or (paragraph['candidate'] is not None and not isinstance(paragraph['candidate'], str))):
                     raise ProjectError('Gemini 校對段落損壞，請還原備份。')
+            self._validate_gemini_plan(review, text)
             for item in review['history']:
                 self._read(item['before']).decode('utf-8')
                 self._read(item['after']).decode('utf-8')
@@ -773,12 +824,68 @@ class ProjectWorkflow:
             reviews.append(review)
         return reviews
 
-    def _gemini_record(self, batch_id: str, review_id: str) -> dict:
+    def _gemini_progress(self, review: dict) -> dict:
+        if 'progress_path' not in review:
+            return review
+        path = self._path(review['progress_path'])
+        if path.exists():
+            try:
+                envelope = json.loads(path.read_bytes())
+                progress = envelope['review']
+                if (digest(encode(progress)) != envelope['sha256'] or any(
+                        progress[k] != review[k] for k in ('id', 'batch_id', 'before', 'expected',
+                            'revision', 'expected_revision', 'start', 'end', 'model', 'progress_path'))):
+                    raise ValueError()
+                if [(p['start'], p['end'], p['original'], p['decision']) for p in progress['paragraphs']] != [
+                        (p['start'], p['end'], p['original'], p['decision']) for p in review['paragraphs']]:
+                    raise ValueError()
+                review = progress
+            except (OSError, ValueError, KeyError, TypeError):
+                raise ProjectError('Gemini 進度檔損壞，請還原備份；原稿未變更。') from None
+        active = self._gemini_job
+        if review['status'] == 'running' and not (active and active.snapshot['id'] == review['id'] and not active.wait(0)):
+            review['status'] = 'interrupted'
+            review['error'] = '上次工作未完成；已保存成功候選，可繼續未完成範圍。'
+            for request in review['requests']:
+                if request['status'] == 'running':
+                    request['status'] = 'pending'
+        return review
+
+    @staticmethod
+    def _validate_gemini_plan(review: dict, text: str):
+        if 'requests' not in review:
+            return  # T07 immutable records remain readable.
+        cursor, first = review['start'], 0
+        paragraph_end = review['start']
+        for part in review['paragraphs']:
+            if part['start'] < paragraph_end or text[paragraph_end:part['start']].strip():
+                raise ProjectError('Gemini 分段計畫有遺漏或重複，請還原備份。')
+            paragraph_end = part['end']
+        if text[paragraph_end:review['end']].strip():
+            raise ProjectError('Gemini 分段計畫未覆蓋全文，請還原備份。')
+        for request in review['requests']:
+            if (request['start'] != cursor or request['first'] != first
+                    or not first < request['last'] <= len(review['paragraphs'])
+                    or not cursor < request['end'] <= review['end']
+                    or request['status'] not in ('pending', 'running', 'completed', 'failed', 'cancelled')):
+                raise ProjectError('Gemini 請求範圍損壞，請還原備份。')
+            for part in review['paragraphs'][first:request['last']]:
+                if not request['start'] <= part['start'] < part['end'] <= request['end']:
+                    raise ProjectError('Gemini 請求與段落範圍不符，請還原備份。')
+                if (request['status'] == 'completed') != (isinstance(part['candidate'], str) and bool(part['candidate'].strip())):
+                    raise ProjectError('Gemini 成功範圍缺少完整候選，請還原備份。')
+            cursor, first = request['end'], request['last']
+        if cursor != review['end'] or first != len(review['paragraphs']):
+            raise ProjectError('Gemini 請求計畫未覆蓋全文，請還原備份。')
+
+    def _gemini_record(self, batch_id: str, review_id: str, *, require_candidate: bool = True) -> dict:
         for review in self.gemini_reviews(batch_id):
             if review['id'] == review_id:
+                if self._gemini_job is not None and self._gemini_job.snapshot['id'] == review_id:
+                    raise ProjectError('請先等待並保存目前 Gemini 工作，再操作候選。')
                 if review.pop('stale'):
                     raise ProjectError('原稿版本已變更，候選與目前稿有差異。請比較後重新送出，不能直接覆蓋。')
-                if review['status'] != 'completed':
+                if require_candidate and not any(p['candidate'] is not None for p in review['paragraphs']):
                     raise ProjectError('本次 Gemini 尚無完整有效候選，原稿未變更。')
                 return review
         raise ProjectError('找不到 Gemini 候選校對稿。')
@@ -788,8 +895,10 @@ class ProjectWorkflow:
         if decision not in ('accepted', 'rejected') or (paragraph is not None and
                 (type(paragraph) is not int or not 0 <= paragraph < len(review['paragraphs']))):
             raise ProjectError('請選擇有效段落及採用或拒絕。')
+        if paragraph is not None and review['paragraphs'][paragraph]['candidate'] is None:
+            raise ProjectError('本段尚無成功候選，請先重試此範圍。')
         for index, part in enumerate(review['paragraphs']):
-            if index == paragraph or (paragraph is None and part['decision'] == 'pending'):
+            if part['candidate'] is not None and (index == paragraph or (paragraph is None and part['decision'] == 'pending')):
                 part['decision'] = decision
         text = self._read(review['before']).decode('utf-8')
         for part in reversed(review['paragraphs']):
@@ -804,6 +913,7 @@ class ProjectWorkflow:
         self._publish_gemini_draft(batch_id, review, self._read(review['before']).decode('utf-8'), 'undo')
 
     def _publish_gemini_draft(self, batch_id: str, review: dict, text: str, action: str):
+        review.pop('progress_path', None)
         manifest = self.state
         batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
         content = text.encode('utf-8')

@@ -1,0 +1,83 @@
+{
+  "removed": [
+    {
+      "removed": true,
+      "bytes": 130208763,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t08"
+    },
+    {
+      "removed": true,
+      "bytes": 98024029,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools"
+    },
+    {
+      "removed": true,
+      "bytes": 121410362,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime"
+    },
+    {
+      "removed": true,
+      "bytes": 14036962,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build"
+    },
+    {
+      "removed": true,
+      "bytes": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs"
+    },
+    {
+      "removed": true,
+      "bytes": 15556837,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.mypy_cache"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 440188
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 529638
+    }
+  ],
+  "exclusive_open_failures": [],
+  "package_files": 1152,
+  "computer_use_kernel": "reset",
+  "retained": [
+    "dist/T08",
+    "older dist releases",
+    "docs",
+    "outputs",
+    "user OCR models"
+  ],
+  "removed_bytes": 380206779,
+  "package_sha256": "44980C80AC28B939E9DDEEB0410F2F51F789451212F1C7F7754ED6B52F1E64F6",
+  "relevant_processes": [],
+  "external_pip_temps": [
+    {
+      "removed": true,
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\sandbox.{52c7e789-84af-4f8f-909c-48699a9069a6}\\AC\\Temp\\pip-build-tracker-yuk3t8fs",
+      "bytes": 0,
+      "existed": false
+    },
+    {
+      "removed": true,
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\sandbox.{52c7e789-84af-4f8f-909c-48699a9069a6}\\AC\\Temp\\pip-target-tgx147ei",
+      "bytes": 0,
+      "existed": false
+    },
+    {
+      "removed": true,
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\sandbox.{52c7e789-84af-4f8f-909c-48699a9069a6}\\AC\\Temp\\pip-ephem-wheel-cache-fi9qmb9b",
+      "bytes": 0,
+      "existed": false
+    },
+    {
+      "removed": true,
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\sandbox.{52c7e789-84af-4f8f-909c-48699a9069a6}\\AC\\Temp\\pip-install-dswcuwqg",
+      "bytes": 0,
+      "existed": false
+    }
+  ]
+}

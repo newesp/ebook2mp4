@@ -1,0 +1,25 @@
+test_cancel_keeps_window_responsive_and_preserves_completed_range (test_gemini_resume_desktop.ResumeDesktop.test_cancel_keeps_window_responsive_and_preserves_completed_range) ... ERROR
+test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls) ... ERROR
+
+======================================================================
+ERROR: test_cancel_keeps_window_responsive_and_preserves_completed_range (test_gemini_resume_desktop.ResumeDesktop.test_cancel_keeps_window_responsive_and_preserves_completed_range)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini_resume_desktop.py", line 82, in test_cancel_keeps_window_responsive_and_preserves_completed_range
+    self.assertIn('���� 1', dialog.progress.cget('text'))
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'ReviewDialog' object has no attribute 'progress'
+
+======================================================================
+ERROR: test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini_resume_desktop.py", line 49, in test_partial_progress_ranges_adoption_and_retry_controls
+    self.assertIn('���� 2', dialog.progress.cget('text'))
+                            ^^^^^^^^^^^^^^^
+AttributeError: 'ReviewDialog' object has no attribute 'progress'
+
+----------------------------------------------------------------------
+Ran 2 tests in 19.247s
+
+FAILED (errors=2)

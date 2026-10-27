@@ -1,0 +1,63 @@
+
+test_gemini.py
+test_cancel_and_failure_preserve_manual_work (test_gemini.GeminiJourney.test_cancel_and_failure_preserve_manual_work) ... ok
+test_edit_during_request_preserves_stale_candidate_without_overwrite (test_gemini.GeminiJourney.test_edit_during_request_preserves_stale_candidate_without_overwrite) ... ok
+test_local_encrypted_settings_connection_and_outgoing_selection (test_gemini.GeminiJourney.test_local_encrypted_settings_connection_and_outgoing_selection) ... ok
+test_pdf_batch_uses_same_review_and_portable_versions (test_gemini.GeminiJourney.test_pdf_batch_uses_same_review_and_portable_versions) ... ok
+test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic (test_gemini.GeminiJourney.test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic) ... ok
+test_selected_paragraph_decisions_undo_and_reopen (test_gemini.GeminiJourney.test_selected_paragraph_decisions_undo_and_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 6.311s
+
+OK
+
+test_gemini_resume.py
+test_cancel_keeps_checkpoint_and_late_output_is_not_reused (test_gemini_resume.LongDraft.test_cancel_keeps_checkpoint_and_late_output_is_not_reused) ... ok
+test_changed_source_blocks_resume_and_apply_without_losing_candidates (test_gemini_resume.LongDraft.test_changed_source_blocks_resume_and_apply_without_losing_candidates) ... ok
+test_final_save_recovers_accurate_status_after_checkpoint_write_failure (test_gemini_resume.LongDraft.test_final_save_recovers_accurate_status_after_checkpoint_write_failure) ... ok
+test_invalid_response_cannot_leave_half_of_request_as_success (test_gemini_resume.LongDraft.test_invalid_response_cannot_leave_half_of_request_as_success) ... ok
+test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) ... ok
+test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries (test_gemini_resume.LongDraft.test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries) ... ok
+test_oversized_paragraph_leading_space_is_never_sent_alone (test_gemini_resume.LongDraft.test_oversized_paragraph_leading_space_is_never_sent_alone) ... ok
+test_process_interruption_reopens_checkpoint_and_resumes_remaining_ranges (test_gemini_resume.LongDraft.test_process_interruption_reopens_checkpoint_and_resumes_remaining_ranges) ... ok
+test_selected_oversized_paragraph_covers_source_once_and_keeps_separators (test_gemini_resume.LongDraft.test_selected_oversized_paragraph_covers_source_once_and_keeps_separators) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 9.360s
+
+OK
+
+test_gemini_desktop.py
+test_deciding_older_candidate_keeps_same_candidate_selected (test_gemini_desktop.GeminiDesktop.test_deciding_older_candidate_keeps_same_candidate_selected) ... ok
+test_finished_candidate_can_be_discarded_when_another_window_changed_project (test_gemini_desktop.GeminiDesktop.test_finished_candidate_can_be_discarded_when_another_window_changed_project) ... ok
+test_malformed_local_settings_can_be_replaced_in_settings_dialog (test_gemini_desktop.GeminiDesktop.test_malformed_local_settings_can_be_replaced_in_settings_dialog) ... ok
+test_selected_text_preview_adopt_and_undo (test_gemini_desktop.GeminiDesktop.test_selected_text_preview_adopt_and_undo) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 6.076s
+
+OK
+
+test_gemini_resume_desktop.py
+test_cancel_keeps_window_responsive_and_preserves_completed_range (test_gemini_resume_desktop.ResumeDesktop.test_cancel_keeps_window_responsive_and_preserves_completed_range) ... ok
+test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 8.528s
+
+OK
+
+test_proofreading_optimization.py
+test_english_numbers_code_and_identifiers_are_preserved (test_proofreading_optimization.ProofreadingOptimization.test_english_numbers_code_and_identifiers_are_preserved) ... ok
+test_full_batch_script_guides_selected_candidate_without_changing_outside (test_proofreading_optimization.ProofreadingOptimization.test_full_batch_script_guides_selected_candidate_without_changing_outside) ... ok
+test_model_cannot_change_protected_identifiers (test_proofreading_optimization.ProofreadingOptimization.test_model_cannot_change_protected_identifiers) ... ok
+test_quotes_with_url_and_code_keep_protected_content_unchanged (test_proofreading_optimization.ProofreadingOptimization.test_quotes_with_url_and_code_keep_protected_content_unchanged) ... ok
+test_shared_han_does_not_vote_and_ellipsis_is_one_mark (test_proofreading_optimization.ProofreadingOptimization.test_shared_han_does_not_vote_and_ellipsis_is_one_mark) ... ok
+test_simplified_and_ambiguous_detection_and_explicit_preserve (test_proofreading_optimization.ProofreadingOptimization.test_simplified_and_ambiguous_detection_and_explicit_preserve) ... ok
+test_unicode_filenames_paths_and_english_apostrophes_survive (test_proofreading_optimization.ProofreadingOptimization.test_unicode_filenames_paths_and_english_apostrophes_survive) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 4.130s
+
+OK

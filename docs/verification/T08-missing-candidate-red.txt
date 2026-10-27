@@ -1,0 +1,15 @@
+test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls) ... FAIL
+
+======================================================================
+FAIL: test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini_resume_desktop.py", line 56, in test_partial_progress_ranges_adoption_and_retry_controls
+    self.assertFalse(dialog.original.tag_ranges('diff'))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<textindex object: '1.0'>, <textindex object: '1.3501'>) is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 3.414s
+
+FAILED (failures=1)

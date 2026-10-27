@@ -1,0 +1,18 @@
+test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries (test_gemini_resume.LongDraft.test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries) ... FAIL
+
+======================================================================
+FAIL: test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries (test_gemini_resume.LongDraft.test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini_resume.py", line 43, in test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries
+    self.assertEqual(job.state['status'], 'partial')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'completed' != 'partial'
+- completed
++ partial
+
+
+----------------------------------------------------------------------
+Ran 1 test in 6.559s
+
+FAILED (failures=1)

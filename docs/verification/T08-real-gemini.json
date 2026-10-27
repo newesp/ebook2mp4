@@ -1,0 +1,49 @@
+{
+  "synthetic_only": true,
+  "real_requests": 3,
+  "injected_failures": 1,
+  "model": "gemini-3.5-flash-lite",
+  "first_status": "partial",
+  "first_ranges": [
+    {
+      "first": 0,
+      "last": 1,
+      "status": "completed",
+      "error": "",
+      "notes": [],
+      "attempts": 1,
+      "start": 0,
+      "end": 3707
+    },
+    {
+      "first": 1,
+      "last": 2,
+      "status": "failed",
+      "error": "合成中段網路錯誤（驗證注入）",
+      "notes": [],
+      "attempts": 1,
+      "start": 3707,
+      "end": 7414
+    },
+    {
+      "first": 2,
+      "last": 3,
+      "status": "completed",
+      "error": "",
+      "notes": [],
+      "attempts": 1,
+      "start": 7414,
+      "end": 11379
+    }
+  ],
+  "draft_unchanged": true,
+  "retry_status": "completed",
+  "final_attempts": [
+    1,
+    2,
+    1
+  ],
+  "adoption_reopened": true,
+  "undo_preserved_source": true,
+  "seconds": 8.03
+}

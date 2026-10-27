@@ -1,0 +1,173 @@
+{
+  "modules": [
+    {
+      "module": "test_desktop.py",
+      "exit_code": 0,
+      "tests": 14,
+      "seconds": 23.022,
+      "skipped": 0
+    },
+    {
+      "module": "test_gemini.py",
+      "exit_code": 0,
+      "tests": 6,
+      "seconds": 6.407,
+      "skipped": 0
+    },
+    {
+      "module": "test_gemini_desktop.py",
+      "exit_code": 0,
+      "tests": 4,
+      "seconds": 6.09,
+      "skipped": 0
+    },
+    {
+      "module": "test_gemini_resume.py",
+      "exit_code": 0,
+      "tests": 9,
+      "seconds": 9.401,
+      "skipped": 0
+    },
+    {
+      "module": "test_gemini_resume_desktop.py",
+      "exit_code": 0,
+      "tests": 2,
+      "seconds": 10.271,
+      "skipped": 0
+    },
+    {
+      "module": "test_mixed_desktop.py",
+      "exit_code": 0,
+      "tests": 1,
+      "seconds": 10.378,
+      "skipped": 0
+    },
+    {
+      "module": "test_mixed_pdf.py",
+      "exit_code": 0,
+      "tests": 7,
+      "seconds": 12.079,
+      "skipped": 0
+    },
+    {
+      "module": "test_ocr.py",
+      "exit_code": 0,
+      "tests": 7,
+      "seconds": 49.25,
+      "skipped": 0
+    },
+    {
+      "module": "test_ocr_desktop.py",
+      "exit_code": 0,
+      "tests": 1,
+      "seconds": 4.511,
+      "skipped": 0
+    },
+    {
+      "module": "test_ocr_optimization.py",
+      "exit_code": 1,
+      "tests": 5,
+      "seconds": 2.323,
+      "skipped": 0
+    },
+    {
+      "module": "test_optimization_desktop.py",
+      "exit_code": 0,
+      "tests": 2,
+      "seconds": 5.212,
+      "skipped": 0
+    },
+    {
+      "module": "test_pdf.py",
+      "exit_code": 0,
+      "tests": 10,
+      "seconds": 6.855,
+      "skipped": 0
+    },
+    {
+      "module": "test_pdf_candidate_refinement.py",
+      "exit_code": 0,
+      "tests": 15,
+      "seconds": 12.586,
+      "skipped": 0
+    },
+    {
+      "module": "test_pdf_refinement_desktop.py",
+      "exit_code": 0,
+      "tests": 7,
+      "seconds": 20.803,
+      "skipped": 0
+    },
+    {
+      "module": "test_proofreading_optimization.py",
+      "exit_code": 0,
+      "tests": 7,
+      "seconds": 5.604,
+      "skipped": 0
+    },
+    {
+      "module": "test_status_help.py",
+      "exit_code": 0,
+      "tests": 3,
+      "seconds": 4.581,
+      "skipped": 0
+    },
+    {
+      "module": "test_terminology_desktop.py",
+      "exit_code": 0,
+      "tests": 2,
+      "seconds": 2.796,
+      "skipped": 0
+    },
+    {
+      "module": "test_ui_layout.py",
+      "exit_code": 0,
+      "tests": 5,
+      "seconds": 5.516,
+      "skipped": 0
+    },
+    {
+      "module": "test_ui_layout_gemini.py",
+      "exit_code": 0,
+      "tests": 3,
+      "seconds": 5.067,
+      "skipped": 0
+    },
+    {
+      "module": "test_ui_layout_pdf.py",
+      "exit_code": 0,
+      "tests": 3,
+      "seconds": 6.212,
+      "skipped": 0
+    },
+    {
+      "module": "test_workflow.py",
+      "exit_code": 0,
+      "tests": 26,
+      "seconds": 12.287,
+      "skipped": 0
+    }
+  ],
+  "total_tests": 139,
+  "failures": 1,
+  "skipped": 0,
+  "seconds": 221.253,
+  "isolation": "one interpreter per test module, per existing Tk lifecycle evidence",
+  "final_outcome": {
+    "total_tests": 139,
+    "passed": 139,
+    "skipped": 0,
+    "first_run_passed": 134,
+    "first_run_errors": 5,
+    "environment_fix": "Set EBOOK2MP4_OCR_HOME explicitly; no OCR code changes",
+    "corrected_module": "test_ocr_optimization.py",
+    "recheck_tests": 5,
+    "recheck_seconds": 57.198,
+    "recheck_log": "T08-ocr-environment-recheck.txt",
+    "final_changed_module_checks": [
+      "T08-final-resume-tests.txt",
+      "T08-final-normalization-tests.txt",
+      "T08-final-desktop-tests.txt"
+    ]
+  }
+}

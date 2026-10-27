@@ -113,10 +113,61 @@ def generate(key: str, model: str, paragraphs: list[str]) -> dict:
         connection.close()
 
 
+REQUEST_CHARACTERS = 6000
+
+
+def plan_requests(text: str, start: int, end: int) -> tuple[list[dict], list[dict]]:
+    """Keep blank separators local; split oversized paragraphs at sentence/space boundaries."""
+    paragraphs: list[dict] = []
+    offset = start
+    for part in re.split(r'(\r?\n[ \t]*\r?\n(?:[ \t]*\r?\n)*)', text[start:end]):
+        if part.strip():
+            while len(part) > REQUEST_CHARACTERS:
+                boundaries = list(re.finditer(r'[。！？!?；;\n]|[ \t]+', part[:REQUEST_CHARACTERS]))
+                cut = boundaries[-1].end() if boundaries else REQUEST_CHARACTERS
+                if part[:cut].strip():
+                    paragraphs.append(dict(start=offset, end=offset+cut, original=part[:cut],
+                                           candidate=None, decision='pending'))
+                offset += cut
+                part = part[cut:]
+            if part.strip():
+                paragraphs.append(dict(start=offset, end=offset+len(part), original=part,
+                                       candidate=None, decision='pending'))
+        offset += len(part)
+    requests: list[dict] = []
+    first, size = 0, 0
+    for index, paragraph in enumerate(paragraphs):
+        length = len(paragraph['original'])
+        if size and size + length > REQUEST_CHARACTERS:
+            requests.append(dict(first=first, last=index, status='pending', error='', notes=[], attempts=0))
+            first, size = index, 0
+        size += length
+    requests.append(dict(first=first, last=len(paragraphs), status='pending', error='', notes=[], attempts=0))
+    for index, request in enumerate(requests):
+        request['start'] = start if index == 0 else paragraphs[request['first']]['start']
+        request['end'] = end if index+1 == len(requests) else paragraphs[request['last']]['start']
+    return paragraphs, requests
+
+
+def review_status(review: dict, *, cancelled: bool = False) -> str:
+    states = [r['status'] for r in review['requests']]
+    if all(s == 'completed' for s in states):
+        return 'completed'
+    if cancelled:
+        return 'cancelled'
+    return 'partial' if 'completed' in states else 'failed'
+
+
 class ReviewJob:
-    """Background request; cancellation discards late output and close waits for release."""
-    def __init__(self, key: str, review: dict):
+    """Sequential bounded requests with atomic checkpoints and late-output cancellation."""
+    def __init__(self, key: str, review: dict, checkpoint=None, targets=None):
         self._review = deepcopy(review)
+        # Connection tests and T07 records remain compatible with the same worker.
+        self._review.setdefault('requests', [dict(first=0, last=len(review['paragraphs']),
+            start=review.get('start', 0), end=review.get('end', 0), status='pending',
+            error='', notes=[], attempts=0)])
+        self._targets = targets if targets is not None else list(range(len(self._review['requests'])))
+        self._checkpoint = checkpoint
         self._cancel = threading.Event()
         self._lock = threading.Lock()
         self._status = 'running'
@@ -127,7 +178,14 @@ class ReviewJob:
     @property
     def state(self) -> dict:
         with self._lock:
-            return dict(status=self._status, error=self._error)
+            requests = deepcopy(self._review['requests'])
+            return dict(status=self._status, error=self._error, requests=requests,
+                        completed=sum(r['status'] == 'completed' for r in requests), total=len(requests))
+
+    @property
+    def snapshot(self) -> dict:
+        with self._lock:
+            return deepcopy(self._review)
 
     def cancel(self):
         self._cancel.set()
@@ -140,35 +198,68 @@ class ReviewJob:
     def review(self) -> dict:
         if not self.wait(0):
             raise ProjectError('Gemini 仍在執行，請等待完成或取消。')
-        return deepcopy(self._review)
+        return self.snapshot
+
+    def _save(self):
+        if self._checkpoint:
+            self._checkpoint(self.snapshot)
+
+    def _candidates(self, key, parts):
+        result = generate(key, self._review['model'], [p['original'] for p in parts])
+        values, notes = result['paragraphs'], result['notes']
+        if (not isinstance(values, list) or len(values) != len(parts)
+                or any(not isinstance(v, str) or not v.strip() or '\x00' in v for v in values)
+                or not isinstance(notes, list) or any(not isinstance(n, str) for n in notes)):
+            raise ProjectError('Gemini 候選段落不完整，原稿未變更；可重試失敗範圍。')
+        normalized = []
+        for paragraph, text in zip(parts, values):
+            if 'normalization' in self._review:
+                from .proofreading import normalize, PROTECTED
+                if PROTECTED.findall(paragraph['original']) != PROTECTED.findall(text):
+                    raise ProjectError('候選改動網址、數字、檔名或程式碼等保護內容，未採用。請縮小範圍或人工校對。')
+                text = normalize(text, self._review['normalization'])
+            normalized.append(text)
+        return normalized, notes
 
     def _run(self, key):
-        status, error = 'completed', ''
         try:
-            result = generate(key, self._review['model'], [p['original'] for p in self._review['paragraphs']])
-            values, notes = result['paragraphs'], result['notes']
-            if (not isinstance(values, list) or len(values) != len(self._review['paragraphs'])
-                    or any(not isinstance(v, str) or not v.strip() or '\x00' in v for v in values)
-                    or not isinstance(notes, list) or any(not isinstance(n, str) for n in notes)):
-                raise ProjectError('Gemini 候選段落不完整，原稿未變更；請縮小範圍重試。')
-            for paragraph, text in zip(self._review['paragraphs'], values):
-                if 'normalization' in self._review:
-                    from .proofreading import normalize, PROTECTED
-                    if PROTECTED.findall(paragraph['original']) != PROTECTED.findall(text):
-                        raise ProjectError('候選改動網址、數字、檔名或程式碼等保護內容，未採用。請縮小範圍或人工校對。')
-                    text = normalize(text, self._review['normalization'])
-                paragraph['candidate'] = text
-            self._review['notes'] = notes
-        except ProjectError as exc:
-            status, error = 'failed', str(exc)
-        except Exception:
-            status, error = 'failed', 'Gemini 請求失敗，原稿未變更；請重新設定後再試。'
-        finally:
-            if self._cancel.is_set():
-                status, error = 'cancelled', '已取消；原稿未變更。'
-                for paragraph in self._review['paragraphs']:
-                    paragraph['candidate'] = None
-                self._review['notes'] = []
-            self._review.update(status=status, error=error)
+            for index in self._targets:
+                if self._cancel.is_set():
+                    break
+                with self._lock:
+                    request = self._review['requests'][index]
+                    request.update(status='running', error='')
+                    request['attempts'] += 1
+                    parts = deepcopy(self._review['paragraphs'][request['first']:request['last']])
+                error = ''
+                values, notes = [], []
+                try:
+                    values, notes = self._candidates(key, parts)
+                except ProjectError as exc:
+                    error = str(exc)
+                except Exception:
+                    error = 'Gemini 請求失敗，原稿未變更；請重新設定後再試。'
+                with self._lock:
+                    if self._cancel.is_set():
+                        request.update(status='cancelled', error='已取消；未採用晚到結果。')
+                    elif error:
+                        request.update(status='failed', error=error)
+                    else:
+                        for part, value in zip(self._review['paragraphs'][request['first']:request['last']], values):
+                            part['candidate'] = value
+                        request.update(status='completed', error='', notes=notes)
+                    self._review['notes'] = [n for r in self._review['requests'] for n in r['notes']]
+                self._save()
             with self._lock:
-                self._status, self._error = status, error
+                self._review['status'] = review_status(self._review, cancelled=self._cancel.is_set())
+                self._review['error'] = ('' if self._review['status'] == 'completed' else
+                    '已取消；成功候選保留，可繼續未完成範圍。' if self._cancel.is_set() else
+                    '部分範圍失敗；成功候選已保留，可重試失敗範圍。')
+            self._save()
+        except Exception:
+            with self._lock:
+                self._review.update(status=review_status(self._review, cancelled=self._cancel.is_set()),
+                    checkpoint_error=True, error='進度保存失敗；候選仍在記憶體，請重試保存後再關閉。')
+        finally:
+            with self._lock:
+                self._status, self._error = self._review['status'], self._review['error']
