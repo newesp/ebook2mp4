@@ -1,0 +1,36 @@
+{
+  "edge_tts": "7.3.1",
+  "voices": 322,
+  "locales": {
+    "zh-TW": 3,
+    "zh-CN": 8,
+    "en-": 47
+  },
+  "voice": "zh-TW-HsiaoChenNeural",
+  "settings": {
+    "provider": "edge-tts",
+    "voice": "zh-TW-HsiaoChenNeural",
+    "rate": "+0%",
+    "processing": "identity-v1",
+    "sentence_pause_ms": 0,
+    "paragraph_pause_ms": 500
+  },
+  "bytes": 105165,
+  "seconds": 4.898,
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1
+      }
+    ],
+    "format": {
+      "duration": "8.684000"
+    }
+  },
+  "synthetic_only": true,
+  "manual_listening": "pending user"
+}

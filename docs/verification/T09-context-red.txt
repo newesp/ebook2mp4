@@ -1,0 +1,15 @@
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... FAIL
+
+======================================================================
+FAIL: test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 119, in test_switching_batch_does_not_write_settings_through_old_dialog
+    self.assertIn('已切換', self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '已切換' not found in '語音設定已儲存。'
+
+----------------------------------------------------------------------
+Ran 1 test in 3.066s
+
+FAILED (failures=1)

@@ -1,0 +1,20 @@
+test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success) ... ok
+test_corrupt_audio_and_conflicting_save_keep_previous_success (test_voice.VoiceJourney.test_corrupt_audio_and_conflicting_save_keep_previous_success) ... ok
+test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing (test_voice.VoiceJourney.test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing) ... ok
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ok
+test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause (test_voice.VoiceJourney.test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause) ... ok
+test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup) ... ok
+test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 11.953s
+
+OK
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_selected_unsaved_text_consent_save_preview_and_play (test_voice_desktop.VoiceDesktop.test_selected_unsaved_text_consent_save_preview_and_play) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.782s
+
+OK

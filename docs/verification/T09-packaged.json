@@ -1,0 +1,33 @@
+{
+  "executable_sha256": "a0ed11fd92b2b9a4bc5e994b761b0468af041efb0a2e94869470937f42b0a8cc",
+  "preview_source": "example",
+  "characters": 57,
+  "settings": {
+    "provider": "edge-tts",
+    "voice": "zh-TW-HsiaoChenNeural",
+    "rate": "+0%",
+    "processing": "identity-v1",
+    "sentence_pause_ms": 0,
+    "paragraph_pause_ms": 500
+  },
+  "bytes": 106605,
+  "audio_sha256": "6c3c1c2d6739c2e2aa337dd266350aac26553eb4331d757faf09859f9c9d04e4",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "mp3",
+        "sample_rate": "24000"
+      }
+    ],
+    "format": {
+      "duration": "8.808000"
+    }
+  },
+  "native_file_picker_open": true,
+  "real_edge_from_packaged_ui": true,
+  "native_playback_invoked": true,
+  "normal_window_close": true,
+  "edge_metadata": true
+}

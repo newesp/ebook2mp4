@@ -2,6 +2,10 @@
 
 from PyInstaller.utils.hooks import collect_all, copy_metadata
 from pathlib import Path
+from importlib.metadata import version
+
+if version('edge-tts') != '7.3.1':
+    raise RuntimeError('Install packaging/requirements-runtime.txt in a clean build environment.')
 
 pdf_datas, pdf_binaries, pdf_imports = collect_all('pypdfium2')
 raw_datas, raw_binaries, raw_imports = collect_all('pypdfium2_raw')

@@ -1,0 +1,17 @@
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ERROR
+
+======================================================================
+ERROR: test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 37, in test_live_catalog_cache_and_independent_batch_defaults_survive_reopen
+    catalog = self.refresh_voices()
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 31, in refresh_voices
+    job = self.flow.start_voice_refresh()
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'start_voice_refresh'
+
+----------------------------------------------------------------------
+Ran 1 test in 1.340s
+
+FAILED (errors=1)

@@ -1,0 +1,8 @@
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_selected_unsaved_text_consent_save_preview_and_play (test_voice_desktop.VoiceDesktop.test_selected_unsaved_text_consent_save_preview_and_play) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.674s
+
+OK

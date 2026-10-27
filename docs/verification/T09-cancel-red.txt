@@ -1,0 +1,15 @@
+test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup) ... FAIL
+
+======================================================================
+FAIL: test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 225, in test_repeated_cancel_waits_for_service_resource_cleanup
+    self.assertTrue(released.is_set())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 2.545s
+
+FAILED (failures=1)

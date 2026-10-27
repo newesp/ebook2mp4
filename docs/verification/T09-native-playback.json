@@ -1,0 +1,6 @@
+{
+  "windows_mci_playing": true,
+  "stopped": true,
+  "exclusive_file_open_after_stop": true,
+  "manual_listening": "pending user"
+}

@@ -1,0 +1,26 @@
+test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success) ... ERROR
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ok
+test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result) ... ERROR
+
+======================================================================
+ERROR: test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 103, in test_cancel_failure_and_unavailable_voice_keep_last_success
+    job = self.flow.start_voice_preview(self.batch)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'start_voice_preview'. Did you mean: 'start_voice_refresh'?
+
+======================================================================
+ERROR: test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 80, in test_selected_preview_snapshots_requests_and_reopens_playable_result
+    job = self.flow.start_voice_preview(self.batch, start=start, end=start+15)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'start_voice_preview'. Did you mean: 'start_voice_refresh'?
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.386s
+
+FAILED (errors=2)

@@ -1,0 +1,56 @@
+{
+  "removed_bytes": 387853122,
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t09",
+      "bytes": 29382858,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "bytes": 102846460,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 101457920,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "bytes": 32438529,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "bytes": 0,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 272472,
+      "exists_after": false
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 44521,
+      "exists_after": false
+    }
+  ],
+  "exclusive_package_files": 1299,
+  "exclusive_failures": [],
+  "remaining_relevant_processes": [],
+  "preserved": [
+    "dist/T09",
+    "docs/verification/T09*",
+    "user models",
+    "outputs",
+    "prior distributions",
+    "preexisting UI/OCR changes"
+  ]
+}
