@@ -76,9 +76,10 @@ class VoiceDesktop(unittest.TestCase):
         with patch('ebook2mp4.voice_media.ctypes.WinDLL') as device:
             device.return_value.mciSendStringW.return_value = 0
             self.dialog.play_button.invoke()
-            self.assertIsNotNone(self.dialog.player.alias)
+            commands = [call.args[0] for call in device.return_value.mciSendStringW.call_args_list]
+            self.assertTrue(any(command.startswith('play ') for command in commands))
             self.dialog.stop_button.invoke()
-            self.assertIsNone(self.dialog.player.alias)
+            self.assertTrue(device.return_value.mciSendStringW.call_args.args[0].startswith('close '))
         self.dialog.close()
         self.assertIsNone(self.app.voice_dialog)
         reopened = ProjectWorkflow.open(self.app.flow.root)
@@ -104,6 +105,23 @@ class VoiceDesktop(unittest.TestCase):
             self.assertIsNone(self.app.voice_dialog)
             self.assertTrue(job.wait(0))
             self.assertEqual(job.state['status'], 'cancelled')
+
+    def test_switching_batch_does_not_write_settings_through_old_dialog(self):
+        self.choose()
+        previous = self.app.batch_id
+        second = self.path / 'second.txt'
+        second.write_bytes(b'Second batch.')
+        self.app.batch_id = self.app.flow.import_txt(self.app.flow.inspect_txt(second))
+        self.app.refresh()
+        self.root.update()
+        self.dialog.rate.set('+20%')
+        self.dialog.save_button.invoke()
+        self.assertIn('已切換', self.dialog.status.cget('text'))
+        self.assertEqual(self.app.flow.voice_settings(previous)['voice'], '')
+        self.assertEqual(self.app.flow.voice_settings(self.app.batch_id)['voice'], '')
+        self.dialog.consent.set(True)
+        self.dialog.preview_button.invoke()
+        self.assertIsNone(self.dialog.job)
 
 
 if __name__ == '__main__':

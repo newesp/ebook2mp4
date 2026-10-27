@@ -30,12 +30,15 @@ class VoiceDialog(tk.Toplevel):
         ttk.Label(header, text='Edge-TTS · 線上語音', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
         self.refresh_button = ttk.Button(header, text='更新線上音色', command=self.refresh_voices)
         self.refresh_button.grid(row=0, column=1)
+        batch = next((b['name'] for b in self.flow.state['batches'] if b['id'] == self.batch_id), '全書預設')
+        ttk.Label(header, text=f'所屬：{self.flow.state["name"]} ／ {batch}', wraplength=680).grid(
+            row=1, column=0, columnspan=2, sticky='ew', pady=4)
         self.cache_info = ttk.Label(header, text='', foreground='#58695f')
-        self.cache_info.grid(row=1, column=0, columnspan=2, sticky='ew', pady=5)
+        self.cache_info.grid(row=2, column=0, columnspan=2, sticky='ew', pady=5)
         self.locale = tk.StringVar(value='全部語系')
         self.filter = ttk.Combobox(header, textvariable=self.locale,
                                   values=('全部語系', '台灣華語', '中國普通話', '英文'), state='readonly', width=18)
-        self.filter.grid(row=2, column=0, sticky='w', pady=(0, 5))
+        self.filter.grid(row=3, column=0, sticky='w', pady=(0, 5))
         self.filter.bind('<<ComboboxSelected>>', lambda e: self.load_catalog())
         table = ttk.Frame(self, padding=(16, 0))
         table.grid(row=1, column=0, sticky='nsew')
@@ -159,6 +162,9 @@ class VoiceDialog(tk.Toplevel):
         return value
 
     def save(self):
+        if self.app.flow is not self.flow or self.app.batch_id != self.batch_id:
+            self.status.configure(text='主視窗的書籍或批次已切換；請關閉本視窗，回目前批次重新開啟語音設定。')
+            return False
         try:
             self.flow.save_voice_settings(self.voice.get(), '+0%' if self.rate.get() == '正常' else self.rate.get(),
                                           batch_id=self.batch_id if self.scope.get() == '本批次' else None)

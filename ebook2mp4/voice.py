@@ -93,7 +93,7 @@ class VoiceJob:
 
     def cancel(self):
         with self._lock:
-            if self._state['status'] not in ('running', 'cancelling'):
+            if self._state['status'] != 'running':
                 return
             self._cancel.set()
             self._state['status'] = 'cancelling'

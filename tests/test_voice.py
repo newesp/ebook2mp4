@@ -6,6 +6,7 @@ from unittest.mock import patch, AsyncMock
 import asyncio
 import subprocess
 import shutil
+import threading
 
 from ebook2mp4.workflow import ProjectWorkflow, ProjectError
 
@@ -198,6 +199,31 @@ class VoiceJourney(unittest.TestCase):
                 self.flow.finish_voice_preview(job)
             self.flow.discard_voice_preview(job)
         self.assertEqual(ProjectWorkflow.open(self.flow.root).voice_preview(self.batch)['id'], original['id'])
+
+    def test_repeated_cancel_waits_for_service_resource_cleanup(self):
+        self.refresh_voices()
+        self.flow.save_voice_settings('zh-TW-TestNeural', batch_id=self.batch)
+        started, cleaning, released = threading.Event(), threading.Event(), threading.Event()
+        class Service:
+            def __init__(self, *args, **kwargs): pass
+            async def stream(self):
+                started.set()
+                try:
+                    await asyncio.sleep(60)
+                    yield dict(type='audio', data=b'late')
+                finally:
+                    cleaning.set()
+                    await asyncio.sleep(.2)
+                    released.set()
+        with patch('edge_tts.Communicate', Service):
+            job = self.flow.start_voice_preview(self.batch)
+            self.assertTrue(started.wait(5))
+            job.cancel()
+            self.assertTrue(cleaning.wait(5))
+            job.cancel()
+            self.assertTrue(job.wait(5))
+            self.assertTrue(released.is_set())
+            self.flow.discard_voice_preview(job)
 
 
 if __name__ == '__main__':
