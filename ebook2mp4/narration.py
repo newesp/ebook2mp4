@@ -53,8 +53,7 @@ def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
             token_start = index
         if url is not None and index >= url.end():
             url = next(urls, None)
-        if url is not None and url.start() <= index < url.end():
-            continue
+        in_url = url is not None and url.start() <= index < url.end()
         if char in pairs:
             stack.append(pairs[char])
         elif stack and char == stack[-1]:
@@ -71,6 +70,10 @@ def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
                 stack.pop()
             else:
                 stack.append("'")
+        # URL punctuation cannot form a technical split, but surrounding closing
+        # quotes/brackets must still close the paragraph's paired context.
+        if in_url:
+            continue
         if not stack and (char in '。！？；，、' or char.isspace()):
             # Never divide a run of whitespace; keep it with the preceding text.
             if index + 1 == len(text) or not text[index+1].isspace():

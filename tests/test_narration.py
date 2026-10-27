@@ -197,3 +197,22 @@ class NarrationJourney(unittest.TestCase):
         self.assertTrue(reopened.narration_path(self.batch).is_file())
         self.assertTrue(reopened.narration_path(self.batch, 'srt').is_file())
         self.assertFalse((self.flow.root / '.production.lock').exists())
+
+    def test_surrounding_quotes_and_brackets_do_not_block_long_url_prose(self):
+        text = ('Read this link (https://example.com). This is a complete sentence. '
+                'Read "https://example.com" and \'https://example.com\'. Another sentence. ') * 60
+        self.prepare(text)
+        audio, requests = self.audio(), []
+        class Service:
+            def __init__(self, text, *args, **options): requests.append(text)
+            async def stream(self): yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service):
+            job = self.flow.start_narration(self.batch)
+            self.assertTrue(job.wait(30))
+            self.flow.finish_narration(job)
+        self.assertGreater(len(requests), 1)
+        self.assertEqual(''.join(requests), text)
+        for sent in requests:
+            self.assertEqual(sent.count('('), sent.count(')'))
+            self.assertEqual(sent.count('"') % 2, 0)
+            self.assertEqual(sent.count("'") % 2, 0)
