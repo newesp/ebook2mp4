@@ -52,5 +52,108 @@
     "outputs",
     "prior distributions",
     "preexisting UI/OCR changes"
-  ]
+  ],
+  "pip_download_cache": {
+    "removed_files": 24,
+    "bytes": 992811,
+    "selection": "12 newly downloaded wheel/metadata bodies identified by package and timestamp, plus paired HTTP headers; existing cache retained",
+    "files": [
+      {
+        "name": "f91fe1f4dd175f39593df95f30296abb1b0ff156f8528c1aca9adc45.body",
+        "bytes": 8534
+      },
+      {
+        "name": "f91fe1f4dd175f39593df95f30296abb1b0ff156f8528c1aca9adc45",
+        "bytes": 1273
+      },
+      {
+        "name": "e1eb2ce40e95ec18dc0e5a0a40b0c59f23e32d0b20a276d6ed913110.body",
+        "bytes": 5939
+      },
+      {
+        "name": "e1eb2ce40e95ec18dc0e5a0a40b0c59f23e32d0b20a276d6ed913110",
+        "bytes": 1305
+      },
+      {
+        "name": "c7c00da7ba2bda4efa4ad5eb6e33541541514de094c8088f07a49dc6.body",
+        "bytes": 46304
+      },
+      {
+        "name": "c7c00da7ba2bda4efa4ad5eb6e33541541514de094c8088f07a49dc6",
+        "bytes": 1193
+      },
+      {
+        "name": "c6b80e4e9599c3bb127217a1bb57833f3d7acc4c9e84696201d82334.body",
+        "bytes": 511755
+      },
+      {
+        "name": "c6b80e4e9599c3bb127217a1bb57833f3d7acc4c9e84696201d82334",
+        "bytes": 1226
+      },
+      {
+        "name": "c1c7beee5124def2e86473959a4f737b7335bb6116624f3ebdabaa48.body",
+        "bytes": 6110
+      },
+      {
+        "name": "c1c7beee5124def2e86473959a4f737b7335bb6116624f3ebdabaa48",
+        "bytes": 1270
+      },
+      {
+        "name": "ab037b35d162a08cd06f82636958881c24124415cdb2162aebded6a7.body",
+        "bytes": 115008
+      },
+      {
+        "name": "ab037b35d162a08cd06f82636958881c24124415cdb2162aebded6a7",
+        "bytes": 1235
+      },
+      {
+        "name": "469f2f29ab6c58a73fcaa6942fe4fff6fa077628b9283521484c036a.body",
+        "bytes": 38908
+      },
+      {
+        "name": "469f2f29ab6c58a73fcaa6942fe4fff6fa077628b9283521484c036a",
+        "bytes": 1225
+      },
+      {
+        "name": "443989e76bfd4e0f9f84547685a2ec07eb4699a646841aa52d66132e.body",
+        "bytes": 15038
+      },
+      {
+        "name": "443989e76bfd4e0f9f84547685a2ec07eb4699a646841aa52d66132e",
+        "bytes": 1260
+      },
+      {
+        "name": "3748994de67f8bc24475c1df27ca5e7708e265279c5b3b62338e7c76.body",
+        "bytes": 6291
+      },
+      {
+        "name": "3748994de67f8bc24475c1df27ca5e7708e265279c5b3b62338e7c76",
+        "bytes": 1272
+      },
+      {
+        "name": "285e881913c7d39b031377f3843e73bee8869fd461b7d25f37fc0b0c.body",
+        "bytes": 94544
+      },
+      {
+        "name": "285e881913c7d39b031377f3843e73bee8869fd461b7d25f37fc0b0c",
+        "bytes": 1226
+      },
+      {
+        "name": "2019d0020f8f5ace6592c7092cc240c3adba54e89a13871e8c23abd9.body",
+        "bytes": 103446
+      },
+      {
+        "name": "2019d0020f8f5ace6592c7092cc240c3adba54e89a13871e8c23abd9",
+        "bytes": 1188
+      },
+      {
+        "name": "17d3b7386b578d0b1b64088ca2a0b76ba5c07e918c4d48a624ce33bb.body",
+        "bytes": 25981
+      },
+      {
+        "name": "17d3b7386b578d0b1b64088ca2a0b76ba5c07e918c4d48a624ce33bb",
+        "bytes": 1280
+      }
+    ]
+  }
 }
