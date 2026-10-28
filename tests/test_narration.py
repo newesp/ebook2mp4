@@ -81,6 +81,7 @@ class NarrationJourney(unittest.TestCase):
             job = self.flow.start_narration(self.batch)
             self.assertTrue(job.wait(15))
             previous = self.flow.finish_narration(job)
+        self.flow.save_voice_settings('zh-TW-TestNeural', '+10%', batch_id=self.batch)
         calls = []
         class Failure(Service):
             def __init__(self, text, *args, **options):

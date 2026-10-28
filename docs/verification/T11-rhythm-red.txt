@@ -1,0 +1,18 @@
+test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption) ... FAIL
+
+======================================================================
+FAIL: test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_rhythm.py", line 30, in test_shared_sentence_audio_reused_and_silence_has_no_caption
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 6.516s
+
+FAILED (failures=1)

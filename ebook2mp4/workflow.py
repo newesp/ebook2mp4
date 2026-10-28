@@ -685,10 +685,15 @@ class ProjectWorkflow:
         owner = self._batch(batch_id) if batch_id is not None else self._manifest
         return settings(owner.get('voice_settings', DEFAULT_SETTINGS))
 
-    def save_voice_settings(self, voice: str, rate: str = '+0%', *, batch_id: str | None = None):
+    def save_voice_settings(self, voice: str, rate: str = '+0%', *, batch_id: str | None = None,
+                            sentence_pause_ms: int | None = None, paragraph_pause_ms: int | None = None):
         from .voice import require_voice, settings
         value = self.voice_settings(batch_id)
         value.update(voice=voice, rate=rate)
+        if sentence_pause_ms is not None:
+            value['sentence_pause_ms'] = sentence_pause_ms
+        if paragraph_pause_ms is not None:
+            value['paragraph_pause_ms'] = paragraph_pause_ms
         value = settings(value)
         require_voice(voice)
         manifest = self.state
@@ -717,11 +722,14 @@ class ProjectWorkflow:
             selected, source = draft[start:end], 'selection'
         if not selected.strip() or len(selected) > 3000:
             raise ProjectError('試聽請選擇 1～3,000 字元；超過時請縮短範圍，不會自動截斷。')
+        from .narration import plan
+        preview_plan = plan(selected, value, 'preview', batch_id)
         self._space(self.root, 25_000_000)
         snapshot = dict(id=uuid.uuid4().hex, batch_id=batch_id, created_at=now(), text=selected,
-                        source=source, start=start, end=end, revision=batch['revision'], settings=value)
+                        source=source, start=start, end=end, revision=batch['revision'], settings=value,
+                        rules=preview_plan['rules'], chunks=preview_plan['chunks'])
         async def operation():
-            audio = await synthesize(selected, value, tool)
+            audio = await synthesize(selected, value, tool, self._path(f'batches/{batch_id}/voice-blocks'))
             return snapshot, audio
         self._voice_job = VoiceJob(operation)
         return self._voice_job

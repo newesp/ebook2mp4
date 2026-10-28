@@ -5,7 +5,7 @@ import asyncio
 import ctypes
 import os
 from pathlib import Path
-import re
+import json
 import shutil
 import subprocess
 import sys
@@ -42,37 +42,75 @@ async def media_command(tool: str, arguments: list[str], *, timeout: float = 30)
             await process.communicate()
 
 
-async def synthesize(text: str, settings: dict, tool: str) -> bytes:
+async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None):
+    """Keep verified, immutable PCM speech independent of added pauses."""
     from .voice import edge_module
-    # Keep every character within a paragraph; only blank-line boundaries add silence.
-    paragraphs = [p for p in re.split(r'(?:\r?\n)[ \t]*(?:\r?\n)(?:[ \t]*\r?\n)*', text) if p.strip()]
-    edge = edge_module()
+    from .workflow import ProjectWorkflow, digest, encode
+    from aiohttp import ClientError
+    from edge_tts.exceptions import EdgeTTSException
+    key = digest(encode(dict(text=text, provider=settings['provider'], voice=settings['voice'],
+                             rate=settings['rate'], processing=settings['processing'],
+                             decoding='pcm-s16le-24000-v1')))
+    cache.mkdir(parents=True, exist_ok=True)
+    target, manifest = cache / (key + '.wav'), cache / (key + '.json')
+    try:
+        metadata = json.loads(manifest.read_bytes())
+        if digest(target.read_bytes()) == metadata['sha256']:
+            with wave.open(str(target), 'rb') as source:
+                if (source.getnchannels(), source.getsampwidth(), source.getframerate()) == (1, 2, 24000) and source.getnframes() > 0:
+                    return target, True
+    except (OSError, ValueError, KeyError, TypeError, EOFError, wave.Error):
+        pass  # Missing or damaged blocks are synthesized again; no corrupt reuse.
+    with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
+        raw, decoded = Path(directory) / 'speech.mp3', Path(directory) / 'speech.wav'
+        for attempt in range(1, 4):
+            if progress:
+                progress(attempt)
+            try:
+                async def receive():
+                    size = 0
+                    with raw.open('wb') as stream:
+                        speaker = edge_module().Communicate(text, settings['voice'], rate=settings['rate'],
+                                                            connect_timeout=10, receive_timeout=30)
+                        async for packet in speaker.stream():
+                            if packet['type'] == 'audio':
+                                size += len(packet['data'])
+                                if size > 30_000_000:
+                                    raise ProjectError('區塊音訊回應過大，請縮短段落後重試。')
+                                stream.write(packet['data'])
+                        if not size:
+                            raise ProjectError('Edge-TTS 未傳回音訊，請更新音色後重試。')
+                await asyncio.wait_for(receive(), 90)
+                break
+            except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException):
+                if attempt == 3:
+                    raise ProjectError('區塊連線或服務錯誤，3 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
+                await asyncio.sleep(attempt)
+        await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
+                                   '-c:a', 'pcm_s16le', str(decoded)])
+        with wave.open(str(decoded), 'rb') as source:
+            if source.getnframes() <= 0:
+                raise ProjectError('區塊音訊為空，請重試。')
+        data = decoded.read_bytes()
+        ProjectWorkflow._atomic(target, data)
+        ProjectWorkflow._atomic(manifest, encode(dict(sha256=digest(data))))
+    return target, False
+
+
+async def synthesize(text: str, settings: dict, tool: str, cache: Path) -> bytes:
+    from .narration import plan
+    chunks = plan(text, settings, 'preview', 'preview')['chunks']
     with tempfile.TemporaryDirectory(prefix='ebook2mp4-voice-') as directory:
         folder = Path(directory)
         pcm_file = folder / 'assembled.wav'
         with wave.open(str(pcm_file), 'wb') as assembled:
             assembled.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
-            for index, paragraph in enumerate(paragraphs):
-                raw, decoded = folder / 'chunk.mp3', folder / 'chunk.wav'
-                size = 0
-                with raw.open('wb') as stream:
-                    speaker = edge.Communicate(paragraph, settings['voice'], rate=settings['rate'],
-                                               connect_timeout=10, receive_timeout=30)
-                    async for chunk in speaker.stream():
-                        if chunk['type'] == 'audio':
-                            size += len(chunk['data'])
-                            if size > 20_000_000:
-                                raise ProjectError('試聽回應過大，請縮短選取文字後重試。')
-                            stream.write(chunk['data'])
-                if size == 0:
-                    raise ProjectError('Edge-TTS 未傳回音訊，音色可能已不可用。請更新音色後重試。')
-                await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le', str(decoded)])
+            for chunk in chunks:
+                decoded, _ = await speech_block(chunk['text'], settings, tool, cache)
                 with wave.open(str(decoded), 'rb') as source:
-                    if source.getnframes() == 0:
-                        raise ProjectError('試聽音訊為空，請重試。')
-                    assembled.writeframes(source.readframes(source.getnframes()))
-                if index < len(paragraphs) - 1:
-                    assembled.writeframes(b'\0\0' * (24 * settings['paragraph_pause_ms']))
+                    while data := source.readframes(24000):
+                        assembled.writeframesraw(data)
+                assembled.writeframesraw(b'\0\0' * (24 * chunk['pause_after_ms']))
         output = folder / 'preview.mp3'
         await media_command(tool, ['-y', '-i', str(pcm_file), '-c:a', 'libmp3lame', '-b:a', '96k', str(output)])
         await media_command(tool, ['-i', str(output), '-f', 'null', '-'])

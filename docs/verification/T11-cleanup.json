@@ -1,0 +1,41 @@
+{
+  "package_exclusive_files": 1299,
+  "bytes": 540122091.0,
+  "deleted": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\T11",
+      "remaining": false,
+      "bytes": 315972448.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "remaining": false,
+      "bytes": 121410362.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "remaining": false,
+      "bytes": 101457920.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp50mfs5ky",
+      "remaining": false,
+      "bytes": 7679.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "remaining": false,
+      "bytes": 600796.0
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "remaining": false,
+      "bytes": 672886.0
+    }
+  ],
+  "remaining_task_processes": [],
+  "package_locked_files": [],
+  "computer_use_kernel": "reset",
+  "remaining_test_directories": [],
+  "preserved": "dist/T11, final evidence, requirements, outputs, user models, pre-existing T10 app and other user processes"
+}

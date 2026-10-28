@@ -1,0 +1,11 @@
+{
+  "exe": "dist\\T11\\ebook2mp4\\ebook2mp4.exe",
+  "sha256": "DC01895B43772FBAFDFC9543F93E3AAF5CAD1CA808D6E36B6C5737F6816A8E01",
+  "startup": true,
+  "native_file_dialog": true,
+  "normal_exit": true,
+  "source_matches_final": true,
+  "packaged_full_synthesis": "not completed: native dialog automation could not reliably bind its edit field; no book was opened or sent",
+  "validated_synthesis": "real Edge through source workflow, three synthetic languages, see T11-real.json",
+  "manual_listening": "pending user"
+}

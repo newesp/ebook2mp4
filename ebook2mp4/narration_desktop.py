@@ -44,7 +44,7 @@ class NarrationDialog(tk.Toplevel):
         controls.columnconfigure(0, weight=1)
         self.reload_button = ttk.Button(controls, text='重讀目前確認稿與設定', command=self.load_source)
         self.reload_button.grid(row=0, column=0, sticky='w')
-        ttk.Label(controls, text='保留原文與自然韻律。句尾額外 0 ms；空白行段落額外 500 ms；末段不補。\n'
+        ttk.Label(controls, text='保留原文。非零句尾按安全句界合成；同邊界取較長值；最後不補靜音。\n'
                   '字幕以完整區塊實測時長顯示。長區塊字幕可能有多行。', wraplength=650,
                   foreground='#58695f').grid(row=1, column=0, sticky='ew', pady=6)
         self.consent = tk.BooleanVar(value=False)
@@ -80,7 +80,8 @@ class NarrationDialog(tk.Toplevel):
             self.source_text = self.flow.reading_text(self.batch_id)
             self.source_settings = self.flow.voice_settings(self.batch_id)
             self.source_info.configure(text=f'{len(self.source_text):,} 字元 · {self.source_settings["voice"] or "尚未選音色"} · '
-                                       f'{self.source_settings["rate"]} · 請先在語音試聽中儲存本批設定。')
+                                       f'{self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]} ms ／ '
+                                       f'段落 {self.source_settings["paragraph_pause_ms"]} ms · 請先儲存本批設定。')
             self.status.configure(text='請核對上方確認稿與音色，再勾選同意並產生。')
         except ProjectError as error:
             self.source_info.configure(text='目前沒有可合成的已確認稿。')

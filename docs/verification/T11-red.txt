@@ -1,0 +1,18 @@
+test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range) ... FAIL
+
+======================================================================
+FAIL: test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_rhythm.py", line 13, in test_pause_settings_persist_and_reject_out_of_range
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 6.541s
+
+FAILED (failures=1)

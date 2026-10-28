@@ -1,0 +1,289 @@
+{
+  "edge_tts": "7.3.1",
+  "synthetic_only": true,
+  "cases": [
+    {
+      "language": "zh",
+      "voice": "zh-TW-HsiaoChenNeural",
+      "text": "今天一起讀書。請慢慢呼吸。\n\n這是最後一段。",
+      "variants": [
+        {
+          "name": "natural",
+          "duration_ms": 6956,
+          "decoded_ms": 6956.0,
+          "chunks": [
+            {
+              "text": "今天一起讀書。請慢慢呼吸。",
+              "start_ms": 0,
+              "end_ms": 4224,
+              "duration_ms": 4224,
+              "pause_after_ms": 500,
+              "reused": false
+            },
+            {
+              "text": "這是最後一段。",
+              "start_ms": 4724,
+              "end_ms": 6956,
+              "duration_ms": 2232,
+              "pause_after_ms": 0,
+              "reused": false
+            }
+          ]
+        },
+        {
+          "name": "relaxed",
+          "duration_ms": 7576,
+          "decoded_ms": 7576.0,
+          "chunks": [
+            {
+              "text": "今天一起讀書。",
+              "start_ms": 0,
+              "end_ms": 2232,
+              "duration_ms": 2232,
+              "pause_after_ms": 200,
+              "reused": false
+            },
+            {
+              "text": "請慢慢呼吸。",
+              "start_ms": 2432,
+              "end_ms": 4544,
+              "duration_ms": 2112,
+              "pause_after_ms": 800,
+              "reused": false
+            },
+            {
+              "text": "這是最後一段。",
+              "start_ms": 5344,
+              "end_ms": 7576,
+              "duration_ms": 2232,
+              "pause_after_ms": 0,
+              "reused": true
+            }
+          ]
+        },
+        {
+          "name": "custom",
+          "duration_ms": 8176,
+          "decoded_ms": 8176.0,
+          "chunks": [
+            {
+              "text": "今天一起讀書。",
+              "start_ms": 0,
+              "end_ms": 2232,
+              "duration_ms": 2232,
+              "pause_after_ms": 600,
+              "reused": true
+            },
+            {
+              "text": "請慢慢呼吸。",
+              "start_ms": 2832,
+              "end_ms": 4944,
+              "duration_ms": 2112,
+              "pause_after_ms": 1000,
+              "reused": true
+            },
+            {
+              "text": "這是最後一段。",
+              "start_ms": 5944,
+              "end_ms": 8176,
+              "duration_ms": 2232,
+              "pause_after_ms": 0,
+              "reused": true
+            }
+          ]
+        }
+      ],
+      "preview_matches_formal": true,
+      "windows_play_stop": true
+    },
+    {
+      "language": "en",
+      "voice": "en-US-JennyNeural",
+      "text": "Hello, Dr. Chen. The value is 3.14.\n\nThis is the final paragraph.",
+      "variants": [
+        {
+          "name": "natural",
+          "duration_ms": 8540,
+          "decoded_ms": 8540.0,
+          "chunks": [
+            {
+              "text": "Hello, Dr. Chen. The value is 3.14.",
+              "start_ms": 0,
+              "end_ms": 5424,
+              "duration_ms": 5424,
+              "pause_after_ms": 500,
+              "reused": false
+            },
+            {
+              "text": "This is the final paragraph.",
+              "start_ms": 5924,
+              "end_ms": 8540,
+              "duration_ms": 2616,
+              "pause_after_ms": 0,
+              "reused": false
+            }
+          ]
+        },
+        {
+          "name": "relaxed",
+          "duration_ms": 9160,
+          "decoded_ms": 9160.0,
+          "chunks": [
+            {
+              "text": "Hello, Dr. Chen. ",
+              "start_ms": 0,
+              "end_ms": 2520,
+              "duration_ms": 2520,
+              "pause_after_ms": 200,
+              "reused": false
+            },
+            {
+              "text": "The value is 3.14.",
+              "start_ms": 2720,
+              "end_ms": 5744,
+              "duration_ms": 3024,
+              "pause_after_ms": 800,
+              "reused": false
+            },
+            {
+              "text": "This is the final paragraph.",
+              "start_ms": 6544,
+              "end_ms": 9160,
+              "duration_ms": 2616,
+              "pause_after_ms": 0,
+              "reused": true
+            }
+          ]
+        },
+        {
+          "name": "custom",
+          "duration_ms": 9760,
+          "decoded_ms": 9760.0,
+          "chunks": [
+            {
+              "text": "Hello, Dr. Chen. ",
+              "start_ms": 0,
+              "end_ms": 2520,
+              "duration_ms": 2520,
+              "pause_after_ms": 600,
+              "reused": true
+            },
+            {
+              "text": "The value is 3.14.",
+              "start_ms": 3120,
+              "end_ms": 6144,
+              "duration_ms": 3024,
+              "pause_after_ms": 1000,
+              "reused": true
+            },
+            {
+              "text": "This is the final paragraph.",
+              "start_ms": 7144,
+              "end_ms": 9760,
+              "duration_ms": 2616,
+              "pause_after_ms": 0,
+              "reused": true
+            }
+          ]
+        }
+      ],
+      "preview_matches_formal": true,
+      "windows_play_stop": true
+    },
+    {
+      "language": "mixed",
+      "voice": "zh-TW-HsiaoChenNeural",
+      "text": "現在開始。Hello, welcome to your audiobook.\n\n今天讀到這裡。",
+      "variants": [
+        {
+          "name": "natural",
+          "duration_ms": 7340,
+          "decoded_ms": 7340.0,
+          "chunks": [
+            {
+              "text": "現在開始。Hello, welcome to your audiobook.",
+              "start_ms": 0,
+              "end_ms": 4584,
+              "duration_ms": 4584,
+              "pause_after_ms": 500,
+              "reused": false
+            },
+            {
+              "text": "今天讀到這裡。",
+              "start_ms": 5084,
+              "end_ms": 7340,
+              "duration_ms": 2256,
+              "pause_after_ms": 0,
+              "reused": false
+            }
+          ]
+        },
+        {
+          "name": "relaxed",
+          "duration_ms": 7960,
+          "decoded_ms": 7960.0,
+          "chunks": [
+            {
+              "text": "現在開始。",
+              "start_ms": 0,
+              "end_ms": 1944,
+              "duration_ms": 1944,
+              "pause_after_ms": 200,
+              "reused": false
+            },
+            {
+              "text": "Hello, welcome to your audiobook.",
+              "start_ms": 2144,
+              "end_ms": 4904,
+              "duration_ms": 2760,
+              "pause_after_ms": 800,
+              "reused": false
+            },
+            {
+              "text": "今天讀到這裡。",
+              "start_ms": 5704,
+              "end_ms": 7960,
+              "duration_ms": 2256,
+              "pause_after_ms": 0,
+              "reused": true
+            }
+          ]
+        },
+        {
+          "name": "custom",
+          "duration_ms": 8560,
+          "decoded_ms": 8560.0,
+          "chunks": [
+            {
+              "text": "現在開始。",
+              "start_ms": 0,
+              "end_ms": 1944,
+              "duration_ms": 1944,
+              "pause_after_ms": 600,
+              "reused": true
+            },
+            {
+              "text": "Hello, welcome to your audiobook.",
+              "start_ms": 2544,
+              "end_ms": 5304,
+              "duration_ms": 2760,
+              "pause_after_ms": 1000,
+              "reused": true
+            },
+            {
+              "text": "今天讀到這裡。",
+              "start_ms": 6304,
+              "end_ms": 8560,
+              "duration_ms": 2256,
+              "pause_after_ms": 0,
+              "reused": true
+            }
+          ]
+        }
+      ],
+      "preview_matches_formal": true,
+      "windows_play_stop": true
+    }
+  ],
+  "manual_listening": "pending user"
+}

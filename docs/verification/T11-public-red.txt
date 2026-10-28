@@ -1,0 +1,29 @@
+test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range) ... ok
+test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption) ... FAIL
+
+======================================================================
+FAIL: test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_rhythm.py", line 44, in test_shared_sentence_audio_reused_and_silence_has_no_caption
+    self.assertEqual(requests, ['�Ĥ@�y�C', 'Hello Dr. Chen, 3.14 is fine!', '�̫�@�q�C'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['�Ĥ@�y�CHello Dr. Chen, 3.14 is fine!', '�̫�@�q�C'] != ['�Ĥ@�y�C', 'Hello Dr. Chen, 3.14 is fine!', '�̫�@�q�C']
+
+First differing element 0:
+'�Ĥ@�y�CHello Dr. Chen, 3.14 is fine!'
+'�Ĥ@�y�C'
+
+Second list contains 1 additional elements.
+First extra element 2:
+'�̫�@�q�C'
+
+- ['�Ĥ@�y�CHello Dr. Chen, 3.14 is fine!', '�̫�@�q�C']
++ ['�Ĥ@�y�C', 'Hello Dr. Chen, 3.14 is fine!', '�̫�@�q�C']
+?       ++++
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.652s
+
+FAILED (failures=1)

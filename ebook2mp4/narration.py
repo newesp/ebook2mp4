@@ -14,8 +14,8 @@ import uuid
 import wave
 
 from .workflow import ProjectError, ProjectWorkflow, digest, encode, now
-from .voice import VoiceJob, edge_module
-from .voice_media import media_command
+from .voice import VoiceJob
+from .voice_media import media_command, speech_block
 
 RULES: dict = dict(version='natural-block-v1', request_escaped_utf8_bytes=3000,
              sentence_pause_ms=0, paragraph_pause_ms=500, timing='measured-block-pcm',
@@ -98,12 +98,30 @@ def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
         if (not stack and char in '。！？；，、' and
                 (index+1 == len(text) or not text[index+1].isspace())):
             token_start = index + 1
-    return result, sentences, clauses
+    if text and text[-1] in '。！？.!?':
+        token = text[token_start:].rstrip(CLOSERS)
+        if token.lower() not in ABBREVIATIONS and not token.endswith(('..', '…')):
+            sentences.append(len(text))
+    # One spoken boundary includes its punctuation run, closing marks and spaces.
+    # Otherwise a quote followed by a space can become a whitespace-only request.
+    complete_sentences = set()
+    for end in sentences:
+        while (end < len(text) and not text[end-1].isspace()
+               and text[end] in CLOSERS + '。！？.!?'):
+            end += 1
+        while end < len(text) and text[end].isspace():
+            end += 1
+        complete_sentences.add(end)
+    return sorted(set(result)), sorted(complete_sentences), clauses
 
 
 def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
     if any(ord(c) < 32 and c not in '\r\n\t' for c in text):
         raise ProjectError('朗讀稿含語音服務不支援的控制字元，請修正後重新確認。')
+    from .voice import settings as validate_settings
+    settings = validate_settings(settings)
+    rules = dict(RULES, version='rhythm-block-v2', sentence_pause_ms=settings['sentence_pause_ms'],
+                 paragraph_pause_ms=settings['paragraph_pause_ms'])
     chunks: list[dict] = []
     # Separators are saved separately, so the exact confirmed text is recoverable.
     start = 0
@@ -140,23 +158,26 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
                     end = boundaries[at] if at >= 0 else offset
                 if end <= offset or not paragraph[offset:end].strip():
                     raise ProjectError('朗讀稿有過長且無法安全切分的引文、網址或句段。請加入自然分句後重新確認。')
+            if settings['sentence_pause_ms']:
+                next_sentence = bisect_right(sentences, offset)
+                if next_sentence < len(sentences) and sentences[next_sentence] < end:
+                    end = sentences[next_sentence]
             sent = paragraph[offset:end]
             chunks.append(dict(id=digest(f'{len(chunks)}\0{sent}'.encode('utf-8')), order=len(chunks),
                                text=sent, separator_after=separator if end == len(paragraph) else '',
                                text_sha256=digest(sent.encode('utf-8')),
-                               pause_after_ms=500 if end == len(paragraph) else 0))
-            if end != len(paragraph):
-                chunks[-1]['pause_after_ms'] = 0
+                               pause_after_ms=max(settings['sentence_pause_ms'] if end in sentences else 0,
+                                                  settings['paragraph_pause_ms'] if end == len(paragraph) else 0)))
             offset = end
     if not chunks or ''.join(c['text'] + c['separator_after'] for c in chunks) != text:
         raise ProjectError('朗讀稿無法完整規劃，請檢查段落內容。')
     chunks[-1]['pause_after_ms'] = 0
-    settings_hash, rules_hash = digest(encode(settings)), digest(encode(RULES))
+    settings_hash, rules_hash = digest(encode(settings)), digest(encode(rules))
     for chunk in chunks:
         chunk.update(settings_sha256=settings_hash, rules_sha256=rules_hash)
     return dict(id=uuid.uuid4().hex, batch_id=batch_id, reading_id=reading_id,
                 created_at=now(), text=text, text_sha256=digest(text.encode('utf-8')),
-                settings=settings, settings_sha256=settings_hash, rules=deepcopy(RULES),
+                settings=settings, settings_sha256=settings_hash, rules=rules,
                 rules_sha256=rules_hash, chunks=chunks)
 
 
@@ -201,9 +222,6 @@ class NarrationJob(VoiceJob):
         try:
             media.mkdir()
             self.save_progress()
-            edge = edge_module()
-            from aiohttp import ClientError
-            from edge_tts.exceptions import EdgeTTSException
             settings = self.snapshot['settings']
             cues, frames = [], 0
             assembled_path = media / 'assembled.wav'
@@ -211,33 +229,13 @@ class NarrationJob(VoiceJob):
                 assembled.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
                 for index, chunk in enumerate(self.report['chunks']):
                     self.save_progress(phase='線上合成', current=index + 1)
-                    raw, decoded = media / 'chunk.mp3', media / 'chunk.wav'
-                    for attempt in range(1, 4):
+                    def progress(attempt):
                         chunk.update(status='running', attempts=attempt)
                         self.save_progress()
-                        try:
-                            async def receive():
-                                size = 0
-                                with raw.open('wb') as stream:
-                                    speaker = edge.Communicate(chunk['text'], settings['voice'], rate=settings['rate'],
-                                                               connect_timeout=10, receive_timeout=30)
-                                    async for packet in speaker.stream():
-                                        if packet['type'] == 'audio':
-                                            size += len(packet['data'])
-                                            if size > 30_000_000:
-                                                raise ProjectError('區塊音訊回應過大，請縮短段落後重試。')
-                                            stream.write(packet['data'])
-                                    if not size:
-                                        raise ProjectError('Edge-TTS 未傳回音訊，請更新音色後重試。')
-                            await asyncio.wait_for(receive(), 90)
-                            break
-                        except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException):
-                            if attempt == 3:
-                                raise ProjectError('區塊連線或服務錯誤，3 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
-                            await asyncio.sleep(attempt)
-                    self.save_progress(phase='解碼區塊')
-                    await media_command(self.tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
-                                                    '-c:a', 'pcm_s16le', str(decoded)])
+                    decoded, reused = await speech_block(
+                        chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
+                        progress)
+                    chunk.update(reused=reused)
                     with wave.open(str(decoded), 'rb') as source:
                         count = source.getnframes()
                         if count <= 0:
@@ -255,8 +253,6 @@ class NarrationJob(VoiceJob):
                     assembled.writeframesraw(b'\0\0' * pause_frames)
                     frames += count + pause_frames
                     self.save_progress(completed=index + 1)
-                    raw.unlink()
-                    decoded.unlink()
             self.save_progress(phase='組裝 MP3／SRT')
             output = media / 'narration.mp3'
             await media_command(self.tool, ['-y', '-i', str(assembled_path), '-c:a', 'libmp3lame', '-b:a', '96k', str(output)], timeout=3600)

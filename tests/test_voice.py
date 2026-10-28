@@ -114,6 +114,7 @@ class VoiceJourney(unittest.TestCase):
             self.assertTrue(job.wait(5))
             self.assertEqual(job.state['status'], 'cancelled')
             self.flow.discard_voice_preview(job)
+        self.flow.save_voice_settings('zh-TW-TestNeural', '+10%', batch_id=self.batch)
         class Failure(Service):
             async def stream(self):
                 raise OSError('private manuscript should not appear')
@@ -185,6 +186,7 @@ class VoiceJourney(unittest.TestCase):
             job = self.flow.start_voice_preview(self.batch)
             self.assertTrue(job.wait(10))
             original = self.flow.finish_voice_preview(job)
+            self.flow.save_voice_settings('zh-TW-TestNeural', '+10%', batch_id=self.batch)
             data = b'not an MP3'
             job = self.flow.start_voice_preview(self.batch)
             self.assertTrue(job.wait(10))

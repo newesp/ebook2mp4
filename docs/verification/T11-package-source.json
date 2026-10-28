@@ -1,0 +1,8 @@
+{
+  "voice": true,
+  "voice_media": true,
+  "narration": true,
+  "voice_desktop": true,
+  "narration_desktop": true,
+  "workflow": true
+}

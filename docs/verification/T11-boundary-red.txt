@@ -1,0 +1,30 @@
+test_quotes_and_punctuation_run_are_one_sentence_boundary (test_rhythm.RhythmJourney.test_quotes_and_punctuation_run_are_one_sentence_boundary) ... FAIL
+
+======================================================================
+FAIL: test_quotes_and_punctuation_run_are_one_sentence_boundary (test_rhythm.RhythmJourney.test_quotes_and_punctuation_run_are_one_sentence_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_rhythm.py", line 81, in test_quotes_and_punctuation_run_are_one_sentence_boundary
+    self.assertEqual(requests, ['「第一句。」 ', '下一句！？ ', '最後一句。'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['「第一句。」', ' ', '下一句！', '？ ', '最後一句。'] != ['「第一句。」 ', '下一句！？ ', '最後一句。']
+
+First differing element 0:
+'「第一句。」'
+'「第一句。」 '
+
+First list contains 2 additional elements.
+First extra element 3:
+'？ '
+
+- ['「第一句。」', ' ', '下一句！', '？ ', '最後一句。']
+?           -----        ------
+
++ ['「第一句。」 ', '下一句！？ ', '最後一句。']
+?         +        ++
+
+
+----------------------------------------------------------------------
+Ran 1 test in 3.804s
+
+FAILED (failures=1)

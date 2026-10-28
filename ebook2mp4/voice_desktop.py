@@ -73,8 +73,25 @@ class VoiceDialog(tk.Toplevel):
         self.rate_control.pack(side='left')
         self.save_button = ttk.Button(settings_row, text='儲存設定', command=self.save)
         self.save_button.pack(side='right')
-        ttk.Label(controls, text='全書預設只供新批次沿用；既有批次請選「本批次」明確儲存。',
-                  foreground='#58695f', wraplength=680).grid(row=2, column=0, sticky='w')
+        rhythm = ttk.Frame(controls)
+        rhythm.grid(row=2, column=0, sticky='ew')
+        self.rhythm = tk.StringVar(value='自然')
+        self.rhythm_control = ttk.Combobox(rhythm, textvariable=self.rhythm, values=('自然', '舒緩', '自訂'),
+                                           state='readonly', width=7)
+        self.rhythm_control.grid(row=0, column=0, padx=(0, 8))
+        self.rhythm_control.bind('<<ComboboxSelected>>', self.apply_rhythm)
+        self.sentence_pause = tk.StringVar(value='0')
+        self.paragraph_pause = tk.StringVar(value='500')
+        ttk.Label(rhythm, text='句尾 ms (0～1500)').grid(row=0, column=1)
+        self.sentence_control = ttk.Spinbox(rhythm, from_=0, to=1500, increment=50,
+                                           textvariable=self.sentence_pause, width=6)
+        self.sentence_control.grid(row=0, column=2, padx=(5, 12))
+        ttk.Label(rhythm, text='段落 ms (0～3000)').grid(row=0, column=3)
+        self.paragraph_control = ttk.Spinbox(rhythm, from_=0, to=3000, increment=50,
+                                            textvariable=self.paragraph_pause, width=6)
+        self.paragraph_control.grid(row=0, column=4, padx=5)
+        ttk.Label(rhythm, text='全書預設僅供新批次；既有批次須儲存本批設定。',
+                  foreground='#58695f').grid(row=1, column=0, columnspan=5, sticky='w', pady=(4, 0))
         ttk.Separator(controls).grid(row=3, column=0, sticky='ew', pady=8)
         self.source = tk.StringVar(value='固定範例')
         source_row = ttk.Frame(controls)
@@ -85,8 +102,10 @@ class VoiceDialog(tk.Toplevel):
         self.outgoing.grid(row=5, column=0, sticky='ew', pady=5)
         self.text_info = ttk.Label(controls, text='', foreground='#58695f', wraplength=680)
         self.text_info.grid(row=6, column=0, sticky='w')
-        ttk.Label(controls, text='不轉字、不改標點；保留引擎韻律。句尾額外 0 ms，空白行段落額外 500 ms，末段不補。',
-                  wraplength=680, foreground='#58695f').grid(row=7, column=0, sticky='w', pady=4)
+        self.rules_info = ttk.Label(controls, text='原文不改；空白行分段；成對引文內不拆句。非零句尾按安全句界合成。\n'
+                                    '同邊界取較長值；最後不補靜音。試聽與正式共用；切分改變可能重合成。',
+                                    wraplength=680, foreground='#58695f')
+        self.rules_info.grid(row=7, column=0, sticky='w', pady=4)
         self.consent = tk.BooleanVar(value=False)
         ttk.Checkbutton(controls, text='我同意將上方試聽文字傳送至 Microsoft Edge 線上語音服務（需網路，不需 GPU）',
                         variable=self.consent).grid(row=8, column=0, sticky='w', pady=4)
@@ -107,6 +126,8 @@ class VoiceDialog(tk.Toplevel):
         self.status.grid(row=11, column=0, sticky='w')
         self.progress = ttk.Progressbar(controls, mode='indeterminate')
         self.progress.grid(row=12, column=0, sticky='ew', pady=(4, 0))
+        self.rhythm_traces = [(variable, variable.trace_add('write', self.rhythm_changed))
+                              for variable in (self.sentence_pause, self.paragraph_pause)]
         self.load_settings()
         self.load_catalog()
         self.prepare_text()
@@ -117,8 +138,20 @@ class VoiceDialog(tk.Toplevel):
         value = self.flow.voice_settings(self.batch_id if self.scope.get() == '本批次' else None)
         self.voice.set(value['voice'])
         self.rate.set('正常' if value['rate'] == '+0%' else value['rate'])
+        self.sentence_pause.set(str(value['sentence_pause_ms']))
+        self.paragraph_pause.set(str(value['paragraph_pause_ms']))
         self.load_catalog()
         self.update_controls()
+
+    def apply_rhythm(self, _event=None):
+        preset = {'自然': (0, 500), '舒緩': (200, 800)}.get(self.rhythm.get())
+        if preset:
+            self.sentence_pause.set(str(preset[0]))
+            self.paragraph_pause.set(str(preset[1]))
+
+    def rhythm_changed(self, *_args):
+        pair = (self.sentence_pause.get(), self.paragraph_pause.get())
+        self.rhythm.set({('0', '500'): '自然', ('200', '800'): '舒緩'}.get(pair, '自訂'))
 
     def load_catalog(self):
         try:
@@ -168,9 +201,14 @@ class VoiceDialog(tk.Toplevel):
             return False
         try:
             self.flow.save_voice_settings(self.voice.get(), '+0%' if self.rate.get() == '正常' else self.rate.get(),
-                                          batch_id=self.batch_id if self.scope.get() == '本批次' else None)
+                                          batch_id=self.batch_id if self.scope.get() == '本批次' else None,
+                                          sentence_pause_ms=int(self.sentence_pause.get()),
+                                          paragraph_pause_ms=int(self.paragraph_pause.get()))
             self.status.configure(text='語音設定已儲存。')
             return True
+        except ValueError:
+            self.status.configure(text='請選有效音色與語速；句尾須為 0～1500、段落須為 0～3000 的整數毫秒。')
+            return False
         except ProjectError as error:
             self.status.configure(text=str(error))
             return False
@@ -249,6 +287,9 @@ class VoiceDialog(tk.Toplevel):
             control.configure(state='disabled' if busy else 'normal')
         self.scope_control.configure(state='disabled' if busy else 'readonly')
         self.rate_control.configure(state='disabled' if busy else 'readonly')
+        self.rhythm_control.configure(state='disabled' if busy else 'readonly')
+        for spinbox in (self.sentence_control, self.paragraph_control):
+            spinbox.configure(state='disabled' if busy else 'normal')
         self.preview_button.configure(state='normal' if not busy and self.batch_id and self.scope.get() == '本批次' else 'disabled')
         self.cancel_button.configure(state='normal' if busy else 'disabled')
         if busy:
@@ -262,7 +303,7 @@ class VoiceDialog(tk.Toplevel):
             self.play_button.configure(state='normal' if preview else 'disabled')
             if preview:
                 value = preview['settings']
-                self.result_info.configure(text=f'上次成功：{value["voice"]} · {value["rate"]} · {len(preview["text"])} 字元 · {preview["source"]}')
+                self.result_info.configure(text=f'上次成功：{value["voice"]} · {value["rate"]} · {value["sentence_pause_ms"]}/{value["paragraph_pause_ms"]} ms · {len(preview["text"])} 字元 · {preview["source"]}')
             else:
                 self.result_info.configure(text='尚無成功試聽。正式合成請按上方「批次 MP3／SRT」。')
         except ProjectError as error:
@@ -308,6 +349,9 @@ class VoiceDialog(tk.Toplevel):
 
     def release(self):
         self.stop()
+        for variable, token in self.rhythm_traces:
+            variable.trace_remove('write', token)
+        self.rhythm_traces.clear()
         if self.timer is not None:
             self.after_cancel(self.timer)
             self.timer = None

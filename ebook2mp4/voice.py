@@ -22,9 +22,9 @@ def settings(value: dict) -> dict:
     if (not isinstance(value, dict) or set(value) != set(DEFAULT_SETTINGS)
             or value['provider'] != 'edge-tts' or not isinstance(value['voice'], str)
             or value['rate'] not in RATES or value['processing'] != 'identity-v1'
-            or type(value['sentence_pause_ms']) is not int or value['sentence_pause_ms'] != 0
-            or type(value['paragraph_pause_ms']) is not int or value['paragraph_pause_ms'] != 500):
-        raise ProjectError('語音設定無效，請重新選擇音色與語速。')
+            or type(value['sentence_pause_ms']) is not int or not 0 <= value['sentence_pause_ms'] <= 1500
+            or type(value['paragraph_pause_ms']) is not int or not 0 <= value['paragraph_pause_ms'] <= 3000):
+        raise ProjectError('語音設定無效。句尾須為 0～1,500 ms；段落須為 0～3,000 ms。')
     return deepcopy(value)
 
 
