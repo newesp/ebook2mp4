@@ -12,7 +12,7 @@ class RhythmDesktop(unittest.TestCase):
     def test_presets_custom_validation_and_minimum_window(self):
         self.choose()
         dialog = self.dialog
-        dialog.geometry('740x650')
+        self.root.geometry('1040x640')
         dialog.rhythm.set('舒緩')
         dialog.rhythm_control.event_generate('<<ComboboxSelected>>')
         self.root.update()
@@ -35,10 +35,16 @@ class RhythmDesktop(unittest.TestCase):
         self.root.update()
         self.assertIn('1000 ms', narration.source_info.cget('text'))
         self.assertIn('300 ms', narration.source_info.cget('text'))
+        self.app.voice_settings()
+        self.root.update()
         for control in (dialog.rhythm_control, dialog.sentence_control, dialog.paragraph_control,
                         dialog.save_button, dialog.preview_button, dialog.cancel_button,
                         dialog.play_button, dialog.status, dialog.rules_info):
             self.assertTrue(control.winfo_ismapped())
+            if control is not dialog.save_button:
+                top=control.winfo_rooty()-dialog.content.winfo_rooty()
+                dialog.canvas.yview_moveto(top/max(1,dialog.content.winfo_height()))
+                self.root.update()
             x = control.winfo_rootx() - dialog.winfo_rootx()
             y = control.winfo_rooty() - dialog.winfo_rooty()
             self.assertGreaterEqual(x, 0)

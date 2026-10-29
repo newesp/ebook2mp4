@@ -94,13 +94,15 @@ class ProviderDesktop(unittest.TestCase):
         self.assertEqual(self.dialog.current_settings()['model'],'future-voice-model')
         self.dialog.service.set('Edge-TTS');self.dialog.change_service()
         self.assertEqual(str(self.dialog.model_control.cget('state')),'disabled')
-        window=ServiceDialog(self.dialog);self.addCleanup(window.close);self.root.update()
+        self.dialog.manage_button.invoke()
+        window=self.app.production.service_page;self.addCleanup(window.close);self.root.update()
         self.assertEqual(int(window.status.grid_info()['row']),8)
 
     def test_check_service_reads_complete_chunked_json(self):
         import time
         from ebook2mp4.service_desktop import ServiceDialog
-        window=ServiceDialog(self.dialog);self.addCleanup(window.close)
+        self.dialog.manage_button.invoke()
+        window=self.app.production.service_page;self.addCleanup(window.close)
         window.key.set('test-key')
         class Content:
             async def iter_chunked(self,n):

@@ -851,6 +851,7 @@ class ProjectWorkflow:
 
     def start_narration(self, batch_id: str):
         from .narration import NarrationJob, plan
+        from .production_lock import ProductionLease
         from .voice import require_voice
         from .voice_media import ffmpeg
         if self._narration_job is not None:
@@ -867,8 +868,7 @@ class ProjectWorkflow:
         folder = self._path(f'batches/{batch_id}/narration-{snapshot["id"]}')
         committed = False
         try:
-            lock = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-            os.write(lock, str(os.getpid()).encode('ascii'))
+            lock = ProductionLease(lock_path)
             folder.mkdir()
             progress = folder / 'progress.json'
             self._atomic(progress, encode(dict(status='pending', chunks=[])))
@@ -883,20 +883,45 @@ class ProjectWorkflow:
             job = NarrationJob(snapshot, folder, tool, lock, lock_path)
             self._narration_job = job
             return job
-        except FileExistsError:
-            raise ProjectError('專案已有產生成品任務。若程序曾中斷，請關閉所有視窗後移除 .production.lock 再重開。') from None
         except OSError:
             raise ProjectError('無法準備合成任務，請檢查磁碟空間與寫入權限。') from None
         finally:
             if self._narration_job is None and lock is not None:
-                os.close(lock)
-                lock_path.unlink(missing_ok=True)
+                lock.release()
                 if not committed and folder.exists():
                     shutil.rmtree(folder)
 
     def narration_runs(self, batch_id: str) -> list[dict]:
         from .narration import read_run
         return [read_run(self, ref) for ref in self._batch(batch_id).get('narration_runs', [])]
+
+    def resume_narration(self, batch_id: str, run_id: str, *, allow_network: bool = True):
+        """Resume the immutable plan, validating cached speech before every reuse."""
+        from .narration import NarrationJob, read_run
+        from .production_lock import ProductionLease
+        from .voice_media import ffmpeg
+        if self._narration_job is not None:
+            raise ProjectError('已有產生成品任務，請先保存或捨棄結果。')
+        ref = next((r for r in self._batch(batch_id).get('narration_runs', []) if r['id'] == run_id), None)
+        if ref is None:
+            raise ProjectError('找不到這個合成任務，請重新開啟專案。')
+        run = read_run(self, ref, verify_audio=False)
+        if run['stale']:
+            raise ProjectError('稿件或語音設定已變更，請核對目前稿件與設定後重新開始。')
+        if run['published']:
+            raise ProjectError('任務已完成並發布，請直接使用成功成品。')
+        tool = ffmpeg()
+        self._space(self.root, 25_000_000)
+        lock_path = self.root / '.production.lock'
+        lease = ProductionLease(lock_path)
+        try:
+            folder = self._path(ref['path']).parent
+            job = NarrationJob(run['snapshot'], folder, tool, lease, lock_path, previous=run['progress'],allow_network=allow_network)
+            self._narration_job = job
+            return job
+        except Exception:
+            lease.release()
+            raise
 
     def finish_narration(self, job: NarrationJob) -> dict:
         if job is not self._narration_job or not job.wait(0):
@@ -917,7 +942,9 @@ class ProjectWorkflow:
             path = job.folder / 'media' / ('narration.' + kind)
             snapshot[kind] = dict(path=path.relative_to(self.root).as_posix(), sha256=digest(path.read_bytes()))
         manifest = self.state
-        next(b for b in manifest['batches'] if b['id'] == batch_id)['narration'] = snapshot
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        batch['narration'] = snapshot
+        next(r for r in batch['narration_runs'] if r['id'] == snapshot['id'])['published'] = True
         self._commit(manifest, [])
         job.published = True
         job.release(discard=False)

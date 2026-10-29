@@ -7,56 +7,51 @@ from tkinter import messagebox, ttk
 from .workflow import ProjectError
 from .voice import EXAMPLE, RATES
 from .voice_media import PreviewPlayer
+from .production_desktop import ScrollPage
 
 
-class VoiceDialog(tk.Toplevel):
+class VoiceDialog(ScrollPage):
     def __init__(self, app):
-        super().__init__(app.root)
+        super().__init__(app.production.host)
         self.app, self.flow, self.batch_id = app, app.flow, app.batch_id
         self.job = None
         self.kind = ''
         self.timer = None
         self.closing = False
         self.player = PreviewPlayer()
-        self.title('語音設定與短文試聽')
-        self.geometry('820x730')
-        self.minsize(740, 650)
-        self.protocol('WM_DELETE_WINDOW', self.close)
-        self.minsize(1100, 740)
         from .tts_services import MODELS
-        self.columnconfigure(0, weight=2)
-        self.columnconfigure(1, weight=3)
-        self.columnconfigure(2, weight=4)
-        self.rowconfigure(1, weight=1)
-        ttk.Label(self, text='語音設定與試聽 · 由左往右設定，再往下製作', style='Heading.TLabel').grid(row=0,column=0,columnspan=3,sticky='w',padx=16,pady=16)
-        left=ttk.LabelFrame(self,text='1 選擇服務',padding=16)
+        for column in range(3):
+            self.content.columnconfigure(column, weight=1, uniform='voice')
+        batch_name=next((b['name'] for b in self.flow.state['batches'] if b['id']==self.batch_id),'全書預設')
+        ttk.Label(self.content, text=f'{batch_name}｜語音設定與試聽', style='Heading.TLabel').grid(row=0,column=0,columnspan=3,sticky='w',padx=12,pady=12)
+        left=ttk.LabelFrame(self.content,text='1 選擇服務',padding=12)
         left.grid(row=1,column=0,sticky='nsew',padx=(16,8))
         left.columnconfigure(0,weight=1)
         self.service=tk.StringVar(value='edge-tts')
-        self.service_control=ttk.Combobox(left,textvariable=self.service,state='readonly',width=28)
+        self.service_control=ttk.Combobox(left,textvariable=self.service,state='readonly',width=16)
         self.service_control.grid(row=0,column=0,sticky='ew',pady=6)
         self.service_control.bind('<<ComboboxSelected>>',self.change_service)
         self.manage_button=ttk.Button(left,text='新增／管理服務…',command=self.manage_services)
         self.manage_button.grid(row=1,column=0,sticky='ew',pady=8)
         ttk.Label(left,text='模型（可選擇或直接輸入）').grid(row=2,column=0,sticky='w',pady=(18,4))
         self.model=tk.StringVar()
-        self.model_control=ttk.Combobox(left,textvariable=self.model,values=MODELS,width=28)
+        self.model_control=ttk.Combobox(left,textvariable=self.model,values=MODELS,width=16)
         self.model_control.grid(row=3,column=0,sticky='ew')
         ttk.Label(left,text='新模型可直接輸入 ID。\n試聽可能產生費用；不自動換模型。',wraplength=260).grid(row=4,column=0,sticky='w',pady=8)
         self.refresh_button=ttk.Button(left,text='更新 Edge 線上音色',command=self.refresh_voices)
         self.refresh_button.grid(row=5,column=0,sticky='ew',pady=8)
         self.cache_info=ttk.Label(left,text='',wraplength=260)
         self.cache_info.grid(row=6,column=0,sticky='ew')
-        middle=ttk.LabelFrame(self,text='2 選擇聲音與節奏',padding=16)
+        middle=ttk.LabelFrame(self.content,text='2 選擇聲音與節奏',padding=12)
         middle.grid(row=1,column=1,sticky='nsew',padx=8)
         middle.columnconfigure(0,weight=1)
         middle.rowconfigure(1,weight=1)
         self.locale=tk.StringVar(value='全部語系')
-        self.filter=ttk.Combobox(middle,textvariable=self.locale,values=('全部語系','台灣華語','中國普通話','英文'),state='readonly')
+        self.filter=ttk.Combobox(middle,textvariable=self.locale,values=('全部語系','台灣華語','中國普通話','英文'),state='readonly',width=16)
         self.filter.grid(row=0,column=0,sticky='ew',pady=4)
         self.filter.bind('<<ComboboxSelected>>',lambda e:self.load_catalog())
         self.voices=ttk.Treeview(middle,columns=('name','locale','gender'),show='headings',height=5,selectmode='browse')
-        for key,label,width in (('name','音色',200),('locale','語系',70),('gender','性別',60)):
+        for key,label,width in (('name','音色',100),('locale','語系',50),('gender','性別',45)):
             self.voices.heading(key,text=label)
             self.voices.column(key,width=width,minwidth=40)
         self.voices.grid(row=1,column=0,sticky='nsew')
@@ -81,7 +76,7 @@ class VoiceDialog(tk.Toplevel):
         ttk.Label(pauses,text='段落 ms').grid(row=1,column=0)
         self.paragraph_control=ttk.Spinbox(pauses,from_=0,to=3000,textvariable=self.paragraph_pause,width=6)
         self.paragraph_control.grid(row=1,column=1,padx=4,pady=4)
-        controls=ttk.LabelFrame(self,text='3 編輯文字並試聽',padding=16)
+        controls=ttk.LabelFrame(self.content,text='3 編輯文字並試聽',padding=12)
         controls.grid(row=1,column=2,sticky='nsew',padx=(8,16))
         controls.columnconfigure(0,weight=1);controls.rowconfigure(0,weight=1)
         self.outgoing=tk.Text(controls,height=8,width=20,wrap='word',font=('Microsoft JhengHei',11))
@@ -91,7 +86,7 @@ class VoiceDialog(tk.Toplevel):
         self.rules_info=ttk.Label(controls,text='試聽不改校對稿。相同邊界取較長停頓，最後不補靜音。',wraplength=400)
         self.rules_info.grid(row=2,column=0,sticky='ew',pady=6)
         self.consent=tk.BooleanVar(value=True)
-        self.consent_control=ttk.Checkbutton(controls,text='同意將試聽文字傳送至所選服務（可能計費）',variable=self.consent)
+        self.consent_control=ttk.Checkbutton(controls,text='同意傳送試聽文字（可能計費）',variable=self.consent)
         self.consent_control.grid(row=3,column=0,sticky='w',pady=6)
         actions=ttk.Frame(controls);actions.grid(row=4,column=0,sticky='ew')
         self.preview_button=ttk.Button(actions,text='產生並播放試聽',command=self.preview,style='Primary.TButton');self.preview_button.grid(row=0,column=0,pady=4,sticky='w')
@@ -101,14 +96,15 @@ class VoiceDialog(tk.Toplevel):
         self.result_info=ttk.Label(controls,text='',wraplength=400);self.result_info.grid(row=5,column=0,sticky='ew',pady=6)
         self.status=ttk.Label(controls,text='請選擇服務與音色。',wraplength=400);self.status.grid(row=6,column=0,sticky='ew')
         self.progress=ttk.Progressbar(controls,mode='indeterminate');self.progress.grid(row=7,column=0,sticky='ew',pady=6)
-        footer=ttk.LabelFrame(self,text='4 儲存設定，前往製作',padding=12)
-        footer.grid(row=2,column=0,columnspan=3,sticky='ew',padx=16,pady=16)
+        footer=ttk.LabelFrame(self,text='4 儲存設定，前往製作',padding=8)
+        footer.grid(row=1,column=0,columnspan=2,sticky='ew',padx=8,pady=8)
+        footer.columnconfigure(1,weight=1)
         self.scope=tk.StringVar(value='本批次' if self.batch_id else '全書預設')
         self.scope_control=ttk.Combobox(footer,textvariable=self.scope,values=('本批次','全書預設') if self.batch_id else ('全書預設',),state='readonly',width=12)
-        self.scope_control.pack(side='left');self.scope_control.bind('<<ComboboxSelected>>',lambda e:self.load_settings())
-        self.save_button=ttk.Button(footer,text='只儲存設定',command=self.save);self.save_button.pack(side='left',padx=8)
-        ttk.Button(footer,text='關閉',command=self.close).pack(side='right')
-        self.produce_button=ttk.Button(footer,text='儲存並前往製作 →',command=self.save_and_produce,style='Primary.TButton');self.produce_button.pack(side='right',padx=8)
+        self.scope_control.grid(row=0,column=0,sticky='w');self.scope_control.bind('<<ComboboxSelected>>',lambda e:self.load_settings())
+        self.save_button=ttk.Button(footer,text='只儲存設定',command=self.save);self.save_button.grid(row=0,column=1,sticky='w',padx=8)
+        ttk.Button(footer,text='← 返回確認朗讀稿',command=lambda:self.app.show_step(3)).grid(row=1,column=0,columnspan=2,sticky='w',pady=(8,0))
+        self.produce_button=ttk.Button(footer,text='儲存並前往製作 →',command=self.save_and_produce,style='Primary.TButton');self.produce_button.grid(row=1,column=2,sticky='e',pady=(8,0))
         self.rhythm_traces = [(variable, variable.trace_add('write', self.rhythm_changed))
                               for variable in (self.sentence_pause, self.paragraph_pause)]
         self.load_settings()
@@ -116,7 +112,19 @@ class VoiceDialog(tk.Toplevel):
         self.prepare_text()
         self.load_result()
         self.update_controls()
-        self.after_idle(lambda: self.state('zoomed') if self.winfo_exists() else None)
+        self.sections = (left, middle, controls)
+        self.content.bind('<Configure>', self.reflow, add='+')
+        self.bind_scroll()
+
+    def reflow(self, event):
+        columns = 3 if event.width >= 1080 else 2 if event.width >= 700 else 1
+        for column in range(3):
+            self.content.columnconfigure(column, weight=1 if column < columns else 0, uniform='voice' if column < columns else '')
+        for index, section in enumerate(self.sections):
+            section.grid(row=1+index//columns,column=index%columns,sticky='nsew',padx=8,pady=8)
+        width = max(180, event.width//columns-64)
+        for label in (self.cache_info,self.rules_info,self.status,self.result_info,self.text_info):
+            label.configure(wraplength=width)
 
     def reload_services(self):
         from .tts_services import profiles
@@ -150,8 +158,7 @@ class VoiceDialog(tk.Toplevel):
         if self.save(announce=False): self.app.narration()
 
     def manage_services(self):
-        from .service_desktop import ServiceDialog
-        ServiceDialog(self)
+        self.app.production.manage_services(self)
 
     def load_settings(self):
         value = self.flow.voice_settings(self.batch_id if self.scope.get() == '本批次' else None)
@@ -303,7 +310,7 @@ class VoiceDialog(tk.Toplevel):
                 self.status.configure(text='試聽已產生。' if state['status'] == 'completed' and self.kind == 'preview'
                                       else '音色清單已更新；請明確選擇音色。' if state['status'] == 'completed'
                                       else '已取消；上一份成功結果保留。' if state['status'] == 'cancelled' else state['error'])
-                if state['status'] == 'completed' and self.kind == 'preview' and not self.closing:
+                if state['status'] == 'completed' and self.kind == 'preview' and not self.closing and self.winfo_ismapped():
                     self.play()
                 if not self.closing:
                     self.app.notify(self.status.cget('text'), owner=self,
@@ -387,10 +394,11 @@ class VoiceDialog(tk.Toplevel):
                 return
             if self.kind == 'preview':
                 if not messagebox.askyesno('捨棄本次試聽', '關閉並捨棄本次尚未保存的試聽？上一份成功結果保留。', parent=self):
-                    return
+                    return False
                 self.flow.discard_voice_preview(self.job)
             self.job = None
         self.release()
+        return True
 
     def release(self):
         self.stop()

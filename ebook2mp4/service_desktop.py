@@ -5,11 +5,12 @@ from .workflow import ProjectError
 from .tts_services import profiles, save_profile
 
 
-class ServiceDialog(tk.Toplevel):
-    def __init__(self, owner):
-        super().__init__(owner)
-        self.title('新增／管理 TTS 服務');self.geometry('820x540');self.owner=owner;self.job=None;self.identity=None;self.timer=None
-        self.protocol('WM_DELETE_WINDOW',self.close)
+class ServiceDialog(ttk.Frame):
+    def __init__(self, owner, *, parent=None, on_return=None):
+        super().__init__(parent if parent is not None else owner)
+        self.on_return=on_return;self.owner=owner;self.job=None;self.identity=None;self.timer=None
+        if parent is None:
+            self.pack(fill='both',expand=True)
         self.columnconfigure(0,weight=1)
         form=ttk.Frame(self,padding=20);form.grid(sticky='nsew');form.columnconfigure(1,weight=1)
         ttk.Label(form,text='1 選服務 → 2 填資料 → 3 檢查服務並返回試聽',style='Heading.TLabel').grid(row=0,column=0,columnspan=2,pady=12)
@@ -87,7 +88,7 @@ class ServiceDialog(tk.Toplevel):
         try:
             identity=save_profile(self.name.get(),{'Google Gemini TTS':'gemini-tts','Fish Audio':'fish-audio'}[self.provider.get()],'' if self.reuse.get() else self.key.get(),self.reuse.get(),self.identity)
             self.identity=identity
-            self.key.set('');self.owner.reload_services();self.owner.service.set(self.owner.service_labels[identity]);self.owner.change_service();self.destroy()
+            self.key.set('');self.owner.reload_services();self.owner.service.set(self.owner.service_labels[identity]);self.owner.change_service();self.close()
         except (ProjectError,OSError) as error:self.status.configure(text=str(error) if isinstance(error,ProjectError) else '無法儲存本機服務設定。')
 
 
@@ -119,3 +120,4 @@ class ServiceDialog(tk.Toplevel):
             if not self.job.wait(0):self.timer=self.after(100,self.close);return
             self.job=None
         self.key.set('');self.destroy()
+        if self.on_return is not None:self.on_return()

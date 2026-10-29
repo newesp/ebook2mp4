@@ -189,14 +189,18 @@ def timestamp(milliseconds: int) -> str:
 
 
 class NarrationJob(VoiceJob):
-    def __init__(self, snapshot: dict, folder: Path, tool: str, lock: int, lock_path: Path):
+    def __init__(self, snapshot: dict, folder: Path, tool: str, lock, lock_path: Path, previous=None, *, allow_network=True):
         self.snapshot, self.folder, self.tool = deepcopy(snapshot), folder, tool
-        self.production_lock: int | None = lock
+        self.production_lock = lock
         self.lock_path = lock_path
         self.published = False
+        self.allow_network = allow_network
         self.report: dict = dict(status='running', phase='準備', current=0, total=len(snapshot['chunks']),
                            completed=0, failed=0, error='', chunks=[dict(c, status='pending', attempts=0,
                            duration_ms=None) for c in snapshot['chunks']])
+        if previous is not None:
+            self.report['resume_history'] = previous.get('resume_history', []) + [
+                {k: deepcopy(v) for k, v in previous.items() if k != 'resume_history'}]
         super().__init__(self.produce, timeout=None)
 
     def _run(self):
@@ -220,6 +224,9 @@ class NarrationJob(VoiceJob):
         media = self.folder / 'media'
         success = False
         try:
+            validate_plan(self.snapshot)
+            if media.exists():
+                shutil.rmtree(media)
             media.mkdir()
             self.save_progress()
             settings = self.snapshot['settings']
@@ -228,13 +235,14 @@ class NarrationJob(VoiceJob):
             with wave.open(str(assembled_path), 'wb') as assembled:
                 assembled.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
                 for index, chunk in enumerate(self.report['chunks']):
-                    self.save_progress(phase='線上合成', current=index + 1)
+                    await asyncio.sleep(0)
+                    self.save_progress(phase='驗證音訊區塊', current=index + 1)
                     def progress(attempt):
                         chunk.update(status='running', attempts=attempt)
-                        self.save_progress()
+                        self.save_progress(phase='線上合成')
                     decoded, reused = await speech_block(
                         chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
-                        progress)
+                        progress, allow_network=self.allow_network)
                     chunk.update(reused=reused)
                     with wave.open(str(decoded), 'rb') as source:
                         count = source.getnframes()
@@ -242,6 +250,7 @@ class NarrationJob(VoiceJob):
                             raise ProjectError('區塊音訊為空，請重試。')
                         # Copy bounded buffers; a long book need not fit into memory.
                         while data := source.readframes(24000):
+                            await asyncio.sleep(0)
                             assembled.writeframesraw(data)
                     start_ms, end_ms = round(frames / 24), round((frames + count) / 24)
                     caption = chunk['text'].strip().replace('\r\n', '\n').replace('\r', '\n')
@@ -268,10 +277,11 @@ class NarrationJob(VoiceJob):
         except asyncio.CancelledError:
             self.save_progress(status='cancelled', phase='已取消')
             raise
-        except Exception:
+        except Exception as error:
             for chunk in self.report['chunks']:
                 if chunk['status'] == 'running':
                     chunk['status'] = 'failed'
+                    chunk['error'] = str(error) if isinstance(error, ProjectError) else '區塊處理失敗。'
             self.save_progress(status='failed', phase='失敗', failed=sum(c['status'] == 'failed' for c in self.report['chunks']))
             raise
         finally:
@@ -292,17 +302,44 @@ class NarrationJob(VoiceJob):
             if discard and not self.published and (self.folder / 'media').exists():
                 shutil.rmtree(self.folder / 'media')
             if self.production_lock is not None:
-                os.close(self.production_lock)
+                self.production_lock.release()
                 self.production_lock = None
-            self.lock_path.unlink(missing_ok=True)
         except OSError:
             raise ProjectError('無法清理合成暫存或任務鎖；已發布成品保留。請解除檔案占用後重試。') from None
 
 
-def read_run(flow: ProjectWorkflow, ref: dict) -> dict:
+def validate_plan(snapshot: dict):
+    expected = plan(snapshot['text'], snapshot['settings'], snapshot['reading_id'], snapshot['batch_id'])
+    if snapshot['rules'] == RULES and snapshot['settings']['sentence_pause_ms'] == 0 and snapshot['settings']['paragraph_pause_ms'] == 500:
+        # T10 used the same natural rhythm under its original rule-version name.
+        expected['rules'] = dict(RULES)
+        expected['rules_sha256'] = digest(encode(RULES))
+        for chunk in expected['chunks']:
+            chunk['rules_sha256'] = expected['rules_sha256']
+    for key in ('chunks', 'text_sha256', 'settings_sha256', 'rules', 'rules_sha256'):
+        if snapshot[key] != expected[key]:
+            raise ProjectError('合成計畫驗證失敗，請還原專案備份。')
+
+
+def read_run(flow: ProjectWorkflow, ref: dict, *, verify_audio=True) -> dict:
     try:
         snapshot = json.loads(flow._read(ref))
         progress = json.loads(flow._path(ref['progress_path']).read_bytes())
-        return dict(snapshot=snapshot, progress=progress)
+        from .production_lock import production_active
+        from .voice_media import cached_block
+        if verify_audio:
+            validate_plan(snapshot)
+        if progress['status'] not in ('pending', 'running', 'cancelling', 'cancelled', 'failed', 'completed'):
+            raise ValueError()
+        if progress['status'] in ('pending', 'running', 'cancelling') and not production_active(flow.root / '.production.lock'):
+            progress['status'] = 'interrupted'
+        cache = flow._path(f'batches/{snapshot["batch_id"]}/voice-blocks')
+        reusable = sum(cached_block(c['text'], snapshot['settings'], cache) is not None for c in snapshot['chunks']) if verify_audio else 0
+        batch = flow._batch(snapshot['batch_id'])
+        stale = (batch.get('current_reading') != snapshot['reading_id'] or
+                 flow.voice_settings(snapshot['batch_id']) != snapshot['settings'])
+        published = ref.get('published', False) or batch.get('narration', {}).get('id') == snapshot['id']
+        return dict(snapshot=snapshot, progress=progress, reusable=reusable,
+                    stale=stale, published=published, remaining=len(snapshot['chunks'])-reusable)
     except (OSError, ValueError, KeyError, TypeError):
         raise ProjectError('合成任務記錄無法讀取，請還原專案備份。') from None

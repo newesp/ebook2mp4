@@ -62,10 +62,14 @@ class Workbench(ttk.Frame):
         self.gemini_settings_dialog = None
         self.voice_dialog = None
         self.narration_dialog = None
+        self._closing = False
+        self._closing_text = ''
         self.pack(fill='both', expand=True)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1)
         self._build()
+        from .production_desktop import ProductionWorkspace
+        self.production = ProductionWorkspace(self)
         self.root.protocol('WM_DELETE_WINDOW', self.close)
         self.root.bind('<Control-s>', lambda e: self.save())
         self.root.bind('<Control-f>', self.focus_search)
@@ -321,6 +325,7 @@ class Workbench(ttk.Frame):
     def notify(self, text, *, owner=None, kind='success', detail=None):
         from .ui_controls import notify
         owner = self.root if owner is None else owner
+        owner = owner.winfo_toplevel()
         full = detail or text
         self.status.remember(full if owner is self.root else f'[{owner.title()}] {full}')
         if len(text) > 80:
@@ -417,9 +422,12 @@ class Workbench(ttk.Frame):
         self.root.title(('＊' if self.dirty else '') + (self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4')
 
     def show_step(self, n):
+        if n != 4:
+            self.production.hide()
         self.step = n
         self.render_step()
         if n == 4:
+            self.center.grid_remove()
             self.voice_settings()
 
     def render_step(self):
@@ -434,6 +442,20 @@ class Workbench(ttk.Frame):
         self.confirm_panel.grid_remove()
         self.close_tools_button.grid_remove()
         self.left_panel.grid_remove() if self.focus_mode else self.left_panel.grid()
+        if n == 4:
+            self.production.grid(row=0, column=1, rowspan=2, sticky='nsew')
+            self.steps[3].configure(style='CompactActive.TButton')
+            for button in self.steps[:3]:
+                button.configure(style='Compact.TButton')
+            self.notice.configure(text='步驟 4：設定語音與試聽，再前往製作與成品。')
+            current = self.production.current
+            if self.flow and (current is None or not current.winfo_exists() or
+                    getattr(current, 'flow', None) is not self.flow or getattr(current, 'batch_id', None) != self.batch_id):
+                self.production.show('voice')
+            return
+        if hasattr(self, 'production'):
+            self.production.hide()
+        self.center.grid()
         if n == 1:
             self.import_panel.grid(row=1, column=0, sticky='nsew')
         else:
@@ -1196,41 +1218,44 @@ class Workbench(ttk.Frame):
                 self.report(ProjectError('無法開啟檔案總管。可從左側複製專案位置後手動開啟。'))
 
     def close(self):
-        if self.narration_dialog is not None and self.narration_dialog.winfo_exists():
-            self.narration_dialog.close()
+        if (not self._closing or self.current_text != self._closing_text) and not self.may_leave():
+            self._closing = False
             return
-        if self.voice_dialog is not None and self.voice_dialog.winfo_exists():
-            self.voice_dialog.close()
+        self._closing = True
+        self._closing_text = self.current_text
+        shutdown = self.production.shutdown()
+        if shutdown == 'cancelled':
+            self._closing = False
+            return
+        if shutdown == 'pending':
+            self.root.after(100, self.close)
             return
         for dialog in (self.gemini_dialog, self.gemini_settings_dialog):
             if dialog is not None and dialog.winfo_exists():
                 dialog.close()
+                self._closing = False
                 return
         if self.pdf_dialog is not None and self.pdf_dialog.winfo_exists():
             self.pdf_dialog.close()
+            self._closing = False
             return
-        if self.may_leave():
-            self.root.destroy()
+        self.root.destroy()
 
     def voice_settings(self):
-        from .voice_desktop import VoiceDialog
-        if self.voice_dialog is not None:
-            self.voice_dialog.lift()
-            return
         if not self.flow:
             self.notice.configure(text='請先建立或開啟書籍專案，再設定語音。')
             return
-        self.voice_dialog = VoiceDialog(self)
+        self.step = 4
+        self.render_step()
+        self.production.show('voice')
 
     def narration(self):
-        from .narration_desktop import NarrationDialog
-        if self.narration_dialog is not None:
-            self.narration_dialog.lift()
-            return
         if not self.flow or not self.batch_id:
             self.notice.configure(text='請先選擇批次，並確認朗讀稿。')
             return
-        self.narration_dialog = NarrationDialog(self)
+        self.step = 4
+        self.render_step()
+        self.production.show('narration')
 
     def gemini_settings(self):
         from .gemini_desktop import SettingsDialog
@@ -1307,6 +1332,7 @@ def make_app():
     style.configure('Treeview', background='#ffffff', fieldbackground='#ffffff', rowheight=25)
     style.map('Treeview', background=[('selected', GREEN)], foreground=[('selected', '#ffffff')])
     style.map('TButton', background=[('active', '#e9f0e5')], foreground=[('disabled', '#68736c')])
+    style.map('CompactActive.TButton', background=[('active', '#264d35')], foreground=[('active', '#ffffff')])
     style.configure('Primary.TButton', background=GREEN, foreground='#ffffff')
     style.configure('Destructive.TButton', foreground='#963b32')
     style.map('Primary.TButton', background=[('disabled', '#e1e5de'), ('active', '#264d35')],

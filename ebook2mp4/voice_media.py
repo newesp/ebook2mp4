@@ -42,26 +42,53 @@ async def media_command(tool: str, arguments: list[str], *, timeout: float = 30)
             await process.communicate()
 
 
-async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None):
+def block_paths(text: str, settings: dict, cache: Path):
+    from .workflow import digest, encode
+    key = digest(encode(dict(text=text, provider=settings['provider'], voice=settings['voice'],
+                             rate=settings['rate'], processing=settings['processing'],
+                             model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')))
+    return cache / (key + '.wav'), cache / (key + '.json')
+
+
+def cached_block(text: str, settings: dict, cache: Path) -> Path | None:
+    """Validate both checksum and the complete declared PCM payload."""
+    from .workflow import digest
+    target, manifest = block_paths(text, settings, cache)
+    try:
+        metadata = json.loads(manifest.read_bytes())
+        if digest(target.read_bytes()) == metadata['sha256']:
+            with wave.open(str(target), 'rb') as source:
+                frames = source.getnframes()
+                if ((source.getnchannels(), source.getsampwidth(), source.getframerate()) == (1, 2, 24000)
+                        and frames > 0):
+                    remaining = frames
+                    while remaining:
+                        data = source.readframes(min(remaining, 24000))
+                        if not data or len(data) % 2:
+                            return None
+                        remaining -= len(data) // 2
+                    return target
+    except (OSError, ValueError, KeyError, TypeError, EOFError, wave.Error):
+        pass
+    return None
+
+
+async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True):
     """Keep verified, immutable PCM speech independent of added pauses."""
     from .voice import edge_module
     from .workflow import ProjectWorkflow, digest, encode
     from .tts_services import RetryableServiceError
     from aiohttp import ClientError
     from edge_tts.exceptions import EdgeTTSException
-    key = digest(encode(dict(text=text, provider=settings['provider'], voice=settings['voice'],
-                             rate=settings['rate'], processing=settings['processing'],
-                             model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')))
     cache.mkdir(parents=True, exist_ok=True)
-    target, manifest = cache / (key + '.wav'), cache / (key + '.json')
-    try:
-        metadata = json.loads(manifest.read_bytes())
-        if digest(target.read_bytes()) == metadata['sha256']:
-            with wave.open(str(target), 'rb') as source:
-                if (source.getnchannels(), source.getsampwidth(), source.getframerate()) == (1, 2, 24000) and source.getnframes() > 0:
-                    return target, True
-    except (OSError, ValueError, KeyError, TypeError, EOFError, wave.Error):
-        pass  # Missing or damaged blocks are synthesized again; no corrupt reuse.
+    target, manifest = block_paths(text, settings, cache)
+    valid = cached_block(text, settings, cache)
+    if valid is not None:
+        return valid, True
+    if not allow_network:
+        raise ProjectError('音訊區塊已缺少或失效。請重新檢查並勾選同意傳送文字後續作。')
+    from .voice import require_voice
+    require_voice(settings['voice'], settings)
     with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
         raw, decoded = Path(directory) / 'speech.mp3', Path(directory) / 'speech.wav'
         for attempt in range(1, 4):

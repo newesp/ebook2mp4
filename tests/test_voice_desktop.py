@@ -52,7 +52,7 @@ class VoiceDesktop(unittest.TestCase):
 
     def test_editable_text_uses_current_settings_and_automatically_plays(self):
         self.assertTrue(self.dialog.consent.get())
-        self.assertEqual(self.dialog.state(), 'zoomed')
+        self.assertIs(self.dialog.winfo_toplevel(), self.root)
         self.assertEqual(str(self.dialog.outgoing.cget('state')), 'normal')
         self.choose()
         original = self.app.flow.voice_settings(self.app.batch_id)

@@ -37,11 +37,15 @@ class NarrationDesktop(unittest.TestCase):
         self.app.narration()
         self.dialog = self.app.narration_dialog
         self.root.update()
+        deadline=time.monotonic()+5
+        while self.dialog.check_job is not None and time.monotonic()<deadline:
+            self.root.update()
+            time.sleep(.02)
         self.addCleanup(lambda: self.dialog.close() if self.dialog.winfo_exists() else None)
 
     def poll(self):
         deadline = time.monotonic() + 15
-        while self.dialog.job is not None and time.monotonic() < deadline:
+        while (self.dialog.job is not None or self.dialog.check_job is not None) and time.monotonic() < deadline:
             self.root.update()
             time.sleep(.02)
         self.root.update()
@@ -78,7 +82,9 @@ class NarrationDesktop(unittest.TestCase):
         with patch('ebook2mp4.narration_desktop.os.startfile') as open_folder:
             self.dialog.folder_button.invoke()
             self.assertEqual(open_folder.call_args.args[0], self.flow.narration_path(self.batch).parent)
-        self.dialog.geometry('700x580+20+20')
+        self.root.geometry('1040x640+20+20')
+        self.root.update()
+        self.dialog.canvas.yview_moveto(1)
         self.root.update()
         for control in (self.dialog.start_button, self.dialog.cancel_button, self.dialog.play_button,
                         self.dialog.export_button, self.dialog.folder_button, self.dialog.consent_control):
