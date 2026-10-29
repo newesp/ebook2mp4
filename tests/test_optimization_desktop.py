@@ -65,13 +65,19 @@ class OptimizationDesktop(unittest.TestCase):
             self.app.pages_button.invoke()
             dialog = self.app.pdf_dialog
             self.until(lambda: dialog.ready)
+            dialog.state('normal')
             dialog.geometry('740x570')
             self.root.update()
+            dialog.resize_image()
             dialog.region_button.invoke()
             self.assertIn('框選', dialog.progress.cget('text'))
-            dialog.canvas.event_generate('<ButtonPress-1>', x=5, y=5)
-            dialog.canvas.event_generate('<B1-Motion>', x=180, y=100)
-            dialog.canvas.event_generate('<ButtonRelease-1>', x=180, y=100)
+            left, top = dialog.image_origin
+            x0, y0 = int(left+5), int(top+5)
+            x1 = int(left+min(dialog.image.width()-5, 170))
+            y1 = int(top+min(dialog.image.height()-5, 95))
+            dialog.canvas.event_generate('<ButtonPress-1>', x=x0, y=y0)
+            dialog.canvas.event_generate('<B1-Motion>', x=x1, y=y1)
+            dialog.canvas.event_generate('<ButtonRelease-1>', x=x1, y=y1)
             self.root.update()
             self.assertIsNotNone(dialog.region)
             dialog.text.tag_add('sel', '1.0', '1.7')
@@ -86,7 +92,9 @@ class OptimizationDesktop(unittest.TestCase):
             self.assertEqual(dialog.text.get('1.0', 'end-1c'), '"Recovered world"'+original[7:])
             self.assertIn('confidence', dialog.candidate_pages[0]['settings'])
             self.assertEqual(flow.pdf_pages(batch)[0]['text'], original)
-            for button in (dialog.region_button, dialog.accept_button):
+            self.assertFalse(dialog.region_button.winfo_ismapped(), 'Recognition tools are hidden while a candidate awaits adoption')
+            self.assertTrue(dialog.accept_button.winfo_ismapped())
+            for button in (dialog.accept_button, dialog.cancel_button):
                 self.assertLessEqual(button.winfo_rootx()+button.winfo_width(), dialog.winfo_rootx()+dialog.winfo_width())
                 self.assertLessEqual(button.winfo_rooty()+button.winfo_height(), dialog.winfo_rooty()+dialog.winfo_height())
             dialog.close()

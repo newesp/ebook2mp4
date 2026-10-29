@@ -126,29 +126,41 @@ All native text uses the same legible Traditional Chinese family, including mixe
 
 ## Layout
 
-Native default client geometry is **1360×820**; minimum is **1040×640**. These are window constraints, not CSS breakpoints. Preserve the three-column workbench at supported sizes: book/batch context left, comparison center, inspector right. Body column minimum sizes are **190 / 470 / 240** logical pixels; only the center has expansion weight. The inspector canvas requests width **240**, with an additional scrollbar. Actual allocations may exceed these values through requested widget sizes.
+The native workbench keeps book/batch context left and an expanding manuscript area. Step 2 shows source and draft side by side; search and optional AI tools open on demand. Step 3 expands the same editable draft, with a confirmation summary on the right. Default geometry remains 1360×820, minimum 1040×640. F6 hides/restores side panels for focused reading without removing the global save control. Opening search or AI tools exits focus mode. The source/draft divider is draggable and manuscript size is selectable.
 
-The outer workbench has **16px** padding. Header bottom separation is **16px**. Four equal-weight numbered step buttons have **2px** horizontal grid padding. The instruction row uses **8px horizontal / 12px vertical** padding and wrap length **1000**. Source metadata uses **12px / 8px** padding and wrap length **500**. Statistics use **12px / 10px** padding; bottom status uses **8px / 10px** and adapts wrap length to available width.
+The top global toolbar contains the book title, Project menu, Versions and Files menu, focus action, and save. Save uses an ordinary button, is disabled when clean, and retains Ctrl+S. Compact stage navigation replaces the previous full-width step row and permanent tutorial block. Long source paths and provenance are available through details rather than occupying the comparison area.
 
-The left frame uses padding **4,10,16,10** (left, top, right, bottom). Book text wraps at **175px**; the project-location text uses character wrapping, width **21 characters**, and height **4 lines** so a long path remains selectable. The fixed batch column prevents filenames stretching the sidebar.
+The batch list expands vertically and shows text status (pending issues, unconfirmed, confirmed). Add and management actions use native menu buttons beneath the list. Native menu commands use the same enabled/invoke behavior as their prior button entry points.
 
-Source and editor sit in a horizontal `ttk.Panedwindow` with equal expansion weights and a native draggable divider. Each wrapper has **12px** padding; each manuscript has **16px** inset, word wrapping, and its own vertical scrollbar. They scroll independently. The inspector is a separately scrollable canvas containing a padded frame (**12,10,4,10**); explanatory labels wrap at **220px**. Group actions have **10px** top and **24px** bottom separation.
+The optional right panel has Search/Replace and AI Proofreading tabs. Ctrl+F opens Search/Replace and focuses search; opening tools retains editor selection. Step 3 replaces those tools with source checks and snapshot state. The manuscript action row uses the explicit labels「儲存並前往確認朗讀稿 →」and「確認朗讀稿並前往語音設定 →」. Saving must succeed before advancing; confirming captures the latest edits before opening voice settings.
 
-Import preview uses native geometry **760×680**, minimum **640×580**, a flexible source preview, and persistent bottom actions. Its details wrap with the dialog width. A read-only encoding selector stays at the top; failures clear the old preview and disable import. Suspected corrupt characters require explicit acknowledgment before import.
+A fixed footer separates persistent manuscript/reading/source-blocker state from recent operation messages. Full operation messages are available as selectable history. Source problems use a separate list with explicit processing/skip decisions and navigation to the relevant PDF page. A success result cannot remove the persistent source-blocker count.
 
-The batch sidebar uses a vertically scrollable native Treeview with **25px** rows and white text on Workbench Green for the selected row. Selected batch names and revisions appear in wrapping center metadata; the tree remains fixed within its column for long names. Naming and up/down actions use a three-column button row, each with native `width=3` character units. The batch list expands vertically; the four-line project location keeps actions reachable at the native minimum size.
+PDF comparison is a standard maximized Toplevel with native restore controls, a compact document header and page navigation, two adjustable image/text panes, and fixed bottom page state, progress and actions. Range/language/layout/model settings open in a compact separate window. Re-recognition commands are grouped in a named native menu. Fit-page, fit-width and percentage zoom resample the bounded preview only; region coordinates remain normalized to the displayed source page. Image and text remain independently scrollable. Candidate selection and publication controls appear only for the corresponding job state.
 
-**The Comparison Rule.** Keep source and draft independently readable and scrollable while retaining batch context and reachable inspector actions.
+Line-break preview is a maximized original/candidate comparison with change highlighting, an optional candidate-only view, and fixed Cancel/Apply actions. Applying always uses the calculated candidate independently of the selected view and remains one undo unit.
+
+Gemini review is a standard maximized/restorable adjustable two-pane comparison. Record and paragraph navigation, decision counts and next-pending remain above the manuscripts. Notes have a visible summary plus disclosure; persistent blockers, operation result and per-paragraph actions are separate below. Batch adoption/undo commands use a named menu. Small API settings dialogs retain native compact forms.
+
+The comparison rule remains: keep source and draft independently readable while retaining batch context, visible save state and reachable task actions. Verify actual supported sizes and DPI with native captures; no browser-specific geometry or visual effects are implied.
 
 ## Elevation & Depth
 
-The native workbench is flat. No authored shadows or animation tokens exist. Tonal surfaces, fine text-widget borders, spacing, the native sash, and `clam` control relief establish hierarchy. Prototype browser shadows are not native elevation tokens.
+The native workbench is flat. No authored shadows exist. Operation notifications have one motion: a 250ms ease-out opacity fade after a three-second hold. Tonal surfaces, fine text-widget borders, spacing, the native sash, and `clam` control relief establish hierarchy. Prototype browser shadows are not native elevation tokens.
 
 ## Shapes
 
 The native `clam` theme owns button shape and relief; the code sets no numeric corner radius. Manuscripts use flat relief with a **1px** highlight boundary. The inspector canvas has no highlight boundary. Preserve this plain rectangular control language instead of importing the prototype's rounded card shapes.
 
 ## Components
+
+### Operation Notifications
+
+Shared owner-bound notifications sit at the top center of the active operation window's content area, with a 16px top inset and a width capped at 400 logical pixels. They use the existing paper surface, a fine semantic border, native Traditional Chinese text and a × close button. A transient native window supplies opacity animation without fading the manuscript itself; it never uses global topmost.
+
+Each owner shows one message at a time. Success/info messages remain for three seconds before a 250ms ease-out fade; hovering or focusing the notification pauses dismissal. Errors/warnings remain until dismissed, replaced or their owner loses focus. Notifications do not grab or take the editor's focus. Moving/resizing the owner re-centers the notification; hiding, closing or switching away clears it and its timers. Long messages and dialog results remain available through the main workbench's message history.
+
+Emit once after a user-visible operation finishes, rather than from rendering, polling or each edit. Suppress notifications from internal pre-save steps. Operations that close a preview publish their completion on the surviving main window. Keep validation, progress, dirty/source blockers and decision dialogs in their existing persistent locations; dismissing a notification does not resolve those states.
 
 ### Buttons
 
@@ -162,13 +174,17 @@ The import preview uses a read-only encoding combobox with native width **27 cha
 
 ### Navigation
 
-Four equal-width numbered buttons read 來源 / 校對 / 語音 / 影片. The selected step uses the primary style. Changing to an unavailable production step displays its actual dependencies while preserving the editing surface and entered text.
+Four stage controls read left to right: 1 匯入來源 → 2 校對文字 → 3 確認朗讀稿 → 4 試聽與製作. Import shows project and PDF/TXT actions. Proofreading and confirmation share one editable text buffer, so changing stages preserves unsaved edits and undo history. Voice preview is available before reading confirmation; formal MP3/SRT production still requires a confirmed reading. Video is not a main navigation stage. Global commands stay in the top toolbar; optional task tools appear on demand. Selected stage and primary task use the restrained green accent.
 
 ### Comparison and Inspector
 
-Plain labeled text panes provide the signature comparison surface, without decorative cards or fabricated TXT page numbers. The inspector groups Gemini, reading confirmation, and production dependencies vertically. Unimplemented controls are disabled with adjacent reasons; scrolling keeps the full inspector reachable at shorter heights. Statistics and bottom status remain outside manuscript scrolling.
+PDF entry points use **PDF 原頁與文字對照**. Tabs distinguish the current page's working text, the batch's immutable extracted text, and its manually edited full draft. An unpublished correction is explicitly marked as unsaved. The original/current page tabs may initially match; their relationship changes after OCR refinement.
 
-T03 adds exact-text search and replacement, undo, UTF-8 export and external reload above confirmation. Search/replace entries request 18 characters; the replacement actions occupy two equal grid columns with width 6. These controls stay inside the existing 240px canvas rather than widening the manuscript's parent grid. Mouse-wheel bindings on the inspector and its descendants scroll only this canvas. The primary confirmation action shows draft revision and a shortened hash nearby; the read-only versions dialog exposes the full hash and text for every reading snapshot or retained unsaved copy. Unresolved source issues list their reasons and disable confirmation; explicit skip requires a separate native confirmation. At shorter heights, use the wheel or vertical scrollbar to reach lower actions.
+Region refinement follows one region at a time: select image and text, recognize with an indeterminate progress bar, choose **採用本次結果／捨棄本次結果** under **本次框選辨識**, keep the choice and continue, then save a single new batch. Rejecting restores the input of the latest operation, including earlier accepted corrections; the immutable extracted text remains a separate comparison tab. Limit this choice to the latest region's page. Whole-page retry retains its explicit page-level choices. Keep the recognition/continue action on the same fixed row as save and close. Hide warning-resolution actions during region selection. Do not represent a selected checkbox's native X as a dismiss button. Source warning actions explicitly say **本頁已核對** and **略過本頁警告**; neither deletes page text. Ready models show **模型已就緒** and disable download instead of reporting a zero-byte installation.
+
+Plain labeled text panes provide the signature comparison surface, without decorative cards or fabricated TXT page numbers. Optional proofreading tools and reading confirmation appear in their corresponding stages. Statistics, page actions and bottom status remain outside manuscript scrolling.
+
+Exact-text search/replacement and undo are in Search/Replace; normalization, scope and candidate access are in optional AI tools. Step 3 displays editable full text, source checks and history, with confirmation below the text. Export/reload and version access also have top-level file-menu entry points. Full paths and hashes remain available in dedicated details/history views. For verification of this layout, see `docs/verification/main-flow.md`; prior screenshots document earlier arrangements.
 
 ## Do's and Don'ts
 

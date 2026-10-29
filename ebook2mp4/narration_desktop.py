@@ -47,8 +47,8 @@ class NarrationDialog(tk.Toplevel):
         ttk.Label(controls, text='保留原文。非零句尾按安全句界合成；同邊界取較長值；最後不補靜音。\n'
                   '字幕以完整區塊實測時長顯示。長區塊字幕可能有多行。', wraplength=650,
                   foreground='#58695f').grid(row=1, column=0, sticky='ew', pady=6)
-        self.consent = tk.BooleanVar(value=False)
-        self.consent_control = ttk.Checkbutton(controls, text='我同意將上方已確認稿傳送至 Microsoft Edge 線上語音服務', variable=self.consent)
+        self.consent = tk.BooleanVar(value=True)
+        self.consent_control = ttk.Checkbutton(controls, text='我同意將上方已確認稿傳送至所選 TTS 服務（可能計費）', variable=self.consent)
         self.consent_control.grid(row=2, column=0, sticky='w', pady=4)
         actions = ttk.Frame(controls)
         actions.grid(row=3, column=0, sticky='ew', pady=5)
@@ -80,7 +80,7 @@ class NarrationDialog(tk.Toplevel):
             self.source_text = self.flow.reading_text(self.batch_id)
             self.source_settings = self.flow.voice_settings(self.batch_id)
             self.source_info.configure(text=f'{len(self.source_text):,} 字元 · {self.source_settings["voice"] or "尚未選音色"} · '
-                                       f'{self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]} ms ／ '
+                                       f'{self.source_settings["provider"]} {self.source_settings.get("model", "")} · {self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]} ms ／ '
                                        f'段落 {self.source_settings["paragraph_pause_ms"]} ms · 請先儲存本批設定。')
             self.status.configure(text='請核對上方確認稿與音色，再勾選同意並產生。')
         except ProjectError as error:
@@ -90,7 +90,7 @@ class NarrationDialog(tk.Toplevel):
         self.outgoing.delete('1.0', 'end')
         self.outgoing.insert('1.0', self.source_text)
         self.outgoing.configure(state='disabled')
-        self.consent.set(False)
+        self.consent.set(True)
 
     def start(self):
         try:
@@ -105,6 +105,7 @@ class NarrationDialog(tk.Toplevel):
             if (self.flow.reading_text(self.batch_id) != self.source_text or
                     self.flow.voice_settings(self.batch_id) != self.source_settings):
                 self.load_source()
+                self.consent.set(False)
                 raise ProjectError('確認稿或設定已變更。已重讀，請重新核對並勾選同意。')
             self.stop()
             self.job = self.flow.start_narration(self.batch_id)

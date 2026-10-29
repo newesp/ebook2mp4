@@ -54,6 +54,8 @@ class NarrationDesktop(unittest.TestCase):
         self.assertIn('確認', self.dialog.status.cget('text'))
         self.flow.confirm_reading(self.batch)
         self.dialog.reload_button.invoke()
+        self.assertTrue(self.dialog.consent.get())
+        self.dialog.consent.set(False)
         self.dialog.start_button.invoke()
         self.assertIn('勾選', self.dialog.status.cget('text'))
         self.dialog.consent.set(True)

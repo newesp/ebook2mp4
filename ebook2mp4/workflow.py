@@ -382,8 +382,69 @@ class ProjectWorkflow:
         self._pdf_job = PdfExtraction(preview, batch['pdf']['start'], batch['pdf']['end'],
                                       mode='ocr', language=language, numbers=numbers, rotation=rotation,
                                       base_pages=original, base_issues=issues,
-                                      source_batch=batch_id, layout=layout, region=region, text_range=text_range)
+                                      source_batch=batch_id, layout=layout, region=region, text_range=text_range,
+                                      publication_baseline=original, source_fingerprint=self._pdf_source_fingerprint(batch_id))
         return self._pdf_job
+
+    def _pdf_source_fingerprint(self, batch_id: str) -> dict:
+        batch = self._batch(batch_id)
+        if batch['kind'] != 'pdf':
+            raise ProjectError('請選擇 PDF 來源批次。')
+        return dict(source=batch['source']['sha256'], extracted=batch['pdf']['extracted']['sha256'],
+                    start=batch['pdf']['start'], end=batch['pdf']['end'], count=batch['pdf']['page_count'])
+
+    def _check_pdf_source(self, job: PdfExtraction) -> None:
+        self._check_current()
+        if job.source_batch is not None:
+            if job.source_fingerprint != self._pdf_source_fingerprint(job.source_batch):
+                raise ProjectError('原 PDF 批次的來源或逐頁原稿已變更；候選仍可檢視，請重新開啟原批次後重辨。')
+            # Draft saves and reading snapshots do not change the immutable page baseline.
+            self._read(self._batch(job.source_batch)['source'])
+            self.pdf_pages(job.source_batch)
+
+    @staticmethod
+    def _pdf_accepted_pages(job: PdfExtraction, accepted_pages: list[int] | None) -> set[int]:
+        selection = job.candidate_numbers if accepted_pages is None else accepted_pages
+        if any(type(n) is not int for n in selection):
+            raise ProjectError('只能採用此候選已辨識的有效頁次。')
+        accepted = set(selection)
+        if not accepted <= set(job.candidate_numbers):
+            raise ProjectError('只能採用此候選已辨識的有效頁次。')
+        return accepted
+
+    def start_pdf_candidate_retry(self, base_job: PdfExtraction, *, pages: list[int],
+                                  accepted_pages: list[int] | None = None,
+                                  language: str = '繁中＋英文', rotation: int = 0, layout: str = 'block',
+                                  region: tuple[float, float, float, float] | None = None,
+                                  text_range: tuple[int, int] | None = None) -> PdfExtraction:
+        """Freeze current page choices, then refine the unpublished candidate in place.
+
+        Text offsets address the effective working pages after those choices. A successful
+        construction retires base_job. Rejected regions return to their operation input,
+        while whole-page choices retain the original publication baseline.
+        """
+        from .pdf import PdfExtraction
+        current = self.pdf_extraction_pages(base_job)  # Checks ownership and terminated worker.
+        self._check_pdf_source(base_job)
+        accepted = self._pdf_accepted_pages(base_job, accepted_pages)
+        if (not pages or any(type(n) is not int or not base_job.start <= n <= base_job.end for n in pages)
+                or list(sorted(set(pages))) != list(pages)):
+            raise ProjectError('請選擇候選範圍內不重複的有效頁次。')
+        baseline = base_job.decision_baseline if base_job.decision_baseline is not None else current
+        originals = {p['number']: p for p in baseline}
+        working = [p if p['number'] in accepted else originals[p['number']] for p in current]
+        self._space(self.root, base_job.preview.size + 8192)
+        # PdfExtraction validates and checks OCR availability before starting its worker.
+        # Leave the active candidate untouched if any of those steps fails.
+        job = PdfExtraction(base_job.preview, base_job.start, base_job.end,
+                            mode='ocr', language=language, numbers=pages, rotation=rotation,
+                            base_pages=working, base_issues=base_job.base_issues,
+                            source_batch=base_job.source_batch, layout=layout, region=region, text_range=text_range,
+                            publication_baseline=(base_job.publication_baseline if base_job.publication_baseline is not None else baseline),
+                            candidate_numbers=tuple(sorted(set(base_job.candidate_numbers) | set(pages))),
+                            source_fingerprint=base_job.source_fingerprint, preserve_on_failure=True)
+        self._pdf_job = job
+        return job
 
     def pdf_source_preview(self, batch_id: str) -> PdfPreview:
         """Verified project source, usable even after the external PDF has moved."""
@@ -401,25 +462,27 @@ class ProjectWorkflow:
         for number in job.numbers:
             pages[number] = completed.get(number, dict(number=number,
                 method='ocr' if job.mode == 'ocr' else 'text-layer',
-                text=pages.get(number, {}).get('text', '') if job.region is not None else '', status='cancelled',
+                text=pages.get(number, {}).get('text', '') if job.region is not None or job.preserve_on_failure else '', status='cancelled',
                 error='擷取已取消，此頁尚未處理完成。', settings=job.settings.copy()))
-        return [pages[n] for n in range(job.start, job.end + 1)]
+        return deepcopy([pages[n] for n in range(job.start, job.end + 1)])
 
     def finish_pdf_extraction(self, job: PdfExtraction, *, accepted_pages: list[int] | None = None) -> str:
         pages = self.pdf_extraction_pages(job)
-        accepted = set(job.numbers if accepted_pages is None else accepted_pages)
-        if (accepted_pages is not None and
-                (job.base_pages is None or any(type(n) is not int for n in accepted_pages)
-                 or not accepted <= set(job.numbers))):
+        self._check_pdf_source(job)
+        accepted = self._pdf_accepted_pages(job, accepted_pages)
+        baseline_pages = job.decision_baseline
+        if accepted_pages is not None and baseline_pages is None:
             raise ProjectError('只能採用本次重試的有效頁次。')
-        if job.base_pages is not None:
-            baseline = {p['number']: p for p in job.base_pages}
+        if baseline_pages is not None:
+            baseline = {p['number']: p for p in baseline_pages}
             pages = [p if p['number'] in accepted else baseline[p['number']] for p in pages]
+        original_pages = {p['number']: p for p in (job.publication_baseline or job.base_pages or [])}
         issues = []
         for page in pages:
             if page['status'] != 'success':
                 previous = next((i for i in job.base_issues if i.get('page') == page['number']), None)
-                issues.append(deepcopy(previous) if previous and page['number'] not in accepted else
+                issues.append(deepcopy(previous) if previous and page['number'] not in accepted
+                              and page == original_pages.get(page['number']) else
                               dict(page=page['number'], reason=f'PDF 第 {page["number"]} 頁：{page["error"]}', status='pending'))
         # Batch-wide issues cannot be silently cleared by a page retry.
         issues.extend(deepcopy(i) for i in job.base_issues if 'page' not in i)
@@ -549,6 +612,18 @@ class ProjectWorkflow:
         manifest = self.state
         batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
         batch['source_issues'][index]['status'] = disposition
+        self._commit(manifest, [])
+
+    def resolve_all_source_issues(self, batch_id: str, disposition: str) -> None:
+        """Apply one decision to all pending issues in a single commit."""
+        self._batch(batch_id)
+        if disposition not in ('resolved', 'skipped'):
+            raise ProjectError('請選擇有效的來源異常處理方式。')
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        for issue in batch.get('source_issues', []):
+            if issue['status'] == 'pending':
+                issue['status'] = disposition
         self._commit(manifest, [])
 
     def confirm_reading(self, batch_id: str) -> dict:
@@ -686,31 +761,32 @@ class ProjectWorkflow:
         return settings(owner.get('voice_settings', DEFAULT_SETTINGS))
 
     def save_voice_settings(self, voice: str, rate: str = '+0%', *, batch_id: str | None = None,
-                            sentence_pause_ms: int | None = None, paragraph_pause_ms: int | None = None):
+                            sentence_pause_ms: int | None = None, paragraph_pause_ms: int | None = None, settings_override: dict | None = None):
         from .voice import require_voice, settings
-        value = self.voice_settings(batch_id)
+        value = self.voice_settings(batch_id) if settings_override is None else settings(settings_override)
         value.update(voice=voice, rate=rate)
         if sentence_pause_ms is not None:
             value['sentence_pause_ms'] = sentence_pause_ms
         if paragraph_pause_ms is not None:
             value['paragraph_pause_ms'] = paragraph_pause_ms
         value = settings(value)
-        require_voice(voice)
+        require_voice(voice, value)
         manifest = self.state
         owner = next(b for b in manifest['batches'] if b['id'] == batch_id) if batch_id is not None else manifest
         owner['voice_settings'] = value
         self._commit(manifest, [])
 
     def start_voice_preview(self, batch_id: str, *, start: int | None = None, end: int | None = None,
-                            text: str | None = None):
+                            text: str | None = None, settings_override: dict | None = None):
         from .voice import VoiceJob, EXAMPLE, require_voice
         from .voice_media import ffmpeg, synthesize
         if self._voice_job is not None:
             raise ProjectError('已有試聽工作待完成，請先取消或保存。')
         self._check_current()
         batch = self._batch(batch_id)
-        value = self.voice_settings(batch_id)
-        require_voice(value['voice'])
+        from .voice import settings
+        value = self.voice_settings(batch_id) if settings_override is None else settings(settings_override)
+        require_voice(value['voice'], value)
         tool = ffmpeg()
         if start is None and end is None and text is None:
             selected, source = EXAMPLE, 'example'
@@ -782,7 +858,7 @@ class ProjectWorkflow:
         text = self.reading_text(batch_id)
         batch = self._batch(batch_id)
         value = self.voice_settings(batch_id)
-        require_voice(value['voice'])
+        require_voice(value['voice'], value)
         tool = ffmpeg()
         snapshot = plan(text, value, batch['current_reading'], batch_id)
         self._space(self.root, 25_000_000)
@@ -1052,7 +1128,10 @@ class ProjectWorkflow:
                 if (not review['start'] <= paragraph['start'] < paragraph['end'] <= review['end']
                         or text[paragraph['start']:paragraph['end']] != paragraph['original']
                         or paragraph['decision'] not in ('pending', 'accepted', 'rejected')
-                        or (paragraph['candidate'] is not None and not isinstance(paragraph['candidate'], str))):
+                        or (paragraph['candidate'] is not None and not isinstance(paragraph['candidate'], str))
+                        or ('applied_candidate' in paragraph and (paragraph['decision'] == 'rejected'
+                            or not isinstance(paragraph['applied_candidate'], str)
+                            or not paragraph['applied_candidate'].strip()))):
                     raise ProjectError('Gemini 校對段落損壞，請還原備份。')
             self._validate_gemini_plan(review, text)
             for item in review['history']:
@@ -1129,6 +1208,26 @@ class ProjectWorkflow:
                 return review
         raise ProjectError('找不到 Gemini 候選校對稿。')
 
+    def edit_gemini_candidates(self, batch_id: str, review_id: str, edits: dict[int, str]) -> None:
+        """Save human corrections without adopting them into the source draft."""
+        review = self._gemini_record(batch_id, review_id)
+        for index, text in edits.items():
+            if (type(index) is not int or not 0 <= index < len(review['paragraphs'])
+                    or not isinstance(text, str) or not text.strip()):
+                raise ProjectError('候選文字不可空白，請選擇有效段落。')
+            part = review['paragraphs'][index]
+            if part['candidate'] is None:
+                raise ProjectError('本段尚無成功候選，請先重試此範圍。')
+            if part['decision'] == 'accepted':
+                part['applied_candidate'] = part['candidate']
+                part['decision'] = 'pending'
+            part.setdefault('ai_candidate', part['candidate'])
+            part['candidate'] = text
+        review.pop('progress_path', None)
+        manifest = self.state
+        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
+        self._write_review(manifest, batch, review, [])
+
     def decide_gemini(self, batch_id: str, review_id: str, paragraph: int | None, decision: str) -> None:
         review = self._gemini_record(batch_id, review_id)
         if decision not in ('accepted', 'rejected') or (paragraph is not None and
@@ -1139,16 +1238,21 @@ class ProjectWorkflow:
         for index, part in enumerate(review['paragraphs']):
             if part['candidate'] is not None and (index == paragraph or (paragraph is None and part['decision'] == 'pending')):
                 part['decision'] = decision
+                if decision == 'accepted':
+                    part['applied_candidate'] = part['candidate']
+                else:
+                    part.pop('applied_candidate', None)
         text = self._read(review['before']).decode('utf-8')
         for part in reversed(review['paragraphs']):
-            if part['decision'] == 'accepted':
-                text = text[:part['start']] + part['candidate'] + text[part['end']:]
+            if part['decision'] == 'accepted' or 'applied_candidate' in part:
+                text = text[:part['start']] + part.get('applied_candidate', part['candidate']) + text[part['end']:]
         self._publish_gemini_draft(batch_id, review, text, 'decision')
 
     def undo_gemini(self, batch_id: str, review_id: str) -> None:
         review = self._gemini_record(batch_id, review_id)
         for part in review['paragraphs']:
             part['decision'] = 'pending'
+            part.pop('applied_candidate', None)
         self._publish_gemini_draft(batch_id, review, self._read(review['before']).decode('utf-8'), 'undo')
 
     def _publish_gemini_draft(self, batch_id: str, review: dict, text: str, action: str):

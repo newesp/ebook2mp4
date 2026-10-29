@@ -87,7 +87,8 @@ class PdfExtraction:
     """A cancellable candidate; only the workflow publishes it as a new batch."""
     def __init__(self, preview: PdfPreview, start: int, end: int, *, mode='text-layer', language='繁中＋英文',
                  numbers=None, rotation=0, base_pages=None, base_issues=None, source_batch=None,
-                 layout='block', region=None, text_range=None):
+                 layout='block', region=None, text_range=None, publication_baseline=None,
+                 candidate_numbers=None, source_fingerprint=None, preserve_on_failure=False):
         validate_range(start, end, preview.page_count)
         if mode not in ('text-layer', 'ocr', 'auto'):
             raise ProjectError('請選擇自動、文字層或全部強制 OCR。')
@@ -118,6 +119,11 @@ class PdfExtraction:
         self.base_pages = deepcopy(base_pages)
         self.base_issues = deepcopy(base_issues or [])
         self.source_batch = source_batch
+        # Preserve the original batch separately from the input of this OCR operation.
+        self.publication_baseline = deepcopy(publication_baseline)
+        self.candidate_numbers = tuple(self.numbers if candidate_numbers is None else candidate_numbers)
+        self.source_fingerprint = deepcopy(source_fingerprint)
+        self.preserve_on_failure = preserve_on_failure
         self.settings: dict = dict(line_breaks='original', rotation=rotation,
                                    requested_mode=mode, requested_language=language, layout=layout)
         if region is not None:
@@ -131,6 +137,13 @@ class PdfExtraction:
         self._status = 'running'
         self._thread = threading.Thread(target=self._run, name='PDF extraction', daemon=False)
         self._thread.start()
+
+    @property
+    def decision_baseline(self):
+        """Reject a region against its own input, preserving earlier accepted edits."""
+        if self.region is not None:
+            return self.base_pages
+        return self.publication_baseline if self.publication_baseline is not None else self.base_pages
 
     @property
     def status(self):
@@ -210,7 +223,7 @@ class PdfExtraction:
                     result['status'] = 'pending'
                     result['error'] = '僅重辨框選區域，其他區域未重新確認；請對照整頁後確認保留或明確略過。'
             except Exception as error:
-                if self.region is not None:
+                if self.region is not None or self.preserve_on_failure:
                     result['text'] = next(p['text'] for p in self.base_pages if p['number'] == number)
                 result['error'] = (str(error) if isinstance(error, ProjectError) else
                                    'OCR 辨識失敗，請檢查原頁或模型後重試。' if self.mode == 'ocr' else

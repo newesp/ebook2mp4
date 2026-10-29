@@ -19,12 +19,19 @@ DEFAULT_SETTINGS = dict(provider='edge-tts', voice='', rate='+0%',
 
 
 def settings(value: dict) -> dict:
-    if (not isinstance(value, dict) or set(value) != set(DEFAULT_SETTINGS)
-            or value['provider'] != 'edge-tts' or not isinstance(value['voice'], str)
+    if (not isinstance(value, dict) or set(value) not in (set(DEFAULT_SETTINGS), set(DEFAULT_SETTINGS) | {'model', 'profile'})
+            or value['provider'] not in ('edge-tts', 'gemini-tts', 'fish-audio') or not isinstance(value['voice'], str)
             or value['rate'] not in RATES or value['processing'] != 'identity-v1'
             or type(value['sentence_pause_ms']) is not int or not 0 <= value['sentence_pause_ms'] <= 1500
             or type(value['paragraph_pause_ms']) is not int or not 0 <= value['paragraph_pause_ms'] <= 3000):
         raise ProjectError('語音設定無效。句尾須為 0～1,500 ms；段落須為 0～3,000 ms。')
+    if value['provider'] != 'edge-tts':
+        from .tts_services import validate_model
+        validate_model(value.get('model'))
+        if value['provider']=='fish-audio' and value.get('model') not in ('s2.1-pro','s2.1-pro-free'):
+            raise ProjectError('Fish 模型尚未驗證；請選 s2.1-pro 或 s2.1-pro-free，避免服務自動換模型。')
+        if not isinstance(value.get('profile'), str) or not value['profile']:
+            raise ProjectError('請選擇 TTS 服務設定檔。')
     return deepcopy(value)
 
 
@@ -53,7 +60,13 @@ def catalog() -> dict:
         raise ProjectError('音色快取無法讀取，請按「更新線上音色」重新取得。') from None
 
 
-def require_voice(voice: str):
+def require_voice(voice: str, value=None):
+    if value and value['provider'] != 'edge-tts':
+        if not isinstance(voice, str) or not voice.strip() or any(ord(c)<32 for c in voice):
+            raise ProjectError('請選擇或輸入音色 ID。')
+        from .tts_services import credential
+        credential(value)
+        return
     if not voice or not any(v['id'] == voice for v in catalog()['voices']):
         raise ProjectError('音色未選擇或已不可用，請更新線上音色後明確重新選擇；不會自動換聲。')
 
@@ -124,7 +137,7 @@ class VoiceJob:
         except ProjectError as exc:
             status, error = 'failed', str(exc)
         except Exception:
-            status, error = 'failed', 'Edge-TTS 網路或服務錯誤。請檢查連線、更新音色後重試；不會自動換聲，仍可校對。'
+            status, error = 'failed', 'TTS 網路或服務錯誤。請檢查連線及服務設定；不會自動換聲，仍可校對。'
         with self._lock:
             if self._cancel.is_set():
                 status, result = 'cancelled', None

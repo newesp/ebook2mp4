@@ -46,11 +46,12 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
     """Keep verified, immutable PCM speech independent of added pauses."""
     from .voice import edge_module
     from .workflow import ProjectWorkflow, digest, encode
+    from .tts_services import RetryableServiceError
     from aiohttp import ClientError
     from edge_tts.exceptions import EdgeTTSException
     key = digest(encode(dict(text=text, provider=settings['provider'], voice=settings['voice'],
                              rate=settings['rate'], processing=settings['processing'],
-                             decoding='pcm-s16le-24000-v1')))
+                             model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')))
     cache.mkdir(parents=True, exist_ok=True)
     target, manifest = cache / (key + '.wav'), cache / (key + '.json')
     try:
@@ -68,6 +69,10 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
                 progress(attempt)
             try:
                 async def receive():
+                    if settings['provider'] != 'edge-tts':
+                        from .tts_services import request_audio
+                        raw.write_bytes(await request_audio(text, settings))
+                        return
                     size = 0
                     with raw.open('wb') as stream:
                         speaker = edge_module().Communicate(text, settings['voice'], rate=settings['rate'],
@@ -82,10 +87,10 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
                             raise ProjectError('Edge-TTS 未傳回音訊，請更新音色後重試。')
                 await asyncio.wait_for(receive(), 90)
                 break
-            except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException):
+            except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException, RetryableServiceError) as exc:
                 if attempt == 3:
                     raise ProjectError('區塊連線或服務錯誤，3 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
-                await asyncio.sleep(attempt)
+                await asyncio.sleep(max(attempt, getattr(exc, 'retry_after', 0)))
         await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
                                    '-c:a', 'pcm_s16le', str(decoded)])
         with wave.open(str(decoded), 'rb') as source:

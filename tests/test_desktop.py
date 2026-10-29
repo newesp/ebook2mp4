@@ -177,7 +177,7 @@ class DesktopJourney(unittest.TestCase):
         before = self.app.current_text
         self.app.cleanup_line_breaks()
         preview_dialog = next(w for w in self.root.winfo_children()
-                              if w.winfo_class() == 'Toplevel')
+                              if w.winfo_class() == 'Toplevel' and w.title().startswith('換行整理預覽'))
         apply = next(w for w in descendants(preview_dialog)
                      if w.winfo_class() == 'TButton' and w.cget('text') == '套用整理')
         apply.invoke()
@@ -357,17 +357,20 @@ class DesktopJourney(unittest.TestCase):
         self.app.undo_button.invoke()
         self.assertEqual(self.app.current_text, '第一章。\n\nHello!')
 
-    def test_tool_panel_mousewheel_reveals_versions_at_minimum_window(self):
+    def test_tool_tabs_keep_confirmation_visible_at_minimum_window(self):
         self.create_import()
         self.root.geometry('1040x640')
         self.root.update()
-        before = self.app.versions_button.winfo_rooty()
-        self.app.find_entry.event_generate('<MouseWheel>', delta=-1200)
+        self.app.show_step(3)
         self.root.update()
-        after = self.app.versions_button.winfo_rooty()
-        self.assertLess(after, before)
-        self.assertLess(after + self.app.versions_button.winfo_height(),
-                        self.root.winfo_rooty() + self.root.winfo_height())
+        for control in (self.app.versions_button, self.app.confirm_button):
+            self.assertTrue(control.winfo_ismapped())
+            self.assertLessEqual(control.winfo_rooty() + control.winfo_height(),
+                                 self.root.winfo_rooty() + self.root.winfo_height())
+        self.app.open_tools(1)
+        self.root.update()
+        self.assertFalse(self.app.confirm_button.winfo_ismapped())
+        self.assertTrue(self.app.save_button.winfo_ismapped())
 
     def test_ui_failure_retains_unsaved_text_and_cancel_close(self):
         self.create_import()
@@ -413,6 +416,7 @@ class DesktopJourney(unittest.TestCase):
         with patch('ebook2mp4.desktop.simpledialog.askstring', return_value='第二章新名稱'):
             self.app.rename_button.invoke()
         self.assertIn('第二章新名稱 · 校對稿 v1', self.app.source_meta.cget('text'))
+        self.assertIn('第二章新名稱', self.app.batch_list.item(second, 'text'))
         self.app.up_button.invoke()
         self.assertEqual([b['id'] for b in self.app.flow.state['batches']], [second, first])
         self.app.batch_list.selection_set(first)

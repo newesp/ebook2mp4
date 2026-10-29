@@ -72,7 +72,8 @@ class MixedDesktopJourney(unittest.TestCase):
                 dialog.page.set('4')
                 dialog.view()
                 self.until(lambda: dialog.ready)
-                dialog.skip_button.invoke()
+                with patch('tkinter.messagebox.askyesno', return_value=True):
+                    dialog.skip_button.invoke()
                 self.until(lambda: dialog.ready)
                 self.assertFalse(app.flow.confirmation_blockers(app.batch_id))
                 app.flow.confirm_reading(app.batch_id)

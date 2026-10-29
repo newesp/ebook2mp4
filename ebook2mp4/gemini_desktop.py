@@ -45,17 +45,20 @@ class SettingsDialog(tk.Toplevel):
         self.protocol('WM_DELETE_WINDOW', self.close)
         self.bind('<Escape>', lambda e: self.close())
 
-    def save(self):
+    def save(self, *, announce=True):
         try:
             ProjectWorkflow.save_gemini_settings(self.key.get(), self.model.get())
             self.status.configure(text='已保存於目前 Windows 使用者設定。')
+            if announce:
+                self.app.notify('Gemini 設定已儲存。', owner=self)
             return True
         except ProjectError as e:
             self.status.configure(text=str(e))
+            self.app.notify(str(e), owner=self, kind='error')
             return False
 
     def test(self):
-        if self.job is not None or not self.save():
+        if self.job is not None or not self.save(announce=False):
             return
         try:
             self.job = ProjectWorkflow.test_gemini_connection()
@@ -80,6 +83,9 @@ class SettingsDialog(tk.Toplevel):
         self.test_button.configure(state='normal')
         self.save_button.configure(state='normal')
         self.status.configure(text='連線成功，模型可產生校對候選。' if state['status'] == 'completed' else state['error'])
+        if not self.closing:
+            self.app.notify('Gemini 連線測試成功。' if state['status'] == 'completed' else state['error'],
+                            owner=self, kind='success' if state['status'] == 'completed' else 'error')
         if self.closing:
             self.close()
 
@@ -110,6 +116,8 @@ class ReviewDialog(tk.Toplevel):
         self.save_error = ''
         self.operation_error = ''
         self.details_open = False
+        self.candidate_edits: dict[tuple[str, int], str] = {}
+        self.displayed_candidate: tuple[str, int] | None = None
         self.title('Gemini 候選校對稿 · 原文與差異')
         preferences = getattr(app, '_gemini_review_window', {})
         self.normal_geometry = preferences.get('geometry', '940x650')
@@ -154,11 +162,13 @@ class ReviewDialog(tk.Toplevel):
         self.counts.grid(row=1, column=0, columnspan=4, sticky='w', pady=(4, 0))
         self.panes = ttk.Panedwindow(self, orient='horizontal')
         self.panes.grid(row=3, column=0, sticky='nsew')
-        for title, name in (('送出時原文 · 唯讀', 'original'), ('Gemini 候選 · 標色為差異', 'candidate')):
+        for title, name in (('送出時原文 · 唯讀', 'original'), ('候選文字 · 可編輯，標色為差異', 'candidate')):
             frame, text = text_pane(self.panes, title)
             self.panes.add(frame, weight=1)
             text.tag_configure('diff', background='#f7dfad', foreground='#332b1b')
             setattr(self, name, text)
+        self.candidate.configure(undo=True, autoseparators=True)
+        self.candidate.bind('<<Modified>>', self.candidate_modified)
         detail = ttk.Frame(self, padding=(12, 0))
         detail.grid(row=4, column=0, sticky='ew')
         detail.columnconfigure(0, weight=1)
@@ -198,6 +208,8 @@ class ReviewDialog(tk.Toplevel):
         self.batch_menu.add_command(label='撤回本次全部採用', command=self.undo_button.invoke)
         self.batch_button.configure(menu=self.batch_menu)
         self.batch_button.grid(row=0, column=0, sticky='w')
+        self.save_candidate_button = ttk.Button(actions, text='保存候選修改', command=self.save_candidate_edits)
+        self.save_candidate_button.grid(row=0, column=1, sticky='w', padx=6)
         self.close_button = ttk.Button(actions, text='關閉／取消', command=self.close)
         self.close_button.grid(row=0, column=2, padx=3)
         self.reject_button.grid(row=0, column=3, padx=3)
@@ -289,6 +301,9 @@ class ReviewDialog(tk.Toplevel):
         current = self.paragraph.current()
         has_candidate = bool(parts and any(p['candidate'] is not None for p in parts))
         selected = bool(0 <= current < len(parts) and parts[current]['candidate'] is not None)
+        editable = enabled and selected
+        self.candidate.configure(state='normal' if editable else 'disabled')
+        self.save_candidate_button.configure(state='normal' if self.candidate_edits and self.job is None else 'disabled')
         for button in (self.accept_button, self.reject_button):
             button.configure(state='normal' if enabled and selected else 'disabled')
         for action in (self.all_button, self.undo_button, self.batch_button):
@@ -305,6 +320,8 @@ class ReviewDialog(tk.Toplevel):
 
     def retry(self, failed_only):
         if self.review is None or self.job is not None:
+            return
+        if not self.save_candidate_edits(announce=False):
             return
         try:
             if self.app.flow is self.flow and self.app.batch_id == self.batch_id and self.app.dirty:
@@ -383,6 +400,8 @@ class ReviewDialog(tk.Toplevel):
         self.show_paragraph()
 
     def show_paragraph(self, _event=None):
+        self.capture_candidate_edit()
+        self.displayed_candidate = None
         self.update_availability()
         parts = self.review['paragraphs'] if self.review else []
         current = max(0, self.paragraph.current())
@@ -397,17 +416,85 @@ class ReviewDialog(tk.Toplevel):
             self.app.fill(self.candidate, '')
             return
         part = parts[current]
-        old, new = part['original'], part['candidate'] or ''
+        assert self.review is not None
+        key = (self.review['id'], current)
+        old, new = part['original'], self.candidate_edits.get(key, part['candidate']) or ''
         self.app.fill(self.original, old)
         review = self.review or {}
         request = next((r for r in review.get('requests', []) if r['first'] <= current < r['last']), None)
-        self.app.fill(self.candidate, new or (request['error'] or '本範圍尚未完成，可續作。' if request else review.get('error', '')))
+        content = new if part['candidate'] is not None else (
+            request['error'] or '本範圍尚未完成，可續作。' if request else review.get('error', ''))
+        self.app.fill(self.candidate, content)
         if part['candidate'] is None:
+            self.candidate.edit_modified(False)
             return
+        self.displayed_candidate = key
+        self.candidate.edit_reset()
+        self.candidate.edit_modified(False)
+        self.update_availability()
+        self.highlight_candidate(old, new)
+
+    def highlight_candidate(self, old, new):
+        self.original.tag_remove('diff', '1.0', 'end')
+        self.candidate.tag_remove('diff', '1.0', 'end')
         for tag, a, b, c, d in difflib.SequenceMatcher(None, old, new, autojunk=len(old) > 2000).get_opcodes():
             if tag != 'equal':
                 self.original.tag_add('diff', f'1.0+{a}c', f'1.0+{b}c')
                 self.candidate.tag_add('diff', f'1.0+{c}c', f'1.0+{d}c')
+
+    def capture_candidate_edit(self):
+        key = self.displayed_candidate
+        if key is None:
+            return
+        review = next(r for r in self.reviews if r['id'] == key[0])
+        text = self.candidate.get('1.0', 'end-1c')
+        if text != review['paragraphs'][key[1]]['candidate']:
+            self.candidate_edits[key] = text
+        else:
+            self.candidate_edits.pop(key, None)
+
+    def candidate_modified(self, _event=None):
+        if not self.candidate.edit_modified():
+            return
+        self.capture_candidate_edit()
+        self.candidate.edit_modified(False)
+        if self.displayed_candidate is not None:
+            review = next(r for r in self.reviews if r['id'] == self.displayed_candidate[0])
+            self.highlight_candidate(review['paragraphs'][self.displayed_candidate[1]]['original'],
+                                     self.candidate.get('1.0', 'end-1c'))
+            self.status.configure(text='候選有未存修改；可保存候選，採用或關閉時也會保存。保存候選尚不改原稿。')
+        self.update_availability()
+
+    def save_candidate_edits(self, *, announce=True):
+        self.capture_candidate_edit()
+        had_edits = bool(self.candidate_edits)
+        try:
+            for review_id in dict.fromkeys(key[0] for key in self.candidate_edits):
+                edits = {index: text for (rid, index), text in self.candidate_edits.items() if rid == review_id}
+                self.flow.edit_gemini_candidates(self.batch_id, review_id, edits)
+                review = next(r for r in self.reviews if r['id'] == review_id)
+                for index, text in edits.items():
+                    if review['paragraphs'][index]['decision'] == 'accepted':
+                        review['paragraphs'][index]['decision'] = 'pending'
+                    review['paragraphs'][index]['candidate'] = text
+                    self.candidate_edits.pop((review_id, index))
+            if had_edits:
+                paragraph = self.paragraph.current()
+                self.load()
+                self.paragraph.current(paragraph)
+                self.show_paragraph()
+            self.operation_error = ''
+            self.status.configure(text='候選修改已保存；採用後才會更新校對稿。')
+            if announce and had_edits:
+                self.app.notify('候選修改已儲存，尚未套用到校對稿。', owner=self)
+            self.update_availability()
+            return True
+        except ProjectError as exc:
+            self.operation_error = str(exc) + ' 候選修改仍保留於視窗，請修正後重試保存。'
+            self.update_availability()
+            self.status.configure(text=self.operation_error)
+            self.app.notify(str(exc), owner=self, kind='error')
+            return False
 
     def poll(self):
         if self.poll_token is not None:
@@ -437,6 +524,9 @@ class ReviewDialog(tk.Toplevel):
                 self.show_paragraph()
             saved = next(r for r in self.reviews if r['id'] == review_id)
             self.status.configure(text='候選已保存，尚未採用。' if saved['status'] == 'completed' else saved['error'])
+            if not self.closing:
+                self.app.notify('Gemini 候選已儲存，尚未採用。' if saved['status'] == 'completed' else saved['error'],
+                                owner=self, kind='success' if saved['status'] == 'completed' else 'warning')
             if self.closing:
                 self.close()
         except ProjectError as e:
@@ -452,8 +542,10 @@ class ReviewDialog(tk.Toplevel):
                 else:
                     self.closing = False
 
-    def perform(self, operation):
+    def perform(self, operation, success='已儲存決定；文字變更後須重新確認朗讀稿。', summary=None):
         if self.review is None:
+            return
+        if not self.save_candidate_edits(announce=False):
             return
         try:
             if self.app.flow is self.flow and self.app.batch_id == self.batch_id and self.app.dirty:
@@ -469,24 +561,35 @@ class ReviewDialog(tk.Toplevel):
             self.load()
             self.paragraph.current(paragraph)
             self.show_paragraph()
-            self.status.configure(text='已保存決定；文字變更後須重新確認朗讀稿。')
+            self.status.configure(text=success)
+            self.app.notify(summary or success, owner=self, detail=success)
         except ProjectError as e:
             self.operation_error = str(e)
             self.update_availability()
             self.status.configure(text=str(e))
+            self.app.notify(str(e), owner=self, kind='error')
 
     def decide(self, decision, all_pending=False):
         if self.review is None:
             return
         review_id = self.review['id']
+        if decision == 'accepted':
+            success = ('已儲存並採用全部待確認段。' if all_pending else '已儲存並採用本段。')
+            success += '可繼續編輯候選，再次採用才更新校對稿。'
+        else:
+            success = '已儲存：本段已拒絕。'
         self.perform(lambda: self.flow.decide_gemini(self.batch_id, review_id,
-                     None if all_pending else self.paragraph.current(), decision))
+                     None if all_pending else self.paragraph.current(), decision),
+                     success, '已儲存並採用全部待確認段。' if all_pending else
+                     f'已儲存並採用第 {self.paragraph.current()+1} 段。' if decision == 'accepted' else
+                     f'已儲存並拒絕第 {self.paragraph.current()+1} 段。')
 
     def undo(self):
         if self.review is None:
             return
         review_id = self.review['id']
-        self.perform(lambda: self.flow.undo_gemini(self.batch_id, review_id))
+        self.perform(lambda: self.flow.undo_gemini(self.batch_id, review_id),
+                     '已撤回本次全部採用並儲存；校對稿已恢復送出前版本。', '已撤回本次全部採用並儲存。')
 
     def close(self):
         if self.job is not None:
@@ -497,6 +600,10 @@ class ReviewDialog(tk.Toplevel):
                 self.poll()
             return
         self.app._gemini_review_window = dict(geometry=self.normal_geometry, maximized=self.state() == 'zoomed')
+        if not self.save_candidate_edits(announce=False):
+            if not messagebox.askyesno('候選修改尚未保存', self.operation_error +
+                    '\n要捨棄尚未保存的候選修改並關閉嗎？', parent=self):
+                return
         self.app.gemini_dialog = None
         if self.poll_token is not None:
             self.after_cancel(self.poll_token)

@@ -4,6 +4,7 @@ import asyncio
 import tempfile
 import time
 import unittest
+import tkinter as tk
 from unittest.mock import AsyncMock, patch
 
 from ebook2mp4.desktop import make_app
@@ -29,7 +30,7 @@ class VoiceDesktop(unittest.TestCase):
         self.app.batch_id = self.app.flow.import_txt(self.app.flow.inspect_txt(source))
         self.app.refresh()
         self.root.update()
-        self.app.steps[2].invoke()
+        self.app.steps[3].invoke()
         self.dialog = self.app.voice_dialog
         self.addCleanup(lambda: self.dialog.close() if self.dialog.winfo_exists() else None)
         self.root.update()
@@ -49,42 +50,33 @@ class VoiceDesktop(unittest.TestCase):
         self.dialog.voices.selection_set('zh-TW-TestNeural')
         self.root.update()
 
-    def test_selected_unsaved_text_consent_save_preview_and_play(self):
+    def test_editable_text_uses_current_settings_and_automatically_plays(self):
+        self.assertTrue(self.dialog.consent.get())
+        self.assertEqual(self.dialog.state(), 'zoomed')
+        self.assertEqual(str(self.dialog.outgoing.cget('state')), 'normal')
         self.choose()
-        self.app.editor.insert('end', '未存文字。')
-        self.app.editor.tag_add('sel', '3.0', '3.end')
-        self.root.update()
-        self.dialog.source.set('校對稿選取文字')
-        self.dialog.prepare_text()
-        self.dialog.preview_button.invoke()
-        self.assertIn('同意', self.dialog.status.cget('text'))
-        self.assertIsNone(self.dialog.job)
-        self.dialog.consent.set(True)
+        original = self.app.flow.voice_settings(self.app.batch_id)
+        draft = self.app.current_text
+        self.dialog.outgoing.delete('1.0', 'end')
+        self.dialog.outgoing.insert('1.0', '自訂 Hello。')
         self.dialog.rate.set('-10%')
         audio = fixture.VoiceJourney.audio(self)
         requests = []
         class Service:
             def __init__(self, text, voice, **options):
                 requests.append((text, voice, options['rate']))
-            async def stream(self):
-                yield dict(type='audio', data=audio)
-        with patch('edge_tts.Communicate', Service):
+            async def stream(self): yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service), patch.object(self.dialog.player, 'play') as play, \
+                patch.object(self.dialog.player, 'playing', return_value=False):
             self.dialog.preview_button.invoke()
             self.poll()
-        self.assertEqual(requests, [('選取 Hello。', 'zh-TW-TestNeural', '-10%')])
-        self.assertTrue(self.app.dirty)
-        with patch('ebook2mp4.voice_media.ctypes.WinDLL') as device:
-            device.return_value.mciSendStringW.return_value = 0
-            self.dialog.play_button.invoke()
-            commands = [call.args[0] for call in device.return_value.mciSendStringW.call_args_list]
-            self.assertTrue(any(command.startswith('play ') for command in commands))
-            self.dialog.stop_button.invoke()
-            self.assertTrue(device.return_value.mciSendStringW.call_args.args[0].startswith('close '))
-        self.dialog.close()
-        self.assertIsNone(self.app.voice_dialog)
-        reopened = ProjectWorkflow.open(self.app.flow.root)
-        self.assertEqual(reopened.voice_settings(self.app.batch_id)['rate'], '-10%')
-        self.assertEqual(reopened.voice_preview(self.app.batch_id)['text'], '選取 Hello。')
+            play.assert_called_once()
+        self.assertEqual(requests, [('自訂 Hello。', 'zh-TW-TestNeural', '-10%')])
+        self.assertEqual(self.app.flow.voice_settings(self.app.batch_id), original)
+        self.assertEqual(self.app.current_text, draft)
+        self.assertEqual(self.app.flow.voice_preview(self.app.batch_id)['text'], '自訂 Hello。')
+        self.dialog.save_button.invoke()
+        self.assertEqual(ProjectWorkflow.open(self.app.flow.root).voice_settings(self.app.batch_id)['rate'], '-10%')
 
     def test_close_cancels_background_request_and_releases_timer(self):
         self.choose()
@@ -105,6 +97,21 @@ class VoiceDesktop(unittest.TestCase):
             self.assertIsNone(self.app.voice_dialog)
             self.assertTrue(job.wait(0))
             self.assertEqual(job.state['status'], 'cancelled')
+
+    def test_normal_dialog_is_centered_and_popover_keeps_anchor(self):
+        dialog = tk.Toplevel(self.root)
+        dialog.geometry('400x200+1+1')
+        self.addCleanup(dialog.destroy)
+        self.root.update()
+        x, y = map(int, dialog.geometry().split('+')[1:])
+        self.assertAlmostEqual(x, (dialog.winfo_screenwidth()-400)//2, delta=2)
+        self.assertAlmostEqual(y, (dialog.winfo_screenheight()-200)//2, delta=2)
+        popup = tk.Toplevel(self.root)
+        popup.overrideredirect(True)
+        popup.geometry('100x60+30+40')
+        self.addCleanup(popup.destroy)
+        self.root.update()
+        self.assertEqual(popup.geometry(), '100x60+30+40')
 
     def test_switching_batch_does_not_write_settings_through_old_dialog(self):
         self.choose()
