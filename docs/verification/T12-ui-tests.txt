@@ -1,0 +1,18 @@
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... FAIL
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+
+======================================================================
+FAIL: test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_desktop.py", line 73, in test_confirm_consent_produce_export_play_and_small_window
+    self.assertIn('完成並保存', self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '完成並保存' not found in '全部區塊有效。本次只在本機組裝，不傳送文字。'
+
+----------------------------------------------------------------------
+Ran 4 tests in 11.663s
+
+FAILED (failures=1)

@@ -1,0 +1,15 @@
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ERROR
+
+======================================================================
+ERROR: test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_resume.py", line 39, in test_cancel_reopen_resume_reuses_successful_blocks
+    self.assertEqual(run['reusable'], 1)
+                     ~~~^^^^^^^^^^^^
+KeyError: 'reusable'
+
+----------------------------------------------------------------------
+Ran 1 test in 2.347s
+
+FAILED (errors=1)

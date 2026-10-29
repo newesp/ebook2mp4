@@ -1,0 +1,6 @@
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.594s
+
+OK

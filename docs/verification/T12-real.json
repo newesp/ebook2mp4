@@ -1,0 +1,18 @@
+{
+  "first_status": "cancelled",
+  "first_completed": 1,
+  "reusable_before_resume": 1,
+  "requests_before_resume": 2,
+  "status": "completed",
+  "chunks": 3,
+  "reused": 1,
+  "duration_ms": 16096,
+  "requests_total": 4,
+  "request_text_sha256": [
+    "495bbf1744ed6ba4b17b80ff1c366225892fd6bf7d4b87c2433346fcbeb38274",
+    "e247613902039131487b7261791d6843cafd64a17d60dc6a3ba574b623d94508",
+    "e247613902039131487b7261791d6843cafd64a17d60dc6a3ba574b623d94508",
+    "b74946146403c18bb69ec18f5922d8e0a978061aa043747d32e91dfbddf2fecc"
+  ],
+  "lock_remaining": false
+}

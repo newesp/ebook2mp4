@@ -1,0 +1,16 @@
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_corrupt_cache_is_not_reused (test_narration_resume.NarrationRecovery.test_corrupt_cache_is_not_reused) ... ok
+test_failed_assembly_resumes_offline_and_preserves_previous_product (test_narration_resume.NarrationRecovery.test_failed_assembly_resumes_offline_and_preserves_previous_product) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+test_offline_permission_is_enforced_after_cache_changes (test_narration_resume.NarrationRecovery.test_offline_permission_is_enforced_after_cache_changes) ... ok
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check (test_production_pages.ProductionPages.test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+test_presets_custom_validation_and_minimum_window (test_rhythm_desktop.RhythmDesktop.test_presets_custom_validation_and_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 67.412s
+
+OK

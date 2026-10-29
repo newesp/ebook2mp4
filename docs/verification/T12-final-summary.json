@@ -1,0 +1,22 @@
+{
+  "modules": 33,
+  "tests": 196,
+  "seconds": 564.171,
+  "first_pass_failed": [
+    "test_rhythm_desktop.py",
+    "test_tts_providers.py"
+  ],
+  "retest": "T12-final-targeted.txt",
+  "retest_tests": 9,
+  "all_modules_final_pass": true,
+  "skipped": 0,
+  "final_recovery_retest": "T12-final-recovery.txt",
+  "final_recovery_tests": 11,
+  "additional_assembly_cancel_test": 1,
+  "total_distinct_tests_after_followup": 197,
+  "final_resume_tests": 6,
+  "pages_final": "T12-pages-final.txt",
+  "committed_copy_tests": 9,
+  "committed_copy_exit_code": 0,
+  "committed_copy_cleanup_diagnostics": false
+}

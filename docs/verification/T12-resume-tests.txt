@@ -1,0 +1,7 @@
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 8.716s
+
+OK

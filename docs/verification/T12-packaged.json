@@ -1,0 +1,34 @@
+{
+  "status": "completed",
+  "ui_build_sha256": "bea610d46ccfce17a16c52f904ef863d7f7c318521802cbb1aa7b71cb03fcaea",
+  "steps": [
+    "native file picker",
+    "open synthetic project",
+    "voice page",
+    "service management and return",
+    "recovery page",
+    "resume",
+    "completed MP3/SRT",
+    "scroll to product actions",
+    "normal exit"
+  ],
+  "flow_windows": 1,
+  "chunks": 3,
+  "reused": 1,
+  "duration_ms": 6984,
+  "mp3_sha256": "d817965361f7aa81735e8e84c28b51900a4d45fb732e4d13f15ab0b4786cb6ed",
+  "srt_sha256": "12c15b36b2d06e2f8c12e8167402d6ef2e0a87c6952563b8f13773de42d7dc11",
+  "lock_remaining": false,
+  "fixture_audio": "first block: local synthetic tone; remaining blocks: real Edge TTS",
+  "final_build_followups": [
+    "service navigation selection",
+    "remove Tk reference from inspection worker"
+  ],
+  "final_executable_sha256": "27767d86130a58367e5032cdf9b6ef17d67b6e013164343c59c3c929f549381e",
+  "final_smoke": [
+    "start",
+    "native main window",
+    "normal exit"
+  ],
+  "final_source_modules_matched": 9
+}

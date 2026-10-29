@@ -1,0 +1,99 @@
+{
+  "removed_bytes": 400052001.0,
+  "removed": [
+    {
+      "bytes": 726085.0,
+      "path": ".scratch/T12-baseline"
+    },
+    {
+      "bytes": 32703609.0,
+      "path": ".scratch/T12-build"
+    },
+    {
+      "bytes": 10918607.0,
+      "path": ".scratch/T12-committed"
+    },
+    {
+      "bytes": 388208.0,
+      "path": ".scratch/T12-packaged"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch/T12-real"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch/T12-temp"
+    },
+    {
+      "bytes": 104471466.0,
+      "path": ".scratch/T12-tools"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch/T12-visual"
+    },
+    {
+      "bytes": 121410362.0,
+      "path": ".scratch/ocr-runtime"
+    },
+    {
+      "bytes": 101457920.0,
+      "path": ".scratch/voice-runtime"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch/test-runs"
+    },
+    {
+      "bytes": 20422885.0,
+      "path": ".mypy_cache"
+    },
+    {
+      "bytes": 951,
+      "path": ".scratch/T12-check-committed.py"
+    },
+    {
+      "bytes": 1260,
+      "path": ".scratch/T12-commit-baseline.py"
+    },
+    {
+      "bytes": 7542841,
+      "path": ".scratch/T12-committed.zip"
+    },
+    {
+      "bytes": 1133,
+      "path": ".scratch/T12-package-check.py"
+    },
+    {
+      "bytes": 1128,
+      "path": ".scratch/T12-package-report.py"
+    },
+    {
+      "bytes": 1521,
+      "path": ".scratch/T12-packaged.py"
+    },
+    {
+      "bytes": 2946,
+      "path": ".scratch/T12-real.py"
+    },
+    {
+      "bytes": 1079,
+      "path": ".scratch/T12-suite.py"
+    }
+  ],
+  "exclusive_failures": [],
+  "exclusive_files_opened_and_released": 1299,
+  "remaining_paths": [],
+  "preserved": [
+    "dist/T12",
+    "docs/verification/T12*",
+    "docs/verification/images/T12",
+    "docs/mock-ui/t12-*",
+    "existing user projects/models/outputs/other dist versions",
+    "existing unrelated documents and prototypes"
+  ],
+  "date": "2026-10-29",
+  "active_task_processes": [],
+  "computer_use_kernel": "reset"
+}

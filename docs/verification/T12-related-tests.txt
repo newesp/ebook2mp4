@@ -1,0 +1,141 @@
+test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens) ... ok
+test_failed_retries_cancel_and_conflict_keep_previous_product (test_narration.NarrationJourney.test_failed_retries_cancel_and_conflict_keep_previous_product) ... ok
+test_indivisible_long_quotation_is_rejected_before_any_online_request (test_narration.NarrationJourney.test_indivisible_long_quotation_is_rejected_before_any_online_request) ... ok
+test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product) ... ok
+test_long_english_prefers_complete_sentences_over_word_boundaries (test_narration.NarrationJourney.test_long_english_prefers_complete_sentences_over_word_boundaries) ... ok
+test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content) ... ok
+test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose) ... ok
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2093, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 876, in callit
+    func(*args, **kw)
+    ~~~~^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 315, in poll
+    self.app.notify(self.status.cget('text'), owner=self,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    kind='success' if state['status'] == 'completed' else
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'info' if state['status'] == 'cancelled' else 'error')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 327, in notify
+    self.status.remember(full if owner is self.root else f'[{owner.title()}] {full}')
+                                                             ^^^^^^^^^^^
+AttributeError: 'VoiceDialog' object has no attribute 'title'
+ERROR
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... invalid command name "2506431883904poll"
+    while executing
+"2506431883904poll"
+    ("after" script)
+FAIL
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... invalid command name "2506382345344poll"
+    while executing
+"2506382345344poll"
+    ("after" script)
+ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... invalid command name "2506380280064poll"
+    while executing
+"2506380280064poll"
+    ("after" script)
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2093, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 876, in callit
+    func(*args, **kw)
+    ~~~~^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 315, in poll
+    self.app.notify(self.status.cget('text'), owner=self,
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    kind='success' if state['status'] == 'completed' else
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    'info' if state['status'] == 'cancelled' else 'error')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 327, in notify
+    self.status.remember(full if owner is self.root else f'[{owner.title()}] {full}')
+                                                             ^^^^^^^^^^^
+AttributeError: 'VoiceDialog' object has no attribute 'title'
+FAIL
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... invalid command name "2506382415424poll"
+    while executing
+"2506382415424poll"
+    ("after" script)
+ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... invalid command name "2506432311872poll"
+    while executing
+"2506432311872poll"
+    ("after" script)
+ERROR
+test_ai_tools_exit_focus_mode_without_losing_selection (test_main_workflow_desktop.MainWorkflow.test_ai_tools_exit_focus_mode_without_losing_selection) ... invalid command name "2506382046080poll"
+    while executing
+"2506382046080poll"
+    ("after" script)
+ok
+test_failed_save_does_not_advance_or_lose_text (test_main_workflow_desktop.MainWorkflow.test_failed_save_does_not_advance_or_lose_text) ... invalid command name "2506320742336poll"
+    while executing
+"2506320742336poll"
+    ("after" script)
+ok
+test_save_next_edit_confirm_and_reconfirm (test_main_workflow_desktop.MainWorkflow.test_save_next_edit_confirm_and_reconfirm) ... invalid command name "2506381317120poll"
+    while executing
+"2506381317120poll"
+    ("after" script)
+ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... invalid command name "2506382291840poll"
+    while executing
+"2506382291840poll"
+    ("after" script)
+ok
+test_missing_reuse_key_is_explained (test_service_form.ServiceForm.test_missing_reuse_key_is_explained) ... invalid command name "2506382204736poll"
+    while executing
+"2506382204736poll"
+    ("after" script)
+ok
+test_reuse_saves_reference_without_copying_secret (test_service_form.ServiceForm.test_reuse_saves_reference_without_copying_secret) ... ok
+test_switch_and_mask_reused_key (test_service_form.ServiceForm.test_switch_and_mask_reused_key) ... ok
+
+======================================================================
+ERROR: test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 98, in test_close_cancels_background_request_and_releases_timer
+    self.assertTrue(job.wait(0))
+                    ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'wait'
+
+======================================================================
+ERROR: test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_desktop.py", line 81, in test_confirm_consent_produce_export_play_and_small_window
+    self.dialog.geometry('700x580+20+20')
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NarrationDialog' object has no attribute 'geometry'
+
+======================================================================
+FAIL: test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 55, in test_editable_text_uses_current_settings_and_automatically_plays
+    self.assertEqual(self.dialog.state(), 'zoomed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: () != 'zoomed'
+
+======================================================================
+FAIL: test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 126, in test_switching_batch_does_not_write_settings_through_old_dialog
+    self.assertIn('已切換', self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '已切換' not found in '音色清單已更新；請明確選擇音色。'
+
+----------------------------------------------------------------------
+Ran 22 tests in 47.592s
+
+FAILED (failures=2, errors=2)

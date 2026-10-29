@@ -1,0 +1,15 @@
+{
+  "executable": "E:\\Leo\\Projects\\ebook2mp4\\dist\\T12\\ebook2mp4\\ebook2mp4.exe",
+  "sha256": "27767d86130a58367e5032cdf9b6ef17d67b6e013164343c59c3c929f549381e",
+  "modules": {
+    "desktop": true,
+    "narration": true,
+    "narration_desktop": true,
+    "voice_desktop": true,
+    "voice_media": true,
+    "workflow": true,
+    "production_lock": true,
+    "production_desktop": true,
+    "service_desktop": true
+  }
+}

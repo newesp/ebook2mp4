@@ -1,0 +1,167 @@
+[
+  {
+    "module": "test_desktop.py",
+    "exit_code": 0,
+    "seconds": 32.886
+  },
+  {
+    "module": "test_gemini.py",
+    "exit_code": 0,
+    "seconds": 6.721
+  },
+  {
+    "module": "test_gemini_desktop.py",
+    "exit_code": 0,
+    "seconds": 9.461
+  },
+  {
+    "module": "test_gemini_resume.py",
+    "exit_code": 0,
+    "seconds": 10.258
+  },
+  {
+    "module": "test_gemini_resume_desktop.py",
+    "exit_code": 0,
+    "seconds": 9.277
+  },
+  {
+    "module": "test_main_workflow_desktop.py",
+    "exit_code": 0,
+    "seconds": 6.25
+  },
+  {
+    "module": "test_mixed_desktop.py",
+    "exit_code": 0,
+    "seconds": 9.673
+  },
+  {
+    "module": "test_mixed_pdf.py",
+    "exit_code": 0,
+    "seconds": 14.486
+  },
+  {
+    "module": "test_narration.py",
+    "exit_code": 0,
+    "seconds": 32.433
+  },
+  {
+    "module": "test_narration_desktop.py",
+    "exit_code": 0,
+    "seconds": 12.675
+  },
+  {
+    "module": "test_narration_resume.py",
+    "exit_code": 0,
+    "seconds": 21.773
+  },
+  {
+    "module": "test_notifications.py",
+    "exit_code": 0,
+    "seconds": 13.218
+  },
+  {
+    "module": "test_ocr.py",
+    "exit_code": 0,
+    "seconds": 73.354
+  },
+  {
+    "module": "test_ocr_desktop.py",
+    "exit_code": 0,
+    "seconds": 8.162
+  },
+  {
+    "module": "test_ocr_optimization.py",
+    "exit_code": 0,
+    "seconds": 65.873
+  },
+  {
+    "module": "test_optimization_desktop.py",
+    "exit_code": 0,
+    "seconds": 10.103
+  },
+  {
+    "module": "test_pdf.py",
+    "exit_code": 0,
+    "seconds": 7.231
+  },
+  {
+    "module": "test_pdf_candidate_refinement.py",
+    "exit_code": 0,
+    "seconds": 14.912
+  },
+  {
+    "module": "test_pdf_refinement_desktop.py",
+    "exit_code": 0,
+    "seconds": 24.951
+  },
+  {
+    "module": "test_production_pages.py",
+    "exit_code": 0,
+    "seconds": 14.036
+  },
+  {
+    "module": "test_proofreading_optimization.py",
+    "exit_code": 0,
+    "seconds": 5.866
+  },
+  {
+    "module": "test_rhythm.py",
+    "exit_code": 0,
+    "seconds": 11.378
+  },
+  {
+    "module": "test_rhythm_desktop.py",
+    "exit_code": 1,
+    "seconds": 4.822
+  },
+  {
+    "module": "test_service_form.py",
+    "exit_code": 0,
+    "seconds": 3.354
+  },
+  {
+    "module": "test_status_help.py",
+    "exit_code": 0,
+    "seconds": 7.228
+  },
+  {
+    "module": "test_terminology_desktop.py",
+    "exit_code": 0,
+    "seconds": 4.826
+  },
+  {
+    "module": "test_tts_providers.py",
+    "exit_code": 1,
+    "seconds": 12.995
+  },
+  {
+    "module": "test_ui_layout.py",
+    "exit_code": 0,
+    "seconds": 18.365
+  },
+  {
+    "module": "test_ui_layout_gemini.py",
+    "exit_code": 0,
+    "seconds": 26.604
+  },
+  {
+    "module": "test_ui_layout_pdf.py",
+    "exit_code": 0,
+    "seconds": 12.846
+  },
+  {
+    "module": "test_voice.py",
+    "exit_code": 0,
+    "seconds": 16.548
+  },
+  {
+    "module": "test_voice_desktop.py",
+    "exit_code": 0,
+    "seconds": 27.666
+  },
+  {
+    "module": "test_workflow.py",
+    "exit_code": 0,
+    "seconds": 13.94
+  }
+]

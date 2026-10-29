@@ -1,0 +1,1640 @@
+diff --git a/ebook2mp4/desktop.py b/ebook2mp4/desktop.py
+index dd6c917..8888fc8 100644
+--- a/ebook2mp4/desktop.py
++++ b/ebook2mp4/desktop.py
+@@ -62,10 +62,14 @@ class Workbench(ttk.Frame):
+         self.gemini_settings_dialog = None
+         self.voice_dialog = None
+         self.narration_dialog = None
++        self._closing = False
++        self._closing_text = ''
+         self.pack(fill='both', expand=True)
+         self.columnconfigure(0, weight=1)
+         self.rowconfigure(2, weight=1)
+         self._build()
++        from .production_desktop import ProductionWorkspace
++        self.production = ProductionWorkspace(self)
+         self.root.protocol('WM_DELETE_WINDOW', self.close)
+         self.root.bind('<Control-s>', lambda e: self.save())
+         self.root.bind('<Control-f>', self.focus_search)
+@@ -321,6 +325,7 @@ class Workbench(ttk.Frame):
+     def notify(self, text, *, owner=None, kind='success', detail=None):
+         from .ui_controls import notify
+         owner = self.root if owner is None else owner
++        owner = owner.winfo_toplevel()
+         full = detail or text
+         self.status.remember(full if owner is self.root else f'[{owner.title()}] {full}')
+         if len(text) > 80:
+@@ -417,9 +422,12 @@ class Workbench(ttk.Frame):
+         self.root.title(('＊' if self.dirty else '') + (self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4')
+ 
+     def show_step(self, n):
++        if n != 4:
++            self.production.hide()
+         self.step = n
+         self.render_step()
+         if n == 4:
++            self.center.grid_remove()
+             self.voice_settings()
+ 
+     def render_step(self):
+@@ -434,6 +442,20 @@ class Workbench(ttk.Frame):
+         self.confirm_panel.grid_remove()
+         self.close_tools_button.grid_remove()
+         self.left_panel.grid_remove() if self.focus_mode else self.left_panel.grid()
++        if n == 4:
++            self.production.grid(row=0, column=1, rowspan=2, sticky='nsew')
++            self.steps[3].configure(style='CompactActive.TButton')
++            for button in self.steps[:3]:
++                button.configure(style='Compact.TButton')
++            self.notice.configure(text='步驟 4：設定語音與試聽，再前往製作與成品。')
++            current = self.production.current
++            if self.flow and (current is None or not current.winfo_exists() or
++                    getattr(current, 'flow', None) is not self.flow or getattr(current, 'batch_id', None) != self.batch_id):
++                self.production.show('voice')
++            return
++        if hasattr(self, 'production'):
++            self.production.hide()
++        self.center.grid()
+         if n == 1:
+             self.import_panel.grid(row=1, column=0, sticky='nsew')
+         else:
+@@ -1196,41 +1218,44 @@ class Workbench(ttk.Frame):
+                 self.report(ProjectError('無法開啟檔案總管。可從左側複製專案位置後手動開啟。'))
+ 
+     def close(self):
+-        if self.narration_dialog is not None and self.narration_dialog.winfo_exists():
+-            self.narration_dialog.close()
++        if (not self._closing or self.current_text != self._closing_text) and not self.may_leave():
++            self._closing = False
+             return
+-        if self.voice_dialog is not None and self.voice_dialog.winfo_exists():
+-            self.voice_dialog.close()
++        self._closing = True
++        self._closing_text = self.current_text
++        shutdown = self.production.shutdown()
++        if shutdown == 'cancelled':
++            self._closing = False
++            return
++        if shutdown == 'pending':
++            self.root.after(100, self.close)
+             return
+         for dialog in (self.gemini_dialog, self.gemini_settings_dialog):
+             if dialog is not None and dialog.winfo_exists():
+                 dialog.close()
++                self._closing = False
+                 return
+         if self.pdf_dialog is not None and self.pdf_dialog.winfo_exists():
+             self.pdf_dialog.close()
++            self._closing = False
+             return
+-        if self.may_leave():
+-            self.root.destroy()
++        self.root.destroy()
+ 
+     def voice_settings(self):
+-        from .voice_desktop import VoiceDialog
+-        if self.voice_dialog is not None:
+-            self.voice_dialog.lift()
+-            return
+         if not self.flow:
+             self.notice.configure(text='請先建立或開啟書籍專案，再設定語音。')
+             return
+-        self.voice_dialog = VoiceDialog(self)
++        self.step = 4
++        self.render_step()
++        self.production.show('voice')
+ 
+     def narration(self):
+-        from .narration_desktop import NarrationDialog
+-        if self.narration_dialog is not None:
+-            self.narration_dialog.lift()
+-            return
+         if not self.flow or not self.batch_id:
+             self.notice.configure(text='請先選擇批次，並確認朗讀稿。')
+             return
+-        self.narration_dialog = NarrationDialog(self)
++        self.step = 4
++        self.render_step()
++        self.production.show('narration')
+ 
+     def gemini_settings(self):
+         from .gemini_desktop import SettingsDialog
+@@ -1307,6 +1332,7 @@ def make_app():
+     style.configure('Treeview', background='#ffffff', fieldbackground='#ffffff', rowheight=25)
+     style.map('Treeview', background=[('selected', GREEN)], foreground=[('selected', '#ffffff')])
+     style.map('TButton', background=[('active', '#e9f0e5')], foreground=[('disabled', '#68736c')])
++    style.map('CompactActive.TButton', background=[('active', '#264d35')], foreground=[('active', '#ffffff')])
+     style.configure('Primary.TButton', background=GREEN, foreground='#ffffff')
+     style.configure('Destructive.TButton', foreground='#963b32')
+     style.map('Primary.TButton', background=[('disabled', '#e1e5de'), ('active', '#264d35')],
+diff --git a/ebook2mp4/narration.py b/ebook2mp4/narration.py
+index d5cc11b..21886fc 100644
+--- a/ebook2mp4/narration.py
++++ b/ebook2mp4/narration.py
+@@ -189,14 +189,18 @@ def timestamp(milliseconds: int) -> str:
+ 
+ 
+ class NarrationJob(VoiceJob):
+-    def __init__(self, snapshot: dict, folder: Path, tool: str, lock: int, lock_path: Path):
++    def __init__(self, snapshot: dict, folder: Path, tool: str, lock, lock_path: Path, previous=None, *, allow_network=True):
+         self.snapshot, self.folder, self.tool = deepcopy(snapshot), folder, tool
+-        self.production_lock: int | None = lock
++        self.production_lock = lock
+         self.lock_path = lock_path
+         self.published = False
++        self.allow_network = allow_network
+         self.report: dict = dict(status='running', phase='準備', current=0, total=len(snapshot['chunks']),
+                            completed=0, failed=0, error='', chunks=[dict(c, status='pending', attempts=0,
+                            duration_ms=None) for c in snapshot['chunks']])
++        if previous is not None:
++            self.report['resume_history'] = previous.get('resume_history', []) + [
++                {k: deepcopy(v) for k, v in previous.items() if k != 'resume_history'}]
+         super().__init__(self.produce, timeout=None)
+ 
+     def _run(self):
+@@ -220,6 +224,9 @@ class NarrationJob(VoiceJob):
+         media = self.folder / 'media'
+         success = False
+         try:
++            validate_plan(self.snapshot)
++            if media.exists():
++                shutil.rmtree(media)
+             media.mkdir()
+             self.save_progress()
+             settings = self.snapshot['settings']
+@@ -228,13 +235,14 @@ class NarrationJob(VoiceJob):
+             with wave.open(str(assembled_path), 'wb') as assembled:
+                 assembled.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+                 for index, chunk in enumerate(self.report['chunks']):
+-                    self.save_progress(phase='線上合成', current=index + 1)
++                    await asyncio.sleep(0)
++                    self.save_progress(phase='驗證音訊區塊', current=index + 1)
+                     def progress(attempt):
+                         chunk.update(status='running', attempts=attempt)
+-                        self.save_progress()
++                        self.save_progress(phase='線上合成')
+                     decoded, reused = await speech_block(
+                         chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
+-                        progress)
++                        progress, allow_network=self.allow_network)
+                     chunk.update(reused=reused)
+                     with wave.open(str(decoded), 'rb') as source:
+                         count = source.getnframes()
+@@ -242,6 +250,7 @@ class NarrationJob(VoiceJob):
+                             raise ProjectError('區塊音訊為空，請重試。')
+                         # Copy bounded buffers; a long book need not fit into memory.
+                         while data := source.readframes(24000):
++                            await asyncio.sleep(0)
+                             assembled.writeframesraw(data)
+                     start_ms, end_ms = round(frames / 24), round((frames + count) / 24)
+                     caption = chunk['text'].strip().replace('\r\n', '\n').replace('\r', '\n')
+@@ -268,10 +277,11 @@ class NarrationJob(VoiceJob):
+         except asyncio.CancelledError:
+             self.save_progress(status='cancelled', phase='已取消')
+             raise
+-        except Exception:
++        except Exception as error:
+             for chunk in self.report['chunks']:
+                 if chunk['status'] == 'running':
+                     chunk['status'] = 'failed'
++                    chunk['error'] = str(error) if isinstance(error, ProjectError) else '區塊處理失敗。'
+             self.save_progress(status='failed', phase='失敗', failed=sum(c['status'] == 'failed' for c in self.report['chunks']))
+             raise
+         finally:
+@@ -292,17 +302,44 @@ class NarrationJob(VoiceJob):
+             if discard and not self.published and (self.folder / 'media').exists():
+                 shutil.rmtree(self.folder / 'media')
+             if self.production_lock is not None:
+-                os.close(self.production_lock)
++                self.production_lock.release()
+                 self.production_lock = None
+-            self.lock_path.unlink(missing_ok=True)
+         except OSError:
+             raise ProjectError('無法清理合成暫存或任務鎖；已發布成品保留。請解除檔案占用後重試。') from None
+ 
+ 
+-def read_run(flow: ProjectWorkflow, ref: dict) -> dict:
++def validate_plan(snapshot: dict):
++    expected = plan(snapshot['text'], snapshot['settings'], snapshot['reading_id'], snapshot['batch_id'])
++    if snapshot['rules'] == RULES and snapshot['settings']['sentence_pause_ms'] == 0 and snapshot['settings']['paragraph_pause_ms'] == 500:
++        # T10 used the same natural rhythm under its original rule-version name.
++        expected['rules'] = dict(RULES)
++        expected['rules_sha256'] = digest(encode(RULES))
++        for chunk in expected['chunks']:
++            chunk['rules_sha256'] = expected['rules_sha256']
++    for key in ('chunks', 'text_sha256', 'settings_sha256', 'rules', 'rules_sha256'):
++        if snapshot[key] != expected[key]:
++            raise ProjectError('合成計畫驗證失敗，請還原專案備份。')
++
++
++def read_run(flow: ProjectWorkflow, ref: dict, *, verify_audio=True) -> dict:
+     try:
+         snapshot = json.loads(flow._read(ref))
+         progress = json.loads(flow._path(ref['progress_path']).read_bytes())
+-        return dict(snapshot=snapshot, progress=progress)
++        from .production_lock import production_active
++        from .voice_media import cached_block
++        if verify_audio:
++            validate_plan(snapshot)
++        if progress['status'] not in ('pending', 'running', 'cancelling', 'cancelled', 'failed', 'completed'):
++            raise ValueError()
++        if progress['status'] in ('pending', 'running', 'cancelling') and not production_active(flow.root / '.production.lock'):
++            progress['status'] = 'interrupted'
++        cache = flow._path(f'batches/{snapshot["batch_id"]}/voice-blocks')
++        reusable = sum(cached_block(c['text'], snapshot['settings'], cache) is not None for c in snapshot['chunks']) if verify_audio else 0
++        batch = flow._batch(snapshot['batch_id'])
++        stale = (batch.get('current_reading') != snapshot['reading_id'] or
++                 flow.voice_settings(snapshot['batch_id']) != snapshot['settings'])
++        published = ref.get('published', False) or batch.get('narration', {}).get('id') == snapshot['id']
++        return dict(snapshot=snapshot, progress=progress, reusable=reusable,
++                    stale=stale, published=published, remaining=len(snapshot['chunks'])-reusable)
+     except (OSError, ValueError, KeyError, TypeError):
+         raise ProjectError('合成任務記錄無法讀取，請還原專案備份。') from None
+diff --git a/ebook2mp4/narration_desktop.py b/ebook2mp4/narration_desktop.py
+index e3bed78..3e666bc 100644
+--- a/ebook2mp4/narration_desktop.py
++++ b/ebook2mp4/narration_desktop.py
+@@ -2,27 +2,31 @@
+ from __future__ import annotations
+ 
+ import os
++import asyncio
+ import tkinter as tk
+-from tkinter import filedialog, ttk
++from tkinter import filedialog, messagebox, ttk
+ 
+ from .workflow import ProjectError
+ from .voice_media import PreviewPlayer
++from .production_desktop import ScrollPage
+ 
++STATUS_LABELS = {'interrupted':'已中斷','cancelled':'已取消','failed':'失敗','completed':'已完成',
++                 'running':'執行中','pending':'等待','cancelling':'取消中'}
+ 
+-class NarrationDialog(tk.Toplevel):
++
++class NarrationDialog(ScrollPage):
+     def __init__(self, app):
+-        super().__init__(app.root)
++        super().__init__(app.production.host)
+         self.app, self.flow, self.batch_id = app, app.flow, app.batch_id
+         self.job, self.timer = None, None
+         self.closing = False
+         self.player = PreviewPlayer()
+-        self.title('批次 MP3／SRT')
+-        self.geometry('800x620')
+-        self.minsize(700, 580)
+-        self.protocol('WM_DELETE_WINDOW', self.close)
+-        self.columnconfigure(0, weight=1)
+-        self.rowconfigure(1, weight=1)
+-        header = ttk.Frame(self, padding=(16, 12, 16, 4))
++        self.run = None
++        self.runs = []
++        self.check_job = None
++        self.check_timer = None
++        self.content.columnconfigure(0, weight=1)
++        header = ttk.Frame(self.content, padding=(12, 12, 12, 4))
+         header.grid(row=0, column=0, sticky='ew')
+         header.columnconfigure(0, weight=1)
+         ttk.Label(header, text='已確認朗讀稿 → 批次 MP3／SRT', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
+@@ -30,7 +34,7 @@ class NarrationDialog(tk.Toplevel):
+         ttk.Label(header, text=f'{self.flow.state["name"]} ／ {batch["name"]}', wraplength=650).grid(row=1, column=0, sticky='ew', pady=5)
+         self.source_info = ttk.Label(header, text='', wraplength=650)
+         self.source_info.grid(row=2, column=0, sticky='ew')
+-        text_frame = ttk.Frame(self, padding=(16, 4))
++        text_frame = ttk.Frame(self.content, padding=(12, 4))
+         text_frame.grid(row=1, column=0, sticky='nsew')
+         text_frame.columnconfigure(0, weight=1)
+         text_frame.rowconfigure(0, weight=1)
+@@ -39,8 +43,8 @@ class NarrationDialog(tk.Toplevel):
+         scrollbar = ttk.Scrollbar(text_frame, command=self.outgoing.yview)
+         scrollbar.grid(row=0, column=1, sticky='ns')
+         self.outgoing.configure(yscrollcommand=scrollbar.set)
+-        controls = ttk.Frame(self, padding=(16, 6, 16, 16))
+-        controls.grid(row=2, column=0, sticky='ew')
++        controls = ttk.Frame(self, padding=(12, 6, 12, 12))
++        controls.grid(row=1, column=0, columnspan=2, sticky='ew')
+         controls.columnconfigure(0, weight=1)
+         self.reload_button = ttk.Button(controls, text='重讀目前確認稿與設定', command=self.load_source)
+         self.reload_button.grid(row=0, column=0, sticky='w')
+@@ -48,7 +52,7 @@ class NarrationDialog(tk.Toplevel):
+                   '字幕以完整區塊實測時長顯示。長區塊字幕可能有多行。', wraplength=650,
+                   foreground='#58695f').grid(row=1, column=0, sticky='ew', pady=6)
+         self.consent = tk.BooleanVar(value=True)
+-        self.consent_control = ttk.Checkbutton(controls, text='我同意將上方已確認稿傳送至所選 TTS 服務（可能計費）', variable=self.consent)
++        self.consent_control = ttk.Checkbutton(controls, text='我同意將待處理文字傳送至本次 TTS 服務（可能計費）', variable=self.consent)
+         self.consent_control.grid(row=2, column=0, sticky='w', pady=4)
+         actions = ttk.Frame(controls)
+         actions.grid(row=3, column=0, sticky='ew', pady=5)
+@@ -60,20 +64,114 @@ class NarrationDialog(tk.Toplevel):
+         self.status.grid(row=4, column=0, sticky='ew', pady=5)
+         self.progress = ttk.Progressbar(controls, mode='indeterminate')
+         self.progress.grid(row=5, column=0, sticky='ew')
+-        self.result_info = ttk.Label(controls, text='', wraplength=650, foreground='#58695f')
+-        self.result_info.grid(row=6, column=0, sticky='ew', pady=8)
+-        outputs = ttk.Frame(controls)
+-        outputs.grid(row=7, column=0, sticky='ew')
++        self.result_info = ttk.Label(self.content, text='', wraplength=650, foreground='#58695f')
++        self.result_info.grid(row=5, column=0, sticky='ew', padx=12,pady=8)
++        outputs = ttk.Frame(self.content)
++        outputs.grid(row=6, column=0, sticky='ew',padx=12,pady=8)
+         self.play_button = ttk.Button(outputs, text='播放成品', command=self.play)
+         self.stop_button = ttk.Button(outputs, text='停止播放', command=self.stop)
+         self.export_button = ttk.Button(outputs, text='另存 MP3／SRT', command=self.export)
+         self.folder_button = ttk.Button(outputs, text='開啟資料夾', command=self.open_folder)
+         for index, button in enumerate((self.play_button, self.stop_button, self.export_button, self.folder_button)):
+-            button.grid(row=0, column=index, padx=(0, 6))
+-        ttk.Button(outputs, text='關閉', command=self.close).grid(row=1, column=0, sticky='w', pady=(8, 0))
++            button.grid(row=index//2, column=index%2, sticky='ew',padx=(0, 6),pady=4)
++        ttk.Button(actions,text='← 返回語音設定',command=self.app.voice_settings).grid(row=1,column=0,sticky='w',pady=8)
++        self.restart_button=ttk.Button(actions,text='重新開始…',command=self.restart)
++        self.restart_button.grid(row=1,column=1,sticky='w',padx=8,pady=8)
++        self.run_choice=tk.StringVar()
++        self.run_control=ttk.Combobox(self.content,textvariable=self.run_choice,state='readonly',width=1)
++        self.run_control.grid(row=2,column=0,sticky='ew',padx=12,pady=8)
++        self.run_control.bind('<<ComboboxSelected>>',self.select_run)
++        self.run_summary=ttk.Label(self.content,text='',wraplength=650)
++        self.run_summary.grid(row=3,column=0,sticky='ew',padx=12,pady=4)
++        self.details=ttk.Treeview(self.content,columns=('block','status','attempts'),show='headings',height=5)
++        for key,label,width in (('block','區塊',80),('status','狀態',250),('attempts','嘗試次數',100)):
++            self.details.heading(key,text=label)
++            self.details.column(key,width=width,minwidth=40)
++        self.details.grid(row=4,column=0,sticky='ew',padx=12,pady=4)
++        self.bind_scroll()
+         self.load_source()
+         self.load_result()
+ 
++    def load_runs(self):
++        if self.check_job is not None or self.job is not None:
++            return
++        from .voice import VoiceJob
++        flow,batch_id=self.flow,self.batch_id
++        async def inspect():
++            return await asyncio.to_thread(flow.narration_runs,batch_id)
++        self.check_job=VoiceJob(inspect,timeout=None)
++        self.status.configure(text='正在檢查保存進度與音訊區塊…')
++        self.update_controls()
++        self.check_timer=self.after(100,self.poll_runs)
++
++    def poll_runs(self):
++        self.check_timer=None
++        job=self.check_job
++        if job is None:
++            return
++        if not job.wait(0):
++            self.check_timer=self.after(100,self.poll_runs)
++            return
++        try:
++            self.runs = job.result
++            self.run_control.configure(values=['目前確認稿（新任務）'] + [
++                f'{r["snapshot"]["created_at"][:19]} · {STATUS_LABELS.get(r["progress"]["status"], "待檢查")} · {r["snapshot"]["id"][:8]}' for r in self.runs])
++            pending = [r for r in self.runs if not r['published']]
++            if self.run is not None:
++                self.run = next((r for r in self.runs if r['snapshot']['id'] == self.run['snapshot']['id']), None)
++            elif pending:
++                self.run = pending[-1]
++            self.run_control.current(self.runs.index(self.run)+1 if self.run is not None else 0)
++            self.display_run()
++        except ProjectError as error:
++            self.status.configure(text=str(error))
++        finally:
++            self.check_job=None
++            self.update_controls()
++        if self.closing and self.job is None:
++            self.release()
++
++    def select_run(self, _event=None):
++        index=self.run_control.current()
++        self.run=self.runs[index-1] if index>0 else None
++        self.display_run()
++        self.consent.set(False)
++
++    def display_run(self):
++        self.details.delete(*self.details.get_children())
++        if self.run is None:
++            self.load_source()
++            self.run_summary.configure(text='新任務：核對目前確認稿與語音設定。')
++        else:
++            snapshot=self.run['snapshot']
++            self.source_text,self.source_settings=snapshot['text'],snapshot['settings']
++            self.source_info.configure(text=f'任務 {snapshot["id"][:8]} · 朗讀稿 {snapshot["reading_id"][:8]} · '
++                f'{self.source_settings["provider"]} {self.source_settings.get("model", "")} · {self.source_settings["voice"]} · '
++                f'{self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]}／段落 {self.source_settings["paragraph_pause_ms"]} ms')
++            self.outgoing.configure(state='normal')
++            self.outgoing.delete('1.0','end')
++            self.outgoing.insert('1.0',self.source_text)
++            self.outgoing.configure(state='disabled')
++            status=STATUS_LABELS.get(self.run['progress']['status'],'待檢查')
++            self.run_summary.configure(text=f'{status} · 共 {len(snapshot["chunks"])} 塊 · 可重用 {self.run["reusable"]} · 待處理 {self.run["remaining"]}')
++            self.status.configure(text='稿件或設定已變更；請返回核對新版本，再重新開始。' if self.run['stale'] else
++                'MP3／SRT 已完成並保存。請使用下方成功成品。' if self.run['published'] else
++                self.run['progress'].get('error') or '已保留原任務快照，可繼續未完成區塊。')
++            for index,chunk in enumerate(self.run['progress'].get('chunks',[])):
++                self.details.insert('','end',values=(index+1,STATUS_LABELS.get(chunk['status'],'待檢查'),chunk.get('attempts',0)))
++            if not self.run['remaining'] and not self.run['published']:
++                self.status.configure(text='全部區塊有效。本次只在本機組裝，不傳送文字。' if not self.run['stale'] else self.status.cget('text'))
++        self.update_controls()
++
++    def restart(self):
++        if self.job is not None:
++            return
++        if messagebox.askyesno('另建製作任務','重新核對目前確認稿與設定？舊進度與成功成品會保留。',parent=self):
++            self.run=None
++            self.run_control.current(0)
++            self.display_run()
++            self.consent.set(False)
++
+     def load_source(self):
+         self.source_text, self.source_settings = '', None
+         try:
+@@ -94,13 +192,17 @@ class NarrationDialog(tk.Toplevel):
+ 
+     def start(self):
+         try:
++            if self.check_job is not None:
++                return
+             if self.job is not None:
+                 if self.job.wait(0) and self.job.state['status'] == 'completed':
+                     self.publish()
+                 return
+             if self.app.flow is not self.flow or self.app.batch_id != self.batch_id:
+                 raise ProjectError('主視窗已換書籍或批次，請關閉後從目前批次重開。')
+-            if not self.consent.get():
++            if self.run is not None and self.run['stale']:
++                raise ProjectError('稿件或設定已變更；請返回核對新版本，再重新開始。')
++            if not self.consent.get() and (self.run is None or self.run['remaining']):
+                 raise ProjectError('請先核對並勾選同意將確認稿傳送至線上語音服務。')
+             if (self.flow.reading_text(self.batch_id) != self.source_text or
+                     self.flow.voice_settings(self.batch_id) != self.source_settings):
+@@ -108,7 +210,8 @@ class NarrationDialog(tk.Toplevel):
+                 self.consent.set(False)
+                 raise ProjectError('確認稿或設定已變更。已重讀，請重新核對並勾選同意。')
+             self.stop()
+-            self.job = self.flow.start_narration(self.batch_id)
++            self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=self.consent.get()) if self.run is not None
++                        else self.flow.start_narration(self.batch_id))
+             self.update_controls()
+             self.schedule()
+         except ProjectError as error:
+@@ -120,9 +223,11 @@ class NarrationDialog(tk.Toplevel):
+         self.timer = self.after(100, self.poll)
+ 
+     def publish(self):
+-        self.flow.finish_narration(self.job)
++        product=self.flow.finish_narration(self.job)
+         self.job = None
++        self.run=dict(snapshot=product)
+         self.load_result()
++        self.load_runs()
+         self.status.configure(text='MP3／SRT 已完成並保存。請播放檢查聽感與字幕。')
+ 
+     def poll(self):
+@@ -144,6 +249,7 @@ class NarrationDialog(tk.Toplevel):
+                 else:
+                     self.flow.discard_narration(self.job)
+                     self.job = None
++                    self.load_runs()
+                     self.status.configure(text='已取消；上一份成功成品保留。' if state['status'] == 'cancelled' else state['error'])
+             except ProjectError as error:
+                 self.closing = False
+@@ -163,8 +269,11 @@ class NarrationDialog(tk.Toplevel):
+         busy = self.job is not None
+         stopped = self.job is not None and self.job.wait(0)
+         can_save = stopped and self.job is not None and self.job.state['status'] == 'completed'
+-        self.start_button.configure(state='normal' if not busy or can_save else 'disabled',
+-                                    text='重試保存' if stopped else '產生 MP3／SRT')
++        blocked = self.check_job is not None or self.run is not None and (self.run['stale'] or self.run['published'])
++        self.start_button.configure(state='normal' if can_save or not busy and not blocked else 'disabled',
++                                    text='重試保存' if stopped else '繼續未完成區塊 →' if self.run is not None else '開始製作 MP3／SRT')
++        self.run_control.configure(state='disabled' if busy or self.check_job is not None else 'readonly')
++        self.restart_button.configure(state='disabled' if busy or self.check_job is not None else 'normal')
+         self.cancel_button.configure(state='normal' if busy and not stopped else 'disabled')
+         self.reload_button.configure(state='disabled' if busy else 'normal')
+         self.consent_control.configure(state='disabled' if busy else 'normal')
+@@ -221,6 +330,9 @@ class NarrationDialog(tk.Toplevel):
+     def close(self):
+         self.stop()
+         self.closing = True
++        if self.check_job is not None:
++            self.check_job.cancel()
++            return
+         if self.job is not None:
+             self.cancel()
+             self.schedule()
+@@ -228,6 +340,9 @@ class NarrationDialog(tk.Toplevel):
+             self.release()
+ 
+     def release(self):
++        if self.check_timer is not None:
++            self.after_cancel(self.check_timer)
++            self.check_timer=None
+         if self.timer is not None:
+             self.after_cancel(self.timer)
+             self.timer = None
+diff --git a/ebook2mp4/production_desktop.py b/ebook2mp4/production_desktop.py
+new file mode 100644
+index 0000000..0386992
+--- /dev/null
++++ b/ebook2mp4/production_desktop.py
+@@ -0,0 +1,140 @@
++"""Single-window production pages, independent from background task lifetime."""
++from tkinter import ttk
++import tkinter as tk
++from typing import Any
++
++
++class ScrollPage(ttk.Frame):
++    def __init__(self, parent):
++        super().__init__(parent)
++        self.columnconfigure(0, weight=1)
++        self.rowconfigure(0, weight=1)
++        self.canvas = tk.Canvas(self, highlightthickness=0, background='#f5f6f2', width=1, height=1)
++        self.canvas.grid(row=0, column=0, sticky='nsew')
++        scrollbar = ttk.Scrollbar(self, command=self.canvas.yview)
++        scrollbar.grid(row=0, column=1, sticky='ns')
++        self.canvas.configure(yscrollcommand=scrollbar.set)
++        self.content = ttk.Frame(self.canvas)
++        item = self.canvas.create_window(0, 0, anchor='nw', window=self.content)
++        self.content.bind('<Configure>', lambda e: self.canvas.configure(scrollregion=self.canvas.bbox('all')))
++        self.canvas.bind('<Configure>', lambda e: self.canvas.itemconfigure(item, width=e.width))
++
++    def bind_scroll(self):
++        from .desktop import bind_canvas_wheel
++        bind_canvas_wheel(self.canvas, self.content)
++
++
++class ProductionWorkspace(ttk.Frame):
++    def __init__(self, app):
++        super().__init__(app.body)
++        self.app = app
++        self.pages: dict[tuple, Any] = {}
++        self.current = None
++        self.service_page = None
++        self.columnconfigure(0, weight=1)
++        self.rowconfigure(1, weight=1)
++        tabs = ttk.Frame(self)
++        tabs.grid(row=0, column=0, sticky='ew', pady=(0, 8))
++        self.voice_tab = ttk.Button(tabs, text='語音設定與試聽', command=app.voice_settings)
++        self.voice_tab.pack(side='left')
++        ttk.Label(tabs, text=' → ').pack(side='left')
++        self.narration_tab = ttk.Button(tabs, text='製作與成品', command=app.narration)
++        self.narration_tab.pack(side='left')
++        self.host = ttk.Frame(self)
++        self.host.grid(row=1, column=0, sticky='nsew')
++        self.host.columnconfigure(0, weight=1)
++        self.host.rowconfigure(0, weight=1)
++        self.task_button = ttk.Button(app, text='', command=self.show_active)
++        self.timer: str | None = self.after(200, self.poll)
++        self.bind('<Destroy>', self.destroyed, add='+')
++
++    def destroyed(self, event):
++        if event.widget is self and self.timer is not None:
++            self.after_cancel(self.timer)
++            self.timer = None
++
++    def activate(self, page):
++        if self.current is not None and self.current.winfo_exists():
++            if hasattr(self.current, 'stop'):
++                self.current.stop()
++            self.current.grid_remove()
++        self.current = page
++        page.grid(row=0, column=0, sticky='nsew')
++        kind = 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
++        self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
++        self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
++
++    def show(self, kind):
++        app = self.app
++        key = (id(app.flow), app.batch_id, kind)
++        page: Any = self.pages.get(key)
++        if page is None or not page.winfo_exists():
++            if kind == 'voice':
++                from .voice_desktop import VoiceDialog
++                page = VoiceDialog(app)
++            else:
++                from .narration_desktop import NarrationDialog
++                page = NarrationDialog(app)
++            self.pages[key] = page
++        app.voice_dialog = self.pages.get((id(app.flow), app.batch_id, 'voice'))
++        app.narration_dialog = self.pages.get((id(app.flow), app.batch_id, 'narration'))
++        self.activate(page)
++        if kind == 'narration' and page.job is None:
++            page.load_runs()
++            page.load_result()
++        return page
++
++    def manage_services(self, owner):
++        from .service_desktop import ServiceDialog
++        if self.service_page is not None and self.service_page.winfo_exists():
++            self.service_page.owner = owner
++            self.service_page.on_return = self.app.voice_settings
++            self.activate(self.service_page)
++            return
++        self.service_page = ServiceDialog(owner, parent=self.host, on_return=self.app.voice_settings)
++        self.activate(self.service_page)
++
++    def hide(self):
++        if self.current is not None and self.current.winfo_exists() and hasattr(self.current, 'stop'):
++            self.current.stop()
++        self.grid_remove()
++
++    def active_page(self):
++        return next((p for k, p in self.pages.items() if k[2] == 'narration' and p.winfo_exists() and p.job is not None), None)
++
++    def show_active(self):
++        page = self.active_page()
++        if page is None:
++            return
++        app = self.app
++        if app.flow is not page.flow or app.batch_id != page.batch_id:
++            if not app.may_leave():
++                return
++            app.flow, app.batch_id = page.flow, page.batch_id
++            app.refresh()
++        app.narration()
++
++    def poll(self):
++        self.timer = None
++        page = self.active_page()
++        if page is not None:
++            state = page.job.state
++            batch = next((b['name'] for b in page.flow.state['batches'] if b['id'] == page.batch_id), '原批次')
++            self.task_button.configure(text=f'{batch}｜{state.get("phase", "製作中")}｜完成 {state.get("completed", 0)}/{state.get("total", 0)} · 返回任務 →')
++            self.task_button.grid(row=4, column=0, sticky='ew')
++        else:
++            self.task_button.grid_remove()
++        self.timer = self.after(200, self.poll)
++
++    def shutdown(self):
++        pages = list(self.pages.values())
++        if self.service_page is not None:
++            self.service_page.on_return = None
++            pages.insert(0, self.service_page)
++        for page in pages:
++            if page.winfo_exists():
++                if page.close() is False:
++                    return 'cancelled'
++        if any(p.winfo_exists() for p in pages):
++            return 'pending'
++        return 'complete'
+diff --git a/ebook2mp4/production_lock.py b/ebook2mp4/production_lock.py
+new file mode 100644
+index 0000000..c84db6e
+--- /dev/null
++++ b/ebook2mp4/production_lock.py
+@@ -0,0 +1,88 @@
++"""Process-owned production lease; Windows releases it after a hard exit."""
++import ctypes
++from ctypes import wintypes
++import hashlib
++import os
++from pathlib import Path
++
++from .workflow import ProjectError
++
++_owned: set[str] = set()
++
++
++def _kernel():
++    api = ctypes.WinDLL('kernel32', use_last_error=True)
++    api.CreateMutexW.argtypes = [ctypes.c_void_p, wintypes.BOOL, wintypes.LPCWSTR]
++    api.CreateMutexW.restype = wintypes.HANDLE
++    api.WaitForSingleObject.argtypes = [wintypes.HANDLE, wintypes.DWORD]
++    api.ReleaseMutex.argtypes = [wintypes.HANDLE]
++    api.CloseHandle.argtypes = [wintypes.HANDLE]
++    api.OpenProcess.argtypes = [wintypes.DWORD, wintypes.BOOL, wintypes.DWORD]
++    api.OpenProcess.restype = wintypes.HANDLE
++    return api
++
++
++def _legacy_alive(path: Path) -> bool:
++    if not path.exists():
++        return False
++    try:
++        pid = int(path.read_text(encoding='ascii'))
++        if pid <= 0:
++            return True
++        api = _kernel()
++        handle = api.OpenProcess(0x100000, False, pid)
++        if not handle:
++            return ctypes.get_last_error() != 87  # Invalid PID is the only safe absence.
++        try:
++            return api.WaitForSingleObject(handle, 0) == 258
++        finally:
++            api.CloseHandle(handle)
++    except (OSError, ValueError):
++        raise ProjectError('任務鎖無法辨識。請關閉舊版程式後還原專案備份。') from None
++
++
++class ProductionLease:
++    def __init__(self, path: Path):
++        self.path = path
++        self.key = str(path.resolve()).casefold()
++        self.handle = None
++        if self.key in _owned:
++            raise ProjectError('專案已有產生成品任務，請先等待任務停止。')
++        api = _kernel()
++        name = 'Local\\ebook2mp4-production-' + hashlib.sha256(self.key.encode()).hexdigest()
++        handle = api.CreateMutexW(None, False, name)
++        if not handle:
++            raise ProjectError('無法取得製作任務鎖。請檢查本機權限。')
++        outcome = api.WaitForSingleObject(handle, 0)
++        if outcome not in (0, 0x80):
++            api.CloseHandle(handle)
++            raise ProjectError('專案已有產生成品任務，請先等待任務停止。')
++        try:
++            # Respect the PID-only leases written by older releases.
++            if _legacy_alive(path):
++                raise ProjectError('專案已有舊版產生成品任務，請先關閉舊版程式。')
++            path.write_text(str(os.getpid()), encoding='ascii')
++        except Exception:
++            api.ReleaseMutex(handle)
++            api.CloseHandle(handle)
++            raise
++        self.handle = handle
++        _owned.add(self.key)
++
++    def release(self):
++        if self.handle is None:
++            return
++        # Remove the marker while still owning the OS lease. Cleanup is retryable.
++        self.path.unlink(missing_ok=True)
++        api = _kernel()
++        api.ReleaseMutex(self.handle)
++        api.CloseHandle(self.handle)
++        self.handle = None
++        _owned.discard(self.key)
++
++
++def production_active(path: Path) -> bool:
++    key = str(path.resolve()).casefold()
++    if key in _owned:
++        return True
++    return _legacy_alive(path)
+diff --git a/ebook2mp4/service_desktop.py b/ebook2mp4/service_desktop.py
+index ce0e877..55f450b 100644
+--- a/ebook2mp4/service_desktop.py
++++ b/ebook2mp4/service_desktop.py
+@@ -5,11 +5,12 @@ from .workflow import ProjectError
+ from .tts_services import profiles, save_profile
+ 
+ 
+-class ServiceDialog(tk.Toplevel):
+-    def __init__(self, owner):
+-        super().__init__(owner)
+-        self.title('新增／管理 TTS 服務');self.geometry('820x540');self.owner=owner;self.job=None;self.identity=None;self.timer=None
+-        self.protocol('WM_DELETE_WINDOW',self.close)
++class ServiceDialog(ttk.Frame):
++    def __init__(self, owner, *, parent=None, on_return=None):
++        super().__init__(parent if parent is not None else owner)
++        self.on_return=on_return;self.owner=owner;self.job=None;self.identity=None;self.timer=None
++        if parent is None:
++            self.pack(fill='both',expand=True)
+         self.columnconfigure(0,weight=1)
+         form=ttk.Frame(self,padding=20);form.grid(sticky='nsew');form.columnconfigure(1,weight=1)
+         ttk.Label(form,text='1 選服務 → 2 填資料 → 3 檢查服務並返回試聽',style='Heading.TLabel').grid(row=0,column=0,columnspan=2,pady=12)
+@@ -87,7 +88,7 @@ class ServiceDialog(tk.Toplevel):
+         try:
+             identity=save_profile(self.name.get(),{'Google Gemini TTS':'gemini-tts','Fish Audio':'fish-audio'}[self.provider.get()],'' if self.reuse.get() else self.key.get(),self.reuse.get(),self.identity)
+             self.identity=identity
+-            self.key.set('');self.owner.reload_services();self.owner.service.set(self.owner.service_labels[identity]);self.owner.change_service();self.destroy()
++            self.key.set('');self.owner.reload_services();self.owner.service.set(self.owner.service_labels[identity]);self.owner.change_service();self.close()
+         except (ProjectError,OSError) as error:self.status.configure(text=str(error) if isinstance(error,ProjectError) else '無法儲存本機服務設定。')
+ 
+ 
+@@ -119,3 +120,4 @@ class ServiceDialog(tk.Toplevel):
+             if not self.job.wait(0):self.timer=self.after(100,self.close);return
+             self.job=None
+         self.key.set('');self.destroy()
++        if self.on_return is not None:self.on_return()
+diff --git a/ebook2mp4/voice_desktop.py b/ebook2mp4/voice_desktop.py
+index b2d4d69..4a8bc90 100644
+--- a/ebook2mp4/voice_desktop.py
++++ b/ebook2mp4/voice_desktop.py
+@@ -7,56 +7,51 @@ from tkinter import messagebox, ttk
+ from .workflow import ProjectError
+ from .voice import EXAMPLE, RATES
+ from .voice_media import PreviewPlayer
++from .production_desktop import ScrollPage
+ 
+ 
+-class VoiceDialog(tk.Toplevel):
++class VoiceDialog(ScrollPage):
+     def __init__(self, app):
+-        super().__init__(app.root)
++        super().__init__(app.production.host)
+         self.app, self.flow, self.batch_id = app, app.flow, app.batch_id
+         self.job = None
+         self.kind = ''
+         self.timer = None
+         self.closing = False
+         self.player = PreviewPlayer()
+-        self.title('語音設定與短文試聽')
+-        self.geometry('820x730')
+-        self.minsize(740, 650)
+-        self.protocol('WM_DELETE_WINDOW', self.close)
+-        self.minsize(1100, 740)
+         from .tts_services import MODELS
+-        self.columnconfigure(0, weight=2)
+-        self.columnconfigure(1, weight=3)
+-        self.columnconfigure(2, weight=4)
+-        self.rowconfigure(1, weight=1)
+-        ttk.Label(self, text='語音設定與試聽 · 由左往右設定，再往下製作', style='Heading.TLabel').grid(row=0,column=0,columnspan=3,sticky='w',padx=16,pady=16)
+-        left=ttk.LabelFrame(self,text='1 選擇服務',padding=16)
++        for column in range(3):
++            self.content.columnconfigure(column, weight=1, uniform='voice')
++        batch_name=next((b['name'] for b in self.flow.state['batches'] if b['id']==self.batch_id),'全書預設')
++        ttk.Label(self.content, text=f'{batch_name}｜語音設定與試聽', style='Heading.TLabel').grid(row=0,column=0,columnspan=3,sticky='w',padx=12,pady=12)
++        left=ttk.LabelFrame(self.content,text='1 選擇服務',padding=12)
+         left.grid(row=1,column=0,sticky='nsew',padx=(16,8))
+         left.columnconfigure(0,weight=1)
+         self.service=tk.StringVar(value='edge-tts')
+-        self.service_control=ttk.Combobox(left,textvariable=self.service,state='readonly',width=28)
++        self.service_control=ttk.Combobox(left,textvariable=self.service,state='readonly',width=16)
+         self.service_control.grid(row=0,column=0,sticky='ew',pady=6)
+         self.service_control.bind('<<ComboboxSelected>>',self.change_service)
+         self.manage_button=ttk.Button(left,text='新增／管理服務…',command=self.manage_services)
+         self.manage_button.grid(row=1,column=0,sticky='ew',pady=8)
+         ttk.Label(left,text='模型（可選擇或直接輸入）').grid(row=2,column=0,sticky='w',pady=(18,4))
+         self.model=tk.StringVar()
+-        self.model_control=ttk.Combobox(left,textvariable=self.model,values=MODELS,width=28)
++        self.model_control=ttk.Combobox(left,textvariable=self.model,values=MODELS,width=16)
+         self.model_control.grid(row=3,column=0,sticky='ew')
+         ttk.Label(left,text='新模型可直接輸入 ID。\n試聽可能產生費用；不自動換模型。',wraplength=260).grid(row=4,column=0,sticky='w',pady=8)
+         self.refresh_button=ttk.Button(left,text='更新 Edge 線上音色',command=self.refresh_voices)
+         self.refresh_button.grid(row=5,column=0,sticky='ew',pady=8)
+         self.cache_info=ttk.Label(left,text='',wraplength=260)
+         self.cache_info.grid(row=6,column=0,sticky='ew')
+-        middle=ttk.LabelFrame(self,text='2 選擇聲音與節奏',padding=16)
++        middle=ttk.LabelFrame(self.content,text='2 選擇聲音與節奏',padding=12)
+         middle.grid(row=1,column=1,sticky='nsew',padx=8)
+         middle.columnconfigure(0,weight=1)
+         middle.rowconfigure(1,weight=1)
+         self.locale=tk.StringVar(value='全部語系')
+-        self.filter=ttk.Combobox(middle,textvariable=self.locale,values=('全部語系','台灣華語','中國普通話','英文'),state='readonly')
++        self.filter=ttk.Combobox(middle,textvariable=self.locale,values=('全部語系','台灣華語','中國普通話','英文'),state='readonly',width=16)
+         self.filter.grid(row=0,column=0,sticky='ew',pady=4)
+         self.filter.bind('<<ComboboxSelected>>',lambda e:self.load_catalog())
+         self.voices=ttk.Treeview(middle,columns=('name','locale','gender'),show='headings',height=5,selectmode='browse')
+-        for key,label,width in (('name','音色',200),('locale','語系',70),('gender','性別',60)):
++        for key,label,width in (('name','音色',100),('locale','語系',50),('gender','性別',45)):
+             self.voices.heading(key,text=label)
+             self.voices.column(key,width=width,minwidth=40)
+         self.voices.grid(row=1,column=0,sticky='nsew')
+@@ -81,7 +76,7 @@ class VoiceDialog(tk.Toplevel):
+         ttk.Label(pauses,text='段落 ms').grid(row=1,column=0)
+         self.paragraph_control=ttk.Spinbox(pauses,from_=0,to=3000,textvariable=self.paragraph_pause,width=6)
+         self.paragraph_control.grid(row=1,column=1,padx=4,pady=4)
+-        controls=ttk.LabelFrame(self,text='3 編輯文字並試聽',padding=16)
++        controls=ttk.LabelFrame(self.content,text='3 編輯文字並試聽',padding=12)
+         controls.grid(row=1,column=2,sticky='nsew',padx=(8,16))
+         controls.columnconfigure(0,weight=1);controls.rowconfigure(0,weight=1)
+         self.outgoing=tk.Text(controls,height=8,width=20,wrap='word',font=('Microsoft JhengHei',11))
+@@ -91,7 +86,7 @@ class VoiceDialog(tk.Toplevel):
+         self.rules_info=ttk.Label(controls,text='試聽不改校對稿。相同邊界取較長停頓，最後不補靜音。',wraplength=400)
+         self.rules_info.grid(row=2,column=0,sticky='ew',pady=6)
+         self.consent=tk.BooleanVar(value=True)
+-        self.consent_control=ttk.Checkbutton(controls,text='同意將試聽文字傳送至所選服務（可能計費）',variable=self.consent)
++        self.consent_control=ttk.Checkbutton(controls,text='同意傳送試聽文字（可能計費）',variable=self.consent)
+         self.consent_control.grid(row=3,column=0,sticky='w',pady=6)
+         actions=ttk.Frame(controls);actions.grid(row=4,column=0,sticky='ew')
+         self.preview_button=ttk.Button(actions,text='產生並播放試聽',command=self.preview,style='Primary.TButton');self.preview_button.grid(row=0,column=0,pady=4,sticky='w')
+@@ -101,14 +96,15 @@ class VoiceDialog(tk.Toplevel):
+         self.result_info=ttk.Label(controls,text='',wraplength=400);self.result_info.grid(row=5,column=0,sticky='ew',pady=6)
+         self.status=ttk.Label(controls,text='請選擇服務與音色。',wraplength=400);self.status.grid(row=6,column=0,sticky='ew')
+         self.progress=ttk.Progressbar(controls,mode='indeterminate');self.progress.grid(row=7,column=0,sticky='ew',pady=6)
+-        footer=ttk.LabelFrame(self,text='4 儲存設定，前往製作',padding=12)
+-        footer.grid(row=2,column=0,columnspan=3,sticky='ew',padx=16,pady=16)
++        footer=ttk.LabelFrame(self,text='4 儲存設定，前往製作',padding=8)
++        footer.grid(row=1,column=0,columnspan=2,sticky='ew',padx=8,pady=8)
++        footer.columnconfigure(1,weight=1)
+         self.scope=tk.StringVar(value='本批次' if self.batch_id else '全書預設')
+         self.scope_control=ttk.Combobox(footer,textvariable=self.scope,values=('本批次','全書預設') if self.batch_id else ('全書預設',),state='readonly',width=12)
+-        self.scope_control.pack(side='left');self.scope_control.bind('<<ComboboxSelected>>',lambda e:self.load_settings())
+-        self.save_button=ttk.Button(footer,text='只儲存設定',command=self.save);self.save_button.pack(side='left',padx=8)
+-        ttk.Button(footer,text='關閉',command=self.close).pack(side='right')
+-        self.produce_button=ttk.Button(footer,text='儲存並前往製作 →',command=self.save_and_produce,style='Primary.TButton');self.produce_button.pack(side='right',padx=8)
++        self.scope_control.grid(row=0,column=0,sticky='w');self.scope_control.bind('<<ComboboxSelected>>',lambda e:self.load_settings())
++        self.save_button=ttk.Button(footer,text='只儲存設定',command=self.save);self.save_button.grid(row=0,column=1,sticky='w',padx=8)
++        ttk.Button(footer,text='← 返回確認朗讀稿',command=lambda:self.app.show_step(3)).grid(row=1,column=0,columnspan=2,sticky='w',pady=(8,0))
++        self.produce_button=ttk.Button(footer,text='儲存並前往製作 →',command=self.save_and_produce,style='Primary.TButton');self.produce_button.grid(row=1,column=2,sticky='e',pady=(8,0))
+         self.rhythm_traces = [(variable, variable.trace_add('write', self.rhythm_changed))
+                               for variable in (self.sentence_pause, self.paragraph_pause)]
+         self.load_settings()
+@@ -116,7 +112,19 @@ class VoiceDialog(tk.Toplevel):
+         self.prepare_text()
+         self.load_result()
+         self.update_controls()
+-        self.after_idle(lambda: self.state('zoomed') if self.winfo_exists() else None)
++        self.sections = (left, middle, controls)
++        self.content.bind('<Configure>', self.reflow, add='+')
++        self.bind_scroll()
++
++    def reflow(self, event):
++        columns = 3 if event.width >= 1080 else 2 if event.width >= 700 else 1
++        for column in range(3):
++            self.content.columnconfigure(column, weight=1 if column < columns else 0, uniform='voice' if column < columns else '')
++        for index, section in enumerate(self.sections):
++            section.grid(row=1+index//columns,column=index%columns,sticky='nsew',padx=8,pady=8)
++        width = max(180, event.width//columns-64)
++        for label in (self.cache_info,self.rules_info,self.status,self.result_info,self.text_info):
++            label.configure(wraplength=width)
+ 
+     def reload_services(self):
+         from .tts_services import profiles
+@@ -150,8 +158,7 @@ class VoiceDialog(tk.Toplevel):
+         if self.save(announce=False): self.app.narration()
+ 
+     def manage_services(self):
+-        from .service_desktop import ServiceDialog
+-        ServiceDialog(self)
++        self.app.production.manage_services(self)
+ 
+     def load_settings(self):
+         value = self.flow.voice_settings(self.batch_id if self.scope.get() == '本批次' else None)
+@@ -303,7 +310,7 @@ class VoiceDialog(tk.Toplevel):
+                 self.status.configure(text='試聽已產生。' if state['status'] == 'completed' and self.kind == 'preview'
+                                       else '音色清單已更新；請明確選擇音色。' if state['status'] == 'completed'
+                                       else '已取消；上一份成功結果保留。' if state['status'] == 'cancelled' else state['error'])
+-                if state['status'] == 'completed' and self.kind == 'preview' and not self.closing:
++                if state['status'] == 'completed' and self.kind == 'preview' and not self.closing and self.winfo_ismapped():
+                     self.play()
+                 if not self.closing:
+                     self.app.notify(self.status.cget('text'), owner=self,
+@@ -387,10 +394,11 @@ class VoiceDialog(tk.Toplevel):
+                 return
+             if self.kind == 'preview':
+                 if not messagebox.askyesno('捨棄本次試聽', '關閉並捨棄本次尚未保存的試聽？上一份成功結果保留。', parent=self):
+-                    return
++                    return False
+                 self.flow.discard_voice_preview(self.job)
+             self.job = None
+         self.release()
++        return True
+ 
+     def release(self):
+         self.stop()
+diff --git a/ebook2mp4/voice_media.py b/ebook2mp4/voice_media.py
+index 10dbcb6..9ad45cc 100644
+--- a/ebook2mp4/voice_media.py
++++ b/ebook2mp4/voice_media.py
+@@ -42,26 +42,53 @@ async def media_command(tool: str, arguments: list[str], *, timeout: float = 30)
+             await process.communicate()
+ 
+ 
+-async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None):
+-    """Keep verified, immutable PCM speech independent of added pauses."""
+-    from .voice import edge_module
+-    from .workflow import ProjectWorkflow, digest, encode
+-    from .tts_services import RetryableServiceError
+-    from aiohttp import ClientError
+-    from edge_tts.exceptions import EdgeTTSException
++def block_paths(text: str, settings: dict, cache: Path):
++    from .workflow import digest, encode
+     key = digest(encode(dict(text=text, provider=settings['provider'], voice=settings['voice'],
+                              rate=settings['rate'], processing=settings['processing'],
+                              model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')))
+-    cache.mkdir(parents=True, exist_ok=True)
+-    target, manifest = cache / (key + '.wav'), cache / (key + '.json')
++    return cache / (key + '.wav'), cache / (key + '.json')
++
++
++def cached_block(text: str, settings: dict, cache: Path) -> Path | None:
++    """Validate both checksum and the complete declared PCM payload."""
++    from .workflow import digest
++    target, manifest = block_paths(text, settings, cache)
+     try:
+         metadata = json.loads(manifest.read_bytes())
+         if digest(target.read_bytes()) == metadata['sha256']:
+             with wave.open(str(target), 'rb') as source:
+-                if (source.getnchannels(), source.getsampwidth(), source.getframerate()) == (1, 2, 24000) and source.getnframes() > 0:
+-                    return target, True
++                frames = source.getnframes()
++                if ((source.getnchannels(), source.getsampwidth(), source.getframerate()) == (1, 2, 24000)
++                        and frames > 0):
++                    remaining = frames
++                    while remaining:
++                        data = source.readframes(min(remaining, 24000))
++                        if not data or len(data) % 2:
++                            return None
++                        remaining -= len(data) // 2
++                    return target
+     except (OSError, ValueError, KeyError, TypeError, EOFError, wave.Error):
+-        pass  # Missing or damaged blocks are synthesized again; no corrupt reuse.
++        pass
++    return None
++
++
++async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True):
++    """Keep verified, immutable PCM speech independent of added pauses."""
++    from .voice import edge_module
++    from .workflow import ProjectWorkflow, digest, encode
++    from .tts_services import RetryableServiceError
++    from aiohttp import ClientError
++    from edge_tts.exceptions import EdgeTTSException
++    cache.mkdir(parents=True, exist_ok=True)
++    target, manifest = block_paths(text, settings, cache)
++    valid = cached_block(text, settings, cache)
++    if valid is not None:
++        return valid, True
++    if not allow_network:
++        raise ProjectError('音訊區塊已缺少或失效。請重新檢查並勾選同意傳送文字後續作。')
++    from .voice import require_voice
++    require_voice(settings['voice'], settings)
+     with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
+         raw, decoded = Path(directory) / 'speech.mp3', Path(directory) / 'speech.wav'
+         for attempt in range(1, 4):
+diff --git a/ebook2mp4/workflow.py b/ebook2mp4/workflow.py
+index dc19a34..67ac9b3 100644
+--- a/ebook2mp4/workflow.py
++++ b/ebook2mp4/workflow.py
+@@ -851,6 +851,7 @@ class ProjectWorkflow:
+ 
+     def start_narration(self, batch_id: str):
+         from .narration import NarrationJob, plan
++        from .production_lock import ProductionLease
+         from .voice import require_voice
+         from .voice_media import ffmpeg
+         if self._narration_job is not None:
+@@ -867,8 +868,7 @@ class ProjectWorkflow:
+         folder = self._path(f'batches/{batch_id}/narration-{snapshot["id"]}')
+         committed = False
+         try:
+-            lock = os.open(lock_path, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+-            os.write(lock, str(os.getpid()).encode('ascii'))
++            lock = ProductionLease(lock_path)
+             folder.mkdir()
+             progress = folder / 'progress.json'
+             self._atomic(progress, encode(dict(status='pending', chunks=[])))
+@@ -883,14 +883,11 @@ class ProjectWorkflow:
+             job = NarrationJob(snapshot, folder, tool, lock, lock_path)
+             self._narration_job = job
+             return job
+-        except FileExistsError:
+-            raise ProjectError('專案已有產生成品任務。若程序曾中斷，請關閉所有視窗後移除 .production.lock 再重開。') from None
+         except OSError:
+             raise ProjectError('無法準備合成任務，請檢查磁碟空間與寫入權限。') from None
+         finally:
+             if self._narration_job is None and lock is not None:
+-                os.close(lock)
+-                lock_path.unlink(missing_ok=True)
++                lock.release()
+                 if not committed and folder.exists():
+                     shutil.rmtree(folder)
+ 
+@@ -898,6 +895,34 @@ class ProjectWorkflow:
+         from .narration import read_run
+         return [read_run(self, ref) for ref in self._batch(batch_id).get('narration_runs', [])]
+ 
++    def resume_narration(self, batch_id: str, run_id: str, *, allow_network: bool = True):
++        """Resume the immutable plan, validating cached speech before every reuse."""
++        from .narration import NarrationJob, read_run
++        from .production_lock import ProductionLease
++        from .voice_media import ffmpeg
++        if self._narration_job is not None:
++            raise ProjectError('已有產生成品任務，請先保存或捨棄結果。')
++        ref = next((r for r in self._batch(batch_id).get('narration_runs', []) if r['id'] == run_id), None)
++        if ref is None:
++            raise ProjectError('找不到這個合成任務，請重新開啟專案。')
++        run = read_run(self, ref, verify_audio=False)
++        if run['stale']:
++            raise ProjectError('稿件或語音設定已變更，請核對目前稿件與設定後重新開始。')
++        if run['published']:
++            raise ProjectError('任務已完成並發布，請直接使用成功成品。')
++        tool = ffmpeg()
++        self._space(self.root, 25_000_000)
++        lock_path = self.root / '.production.lock'
++        lease = ProductionLease(lock_path)
++        try:
++            folder = self._path(ref['path']).parent
++            job = NarrationJob(run['snapshot'], folder, tool, lease, lock_path, previous=run['progress'],allow_network=allow_network)
++            self._narration_job = job
++            return job
++        except Exception:
++            lease.release()
++            raise
++
+     def finish_narration(self, job: NarrationJob) -> dict:
+         if job is not self._narration_job or not job.wait(0):
+             raise ProjectError('請等待所屬合成任務停止。')
+@@ -917,7 +942,9 @@ class ProjectWorkflow:
+             path = job.folder / 'media' / ('narration.' + kind)
+             snapshot[kind] = dict(path=path.relative_to(self.root).as_posix(), sha256=digest(path.read_bytes()))
+         manifest = self.state
+-        next(b for b in manifest['batches'] if b['id'] == batch_id)['narration'] = snapshot
++        batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
++        batch['narration'] = snapshot
++        next(r for r in batch['narration_runs'] if r['id'] == snapshot['id'])['published'] = True
+         self._commit(manifest, [])
+         job.published = True
+         job.release(discard=False)
+diff --git a/tests/t12_visual_fixture.py b/tests/t12_visual_fixture.py
+new file mode 100644
+index 0000000..3cae8d7
+--- /dev/null
++++ b/tests/t12_visual_fixture.py
+@@ -0,0 +1,30 @@
++"""Synthetic native single-window fixture; removes its project on normal exit."""
++from pathlib import Path
++import sys
++import tempfile
++from unittest.mock import AsyncMock, patch
++
++sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++from ebook2mp4.desktop import make_app
++from ebook2mp4.workflow import ProjectWorkflow
++
++base=Path('.scratch/T12-visual')
++base.mkdir(parents=True,exist_ok=True)
++with tempfile.TemporaryDirectory(dir=base) as directory:
++    path=Path(directory)
++    with patch.dict('os.environ',EBOOK2MP4_VOICE_HOME=str(path/'voice')):
++        root,app=make_app()
++        app.flow=ProjectWorkflow.create(path/'book','T12 原生驗證範例')
++        source=path/'第一章.txt'
++        source.write_text('清晨的風穿過窗邊。\n\n我們從第一章開始閱讀。',encoding='utf-8')
++        app.batch_id=app.flow.import_txt(app.flow.inspect_txt(source))
++        with patch('edge_tts.list_voices',new=AsyncMock(return_value=[dict(ShortName='zh-TW-HsiaoChenNeural',FriendlyName='台灣華語 曉臻',Locale='zh-TW',Gender='Female')])):
++            job=app.flow.start_voice_refresh()
++            job.wait(10)
++        app.flow.save_voice_settings('zh-TW-HsiaoChenNeural',batch_id=app.batch_id)
++        app.flow.confirm_reading(app.batch_id)
++        app.refresh()
++        root.geometry('1040x640+30+30')
++        app.voice_settings()
++        root.after(480000,app.close)
++        root.mainloop()
+diff --git a/tests/test_narration_desktop.py b/tests/test_narration_desktop.py
+index 493f72c..c0e0691 100644
+--- a/tests/test_narration_desktop.py
++++ b/tests/test_narration_desktop.py
+@@ -37,11 +37,15 @@ class NarrationDesktop(unittest.TestCase):
+         self.app.narration()
+         self.dialog = self.app.narration_dialog
+         self.root.update()
++        deadline=time.monotonic()+5
++        while self.dialog.check_job is not None and time.monotonic()<deadline:
++            self.root.update()
++            time.sleep(.02)
+         self.addCleanup(lambda: self.dialog.close() if self.dialog.winfo_exists() else None)
+ 
+     def poll(self):
+         deadline = time.monotonic() + 15
+-        while self.dialog.job is not None and time.monotonic() < deadline:
++        while (self.dialog.job is not None or self.dialog.check_job is not None) and time.monotonic() < deadline:
+             self.root.update()
+             time.sleep(.02)
+         self.root.update()
+@@ -78,7 +82,9 @@ class NarrationDesktop(unittest.TestCase):
+         with patch('ebook2mp4.narration_desktop.os.startfile') as open_folder:
+             self.dialog.folder_button.invoke()
+             self.assertEqual(open_folder.call_args.args[0], self.flow.narration_path(self.batch).parent)
+-        self.dialog.geometry('700x580+20+20')
++        self.root.geometry('1040x640+20+20')
++        self.root.update()
++        self.dialog.canvas.yview_moveto(1)
+         self.root.update()
+         for control in (self.dialog.start_button, self.dialog.cancel_button, self.dialog.play_button,
+                         self.dialog.export_button, self.dialog.folder_button, self.dialog.consent_control):
+diff --git a/tests/test_narration_resume.py b/tests/test_narration_resume.py
+new file mode 100644
+index 0000000..a89a276
+--- /dev/null
++++ b/tests/test_narration_resume.py
+@@ -0,0 +1,223 @@
++"""Recovery journeys at the agreed ProjectWorkflow seam."""
++import asyncio
++import threading
++import os
++import subprocess
++import sys
++import unittest
++from unittest.mock import patch
++
++import test_narration as fixture
++from ebook2mp4.workflow import ProjectError, ProjectWorkflow
++
++
++class NarrationRecovery(unittest.TestCase):
++    setUp = fixture.NarrationJourney.setUp
++    refresh_voices = fixture.NarrationJourney.refresh_voices
++    audio = fixture.NarrationJourney.audio
++    prepare = fixture.NarrationJourney.prepare
++
++    def test_cancel_reopen_resume_reuses_successful_blocks(self):
++        self.prepare('第一段。\n\n第二段。\n\n第三段。')
++        audio, requests = self.audio(), []
++        waiting = threading.Event()
++        class Interrupted:
++            def __init__(self, text, *args, **kwargs):
++                self.text = text
++                requests.append(text)
++            async def stream(self):
++                if self.text == '第二段。':
++                    waiting.set()
++                    await asyncio.sleep(60)
++                yield dict(type='audio', data=audio)
++        with patch('edge_tts.Communicate', Interrupted):
++            job = self.flow.start_narration(self.batch)
++            self.assertTrue(waiting.wait(10))
++            job.cancel()
++            self.assertTrue(job.wait(5))
++            self.flow.discard_narration(job)
++        reopened = ProjectWorkflow.open(self.flow.root)
++        run = reopened.narration_runs(self.batch)[-1]
++        self.assertEqual(run['progress']['status'], 'cancelled')
++        self.assertEqual(run['reusable'], 1)
++        class Restored(Interrupted):
++            async def stream(self):
++                yield dict(type='audio', data=audio)
++        requests.clear()
++        with patch('edge_tts.Communicate', Restored):
++            job = reopened.resume_narration(self.batch, run['snapshot']['id'])
++            self.assertTrue(job.wait(20), job.state)
++            result = reopened.finish_narration(job)
++        self.assertEqual(requests, ['第二段。', '第三段。'])
++        self.assertEqual(result['id'], run['snapshot']['id'])
++        self.assertEqual(result['text'], '第一段。\n\n第二段。\n\n第三段。')
++        self.assertTrue(reopened.narration_path(self.batch).is_file())
++
++    def test_hard_exit_recovers_lease_and_rejects_changed_settings(self):
++        self.prepare('第一段。\n\n第二段。')
++        self.audio()
++        script = '''
++import asyncio, os, sys
++from unittest.mock import patch
++from pathlib import Path
++from ebook2mp4.workflow import ProjectWorkflow
++flow = ProjectWorkflow.open(sys.argv[1])
++audio = Path(sys.argv[2]).read_bytes()
++class Service:
++    def __init__(self, text, *a, **k): self.text = text
++    async def stream(self):
++        if self.text == '第二段。': os._exit(0)
++        yield dict(type='audio', data=audio)
++with patch('edge_tts.Communicate', Service):
++    job = flow.start_narration(sys.argv[3])
++    job.wait(20)
++os._exit(2)
++'''
++        subprocess.run([sys.executable, '-c', script, str(self.flow.root),
++                        str(self.path / '服務音訊.mp3'), self.batch], check=True, timeout=30)
++        reopened = ProjectWorkflow.open(self.flow.root)
++        run = reopened.narration_runs(self.batch)[-1]
++        self.assertEqual(run['progress']['status'], 'interrupted')
++        self.assertEqual(run['reusable'], 1)
++        reopened.save_voice_settings('en-US-TestNeural', batch_id=self.batch)
++        with self.assertRaisesRegex(ProjectError, '變更'):
++            reopened.resume_narration(self.batch, run['snapshot']['id'])
++        reopened.save_voice_settings('zh-TW-TestNeural', batch_id=self.batch)
++        audio, requests = self.audio(), []
++        class Service:
++            def __init__(self, text, *a, **k): requests.append(text)
++            async def stream(self): yield dict(type='audio', data=audio)
++        with patch('edge_tts.Communicate', Service):
++            job = reopened.resume_narration(self.batch, run['snapshot']['id'])
++            self.assertTrue(job.wait(15))
++            reopened.finish_narration(job)
++        self.assertEqual(requests, ['第二段。'])
++        self.assertFalse((reopened.root / '.production.lock').exists())
++
++    def test_failed_assembly_resumes_offline_and_preserves_previous_product(self):
++        self.prepare('第一段。\n\n第二段。')
++        audio, requests = self.audio(), []
++        class Service:
++            def __init__(self, text, *a, **k): requests.append(text)
++            async def stream(self): yield dict(type='audio', data=audio)
++        with patch('edge_tts.Communicate', Service):
++            job=self.flow.start_narration(self.batch)
++            self.assertTrue(job.wait(15))
++            previous=self.flow.finish_narration(job)
++            old_audio=self.flow.narration_path(self.batch).read_bytes()
++            old_srt=self.flow.narration_path(self.batch,'srt').read_bytes()
++            self.flow.save_voice_settings('zh-TW-TestNeural','+10%',batch_id=self.batch)
++            original_replace=os.replace
++            def no_space(source,target):
++                if str(target).endswith('narration.srt'):
++                    raise OSError('disk full')
++                return original_replace(source,target)
++            with patch('os.replace',side_effect=no_space):
++                job=self.flow.start_narration(self.batch)
++                self.assertTrue(job.wait(15))
++                self.assertEqual(job.state['status'],'failed')
++                self.flow.discard_narration(job)
++        self.assertEqual(self.flow.narration(self.batch)['id'],previous['id'])
++        self.assertEqual(self.flow.narration_path(self.batch).read_bytes(),old_audio)
++        self.assertEqual(self.flow.narration_path(self.batch,'srt').read_bytes(),old_srt)
++        reopened=ProjectWorkflow.open(self.flow.root)
++        run=reopened.narration_runs(self.batch)[-1]
++        self.assertEqual(run['remaining'],0)
++        # No catalog or online credentials are needed for local-only assembly.
++        (self.path/'voice-cache'/'voices.json').unlink()
++        requests.clear()
++        with patch('edge_tts.Communicate',side_effect=AssertionError('unexpected TTS')):
++            job=reopened.resume_narration(self.batch,run['snapshot']['id'])
++            self.assertTrue(job.wait(15),job.state)
++            reopened.finish_narration(job)
++        self.assertEqual(requests,[])
++        self.assertEqual(reopened.narration_runs(self.batch)[-1]['progress']['resume_history'][-1]['status'],'failed')
++
++    def test_corrupt_cache_is_not_reused(self):
++        self.prepare('第一段。\n\n第二段。')
++        audio, requests=self.audio(),[]
++        class Service:
++            def __init__(self,text,*a,**k): requests.append(text)
++            async def stream(self): yield dict(type='audio',data=audio)
++        with patch('edge_tts.Communicate',Service):
++            job=self.flow.start_narration(self.batch)
++            self.assertTrue(job.wait(15))
++            # Discard unpublished assembly, keeping its verified speech blocks.
++            self.flow.discard_narration(job)
++        run=self.flow.narration_runs(self.batch)[-1]
++        cache=self.flow.root/'batches'/self.batch/'voice-blocks'
++        target=next(cache.glob('*.wav'))
++        target.write_bytes(target.read_bytes()[:45])
++        reopened=ProjectWorkflow.open(self.flow.root)
++        self.assertEqual(reopened.narration_runs(self.batch)[-1]['reusable'],1)
++        requests.clear()
++        with patch('edge_tts.Communicate',Service):
++            job=reopened.resume_narration(self.batch,run['snapshot']['id'])
++            self.assertTrue(job.wait(15))
++            reopened.finish_narration(job)
++        self.assertEqual(len(requests),1)
++
++    def test_offline_permission_is_enforced_after_cache_changes(self):
++        self.prepare('第一段。')
++        audio=self.audio()
++        class Service:
++            def __init__(self,*a,**k): pass
++            async def stream(self): yield dict(type='audio',data=audio)
++        with patch('edge_tts.Communicate',Service):
++            job=self.flow.start_narration(self.batch)
++            self.assertTrue(job.wait(15))
++            self.flow.discard_narration(job)
++
++    def test_assembly_cancel_joins_media_process_and_resumes_without_tts(self):
++        self.prepare('第一段。\n\n第二段。')
++        audio=self.audio()
++        class Service:
++            def __init__(self,*a,**k): pass
++            async def stream(self): yield dict(type='audio',data=audio)
++        with patch('edge_tts.Communicate',Service):
++            job=self.flow.start_narration(self.batch)
++            self.assertTrue(job.wait(15))
++            previous=self.flow.finish_narration(job)
++        old_audio=self.flow.narration_path(self.batch).read_bytes()
++        old_srt=self.flow.narration_path(self.batch,'srt').read_bytes()
++        started=threading.Event()
++        processes=[]
++        original_exec=asyncio.create_subprocess_exec
++        async def block_encoder(tool,*arguments,**options):
++            if 'libmp3lame' in arguments:
++                process=await original_exec(sys.executable,'-c','import time; time.sleep(60)',**options)
++                processes.append(process)
++                started.set()
++                return process
++            return await original_exec(tool,*arguments,**options)
++        with patch('asyncio.create_subprocess_exec',side_effect=block_encoder), \
++                patch('edge_tts.Communicate',side_effect=AssertionError('cached speech must not transmit')):
++            job=self.flow.start_narration(self.batch)
++            self.assertTrue(started.wait(10))
++            job.cancel()
++            self.assertTrue(job.wait(10))
++            self.assertEqual(job.state['status'],'cancelled')
++            self.assertIsNotNone(processes[0].returncode)
++            self.flow.discard_narration(job)
++        self.assertEqual(self.flow.narration(self.batch)['id'],previous['id'])
++        self.assertEqual(self.flow.narration_path(self.batch).read_bytes(),old_audio)
++        self.assertEqual(self.flow.narration_path(self.batch,'srt').read_bytes(),old_srt)
++        reopened=ProjectWorkflow.open(self.flow.root)
++        run=reopened.narration_runs(self.batch)[-1]
++        with patch('edge_tts.Communicate',side_effect=AssertionError('offline assembly must not transmit')):
++            job=reopened.resume_narration(self.batch,run['snapshot']['id'],allow_network=False)
++            self.assertTrue(job.wait(15))
++            reopened.finish_narration(job)
++        run=self.flow.narration_runs(self.batch)[-1]
++        self.assertEqual(run['remaining'],0)
++        next((self.flow.root/'batches'/self.batch/'voice-blocks').glob('*.wav')).unlink()
++        with patch('edge_tts.Communicate',side_effect=AssertionError('must not transmit')):
++            job=self.flow.resume_narration(self.batch,run['snapshot']['id'],allow_network=False)
++            self.assertTrue(job.wait(15))
++            self.assertEqual(job.state['status'],'failed')
++            self.assertIn('同意',job.state['error'])
++            self.flow.discard_narration(job)
++
++
++if __name__ == '__main__':
++    unittest.main()
+diff --git a/tests/test_production_pages.py b/tests/test_production_pages.py
+new file mode 100644
+index 0000000..5552044
+--- /dev/null
++++ b/tests/test_production_pages.py
+@@ -0,0 +1,142 @@
++"""Single-window journeys through real Tk actions."""
++import tkinter as tk
++import unittest
++import asyncio
++import threading
++import time
++import gc
++from unittest.mock import patch, AsyncMock
++
++import test_ui_layout as fixture
++import test_voice as voice_fixture
++
++
++class ProductionPages(unittest.TestCase):
++    def setUp(self):
++        self.addCleanup(self.collect_ui)
++        fixture.WorkbenchLayout.setUp(self)
++        environment=patch.dict('os.environ',EBOOK2MP4_VOICE_HOME=str(self.folder/'voice-cache'))
++        environment.start()
++        self.addCleanup(environment.stop)
++        self.addCleanup(self.stop_ui)
++
++    def stop_ui(self):
++        deadline=time.monotonic()+10
++        while self.app.production.shutdown() != 'complete' and time.monotonic()<deadline:
++            self.root.update()
++            time.sleep(.02)
++
++    def collect_ui(self):
++        self.app=None
++        self.root=None
++        gc.collect()
++
++    def test_voice_production_and_service_management_share_main_window(self):
++        self.app.steps[3].invoke()
++        self.root.update()
++        voice = self.app.voice_dialog
++        self.assertIs(voice.winfo_toplevel(), self.root)
++        voice.outgoing.delete('1.0', 'end')
++        voice.outgoing.insert('1.0', '往返後仍保留的試聽文字。')
++        self.app.narration()
++        self.root.update()
++        production = self.app.narration_dialog
++        self.assertIs(production.winfo_toplevel(), self.root)
++        self.app.voice_settings()
++        self.root.update()
++        self.assertEqual(voice.outgoing.get('1.0', 'end-1c'), '往返後仍保留的試聽文字。')
++        voice.manage_button.invoke()
++        self.root.update()
++        service = self.app.production.service_page
++        self.assertIs(service.winfo_toplevel(), self.root)
++        self.assertEqual(self.app.production.voice_tab.cget('style'),'CompactActive.TButton')
++        first=self.app.batch_id
++        source=self.folder/'另一批次.txt'
++        source.write_text('另一批次。',encoding='utf-8')
++        self.app.batch_id=self.app.flow.import_txt(self.app.flow.inspect_txt(source))
++        self.app.refresh()
++        self.app.voice_settings()
++        other_voice=self.app.voice_dialog
++        other_voice.manage_button.invoke()
++        self.root.update()
++        self.assertIs(service.owner,other_voice)
++        service.close()
++        self.root.update()
++        self.assertIs(self.app.production.current,other_voice)
++        self.app.batch_id=first
++        self.app.refresh()
++        self.app.voice_settings()
++        self.root.update()
++        self.assertTrue(voice.winfo_ismapped())
++        self.assertFalse(any(isinstance(w, tk.Toplevel) for w in self.root.winfo_children()))
++
++    def test_background_narration_keeps_owner_and_survives_navigation(self):
++        flow=self.app.flow
++        batch=self.app.batch_id
++        with patch('edge_tts.list_voices',new=AsyncMock(return_value=voice_fixture.VOICES)):
++            job=flow.start_voice_refresh()
++            self.assertTrue(job.wait(5))
++        flow.save_voice_settings('zh-TW-TestNeural',batch_id=batch)
++        flow.confirm_reading(batch)
++        self.path=self.folder
++        audio=voice_fixture.VoiceJourney.audio(self)
++        waiting=threading.Event()
++        proceed=threading.Event()
++        class Service:
++            def __init__(self,*a,**k): pass
++            async def stream(self):
++                waiting.set()
++                while not proceed.is_set(): await asyncio.sleep(.01)
++                yield dict(type='audio',data=audio)
++        self.app.narration()
++        page=self.app.narration_dialog
++        deadline=time.monotonic()+5
++        while page.check_job is not None and time.monotonic()<deadline:
++            self.root.update();time.sleep(.02)
++        with patch('edge_tts.Communicate',Service):
++            page.consent.set(True)
++            page.start_button.invoke()
++            job=page.job
++            self.addCleanup(lambda: job.cancel() if not job.wait(0) else None)
++            self.assertTrue(waiting.wait(5))
++            self.app.show_step(2)
++            self.root.update()
++            self.assertFalse(job.wait(0))
++            second=self.folder/'second.txt'
++            second.write_text('另一批次。',encoding='utf-8')
++            second_id=flow.import_txt(flow.inspect_txt(second))
++            self.app.batch_id=second_id
++            self.app.refresh()
++            self.app.voice_settings()
++            self.root.update()
++            self.assertEqual(self.app.voice_dialog.batch_id,second_id)
++            self.assertEqual(page.job.snapshot['batch_id'],batch)
++            self.app.production.task_button.invoke()
++            self.root.update()
++            self.assertEqual(self.app.batch_id,batch)
++            self.assertIs(self.app.narration_dialog,page)
++            proceed.set()
++            deadline=time.monotonic()+15
++            while (page.job is not None or page.check_job is not None) and time.monotonic()<deadline:
++                self.root.update();time.sleep(.02)
++            self.assertIsNone(page.job)
++        self.assertIsNotNone(flow.narration(batch))
++
++    def test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check(self):
++        dialog=tk.Toplevel(self.root)
++        dialog.close=dialog.destroy
++        self.app.gemini_settings_dialog=dialog
++        self.app.close()
++        self.assertFalse(self.app._closing)
++        self.assertIsNotNone(self.app.production.timer)
++        self.app.editor.insert('end','未存稿必須保留。')
++        self.root.update()
++        with patch('ebook2mp4.desktop.messagebox.askyesnocancel',return_value=None) as prompt:
++            self.app.close()
++        prompt.assert_called_once()
++        self.assertTrue(self.root.winfo_exists())
++        self.assertTrue(self.app.dirty)
++
++
++if __name__ == '__main__':
++    unittest.main()
+diff --git a/tests/test_rhythm_desktop.py b/tests/test_rhythm_desktop.py
+index 7c8b41e..fbfb39e 100644
+--- a/tests/test_rhythm_desktop.py
++++ b/tests/test_rhythm_desktop.py
+@@ -12,7 +12,7 @@ class RhythmDesktop(unittest.TestCase):
+     def test_presets_custom_validation_and_minimum_window(self):
+         self.choose()
+         dialog = self.dialog
+-        dialog.geometry('740x650')
++        self.root.geometry('1040x640')
+         dialog.rhythm.set('舒緩')
+         dialog.rhythm_control.event_generate('<<ComboboxSelected>>')
+         self.root.update()
+@@ -35,10 +35,16 @@ class RhythmDesktop(unittest.TestCase):
+         self.root.update()
+         self.assertIn('1000 ms', narration.source_info.cget('text'))
+         self.assertIn('300 ms', narration.source_info.cget('text'))
++        self.app.voice_settings()
++        self.root.update()
+         for control in (dialog.rhythm_control, dialog.sentence_control, dialog.paragraph_control,
+                         dialog.save_button, dialog.preview_button, dialog.cancel_button,
+                         dialog.play_button, dialog.status, dialog.rules_info):
+             self.assertTrue(control.winfo_ismapped())
++            if control is not dialog.save_button:
++                top=control.winfo_rooty()-dialog.content.winfo_rooty()
++                dialog.canvas.yview_moveto(top/max(1,dialog.content.winfo_height()))
++                self.root.update()
+             x = control.winfo_rootx() - dialog.winfo_rootx()
+             y = control.winfo_rooty() - dialog.winfo_rooty()
+             self.assertGreaterEqual(x, 0)
+diff --git a/tests/test_tts_providers.py b/tests/test_tts_providers.py
+index aa354fa..92d3fed 100644
+--- a/tests/test_tts_providers.py
++++ b/tests/test_tts_providers.py
+@@ -94,13 +94,15 @@ class ProviderDesktop(unittest.TestCase):
+         self.assertEqual(self.dialog.current_settings()['model'],'future-voice-model')
+         self.dialog.service.set('Edge-TTS');self.dialog.change_service()
+         self.assertEqual(str(self.dialog.model_control.cget('state')),'disabled')
+-        window=ServiceDialog(self.dialog);self.addCleanup(window.close);self.root.update()
++        self.dialog.manage_button.invoke()
++        window=self.app.production.service_page;self.addCleanup(window.close);self.root.update()
+         self.assertEqual(int(window.status.grid_info()['row']),8)
+ 
+     def test_check_service_reads_complete_chunked_json(self):
+         import time
+         from ebook2mp4.service_desktop import ServiceDialog
+-        window=ServiceDialog(self.dialog);self.addCleanup(window.close)
++        self.dialog.manage_button.invoke()
++        window=self.app.production.service_page;self.addCleanup(window.close)
+         window.key.set('test-key')
+         class Content:
+             async def iter_chunked(self,n):
+diff --git a/tests/test_voice_desktop.py b/tests/test_voice_desktop.py
+index f83c5a8..386ab8e 100644
+--- a/tests/test_voice_desktop.py
++++ b/tests/test_voice_desktop.py
+@@ -52,7 +52,7 @@ class VoiceDesktop(unittest.TestCase):
+ 
+     def test_editable_text_uses_current_settings_and_automatically_plays(self):
+         self.assertTrue(self.dialog.consent.get())
+-        self.assertEqual(self.dialog.state(), 'zoomed')
++        self.assertIs(self.dialog.winfo_toplevel(), self.root)
+         self.assertEqual(str(self.dialog.outgoing.cget('state')), 'normal')
+         self.choose()
+         original = self.app.flow.voice_settings(self.app.batch_id)
