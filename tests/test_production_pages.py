@@ -4,6 +4,7 @@ import unittest
 import asyncio
 import threading
 import time
+import gc
 from unittest.mock import patch, AsyncMock
 
 import test_ui_layout as fixture
@@ -12,10 +13,23 @@ import test_voice as voice_fixture
 
 class ProductionPages(unittest.TestCase):
     def setUp(self):
+        self.addCleanup(self.collect_ui)
         fixture.WorkbenchLayout.setUp(self)
         environment=patch.dict('os.environ',EBOOK2MP4_VOICE_HOME=str(self.folder/'voice-cache'))
         environment.start()
         self.addCleanup(environment.stop)
+        self.addCleanup(self.stop_ui)
+
+    def stop_ui(self):
+        deadline=time.monotonic()+10
+        while self.app.production.shutdown() != 'complete' and time.monotonic()<deadline:
+            self.root.update()
+            time.sleep(.02)
+
+    def collect_ui(self):
+        self.app=None
+        self.root=None
+        gc.collect()
 
     def test_voice_production_and_service_management_share_main_window(self):
         self.app.steps[3].invoke()

@@ -96,8 +96,9 @@ class NarrationDialog(ScrollPage):
         if self.check_job is not None or self.job is not None:
             return
         from .voice import VoiceJob
+        flow,batch_id=self.flow,self.batch_id
         async def inspect():
-            return await asyncio.to_thread(self.flow.narration_runs,self.batch_id)
+            return await asyncio.to_thread(flow.narration_runs,batch_id)
         self.check_job=VoiceJob(inspect,timeout=None)
         self.status.configure(text='正在檢查保存進度與音訊區塊…')
         self.update_controls()
