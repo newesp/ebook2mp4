@@ -277,8 +277,9 @@ class NarrationDialog(ttk.Frame):
                 self.consent.set(True)
                 raise ProjectError('確認稿或設定已變更。已重讀，請重新核對並勾選同意。')
             self.stop()
-            self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=self.consent.get()) if self.run is not None
-                        else self.flow.start_narration(self.batch_id, allow_network=self.consent.get()))
+            allow_network = bool(remaining) and self.consent.get()
+            self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=allow_network) if self.run is not None
+                        else self.flow.start_narration(self.batch_id, allow_network=allow_network))
             self.update_controls()
             self.schedule()
         except ProjectError as error:

@@ -10,16 +10,15 @@ class VoiceDefaultsPage(ttk.Frame):
     def __init__(self, owner):
         super().__init__(owner.app.production.host, padding=6)
         self.owner, self.flow = owner, owner.flow
+        self.production_busy = False
         self.selected: set[str] = set()
         self.value = self.flow.voice_settings()
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1)
         ttk.Label(self, text='套用全書預設：選擇批次 → 檢查影響 → 套用',
                   style='Heading.TLabel').grid(row=0, column=0, sticky='w')
-        value = self.value
-        ttk.Label(self, text=f'{value["voice"] or "尚未選音色"} · {value["rate"]} · '
-                  f'句尾 {value["sentence_pause_ms"]}／段落 {value["paragraph_pause_ms"]} ms').grid(
-                      row=1, column=0, sticky='w', pady=6)
+        self.summary = ttk.Label(self)
+        self.summary.grid(row=1, column=0, sticky='w', pady=6)
         table_frame = ttk.Frame(self)
         table_frame.grid(row=2, column=0, sticky='nsew')
         table_frame.columnconfigure(0, weight=1)
@@ -51,7 +50,11 @@ class VoiceDefaultsPage(ttk.Frame):
         self.refresh()
 
     def refresh(self):
+        value = self.value
+        self.summary.configure(text=f'{value["voice"] or "尚未選音色"} · {value["rate"]} · '
+                               f'句尾 {value["sentence_pause_ms"]}／段落 {value["paragraph_pause_ms"]} ms')
         self.table.delete(*self.table.get_children())
+        self.selected.intersection_update(batch['id'] for batch in self.flow.state['batches'])
         speech_keys = ('provider', 'profile', 'model', 'voice', 'rate', 'processing')
         for batch in self.flow.state['batches']:
             value = self.flow.voice_settings(batch['id'])
@@ -62,18 +65,34 @@ class VoiceDefaultsPage(ttk.Frame):
                 '☑' if batch['id'] in self.selected else '☐', batch['name'],
                 f'{value["voice"] or "未選音色"} · {value["rate"]} · '
                 f'{value["sentence_pause_ms"]}/{value["paragraph_pause_ms"]} ms', impact))
+        self.set_production_busy(self.production_busy)
 
-    def toggle_selected(self, _event=None):
-        for identity in self.table.selection():
+    def toggle_selected(self, event=None):
+        identities = self.table.selection()
+        if event is not None and getattr(event, 'num', None) == 1:
+            if self.table.identify_region(event.x, event.y) != 'cell':
+                return
+            identity = self.table.identify_row(event.y)
+            identities = (identity,) if identity else ()
+        for identity in identities:
             if identity in self.selected:
                 self.selected.remove(identity)
             else:
                 self.selected.add(identity)
             self.table.set(identity, 'pick', '☑' if identity in self.selected else '☐')
         count = len(self.selected)
-        self.apply_button.configure(text=f'套用至 {count} 個批次', state='normal' if count else 'disabled')
         self.status.configure(text=f'已選 {count} 批。未選批次保持原設定。舊成品保留可播。')
+        self.set_production_busy(self.production_busy)
         return 'break'
+
+    def set_production_busy(self, busy):
+        was_busy, self.production_busy = self.production_busy, busy
+        self.apply_button.configure(text=f'套用至 {len(self.selected)} 個批次',
+                                    state='normal' if self.selected and not busy else 'disabled')
+        if busy:
+            self.status.configure(text='專案正在製作。請等待任務停止後再套用設定。')
+        elif was_busy:
+            self.status.configure(text=f'已選 {len(self.selected)} 批。請核對影響後套用。')
 
     def apply(self):
         try:
@@ -97,7 +116,6 @@ class VoiceDefaultsPage(ttk.Frame):
 
     def back(self):
         self.owner.app.production.activate(self.owner)
-        self.destroy()
 
     def close(self):
         self.destroy()

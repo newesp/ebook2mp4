@@ -60,6 +60,7 @@ class ProductionWorkspace(ttk.Frame):
             self.current.grid_remove()
         self.current = page
         page.grid(row=0, column=0, sticky='nsew')
+        self.refresh_task_controls()
         kind = 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
         self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
         self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
@@ -124,7 +125,22 @@ class ProductionWorkspace(ttk.Frame):
             self.task_button.grid(row=4, column=0, sticky='ew')
         else:
             self.task_button.grid_remove()
+        self.refresh_task_controls()
         self.timer = self.after(200, self.poll)
+
+    @staticmethod
+    def busy_for(flow):
+        from .production_lock import production_active
+        from .workflow import ProjectError
+        try:
+            return production_active(flow.root / '.production.lock')
+        except ProjectError:
+            return True
+
+    def refresh_task_controls(self):
+        page = self.current
+        if page is not None and page.winfo_exists() and hasattr(page, 'set_production_busy'):
+            page.set_production_busy(self.busy_for(page.flow))
 
     def shutdown(self):
         pages = list(self.pages.values())

@@ -205,8 +205,15 @@ class VoiceDialog(ttk.Frame):
             if self.app.flow is not self.flow or self.app.batch_id != self.batch_id:
                 raise ProjectError('書籍或批次已切換，請從目前批次重新開啟。')
             from .voice_defaults_desktop import VoiceDefaultsPage
-            page = VoiceDefaultsPage(self)
-            self.app.production.pages[(id(self.flow), self.batch_id, 'defaults')] = page
+            key = (id(self.flow), self.batch_id, 'defaults')
+            page = self.app.production.pages.get(key)
+            if page is None or not page.winfo_exists():
+                page = VoiceDefaultsPage(self)
+                self.app.production.pages[key] = page
+            elif page.value != self.flow.voice_settings():
+                page.value = self.flow.voice_settings()
+                page.status.configure(text='全書預設已更新。保留批次選取，請重新核對套用後影響。')
+            page.refresh()
             self.app.production.activate(page)
         except (ProjectError, ValueError) as error:
             self.status.configure(text=str(error))
@@ -395,6 +402,7 @@ class VoiceDialog(ttk.Frame):
         self.save_button.configure(text='儲存全書預設' if defaults else '只儲存設定')
         self.apply_defaults_button.grid() if defaults else self.apply_defaults_button.grid_remove()
         self.apply_defaults_button.configure(state='disabled' if busy else 'normal')
+        self.set_production_busy(self.app.production.busy_for(self.flow))
         for control in (self.refresh_button, self.save_button):
             control.configure(state='disabled' if busy else 'normal')
         self.scope_control.configure(state='disabled' if busy else 'readonly')
@@ -420,6 +428,9 @@ class VoiceDialog(ttk.Frame):
             self.cancel_button.grid_remove()
             self.progress.stop()
             self.progress.grid_remove()
+
+    def set_production_busy(self, busy):
+        self.apply_defaults_button.configure(state='disabled' if busy or self.job is not None else 'normal')
 
     def load_result(self):
         try:
