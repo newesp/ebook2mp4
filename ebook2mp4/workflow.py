@@ -776,6 +776,38 @@ class ProjectWorkflow:
         owner['voice_settings'] = value
         self._commit(manifest, [])
 
+    def apply_voice_defaults(self, batch_ids: list[str]) -> None:
+        """Copy saved defaults to explicit batches in one atomic project write."""
+        from .production_lock import ProductionLease
+        if not batch_ids or len(set(batch_ids)) != len(batch_ids):
+            raise ProjectError('請選擇要套用的批次，不可重複。')
+        for batch_id in batch_ids:
+            self._batch(batch_id)
+        value = self.voice_settings()
+        if not value['voice'].strip():
+            raise ProjectError('請先選擇音色並儲存全書預設。')
+        lease = ProductionLease(self.root / '.production.lock')
+        try:
+            manifest = self.state
+            for batch in manifest['batches']:
+                if batch['id'] in batch_ids:
+                    batch['voice_settings'] = deepcopy(value)
+            self._commit(manifest, [])
+        finally:
+            lease.release()
+
+    def inspect_narration(self, batch_id: str) -> dict:
+        """Inspect the current confirmed version without sending any text."""
+        from .narration import plan
+        from .voice_media import cached_block
+        snapshot = plan(self.reading_text(batch_id), self.voice_settings(batch_id),
+                        self._batch(batch_id)['current_reading'], batch_id)
+        cache = self._path(f'batches/{batch_id}/voice-blocks')
+        chunks = [dict(chunk, reusable=cached_block(chunk['text'], snapshot['settings'], cache) is not None)
+                  for chunk in snapshot['chunks']]
+        reusable = sum(chunk['reusable'] for chunk in chunks)
+        return dict(snapshot=snapshot, chunks=chunks, reusable=reusable, remaining=len(chunks)-reusable)
+
     def start_voice_preview(self, batch_id: str, *, start: int | None = None, end: int | None = None,
                             text: str | None = None, settings_override: dict | None = None):
         from .voice import VoiceJob, EXAMPLE, require_voice
@@ -849,7 +881,7 @@ class ProjectWorkflow:
             raise ProjectError('尚無成功試聽，請先產生試聽音訊。')
         return self.root / preview['audio']['path']
 
-    def start_narration(self, batch_id: str):
+    def start_narration(self, batch_id: str, *, allow_network: bool = True):
         from .narration import NarrationJob, plan
         from .production_lock import ProductionLease
         from .voice import require_voice
@@ -859,7 +891,8 @@ class ProjectWorkflow:
         text = self.reading_text(batch_id)
         batch = self._batch(batch_id)
         value = self.voice_settings(batch_id)
-        require_voice(value['voice'], value)
+        if allow_network:
+            require_voice(value['voice'], value)
         tool = ffmpeg()
         snapshot = plan(text, value, batch['current_reading'], batch_id)
         self._space(self.root, 25_000_000)
@@ -880,7 +913,7 @@ class ProjectWorkflow:
             next(b for b in manifest['batches'] if b['id'] == batch_id).setdefault('narration_runs', []).append(ref)
             self._commit(manifest, [(relative, data)])
             committed = True
-            job = NarrationJob(snapshot, folder, tool, lock, lock_path)
+            job = NarrationJob(snapshot, folder, tool, lock, lock_path, allow_network=allow_network)
             self._narration_job = job
             return job
         except OSError:

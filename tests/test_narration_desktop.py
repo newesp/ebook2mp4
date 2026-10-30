@@ -58,6 +58,7 @@ class NarrationDesktop(unittest.TestCase):
         self.assertIn('確認', self.dialog.status.cget('text'))
         self.flow.confirm_reading(self.batch)
         self.dialog.reload_button.invoke()
+        self.poll()
         self.assertTrue(self.dialog.consent.get())
         self.dialog.consent.set(False)
         self.dialog.start_button.invoke()
@@ -99,6 +100,7 @@ class NarrationDesktop(unittest.TestCase):
         self.assertIn('核對',self.dialog.start_button.cget('text'))
         self.dialog.start_button.invoke()
         self.assertIsNone(self.dialog.job)
+        self.poll()
         self.assertTrue(self.dialog.consent.get())
         self.dialog.consent.set(True)
         class Offline(Service):
@@ -138,6 +140,7 @@ class NarrationDesktop(unittest.TestCase):
     def test_close_waits_for_cancel_and_changed_source_requires_new_consent(self):
         self.flow.confirm_reading(self.batch)
         self.dialog.reload_button.invoke()
+        self.poll()
         self.dialog.consent.set(True)
         self.flow.save_voice_settings('en-US-TestNeural', batch_id=self.batch)
         self.dialog.start_button.invoke()

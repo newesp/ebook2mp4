@@ -22,6 +22,9 @@ class NarrationDialog(ttk.Frame):
         self.player = PreviewPlayer()
         self.run = None
         self.runs = []
+        self.inspection: dict | None = None
+        self.source_text = ''
+        self.source_settings: dict | None = None
         self.check_job = None
         self.check_timer = None
         self.columnconfigure(0, weight=1)
@@ -47,7 +50,7 @@ class NarrationDialog(ttk.Frame):
         self.info_frame.rowconfigure(0,weight=1)
         self.source_info=ttk.Label(self.info_frame,text='',wraplength=650)
         self.source_info.grid(row=0,column=0,sticky='nw')
-        self.reload_button=ttk.Button(self.info_frame,text='重讀目前確認稿與設定',command=self.load_source)
+        self.reload_button=ttk.Button(self.info_frame,text='重新檢查目前稿件與設定',command=self.recheck)
         self.reload_button.grid(row=1,column=0,sticky='w')
         self.info_open=False
         toolbar=ttk.Frame(self)
@@ -120,10 +123,15 @@ class NarrationDialog(ttk.Frame):
             self.source_info.configure(wraplength=max(180,event.width-24))
 
     def review_current(self):
+        self.recheck()
+
+    def recheck(self):
+        if self.job is not None or self.check_job is not None:
+            return
         self.run=None
         self.run_control.current(0)
-        self.display_run()
-        self.consent.set(True)
+        self.load_source()
+        self.load_runs(keep_current=True)
 
     def show_block_error(self,_event=None):
         selected=self.details.selection()
@@ -137,13 +145,19 @@ class NarrationDialog(ttk.Frame):
         prefix='稿件或設定已變更，請先核對。' if self.run.get('stale') else ''
         self.status.configure(text=f'{prefix}第 {index+1} 塊：{error}')
 
-    def load_runs(self):
+    def load_runs(self, *, keep_current=False):
         if self.check_job is not None or self.job is not None:
             return
         from .voice import VoiceJob
         flow,batch_id=self.flow,self.batch_id
         async def inspect():
-            return await asyncio.to_thread(flow.narration_runs,batch_id)
+            runs = await asyncio.to_thread(flow.narration_runs,batch_id)
+            try:
+                inspection = await asyncio.to_thread(flow.inspect_narration, batch_id)
+            except ProjectError:
+                inspection = None
+            return runs, inspection
+        self.keep_current = keep_current
         self.check_job=VoiceJob(inspect,timeout=None)
         self.status.configure(text='正在檢查保存進度與音訊區塊…')
         self.update_controls()
@@ -158,13 +172,13 @@ class NarrationDialog(ttk.Frame):
             self.check_timer=self.after(100,self.poll_runs)
             return
         try:
-            self.runs = job.result
+            self.runs, self.inspection = job.result
             self.run_control.configure(values=['目前確認稿（新任務）'] + [
                 f'第 {index} 次 · {r["snapshot"]["created_at"][:19]} · {STATUS_LABELS.get(r["progress"]["status"], "待檢查")}' for index,r in enumerate(self.runs,1)])
             pending = [r for r in self.runs if not r['published']]
             if self.run is not None:
                 self.run = next((r for r in self.runs if r['snapshot']['id'] == self.run['snapshot']['id']), None)
-            elif pending:
+            elif pending and not self.keep_current:
                 self.run = pending[-1]
             self.run_control.current(self.runs.index(self.run)+1 if self.run is not None else 0)
             self.display_run()
@@ -187,6 +201,15 @@ class NarrationDialog(ttk.Frame):
         if self.run is None:
             self.load_source()
             self.run_summary.configure(text='新任務：核對目前確認稿與語音設定。')
+            inspection = self.inspection
+            if (inspection is not None and inspection['snapshot']['text'] == self.source_text
+                    and inspection['snapshot']['settings'] == self.source_settings):
+                self.run_summary.configure(text=f'可重用 {inspection["reusable"]} 塊 · 需合成 {inspection["remaining"]} 塊')
+                self.status.configure(text='請核對目前版本後更新；舊成品保留。' if inspection['remaining'] else
+                                      '全部區塊有效。本次只在本機組裝，不傳送文字。')
+                for index, chunk in enumerate(inspection['chunks'], 1):
+                    self.details.insert('', 'end', values=(index, '重用' if chunk['reusable'] else '需合成', 0,
+                        '原音已驗證' if chunk['reusable'] else '文字／設定不同或原音無效'))
         else:
             snapshot=self.run['snapshot']
             self.source_text,self.source_settings=snapshot['text'],snapshot['settings']
@@ -212,10 +235,7 @@ class NarrationDialog(ttk.Frame):
         if self.job is not None:
             return
         if messagebox.askyesno('另建製作任務','重新核對目前確認稿與設定？舊進度與成功成品會保留。',parent=self):
-            self.run=None
-            self.run_control.current(0)
-            self.display_run()
-            self.consent.set(True)
+            self.recheck()
 
     def load_source(self):
         self.source_text, self.source_settings = '', None
@@ -247,7 +267,9 @@ class NarrationDialog(ttk.Frame):
                 raise ProjectError('主視窗已換書籍或批次，請關閉後從目前批次重開。')
             if self.run is not None and self.run['stale']:
                 raise ProjectError('稿件或設定已變更；請返回核對新版本，再重新開始。')
-            if not self.consent.get() and (self.run is None or self.run['remaining']):
+            remaining = self.run['remaining'] if self.run is not None else (
+                self.inspection['remaining'] if self.inspection is not None else 1)
+            if not self.consent.get() and remaining:
                 raise ProjectError('請先核對並勾選同意將確認稿傳送至線上語音服務。')
             if (self.flow.reading_text(self.batch_id) != self.source_text or
                     self.flow.voice_settings(self.batch_id) != self.source_settings):
@@ -256,7 +278,7 @@ class NarrationDialog(ttk.Frame):
                 raise ProjectError('確認稿或設定已變更。已重讀，請重新核對並勾選同意。')
             self.stop()
             self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=self.consent.get()) if self.run is not None
-                        else self.flow.start_narration(self.batch_id))
+                        else self.flow.start_narration(self.batch_id, allow_network=self.consent.get()))
             self.update_controls()
             self.schedule()
         except ProjectError as error:
@@ -316,9 +338,12 @@ class NarrationDialog(ttk.Frame):
         can_save = stopped and self.job is not None and self.job.state['status'] == 'completed'
         stale = self.run is not None and self.run.get('stale', False)
         blocked = self.check_job is not None or self.run is not None and self.run['published'] and not stale
+        incremental = self.run is None and self.inspection is not None and self.inspection['reusable'] > 0
         self.start_button.configure(state='normal' if can_save or not busy and not blocked else 'disabled',
                                     command=self.review_current if stale and not busy else self.start,
-                                    text='核對稿件與設定 →' if stale and not busy else '重試保存' if stopped else '繼續未完成區塊 →' if self.run is not None else '開始製作 MP3／SRT')
+                                    text='核對稿件與設定 →' if stale and not busy else '重試保存' if stopped else '繼續未完成區塊 →' if self.run is not None else
+                                    '重新組裝 MP3／SRT →' if incremental and self.inspection is not None and not self.inspection['remaining'] else
+                                    '更新 MP3／SRT →' if incremental else '開始製作 MP3／SRT')
         self.run_control.configure(state='disabled' if busy or self.check_job is not None else 'readonly')
         self.restart_button.configure(state='disabled' if busy or self.check_job is not None else 'normal')
         self.cancel_button.configure(state='normal' if busy and not stopped else 'disabled')
@@ -335,10 +360,14 @@ class NarrationDialog(ttk.Frame):
     def load_result(self):
         try:
             product = self.flow.narration(self.batch_id)
+            batch = next(b for b in self.flow.state['batches'] if b['id'] == self.batch_id)
+            stale = product is not None and (batch.get('current_reading') != product['reading_id'] or
+                                             self.flow.voice_settings(self.batch_id) != product['settings'])
             for button in (self.play_button, self.export_button, self.folder_button):
                 button.configure(state='normal' if product else 'disabled')
-            self.result_info.configure(text=f'上次成品：{product["completed_at"]} · {product["settings"]["voice"]} · '
-                                       f'{product["duration_ms"]/1000:.3f} 秒 · {len(product["chunks"])} 區塊' if product else '尚無成功的批次成品。')
+            self.result_info.configure(text=f'{"待更新 · 上一版" if stale else "目前成品"}：{product["completed_at"][:19].replace("T", " ")} · '
+                                       f'{product["settings"]["voice"]} · {product["settings"]["rate"]} · '
+                                       f'{product["duration_ms"]/1000:.3f} 秒' if product else '尚無成功的批次成品。')
         except ProjectError as error:
             self.result_info.configure(text=str(error))
             for button in (self.play_button, self.export_button, self.folder_button):

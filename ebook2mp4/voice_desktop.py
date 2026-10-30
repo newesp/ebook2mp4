@@ -143,6 +143,8 @@ class VoiceDialog(ttk.Frame):
         self.save_button.grid(row=0, column=3)
         self.produce_button = ttk.Button(footer, text='儲存並前往製作 →', command=self.save_and_produce, style='Primary.TButton')
         self.produce_button.grid(row=0, column=5, sticky='e')
+        self.apply_defaults_button = ttk.Button(footer, text='套用到既有批次…', command=self.open_defaults)
+        self.apply_defaults_button.grid(row=0, column=5, sticky='e')
         self.rhythm_traces = [(variable, variable.trace_add('write', self.rhythm_changed))
                               for variable in (self.sentence_pause, self.paragraph_pause)]
         self.load_settings()
@@ -194,6 +196,21 @@ class VoiceDialog(ttk.Frame):
     def manage_services(self):
         self.app.production.manage_services(self)
 
+    def open_defaults(self):
+        if self.job is not None or self.scope.get() != '全書預設':
+            return
+        try:
+            if self.current_settings() != self.flow.voice_settings():
+                raise ProjectError('請先儲存全書預設，再選擇要套用的批次。')
+            if self.app.flow is not self.flow or self.app.batch_id != self.batch_id:
+                raise ProjectError('書籍或批次已切換，請從目前批次重新開啟。')
+            from .voice_defaults_desktop import VoiceDefaultsPage
+            page = VoiceDefaultsPage(self)
+            self.app.production.pages[(id(self.flow), self.batch_id, 'defaults')] = page
+            self.app.production.activate(page)
+        except (ProjectError, ValueError) as error:
+            self.status.configure(text=str(error))
+
     def load_settings(self):
         value = self.flow.voice_settings(self.batch_id if self.scope.get() == '本批次' else None)
         self.reload_services()
@@ -207,6 +224,8 @@ class VoiceDialog(ttk.Frame):
         self.rate.set('正常' if value['rate'] == '+0%' else value['rate'])
         self.sentence_pause.set(str(value['sentence_pause_ms']))
         self.paragraph_pause.set(str(value['paragraph_pause_ms']))
+        self.status.configure(text='全書預設僅供新批次；既有批次須明確套用。' if self.scope.get() == '全書預設'
+                              else '本批次設定獨立保存。')
         self.load_catalog()
         self.update_controls()
 
@@ -372,6 +391,10 @@ class VoiceDialog(ttk.Frame):
 
     def update_controls(self):
         busy = self.job is not None
+        defaults = self.scope.get() == '全書預設'
+        self.save_button.configure(text='儲存全書預設' if defaults else '只儲存設定')
+        self.apply_defaults_button.grid() if defaults else self.apply_defaults_button.grid_remove()
+        self.apply_defaults_button.configure(state='disabled' if busy else 'normal')
         for control in (self.refresh_button, self.save_button):
             control.configure(state='disabled' if busy else 'normal')
         self.scope_control.configure(state='disabled' if busy else 'readonly')
@@ -385,6 +408,7 @@ class VoiceDialog(ttk.Frame):
         self.preview_button.configure(state='normal' if not busy and self.batch_id else 'disabled')
         self.cancel_button.configure(state='normal' if busy else 'disabled')
         self.produce_button.configure(state='disabled' if busy else 'normal')
+        self.produce_button.grid_remove() if defaults else self.produce_button.grid()
         self.voice_entry.configure(state='disabled' if busy else 'normal')
         self.voice_control.configure(state='disabled' if busy else 'normal')
         self.filter.configure(state='disabled' if busy else 'readonly')
