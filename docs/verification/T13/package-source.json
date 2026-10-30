@@ -1,0 +1,14 @@
+{
+  "exe": "E:\\Leo\\Projects\\ebook2mp4\\dist\\T13\\ebook2mp4\\ebook2mp4.exe",
+  "sha256": "97c46454d500fedfdd25e9b091bcdff13bc6dd8fafeae3e8b5c4f8885c47af1e",
+  "modules": {
+    "desktop": true,
+    "window_layout": true,
+    "workflow": true,
+    "voice_desktop": true,
+    "voice_defaults_desktop": true,
+    "production_desktop": true,
+    "narration_desktop": true
+  },
+  "files": 1299
+}

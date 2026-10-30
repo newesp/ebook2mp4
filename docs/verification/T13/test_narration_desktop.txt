@@ -1,0 +1,88 @@
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ERROR
+test_compact_page_has_no_outer_scroll_and_footer_stays_visible (test_narration_desktop.NarrationDesktop.test_compact_page_has_no_outer_scroll_and_footer_stays_visible) ... ERROR
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ERROR
+
+======================================================================
+ERROR: test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_desktop.py", line 37, in setUp
+    self.app.narration()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 1257, in narration
+    self.render_step()
+    ~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 454, in render_step
+    self.production.show('voice')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 74, in show
+    page = VoiceDialog(app)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 150, in __init__
+    self.load_settings()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 237, in load_settings
+    self.update_controls()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 405, in update_controls
+    self.set_production_busy(self.app.production.busy_for(self.flow))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductionWorkspace' object has no attribute 'busy_for'. Did you mean: 'busy_forget'?
+
+======================================================================
+ERROR: test_compact_page_has_no_outer_scroll_and_footer_stays_visible (test_narration_desktop.NarrationDesktop.test_compact_page_has_no_outer_scroll_and_footer_stays_visible)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_desktop.py", line 37, in setUp
+    self.app.narration()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 1257, in narration
+    self.render_step()
+    ~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 454, in render_step
+    self.production.show('voice')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 74, in show
+    from .voice_desktop import VoiceDialog
+           ^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 150, in __init__
+    self.load_settings()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 237, in load_settings
+    self.update_controls()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 405, in update_controls
+    self.set_production_busy(self.app.production.busy_for(self.flow))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductionWorkspace' object has no attribute 'busy_for'. Did you mean: 'busy_forget'?
+
+======================================================================
+ERROR: test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_desktop.py", line 37, in setUp
+    self.app.narration()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 1257, in narration
+    self.render_step()
+    ~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop.py", line 454, in render_step
+    self.production.show('voice')
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 74, in show
+    from .voice_desktop import VoiceDialog
+           ^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 150, in __init__
+    self.load_settings()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 237, in load_settings
+    self.update_controls()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py", line 405, in update_controls
+    self.set_production_busy(self.app.production.busy_for(self.flow))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProductionWorkspace' object has no attribute 'busy_for'. Did you mean: 'busy_forget'?
+
+----------------------------------------------------------------------
+Ran 3 tests in 6.784s
+
+FAILED (errors=3)

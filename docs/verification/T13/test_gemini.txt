@@ -1,0 +1,11 @@
+test_cancel_and_failure_preserve_manual_work (test_gemini.GeminiJourney.test_cancel_and_failure_preserve_manual_work) ... ok
+test_edit_during_request_preserves_stale_candidate_without_overwrite (test_gemini.GeminiJourney.test_edit_during_request_preserves_stale_candidate_without_overwrite) ... ok
+test_local_encrypted_settings_connection_and_outgoing_selection (test_gemini.GeminiJourney.test_local_encrypted_settings_connection_and_outgoing_selection) ... ok
+test_pdf_batch_uses_same_review_and_portable_versions (test_gemini.GeminiJourney.test_pdf_batch_uses_same_review_and_portable_versions) ... ok
+test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic (test_gemini.GeminiJourney.test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic) ... ok
+test_selected_paragraph_decisions_undo_and_reopen (test_gemini.GeminiJourney.test_selected_paragraph_decisions_undo_and_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 21.605s
+
+OK

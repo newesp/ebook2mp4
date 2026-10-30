@@ -1,0 +1,26 @@
+test_incremental_plan_and_stale_product_then_offline_reassembly (test_incremental_desktop.IncrementalDesktop.test_incremental_plan_and_stale_product_then_offline_reassembly) ... FAIL
+test_saved_defaults_apply_to_selected_batch_in_same_window (test_incremental_desktop.IncrementalDesktop.test_saved_defaults_apply_to_selected_batch_in_same_window) ... FAIL
+
+======================================================================
+FAIL: test_incremental_plan_and_stale_product_then_offline_reassembly (test_incremental_desktop.IncrementalDesktop.test_incremental_plan_and_stale_product_then_offline_reassembly)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_incremental_desktop.py", line 77, in test_incremental_plan_and_stale_product_then_offline_reassembly
+    self.assertIn('目前成品', page.result_info.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '目前成品' not found in '待更新 · 上一版：2026-10-30 12:52:03 · zh-TW-TestNeural · +0% · 1.600 秒'
+
+======================================================================
+FAIL: test_saved_defaults_apply_to_selected_batch_in_same_window (test_incremental_desktop.IncrementalDesktop.test_saved_defaults_apply_to_selected_batch_in_same_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_incremental_desktop.py", line 36, in test_saved_defaults_apply_to_selected_batch_in_same_window
+    self.assertEqual(self.app.production.current.selected, {self.app.batch_id})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'e238ad53519b41aeb28502f36b8711f0'
+
+----------------------------------------------------------------------
+Ran 2 tests in 17.622s
+
+FAILED (failures=2)

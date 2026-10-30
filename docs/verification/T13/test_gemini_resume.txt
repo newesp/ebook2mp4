@@ -1,0 +1,14 @@
+test_cancel_keeps_checkpoint_and_late_output_is_not_reused (test_gemini_resume.LongDraft.test_cancel_keeps_checkpoint_and_late_output_is_not_reused) ... ok
+test_changed_source_blocks_resume_and_apply_without_losing_candidates (test_gemini_resume.LongDraft.test_changed_source_blocks_resume_and_apply_without_losing_candidates) ... ok
+test_final_save_recovers_accurate_status_after_checkpoint_write_failure (test_gemini_resume.LongDraft.test_final_save_recovers_accurate_status_after_checkpoint_write_failure) ... ok
+test_invalid_response_cannot_leave_half_of_request_as_success (test_gemini_resume.LongDraft.test_invalid_response_cannot_leave_half_of_request_as_success) ... ok
+test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) ... ok
+test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries (test_gemini_resume.LongDraft.test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries) ... ok
+test_oversized_paragraph_leading_space_is_never_sent_alone (test_gemini_resume.LongDraft.test_oversized_paragraph_leading_space_is_never_sent_alone) ... ok
+test_process_interruption_reopens_checkpoint_and_resumes_remaining_ranges (test_gemini_resume.LongDraft.test_process_interruption_reopens_checkpoint_and_resumes_remaining_ranges) ... ok
+test_selected_oversized_paragraph_covers_source_once_and_keeps_separators (test_gemini_resume.LongDraft.test_selected_oversized_paragraph_covers_source_once_and_keeps_separators) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 20.125s
+
+OK

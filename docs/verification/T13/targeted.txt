@@ -1,0 +1,10 @@
+test_incremental_plan_and_stale_product_then_offline_reassembly (test_incremental_desktop.IncrementalDesktop.test_incremental_plan_and_stale_product_then_offline_reassembly) ... ok
+test_saved_defaults_apply_to_selected_batch_in_same_window (test_incremental_desktop.IncrementalDesktop.test_saved_defaults_apply_to_selected_batch_in_same_window) ... ok
+test_defaults_apply_only_to_explicit_batches_and_survive_reopen (test_incremental_narration.IncrementalNarration.test_defaults_apply_only_to_explicit_batches_and_survive_reopen) ... ok
+test_edit_insert_and_pause_changes_reuse_actual_requests (test_incremental_narration.IncrementalNarration.test_edit_insert_and_pause_changes_reuse_actual_requests) ... ok
+test_new_revision_cancel_and_cache_loss_preserve_old_product (test_incremental_narration.IncrementalNarration.test_new_revision_cancel_and_cache_loss_preserve_old_product) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 22.051s
+
+OK

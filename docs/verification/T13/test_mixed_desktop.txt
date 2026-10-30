@@ -1,0 +1,6 @@
+test_retry_compare_reject_and_preserve_unsaved_editor (test_mixed_desktop.MixedDesktopJourney.test_retry_compare_reject_and_preserve_unsaved_editor) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 16.290s
+
+OK

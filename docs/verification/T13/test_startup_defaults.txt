@@ -1,0 +1,6 @@
+test_main_window_starts_maximized (test_startup_defaults.StartupDefaults.test_main_window_starts_maximized) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.869s
+
+OK

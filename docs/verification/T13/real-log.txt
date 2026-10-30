@@ -1,0 +1,1 @@
+{"synthetic_only": true, "provider": "edge-tts", "version": "7.3.1", "initial_requests": ["今天一起讀書。", "這是第二段。", "故事到這裡結束。"], "update_requests": ["這是新增的小段落。", "第二段已經修改。"], "reusable": 2, "remaining": 2, "pause_change_requests": [], "before_pause_ms": 11172, "duration_ms": 12072, "decoded_ms": 12072.0, "no_production_lock": true, "manual_listening": "pending"}

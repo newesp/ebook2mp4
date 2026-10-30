@@ -1,0 +1,29 @@
+{
+  "package_open_failures": [],
+  "deleted_bytes": 382039361,
+  "deleted_paths": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-mypy",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-package",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-temp",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-build.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-finish.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-package-prepare.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-package-verify.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-real.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-suite.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13-visual.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t13.spec",
+    "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+    "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__"
+  ],
+  "remaining_paths": [],
+  "test_run_directories": [],
+  "package_files_exclusively_opened": 1299,
+  "remaining_task_processes": [],
+  "pip_temporary_paths_remaining": [],
+  "deleted_bytes_note": "Approximate; individual script files were counted twice during collection."
+}

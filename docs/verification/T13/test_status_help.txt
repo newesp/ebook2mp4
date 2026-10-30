@@ -1,0 +1,8 @@
+test_help_is_only_for_status_and_uses_current_unresolved_count (test_status_help.StatusHelp.test_help_is_only_for_status_and_uses_current_unresolved_count) ... ok
+test_help_matches_hovered_row_without_changing_selection_or_focus (test_status_help.StatusHelp.test_help_matches_hovered_row_without_changing_selection_or_focus) ... ok
+test_leave_scroll_and_destroy_release_popup_and_delayed_callback (test_status_help.StatusHelp.test_leave_scroll_and_destroy_release_popup_and_delayed_callback) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.696s
+
+OK
