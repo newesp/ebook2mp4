@@ -1,0 +1,16 @@
+{
+  "modules": 33,
+  "tests_recorded": 198,
+  "first_pass_nonzero": [
+    {
+      "module": "test_gemini_desktop.py",
+      "exit_code": 4294967295,
+      "seconds": 219.46
+    }
+  ],
+  "retest": "production-compact-gemini-retest.txt",
+  "retest_passed": true,
+  "skipped": 0,
+  "native_final_tests": 3,
+  "seconds": 756.2
+}

@@ -1,0 +1,6 @@
+test_selected_text_preview_adopt_and_undo (test_gemini_desktop.GeminiDesktop.test_selected_text_preview_adopt_and_undo) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.766s
+
+OK

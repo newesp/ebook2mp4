@@ -1,0 +1,20 @@
+{
+  "removed_bytes": 365533146.0,
+  "computer_use_kernel": "reset",
+  "exclusive_failures": [],
+  "active_processes": [],
+  "removed": [
+    ".scratch/compact-tools",
+    ".scratch/compact-build",
+    ".scratch/compact-visual",
+    ".scratch/compact-suite.py",
+    ".scratch/compact-fixture.py",
+    ".scratch/compact-gemini-check.py",
+    ".scratch/compact-package-check.py",
+    ".scratch/ocr-runtime",
+    ".scratch/voice-runtime",
+    ".mypy_cache"
+  ],
+  "remaining": [],
+  "exclusive_files": 1299
+}

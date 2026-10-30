@@ -84,13 +84,54 @@ class NarrationDesktop(unittest.TestCase):
             self.assertEqual(open_folder.call_args.args[0], self.flow.narration_path(self.batch).parent)
         self.root.geometry('1040x640+20+20')
         self.root.update()
-        self.dialog.canvas.yview_moveto(1)
-        self.root.update()
         for control in (self.dialog.start_button, self.dialog.cancel_button, self.dialog.play_button,
                         self.dialog.export_button, self.dialog.folder_button, self.dialog.consent_control):
+            if not control.winfo_ismapped():
+                continue
             self.assertGreaterEqual(control.winfo_rootx(), self.dialog.winfo_rootx())
             self.assertLessEqual(control.winfo_rootx()+control.winfo_width(), self.dialog.winfo_rootx()+self.dialog.winfo_width())
             self.assertLessEqual(control.winfo_rooty()+control.winfo_height(), self.dialog.winfo_rooty()+self.dialog.winfo_height())
+        self.flow.save_voice_settings('zh-TW-TestNeural','+10%',batch_id=self.batch)
+        self.dialog.load_runs()
+        self.poll()
+        self.assertFalse(self.dialog.start_button.instate(['disabled']))
+        self.assertIn('核對',self.dialog.start_button.cget('text'))
+        self.dialog.start_button.invoke()
+        self.assertIsNone(self.dialog.job)
+        self.assertFalse(self.dialog.consent.get())
+        self.dialog.consent.set(True)
+        class Offline(Service):
+            async def stream(self):
+                raise OSError('offline fixture')
+                yield
+        with patch('edge_tts.Communicate',Offline):
+            self.dialog.start_button.invoke()
+            self.poll()
+        self.dialog.details.selection_set(self.dialog.details.get_children()[0])
+        self.root.update()
+        self.assertIn('第 1 塊',self.dialog.status.cget('text'))
+
+    def test_compact_page_has_no_outer_scroll_and_footer_stays_visible(self):
+        import tkinter as tk
+        self.root.geometry('1040x640')
+        self.root.update()
+        def children(widget):
+            for child in widget.winfo_children():
+                yield child
+                yield from children(child)
+        self.assertFalse(any(isinstance(w,tk.Canvas) for w in children(self.dialog)))
+        self.assertFalse(self.dialog.source_info.winfo_ismapped())
+        for widget in (self.dialog.details,self.dialog.start_button,self.dialog.consent_control,self.dialog.folder_button):
+            self.assertTrue(widget.winfo_ismapped())
+            self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),self.root.winfo_rooty()+self.root.winfo_height())
+        self.dialog.info_button.invoke()
+        self.root.update()
+        self.assertTrue(self.dialog.source_info.winfo_ismapped())
+        self.assertFalse(self.dialog.outgoing.winfo_ismapped())
+        self.dialog.info_button.invoke()
+        self.root.geometry('1360x800')
+        self.root.update()
+        self.assertGreaterEqual(self.dialog.details.winfo_height(),150)
 
     def test_close_waits_for_cancel_and_changed_source_requires_new_consent(self):
         self.flow.confirm_reading(self.batch)
