@@ -1,0 +1,7 @@
+{
+  "sha256": "9db7e065598f3f7a57a7984e4e61a273a275e1dbb87b2f35e6d655fdf181ecb0",
+  "modules": {
+    "desktop": true,
+    "narration_desktop": true
+  }
+}

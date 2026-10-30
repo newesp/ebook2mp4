@@ -1,0 +1,15 @@
+{
+  "computer_use_kernel": "reset",
+  "bytes": 302862767.0,
+  "removed": [
+    ".scratch/defaults-tools",
+    ".scratch/defaults-build",
+    ".scratch/defaults-package-check.py",
+    ".scratch/ocr-runtime",
+    ".scratch/voice-runtime"
+  ],
+  "exclusive_failures": [],
+  "remaining": [],
+  "processes": 0,
+  "exclusive_files": 1223
+}

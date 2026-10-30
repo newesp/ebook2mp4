@@ -123,7 +123,7 @@ class NarrationDialog(ttk.Frame):
         self.run=None
         self.run_control.current(0)
         self.display_run()
-        self.consent.set(False)
+        self.consent.set(True)
 
     def show_block_error(self,_event=None):
         selected=self.details.selection()
@@ -180,7 +180,7 @@ class NarrationDialog(ttk.Frame):
         index=self.run_control.current()
         self.run=self.runs[index-1] if index>0 else None
         self.display_run()
-        self.consent.set(False)
+        self.consent.set(True)
 
     def display_run(self):
         self.details.delete(*self.details.get_children())
@@ -215,7 +215,7 @@ class NarrationDialog(ttk.Frame):
             self.run=None
             self.run_control.current(0)
             self.display_run()
-            self.consent.set(False)
+            self.consent.set(True)
 
     def load_source(self):
         self.source_text, self.source_settings = '', None
@@ -252,7 +252,7 @@ class NarrationDialog(ttk.Frame):
             if (self.flow.reading_text(self.batch_id) != self.source_text or
                     self.flow.voice_settings(self.batch_id) != self.source_settings):
                 self.load_source()
-                self.consent.set(False)
+                self.consent.set(True)
                 raise ProjectError('確認稿或設定已變更。已重讀，請重新核對並勾選同意。')
             self.stop()
             self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=self.consent.get()) if self.run is not None

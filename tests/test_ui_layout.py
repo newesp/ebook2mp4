@@ -29,6 +29,7 @@ class WorkbenchLayout(unittest.TestCase):
         self.app.flow = ProjectWorkflow.create(self.folder / 'book', 'Layout')
         self.app.batch_id = self.app.flow.import_txt(self.app.flow.inspect_txt(source))
         self.app.refresh()
+        self.root.state('normal')
         self.root.geometry('1040x640')
         self.root.update()
 

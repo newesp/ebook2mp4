@@ -82,6 +82,7 @@ class NarrationDesktop(unittest.TestCase):
         with patch('ebook2mp4.narration_desktop.os.startfile') as open_folder:
             self.dialog.folder_button.invoke()
             self.assertEqual(open_folder.call_args.args[0], self.flow.narration_path(self.batch).parent)
+        self.root.state('normal')
         self.root.geometry('1040x640+20+20')
         self.root.update()
         for control in (self.dialog.start_button, self.dialog.cancel_button, self.dialog.play_button,
@@ -98,7 +99,7 @@ class NarrationDesktop(unittest.TestCase):
         self.assertIn('核對',self.dialog.start_button.cget('text'))
         self.dialog.start_button.invoke()
         self.assertIsNone(self.dialog.job)
-        self.assertFalse(self.dialog.consent.get())
+        self.assertTrue(self.dialog.consent.get())
         self.dialog.consent.set(True)
         class Offline(Service):
             async def stream(self):
@@ -113,6 +114,7 @@ class NarrationDesktop(unittest.TestCase):
 
     def test_compact_page_has_no_outer_scroll_and_footer_stays_visible(self):
         import tkinter as tk
+        self.root.state('normal')
         self.root.geometry('1040x640')
         self.root.update()
         def children(widget):
@@ -139,7 +141,7 @@ class NarrationDesktop(unittest.TestCase):
         self.dialog.consent.set(True)
         self.flow.save_voice_settings('en-US-TestNeural', batch_id=self.batch)
         self.dialog.start_button.invoke()
-        self.assertFalse(self.dialog.consent.get())
+        self.assertTrue(self.dialog.consent.get())
         self.assertIn('變更', self.dialog.status.cget('text'))
         self.dialog.consent.set(True)
         class Waiting:

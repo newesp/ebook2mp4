@@ -1340,6 +1340,11 @@ def make_app():
     style.configure('Title.TLabel', font=('Microsoft JhengHei', 19, 'bold'))
     style.configure('Heading.TLabel', font=('Microsoft JhengHei', 11, 'bold'))
     style.configure('Book.TLabel', font=('Microsoft JhengHei', 13, 'bold'))
+    def maximize_on_first_map(event):
+        if event.widget is root:
+            root.unbind('<Map>', startup_binding)
+            root.after_idle(lambda: root.state('zoomed') if root.winfo_exists() else None)
+    startup_binding = root.bind('<Map>', maximize_on_first_map)
     return root, Workbench(root)
 
 
