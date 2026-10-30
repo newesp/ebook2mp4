@@ -1,0 +1,7 @@
+test_canvas_region_and_selected_raw_text_produce_partial_candidate (test_optimization_desktop.OptimizationDesktop.test_canvas_region_and_selected_raw_text_produce_partial_candidate) ... ok
+test_normalization_controls_and_confirmation_connect_to_candidates (test_optimization_desktop.OptimizationDesktop.test_normalization_controls_and_confirmation_connect_to_candidates) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.423s
+
+OK

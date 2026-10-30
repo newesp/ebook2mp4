@@ -1,0 +1,15 @@
+test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls) ... FAIL
+
+======================================================================
+FAIL: test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 121, in test_compact_page_keeps_controls_visible_and_only_text_scrolls
+    self.assertFalse(any(isinstance(w, tk.Canvas) for w in descendants(d)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 1.696s
+
+FAILED (failures=1)

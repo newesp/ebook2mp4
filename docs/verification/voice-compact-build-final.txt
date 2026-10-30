@@ -1,0 +1,104 @@
+471 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+471 INFO: Python: 3.14.3
+554 INFO: Platform: Windows-11-10.0.26200-SP0
+555 INFO: Python environment: C:\Python314
+15345 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+18033 INFO: Appending 'binaries' from .spec
+18033 INFO: Appending 'datas' from .spec
+18050 INFO: checking Analysis
+18192 INFO: Building because excludes changed
+18192 INFO: Looking for Python shared library...
+18193 INFO: Using Python shared library: C:\Python314\python314.dll
+18193 INFO: Running Analysis Analysis-00.toc
+18193 INFO: Target bytecode optimization level: 0
+18193 INFO: Initializing module dependency graph...
+18198 INFO: Initializing module graph hook caches...
+18329 INFO: Analyzing modules for base_library.zip ...
+24177 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+25919 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+26905 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+27356 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+27449 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+37350 INFO: Caching module dependency graph...
+37426 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+37710 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_find_module_path'
+37790 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+38860 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+39606 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+39699 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+39718 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+39775 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+39808 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+40355 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+40681 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+41757 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+41821 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+42383 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+43127 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+44590 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+45212 INFO: Processing standard module hook 'hook-opencc.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+45734 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+49134 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+50146 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+50167 INFO: SetuptoolsInfo: initializing cached setuptools info...
+53216 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+55047 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+60647 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+64821 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+64823 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+64862 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+64934 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+65011 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+65013 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+65035 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+65037 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+65399 INFO: Processing standard module hook 'hook-_osx_support.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+65445 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+66470 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+66475 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+68244 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+71535 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+71538 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+75971 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+77247 INFO: Analyzing hidden import 'pypdfium2.__main__'
+77299 INFO: Analyzing hidden import 'opencc.__main__'
+77304 INFO: Analyzing hidden import 'edge_tts.__main__'
+77337 INFO: Analyzing hidden import 'certifi.__main__'
+77339 INFO: Analyzing hidden import 'certifi.tests'
+77340 INFO: Analyzing hidden import 'certifi.tests.test_certify'
+77649 INFO: Processing module hooks (post-graph stage)...
+79395 INFO: Processing standard module hook 'hook-orjson.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+87679 WARNING: Hidden import "tzdata" not found!
+88858 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+96537 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks'
+96574 INFO: Performing binary vs. data reclassification (1092 entries)
+96880 INFO: Looking for ctypes DLLs
+97079 INFO: Analyzing run-time hooks ...
+97089 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\rthooks'
+97095 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\rthooks'
+97101 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\rthooks'
+97108 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-compact-tools\\PyInstaller\\hooks\\rthooks'
+97190 INFO: Creating base_library.zip...
+97231 INFO: Looking for dynamic libraries
+100113 INFO: Extra DLL search directories (AddDllDirectory): []
+100113 INFO: Extra DLL search directories (PATH): []
+102500 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\voice-compact-build\ebook2mp4\warn-ebook2mp4.txt
+102695 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\voice-compact-build\ebook2mp4\xref-ebook2mp4.html
+102824 INFO: checking PYZ
+102899 INFO: checking PKG
+102924 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\voice-compact-tools\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+102924 INFO: checking EXE
+102971 INFO: checking COLLECT
+103023 INFO: Removing dir E:\Leo\Projects\ebook2mp4\dist\T12-voice-compact\ebook2mp4
+103543 INFO: Building COLLECT COLLECT-00.toc
+109704 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+109769 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist\T12-voice-compact

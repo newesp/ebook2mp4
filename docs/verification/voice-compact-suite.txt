@@ -1,0 +1,433 @@
+
+test_desktop.py
+test_cancel_or_failed_save_during_batch_switch_keeps_unsaved_editor (test_desktop.DesktopJourney.test_cancel_or_failed_save_during_batch_switch_keeps_unsaved_editor) ... ok
+test_cancelled_pdf_save_failure_keeps_candidate_for_retry (test_desktop.DesktopJourney.test_cancelled_pdf_save_failure_keeps_candidate_for_retry) ... ok
+test_external_reload_cancel_failure_copy_versions_and_explicit_replace (test_desktop.DesktopJourney.test_external_reload_cancel_failure_copy_versions_and_explicit_replace) ... ok
+test_failed_pdf_page_preview_does_not_show_previous_page_image (test_desktop.DesktopJourney.test_failed_pdf_page_preview_does_not_show_previous_page_image) ... ok
+test_missing_pdf_comparison_shows_error_and_releases_modal_on_close (test_desktop.DesktopJourney.test_missing_pdf_comparison_shows_error_and_releases_modal_on_close) ... ok
+test_multiple_batches_encoding_recovery_switch_rename_reorder (test_desktop.DesktopJourney.test_multiple_batches_encoding_recovery_switch_rename_reorder) ... ok
+test_pdf_remove_cancel_failure_success_and_empty_state (test_desktop.DesktopJourney.test_pdf_remove_cancel_failure_success_and_empty_state) ... ok
+test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo (test_desktop.DesktopJourney.test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo) ... ok
+test_proofread_search_replace_undo_confirm_and_unsaved_edit_invalidation (test_desktop.DesktopJourney.test_proofread_search_replace_undo_confirm_and_unsaved_edit_invalidation) ... ok
+test_reading_history_delete_cancel_failure_and_unsaved_draft (test_desktop.DesktopJourney.test_reading_history_delete_cancel_failure_and_unsaved_draft) ... ok
+test_real_ui_create_preview_import_edit_save_close_reopen (test_desktop.DesktopJourney.test_real_ui_create_preview_import_edit_save_close_reopen) ... ok
+test_replace_all_is_single_undo_and_export_includes_unsaved_text (test_desktop.DesktopJourney.test_replace_all_is_single_undo_and_export_includes_unsaved_text) ... ok
+test_tool_tabs_keep_confirmation_visible_at_minimum_window (test_desktop.DesktopJourney.test_tool_tabs_keep_confirmation_visible_at_minimum_window) ... ok
+test_ui_failure_retains_unsaved_text_and_cancel_close (test_desktop.DesktopJourney.test_ui_failure_retains_unsaved_text_and_cancel_close) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 46.585s
+
+OK
+
+test_gemini.py
+test_cancel_and_failure_preserve_manual_work (test_gemini.GeminiJourney.test_cancel_and_failure_preserve_manual_work) ... ok
+test_edit_during_request_preserves_stale_candidate_without_overwrite (test_gemini.GeminiJourney.test_edit_during_request_preserves_stale_candidate_without_overwrite) ... ok
+test_local_encrypted_settings_connection_and_outgoing_selection (test_gemini.GeminiJourney.test_local_encrypted_settings_connection_and_outgoing_selection) ... ok
+test_pdf_batch_uses_same_review_and_portable_versions (test_gemini.GeminiJourney.test_pdf_batch_uses_same_review_and_portable_versions) ... ok
+test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic (test_gemini.GeminiJourney.test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic) ... ok
+test_selected_paragraph_decisions_undo_and_reopen (test_gemini.GeminiJourney.test_selected_paragraph_decisions_undo_and_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 6.156s
+
+OK
+
+test_gemini_desktop.py
+test_deciding_older_candidate_keeps_same_candidate_selected (test_gemini_desktop.GeminiDesktop.test_deciding_older_candidate_keeps_same_candidate_selected) ... ok
+test_finished_candidate_can_be_discarded_when_another_window_changed_project (test_gemini_desktop.GeminiDesktop.test_finished_candidate_can_be_discarded_when_another_window_changed_project) ... ok
+test_malformed_local_settings_can_be_replaced_in_settings_dialog (test_gemini_desktop.GeminiDesktop.test_malformed_local_settings_can_be_replaced_in_settings_dialog) ... ok
+test_selected_text_preview_adopt_and_undo (test_gemini_desktop.GeminiDesktop.test_selected_text_preview_adopt_and_undo) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 9.999s
+
+OK
+
+test_gemini_resume.py
+test_cancel_keeps_checkpoint_and_late_output_is_not_reused (test_gemini_resume.LongDraft.test_cancel_keeps_checkpoint_and_late_output_is_not_reused) ... ok
+test_changed_source_blocks_resume_and_apply_without_losing_candidates (test_gemini_resume.LongDraft.test_changed_source_blocks_resume_and_apply_without_losing_candidates) ... ok
+test_final_save_recovers_accurate_status_after_checkpoint_write_failure (test_gemini_resume.LongDraft.test_final_save_recovers_accurate_status_after_checkpoint_write_failure) ... ok
+test_invalid_response_cannot_leave_half_of_request_as_success (test_gemini_resume.LongDraft.test_invalid_response_cannot_leave_half_of_request_as_success) ... ok
+test_long_unbroken_text_scope_returns_without_freezing_the_caller (test_gemini_resume.LongDraft.test_long_unbroken_text_scope_returns_without_freezing_the_caller) ... ok
+test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries (test_gemini_resume.LongDraft.test_middle_failure_is_retained_after_reopen_and_only_failed_range_retries) ... ok
+test_oversized_paragraph_leading_space_is_never_sent_alone (test_gemini_resume.LongDraft.test_oversized_paragraph_leading_space_is_never_sent_alone) ... ok
+test_process_interruption_reopens_checkpoint_and_resumes_remaining_ranges (test_gemini_resume.LongDraft.test_process_interruption_reopens_checkpoint_and_resumes_remaining_ranges) ... ok
+test_selected_oversized_paragraph_covers_source_once_and_keeps_separators (test_gemini_resume.LongDraft.test_selected_oversized_paragraph_covers_source_once_and_keeps_separators) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 10.215s
+
+OK
+
+test_gemini_resume_desktop.py
+test_cancel_keeps_window_responsive_and_preserves_completed_range (test_gemini_resume_desktop.ResumeDesktop.test_cancel_keeps_window_responsive_and_preserves_completed_range) ... ok
+test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 9.856s
+
+OK
+
+test_main_workflow_desktop.py
+test_ai_tools_exit_focus_mode_without_losing_selection (test_main_workflow_desktop.MainWorkflow.test_ai_tools_exit_focus_mode_without_losing_selection) ... ok
+test_failed_save_does_not_advance_or_lose_text (test_main_workflow_desktop.MainWorkflow.test_failed_save_does_not_advance_or_lose_text) ... ok
+test_save_next_edit_confirm_and_reconfirm (test_main_workflow_desktop.MainWorkflow.test_save_next_edit_confirm_and_reconfirm) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 6.855s
+
+OK
+
+test_mixed_desktop.py
+test_retry_compare_reject_and_preserve_unsaved_editor (test_mixed_desktop.MixedDesktopJourney.test_retry_compare_reject_and_preserve_unsaved_editor) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 10.054s
+
+OK
+
+test_mixed_pdf.py
+test_all_three_rotations_recover_sideways_or_upside_down_scans (test_mixed_pdf.MixedPdfJourney.test_all_three_rotations_recover_sideways_or_upside_down_scans) ... ok
+test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation (test_mixed_pdf.MixedPdfJourney.test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation) ... ok
+test_auto_retry_selected_candidate_preserves_corrected_original_and_confirmations (test_mixed_pdf.MixedPdfJourney.test_auto_retry_selected_candidate_preserves_corrected_original_and_confirmations) ... ok
+test_auto_without_models_preserves_text_and_flags_unread_pages (test_mixed_pdf.MixedPdfJourney.test_auto_without_models_preserves_text_and_flags_unread_pages) ... ok
+test_failed_only_recovers_and_publication_failure_keeps_candidate (test_mixed_pdf.MixedPdfJourney.test_failed_only_recovers_and_publication_failure_keeps_candidate) ... ok
+test_failed_only_retry_retains_untargeted_progress_and_cancelled_target (test_mixed_pdf.MixedPdfJourney.test_failed_only_retry_retains_untargeted_progress_and_cancelled_target) ... ok
+test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections (test_mixed_pdf.MixedPdfJourney.test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 14.336s
+
+OK
+
+test_narration.py
+test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens) ... ok
+test_failed_retries_cancel_and_conflict_keep_previous_product (test_narration.NarrationJourney.test_failed_retries_cancel_and_conflict_keep_previous_product) ... ok
+test_indivisible_long_quotation_is_rejected_before_any_online_request (test_narration.NarrationJourney.test_indivisible_long_quotation_is_rejected_before_any_online_request) ... ok
+test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product) ... ok
+test_long_english_prefers_complete_sentences_over_word_boundaries (test_narration.NarrationJourney.test_long_english_prefers_complete_sentences_over_word_boundaries) ... ok
+test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content) ... ok
+test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 25.161s
+
+OK
+
+test_narration_desktop.py
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_compact_page_has_no_outer_scroll_and_footer_stays_visible (test_narration_desktop.NarrationDesktop.test_compact_page_has_no_outer_scroll_and_footer_stays_visible) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 18.273s
+
+OK
+
+test_narration_resume.py
+test_assembly_cancel_joins_media_process_and_resumes_without_tts (test_narration_resume.NarrationRecovery.test_assembly_cancel_joins_media_process_and_resumes_without_tts) ... ok
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_corrupt_cache_is_not_reused (test_narration_resume.NarrationRecovery.test_corrupt_cache_is_not_reused) ... ok
+test_failed_assembly_resumes_offline_and_preserves_previous_product (test_narration_resume.NarrationRecovery.test_failed_assembly_resumes_offline_and_preserves_previous_product) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+test_offline_permission_is_enforced_after_cache_changes (test_narration_resume.NarrationRecovery.test_offline_permission_is_enforced_after_cache_changes) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 24.712s
+
+OK
+
+test_notifications.py
+test_auto_dismiss_eases_out (test_notifications.Notifications.test_auto_dismiss_eases_out) ... ok
+test_hover_and_focus_pause_then_resume_countdown (test_notifications.Notifications.test_hover_and_focus_pause_then_resume_countdown) ... ok
+test_new_message_replaces_old_timer_and_history_keeps_both (test_notifications.Notifications.test_new_message_replaces_old_timer_and_history_keeps_both) ... ok
+test_small_child_owner_long_message_and_destruction_release_timers (test_notifications.Notifications.test_small_child_owner_long_message_and_destruction_release_timers) ... ok
+test_sticky_error_close_does_not_clear_existing_blocker (test_notifications.Notifications.test_sticky_error_close_does_not_clear_existing_blocker) ... ok
+test_switching_owner_dismisses_toast_and_never_uses_global_topmost (test_notifications.Notifications.test_switching_owner_dismisses_toast_and_never_uses_global_topmost) ... ok
+test_top_center_tracks_owner_without_stealing_editor_focus (test_notifications.Notifications.test_top_center_tracks_owner_without_stealing_editor_focus) ... ok
+test_unmapped_owner_dismisses_and_hidden_owner_only_records_history (test_notifications.Notifications.test_unmapped_owner_dismisses_and_hidden_owner_only_records_history) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 12.993s
+
+OK
+
+test_ocr.py
+test_bad_download_is_not_installed_and_retry_is_possible (test_ocr.OcrAvailability.test_bad_download_is_not_installed_and_retry_is_possible) ... ok
+test_missing_engine_blocks_only_forced_ocr_not_text_layer (test_ocr.OcrAvailability.test_missing_engine_blocks_only_forced_ocr_not_text_layer) ... ok
+test_missing_ocr_lists_correct_languages_sizes_and_txt_still_works (test_ocr.OcrAvailability.test_missing_ocr_lists_correct_languages_sizes_and_txt_still_works) ... ok
+test_real_cancellation_keeps_complete_pages_and_failed_engine_is_not_success (test_ocr.RealOcrJourney.test_real_cancellation_keeps_complete_pages_and_failed_engine_is_not_success) ... ok
+test_three_real_scripts_blank_page_and_retry_preserve_corrected_snapshot (test_ocr.RealOcrJourney.test_three_real_scripts_blank_page_and_retry_preserve_corrected_snapshot) ... ok
+test_user_book_nine_scanned_pages_export_to_utf8_txt (test_ocr.RealOcrJourney.test_user_book_nine_scanned_pages_export_to_utf8_txt) ... ok
+test_verified_model_install_and_cancel_release_download_resources (test_ocr.RealOcrJourney.test_verified_model_install_and_cancel_release_download_resources) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 73.410s
+
+OK
+
+test_ocr_desktop.py
+test_model_failure_retry_and_explicit_candidate_acceptance (test_ocr_desktop.OcrDesktopJourney.test_model_failure_retry_and_explicit_candidate_acceptance) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.485s
+
+OK
+
+test_ocr_optimization.py
+test_auto_language_recovers_reported_title_without_script_conversion (test_ocr_optimization.OcrOptimization.test_auto_language_recovers_reported_title_without_script_conversion) ... ok
+test_high_confidence_bad_region_still_needs_check_in_chinese_context (test_ocr_optimization.OcrOptimization.test_high_confidence_bad_region_still_needs_check_in_chinese_context) ... ok
+test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft (test_ocr_optimization.OcrOptimization.test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft) ... ok
+test_region_validation_and_cancellation_preserve_original_page_text (test_ocr_optimization.OcrOptimization.test_region_validation_and_cancellation_preserve_original_page_text) ... ok
+test_small_screenshot_stays_pending_when_confidence_is_low (test_ocr_optimization.OcrOptimization.test_small_screenshot_stays_pending_when_confidence_is_low) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 53.261s
+
+OK
+
+test_optimization_desktop.py
+test_canvas_region_and_selected_raw_text_produce_partial_candidate (test_optimization_desktop.OptimizationDesktop.test_canvas_region_and_selected_raw_text_produce_partial_candidate) ... ok
+test_normalization_controls_and_confirmation_connect_to_candidates (test_optimization_desktop.OptimizationDesktop.test_normalization_controls_and_confirmation_connect_to_candidates) ... 
+test_pdf.py
+test_blank_and_failed_pages_block_confirmation_until_explicit_resolution (test_pdf.PdfJourney.test_blank_and_failed_pages_block_confirmation_until_explicit_resolution) ... ok
+test_cancellation_keeps_complete_pages_and_leaves_corrected_batch_intact (test_pdf.PdfJourney.test_cancellation_keeps_complete_pages_and_leaves_corrected_batch_intact) ... ok
+test_commit_failure_retains_candidate_and_previous_confirmed_content (test_pdf.PdfJourney.test_commit_failure_retains_candidate_and_previous_confirmed_content) ... ok
+test_failed_pdf_removal_retains_previous_project (test_pdf.PdfJourney.test_failed_pdf_removal_retains_previous_project) ... ok
+test_invalid_ranges_and_unreadable_corrupt_password_sources_do_not_start (test_pdf.PdfJourney.test_invalid_ranges_and_unreadable_corrupt_password_sources_do_not_start) ... ok
+test_line_break_cleanup_preview_never_rewrites_original_and_can_be_undone (test_pdf.PdfJourney.test_line_break_cleanup_preview_never_rewrites_original_and_can_be_undone) ... ok
+test_mapping_invalidates_on_edit_reload_and_original_export_has_no_labels (test_pdf.PdfJourney.test_mapping_invalidates_on_edit_reload_and_original_export_has_no_labels) ... ok
+test_real_multilingual_text_layer_preserves_script_numbers_and_punctuation (test_pdf.PdfJourney.test_real_multilingual_text_layer_preserves_script_numbers_and_punctuation) ... ok
+test_remove_selected_pdf_preserves_other_batches_and_source (test_pdf.PdfJourney.test_remove_selected_pdf_preserves_other_batches_and_source) ... ok
+test_selected_pages_are_independent_persistent_batches_with_txt (test_pdf.PdfJourney.test_selected_pages_are_independent_persistent_batches_with_txt) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 5.892s
+
+OK
+
+test_pdf_candidate_refinement.py
+test_accumulated_page_selection_uses_original_publication_baseline (test_pdf_candidate_refinement.PdfCandidateRefinement.test_accumulated_page_selection_uses_original_publication_baseline) ... ok
+test_cancelled_and_failed_refinements_keep_already_corrected_text (test_pdf_candidate_refinement.PdfCandidateRefinement.test_cancelled_and_failed_refinements_keep_already_corrected_text) ... ok
+test_changed_source_or_extracted_content_is_rejected_without_losing_candidate (test_pdf_candidate_refinement.PdfCandidateRefinement.test_changed_source_or_extracted_content_is_rejected_without_losing_candidate) ... ok
+test_construction_and_publication_failure_keep_current_owner_and_work (test_pdf_candidate_refinement.PdfCandidateRefinement.test_construction_and_publication_failure_keep_current_owner_and_work) ... ok
+test_foreign_retired_and_removed_source_jobs_are_rejected (test_pdf_candidate_refinement.PdfCandidateRefinement.test_foreign_retired_and_removed_source_jobs_are_rejected) ... ok
+test_initial_import_candidate_can_refine_before_any_batch_exists (test_pdf_candidate_refinement.PdfCandidateRefinement.test_initial_import_candidate_can_refine_before_any_batch_exists) ... ok
+test_manual_draft_saved_during_refinement_is_preserved_without_invalidating_candidate (test_pdf_candidate_refinement.PdfCandidateRefinement.test_manual_draft_saved_during_refinement_is_preserved_without_invalidating_candidate) ... ok
+test_reject_latest_region_keeps_prior_correction_pending_for_page_review (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_latest_region_keeps_prior_correction_pending_for_page_review) ... ok
+test_reject_latest_region_then_publish_preserves_earlier_regions (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_latest_region_then_publish_preserves_earlier_regions) ... ok
+test_reject_overlapping_retry_restores_previous_accepted_correction (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_overlapping_retry_restores_previous_accepted_correction) ... ok
+test_reject_region_on_another_page_keeps_previously_accepted_page (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_region_on_another_page_keeps_previously_accepted_page) ... ok
+test_reject_region_then_retry_another_whole_page_keeps_prior_region (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_region_then_retry_another_whole_page_keeps_prior_region) ... ok
+test_rename_reorder_and_reading_snapshot_do_not_invalidate_source (test_pdf_candidate_refinement.PdfCandidateRefinement.test_rename_reorder_and_reading_snapshot_do_not_invalidate_source) ... ok
+test_two_regions_accumulate_with_shifted_offsets_and_publish_once (test_pdf_candidate_refinement.PdfCandidateRefinement.test_two_regions_accumulate_with_shifted_offsets_and_publish_once) ... ok
+test_unchecked_previous_page_is_frozen_back_to_original_before_next_region (test_pdf_candidate_refinement.PdfCandidateRefinement.test_unchecked_previous_page_is_frozen_back_to_original_before_next_region) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 11.834s
+
+OK
+
+test_pdf_refinement_desktop.py
+test_failed_region_unlocks_settings_and_missing_model_can_be_installed (test_pdf_refinement_desktop.PdfRefinementDesktop.test_failed_region_unlocks_settings_and_missing_model_can_be_installed) ... ok
+test_keep_original_choice_resets_selection_baseline_before_next_region (test_pdf_refinement_desktop.PdfRefinementDesktop.test_keep_original_choice_resets_selection_baseline_before_next_region) ... ok
+test_ready_model_does_not_offer_or_start_zero_byte_download (test_pdf_refinement_desktop.PdfRefinementDesktop.test_ready_model_does_not_offer_or_start_zero_byte_download) ... ok
+test_real_ocr_job_displays_indeterminate_busy_feedback (test_pdf_refinement_desktop.PdfRefinementDesktop.test_real_ocr_job_displays_indeterminate_busy_feedback) ... ok
+test_reject_third_region_keeps_first_two_when_recognizing_fourth (test_pdf_refinement_desktop.PdfRefinementDesktop.test_reject_third_region_keeps_first_two_when_recognizing_fourth) ... ok
+test_settings_unlock_and_next_region_uses_new_language_and_layout (test_pdf_refinement_desktop.PdfRefinementDesktop.test_settings_unlock_and_next_region_uses_new_language_and_layout) ... ok
+test_two_regions_accumulate_then_publish_one_batch (test_pdf_refinement_desktop.PdfRefinementDesktop.test_two_regions_accumulate_then_publish_one_batch) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 25.966s
+
+OK
+
+test_production_pages.py
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check (test_production_pages.ProductionPages.test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 11.154s
+
+OK
+
+test_proofreading_optimization.py
+test_english_numbers_code_and_identifiers_are_preserved (test_proofreading_optimization.ProofreadingOptimization.test_english_numbers_code_and_identifiers_are_preserved) ... ok
+test_full_batch_script_guides_selected_candidate_without_changing_outside (test_proofreading_optimization.ProofreadingOptimization.test_full_batch_script_guides_selected_candidate_without_changing_outside) ... ok
+test_model_cannot_change_protected_identifiers (test_proofreading_optimization.ProofreadingOptimization.test_model_cannot_change_protected_identifiers) ... ok
+test_quotes_with_url_and_code_keep_protected_content_unchanged (test_proofreading_optimization.ProofreadingOptimization.test_quotes_with_url_and_code_keep_protected_content_unchanged) ... ok
+test_shared_han_does_not_vote_and_ellipsis_is_one_mark (test_proofreading_optimization.ProofreadingOptimization.test_shared_han_does_not_vote_and_ellipsis_is_one_mark) ... ok
+test_simplified_and_ambiguous_detection_and_explicit_preserve (test_proofreading_optimization.ProofreadingOptimization.test_simplified_and_ambiguous_detection_and_explicit_preserve) ... ok
+test_unicode_filenames_paths_and_english_apostrophes_survive (test_proofreading_optimization.ProofreadingOptimization.test_unicode_filenames_paths_and_english_apostrophes_survive) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 4.519s
+
+OK
+
+test_rhythm.py
+test_ascii_opening_quote_stays_with_its_sentence (test_rhythm.RhythmJourney.test_ascii_opening_quote_stays_with_its_sentence) ... ok
+test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range) ... ok
+test_quotes_and_punctuation_run_are_one_sentence_boundary (test_rhythm.RhythmJourney.test_quotes_and_punctuation_run_are_one_sentence_boundary) ... ok
+test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 11.786s
+
+OK
+
+test_rhythm_desktop.py
+test_presets_custom_validation_and_minimum_window (test_rhythm_desktop.RhythmDesktop.test_presets_custom_validation_and_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.241s
+
+OK
+
+test_service_form.py
+test_missing_reuse_key_is_explained (test_service_form.ServiceForm.test_missing_reuse_key_is_explained) ... ok
+test_reuse_saves_reference_without_copying_secret (test_service_form.ServiceForm.test_reuse_saves_reference_without_copying_secret) ... ok
+test_switch_and_mask_reused_key (test_service_form.ServiceForm.test_switch_and_mask_reused_key) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.357s
+
+OK
+
+test_startup_defaults.py
+test_main_window_starts_maximized (test_startup_defaults.StartupDefaults.test_main_window_starts_maximized) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.497s
+
+OK
+
+test_status_help.py
+test_help_is_only_for_status_and_uses_current_unresolved_count (test_status_help.StatusHelp.test_help_is_only_for_status_and_uses_current_unresolved_count) ... ok
+test_help_matches_hovered_row_without_changing_selection_or_focus (test_status_help.StatusHelp.test_help_matches_hovered_row_without_changing_selection_or_focus) ... ok
+test_leave_scroll_and_destroy_release_popup_and_delayed_callback (test_status_help.StatusHelp.test_leave_scroll_and_destroy_release_popup_and_delayed_callback) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 7.068s
+
+OK
+
+test_terminology_desktop.py
+test_entry_names_and_empty_history_explain_two_document_kinds (test_terminology_desktop.ManuscriptTerminology.test_entry_names_and_empty_history_explain_two_document_kinds) ... ok
+test_history_keeps_readings_and_reload_backups_distinct_and_read_only (test_terminology_desktop.ManuscriptTerminology.test_history_keeps_readings_and_reload_backups_distinct_and_read_only) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.534s
+
+OK
+
+test_tts_providers.py
+test_check_service_reads_complete_chunked_json (test_tts_providers.ProviderDesktop.test_check_service_reads_complete_chunked_json) ... ok
+test_service_switch_enables_model_and_management_layout (test_tts_providers.ProviderDesktop.test_service_switch_enables_model_and_management_layout) ... ok
+test_fish_request_and_auth_error_preserve_previous_result (test_tts_providers.Providers.test_fish_request_and_auth_error_preserve_previous_result) ... ok
+test_gemini_custom_model_preview_formal_reuse_and_no_project_key (test_tts_providers.Providers.test_gemini_custom_model_preview_formal_reuse_and_no_project_key) ... ok
+test_profile_provider_cannot_change_and_fish_model_is_explicit (test_tts_providers.Providers.test_profile_provider_cannot_change_and_fish_model_is_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 12.216s
+
+OK
+
+test_ui_layout.py
+test_bulk_source_decisions_confirm_and_preserve_existing_statuses (test_ui_layout.WorkbenchLayout.test_bulk_source_decisions_confirm_and_preserve_existing_statuses) ... ok
+test_menu_disabled_state_and_real_export_action (test_ui_layout.WorkbenchLayout.test_menu_disabled_state_and_real_export_action) ... ok
+test_preview_view_choice_does_not_change_candidate_and_undo (test_ui_layout.WorkbenchLayout.test_preview_view_choice_does_not_change_candidate_and_undo) ... ok
+test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit (test_ui_layout.WorkbenchLayout.test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit) ... ok
+test_selection_survives_ai_tab_and_focus_mode (test_ui_layout.WorkbenchLayout.test_selection_survives_ai_tab_and_focus_mode) ... ok
+test_source_blockers_remain_visible_after_save_and_in_other_tab (test_ui_layout.WorkbenchLayout.test_source_blockers_remain_visible_after_save_and_in_other_tab) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 14.349s
+
+OK
+
+test_ui_layout_gemini.py
+test_accepted_paragraph_can_be_edited_and_adopted_again (test_ui_layout_gemini.GeminiLayout.test_accepted_paragraph_can_be_edited_and_adopted_again) ... ok
+test_adoption_has_one_notification_and_editing_does_not_emit_toasts (test_ui_layout_gemini.GeminiLayout.test_adoption_has_one_notification_and_editing_does_not_emit_toasts) ... ok
+test_dirty_and_stale_warnings_survive_success_messages (test_ui_layout_gemini.GeminiLayout.test_dirty_and_stale_warnings_survive_success_messages) ... ok
+test_edit_candidate_navigate_save_reopen_adopt_and_undo (test_ui_layout_gemini.GeminiLayout.test_edit_candidate_navigate_save_reopen_adopt_and_undo) ... ok
+test_empty_candidate_or_save_failure_keeps_edits_and_window (test_ui_layout_gemini.GeminiLayout.test_empty_candidate_or_save_failure_keeps_edits_and_window) ... ok
+test_navigation_decisions_and_batch_menu_preserve_candidate_scope (test_ui_layout_gemini.GeminiLayout.test_navigation_decisions_and_batch_menu_preserve_candidate_scope) ... ok
+test_notes_and_primary_actions_remain_available_at_restored_size (test_ui_layout_gemini.GeminiLayout.test_notes_and_primary_actions_remain_available_at_restored_size) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 22.864s
+
+OK
+
+test_ui_layout_pdf.py
+test_source_warning_remains_visible_while_operation_messages_change (test_ui_layout_pdf.PdfReadingLayout.test_source_warning_remains_visible_while_operation_messages_change) ... ok
+test_standard_maximized_window_and_fixed_actions_at_minimum_size (test_ui_layout_pdf.PdfReadingLayout.test_standard_maximized_window_and_fixed_actions_at_minimum_size) ... ok
+test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change (test_ui_layout_pdf.PdfReadingLayout.test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 8.982s
+
+OK
+
+test_voice.py
+test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success) ... ok
+test_corrupt_audio_and_conflicting_save_keep_previous_success (test_voice.VoiceJourney.test_corrupt_audio_and_conflicting_save_keep_previous_success) ... ok
+test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing (test_voice.VoiceJourney.test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing) ... ok
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ok
+test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause (test_voice.VoiceJourney.test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause) ... ok
+test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup) ... ok
+test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 12.240s
+
+OK
+
+test_voice_desktop.py
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls) ... ok
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... ok
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... ok
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 21.124s
+
+OK
+
+test_workflow.py
+test_bad_encoding_is_rejected_without_replacement_characters (test_workflow.ProjectJourney.test_bad_encoding_is_rejected_without_replacement_characters) ... ok
+test_confirmation_failure_retry_unsaved_invalidation_and_metadata_changes (test_workflow.ProjectJourney.test_confirmation_failure_retry_unsaved_invalidation_and_metadata_changes) ... ok
+test_delete_reading_locked_file_reports_retained_file_after_version_removal (test_workflow.ProjectJourney.test_delete_reading_locked_file_reports_retained_file_after_version_removal) ... ok
+test_delete_reading_storage_failure_keeps_version_and_can_retry (test_workflow.ProjectJourney.test_delete_reading_storage_failure_keeps_version_and_can_retry) ... ok
+test_delete_reading_version_keeps_draft_and_other_confirmations (test_workflow.ProjectJourney.test_delete_reading_version_keeps_draft_and_other_confirmations) ... ok
+test_empty_file_and_100k_manuscript_round_trip (test_workflow.ProjectJourney.test_empty_file_and_100k_manuscript_round_trip) ... ok
+test_existing_folder_never_overwritten (test_workflow.ProjectJourney.test_existing_folder_never_overwritten) ... ok
+test_export_external_reload_conflict_copy_and_reconfirm (test_workflow.ProjectJourney.test_export_external_reload_conflict_copy_and_reconfirm) ... ok
+test_failed_import_remains_empty_and_retry_works (test_workflow.ProjectJourney.test_failed_import_remains_empty_and_retry_works) ... ok
+test_failed_publication_preserves_last_save_and_allows_retry (test_workflow.ProjectJourney.test_failed_publication_preserves_last_save_and_allows_retry) ... ok
+test_future_version_and_unsafe_reference_rejected (test_workflow.ProjectJourney.test_future_version_and_unsafe_reference_rejected) ... ok
+test_invalid_batch_identity_is_reported_before_ui_load (test_workflow.ProjectJourney.test_invalid_batch_identity_is_reported_before_ui_load) ... ok
+test_missing_and_modified_project_content_are_reported (test_workflow.ProjectJourney.test_missing_and_modified_project_content_are_reported) ... ok
+test_other_window_invalidation_blocks_stale_current_reading_but_keeps_history (test_workflow.ProjectJourney.test_other_window_invalidation_blocks_stale_current_reading_but_keeps_history) ... ok
+test_other_window_update_is_not_overwritten (test_workflow.ProjectJourney.test_other_window_update_is_not_overwritten) ... ok
+test_permission_failure_and_space_failure_are_recoverable (test_workflow.ProjectJourney.test_permission_failure_and_space_failure_are_recoverable) ... ok
+test_preview_is_exact_import_snapshot (test_workflow.ProjectJourney.test_preview_is_exact_import_snapshot) ... ok
+test_reading_confirmation_is_immutable_and_local_to_batch (test_workflow.ProjectJourney.test_reading_confirmation_is_immutable_and_local_to_batch) ... ok
+test_reading_snapshot_tampering_is_rejected_when_reopening (test_workflow.ProjectJourney.test_reading_snapshot_tampering_is_rejected_when_reopening) ... ok
+test_reload_warnings_require_acknowledgement_and_empty_cannot_confirm (test_workflow.ProjectJourney.test_reload_warnings_require_acknowledgement_and_empty_cannot_confirm) ... ok
+test_source_anomalies_block_confirmation_until_resolved_or_skipped (test_workflow.ProjectJourney.test_source_anomalies_block_confirmation_until_resolved_or_skipped) ... ok
+test_supported_encodings_preview_and_reopen_exact_originals (test_workflow.ProjectJourney.test_supported_encodings_preview_and_reopen_exact_originals) ... ok
+test_suspected_garbled_text_needs_explicit_acknowledgment (test_workflow.ProjectJourney.test_suspected_garbled_text_needs_explicit_acknowledgment) ... ok
+test_two_txt_batches_keep_independent_drafts_names_and_order (test_workflow.ProjectJourney.test_two_txt_batches_keep_independent_drafts_names_and_order) ... ok
+test_utf8_and_bom_create_import_edit_save_reopen_move (test_workflow.ProjectJourney.test_utf8_and_bom_create_import_edit_save_reopen_move) ... ok
+test_write_lock_is_actionable_and_not_removed_by_other_window (test_workflow.ProjectJourney.test_write_lock_is_actionable_and_not_removed_by_other_window) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 18.871s
+
+OK

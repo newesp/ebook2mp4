@@ -1,0 +1,26 @@
+{
+  "computer_use_kernel": "reset",
+  "bytes": 366393749.0,
+  "processes": 0,
+  "remaining": [],
+  "removed": [
+    ".scratch\\voice-compact-build",
+    ".scratch\\voice-compact-tools",
+    ".scratch\\voice-compact-visual",
+    ".scratch\\voice-compact-package-check.py",
+    ".scratch\\voice-compact-package-pid.json",
+    ".scratch\\voice-compact-package-smoke.py",
+    ".scratch\\voice-compact-startup-probe.py",
+    ".scratch\\voice-compact-suite.py",
+    ".scratch\\voice-compact-test-pid.json",
+    ".scratch\\voice-compact-visual.py",
+    ".scratch\\ocr-runtime",
+    ".scratch\\voice-runtime",
+    ".scratch\\test-runs",
+    ".mypy_cache",
+    "ebook2mp4\\__pycache__",
+    "tests\\__pycache__"
+  ],
+  "exclusive_files": 1299,
+  "exclusive_failures": []
+}

@@ -1,0 +1,25 @@
+test_canvas_region_and_selected_raw_text_produce_partial_candidate (test_optimization_desktop.OptimizationDesktop.test_canvas_region_and_selected_raw_text_produce_partial_candidate) ... ok
+test_normalization_controls_and_confirmation_connect_to_candidates (test_optimization_desktop.OptimizationDesktop.test_normalization_controls_and_confirmation_connect_to_candidates) ... Windows fatal exception: access violation
+
+Current thread 0x00006cf8 (most recent call first):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1481 in update
+  File "E:\Leo\Projects\ebook2mp4\tests\test_optimization_desktop.py", line 27 in until
+  File "E:\Leo\Projects\ebook2mp4\tests\test_optimization_desktop.py", line 43 in test_normalization_controls_and_confirmation_connect_to_candidates
+  File "C:\Python314\Lib\unittest\case.py", line 615 in _callTestMethod
+  File "C:\Python314\Lib\unittest\case.py", line 669 in run
+  File "C:\Python314\Lib\unittest\case.py", line 725 in __call__
+  File "C:\Python314\Lib\unittest\suite.py", line 122 in run
+  File "C:\Python314\Lib\unittest\suite.py", line 84 in __call__
+  File "C:\Python314\Lib\unittest\suite.py", line 122 in run
+  File "C:\Python314\Lib\unittest\suite.py", line 84 in __call__
+  File "C:\Python314\Lib\unittest\suite.py", line 122 in run
+  File "C:\Python314\Lib\unittest\suite.py", line 84 in __call__
+  File "C:\Python314\Lib\unittest\runner.py", line 257 in run
+  File "C:\Python314\Lib\unittest\main.py", line 270 in runTests
+  File "C:\Python314\Lib\unittest\main.py", line 104 in __init__
+  File "C:\Python314\Lib\unittest\__main__.py", line 18 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 198 in _run_module_as_main
+
+Current thread's C stack trace (most recent call first):
+  <cannot get C stack on this system>

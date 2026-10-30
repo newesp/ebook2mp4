@@ -1,0 +1,20 @@
+{
+  "modules": 34,
+  "initial_failed_modules": [
+    {
+      "module": "test_optimization_desktop.py",
+      "exit_code": 3221225477,
+      "seconds": 12.23
+    }
+  ],
+  "initial_completed_cases": 199,
+  "corrected_module": "test_optimization_desktop.py",
+  "corrected_module_cases": 2,
+  "distinct_cases": 201,
+  "skipped": 0,
+  "final_retest_passed": true,
+  "total_seconds": 572.57,
+  "product_revision": "33120b5",
+  "test_revision": "d691de5",
+  "notes": "Full initial suite retained, not relabeled. Optimization fixture now settles initial Map/maximize before child dialogs; both original cases pass. Other modules passed first run."
+}

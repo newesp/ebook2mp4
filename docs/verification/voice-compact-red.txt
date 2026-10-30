@@ -1,0 +1,15 @@
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... FAIL
+
+======================================================================
+FAIL: test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 64, in test_service_controls_and_editable_models_follow_selected_provider
+    self.assertFalse(d.refresh_button.winfo_ismapped())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 2.144s
+
+FAILED (failures=1)

@@ -1,0 +1,10 @@
+{
+  "sha256": "fde2584a31b113be0727e62baf676b187402c59b823df751bb97a2e7e8e4d386",
+  "source_match": {
+    "voice_desktop": false,
+    "desktop": true,
+    "production_desktop": true,
+    "service_desktop": true,
+    "narration_desktop": true
+  }
+}

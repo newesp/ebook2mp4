@@ -1,0 +1,15 @@
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls) ... ok
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... ok
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... ok
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+test_presets_custom_validation_and_minimum_window (test_rhythm_desktop.RhythmDesktop.test_presets_custom_validation_and_minimum_window) ... ok
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check (test_production_pages.ProductionPages.test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 27.299s
+
+OK
