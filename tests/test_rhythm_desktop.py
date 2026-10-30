@@ -38,13 +38,9 @@ class RhythmDesktop(unittest.TestCase):
         self.app.voice_settings()
         self.root.update()
         for control in (dialog.rhythm_control, dialog.sentence_control, dialog.paragraph_control,
-                        dialog.save_button, dialog.preview_button, dialog.cancel_button,
+                        dialog.save_button, dialog.preview_button,
                         dialog.play_button, dialog.status, dialog.rules_info):
             self.assertTrue(control.winfo_ismapped())
-            if control is not dialog.save_button:
-                top=control.winfo_rooty()-dialog.content.winfo_rooty()
-                dialog.canvas.yview_moveto(top/max(1,dialog.content.winfo_height()))
-                self.root.update()
             x = control.winfo_rootx() - dialog.winfo_rootx()
             y = control.winfo_rooty() - dialog.winfo_rooty()
             self.assertGreaterEqual(x, 0)
