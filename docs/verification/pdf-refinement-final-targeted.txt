@@ -1,0 +1,18 @@
+test_keep_original_choice_resets_selection_baseline_before_next_region (test_pdf_refinement_desktop.PdfRefinementDesktop.test_keep_original_choice_resets_selection_baseline_before_next_region) ... ok
+test_ready_model_does_not_offer_or_start_zero_byte_download (test_pdf_refinement_desktop.PdfRefinementDesktop.test_ready_model_does_not_offer_or_start_zero_byte_download) ... ok
+test_real_ocr_job_displays_indeterminate_busy_feedback (test_pdf_refinement_desktop.PdfRefinementDesktop.test_real_ocr_job_displays_indeterminate_busy_feedback) ... ok
+test_two_regions_accumulate_then_publish_one_batch (test_pdf_refinement_desktop.PdfRefinementDesktop.test_two_regions_accumulate_then_publish_one_batch) ... ok
+test_retry_compare_reject_and_preserve_unsaved_editor (test_mixed_desktop.MixedDesktopJourney.test_retry_compare_reject_and_preserve_unsaved_editor) ... skipped 'requires real OCR models and engine'
+test_source_warning_remains_visible_while_operation_messages_change (test_ui_layout_pdf.PdfReadingLayout.test_source_warning_remains_visible_while_operation_messages_change) ... ok
+test_standard_maximized_window_and_fixed_actions_at_minimum_size (test_ui_layout_pdf.PdfReadingLayout.test_standard_maximized_window_and_fixed_actions_at_minimum_size) ... ok
+test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change (test_ui_layout_pdf.PdfReadingLayout.test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change) ... ok
+test_entry_names_and_empty_history_explain_two_document_kinds (test_terminology_desktop.ManuscriptTerminology.test_entry_names_and_empty_history_explain_two_document_kinds) ... ok
+test_history_keeps_readings_and_reload_backups_distinct_and_read_only (test_terminology_desktop.ManuscriptTerminology.test_history_keeps_readings_and_reload_backups_distinct_and_read_only) ... ok
+test_dirty_and_stale_warnings_survive_success_messages (test_ui_layout_gemini.GeminiLayout.test_dirty_and_stale_warnings_survive_success_messages) ... ok
+test_navigation_decisions_and_batch_menu_preserve_candidate_scope (test_ui_layout_gemini.GeminiLayout.test_navigation_decisions_and_batch_menu_preserve_candidate_scope) ... ok
+test_notes_and_primary_actions_remain_available_at_restored_size (test_ui_layout_gemini.GeminiLayout.test_notes_and_primary_actions_remain_available_at_restored_size) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 61.537s
+
+OK (skipped=1)

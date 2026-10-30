@@ -1,0 +1,179 @@
+test_desktop.py
+test_cancel_or_failed_save_during_batch_switch_keeps_unsaved_editor (test_desktop.DesktopJourney.test_cancel_or_failed_save_during_batch_switch_keeps_unsaved_editor) ... ok
+test_cancelled_pdf_save_failure_keeps_candidate_for_retry (test_desktop.DesktopJourney.test_cancelled_pdf_save_failure_keeps_candidate_for_retry) ... ok
+test_external_reload_cancel_failure_copy_versions_and_explicit_replace (test_desktop.DesktopJourney.test_external_reload_cancel_failure_copy_versions_and_explicit_replace) ... ok
+test_failed_pdf_page_preview_does_not_show_previous_page_image (test_desktop.DesktopJourney.test_failed_pdf_page_preview_does_not_show_previous_page_image) ... ok
+test_missing_pdf_comparison_shows_error_and_releases_modal_on_close (test_desktop.DesktopJourney.test_missing_pdf_comparison_shows_error_and_releases_modal_on_close) ... ok
+test_multiple_batches_encoding_recovery_switch_rename_reorder (test_desktop.DesktopJourney.test_multiple_batches_encoding_recovery_switch_rename_reorder) ... ok
+test_pdf_remove_cancel_failure_success_and_empty_state (test_desktop.DesktopJourney.test_pdf_remove_cancel_failure_success_and_empty_state) ... ok
+test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo (test_desktop.DesktopJourney.test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo) ... ok
+test_proofread_search_replace_undo_confirm_and_unsaved_edit_invalidation (test_desktop.DesktopJourney.test_proofread_search_replace_undo_confirm_and_unsaved_edit_invalidation) ... ok
+test_reading_history_delete_cancel_failure_and_unsaved_draft (test_desktop.DesktopJourney.test_reading_history_delete_cancel_failure_and_unsaved_draft) ... ok
+test_real_ui_create_preview_import_edit_save_close_reopen (test_desktop.DesktopJourney.test_real_ui_create_preview_import_edit_save_close_reopen) ... ok
+test_replace_all_is_single_undo_and_export_includes_unsaved_text (test_desktop.DesktopJourney.test_replace_all_is_single_undo_and_export_includes_unsaved_text) ... ok
+test_tool_tabs_keep_confirmation_visible_at_minimum_window (test_desktop.DesktopJourney.test_tool_tabs_keep_confirmation_visible_at_minimum_window) ... ok
+test_ui_failure_retains_unsaved_text_and_cancel_close (test_desktop.DesktopJourney.test_ui_failure_retains_unsaved_text_and_cancel_close) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 22.199s
+
+OK
+
+test_gemini_desktop.py
+test_deciding_older_candidate_keeps_same_candidate_selected (test_gemini_desktop.GeminiDesktop.test_deciding_older_candidate_keeps_same_candidate_selected) ... ok
+test_finished_candidate_can_be_discarded_when_another_window_changed_project (test_gemini_desktop.GeminiDesktop.test_finished_candidate_can_be_discarded_when_another_window_changed_project) ... ok
+test_malformed_local_settings_can_be_replaced_in_settings_dialog (test_gemini_desktop.GeminiDesktop.test_malformed_local_settings_can_be_replaced_in_settings_dialog) ... ok
+test_selected_text_preview_adopt_and_undo (test_gemini_desktop.GeminiDesktop.test_selected_text_preview_adopt_and_undo) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 5.485s
+
+OK
+
+test_gemini_resume_desktop.py
+test_cancel_keeps_window_responsive_and_preserves_completed_range (test_gemini_resume_desktop.ResumeDesktop.test_cancel_keeps_window_responsive_and_preserves_completed_range) ... ok
+test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 11.811s
+
+OK
+
+test_mixed_desktop.py
+test_retry_compare_reject_and_preserve_unsaved_editor (test_mixed_desktop.MixedDesktopJourney.test_retry_compare_reject_and_preserve_unsaved_editor) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.200s
+
+OK
+
+test_narration_desktop.py
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 6.586s
+
+OK
+
+test_notifications.py
+test_auto_dismiss_eases_out (test_notifications.Notifications.test_auto_dismiss_eases_out) ... ok
+test_hover_and_focus_pause_then_resume_countdown (test_notifications.Notifications.test_hover_and_focus_pause_then_resume_countdown) ... ok
+test_new_message_replaces_old_timer_and_history_keeps_both (test_notifications.Notifications.test_new_message_replaces_old_timer_and_history_keeps_both) ... ok
+test_small_child_owner_long_message_and_destruction_release_timers (test_notifications.Notifications.test_small_child_owner_long_message_and_destruction_release_timers) ... ok
+test_sticky_error_close_does_not_clear_existing_blocker (test_notifications.Notifications.test_sticky_error_close_does_not_clear_existing_blocker) ... ok
+test_switching_owner_dismisses_toast_and_never_uses_global_topmost (test_notifications.Notifications.test_switching_owner_dismisses_toast_and_never_uses_global_topmost) ... ok
+test_top_center_tracks_owner_without_stealing_editor_focus (test_notifications.Notifications.test_top_center_tracks_owner_without_stealing_editor_focus) ... ok
+test_unmapped_owner_dismisses_and_hidden_owner_only_records_history (test_notifications.Notifications.test_unmapped_owner_dismisses_and_hidden_owner_only_records_history) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 8.312s
+
+OK
+
+test_ocr_desktop.py
+test_model_failure_retry_and_explicit_candidate_acceptance (test_ocr_desktop.OcrDesktopJourney.test_model_failure_retry_and_explicit_candidate_acceptance) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.472s
+
+OK
+
+test_optimization_desktop.py
+test_canvas_region_and_selected_raw_text_produce_partial_candidate (test_optimization_desktop.OptimizationDesktop.test_canvas_region_and_selected_raw_text_produce_partial_candidate) ... ok
+test_normalization_controls_and_confirmation_connect_to_candidates (test_optimization_desktop.OptimizationDesktop.test_normalization_controls_and_confirmation_connect_to_candidates) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.559s
+
+OK
+
+test_pdf_refinement_desktop.py
+test_failed_region_unlocks_settings_and_missing_model_can_be_installed (test_pdf_refinement_desktop.PdfRefinementDesktop.test_failed_region_unlocks_settings_and_missing_model_can_be_installed) ... ok
+test_keep_original_choice_resets_selection_baseline_before_next_region (test_pdf_refinement_desktop.PdfRefinementDesktop.test_keep_original_choice_resets_selection_baseline_before_next_region) ... ok
+test_ready_model_does_not_offer_or_start_zero_byte_download (test_pdf_refinement_desktop.PdfRefinementDesktop.test_ready_model_does_not_offer_or_start_zero_byte_download) ... ok
+test_real_ocr_job_displays_indeterminate_busy_feedback (test_pdf_refinement_desktop.PdfRefinementDesktop.test_real_ocr_job_displays_indeterminate_busy_feedback) ... ok
+test_reject_third_region_keeps_first_two_when_recognizing_fourth (test_pdf_refinement_desktop.PdfRefinementDesktop.test_reject_third_region_keeps_first_two_when_recognizing_fourth) ... ok
+test_settings_unlock_and_next_region_uses_new_language_and_layout (test_pdf_refinement_desktop.PdfRefinementDesktop.test_settings_unlock_and_next_region_uses_new_language_and_layout) ... ok
+test_two_regions_accumulate_then_publish_one_batch (test_pdf_refinement_desktop.PdfRefinementDesktop.test_two_regions_accumulate_then_publish_one_batch) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 22.056s
+
+OK
+
+test_rhythm_desktop.py
+test_presets_custom_validation_and_minimum_window (test_rhythm_desktop.RhythmDesktop.test_presets_custom_validation_and_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.385s
+
+OK
+
+test_status_help.py
+test_help_is_only_for_status_and_uses_current_unresolved_count (test_status_help.StatusHelp.test_help_is_only_for_status_and_uses_current_unresolved_count) ... ok
+test_help_matches_hovered_row_without_changing_selection_or_focus (test_status_help.StatusHelp.test_help_matches_hovered_row_without_changing_selection_or_focus) ... ok
+test_leave_scroll_and_destroy_release_popup_and_delayed_callback (test_status_help.StatusHelp.test_leave_scroll_and_destroy_release_popup_and_delayed_callback) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.876s
+
+OK
+
+test_terminology_desktop.py
+test_entry_names_and_empty_history_explain_two_document_kinds (test_terminology_desktop.ManuscriptTerminology.test_entry_names_and_empty_history_explain_two_document_kinds) ... ok
+test_history_keeps_readings_and_reload_backups_distinct_and_read_only (test_terminology_desktop.ManuscriptTerminology.test_history_keeps_readings_and_reload_backups_distinct_and_read_only) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.968s
+
+OK
+
+test_ui_layout.py
+test_bulk_source_decisions_confirm_and_preserve_existing_statuses (test_ui_layout.WorkbenchLayout.test_bulk_source_decisions_confirm_and_preserve_existing_statuses) ... ok
+test_menu_disabled_state_and_real_export_action (test_ui_layout.WorkbenchLayout.test_menu_disabled_state_and_real_export_action) ... ok
+test_preview_view_choice_does_not_change_candidate_and_undo (test_ui_layout.WorkbenchLayout.test_preview_view_choice_does_not_change_candidate_and_undo) ... ok
+test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit (test_ui_layout.WorkbenchLayout.test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit) ... ok
+test_selection_survives_ai_tab_and_focus_mode (test_ui_layout.WorkbenchLayout.test_selection_survives_ai_tab_and_focus_mode) ... ok
+test_source_blockers_remain_visible_after_save_and_in_other_tab (test_ui_layout.WorkbenchLayout.test_source_blockers_remain_visible_after_save_and_in_other_tab) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 9.820s
+
+OK
+
+test_ui_layout_gemini.py
+test_accepted_paragraph_can_be_edited_and_adopted_again (test_ui_layout_gemini.GeminiLayout.test_accepted_paragraph_can_be_edited_and_adopted_again) ... ok
+test_adoption_has_one_notification_and_editing_does_not_emit_toasts (test_ui_layout_gemini.GeminiLayout.test_adoption_has_one_notification_and_editing_does_not_emit_toasts) ... ok
+test_dirty_and_stale_warnings_survive_success_messages (test_ui_layout_gemini.GeminiLayout.test_dirty_and_stale_warnings_survive_success_messages) ... ok
+test_edit_candidate_navigate_save_reopen_adopt_and_undo (test_ui_layout_gemini.GeminiLayout.test_edit_candidate_navigate_save_reopen_adopt_and_undo) ... ok
+test_empty_candidate_or_save_failure_keeps_edits_and_window (test_ui_layout_gemini.GeminiLayout.test_empty_candidate_or_save_failure_keeps_edits_and_window) ... ok
+test_navigation_decisions_and_batch_menu_preserve_candidate_scope (test_ui_layout_gemini.GeminiLayout.test_navigation_decisions_and_batch_menu_preserve_candidate_scope) ... ok
+test_notes_and_primary_actions_remain_available_at_restored_size (test_ui_layout_gemini.GeminiLayout.test_notes_and_primary_actions_remain_available_at_restored_size) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 27.209s
+
+OK
+
+test_ui_layout_pdf.py
+test_source_warning_remains_visible_while_operation_messages_change (test_ui_layout_pdf.PdfReadingLayout.test_source_warning_remains_visible_while_operation_messages_change) ... ok
+test_standard_maximized_window_and_fixed_actions_at_minimum_size (test_ui_layout_pdf.PdfReadingLayout.test_standard_maximized_window_and_fixed_actions_at_minimum_size) ... ok
+test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change (test_ui_layout_pdf.PdfReadingLayout.test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.247s
+
+OK
+
+test_voice_desktop.py
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... ok
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 12.917s
+
+OK
+

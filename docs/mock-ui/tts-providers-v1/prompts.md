@@ -1,0 +1,28 @@
+# 圖片產生提示詞
+
+工具：內建 image_gen；兩張均為新圖片，非程式實作。
+
+## 主畫面
+
+Create a high-fidelity flat UI mockup image ONLY, not a coded app. This is a proposed Windows desktop audiobook application screen in Traditional Chinese (Taiwan). Landscape 1800x1150 or similar, crisp perfectly legible large CJK typography, full window visible straight-on, no perspective, no device mockup, no photography. Preserve a calm native productivity aesthetic: warm off-white #f5f6f2 canvas, white editing surfaces, dark green #315d43 primary buttons, dark ink #263d34, fine gray-green dividers, almost square corners, Microsoft JhengHei-like sans serif. No trendy gradients, no glass effects. Plenty of usable space, restrained polish. This is an interface proposal, not an actual connected service: top small annotation "介面提案 A｜示意資料".
+
+Titlebar text "語音設定與試聽" and Windows minimize/maximize/close icons. Under header: title "選好聲音，再開始製作" and small context "靈性開悟 / book1-ch1 · 第 1–9 頁". Small note "依序由左往右設定，再往下製作".
+Main body has THREE unequal-width adjacent columns separated by thin vertical dividers, reading LEFT TO RIGHT. Each has a clear green circled step number and heading. Do NOT use a navigation sidebar. Left column 24%, middle 32%, right 44%.
+COLUMN ONE heading "1 選擇服務". Label "使用的 TTS 服務". Dropdown "Google Cloud TTS｜我的帳戶". Below green outlined status "已設定". Secondary button "管理服務…" beneath dropdown. Small help "新增服務或更換帳戶，從這裡開始。" Quiet note below "服務切換後，請重新選擇音色。". Leave breathing room, no irrelevant settings.
+COLUMN TWO heading "2 選擇聲音與節奏". Small language dropdown "台灣華語". Three-row voice list with selected light green first row "台灣華語・女聲 A" and sublabel "cmn-TW-Wavenet-A"; remaining "台灣華語・男聲 B" and "台灣華語・男聲 C". Selected row should have a visible check. Below label "語速" dropdown "正常 1.0×". Next label "節奏" segmented buttons "自然" "舒緩" "自訂", selected 舒緩. Two aligned numeric inputs "句尾 200 ms" and "段落 800 ms". Small helper "同一邊界取較長值，最後不補靜音。".
+COLUMN THREE heading "3 編輯文字並試聽". Label "試聽文字". LARGE multiline white editable text box with sample text exactly "今天，讓我們一起聽一本好書。\nHello, welcome to your audiobook.\n\n請放慢腳步，聽聽這個聲音。" The textbox must look editable, not read-only. Below "可直接修改或貼上文字，最多 3,000 字元。". Checked checkbox "同意將試聽文字傳送至 Google Cloud TTS". Small muted note "試聽可能產生服務費用。". Prominent dark green button "產生並播放試聽" then outlined "停止". Below a quiet result strip with simple tiny speaker icon "目前設定已試聽" and text button "重播". No fake waveform, no made-up latency metrics.
+
+Across the bottom a full-width horizontal region separated by a line, explicitly the NEXT ROW in the reading order: heading "4 儲存設定，前往製作". Left dropdown labelled "套用範圍" value "本批次". Beside it a muted "朗讀稿已確認" check indicator. On far right outlined secondary button "只儲存設定" and solid green primary button "儲存並前往製作 →". Helper below heading "試聽不會修改校對稿；正式合成使用已確認的朗讀稿。". Bottom footnote "尚未確認朗讀稿時，前往製作按鈕停用並顯示原因。" Keep all controls comfortably fitting, no clipping, no unnecessary marketing copy. Main visual priority: explicit numbered 1→2→3 then row4, a calm readable tool. Render accurate Traditional Chinese text.
+
+## 新增服務
+
+Generate a second polished UI concept image for a Traditional Chinese Windows desktop audiobook app. Flat front-on full desktop dialog, landscape roughly 1600x1050. This is a NONFUNCTIONAL DESIGN PROPOSAL with prominent small annotation "新增服務｜示意資料", not a real connected account. Clear Traditional Chinese (Taiwan), large legible Microsoft JhengHei-like sans-serif. Same visual family as a calm manuscript tool: warm off-white #f5f6f2, white form fields, dark forest green #315d43 primary action, dark ink #263d34, thin gray-green borders, almost square corners, no gradients/glass/fancy illustration. Native Windows titlebar "新增 TTS 服務", minimize and close symbols. It is a normal centered dialog drawn as a complete window on a very light neutral backdrop, not a browser.
+
+Header "先設定服務，再回去選聲音" with helper "首次使用設定一次；之後可直接從試聽畫面切換。". Then three columns numbered left-to-right separated by thin vertical lines: 1 chooses provider, 2 configures credentials, 3 tests connection. Explicit numbering with green circles, clear left-to-right scan. No additional navigation sidebar.
+
+LEFT COLUMN width25%, heading "1 選擇服務類型". A vertical radio selection list, four options exactly "Edge-TTS", "Fish Audio", "Google Cloud TTS", "相容 API（進階）". Fish Audio visibly selected with subdued green background and a radio dot. Brief label beneath "先選類型，右側會顯示需要填的資料。". Muted bottom note "相容 API 需符合支援的協定。" It must not promise arbitrary universal support.
+MIDDLE COLUMN width42%, heading "2 填寫服務資料". Label "顯示名稱" white input "我的 Fish Audio". Label "API 金鑰" white password input masked bullets, small text button "顯示". Helper "金鑰只保存在這台電腦。". Label "模型" dropdown "s2.1-pro". Helper "此模型可能產生合成費用。". Subtle collapsed disclosure "進階設定（選填） ▸". No real keys, no voice clone upload, no technical JSON fields. Short note at bottom "音色與朗讀速度，回到試聽畫面再選。".
+RIGHT COLUMN width33%, heading "3 檢查服務". Secondary full-width button "檢查連線與音色". Below a restrained pale green result region with checkmark and heading "檢查通過" and two short lines "憑證可用" and "已取得音色清單". These are explicitly example results because the header says 示意資料. Small helper "這一步不產生試聽音訊。". Muted note "若檢查失敗，這裡會顯示原因與處理方式。". Do NOT show any invented latency, quota, account balance or success percentage.
+
+At bottom FULL WIDTH horizontal footer, thin divider. On left outline button "取消". On right single strongest primary button "儲存並返回試聽 →". Small helper near button "返回後，繼續選聲音、編輯文字與試聽。". All fields and footer fit generously with no clipping. Clear directional reading order 1→2→3 then bottom-right save. Professional desktop UI mockup quality; prioritize accurate Chinese labels, alignment and intuitive sequence over decoration.
+

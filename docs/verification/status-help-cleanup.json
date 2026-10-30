@@ -1,0 +1,62 @@
+{
+  "removed": [
+    {
+      "files": 3694,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\status-help-tools",
+      "bytes": 40969036,
+      "removed": true
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\status-help-temp",
+      "bytes": 0,
+      "removed": true
+    },
+    {
+      "files": 16,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\status-help-build",
+      "bytes": 14005549,
+      "removed": true
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\status-help-build-cache",
+      "bytes": 0,
+      "removed": true
+    },
+    {
+      "files": 28,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362,
+      "removed": true
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\status-help-visual",
+      "bytes": 0,
+      "removed": true
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "bytes": 0,
+      "removed": true
+    },
+    {
+      "files": 1,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 203,
+      "removed": true
+    }
+  ],
+  "package_files_exclusively_opened_and_disposed": 1152,
+  "preserved_scratch": [
+    "pdf-txt-audiobook-video",
+    "prototype-qa"
+  ],
+  "package_lock_failures": [],
+  "exe_sha256": "FB85EC90AA2A13971CAC6A8DE7CBC1A59340D476C99463D405C4B4B318A74996",
+  "removed_bytes": 176385150.0,
+  "timestamp": "2026-10-27T11:34:30.1109912+08:00",
+  "remaining_new_package_processes": []
+}

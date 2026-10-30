@@ -1,0 +1,8 @@
+test_missing_reuse_key_is_explained (test_service_form.ServiceForm.test_missing_reuse_key_is_explained) ... ok
+test_reuse_saves_reference_without_copying_secret (test_service_form.ServiceForm.test_reuse_saves_reference_without_copying_secret) ... ok
+test_switch_and_mask_reused_key (test_service_form.ServiceForm.test_switch_and_mask_reused_key) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.882s
+
+OK

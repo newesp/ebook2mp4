@@ -1,0 +1,42 @@
+[
+  {
+    "module": "test_workflow",
+    "code": 0,
+    "seconds": 15.186
+  },
+  {
+    "module": "test_voice",
+    "code": 0,
+    "seconds": 15.722
+  },
+  {
+    "module": "test_narration",
+    "code": 0,
+    "seconds": 25.053
+  },
+  {
+    "module": "test_rhythm",
+    "code": 0,
+    "seconds": 13.182
+  },
+  {
+    "module": "test_voice_desktop",
+    "code": 0,
+    "seconds": 21.077
+  },
+  {
+    "module": "test_narration_desktop",
+    "code": 0,
+    "seconds": 10.522
+  },
+  {
+    "module": "test_rhythm_desktop",
+    "code": 0,
+    "seconds": 4.922
+  },
+  {
+    "module": "test_tts_providers",
+    "code": 0,
+    "seconds": 13.034
+  }
+]

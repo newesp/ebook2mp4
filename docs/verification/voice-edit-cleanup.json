@@ -1,0 +1,38 @@
+{
+  "test_directories": [],
+  "package_normal_exit": "verified",
+  "exclusive_files": 1299,
+  "package_startup": "verified",
+  "bytes": 381619734.0,
+  "task_processes": [],
+  "preserved": "formal builds, final evidence, user projects, prior uncommitted work and user processes",
+  "locked_files": [],
+  "kernel": "reset",
+  "deleted": [
+    {
+      "bytes": 157666339.0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-edit",
+      "remaining": false
+    },
+    {
+      "bytes": 121410362.0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "remaining": false
+    },
+    {
+      "bytes": 101457920.0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "remaining": false
+    },
+    {
+      "bytes": 606837.0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "remaining": false
+    },
+    {
+      "bytes": 478276.0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "remaining": false
+    }
+  ]
+}

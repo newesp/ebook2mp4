@@ -1,0 +1,154 @@
+Native UI modules run in separate Python processes.
+test_notifications.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 5.331s
+
+OK
+test_ui_layout_gemini.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 18.011s
+
+OK
+test_gemini_desktop.py
+....
+----------------------------------------------------------------------
+Ran 4 tests in 6.613s
+
+OK
+test_gemini_resume_desktop.py
+..
+----------------------------------------------------------------------
+Ran 2 tests in 11.320s
+
+OK
+test_ui_layout.py
+....E
+======================================================================
+ERROR: test_source_blockers_remain_visible_after_save_and_in_other_tab (test_ui_layout.WorkbenchLayout.test_source_blockers_remain_visible_after_save_and_in_other_tab)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_ui_layout.py", line 100, in test_source_blockers_remain_visible_after_save_and_in_other_tab
+    skip = next(w for w in descendants(dialog) if w.winfo_class() == 'TButton' and w.cget('text') == '明確略過')
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+----------------------------------------------------------------------
+Ran 5 tests in 5.976s
+
+FAILED (errors=1)
+test_desktop.py
+.......E......
+======================================================================
+ERROR: test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo (test_desktop.DesktopJourney.test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_desktop.py", line 181, in test_pdf_ui_select_extract_compare_edit_mapping_and_cleanup_undo
+    apply = next(w for w in descendants(preview_dialog)
+            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 if w.winfo_class() == 'TButton' and w.cget('text') == '套用整理')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration
+
+----------------------------------------------------------------------
+Ran 14 tests in 37.577s
+
+FAILED (errors=1)
+test_ui_layout_pdf.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 9.504s
+
+OK
+test_pdf_refinement_desktop.py
+.......
+----------------------------------------------------------------------
+Ran 7 tests in 27.451s
+
+OK
+test_voice_desktop.py
+Fcan't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!voicedialog.!frame3.!progressbar 12 1"
+    ("after" script)
+invalid command name "2714109395776poll"
+    while executing
+"2714109395776poll"
+    ("after" script)
+Fcan't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!voicedialog.!frame3.!progressbar 12 1"
+    ("after" script)
+invalid command name "2714110312512poll"
+    while executing
+"2714110312512poll"
+    ("after" script)
+F
+======================================================================
+FAIL: test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 90, in test_close_cancels_background_request_and_releases_timer
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 48, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 43, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x00000277ED7934D0> is not None : 正在取得線上音色清單…
+
+======================================================================
+FAIL: test_selected_unsaved_text_consent_save_preview_and_play (test_voice_desktop.VoiceDesktop.test_selected_unsaved_text_consent_save_preview_and_play)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 53, in test_selected_unsaved_text_consent_save_preview_and_play
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 48, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 43, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x00000277ED8E1A90> is not None : 正在取得線上音色清單…
+
+======================================================================
+FAIL: test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 110, in test_switching_batch_does_not_write_settings_through_old_dialog
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 48, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 43, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x00000277ED8E2850> is not None : 正在取得線上音色清單…
+
+----------------------------------------------------------------------
+Ran 3 tests in 39.893s
+
+FAILED (failures=3)
+test_status_help.py
+...
+----------------------------------------------------------------------
+Ran 3 tests in 6.326s
+
+OK
+test_mixed_desktop.py
+s
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK (skipped=1)

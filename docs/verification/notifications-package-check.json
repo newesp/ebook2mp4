@@ -1,0 +1,10 @@
+{
+  "packaged_modules_match_source": [
+    "ui_controls",
+    "desktop",
+    "gemini_desktop",
+    "pdf_desktop",
+    "voice_desktop"
+  ],
+  "exe_sha256": "ff8bd7b326bedddc503daf667338191f0d37dc5423c76658e90c61a0140c445a"
+}

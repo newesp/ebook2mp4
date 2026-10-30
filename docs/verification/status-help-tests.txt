@@ -1,0 +1,13 @@
+test_help_is_only_for_status_and_uses_current_unresolved_count (test_status_help.StatusHelp.test_help_is_only_for_status_and_uses_current_unresolved_count) ... ok
+test_help_matches_hovered_row_without_changing_selection_or_focus (test_status_help.StatusHelp.test_help_matches_hovered_row_without_changing_selection_or_focus) ... ok
+test_leave_scroll_and_destroy_release_popup_and_delayed_callback (test_status_help.StatusHelp.test_leave_scroll_and_destroy_release_popup_and_delayed_callback) ... ok
+test_menu_disabled_state_and_real_export_action (test_ui_layout.WorkbenchLayout.test_menu_disabled_state_and_real_export_action) ... ok
+test_preview_view_choice_does_not_change_candidate_and_undo (test_ui_layout.WorkbenchLayout.test_preview_view_choice_does_not_change_candidate_and_undo) ... ok
+test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit (test_ui_layout.WorkbenchLayout.test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit) ... ok
+test_selection_survives_ai_tab_and_focus_mode (test_ui_layout.WorkbenchLayout.test_selection_survives_ai_tab_and_focus_mode) ... ok
+test_source_blockers_remain_visible_after_save_and_in_other_tab (test_ui_layout.WorkbenchLayout.test_source_blockers_remain_visible_after_save_and_in_other_tab) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 8.790s
+
+OK

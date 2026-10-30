@@ -1,0 +1,24 @@
+{
+  "removed_paths": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\main-flow",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ui-layout-visual",
+    "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+    "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs"
+  ],
+  "removed_bytes": 370350868.0,
+  "residual_temp_paths": [],
+  "test_run_leftovers": 0,
+  "related_processes": [],
+  "exclusive_open_and_release_files": 1299,
+  "computer_use_kernel_reset": true,
+  "preserved": [
+    "dist/MAIN",
+    "prior dist builds",
+    "docs and final verification evidence",
+    "user projects and OCR models",
+    "pre-existing unrelated work"
+  ]
+}

@@ -1,0 +1,15 @@
+test_save_next_edit_confirm_and_reconfirm (test_main_workflow_desktop.MainWorkflow.test_save_next_edit_confirm_and_reconfirm) ... ERROR
+
+======================================================================
+ERROR: test_save_next_edit_confirm_and_reconfirm (test_main_workflow_desktop.MainWorkflow.test_save_next_edit_confirm_and_reconfirm)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_main_workflow_desktop.py", line 13, in test_save_next_edit_confirm_and_reconfirm
+    self.assertEqual(self.app.next_button.cget('text'), '�x�s�ëe���T�{��Ū�Z ��')
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Workbench' object has no attribute 'next_button'. Did you mean: 'down_button'?
+
+----------------------------------------------------------------------
+Ran 1 test in 0.803s
+
+FAILED (errors=1)

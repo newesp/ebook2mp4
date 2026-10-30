@@ -1,0 +1,10 @@
+{
+  "voice": true,
+  "voice_media": true,
+  "workflow": true,
+  "voice_desktop": true,
+  "narration_desktop": true,
+  "tts_services": true,
+  "service_desktop": true,
+  "exe_sha256": "14C10F005FB974490B2C13211645C578BB57DCEC739F372540B80413137ACD3E"
+}

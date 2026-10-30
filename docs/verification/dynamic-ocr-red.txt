@@ -1,0 +1,25 @@
+test_settings_unlock_and_next_region_uses_new_language_and_layout (test_pdf_refinement_desktop.PdfRefinementDesktop.test_settings_unlock_and_next_region_uses_new_language_and_layout) ... FAIL
+test_failed_region_unlocks_settings_and_missing_model_can_be_installed (test_pdf_refinement_desktop.PdfRefinementDesktop.test_failed_region_unlocks_settings_and_missing_model_can_be_installed) ... FAIL
+
+======================================================================
+FAIL: test_settings_unlock_and_next_region_uses_new_language_and_layout (test_pdf_refinement_desktop.PdfRefinementDesktop.test_settings_unlock_and_next_region_uses_new_language_and_layout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_refinement_desktop.py", line 88, in test_settings_unlock_and_next_region_uses_new_language_and_layout
+    self.assertTrue(control.instate(['readonly']), str(control))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : .!pdfdialog.!toplevel.!frame.!frame3.!combobox
+
+======================================================================
+FAIL: test_failed_region_unlocks_settings_and_missing_model_can_be_installed (test_pdf_refinement_desktop.PdfRefinementDesktop.test_failed_region_unlocks_settings_and_missing_model_can_be_installed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_refinement_desktop.py", line 127, in test_failed_region_unlocks_settings_and_missing_model_can_be_installed
+    self.assertTrue(self.dialog.language_select.instate(['readonly']))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 2 tests in 4.626s
+
+FAILED (failures=2)

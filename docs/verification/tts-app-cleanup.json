@@ -1,0 +1,36 @@
+{
+  "test_directories": [],
+  "exclusive_files": 1299,
+  "locked_files": [],
+  "kernel": "reset",
+  "remaining_task_processes": [],
+  "preserved": "final build, evidence, user profiles, user projects, previous work and processes",
+  "bytes": 380864291.0,
+  "deleted": [
+    {
+      "remaining": false,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-app",
+      "bytes": 157393632.0
+    },
+    {
+      "remaining": false,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362.0
+    },
+    {
+      "remaining": false,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 101457920.0
+    },
+    {
+      "remaining": false,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 423894.0
+    },
+    {
+      "remaining": false,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\tests\\__pycache__",
+      "bytes": 178483.0
+    }
+  ]
+}

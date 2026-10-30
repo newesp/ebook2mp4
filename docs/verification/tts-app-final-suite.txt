@@ -1,0 +1,112 @@
+test_workflow
+test_bad_encoding_is_rejected_without_replacement_characters (test_workflow.ProjectJourney.test_bad_encoding_is_rejected_without_replacement_characters) ... ok
+test_confirmation_failure_retry_unsaved_invalidation_and_metadata_changes (test_workflow.ProjectJourney.test_confirmation_failure_retry_unsaved_invalidation_and_metadata_changes) ... ok
+test_delete_reading_locked_file_reports_retained_file_after_version_removal (test_workflow.ProjectJourney.test_delete_reading_locked_file_reports_retained_file_after_version_removal) ... ok
+test_delete_reading_storage_failure_keeps_version_and_can_retry (test_workflow.ProjectJourney.test_delete_reading_storage_failure_keeps_version_and_can_retry) ... ok
+test_delete_reading_version_keeps_draft_and_other_confirmations (test_workflow.ProjectJourney.test_delete_reading_version_keeps_draft_and_other_confirmations) ... ok
+test_empty_file_and_100k_manuscript_round_trip (test_workflow.ProjectJourney.test_empty_file_and_100k_manuscript_round_trip) ... ok
+test_existing_folder_never_overwritten (test_workflow.ProjectJourney.test_existing_folder_never_overwritten) ... ok
+test_export_external_reload_conflict_copy_and_reconfirm (test_workflow.ProjectJourney.test_export_external_reload_conflict_copy_and_reconfirm) ... ok
+test_failed_import_remains_empty_and_retry_works (test_workflow.ProjectJourney.test_failed_import_remains_empty_and_retry_works) ... ok
+test_failed_publication_preserves_last_save_and_allows_retry (test_workflow.ProjectJourney.test_failed_publication_preserves_last_save_and_allows_retry) ... ok
+test_future_version_and_unsafe_reference_rejected (test_workflow.ProjectJourney.test_future_version_and_unsafe_reference_rejected) ... ok
+test_invalid_batch_identity_is_reported_before_ui_load (test_workflow.ProjectJourney.test_invalid_batch_identity_is_reported_before_ui_load) ... ok
+test_missing_and_modified_project_content_are_reported (test_workflow.ProjectJourney.test_missing_and_modified_project_content_are_reported) ... ok
+test_other_window_invalidation_blocks_stale_current_reading_but_keeps_history (test_workflow.ProjectJourney.test_other_window_invalidation_blocks_stale_current_reading_but_keeps_history) ... ok
+test_other_window_update_is_not_overwritten (test_workflow.ProjectJourney.test_other_window_update_is_not_overwritten) ... ok
+test_permission_failure_and_space_failure_are_recoverable (test_workflow.ProjectJourney.test_permission_failure_and_space_failure_are_recoverable) ... ok
+test_preview_is_exact_import_snapshot (test_workflow.ProjectJourney.test_preview_is_exact_import_snapshot) ... ok
+test_reading_confirmation_is_immutable_and_local_to_batch (test_workflow.ProjectJourney.test_reading_confirmation_is_immutable_and_local_to_batch) ... ok
+test_reading_snapshot_tampering_is_rejected_when_reopening (test_workflow.ProjectJourney.test_reading_snapshot_tampering_is_rejected_when_reopening) ... ok
+test_reload_warnings_require_acknowledgement_and_empty_cannot_confirm (test_workflow.ProjectJourney.test_reload_warnings_require_acknowledgement_and_empty_cannot_confirm) ... ok
+test_source_anomalies_block_confirmation_until_resolved_or_skipped (test_workflow.ProjectJourney.test_source_anomalies_block_confirmation_until_resolved_or_skipped) ... ok
+test_supported_encodings_preview_and_reopen_exact_originals (test_workflow.ProjectJourney.test_supported_encodings_preview_and_reopen_exact_originals) ... ok
+test_suspected_garbled_text_needs_explicit_acknowledgment (test_workflow.ProjectJourney.test_suspected_garbled_text_needs_explicit_acknowledgment) ... ok
+test_two_txt_batches_keep_independent_drafts_names_and_order (test_workflow.ProjectJourney.test_two_txt_batches_keep_independent_drafts_names_and_order) ... ok
+test_utf8_and_bom_create_import_edit_save_reopen_move (test_workflow.ProjectJourney.test_utf8_and_bom_create_import_edit_save_reopen_move) ... ok
+test_write_lock_is_actionable_and_not_removed_by_other_window (test_workflow.ProjectJourney.test_write_lock_is_actionable_and_not_removed_by_other_window) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 14.303s
+
+OK
+
+test_voice
+test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success) ... ok
+test_corrupt_audio_and_conflicting_save_keep_previous_success (test_voice.VoiceJourney.test_corrupt_audio_and_conflicting_save_keep_previous_success) ... ok
+test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing (test_voice.VoiceJourney.test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing) ... ok
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ok
+test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause (test_voice.VoiceJourney.test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause) ... ok
+test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup) ... ok
+test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 15.018s
+
+OK
+
+test_narration
+test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens) ... ok
+test_failed_retries_cancel_and_conflict_keep_previous_product (test_narration.NarrationJourney.test_failed_retries_cancel_and_conflict_keep_previous_product) ... ok
+test_indivisible_long_quotation_is_rejected_before_any_online_request (test_narration.NarrationJourney.test_indivisible_long_quotation_is_rejected_before_any_online_request) ... ok
+test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product) ... ok
+test_long_english_prefers_complete_sentences_over_word_boundaries (test_narration.NarrationJourney.test_long_english_prefers_complete_sentences_over_word_boundaries) ... ok
+test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content) ... ok
+test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 24.062s
+
+OK
+
+test_rhythm
+test_ascii_opening_quote_stays_with_its_sentence (test_rhythm.RhythmJourney.test_ascii_opening_quote_stays_with_its_sentence) ... ok
+test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range) ... ok
+test_quotes_and_punctuation_run_are_one_sentence_boundary (test_rhythm.RhythmJourney.test_quotes_and_punctuation_run_are_one_sentence_boundary) ... ok
+test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 12.258s
+
+OK
+
+test_voice_desktop
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... ok
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 19.742s
+
+OK
+
+test_narration_desktop
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 9.301s
+
+OK
+
+test_rhythm_desktop
+test_presets_custom_validation_and_minimum_window (test_rhythm_desktop.RhythmDesktop.test_presets_custom_validation_and_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.210s
+
+OK
+
+test_tts_providers
+test_check_service_reads_complete_chunked_json (test_tts_providers.ProviderDesktop.test_check_service_reads_complete_chunked_json) ... ok
+test_service_switch_enables_model_and_management_layout (test_tts_providers.ProviderDesktop.test_service_switch_enables_model_and_management_layout) ... ok
+test_fish_request_and_auth_error_preserve_previous_result (test_tts_providers.Providers.test_fish_request_and_auth_error_preserve_previous_result) ... ok
+test_gemini_custom_model_preview_formal_reuse_and_no_project_key (test_tts_providers.Providers.test_gemini_custom_model_preview_formal_reuse_and_no_project_key) ... ok
+test_profile_provider_cannot_change_and_fish_model_is_explicit (test_tts_providers.Providers.test_profile_provider_cannot_change_and_fish_model_is_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 11.745s
+
+OK
+

@@ -1,0 +1,15 @@
+test_reject_latest_region_keeps_prior_correction_pending_for_page_review (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_latest_region_keeps_prior_correction_pending_for_page_review) ... FAIL
+
+======================================================================
+FAIL: test_reject_latest_region_keeps_prior_correction_pending_for_page_review (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_latest_region_keeps_prior_correction_pending_for_page_review)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_candidate_refinement.py", line 178, in test_reject_latest_region_keeps_prior_correction_pending_for_page_review
+    self.assertTrue(self.flow.confirmation_blockers(new))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 2.172s
+
+FAILED (failures=1)

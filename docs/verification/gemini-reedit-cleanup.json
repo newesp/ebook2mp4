@@ -1,0 +1,13 @@
+{
+  "removed": [
+    ".scratch/gemini-reedit-build",
+    ".scratch/gemini-reedit-mypy",
+    ".scratch/gemini-reedit-ocr",
+    ".scratch/gemini-reedit-tools",
+    ".scratch/gemini-reedit-voice",
+    "packaging/gemini-reedit.spec"
+  ],
+  "remaining_task_temp": [],
+  "test_runs_remaining": [],
+  "packaged_smoke_released": true
+}

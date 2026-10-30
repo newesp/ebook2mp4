@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-10-26T16:34:42.821265+00:00",
+  "network": false,
+  "user_manuscript_used": false,
+  "scope": "Synthetic two-region candidate chaining with the real PDFium renderer and Tesseract engine; not an accuracy benchmark.",
+  "fixture": "Raster page with two clear correct lines and an intentionally inaccurate invisible PDF text layer, created as an ordinary PDF.",
+  "engine": "E:\\Leo\\Projects\\ebook2mp4\\dist\\T07-ui-layout\\ebook2mp4\\_internal\\tools\\tesseract\\tesseract.exe",
+  "language": "英文",
+  "layout": "line",
+  "checks": [
+    {
+      "stage": "first-region",
+      "text": "Heading: Correct title.\r\nBody: Wrogn paragraph.",
+      "status": "pending",
+      "settings": {
+        "line_breaks": "original",
+        "rotation": 0,
+        "requested_mode": "ocr",
+        "requested_language": "英文",
+        "layout": "line",
+        "region": [
+          0.02,
+          0.11,
+          0.98,
+          0.29
+        ],
+        "text_range": [
+          0,
+          21
+        ],
+        "language": "eng",
+        "model_revision": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+        "engine": "Tesseract 5 LSTM",
+        "dpi": 300,
+        "max_pixels": 25000000,
+        "psm": 7,
+        "confidence": 95.84,
+        "suspicious_lines": [],
+        "selected_language": "eng",
+        "selected_source": "crop",
+        "alternatives": [
+          {
+            "language": "eng",
+            "source": "crop",
+            "confidence": 95.84
+          },
+          {
+            "language": "eng",
+            "source": "page-context",
+            "confidence": 95.84
+          },
+          {
+            "language": "eng",
+            "source": "page-context",
+            "confidence": 95.84
+          }
+        ]
+      },
+      "no_intermediate_batch": true
+    },
+    {
+      "stage": "second-region-and-publication",
+      "text": "Heading: Correct title.\r\nBody: Correct paragraph.",
+      "status": "pending",
+      "settings": {
+        "line_breaks": "original",
+        "rotation": 0,
+        "requested_mode": "ocr",
+        "requested_language": "英文",
+        "layout": "line",
+        "region": [
+          0.02,
+          0.49,
+          0.98,
+          0.7
+        ],
+        "text_range": [
+          25,
+          47
+        ],
+        "language": "eng",
+        "model_revision": "65727574dfcd264acbb0c3e07860e4e9e9b22185",
+        "engine": "Tesseract 5 LSTM",
+        "dpi": 300,
+        "max_pixels": 25000000,
+        "psm": 7,
+        "confidence": 96.33,
+        "suspicious_lines": [],
+        "selected_language": "eng",
+        "selected_source": "crop",
+        "alternatives": [
+          {
+            "language": "eng",
+            "source": "crop",
+            "confidence": 96.33
+          },
+          {
+            "language": "eng",
+            "source": "page-context",
+            "confidence": 96.33
+          },
+          {
+            "language": "eng",
+            "source": "page-context",
+            "confidence": 96.33
+          }
+        ]
+      },
+      "batch_count_before": 1,
+      "batch_count_after": 2,
+      "exactly_one_new_batch": true,
+      "first_correction_retained": true,
+      "source_pages_unchanged": true,
+      "original_manual_draft_and_snapshot_unchanged": true,
+      "source_pdf_sha256": "c6fb77657b95d0153c4cc1b30d06f0a864621aa955e1528e42e8fe5e7c5d7bb3",
+      "partial_page_still_requires_confirmation": true
+    }
+  ],
+  "passed": true,
+  "seconds": 7.916,
+  "cleanup": {
+    "temporary_project_removed": true,
+    "workers_terminated": true,
+    "remaining_pdf_threads": [],
+    "remaining_tesseract_processes": 0,
+    "verification_script_removed": true
+  }
+}

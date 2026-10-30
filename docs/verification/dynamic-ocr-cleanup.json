@@ -1,0 +1,69 @@
+{
+  "remaining_new_package_processes": [],
+  "preserved_scratch": [
+    "pdf-txt-audiobook-video",
+    "prototype-qa"
+  ],
+  "package_files_exclusively_opened_and_disposed": 1152,
+  "removed": [
+    {
+      "files": 6034,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools",
+      "removed": true,
+      "bytes": 98046579
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-temp",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 16,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-build",
+      "removed": true,
+      "bytes": 13994553
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-build-cache",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 18,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-mypy",
+      "removed": true,
+      "bytes": 15532261
+    },
+    {
+      "files": 28,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "removed": true,
+      "bytes": 121410362
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pdf-refinement-visual",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 1,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "removed": true,
+      "bytes": 203
+    }
+  ],
+  "timestamp": "2026-10-27T02:32:41.8410209+08:00",
+  "removed_bytes": 248983958.0,
+  "native_window_check": "No task Python or new packaged windows remain; user app windows retained",
+  "exe_sha256": "0746A8BA0C50DAFD39CA7FA42247A043F2712A074A308D87733D65C607106B6A",
+  "package_lock_failures": []
+}

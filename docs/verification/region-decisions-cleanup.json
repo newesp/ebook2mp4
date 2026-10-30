@@ -1,0 +1,70 @@
+{
+  "remaining_new_package_processes": [],
+  "native_window_check": "No task Python or new packaged windows remain; user app windows retained",
+  "package_lock_failures": [],
+  "removed": [
+    {
+      "files": 6034,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\region-decisions-tools",
+      "removed": true,
+      "bytes": 98057854
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\region-decisions-temp",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 16,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\region-decisions-build",
+      "removed": true,
+      "bytes": 13997534
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\region-decisions-build-cache",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 18,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\region-decisions-mypy",
+      "removed": true,
+      "bytes": 15532261
+    },
+    {
+      "files": 28,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "removed": true,
+      "bytes": 121410362
+    },
+    {
+      "files": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pdf-refinement-visual",
+      "removed": true,
+      "bytes": 0
+    },
+    {
+      "files": 5,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs",
+      "removed": true,
+      "bytes": 4503
+    },
+    {
+      "files": 1,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "removed": true,
+      "bytes": 203
+    }
+  ],
+  "timestamp": "2026-10-27T01:39:37.6908745+08:00",
+  "test_sessions": "Isolated full suite and final targeted suite exited 0; monolithic Tk failure exited and its synthetic temp project removed; final packaged startup exited 0",
+  "removed_bytes": 249002717.0,
+  "exe_sha256": "4E1D178E4B53DC21EF4040E3BB907EFE5EF77047FD69E1EF53EF4554815F91AF",
+  "package_files_exclusively_opened_and_disposed": 1152,
+  "preserved_scratch": [
+    "pdf-txt-audiobook-video",
+    "prototype-qa"
+  ]
+}

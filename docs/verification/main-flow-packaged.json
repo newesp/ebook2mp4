@@ -1,0 +1,8 @@
+{
+  "launch": true,
+  "import_landing_visible": true,
+  "native_file_dialog_open": true,
+  "normal_exit": true,
+  "end_to_end_edit_confirm": "not completed: native file dialog automation could not reliably target filename; source Tk journeys and packaged bytecode comparison passed",
+  "cloud_requests": 0
+}

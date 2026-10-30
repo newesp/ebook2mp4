@@ -1,10 +1,10 @@
 # ebook2mp4
 
-## 最新完成：四步驟主介面
+## 最新完成：T12 單一主視窗與精簡語音介面
 
-新版 `dist/SERVICE/ebook2mp4/ebook2mp4.exe`。搬移時請保留整個 ebook2mp4 資料夾。主流程為「匯入來源 → 校對文字 → 確認朗讀稿 → 試聽與製作」。按「儲存並前往確認朗讀稿」保存後進入確認頁；確認頁全文可直接編輯，確認時保存最後修改，再開啟語音設定。多服務語音支援 Edge、Google Gemini TTS 與 Fish；模型可選可填，試聽文字可編輯。正式 MP3／SRT 必須使用已確認朗讀稿。操作與驗收見 [主介面驗證](docs/verification/main-flow.md)，完整狀態見 [交接文件](docs/implementation-status.md)。
+新版 `dist/T12-voice-compact/ebook2mp4/ebook2mp4.exe`。搬移時請保留整個 ebook2mp4 資料夾。主流程為「匯入來源 → 校對文字 → 確認朗讀稿 → 試聽與製作」；語音設定、服務管理與製作頁在同一主視窗內切換。語音頁依服務顯示適用音色控制，模型可下拉或手填，底部操作固定單列，長文只在文字框內捲動。正式 MP3／SRT 使用已確認朗讀稿，支援中斷後重用有效區塊續作。操作與驗收見 [語音 UI 驗證](docs/verification/voice-compact.md) 及 [T12 驗證](docs/verification/T12.md)，完整狀態見 [交接文件](docs/implementation-status.md)。
 
-以下 T09 等段落為歷史紀錄，最新成品以上述 SERVICE 為準。
+Git 儲存庫提供原始碼、測試與文件；`dist` 封裝成品、書稿輸出及本機暫存依 `.gitignore` 排除。以下 T09 等段落為歷史紀錄，最新成品以上述 T12 版本為準。
 
 ## 歷史：T09 語音設定與短文試聽
 
@@ -12,11 +12,11 @@
 
 T01～T09 已實作（含 T08 長稿續作）。147 項完整回歸全過，修正後追加 10 項語音／Tk 回歸及型別檢查通過；真實 Edge-TTS、包內 FFmpeg、原生封裝試聽與播放已驗證。發音與自然度仍請人工聆聽。[T09 驗證與限制](docs/verification/T09.md)。以下較舊版本啟動段落屬歷史，最新成品以上述 T09 為準。
 
-Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.2](docs/pdf-txt-audiobook-video-spec.md)；目前實作 T01～T11 與使用者追加優化：同書多份 TXT／PDF 批次、混合 PDF 自動擷取、本機自適應 OCR／區域重辨、人工／Gemini 校對、繁簡／中文標點統一候選、差異採用與撤回、外部重載及朗讀稿確認。
+Windows 本機書籍校對與朗讀製作工具。規格為 [Spec v1.2](docs/pdf-txt-audiobook-video-spec.md)；目前實作 T01～T12 與使用者追加優化：同書多份 TXT／PDF 批次、混合 PDF 自動擷取、本機自適應 OCR／區域重辨、人工／Gemini 校對、繁簡／中文標點統一候選、差異採用與撤回、外部重載、朗讀稿確認及批次音訊／字幕製作與續作。
 
 ## 啟動
 
-目前新版為 `dist/SERVICE/ebook2mp4/ebook2mp4.exe`。搬移時請一起搬移整個 `dist/SERVICE/ebook2mp4`，其中 `_internal` 包含執行環境、OCR 引擎及繁簡詞庫。一般建置預設仍輸出 `dist/ebook2mp4`。此版本尚未完成 T23 的安裝與乾淨 Windows 驗收。
+目前本機新版為 `dist/T12-voice-compact/ebook2mp4/ebook2mp4.exe`。搬移時請一起搬移整個 `dist/T12-voice-compact/ebook2mp4`，其中 `_internal` 包含執行環境、OCR 引擎及繁簡詞庫。一般建置預設仍輸出 `dist/ebook2mp4`。此版本尚未完成 T23 的安裝與乾淨 Windows 驗收。
 
 滑鼠停留在批次狀態約 0.4 秒可查看說明：「未確認」顯示「確認朗讀稿」；「待檢查 N」顯示「有 N 項來源／OCR 異常尚未處理」。說明僅適用狀態欄，不更動批次選取，移開、捲動、狀態更新或關閉時收起。
 

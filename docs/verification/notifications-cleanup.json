@@ -1,0 +1,20 @@
+{
+  "removed": [
+    ".scratch/notifications-build",
+    ".scratch/notifications-mypy",
+    ".scratch/notifications-ocr",
+    ".scratch/notifications-tools",
+    ".scratch/notifications-voice",
+    "packaging/notifications.spec"
+  ],
+  "remaining_task_temp": [],
+  "test_runs_remaining": [],
+  "packaged_smoke_released": true,
+  "packaged_source_verified": [
+    "ui_controls",
+    "desktop",
+    "gemini_desktop",
+    "pdf_desktop",
+    "voice_desktop"
+  ]
+}

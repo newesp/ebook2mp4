@@ -1,0 +1,91 @@
+475 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+476 INFO: Python: 3.14.3
+504 INFO: Platform: Windows-11-10.0.26200-SP0
+505 INFO: Python environment: C:\Python314
+10565 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+15525 INFO: Appending 'binaries' from .spec
+15526 INFO: Appending 'datas' from .spec
+15576 INFO: checking Analysis
+15577 INFO: Building Analysis because Analysis-00.toc is non existent
+15577 INFO: Looking for Python shared library...
+15577 INFO: Using Python shared library: C:\Python314\python314.dll
+15577 INFO: Running Analysis Analysis-00.toc
+15577 INFO: Target bytecode optimization level: 0
+15577 INFO: Initializing module dependency graph...
+15581 INFO: Initializing module graph hook caches...
+15664 INFO: Analyzing modules for base_library.zip ...
+20461 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+22146 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+23094 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+23552 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+23630 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+35531 INFO: Caching module dependency graph...
+35627 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+35845 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks\\pre_find_module_path'
+35850 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+36855 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+37549 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+37728 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+37786 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+37879 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+37989 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+38698 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+39008 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+40149 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+40282 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+40834 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+41794 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+44607 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+45309 INFO: Processing standard module hook 'hook-opencc.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+45989 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+47498 INFO: Analyzing hidden import 'pypdfium2.__main__'
+47538 INFO: Analyzing hidden import 'opencc.__main__'
+47544 INFO: Processing module hooks (post-graph stage)...
+48402 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+48615 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks'
+48644 INFO: Performing binary vs. data reclassification (1052 entries)
+67685 INFO: Looking for ctypes DLLs
+67883 INFO: Analyzing run-time hooks ...
+67887 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks\\rthooks'
+67895 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks\\rthooks'
+67905 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks\\rthooks'
+67910 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\dynamic-ocr-tools\\PyInstaller\\hooks\\rthooks'
+67969 INFO: Creating base_library.zip...
+68013 INFO: Looking for dynamic libraries
+68866 INFO: Extra DLL search directories (AddDllDirectory): []
+68867 INFO: Extra DLL search directories (PATH): []
+71393 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\dynamic-ocr-build\ebook2mp4\warn-ebook2mp4.txt
+71458 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\dynamic-ocr-build\ebook2mp4\xref-ebook2mp4.html
+71583 INFO: checking PYZ
+71583 INFO: Building PYZ because PYZ-00.toc is non existent
+71583 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\dynamic-ocr-build\ebook2mp4\PYZ-00.pyz
+72074 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\dynamic-ocr-build\ebook2mp4\PYZ-00.pyz completed successfully.
+72106 INFO: checking PKG
+72106 INFO: Building PKG because PKG-00.toc is non existent
+72107 INFO: Building PKG (CArchive) ebook2mp4.pkg
+72153 INFO: Building PKG (CArchive) ebook2mp4.pkg completed successfully.
+72156 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\dynamic-ocr-tools\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+72156 INFO: checking EXE
+72156 INFO: Building EXE because EXE-00.toc is non existent
+72156 INFO: Building EXE from EXE-00.toc
+72157 INFO: Copying bootloader EXE to E:\Leo\Projects\ebook2mp4\.scratch\dynamic-ocr-build\ebook2mp4\ebook2mp4.exe
+72765 INFO: Copying icon to EXE
+72885 INFO: Copying 0 resources to EXE
+72885 INFO: Embedding manifest in EXE
+72975 INFO: Appending PKG archive to EXE
+73073 INFO: Fixing EXE headers
+73758 INFO: Building EXE from EXE-00.toc completed successfully.
+73785 INFO: checking COLLECT
+73785 INFO: Building COLLECT because COLLECT-00.toc is non existent
+73786 INFO: Building COLLECT COLLECT-00.toc
+82772 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+82817 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist\T07-dynamic-ocr

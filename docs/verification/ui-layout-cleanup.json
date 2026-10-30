@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-26",
+  "packaged_files_exclusively_opened_and_released": 1152,
+  "new_packaged_processes_remaining": 0,
+  "preserved": [
+    "dist/T07-ui-layout",
+    "previous builds",
+    "user projects and OCR models",
+    "mock artifacts",
+    "requirements and final verification evidence"
+  ],
+  "removed": [
+    {
+      "bytes": 98024029.0,
+      "path": ".scratch\\ui-layout-tools"
+    },
+    {
+      "bytes": 13967359.0,
+      "path": ".scratch\\ui-layout-build"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch\\ui-layout-build-cache"
+    },
+    {
+      "bytes": 15507685.0,
+      "path": ".scratch\\ui-layout-mypy"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch\\ui-layout-temp"
+    },
+    {
+      "bytes": null,
+      "path": ".scratch\\ui-layout-visual"
+    },
+    {
+      "bytes": 15499493.0,
+      "path": ".scratch\\test-runs"
+    },
+    {
+      "bytes": 121410362.0,
+      "path": ".scratch\\ocr-runtime"
+    },
+    {
+      "bytes": 0,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__"
+    }
+  ],
+  "source_fixture_and_test_sessions": "all exited"
+}

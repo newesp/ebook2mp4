@@ -1,0 +1,47 @@
+test_reject_third_region_keeps_first_two_when_recognizing_fourth (test_pdf_refinement_desktop.PdfRefinementDesktop.test_reject_third_region_keeps_first_two_when_recognizing_fourth) ... FAIL
+test_reject_latest_region_then_publish_preserves_earlier_regions (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_latest_region_then_publish_preserves_earlier_regions) ... FAIL
+test_reject_overlapping_retry_restores_previous_accepted_correction (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_overlapping_retry_restores_previous_accepted_correction) ... FAIL
+
+======================================================================
+FAIL: test_reject_third_region_keeps_first_two_when_recognizing_fourth (test_pdf_refinement_desktop.PdfRefinementDesktop.test_reject_third_region_keeps_first_two_when_recognizing_fourth)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_refinement_desktop.py", line 160, in test_reject_third_region_keeps_first_two_when_recognizing_fourth
+    self.assertIn('First accepted correction', before_fourth)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'First accepted correction' not found in 'Chapter 1: Hello 3.14 U.S.A. - original text.'
+
+======================================================================
+FAIL: test_reject_latest_region_then_publish_preserves_earlier_regions (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_latest_region_then_publish_preserves_earlier_regions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_candidate_refinement.py", line 129, in test_reject_latest_region_then_publish_preserves_earlier_regions
+    self.assertEqual(reopened.pdf_pages(new), before_bad)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'nu[16 chars]d': 'text-layer', 'text': 'Chapter 1: Hello 3.[464 chars]k'}}] != [{'nu[16 chars]d': 'ocr', 'text': 'First corrected title 1: S[765 chars]k'}}]
+
+First differing element 0:
+{'num[15 chars]d': 'text-layer', 'text': 'Chapter 1: Hello 3.[195 chars]ck'}}
+{'num[15 chars]d': 'ocr', 'text': 'First corrected title 1: S[496 chars] []}}
+
+Diff is 1667 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_reject_overlapping_retry_restores_previous_accepted_correction (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_overlapping_retry_restores_previous_accepted_correction)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_candidate_refinement.py", line 140, in test_reject_overlapping_retry_restores_previous_accepted_correction
+    self.assertEqual(self.flow.pdf_pages(new), accepted)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'nu[16 chars]d': 'text-layer', 'text': 'Chapter 1: Hello 3.[464 chars]k'}}] != [{'nu[16 chars]d': 'ocr', 'text': 'First corrected title 1: H[748 chars]k'}}]
+
+First differing element 0:
+{'num[15 chars]d': 'text-layer', 'text': 'Chapter 1: Hello 3.[195 chars]ck'}}
+{'num[15 chars]d': 'ocr', 'text': 'First corrected title 1: H[479 chars] []}}
+
+Diff is 1693 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.294s
+
+FAILED (failures=3)

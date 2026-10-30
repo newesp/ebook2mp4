@@ -1,0 +1,20 @@
+{
+  "passed": 56,
+  "skipped": 1,
+  "skip_reason": "Real OCR integration requires EBOOK2MP4_REAL_OCR_HOME",
+  "final_modules": {
+    "test_notifications": 8,
+    "test_ui_layout_gemini": 7,
+    "test_gemini_desktop": 4,
+    "test_gemini_resume_desktop": 2,
+    "test_ui_layout": 5,
+    "test_desktop": 14,
+    "test_ui_layout_pdf": 3,
+    "test_pdf_refinement_desktop": 7,
+    "test_voice_desktop": 3,
+    "test_status_help": 3
+  },
+  "typecheck": "5 UI source files passed",
+  "voice_environment": "Mock service; local asyncio socketpair permitted outside sandbox",
+  "initial_failures": "Two window locators corrected; sandboxed voice event-loop bootstrap rerun outside sandbox"
+}

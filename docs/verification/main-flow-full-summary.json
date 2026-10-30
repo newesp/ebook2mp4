@@ -1,0 +1,152 @@
+[
+  {
+    "module": "test_desktop",
+    "code": 0,
+    "seconds": 58.489
+  },
+  {
+    "module": "test_gemini",
+    "code": 0,
+    "seconds": 8.822
+  },
+  {
+    "module": "test_gemini_desktop",
+    "code": 0,
+    "seconds": 10.588
+  },
+  {
+    "module": "test_gemini_resume",
+    "code": 0,
+    "seconds": 11.983
+  },
+  {
+    "module": "test_gemini_resume_desktop",
+    "code": 0,
+    "seconds": 21.024
+  },
+  {
+    "module": "test_main_workflow_desktop",
+    "code": 0,
+    "seconds": 8.814
+  },
+  {
+    "module": "test_mixed_desktop",
+    "code": 0,
+    "seconds": 19.57
+  },
+  {
+    "module": "test_mixed_pdf",
+    "code": 0,
+    "seconds": 17.974
+  },
+  {
+    "module": "test_narration",
+    "code": 0,
+    "seconds": 23.129
+  },
+  {
+    "module": "test_narration_desktop",
+    "code": 0,
+    "seconds": 9.599
+  },
+  {
+    "module": "test_notifications",
+    "code": 1,
+    "seconds": 14.814
+  },
+  {
+    "module": "test_ocr",
+    "code": 0,
+    "seconds": 86.729
+  },
+  {
+    "module": "test_ocr_desktop",
+    "code": 0,
+    "seconds": 8.244
+  },
+  {
+    "module": "test_ocr_optimization",
+    "code": 0,
+    "seconds": 48.785
+  },
+  {
+    "module": "test_optimization_desktop",
+    "code": 0,
+    "seconds": 9.515
+  },
+  {
+    "module": "test_pdf",
+    "code": 0,
+    "seconds": 7.37
+  },
+  {
+    "module": "test_pdf_candidate_refinement",
+    "code": 0,
+    "seconds": 14.548
+  },
+  {
+    "module": "test_pdf_refinement_desktop",
+    "code": 0,
+    "seconds": 29.51
+  },
+  {
+    "module": "test_proofreading_optimization",
+    "code": 0,
+    "seconds": 5.813
+  },
+  {
+    "module": "test_rhythm",
+    "code": 0,
+    "seconds": 8.629
+  },
+  {
+    "module": "test_rhythm_desktop",
+    "code": 0,
+    "seconds": 4.967
+  },
+  {
+    "module": "test_status_help",
+    "code": 0,
+    "seconds": 7.336
+  },
+  {
+    "module": "test_terminology_desktop",
+    "code": 0,
+    "seconds": 4.52
+  },
+  {
+    "module": "test_tts_providers",
+    "code": 0,
+    "seconds": 13.862
+  },
+  {
+    "module": "test_ui_layout",
+    "code": 0,
+    "seconds": 14.272
+  },
+  {
+    "module": "test_ui_layout_gemini",
+    "code": 0,
+    "seconds": 23.562
+  },
+  {
+    "module": "test_ui_layout_pdf",
+    "code": 0,
+    "seconds": 13.914
+  },
+  {
+    "module": "test_voice",
+    "code": 0,
+    "seconds": 11.819
+  },
+  {
+    "module": "test_voice_desktop",
+    "code": 0,
+    "seconds": 12.751
+  },
+  {
+    "module": "test_workflow",
+    "code": 0,
+    "seconds": 12.324
+  }
+]

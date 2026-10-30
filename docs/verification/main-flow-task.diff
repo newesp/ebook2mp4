@@ -1,0 +1,272 @@
+--- a/ebook2mp4/desktop.py
++++ b/ebook2mp4/desktop.py
+@@ -56,6 +56,7 @@
+         self.step = 1
+         self._loading = False
+         self.focus_mode = False
++        self.tools_open = False
+         self.pdf_dialog = None
+         self.gemini_dialog = None
+         self.gemini_settings_dialog = None
+@@ -100,7 +101,7 @@
+         nav.grid(row=1, column=0, sticky='ew', pady=(0, 8))
+         nav.columnconfigure(4, weight=1)
+         self.steps = []
+-        for index, name in enumerate(('來源', '校對', '語音試聽', '影片尚未提供'), 1):
++        for index, name in enumerate(('1  匯入來源', '2  校對文字', '3  確認朗讀稿', '4  試聽與製作'), 1):
+             control = ttk.Button(nav, text=name, command=partial(self.show_step, index), style='Compact.TButton')
+             control.grid(row=0, column=index-1, padx=(0, 4))
+             self.steps.append(control)
+@@ -141,31 +142,39 @@
+         manage_menu.add_separator()
+         self.remove_pdf_button = MenuAction(manage_menu, '移除 PDF 批次', self.remove_pdf)
+ 
+-        center = ttk.Frame(body)
++        self.center = center = ttk.Frame(body)
+         center.grid(row=0, column=1, sticky='nsew')
+         center.rowconfigure(1, weight=1)
+         center.columnconfigure(0, weight=1)
+-        metadata = ttk.Frame(center, padding=(12, 0, 12, 4))
++        self.metadata = metadata = ttk.Frame(center, padding=(12, 0, 12, 4))
+         metadata.grid(row=0, column=0, sticky='ew')
+         metadata.columnconfigure(0, weight=1)
+         self.source_meta = ttk.Label(metadata, text='', width=1, anchor='w')
+         self.source_meta.grid(row=0, column=0, sticky='ew')
+-        tools_control, tools_menu = command_menu(metadata, '原稿工具')
++        tools_control, tools_menu = command_menu(metadata, '校對工具')
+         tools_control.grid(row=0, column=1, padx=4)
+         self.pages_button = MenuAction(tools_menu, 'PDF 原頁與文字對照', self.compare_pdf_pages)
+         self.cleanup_button = MenuAction(tools_menu, '預覽換行整理', self.cleanup_line_breaks)
+         tools_menu.add_separator()
+         MenuAction(tools_menu, '來源詳細資訊', self.show_source_info)
++        tools_menu.add_separator()
++        MenuAction(tools_menu, '搜尋與取代  Ctrl+F', self.focus_search)
++        MenuAction(tools_menu, 'AI 校對（選用）', partial(self.open_tools, 1))
++        self.ai_tools_button = ttk.Button(metadata, text='AI 校對（選用）', command=partial(self.open_tools, 1))
++        self.ai_tools_button.grid(row=0, column=4, padx=(8, 0))
+         self.font_size = tk.StringVar(value='12')
+         font_control = ttk.Combobox(metadata, textvariable=self.font_size, values=('10', '12', '14', '16', '18'), width=3, state='readonly')
+         font_control.grid(row=0, column=2)
+         font_control.bind('<<ComboboxSelected>>', self.change_font)
+         ttk.Label(metadata, text='pt', foreground=MUTED).grid(row=0, column=3, padx=(3, 0))
+-        panes = ttk.Panedwindow(center, orient='horizontal')
++        self.panes = panes = ttk.Panedwindow(center, orient='horizontal')
+         panes.grid(row=1, column=0, sticky='nsew')
+-        source_frame, self.source = text_pane(panes, '來源原文 · TXT')
++        self.source_frame, self.source = text_pane(panes, '來源原文 · TXT')
++        source_frame = self.source_frame
+         self.source_heading = source_frame.grid_slaves(row=0)[0]
+-        editor_frame, self.editor = text_pane(panes, '校對稿 · 可編輯', True)
++        self.editor_frame, self.editor = text_pane(panes, '校對稿 · 可編輯', True)
++        editor_frame = self.editor_frame
++        self.editor_heading = editor_frame.grid_slaves(row=0)[0]
+         panes.add(source_frame, weight=1)
+         panes.add(editor_frame, weight=1)
+         self.editor.configure(exportselection=False)
+@@ -177,9 +186,9 @@
+         right.rowconfigure(0, weight=1)
+         self.tool_tabs = ttk.Notebook(right, width=225)
+         self.tool_tabs.grid(row=0, column=0, sticky='nsew')
+-        edit, ai, confirm = (ttk.Frame(self.tool_tabs, padding=12) for _ in range(3))
+-        self.confirm_panel = confirm
+-        for frame, title in ((edit, '編輯'), (ai, 'AI 校對'), (confirm, '確認')):
++        edit, ai = (ttk.Frame(self.tool_tabs, padding=12) for _ in range(2))
++        self.confirm_panel = confirm = ttk.Frame(right, padding=12, width=250)
++        for frame, title in ((edit, '搜尋取代'), (ai, 'AI 校對（選用）')):
+             self.tool_tabs.add(frame, text=title)
+         ttk.Label(edit, text='搜尋文字（完全相符）').pack(anchor='w')
+         self.find_text = tk.StringVar()
+@@ -221,14 +230,42 @@
+         ttk.Separator(ai).pack(fill='x', pady=12)
+         ttk.Button(ai, text='Gemini 設定', command=self.gemini_settings).pack(fill='x')
+ 
+-        self.reading_status = ttk.Label(confirm, text='', wraplength=200, foreground=MUTED)
++        ttk.Label(confirm, text='確認本批朗讀內容', style='Heading.TLabel').pack(anchor='w', pady=(0, 12))
++        ttk.Label(confirm, text='1. 閱讀左側完整文字。\n2. 直接修改需要調整的內容。\n3. 確認後前往選聲音與試聽。', wraplength=220, foreground=MUTED).pack(anchor='w', pady=(0, 16))
++        self.reading_status = ttk.Label(confirm, text='', wraplength=220, foreground=MUTED)
+         self.reading_status.pack(anchor='w', pady=(0, 12))
+         self.issues_button = ttk.Button(confirm, text='檢查來源異常', command=self.review_source_issues)
+         self.issues_button.pack(fill='x', pady=3)
+         self.versions_button = ttk.Button(confirm, text='朗讀稿與重載備份', command=self.show_versions)
+         self.versions_button.pack(fill='x', pady=3)
+-        self.confirm_button = ttk.Button(confirm, text='確認朗讀稿', command=self.confirm_reading, style='Primary.TButton')
+-        self.confirm_button.pack(side='bottom', fill='x')
++        ttk.Label(confirm, text='確認時會儲存目前編輯。\n確認後再修改，必須重新確認。\n舊朗讀稿與成品仍會保留。', wraplength=220, foreground=MUTED).pack(anchor='w', pady=(20, 0))
++        self.close_tools_button = ttk.Button(right, text='收起工具', command=self.close_tools)
++        self.close_tools_button.grid(row=1, column=0, sticky='ew', pady=(6, 0))
++
++        self.import_panel = welcome = ttk.Frame(center, padding=32)
++        welcome.columnconfigure(0, weight=1)
++        ttk.Label(welcome, text='先建立專案，再加入要朗讀的內容', style='Title.TLabel').grid(row=0, column=0, sticky='w', pady=(0, 16))
++        ttk.Label(welcome, text='每份 TXT 或一段 PDF 頁碼會成為一個批次。\n加入後，從左側選擇批次，再進行校對。', foreground=MUTED).grid(row=1, column=0, sticky='w', pady=(0, 24))
++        project_actions = ttk.Frame(welcome)
++        project_actions.grid(row=2, column=0, sticky='w', pady=(0, 20))
++        ttk.Button(project_actions, text='建立書籍專案', command=self.create).pack(side='left', padx=(0, 8))
++        ttk.Button(project_actions, text='開啟既有專案', command=self.open).pack(side='left')
++        import_actions = ttk.Frame(welcome)
++        import_actions.grid(row=3, column=0, sticky='w')
++        self.import_pdf_cta = ttk.Button(import_actions, text='加入 PDF 文件', command=self.pdf_button.invoke, style='Primary.TButton')
++        self.import_pdf_cta.pack(side='left', padx=(0, 8))
++        self.import_txt_cta = ttk.Button(import_actions, text='加入 TXT 批次', command=self.import_button.invoke)
++        self.import_txt_cta.pack(side='left')
++
++        self.actions = actions = ttk.Frame(center, padding=(12, 8))
++        actions.grid(row=2, column=0, sticky='ew')
++        actions.columnconfigure(1, weight=1)
++        self.back_button = ttk.Button(actions, text='← 返回校對文字', command=partial(self.show_step, 2))
++        self.back_button.grid(row=0, column=0, sticky='w')
++        self.next_button = ttk.Button(actions, text='儲存並前往確認朗讀稿 →', command=self.save_and_review, style='Primary.TButton')
++        self.next_button.grid(row=0, column=2, sticky='e')
++        self.confirm_button = ttk.Button(actions, text='確認朗讀稿並前往語音設定 →', command=self.confirm_and_continue, style='Primary.TButton')
++        self.confirm_button.grid(row=0, column=2, sticky='e')
+ 
+         footer = ttk.Frame(self, padding=(8, 8, 0, 0))
+         footer.grid(row=3, column=0, sticky='ew')
+@@ -242,16 +279,26 @@
+         self.notice = self.status
+ 
+     def focus_search(self, _event=None):
++        self.open_tools(0)
++        self.find_entry.focus_set()
++        return 'break'
++
++    def open_tools(self, index=0):
+         if self.focus_mode:
+             self.toggle_focus()
+-        self.tool_tabs.select(0)
+-        self.find_entry.focus_set()
+-        return 'break'
++        if self.step != 2:
++            self.show_step(2)
++        self.tools_open = True
++        self.tool_tabs.select(index)
++        self.render_step()
++
++    def close_tools(self):
++        self.tools_open = False
++        self.render_step()
+ 
+     def toggle_focus(self, _event=None):
+         self.focus_mode = not self.focus_mode
+-        for panel in (self.left_panel, self.right_panel):
+-            panel.grid_remove() if self.focus_mode else panel.grid()
++        self.render_step()
+         self.focus_button.configure(text='返回工作台  F6' if self.focus_mode else '專注閱讀  F6')
+ 
+     def change_font(self, _event=None):
+@@ -346,8 +393,10 @@
+                        self.gemini_start_button, self.history_action):
+             button.configure(state=enabled)
+         blockers = self.flow.confirmation_blockers(self.batch_id) if batch and self.flow and self.batch_id else []
+-        self.confirm_button.configure(state='normal' if batch and text.strip() and not blockers else 'disabled',
+-                                      text='儲存並確認朗讀稿' if self.dirty else '確認朗讀稿')
++        self.next_button.configure(state='normal' if batch and text.strip() else 'disabled')
++        self.confirm_button.configure(state='normal' if batch and text.strip() and not blockers else 'disabled')
++        for button in (self.import_pdf_cta, self.import_txt_cta):
++            button.configure(state='normal' if self.flow else 'disabled')
+         self.issues_button.configure(state='normal' if blockers else 'disabled')
+         snapshot = next((s for s in batch.get('readings', []) if s['id'] == batch.get('current_reading')), None) if batch else None
+         reading = ('已確認 · 校對稿 v' + str(snapshot['revision']) + '\nSHA-256 ' + snapshot['sha256'][:16]
+@@ -364,22 +413,76 @@
+             self.batch_summary.configure(text=f'{len(self.flow.state["batches"])} 個批次 · {confirmed} 個已確認')
+         else:
+             self.batch_summary.configure(text='新增批次後開始校對')
+-        self.tool_tabs.tab(2, text=f'確認 ({len(blockers)})' if blockers else '確認')
++        self.steps[2].configure(text=f'3  確認朗讀稿（{len(blockers)} 項待檢查）' if blockers else '3  確認朗讀稿')
+         self.root.title(('＊' if self.dirty else '') + (self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4')
+ 
+     def show_step(self, n):
+-        if n == 3:
++        self.step = n
++        self.render_step()
++        if n == 4:
+             self.voice_settings()
+-        self.step = n
++
++    def render_step(self):
++        """Change page layout without reloading or replacing the editor buffer."""
++        n = self.step
++        self.import_panel.grid_remove()
++        self.panes.grid_remove()
++        self.actions.grid_remove()
++        self.metadata.grid_remove()
++        self.right_panel.grid_remove()
++        self.tool_tabs.grid_remove()
++        self.confirm_panel.grid_remove()
++        self.close_tools_button.grid_remove()
++        self.left_panel.grid_remove() if self.focus_mode else self.left_panel.grid()
++        if n == 1:
++            self.import_panel.grid(row=1, column=0, sticky='nsew')
++        else:
++            self.metadata.grid()
++            self.panes.grid()
++            self.actions.grid()
++            has_source = str(self.source_frame) in self.panes.panes()
++            if n == 2 and not has_source:
++                self.panes.insert(0, self.source_frame, weight=1)
++            elif n != 2 and has_source:
++                self.panes.forget(self.source_frame)
++            self.editor_heading.configure(text='校對稿 · 可編輯' if n == 2 else '待確認朗讀內容 · 可直接編輯')
++            self.next_button.grid_remove()
++            self.confirm_button.grid_remove()
++            self.back_button.grid_remove()
++            if n == 2:
++                self.next_button.configure(text='儲存並前往確認朗讀稿 →', command=self.save_and_review)
++                self.next_button.grid()
++                if self.tools_open and not self.focus_mode:
++                    self.right_panel.grid()
++                    self.tool_tabs.grid()
++                    self.close_tools_button.grid()
++            else:
++                self.back_button.grid()
++                if n == 3:
++                    self.confirm_button.grid()
++                else:
++                    self.next_button.configure(text='開啟語音設定與試聽 →', command=self.voice_settings)
++                    self.next_button.grid()
++                if not self.focus_mode:
++                    self.right_panel.grid()
++                    self.confirm_panel.grid(row=0, column=0, sticky='nsew')
+         reasons = {
+-            1: '來源：從「新增批次」匯入 TXT 或 PDF，原始來源不覆寫。',
+-            2: '校對：編輯、AI 校對與朗讀確認可從右側頁籤切換。',
+-            3: '語音：選擇音色與語速、短文試聽，或從已確認朗讀稿產生批次 MP3／SRT。',
+-            4: '影片尚未提供。可繼續校對及確認朗讀稿。',
++            1: '步驟 1：建立或開啟專案，再加入 PDF／TXT。',
++            2: '步驟 2：對照來源、編輯校對稿；完成後，儲存並前往確認朗讀稿。',
++            3: '步驟 3：檢查完整內容；可直接編輯，確認後再設定聲音。',
++            4: '步驟 4：選服務與聲音、編輯試聽；正式製作須使用已確認朗讀稿。',
+         }
+         self.notice.configure(text=reasons[n])
+         for i, button in enumerate(self.steps, 1):
+             button.configure(style='CompactActive.TButton' if i == n else 'Compact.TButton')
++
++    def save_and_review(self):
++        if self.batch_id and self.save(announce=False):
++            self.show_step(3)
++
++    def confirm_and_continue(self):
++        if self.confirm_reading():
++            self.show_step(4)
+ 
+     @staticmethod
+     def fill(widget, content, editable=False):
+@@ -427,7 +530,9 @@
+         self._loading = False
+         self.update_source_metadata()
+         self.update_stats()
+-        self.show_step(self.step)
++        if self.step == 1 and batches:
++            self.step = 2
++        self.render_step()
+         self.status.configure(text='所有書稿資料保存在本機。' if not self.flow else '已載入專案 · 原始來源檔不會被改寫')
+ 
+     def update_source_metadata(self):
+@@ -851,6 +956,7 @@
+             self.update_stats()
+             self.status.configure(text='朗讀稿已確認；已確認版本與完整雜湊可由「朗讀稿與重載備份」查閱。', foreground=GREEN)
+             self.notify('朗讀稿已儲存並確認。', detail=self.status.full_text)
++            return True
+         except ProjectError as e:
+             self.report(e)
+ 

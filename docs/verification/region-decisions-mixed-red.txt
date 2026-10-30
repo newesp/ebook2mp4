@@ -1,0 +1,16 @@
+test_reject_region_then_retry_another_whole_page_keeps_prior_region (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_region_then_retry_another_whole_page_keeps_prior_region) ... FAIL
+
+======================================================================
+FAIL: test_reject_region_then_retry_another_whole_page_keeps_prior_region (test_pdf_candidate_refinement.PdfCandidateRefinement.test_reject_region_then_retry_another_whole_page_keeps_prior_region)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf_candidate_refinement.py", line 162, in test_reject_region_then_retry_another_whole_page_keeps_prior_region
+    self.assertEqual(self.flow.pdf_pages(new)[1], accepted_page)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'num[15 chars]d': 'text-layer', 'text': 'Chapter 2: Hello 3.[195 chars]ck'}} != {'num[15 chars]d': 'ocr', 'text': 'Accepted page two correcti[486 chars] []}}
+Diff is 1308 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 1 test in 1.203s
+
+FAILED (failures=1)

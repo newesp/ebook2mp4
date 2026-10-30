@@ -1,0 +1,11 @@
+{
+  "modules": 30,
+  "tests": 185,
+  "first_run_seconds": 543.276,
+  "first_run_failures": [
+    "test_notifications: 2 tests assumed the editor was visible on the import page"
+  ],
+  "resolution": "Notification focus setup now opens proofreading step 2; all 8 notification tests pass on rerun. No production notification code changed.",
+  "final_failed_modules": [],
+  "skipped": 0
+}
