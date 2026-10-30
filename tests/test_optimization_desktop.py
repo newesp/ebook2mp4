@@ -20,6 +20,8 @@ class OptimizationDesktop(unittest.TestCase):
         self.root, self.app = make_app()
         self.addCleanup(self.root.destroy)
         self.app.flow = ProjectWorkflow.create(self.path/'book', '優化')
+        # Match real use: finish initial Map/maximize before opening a child dialog.
+        self.root.update()
 
     def until(self, predicate):
         deadline = time.monotonic()+15
