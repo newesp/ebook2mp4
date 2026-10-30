@@ -150,17 +150,15 @@ class VoiceDialog(ttk.Frame):
         self.load_result()
         self.update_controls()
         self.settings_panel, self.preview_panel = middle, controls
-        self.bind('<Configure>', self.reflow, add='+')
+        middle.bind('<Configure>', self.reflow)
+        controls.bind('<Configure>', self.reflow)
 
     def reflow(self, event):
-        if event.widget is not self:
-            return
-        left_width = max(140, self.settings_panel.winfo_width()-16)
-        right_width = max(180, self.preview_panel.winfo_width()-16)
-        for label in (self.cache_info, self.rules_info, self.rate_info):
-            label.configure(wraplength=left_width)
-        for label in (self.status, self.result_info, self.text_info):
-            label.configure(wraplength=right_width)
+        labels = ((self.cache_info, self.rules_info, self.rate_info)
+                  if event.widget is self.settings_panel else
+                  (self.status, self.result_info, self.text_info))
+        for label in labels:
+            label.configure(wraplength=max(140, event.width-16))
 
     def reload_services(self):
         from .tts_services import profiles
