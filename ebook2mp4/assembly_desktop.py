@@ -28,15 +28,22 @@ class AssemblyPage(ttk.Frame):
         self.product = None
         self.last_status = ''
         self.check_action = 'inspect'
+        self.accepted_joins = set(value.get('accepted_joins', []))
+        self.edit_return = False
+        self.join_page = None
         self.columnconfigure(0, weight=1)
-        self.rowconfigure(2, weight=1, minsize=70)
+        self.rowconfigure(0, weight=1)
+        self.main = main = ttk.Frame(self)
+        main.grid(row=0, column=0, sticky='nsew')
+        main.columnconfigure(0, weight=1)
+        main.rowconfigure(2, weight=1, minsize=70)
 
-        header = ttk.Frame(self)
+        header = ttk.Frame(main)
         header.grid(row=0, column=0, sticky='ew', pady=(0, 6))
         header.columnconfigure(0, weight=1)
         ttk.Label(header, text='全書合併 · 總 MP3／SRT', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
         ttk.Label(header, text='本機合併 · 不傳送文字').grid(row=0, column=1, sticky='e')
-        toolbar = ttk.Frame(self)
+        toolbar = ttk.Frame(main)
         toolbar.grid(row=1, column=0, sticky='ew', pady=(0, 6))
         toolbar.columnconfigure(0, weight=1)
         ttk.Label(toolbar, text='1 選取批次，再調整順序').grid(row=0, column=0, sticky='w')
@@ -47,7 +54,7 @@ class AssemblyPage(ttk.Frame):
         for column, button in enumerate((self.select_button, self.up_button, self.down_button, self.info_button), 1):
             button.grid(row=0, column=column, padx=(4, 0))
 
-        self.table_frame = table_frame = ttk.Frame(self)
+        self.table_frame = table_frame = ttk.Frame(main)
         table_frame.grid(row=2, column=0, sticky='nsew')
         table_frame.columnconfigure(0, weight=1)
         table_frame.rowconfigure(0, weight=1)
@@ -68,7 +75,7 @@ class AssemblyPage(ttk.Frame):
         from .ui_controls import CellTooltip
         self.tooltip = CellTooltip(self.table, self.cell_help)
 
-        self.info_frame = ttk.Frame(self)
+        self.info_frame = ttk.Frame(main)
         self.info_frame.columnconfigure(0, weight=1)
         self.info_frame.rowconfigure(0, weight=1)
         self.info_text = tk.Text(self.info_frame, wrap='word', height=4, width=1, relief='flat',
@@ -83,36 +90,43 @@ class AssemblyPage(ttk.Frame):
         self.fix_button.pack(side='left')
         ttk.Button(detail_actions, text='返回批次清單', command=self.toggle_info).pack(side='right')
 
-        options = ttk.Frame(self)
+        options = ttk.Frame(main)
         options.grid(row=3, column=0, sticky='ew', pady=6)
         options.columnconfigure(3, weight=1)
-        ttk.Label(options, text='2 交接停頓').grid(row=0, column=0, sticky='w')
-        self.pause_control = ttk.Combobox(options, textvariable=self.pause, values=('0', '0.5', '1', '2'), width=6)
+        ttk.Label(options, text='2 額外交接停頓').grid(row=0, column=0, sticky='w')
+        self.pause_control = ttk.Combobox(options, textvariable=self.pause, values=('0', '0.5', '1', '2', '5'), width=6)
         self.pause_control.grid(row=0, column=1, padx=6)
         ttk.Label(options, text='秒').grid(row=0, column=2)
         self.summary = ttk.Label(options, text='', width=1)
         self.summary.grid(row=0, column=3, sticky='ew', padx=6)
         self.save_button = ttk.Button(options, text='儲存合併設定', command=self.save)
         self.save_button.grid(row=0, column=4)
-        self.status = ttk.Label(self, text='正在檢查來源…', wraplength=620)
-        self.status.grid(row=4, column=0, sticky='ew', pady=(0, 4))
-        self.progress = ttk.Progressbar(self, mode='determinate')
-        actions = ttk.Frame(self)
-        actions.grid(row=6, column=0, sticky='ew', pady=4)
+        join_actions = ttk.Frame(main)
+        join_actions.grid(row=4, column=0, sticky='ew', pady=(0, 4))
+        join_actions.columnconfigure(0, weight=1)
+        self.join_summary = ttk.Label(join_actions, text='3 檢查交接接點')
+        self.join_summary.grid(row=0, column=0, sticky='w')
+        self.join_button = ttk.Button(join_actions, text='對照文字與試聽接點 →', command=self.open_joins)
+        self.join_button.grid(row=0, column=1, sticky='e')
+        self.status = ttk.Label(main, text='正在檢查來源…', wraplength=620)
+        self.status.grid(row=5, column=0, sticky='ew', pady=(0, 4))
+        self.progress = ttk.Progressbar(main, mode='determinate')
+        actions = ttk.Frame(main)
+        actions.grid(row=7, column=0, sticky='ew', pady=4)
         actions.columnconfigure(1, weight=1)
         self.back_button = ttk.Button(actions, text='← 返回批次製作', command=app.narration)
         self.back_button.grid(row=0, column=0, sticky='w')
         self.saved_label = ttk.Label(actions, text='合併設定已儲存' if self.selected else '尚未選取批次', width=1)
         self.saved_label.grid(row=0, column=1, sticky='ew', padx=6)
-        self.start_button = ttk.Button(actions, text='3 製作總 MP3／SRT →', command=self.start, style='Primary.TButton')
+        self.start_button = ttk.Button(actions, text='4 製作總 MP3／SRT →', command=self.start, style='Primary.TButton')
         self.start_button.grid(row=0, column=2, sticky='e')
         self.cancel_button = ttk.Button(actions, text='取消任務', command=self.cancel)
         self.cancel_button.grid(row=0, column=3, padx=(6, 0))
 
-        self.result_info = ttk.Label(self, text='', width=1)
-        self.result_info.grid(row=7, column=0, sticky='ew', pady=(4, 0))
-        outputs = ttk.Frame(self)
-        outputs.grid(row=8, column=0, sticky='ew', pady=(4, 0))
+        self.result_info = ttk.Label(main, text='', width=1)
+        self.result_info.grid(row=8, column=0, sticky='ew', pady=(4, 0))
+        outputs = ttk.Frame(main)
+        outputs.grid(row=9, column=0, sticky='ew', pady=(4, 0))
         outputs.columnconfigure(1, weight=1)
         self.play_button = ttk.Button(outputs, text='播放總音訊', command=self.play)
         self.stop_button = ttk.Button(outputs, text='停止播放', command=self.stop)
@@ -140,13 +154,15 @@ class AssemblyPage(ttk.Frame):
     def pause_ms(self):
         try:
             value = Decimal(self.pause.get())*1000
-            if not value.is_finite() or value != value.to_integral_value() or not 0 <= value <= 86_400_000:
+            if not value.is_finite() or value != value.to_integral_value() or not 0 <= value <= 5000:
                 raise ValueError()
             return int(value)
         except (ValueError, InvalidOperation):
-            raise ProjectError('請輸入 0～86,400 秒，最多 3 位小數。') from None
+            raise ProjectError('請輸入 0～5 秒，最多 3 位小數。') from None
 
     def changed(self):
+        if self.join_page is not None:
+            self.join_page.stop()
         self.saved_label.configure(text='合併設定尚未儲存')
         self.load_result()
         self.update_controls()
@@ -236,7 +252,7 @@ class AssemblyPage(ttk.Frame):
     def save(self):
         try:
             self.require_current()
-            self.flow.save_assembly_settings(self.selected, self.pause_ms())
+            self.flow.save_assembly_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
             self.saved_label.configure(text='合併設定已儲存')
             self.status.configure(text='合併設定已儲存。尚未開始合併，不傳送文字。')
             self.app.notify('全書合併設定已儲存。')
@@ -266,7 +282,7 @@ class AssemblyPage(ttk.Frame):
                 return
             self.require_current()
             self.stop()
-            self.flow.save_assembly_settings(self.selected, self.pause_ms())
+            self.flow.save_assembly_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
             self.saved_label.configure(text='合併設定已儲存')
             self.job = self.flow.start_total_audio()
             self.status.configure(text='開始合併；本次來源版本與順序已固定。')
@@ -327,6 +343,9 @@ class AssemblyPage(ttk.Frame):
                 self.status.configure(text=str(error))
                 self.app.notify(str(error), kind='error')
             self.check_job = None
+            if (self.check_action == 'inspect' and self.join_page is not None
+                    and self.join_page.winfo_viewable() and not self.closing):
+                self.join_page.load()
         if self.job is not None:
             state = self.job.state
             if not self.job.wait(0):
@@ -355,6 +374,9 @@ class AssemblyPage(ttk.Frame):
                 self.closing = False
                 self.status.configure(text=str(error)+' 請重試保存，或關閉以捨棄本次結果。')
                 self.app.notify(self.status.cget('text'), kind='error')
+        if self.closing and self.join_page is not None and self.join_page.has_work():
+            self.schedule()
+            return
         if self.closing and self.job is None and self.check_job is None:
             self.release()
             return
@@ -381,8 +403,18 @@ class AssemblyPage(ttk.Frame):
         stopped = self.job is not None and self.job.wait(0)
         can_save = stopped and self.job is not None and self.job.state['status'] == 'completed'
         self.start_button.configure(state='normal' if can_save or valid and not busy else 'disabled',
-            text='重試保存' if can_save else '3 重試合併 MP3／SRT →' if self.last_status in ('failed', 'cancelled', 'interrupted') else
-            '3 更新總 MP3／SRT →' if self.product else '3 製作總 MP3／SRT →')
+            text='重試保存' if can_save else '4 重試合併 MP3／SRT →' if self.last_status in ('failed', 'cancelled', 'interrupted') else
+            '4 更新總 MP3／SRT →' if self.product else '4 製作總 MP3／SRT →')
+        from .assembly_joins import metadata
+        try:
+            joins = metadata(self.flow, self.selected)
+            pending = sum(bool(j['warning']) and j['key'] not in self.accepted_joins for j in joins)
+            self.join_summary.configure(text=f'3 檢查 {len(joins)} 個接點' + (f' · {pending} 個頁碼警告待確認' if pending else ''))
+            if pending and not can_save:
+                self.start_button.configure(state='disabled')
+        except ProjectError:
+            joins = []
+        self.join_button.configure(state='normal' if len(self.selected) >= 2 and not busy and joins else 'disabled')
         self.save_button.configure(state='disabled' if busy or not valid else 'normal')
         self.select_button.configure(state='disabled' if busy else 'normal')
         self.select_button.configure(text='選取全部有效批次' if self.rows else '重新檢查來源')
@@ -403,12 +435,34 @@ class AssemblyPage(ttk.Frame):
                 self.progress.configure(mode='indeterminate' if self.check_job is not None else 'determinate')
                 if self.check_job is not None:
                     self.progress.start(15)
-            self.progress.grid(row=5, column=0, sticky='ew')
+            self.progress.grid(row=6, column=0, sticky='ew')
             self.cancel_button.grid()
         else:
             self.progress.stop()
             self.progress.grid_remove()
             self.cancel_button.grid_remove()
+        if self.join_page is not None:
+            self.join_page.update_controls()
+
+    def open_joins(self):
+        if self.join_button.instate(['disabled']):
+            return
+        self.stop()
+        if self.join_page is None:
+            from .assembly_joins_desktop import JoinPage
+            self.join_page = JoinPage(self)
+        self.main.grid_remove()
+        self.join_page.grid(row=0, column=0, sticky='nsew')
+        self.join_page.load()
+
+    def return_from_joins(self):
+        if self.join_page is None:
+            return
+        self.join_page.stop()
+        self.join_page.grid_remove()
+        self.main.grid(row=0, column=0, sticky='nsew')
+        self.edit_return = False
+        self.update_controls()
 
     def set_production_busy(self, busy):
         was_busy = self.production_busy
@@ -464,6 +518,8 @@ class AssemblyPage(ttk.Frame):
         self.file_action('play')
 
     def stop(self):
+        if self.join_page is not None:
+            self.join_page.stop()
         was_playing = self.player.alias is not None
         if self.check_job is not None and self.check_action == 'play':
             self.check_job.cancel()
@@ -518,7 +574,7 @@ class AssemblyPage(ttk.Frame):
             self.check_job.cancel()
         if self.job is not None:
             self.cancel()
-        if self.check_job is not None or self.job is not None:
+        if self.check_job is not None or self.job is not None or self.join_page is not None and self.join_page.has_work():
             self.schedule()
         else:
             self.release()
@@ -529,4 +585,6 @@ class AssemblyPage(ttk.Frame):
         self.tooltip.hide()
         self.progress.stop()
         self.stop()
+        if self.join_page is not None:
+            self.join_page.release()
         self.destroy()

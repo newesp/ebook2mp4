@@ -115,6 +115,8 @@ class ProductionWorkspace(ttk.Frame):
     def show_active(self):
         page = self.active_page()
         if page is None:
+            page = next((p for p in self.pages.values() if getattr(p, 'edit_return', False) and p.winfo_exists()), None)
+        if page is None:
             return
         app = self.app
         if getattr(page, 'kind', None) == 'assembly':
@@ -141,7 +143,13 @@ class ProductionWorkspace(ttk.Frame):
             self.task_button.configure(text=f'{batch}｜{state.get("phase", "製作中")}｜完成 {state.get("completed", 0)}/{state.get("total", 0)} · 返回任務 →')
             self.task_button.grid(row=4, column=0, sticky='ew')
         else:
-            self.task_button.grid_remove()
+            returning = next((p for p in self.pages.values() if getattr(p, 'edit_return', False)
+                              and p.winfo_exists() and p.flow is self.app.flow), None)
+            if returning is not None and self.app.step != 4:
+                self.task_button.configure(text='返回全書合併的接點檢查 →')
+                self.task_button.grid(row=4, column=0, sticky='ew')
+            else:
+                self.task_button.grid_remove()
         self.refresh_task_controls()
         self.timer = self.after(200, self.poll)
 

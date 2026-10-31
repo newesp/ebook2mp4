@@ -1,6 +1,6 @@
 # T15：交接停頓、接點試聽與頁碼檢查
 
-狀態：HTML 設計預覽完成，等待使用者說 OK。尚未實作正式程式。
+狀態：使用者已說 OK，核准依本草圖實作。HTML 保留為設計依據；正式驗證另記錄。
 
 依據：本機票稿 `.scratch/pdf-txt-audiobook-video/v1.1/issues/15-audio-join-preview-page-warnings.md`、交接文件、T14 原生畫面與現有 `assembly_desktop.py`。T15 是本機票號，不推定遠端 issue #15。
 

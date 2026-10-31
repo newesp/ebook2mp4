@@ -77,7 +77,8 @@ async def inspect(flow: ProjectWorkflow) -> list[dict]:
     tool = ffmpeg()
     with tempfile.TemporaryDirectory(prefix='.assembly-check-', dir=flow.root) as temp:
         decoded_path = Path(temp)/'source.wav'
-        for batch in flow.state['batches']:
+        from .assembly_joins import ordered_batches
+        for batch in ordered_batches(flow):
             await asyncio.sleep(0)
             row = dict(batch_id=batch['id'], name=batch['name'], valid=False,
                        duration_ms=batch.get('narration', {}).get('duration_ms', 0))
@@ -102,16 +103,22 @@ async def inspect(flow: ProjectWorkflow) -> list[dict]:
     return rows
 
 
-def save_settings(flow: ProjectWorkflow, batch_ids: list[str], pause_ms: int) -> None:
+def save_settings(flow: ProjectWorkflow, batch_ids: list[str], pause_ms: int, accepted_joins: list[str] | None = None) -> None:
     from .production_lock import ProductionLease
     if not batch_ids or len(set(batch_ids)) != len(batch_ids):
         raise ProjectError('請至少選取一個批次，不可重複。')
-    if type(pause_ms) is not int or not 0 <= pause_ms <= 86_400_000:
-        raise ProjectError('交接停頓須為 0～86,400 秒，精確至毫秒。')
+    if type(pause_ms) is not int or not 0 <= pause_ms <= 5000:
+        raise ProjectError('額外交接停頓須為 0～5 秒，精確至毫秒。')
     lease = ProductionLease(flow.root / '.production.lock')
     try:
         flow._check_current()
         value = dict(sources=[source_ref(flow, batch_id, verify_media=False) for batch_id in batch_ids], pause_ms=pause_ms)
+        from .assembly_joins import metadata
+        if accepted_joins is not None and (not isinstance(accepted_joins, list) or
+                any(not isinstance(key, str) for key in accepted_joins)):
+            raise ProjectError('接點確認記錄無效，請重新檢查。')
+        accepted = settings(flow).get('accepted_joins', []) if accepted_joins is None else accepted_joins
+        value['accepted_joins'] = [j['key'] for j in metadata(flow, batch_ids) if j['key'] in accepted]
         manifest = flow.state
         manifest['assembly_settings'] = value
         flow._commit(manifest, [])
@@ -145,6 +152,31 @@ def captions(path: Path, duration_ms: int) -> list[tuple[int, int, str]]:
         return result
     except (OSError, UnicodeError, ValueError):
         raise ProjectError('字幕格式、順序或時間無效，請重新製作該批次 MP3／SRT。') from None
+
+
+async def copy_verified_source(root: Path, ref: dict, target: Path):
+    source = (root/ref['path']).resolve()
+    if not source.is_relative_to(root):
+        raise ProjectError('來源路徑不安全，請還原可信任專案。')
+    hasher = hashlib.sha256()
+    with source.open('rb') as stream, target.open('wb') as dest:
+        while data := stream.read(1024*1024):
+            await asyncio.sleep(0)
+            hasher.update(data)
+            dest.write(data)
+    if hasher.hexdigest() != ref['sha256']:
+        raise ProjectError('已選來源在檢查後變更。請重新檢查全書合併設定。')
+
+
+async def write_silence(output, pause_ms: int) -> int:
+    frames = pause_ms*24
+    remaining = frames
+    while remaining:
+        await asyncio.sleep(0)
+        take = min(remaining, 24000)
+        output.writeframesraw(b'\0\0'*take)
+        remaining -= take
+    return frames
 
 
 class TotalAudioJob(VoiceJob):
@@ -191,19 +223,6 @@ class TotalAudioJob(VoiceJob):
                     raise ProjectError('媒體處理 3 次嘗試後仍失敗。請檢查來源及磁碟，再重試合併。') from None
                 await asyncio.sleep(attempt/2)
 
-    async def copy_source(self, ref: dict, target: Path):
-        source = (self.root/ref['path']).resolve()
-        if not source.is_relative_to(self.root):
-            raise ProjectError('來源路徑不安全，請還原可信任專案。')
-        hasher = hashlib.sha256()
-        with source.open('rb') as stream, target.open('wb') as dest:
-            while data := stream.read(1024*1024):
-                await asyncio.sleep(0)
-                hasher.update(data)
-                dest.write(data)
-        if hasher.hexdigest() != ref['sha256']:
-            raise ProjectError('已選來源在檢查後變更。請重新檢查全書合併設定。')
-
     async def produce(self):
         media = self.folder/'media'
         success = False
@@ -218,7 +237,7 @@ class TotalAudioJob(VoiceJob):
                     entry = self.report['sources'][index]
                     entry.update(status='running')
                     for kind in ('mp3', 'srt'):
-                        await self.copy_source(source[kind], media/('source.'+kind))
+                        await copy_verified_source(self.root, source[kind], media/('source.'+kind))
                     await self.command(['-y', '-xerror', '-err_detect', 'explode', '-i', str(media/'source.mp3'),
                                         '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le', str(media/'source.wav')])
                     with wave.open(str(media/'source.wav'), 'rb') as decoded:
@@ -239,13 +258,7 @@ class TotalAudioJob(VoiceJob):
                                  duration_ms=round(count/24), attempts=self.report.get('attempt', 1))
                     frames += count
                     if index < len(self.snapshot['sources'])-1:
-                        silence = self.snapshot['pause_ms']*24
-                        while silence:
-                            await asyncio.sleep(0)
-                            take = min(silence, 24000)
-                            assembled.writeframesraw(b'\0\0'*take)
-                            frames += take
-                            silence -= take
+                        frames += await write_silence(assembled, self.snapshot['pause_ms'])
                     self.save_progress(completed=index+1)
             self.save_progress(phase='組裝總 MP3／SRT')
             output = media/'total.mp3'
@@ -310,11 +323,16 @@ def start(flow: ProjectWorkflow) -> TotalAudioJob:
     try:
         flow._check_current()
         value = settings(flow)
+        if not 0 <= value['pause_ms'] <= 5000:
+            raise ProjectError('請將舊交接停頓調整為 0～5 秒，再儲存合併設定。')
         if not value['sources']:
             raise ProjectError('請至少選取一個有效批次，並儲存合併設定。')
         for source in value['sources']:
             if source != source_ref(flow, source['batch_id'], verify_media=False):
                 raise ProjectError('已選來源版本變更，請重新檢查並儲存合併設定。')
+        from .assembly_joins import metadata
+        if any(j['warning'] and not j['accepted'] for j in metadata(flow)):
+            raise ProjectError('請先檢查交接接點的 PDF 頁碼警告，並明確確認保留內容。')
         total_ms = sum(flow._batch(s['batch_id'])['narration']['duration_ms'] for s in value['sources'])
         total_ms += (len(value['sources'])-1)*value['pause_ms']
         # WAV/RF64 support is explicit: reject instead of producing an invalid RIFF.

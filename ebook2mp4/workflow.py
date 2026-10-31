@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from .voice import VoiceJob
     from .narration import NarrationJob
     from .assembly import TotalAudioJob
+    from .assembly_joins import JoinPreviewJob
 
 
 class ProjectError(Exception):
@@ -94,6 +95,7 @@ class ProjectWorkflow:
         self._voice_job: VoiceJob | None = None
         self._narration_job: NarrationJob | None = None
         self._total_audio_job: TotalAudioJob | None = None
+        self._assembly_preview_job: JoinPreviewJob | None = None
 
     @property
     def state(self) -> dict:
@@ -1043,9 +1045,29 @@ class ProjectWorkflow:
         from .assembly import settings
         return settings(self)
 
-    def save_assembly_settings(self, batch_ids: list[str], pause_ms: int = 500) -> None:
+    def save_assembly_settings(self, batch_ids: list[str], pause_ms: int = 500, *,
+                               accepted_joins: list[str] | None = None) -> None:
         from .assembly import save_settings
-        save_settings(self, batch_ids, pause_ms)
+        save_settings(self, batch_ids, pause_ms, accepted_joins)
+
+    def inspect_assembly_joins(self, batch_ids: list[str] | None = None) -> list[dict]:
+        from .assembly_joins import inspect
+        return inspect(self, batch_ids)
+
+    def start_assembly_join_preview(self, batch_ids: list[str], index: int, *,
+                                    pause_ms: int = 500, clip_ms: int = 5000) -> JoinPreviewJob:
+        from .assembly_joins import start_preview
+        return start_preview(self, batch_ids, index, pause_ms, clip_ms)
+
+    def finish_assembly_join_preview(self, job: JoinPreviewJob) -> dict:
+        from .assembly_joins import finish_preview
+        return finish_preview(self, job)
+
+    def discard_assembly_join_preview(self, job: JoinPreviewJob) -> None:
+        if job is not self._assembly_preview_job:
+            raise ProjectError('找不到此專案的接點試聽。')
+        job.release()
+        self._assembly_preview_job = None
 
     def inspect_assembly(self) -> list[dict]:
         import asyncio
