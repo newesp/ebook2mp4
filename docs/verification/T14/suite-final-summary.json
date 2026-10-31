@@ -1,0 +1,268 @@
+[
+  {
+    "module": "test_desktop.py",
+    "exit_code": 0,
+    "cases": 14,
+    "skipped": 0,
+    "seconds": 46.16
+  },
+  {
+    "module": "test_gemini.py",
+    "exit_code": 0,
+    "cases": 6,
+    "skipped": 0,
+    "seconds": 6.96
+  },
+  {
+    "module": "test_gemini_desktop.py",
+    "exit_code": 0,
+    "cases": 4,
+    "skipped": 0,
+    "seconds": 10.07
+  },
+  {
+    "module": "test_gemini_resume.py",
+    "exit_code": 0,
+    "cases": 9,
+    "skipped": 0,
+    "seconds": 10.77
+  },
+  {
+    "module": "test_gemini_resume_desktop.py",
+    "exit_code": 0,
+    "cases": 2,
+    "skipped": 0,
+    "seconds": 8.2
+  },
+  {
+    "module": "test_incremental_desktop.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 15.12
+  },
+  {
+    "module": "test_incremental_narration.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 14.62
+  },
+  {
+    "module": "test_main_workflow_desktop.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 9.37
+  },
+  {
+    "module": "test_mixed_desktop.py",
+    "exit_code": 0,
+    "cases": 1,
+    "skipped": 0,
+    "seconds": 13.19
+  },
+  {
+    "module": "test_mixed_pdf.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 21.51
+  },
+  {
+    "module": "test_narration.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 25.76
+  },
+  {
+    "module": "test_narration_desktop.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 16.92
+  },
+  {
+    "module": "test_narration_resume.py",
+    "exit_code": 0,
+    "cases": 6,
+    "skipped": 0,
+    "seconds": 19.76
+  },
+  {
+    "module": "test_notifications.py",
+    "exit_code": 0,
+    "cases": 8,
+    "skipped": 0,
+    "seconds": 15.79
+  },
+  {
+    "module": "test_ocr.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 86.52
+  },
+  {
+    "module": "test_ocr_desktop.py",
+    "exit_code": 0,
+    "cases": 1,
+    "skipped": 0,
+    "seconds": 8.19
+  },
+  {
+    "module": "test_ocr_optimization.py",
+    "exit_code": 0,
+    "cases": 5,
+    "skipped": 0,
+    "seconds": 76.18
+  },
+  {
+    "module": "test_optimization_desktop.py",
+    "exit_code": 0,
+    "cases": 2,
+    "skipped": 0,
+    "seconds": 10.43
+  },
+  {
+    "module": "test_pdf.py",
+    "exit_code": 0,
+    "cases": 10,
+    "skipped": 0,
+    "seconds": 7.94
+  },
+  {
+    "module": "test_pdf_candidate_refinement.py",
+    "exit_code": 0,
+    "cases": 15,
+    "skipped": 0,
+    "seconds": 16.63
+  },
+  {
+    "module": "test_pdf_refinement_desktop.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 29.78
+  },
+  {
+    "module": "test_production_pages.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 15.06
+  },
+  {
+    "module": "test_proofreading_optimization.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 6.98
+  },
+  {
+    "module": "test_rhythm.py",
+    "exit_code": 0,
+    "cases": 4,
+    "skipped": 0,
+    "seconds": 11.8
+  },
+  {
+    "module": "test_rhythm_desktop.py",
+    "exit_code": 0,
+    "cases": 1,
+    "skipped": 0,
+    "seconds": 5.72
+  },
+  {
+    "module": "test_service_form.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 4.48
+  },
+  {
+    "module": "test_startup_defaults.py",
+    "exit_code": 0,
+    "cases": 1,
+    "skipped": 0,
+    "seconds": 1.99
+  },
+  {
+    "module": "test_status_help.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 7.82
+  },
+  {
+    "module": "test_terminology_desktop.py",
+    "exit_code": 0,
+    "cases": 2,
+    "skipped": 0,
+    "seconds": 5.37
+  },
+  {
+    "module": "test_total_audio.py",
+    "exit_code": 0,
+    "cases": 11,
+    "skipped": 0,
+    "seconds": 62.34
+  },
+  {
+    "module": "test_total_audio_desktop.py",
+    "exit_code": 0,
+    "cases": 5,
+    "skipped": 0,
+    "seconds": 47.82
+  },
+  {
+    "module": "test_tts_providers.py",
+    "exit_code": 0,
+    "cases": 5,
+    "skipped": 0,
+    "seconds": 12.98
+  },
+  {
+    "module": "test_ui_layout.py",
+    "exit_code": 0,
+    "cases": 6,
+    "skipped": 0,
+    "seconds": 18.47
+  },
+  {
+    "module": "test_ui_layout_gemini.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 20.71
+  },
+  {
+    "module": "test_ui_layout_pdf.py",
+    "exit_code": 0,
+    "cases": 3,
+    "skipped": 0,
+    "seconds": 16.41
+  },
+  {
+    "module": "test_voice.py",
+    "exit_code": 0,
+    "cases": 7,
+    "skipped": 0,
+    "seconds": 14.43
+  },
+  {
+    "module": "test_voice_desktop.py",
+    "exit_code": 0,
+    "cases": 6,
+    "skipped": 0,
+    "seconds": 22.25
+  },
+  {
+    "module": "test_workflow.py",
+    "exit_code": 0,
+    "cases": 26,
+    "skipped": 0,
+    "seconds": 14.81
+  }
+]

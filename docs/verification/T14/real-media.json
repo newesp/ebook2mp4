@@ -1,0 +1,53 @@
+{
+  "tool": "ffmpeg version 8.1.1-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "service": "synthetic response fixture, no live service",
+  "measurements": [
+    {
+      "batches": 1,
+      "source_frames": [
+        4800
+      ],
+      "decoded_frames": 4800,
+      "duration_ms": 200,
+      "added_silence_ms": 0,
+      "silence_peaks": [],
+      "new_tts_requests": 0,
+      "cues": "1\n00:00:00,000 --> 00:00:00,200\n第 1 批。\n\n",
+      "mp3_sha256": "86b16ccb626694384603394f176ae87b89c688a620c4882218f399eaba02f1c4"
+    },
+    {
+      "batches": 2,
+      "source_frames": [
+        4800,
+        4800
+      ],
+      "decoded_frames": 21600,
+      "duration_ms": 900,
+      "added_silence_ms": 500,
+      "silence_peaks": [
+        0
+      ],
+      "new_tts_requests": 0,
+      "cues": "1\n00:00:00,000 --> 00:00:00,200\n第 1 批。\n\n2\n00:00:00,700 --> 00:00:00,900\n第 2 批。\n\n",
+      "mp3_sha256": "715b30ac4933eec0d722cc6e911c2b109887e2110a4f43115edca6f05f032323"
+    },
+    {
+      "batches": 3,
+      "source_frames": [
+        4800,
+        4800,
+        4800
+      ],
+      "decoded_frames": 38400,
+      "duration_ms": 1600,
+      "added_silence_ms": 1000,
+      "silence_peaks": [
+        0,
+        0
+      ],
+      "new_tts_requests": 0,
+      "cues": "1\n00:00:00,000 --> 00:00:00,200\n第 1 批。\n\n2\n00:00:00,700 --> 00:00:00,900\n第 2 批。\n\n3\n00:00:01,400 --> 00:00:01,600\n第 3 批。\n\n",
+      "mp3_sha256": "74ddfe682a18da6b1e408104223bce369408a1345be5dba6f53d50a9b0466e42"
+    }
+  ]
+}

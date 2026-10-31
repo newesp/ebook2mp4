@@ -1,0 +1,106 @@
+test_cancel_and_failure_preserve_manual_work (test_gemini.GeminiJourney.test_cancel_and_failure_preserve_manual_work) ... ERROR
+test_edit_during_request_preserves_stale_candidate_without_overwrite (test_gemini.GeminiJourney.test_edit_during_request_preserves_stale_candidate_without_overwrite) ... ERROR
+test_local_encrypted_settings_connection_and_outgoing_selection (test_gemini.GeminiJourney.test_local_encrypted_settings_connection_and_outgoing_selection) ... ok
+test_pdf_batch_uses_same_review_and_portable_versions (test_gemini.GeminiJourney.test_pdf_batch_uses_same_review_and_portable_versions) ... ERROR
+test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic (test_gemini.GeminiJourney.test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic) ... ERROR
+test_selected_paragraph_decisions_undo_and_reopen (test_gemini.GeminiJourney.test_selected_paragraph_decisions_undo_and_reopen) ... ERROR
+
+======================================================================
+ERROR: test_cancel_and_failure_preserve_manual_work (test_gemini.GeminiJourney.test_cancel_and_failure_preserve_manual_work)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini.py", line 73, in test_cancel_and_failure_preserve_manual_work
+    job = self.flow.start_gemini_review(self.batch)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1140, in start_gemini_review
+    scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1130, in gemini_scope
+    settings = self.gemini_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1108, in gemini_settings
+    return load_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 62, in load_settings
+    key = protect(base64.b64decode(value['protected_key'], validate=True), decrypt=True).decode('utf-8') if value.get('protected_key') else ''
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 49, in protect
+    raise ProjectError('無法存取本機金鑰，請在目前 Windows 帳號重新設定。')
+ebook2mp4.workflow.ProjectError: 無法存取本機金鑰，請在目前 Windows 帳號重新設定。
+
+======================================================================
+ERROR: test_edit_during_request_preserves_stale_candidate_without_overwrite (test_gemini.GeminiJourney.test_edit_during_request_preserves_stale_candidate_without_overwrite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini.py", line 55, in test_edit_during_request_preserves_stale_candidate_without_overwrite
+    job = self.flow.start_gemini_review(self.batch)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1140, in start_gemini_review
+    scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1130, in gemini_scope
+    settings = self.gemini_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1108, in gemini_settings
+    return load_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 62, in load_settings
+    key = protect(base64.b64decode(value['protected_key'], validate=True), decrypt=True).decode('utf-8') if value.get('protected_key') else ''
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 49, in protect
+    raise ProjectError('無法存取本機金鑰，請在目前 Windows 帳號重新設定。')
+ebook2mp4.workflow.ProjectError: 無法存取本機金鑰，請在目前 Windows 帳號重新設定。
+
+======================================================================
+ERROR: test_pdf_batch_uses_same_review_and_portable_versions (test_gemini.GeminiJourney.test_pdf_batch_uses_same_review_and_portable_versions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini.py", line 130, in test_pdf_batch_uses_same_review_and_portable_versions
+    job = self.flow.start_gemini_review(batch)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1140, in start_gemini_review
+    scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1130, in gemini_scope
+    settings = self.gemini_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1108, in gemini_settings
+    return load_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 62, in load_settings
+    key = protect(base64.b64decode(value['protected_key'], validate=True), decrypt=True).decode('utf-8') if value.get('protected_key') else ''
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 49, in protect
+    raise ProjectError('無法存取本機金鑰，請在目前 Windows 帳號重新設定。')
+ebook2mp4.workflow.ProjectError: 無法存取本機金鑰，請在目前 Windows 帳號重新設定。
+
+======================================================================
+ERROR: test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic (test_gemini.GeminiJourney.test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini.py", line 146, in test_rejected_paragraph_survives_accept_all_and_failed_save_is_atomic
+    job = self.flow.start_gemini_review(self.batch)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1140, in start_gemini_review
+    scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1130, in gemini_scope
+    settings = self.gemini_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1108, in gemini_settings
+    return load_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 62, in load_settings
+    key = protect(base64.b64decode(value['protected_key'], validate=True), decrypt=True).decode('utf-8') if value.get('protected_key') else ''
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 49, in protect
+    raise ProjectError('無法存取本機金鑰，請在目前 Windows 帳號重新設定。')
+ebook2mp4.workflow.ProjectError: 無法存取本機金鑰，請在目前 Windows 帳號重新設定。
+
+======================================================================
+ERROR: test_selected_paragraph_decisions_undo_and_reopen (test_gemini.GeminiJourney.test_selected_paragraph_decisions_undo_and_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_gemini.py", line 33, in test_selected_paragraph_decisions_undo_and_reopen
+    job = self.flow.start_gemini_review(self.batch, start=start, end=end)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1140, in start_gemini_review
+    scope = self.gemini_scope(batch_id, start=start, end=end, script=script, punctuation=punctuation)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1130, in gemini_scope
+    settings = self.gemini_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1108, in gemini_settings
+    return load_settings()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 62, in load_settings
+    key = protect(base64.b64decode(value['protected_key'], validate=True), decrypt=True).decode('utf-8') if value.get('protected_key') else ''
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\gemini.py", line 49, in protect
+    raise ProjectError('無法存取本機金鑰，請在目前 Windows 帳號重新設定。')
+ebook2mp4.workflow.ProjectError: 無法存取本機金鑰，請在目前 Windows 帳號重新設定。
+
+----------------------------------------------------------------------
+Ran 6 tests in 2.309s
+
+FAILED (errors=5)

@@ -1,0 +1,6 @@
+test_output_changed_after_verification_does_not_replace_previous_total (test_total_audio.TotalAudioJourney.test_output_changed_after_verification_does_not_replace_previous_total) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 9.162s
+
+OK

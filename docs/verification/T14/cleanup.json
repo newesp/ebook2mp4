@@ -1,0 +1,109 @@
+{
+  "removed": [
+    {
+      "path": ".scratch/t14-tools",
+      "bytes": 104471466,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-build",
+      "bytes": 32874173,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-ocr-copy",
+      "bytes": 121410362,
+      "remains": false
+    },
+    {
+      "path": ".scratch/ocr-runtime",
+      "bytes": 121410362,
+      "remains": false
+    },
+    {
+      "path": ".scratch/voice-runtime",
+      "bytes": 101457920,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-mypy",
+      "bytes": 20377829,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-probe",
+      "bytes": 173927,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-temp",
+      "bytes": 0,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-package-book",
+      "bytes": 129426,
+      "remains": false
+    },
+    {
+      "path": ".scratch/test-runs/tmp4t5h7mfq",
+      "bytes": 1130,
+      "remains": false
+    },
+    {
+      "path": ".scratch/test-runs/tmpjcbb14do",
+      "bytes": 92678,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-run-suite.py",
+      "bytes": 1833,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-package-check.py",
+      "bytes": 1139,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-prepare-package.py",
+      "bytes": 731,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-package-meta.json",
+      "bytes": 233,
+      "remains": false
+    },
+    {
+      "path": ".scratch/t14-final-record.py",
+      "bytes": 3157,
+      "remains": false
+    },
+    {
+      "path": "docs/verification/T14/native-1040.jpg",
+      "bytes": 115213,
+      "remains": false
+    },
+    {
+      "path": "docs/verification/T14/native-details.png",
+      "bytes": 116310,
+      "remains": false
+    },
+    {
+      "path": "docs/verification/T14/package-completed.png",
+      "bytes": 138089,
+      "remains": false
+    }
+  ],
+  "bytes_removed": 502775978,
+  "remaining_targets": [],
+  "package_files_checked": 1299,
+  "blocked_files": [],
+  "user_T13_sha256": "97c46454d500fedfdd25e9b091bcdff13bc6dd8fafeae3e8b5c4f8885c47af1e",
+  "final_T14_sha256": "149b50c8352e4c1c182bc8d50dc1a09319d2612d680b2ad674fe203108f4f5c2",
+  "owned_remaining_processes": [],
+  "preserved_user_T13": true,
+  "test_runs_directory_empty": true,
+  "computer_use_kernel_reset": true
+}

@@ -1,0 +1,33 @@
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ERROR
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ERROR
+test_cancel_conflict_and_disk_shortage_preserve_previous_product (test_total_audio.TotalAudioJourney.test_cancel_conflict_and_disk_shortage_preserve_previous_product) ... ok
+test_invalid_selection_and_missing_sources_are_reported (test_total_audio.TotalAudioJourney.test_invalid_selection_and_missing_sources_are_reported) ... ok
+test_one_two_three_batches_use_decoded_timeline_and_no_tts (test_total_audio.TotalAudioJourney.test_one_two_three_batches_use_decoded_timeline_and_no_tts) ... ok
+test_only_selected_sources_and_shared_settings_invalidate_total (test_total_audio.TotalAudioJourney.test_only_selected_sources_and_shared_settings_invalidate_total) ... ok
+test_selection_order_and_versions_survive_reopen (test_total_audio.TotalAudioJourney.test_selection_order_and_versions_survive_reopen) ... ok
+
+======================================================================
+ERROR: test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio_desktop.py", line 39, in test_gui_selection_save_reorder_and_production_stay_in_main_window
+    self.app.total_audio()
+    ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Workbench' object has no attribute 'total_audio'
+
+======================================================================
+ERROR: test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio_desktop.py", line 25, in shutdown
+    while self.root.winfo_exists() and time.monotonic()<deadline:
+          ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1248, in winfo_exists
+    self.tk.call('winfo', 'exists', self._w))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: can't invoke "winfo" command: application has been destroyed
+
+----------------------------------------------------------------------
+Ran 6 tests in 29.937s
+
+FAILED (errors=2)

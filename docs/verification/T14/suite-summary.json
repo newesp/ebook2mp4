@@ -1,0 +1,16 @@
+[
+  {
+    "module": "test_desktop.py",
+    "exit_code": 0,
+    "cases": 14,
+    "skipped": 0,
+    "seconds": 23.42
+  },
+  {
+    "module": "test_gemini.py",
+    "exit_code": 1,
+    "cases": 6,
+    "skipped": 0,
+    "seconds": 2.85
+  }
+]

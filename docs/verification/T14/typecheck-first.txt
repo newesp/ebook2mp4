@@ -1,0 +1,11 @@
+ebook2mp4\assembly_desktop.py:68: error: Cannot assign to a method  [method-assign]
+ebook2mp4\assembly_desktop.py:68: error: Incompatible types in assignment (expression has type "Frame", variable has type "Callable[[], _PlaceInfo]")  [assignment]
+ebook2mp4\assembly_desktop.py:69: error: "Callable[[], _PlaceInfo]" has no attribute "columnconfigure"  [attr-defined]
+ebook2mp4\assembly_desktop.py:70: error: "Callable[[], _PlaceInfo]" has no attribute "rowconfigure"  [attr-defined]
+ebook2mp4\assembly_desktop.py:71: error: Argument 1 to "Text" has incompatible type "Callable[[], _PlaceInfo]"; expected "Misc | None"  [arg-type]
+ebook2mp4\assembly_desktop.py:74: error: Argument 1 to "Scrollbar" has incompatible type "Callable[[], _PlaceInfo]"; expected "Misc | None"  [arg-type]
+ebook2mp4\assembly_desktop.py:77: error: Argument 1 to "Frame" has incompatible type "Callable[[], _PlaceInfo]"; expected "Misc | None"  [arg-type]
+ebook2mp4\assembly_desktop.py:319: error: Item "None" of "Any | None" has no attribute "state"  [union-attr]
+ebook2mp4\assembly_desktop.py:353: error: "Callable[[], _PlaceInfo]" has no attribute "grid_remove"  [attr-defined]
+ebook2mp4\assembly_desktop.py:354: error: Item "function" of "Callable[[], _PlaceInfo] | Frame" has no attribute "grid"  [union-attr]
+Found 10 errors in 1 file (checked 5 source files)

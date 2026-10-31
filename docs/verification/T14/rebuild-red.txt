@@ -1,0 +1,15 @@
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... FAIL
+
+======================================================================
+FAIL: test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio_desktop.py", line 208, in test_damaged_old_total_does_not_block_rebuilding_from_valid_batches
+    self.assertIn('舊總成品', page.status.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '舊總成品' not found in '找不到總成品，請重新合併。'
+
+----------------------------------------------------------------------
+Ran 1 test in 10.571s
+
+FAILED (failures=1)

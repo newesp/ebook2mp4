@@ -1,0 +1,6 @@
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 11.255s
+
+OK

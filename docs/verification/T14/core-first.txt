@@ -1,0 +1,10 @@
+test_cancel_conflict_and_disk_shortage_preserve_previous_product (test_total_audio.TotalAudioJourney.test_cancel_conflict_and_disk_shortage_preserve_previous_product) ... ok
+test_invalid_selection_and_missing_sources_are_reported (test_total_audio.TotalAudioJourney.test_invalid_selection_and_missing_sources_are_reported) ... ok
+test_one_two_three_batches_use_decoded_timeline_and_no_tts (test_total_audio.TotalAudioJourney.test_one_two_three_batches_use_decoded_timeline_and_no_tts) ... ok
+test_only_selected_sources_and_shared_settings_invalidate_total (test_total_audio.TotalAudioJourney.test_only_selected_sources_and_shared_settings_invalidate_total) ... ok
+test_selection_order_and_versions_survive_reopen (test_total_audio.TotalAudioJourney.test_selection_order_and_versions_survive_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 25.847s
+
+OK

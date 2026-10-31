@@ -1,0 +1,30 @@
+{
+  "exe": "E:\\Leo\\Projects\\ebook2mp4\\dist\\T14\\ebook2mp4\\ebook2mp4.exe",
+  "sha256": "149b50c8352e4c1c182bc8d50dc1a09319d2612d680b2ad674fe203108f4f5c2",
+  "modules": {
+    "ebook2mp4": true,
+    "ebook2mp4.assembly": true,
+    "ebook2mp4.assembly_desktop": true,
+    "ebook2mp4.desktop": true,
+    "ebook2mp4.gemini": true,
+    "ebook2mp4.gemini_desktop": true,
+    "ebook2mp4.narration": true,
+    "ebook2mp4.narration_desktop": true,
+    "ebook2mp4.ocr": true,
+    "ebook2mp4.pdf": true,
+    "ebook2mp4.pdf_desktop": true,
+    "ebook2mp4.production_desktop": true,
+    "ebook2mp4.production_lock": true,
+    "ebook2mp4.proofreading": true,
+    "ebook2mp4.service_desktop": true,
+    "ebook2mp4.tts_services": true,
+    "ebook2mp4.ui_controls": true,
+    "ebook2mp4.voice": true,
+    "ebook2mp4.voice_defaults_desktop": true,
+    "ebook2mp4.voice_desktop": true,
+    "ebook2mp4.voice_media": true,
+    "ebook2mp4.window_layout": true,
+    "ebook2mp4.workflow": true
+  },
+  "files": 1299
+}

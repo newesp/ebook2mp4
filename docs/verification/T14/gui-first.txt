@@ -1,0 +1,6 @@
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.484s
+
+OK

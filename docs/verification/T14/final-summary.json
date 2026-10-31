@@ -1,0 +1,27 @@
+{
+  "modules": 38,
+  "full_suite_cases": 223,
+  "full_suite_failures": [],
+  "skipped": 0,
+  "seconds": 759.31,
+  "additional_publication_guard": 1,
+  "total_distinct_cases": 224,
+  "final_gui_retest_cases": 5,
+  "typechecked_sources": 25,
+  "compiled_modules_verified": 23,
+  "review": {
+    "standards": 0,
+    "spec": 0
+  },
+  "source_commit": "0ea80a4",
+  "initial_sandbox_attempt": "Aborted after DPAPI sandbox decryption failures; owned process tree stopped, complete suite rerun in current Windows user context.",
+  "limitations": [
+    "Other DPI and real-book long-play listening not performed",
+    "WAV assembly limit approximately 23 hours; explicit preflight rejection"
+  ],
+  "native_sizes": [
+    "1040x640",
+    "1360x800",
+    "maximized"
+  ]
+}

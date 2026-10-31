@@ -83,13 +83,15 @@ class TotalAudioDesktop(unittest.TestCase):
         page = self.app.production.current
         self.wait_page(page)
         self.root.state('normal')
-        self.root.geometry('1040x640')
-        self.root.update()
-        for widget in (page.start_button, page.save_button, page.back_button, page.play_button,
-                       page.export_button, page.folder_button, page.pause_control, page.info_button):
-            self.assertGreaterEqual(widget.winfo_rootx(), self.root.winfo_rootx())
-            self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(), self.root.winfo_rootx()+self.root.winfo_width())
-            self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(), self.root.winfo_rooty()+self.root.winfo_height())
+        for viewport in ('1040x640', '1360x800'):
+            with self.subTest(viewport=viewport):
+                self.root.geometry(viewport)
+                self.root.update()
+                for widget in (page.start_button, page.save_button, page.back_button, page.play_button,
+                               page.export_button, page.folder_button, page.pause_control, page.info_button):
+                    self.assertGreaterEqual(widget.winfo_rootx(), self.root.winfo_rootx())
+                    self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(), self.root.winfo_rootx()+self.root.winfo_width())
+                    self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(), self.root.winfo_rooty()+self.root.winfo_height())
         self.assertGreater(page.table.winfo_height(), 60)
         page.table.selection_set(self.ids[0])
         page.toggle_selected()

@@ -1,0 +1,6 @@
+test_fractional_millisecond_sources_do_not_overlap_at_zero_pause (test_total_audio.TotalAudioJourney.test_fractional_millisecond_sources_do_not_overlap_at_zero_pause) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.384s
+
+OK

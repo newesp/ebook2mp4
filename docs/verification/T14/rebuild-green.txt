@@ -1,0 +1,6 @@
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 14.454s
+
+OK

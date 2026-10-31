@@ -1,0 +1,20 @@
+test_fractional_millisecond_sources_do_not_overlap_at_zero_pause (test_total_audio.TotalAudioJourney.test_fractional_millisecond_sources_do_not_overlap_at_zero_pause) ... FAIL
+
+======================================================================
+FAIL: test_fractional_millisecond_sources_do_not_overlap_at_zero_pause (test_total_audio.TotalAudioJourney.test_fractional_millisecond_sources_do_not_overlap_at_zero_pause)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 255, in test_fractional_millisecond_sources_do_not_overlap_at_zero_pause
+    result = self.merge()
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 44, in merge
+    self.assertEqual(job.state['status'], 'completed', job.state)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'completed'
+- failed
++ completed
+ : {'status': 'failed', 'error': '�`���T���ѽX�ɶ��P�����ɶ����@�P�A���o�����~�C', 'phase': '����', 'current': 3, 'total': 3, 'completed': 3, 'sources': [{'batch_id': 'f62389d33cde436fbf2eeda61d4f1468', 'status': 'completed', 'attempts': 1, 'frames': 4814, 'start_ms': 0, 'duration_ms': 201}, {'batch_id': 'c84ee90afb8e4b33895f862cd2104755', 'status': 'completed', 'attempts': 1, 'frames': 4814, 'start_ms': 201, 'duration_ms': 201}, {'batch_id': '1bed969c1f2f4069b4b4ae1c43fcf5b0', 'status': 'completed', 'attempts': 1, 'frames': 4814, 'start_ms': 401, 'duration_ms': 201}], 'attempt': 1}
+
+----------------------------------------------------------------------
+Ran 1 test in 7.671s
+
+FAILED (failures=1)
