@@ -378,7 +378,7 @@ class AssemblyPage(ttk.Frame):
             mode = 'indeterminate' if self.check_job is not None else 'determinate'
             if str(self.progress.cget('mode')) != mode:
                 self.progress.stop()
-                self.progress.configure(mode=mode)
+                self.progress.configure(mode='indeterminate' if self.check_job is not None else 'determinate')
                 if self.check_job is not None:
                     self.progress.start(15)
             self.progress.grid(row=5, column=0, sticky='ew')
