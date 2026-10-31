@@ -2,6 +2,11 @@
 import unittest
 from pathlib import Path
 import threading
+import wave
+import subprocess
+import os
+import json
+import hashlib
 from unittest.mock import patch
 
 from test_pdf import pdf_bytes
@@ -176,6 +181,35 @@ class AssemblyJoinJourney(unittest.TestCase):
         finally:
             self.flow.discard_assembly_join_preview(job)
         self.assertFalse(job.folder.exists())
+
+    def test_fractional_clip_boundary_does_not_create_empty_caption(self):
+        wav = self.path/'fractional.wav'
+        with wave.open(str(wav), 'wb') as output:
+            output.setparams((1, 2, 24000, 0, 'NONE', 'not compressed'))
+            output.writeframes(b'\x40\x00'*95990)
+        mp3 = self.path/'fractional.mp3'
+        subprocess.run([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(wav),
+                        '-c:a', 'libmp3lame', '-b:a', '96k', str(mp3)], check=True)
+        ids = self.prepare(2, mp3.read_bytes())
+        # Import a checksum-consistent, valid SRT through the project-file boundary.
+        manifest = json.loads((self.flow.root/'project.json').read_bytes())
+        ref = next(b for b in manifest['batches'] if b['id'] == ids[0])['narration']['srt']
+        data = ('1\n00:00:00,000 --> 00:00:01,000\nFirst sentence.\n\n'
+                '2\n00:00:01,000 --> 00:00:04,000\nLast sentence.\n\n').encode('utf-8')
+        (self.flow.root/ref['path']).write_bytes(data)
+        ref['sha256'] = hashlib.sha256(data).hexdigest()
+        (self.flow.root/'project.json').write_text(json.dumps(manifest), encoding='utf-8')
+        self.flow = ProjectWorkflow.open(self.flow.root)
+        job = self.flow.start_assembly_join_preview(ids, 0, clip_ms=3000)
+        try:
+            self.assertTrue(job.wait(15))
+            self.assertEqual(job.state['status'], 'completed', job.state)
+            preview = self.flow.finish_assembly_join_preview(job)
+            srt = Path(preview['srt_path']).read_text(encoding='utf-8')
+            self.assertNotIn('00:00:00,000 --> 00:00:00,000', srt)
+            self.assertIn('Last sentence.', preview['left_text'])
+        finally:
+            self.flow.discard_assembly_join_preview(job)
 
 
 if __name__ == '__main__':

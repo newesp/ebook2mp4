@@ -4,6 +4,7 @@ import time
 from unittest.mock import patch
 import threading
 from pathlib import Path
+import shutil
 
 from ebook2mp4.workflow import ProjectWorkflow
 import test_total_audio_desktop as fixture
@@ -135,3 +136,27 @@ class AssemblyJoinsDesktop(unittest.TestCase):
             finally:
                 proceed.set()
         self.assertEqual(list(self.flow.root.glob('.join-preview-*')), [])
+
+    def test_edit_return_uses_current_book_when_two_books_have_pending_returns(self):
+        self.app.total_audio()
+        first = self.app.production.current
+        self.wait_page(first)
+        first.select_button.invoke()
+        first.join_button.invoke()
+        self.wait_join(first.join_page)
+        first.join_page.right_edit.invoke()
+        shutil.copytree(self.flow.root, self.path/'book-b')
+        second_flow = ProjectWorkflow.open(self.path/'book-b')
+        self.app.flow = second_flow
+        self.app.refresh()
+        self.app.total_audio()
+        second = self.app.production.current
+        self.wait_page(second)
+        second.select_button.invoke()
+        second.join_button.invoke()
+        self.wait_join(second.join_page)
+        second.join_page.right_edit.invoke()
+        self.app.production.show_active()
+        self.root.update()
+        self.assertIs(self.app.flow, second_flow)
+        self.assertIs(self.app.production.current, second)

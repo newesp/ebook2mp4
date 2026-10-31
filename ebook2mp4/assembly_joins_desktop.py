@@ -160,9 +160,9 @@ class JoinPage(ttk.Frame):
         if warning:
             labels = dict(overlap='頁碼重疊', gap='頁碼缺口', reverse='手動倒序')
             page_range = str(warning['start']) if warning['start'] == warning['end'] else f'{warning["start"]}～{warning["end"]}'
-            self.warning_title.configure(text=f'{labels[warning["kind"]]} · {warning["source_name"]} 第 {page_range} 頁')
+            self.warning_title.configure(text=f'{labels[warning["kind"]]} · 第 {page_range} 頁')
             a, b = join['left']['pages'], join['right']['pages']
-            self.warning_copy.configure(text=f'前批：{a["start"]}～{a["end"]}；後批：{b["start"]}～{b["end"]}。不自動去重、補頁或補半句。')
+            self.warning_copy.configure(text=f'前批：{a["start"]}～{a["end"]}；後批：{b["start"]}～{b["end"]}。不自動去重、補頁或補半句。來源：{warning["source_name"]}')
             self.warning.grid()
         else:
             self.warning.grid_remove()

@@ -27,6 +27,9 @@ def settings(flow: ProjectWorkflow) -> dict:
         ids = [source['batch_id'] for source in value['sources']]
         if len(set(ids)) != len(ids) or any(not isinstance(i, str) for i in ids):
             raise ValueError()
+        accepted = value.get('accepted_joins', [])
+        if not isinstance(accepted, list) or any(not isinstance(key, str) for key in accepted):
+            raise ValueError()
         return value
     except (KeyError, TypeError, ValueError):
         raise ProjectError('全書合併設定損壞，請還原專案備份。') from None

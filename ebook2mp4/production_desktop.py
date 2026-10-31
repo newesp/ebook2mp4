@@ -115,7 +115,8 @@ class ProductionWorkspace(ttk.Frame):
     def show_active(self):
         page = self.active_page()
         if page is None:
-            page = next((p for p in self.pages.values() if getattr(p, 'edit_return', False) and p.winfo_exists()), None)
+            page = next((p for p in self.pages.values() if getattr(p, 'edit_return', False)
+                         and p.flow is self.app.flow and p.winfo_exists()), None)
         if page is None:
             return
         app = self.app

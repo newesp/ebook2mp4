@@ -122,10 +122,14 @@ class JoinPreviewJob(VoiceJob):
                         decoded.setpos(start)
                         relevant = [(max(begin*24, start)-start, min(end*24, start+take)-start, text)
                                     for begin, end, text in source_cues if begin*24 < start+take and end*24 > start]
-                        texts.append('\n'.join(text for _, _, text in relevant))
+                        visible_texts = []
                         for begin, end, text in relevant:
-                            cues.append(f'{len(cues)+1}\n{timestamp(round((frames+begin)/24))} --> '
-                                        f'{timestamp(round((frames+end)/24))}\n{text}\n\n')
+                            begin_ms, end_ms = round((frames+begin)/24), round((frames+end)/24)
+                            if begin_ms < end_ms:
+                                visible_texts.append(text)
+                                cues.append(f'{len(cues)+1}\n{timestamp(begin_ms)} --> '
+                                            f'{timestamp(end_ms)}\n{text}\n\n')
+                        texts.append('\n'.join(visible_texts))
                         remaining = take
                         while remaining:
                             await asyncio.sleep(0)
