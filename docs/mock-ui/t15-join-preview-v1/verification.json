@@ -1,0 +1,42 @@
+{
+  "stage": "HTML mock only; awaiting user approval",
+  "date": "2026-11-01",
+  "viewport_checks": [
+    {
+      "controls_outside": 0,
+      "width": 1040,
+      "height": 640,
+      "document_width": 1040,
+      "document_height": 640
+    },
+    {
+      "controls_outside": 0,
+      "width": 1360,
+      "height": 800,
+      "document_width": 1360,
+      "document_height": 800
+    }
+  ],
+  "observed": [
+    "Overlap page 8 warning",
+    "Gap pages 9-17 warning",
+    "Explicit warning acknowledgement enables merge",
+    "5 seconds persists after reload",
+    "5.001 seconds blocks save",
+    "0 seconds simulated preview",
+    "TXT has no PDF warning",
+    "Corrective edit placeholder and return preserve context"
+  ],
+  "limitations": [
+    "No real audio or TTS",
+    "No native Tk verification",
+    "No product code changed"
+  ],
+  "cleanup": {
+    "port_8765_listeners": 0,
+    "temporary_scripts_removed": true,
+    "http_server_stopped": true,
+    "viewport_override_reset": true,
+    "preview_tab_closed": true
+  }
+}
