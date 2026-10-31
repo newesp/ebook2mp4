@@ -316,8 +316,10 @@ class AssemblyPage(ttk.Frame):
                     if (self.check_action == 'play' and not self.closing and self.app.step == 4
                             and self.app.production.current is self and self.app.flow is self.flow):
                         self.player.play(path)
+                        self.status.configure(text='正在播放總音訊。可按「停止播放」結束。')
                     elif self.check_action == 'folder':
                         os.startfile(path)
+                        self.status.configure(text='已開啟總成品資料夾。')
                     elif self.check_action == 'export':
                         self.status.configure(text='總 MP3 與 SRT 已另存至新資料夾。')
                         self.app.notify('總 MP3 與 SRT 已另存至新資料夾。')
@@ -358,8 +360,11 @@ class AssemblyPage(ttk.Frame):
             return
         self.update_controls()
         try:
+            was_playing = self.player.alias is not None
             if self.player.playing():
                 self.schedule()
+            elif was_playing:
+                self.status.configure(text='播放已結束。')
         except ProjectError as error:
             self.status.configure(text=str(error))
             self.stop()
@@ -459,10 +464,13 @@ class AssemblyPage(ttk.Frame):
         self.file_action('play')
 
     def stop(self):
+        was_playing = self.player.alias is not None
         if self.check_job is not None and self.check_action == 'play':
             self.check_job.cancel()
         try:
             self.player.stop()
+            if was_playing:
+                self.status.configure(text='播放已停止。')
         except ProjectError as error:
             self.status.configure(text=str(error))
         self.update_controls()

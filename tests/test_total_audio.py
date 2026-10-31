@@ -266,6 +266,22 @@ class TotalAudioJourney(unittest.TestCase):
         self.assertIn('00:00:00,201 --> 00:00:00,401', text)
         self.assertIn('00:00:00,401 --> 00:00:00,602', text)
 
+    def test_output_changed_after_verification_does_not_replace_previous_total(self):
+        ids = self.prepare(1)
+        self.flow.save_assembly_settings(ids)
+        previous = self.merge()
+        known = set(self.flow.root.rglob('total.mp3'))
+        job = self.flow.start_total_audio()
+        self.assertTrue(job.wait(10), job.state)
+        pending, = set(self.flow.root.rglob('total.mp3'))-known
+        with pending.open('ab') as stream:
+            stream.write(b'damaged after verification')
+        with self.assertRaisesRegex(ProjectError, '發布前變更'):
+            self.flow.finish_total_audio(job)
+        self.flow.discard_total_audio(job)
+        self.assertEqual(self.flow.total_audio()['id'], previous['id'])
+        self.assertFalse((self.flow.root/'.production.lock').exists())
+
 
 if __name__ == '__main__':
     unittest.main()

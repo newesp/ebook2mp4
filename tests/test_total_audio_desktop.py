@@ -70,6 +70,13 @@ class TotalAudioDesktop(unittest.TestCase):
         self.assertEqual(self.flow.total_audio()['duration_ms'], 900)
         self.assertIn('目前總成品', page.result_info.cget('text'))
         self.assertFalse(page.play_button.instate(['disabled']))
+        with patch('ebook2mp4.voice_media.PreviewPlayer._send', return_value='playing'):
+            page.play_button.invoke()
+            self.wait_page(page)
+            self.assertIn('正在播放', page.status.cget('text'))
+            page.stop_button.invoke()
+            self.assertIn('已停止', page.status.cget('text'))
+            self.assertIsNone(page.player.alias)
 
     def test_main_window_busy_guard_invalid_source_and_minimum_size(self):
         self.app.total_audio()
