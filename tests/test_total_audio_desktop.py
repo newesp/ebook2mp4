@@ -1,6 +1,8 @@
 """Native journeys for shared book selection, saved order and local production."""
 import time
 import asyncio
+import threading
+from pathlib import Path
 import tkinter as tk
 import unittest
 from unittest.mock import patch
@@ -122,6 +124,45 @@ class TotalAudioDesktop(unittest.TestCase):
         self.assertTrue(page.info_open)
         page.info_button.invoke()
         self.assertEqual(page.selected, [self.ids[1]])
+
+    def test_source_reading_does_not_block_main_window_cancellation(self):
+        self.app.total_audio()
+        page = self.app.production.current
+        self.wait_page(page)
+        page.table.selection_set(self.batch)
+        page.toggle_selected()
+        source = self.flow.narration_path(self.batch)
+        opened, proceed, ui_event = threading.Event(), threading.Event(), threading.Event()
+        original = Path.open
+        main_thread = threading.get_ident()
+        readers = []
+        class SlowFile:
+            def __init__(self, stream): self.stream = stream
+            def __enter__(self): return self
+            def __exit__(self, *args): self.stream.close()
+            def read(self, *args):
+                readers.append(threading.get_ident())
+                opened.set()
+                proceed.wait(5)
+                return self.stream.read(*args)
+        def slow_open(path, *args, **kwargs):
+            stream = original(path, *args, **kwargs)
+            return SlowFile(stream) if path == source else stream
+        with patch.object(Path, 'open', slow_open):
+            try:
+                page.start_button.invoke()
+                self.assertTrue(opened.wait(5))
+                self.root.after(0, ui_event.set)
+                self.root.update()
+                self.assertTrue(ui_event.is_set())
+                self.assertNotIn(main_thread, readers)
+                page.cancel_button.invoke()
+                proceed.set()
+                self.wait_page(page)
+            finally:
+                proceed.set()
+        self.assertEqual(self.flow.total_audio_runs()[-1]['progress']['status'], 'cancelled')
+        self.assertFalse((self.flow.root/'.production.lock').exists())
 
 
 if __name__ == '__main__':

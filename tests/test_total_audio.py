@@ -144,9 +144,11 @@ class TotalAudioJourney(unittest.TestCase):
         self.flow.save_assembly_settings(ids)
         self.flow.narration_path(self.batch, 'srt').write_text('broken subtitles', encoding='utf-8')
         self.assertFalse(self.flow.inspect_assembly()[0]['valid'])
-        with self.assertRaises(ProjectError):
-            self.flow.start_total_audio()
-        self.assertEqual(self.flow.total_audio_runs(), [])
+        job = self.flow.start_total_audio()
+        self.assertTrue(job.wait(10), job.state)
+        self.assertEqual(job.state['status'], 'failed')
+        self.flow.discard_total_audio(job)
+        self.assertIsNone(self.flow.total_audio())
 
     def test_media_failure_has_three_attempts_and_keeps_old_publication(self):
         ids = self.prepare(1)
@@ -216,6 +218,9 @@ class TotalAudioJourney(unittest.TestCase):
                 (self.flow.root/'project.json').write_text(json.dumps(manifest), encoding='utf-8')
                 self.flow = ProjectWorkflow.open(self.flow.root)
                 self.flow.save_assembly_settings(ids)
+                invalid = self.flow.inspect_assembly()[0]
+                self.assertFalse(invalid['valid'])
+                self.assertIn('字幕', invalid['reason'])
                 job = self.flow.start_total_audio()
                 self.assertTrue(job.wait(10), job.state)
                 self.assertEqual(job.state['status'], 'failed')

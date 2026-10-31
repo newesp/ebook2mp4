@@ -1048,8 +1048,9 @@ class ProjectWorkflow:
         save_settings(self, batch_ids, pause_ms)
 
     def inspect_assembly(self) -> list[dict]:
+        import asyncio
         from .assembly import inspect
-        return inspect(self)
+        return asyncio.run(inspect(self))
 
     def total_audio(self) -> dict | None:
         from .assembly import total_audio
@@ -1082,25 +1083,9 @@ class ProjectWorkflow:
         return self._path(product[kind]['path'])
 
     def export_total_audio(self, folder: str | Path) -> None:
-        product = self.total_audio()
-        if product is None:
-            raise ProjectError('尚無成功總成品。')
-        target = Path(folder).resolve()
-        if target.exists():
-            raise ProjectError('另存資料夾已存在，請選擇新的資料夾名稱。')
-        temporary = None
-        try:
-            temporary = Path(tempfile.mkdtemp(prefix='.total-export-', dir=target.parent))
-            self._space(target.parent, sum(self._path(product[k]['path']).stat().st_size for k in ('mp3', 'srt')))
-            for kind in ('mp3', 'srt'):
-                shutil.copyfile(self._path(product[kind]['path']), temporary/('total.'+kind))
-            temporary.rename(target)
-            temporary = None
-        except OSError:
-            raise ProjectError('無法另存總成品。請檢查資料夾權限與磁碟空間。') from None
-        finally:
-            if temporary is not None:
-                shutil.rmtree(temporary)
+        import asyncio
+        from .assembly import export
+        asyncio.run(export(self, folder))
 
     @staticmethod
     def gemini_settings() -> dict:

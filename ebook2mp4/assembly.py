@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import re
 import shutil
+import tempfile
 import uuid
 import wave
 
@@ -45,7 +46,7 @@ def checked_file(flow: ProjectWorkflow, ref: dict) -> Path:
         raise ProjectError('缺少批次 MP3／SRT，請重新製作該批次。') from None
 
 
-def source_ref(flow: ProjectWorkflow, batch_id: str) -> dict:
+def source_ref(flow: ProjectWorkflow, batch_id: str, *, verify_media=True) -> dict:
     batch = flow._batch(batch_id)
     product = batch.get('narration')
     if product is None:
@@ -60,26 +61,44 @@ def source_ref(flow: ProjectWorkflow, batch_id: str) -> dict:
                    settings_sha256=digest(encode(product['settings'])),
                    mp3=deepcopy(product['mp3']), srt=deepcopy(product['srt']))
         for kind in ('mp3', 'srt'):
-            checked_file(flow, ref[kind])
+            if verify_media:
+                checked_file(flow, ref[kind])
+            elif not flow._path(ref[kind]['path']).is_file():
+                raise ProjectError('缺少 MP3／SRT，請重新製作該批次。')
         return ref
     except (KeyError, TypeError):
         raise ProjectError('批次成品記錄損壞，請重新製作該批次。') from None
 
 
-def inspect(flow: ProjectWorkflow) -> list[dict]:
+async def inspect(flow: ProjectWorkflow) -> list[dict]:
     flow._check_current()
     rows = []
     saved = {s['batch_id']: s for s in settings(flow)['sources']}
-    for batch in flow.state['batches']:
-        row = dict(batch_id=batch['id'], name=batch['name'], valid=False,
-                   duration_ms=batch.get('narration', {}).get('duration_ms', 0))
-        try:
-            row['source'] = source_ref(flow, batch['id'])
-            row.update(valid=True, reason='目前版本 · 開始前驗證媒體',
-                       version_changed=batch['id'] in saved and saved[batch['id']] != row['source'])
-        except ProjectError as error:
-            row['reason'] = str(error)
-        rows.append(row)
+    tool = ffmpeg()
+    with tempfile.TemporaryDirectory(prefix='.assembly-check-', dir=flow.root) as temp:
+        decoded_path = Path(temp)/'source.wav'
+        for batch in flow.state['batches']:
+            await asyncio.sleep(0)
+            row = dict(batch_id=batch['id'], name=batch['name'], valid=False,
+                       duration_ms=batch.get('narration', {}).get('duration_ms', 0))
+            try:
+                ref = source_ref(flow, batch['id'], verify_media=False)
+                for kind in ('mp3', 'srt'):
+                    await checked_file_async(flow, ref[kind])
+                await media_command(tool, ['-y', '-xerror', '-err_detect', 'explode', '-i',
+                    str(flow._path(ref['mp3']['path'])), '-ac', '1', '-ar', '24000', '-c:a', 'pcm_s16le', str(decoded_path)], timeout=3600)
+                with wave.open(str(decoded_path), 'rb') as decoded:
+                    frames = decoded.getnframes()
+                    if frames <= 0:
+                        raise ProjectError('批次音訊為空，請重新製作。')
+                    captions(flow._path(ref['srt']['path']), round(frames/24))
+                row.update(source=ref, valid=True, reason='有效 · 音訊與字幕已驗證', duration_ms=round(frames/24),
+                           version_changed=batch['id'] in saved and saved[batch['id']] != ref)
+            except (OSError, wave.Error):
+                row['reason'] = '無法檢查媒體，請檢查來源及磁碟空間。'
+            except ProjectError as error:
+                row['reason'] = str(error)
+            rows.append(row)
     return rows
 
 
@@ -92,7 +111,7 @@ def save_settings(flow: ProjectWorkflow, batch_ids: list[str], pause_ms: int) ->
     lease = ProductionLease(flow.root / '.production.lock')
     try:
         flow._check_current()
-        value = dict(sources=[source_ref(flow, batch_id) for batch_id in batch_ids], pause_ms=pause_ms)
+        value = dict(sources=[source_ref(flow, batch_id, verify_media=False) for batch_id in batch_ids], pause_ms=pause_ms)
         manifest = flow.state
         manifest['assembly_settings'] = value
         flow._commit(manifest, [])
@@ -251,7 +270,10 @@ class TotalAudioJob(VoiceJob):
             for name in ('assembled.wav', 'verified.wav', 'source.wav', 'source.mp3', 'source.srt'):
                 (media/name).unlink(missing_ok=True)
             self.save_progress(status='completed', phase='等待保存', duration_ms=round(actual/24), frames=actual,
-                               planned_frames=frames)
+                               planned_frames=frames, artifacts={kind: dict(
+                                   path=(media/('total.'+kind)).relative_to(self.root).as_posix(),
+                                   sha256=await file_digest_async(media/('total.'+kind))) for kind in ('mp3', 'srt')})
+            self.report['artifact_stats'] = {kind: file_signature(media/('total.'+kind)) for kind in ('mp3', 'srt')}
             success = True
             return deepcopy(self.report)
         except asyncio.CancelledError:
@@ -291,7 +313,7 @@ def start(flow: ProjectWorkflow) -> TotalAudioJob:
         if not value['sources']:
             raise ProjectError('請至少選取一個有效批次，並儲存合併設定。')
         for source in value['sources']:
-            if source != source_ref(flow, source['batch_id']):
+            if source != source_ref(flow, source['batch_id'], verify_media=False):
                 raise ProjectError('已選來源版本變更，請重新檢查並儲存合併設定。')
         total_ms = sum(flow._batch(s['batch_id'])['narration']['duration_ms'] for s in value['sources'])
         total_ms += (len(value['sources'])-1)*value['pause_ms']
@@ -331,8 +353,10 @@ def finish(flow: ProjectWorkflow, job: TotalAudioJob) -> dict:
         product = dict(deepcopy(job.snapshot), duration_ms=report['duration_ms'], frames=report['frames'],
                        planned_frames=report['planned_frames'], timeline=report['sources'], completed_at=now())
         for kind in ('mp3', 'srt'):
-            path = job.folder/'media'/('total.'+kind)
-            product[kind] = dict(path=path.relative_to(flow.root).as_posix(), sha256=file_digest(path))
+            path = flow._path(report['artifacts'][kind]['path'])
+            if file_signature(path) != report['artifact_stats'][kind]:
+                raise ProjectError('已驗證的總成品在發布前變更。舊成品保留，請重新合併。')
+            product[kind] = deepcopy(report['artifacts'][kind])
         manifest = flow.state
         manifest['total_audio'] = product
         next(r for r in manifest['total_audio_runs'] if r['id'] == product['id'])['published'] = True
@@ -340,34 +364,103 @@ def finish(flow: ProjectWorkflow, job: TotalAudioJob) -> dict:
         job.published = True
     job.release(discard=False)
     flow._total_audio_job = None
-    result = total_audio(flow)
+    result = total_audio(flow, verify_media=False)
     assert result is not None
     return result
 
 
-def file_digest(path: Path) -> str:
+async def file_digest_async(path: Path) -> str:
+    hasher = hashlib.sha256()
     with path.open('rb') as stream:
-        return hashlib.file_digest(stream, 'sha256').hexdigest()
+        while data := stream.read(1024*1024):
+            await asyncio.sleep(0)
+            hasher.update(data)
+    return hasher.hexdigest()
 
 
-def total_audio(flow: ProjectWorkflow) -> dict | None:
+def file_signature(path: Path) -> tuple[int, int, int]:
+    try:
+        stat = path.stat()
+        return stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns
+    except OSError:
+        raise ProjectError('已驗證的總成品遺失。舊成品保留，請重新合併。') from None
+
+
+async def checked_file_async(flow: ProjectWorkflow, ref: dict) -> Path:
+    path = flow._path(ref['path'])
+    try:
+        if path.stat().st_size == 0 or await file_digest_async(path) != ref['sha256']:
+            raise ProjectError('音訊或字幕已損壞，請重新製作對應成品。')
+        return path
+    except OSError:
+        raise ProjectError('找不到音訊或字幕，請重新製作對應成品。') from None
+
+
+def total_audio(flow: ProjectWorkflow, *, verify_media=True) -> dict | None:
     product = deepcopy(flow.state.get('total_audio'))
     if product is None:
         return None
     try:
         for kind in ('mp3', 'srt'):
-            checked_file(flow, product[kind])
+            if verify_media:
+                checked_file(flow, product[kind])
+            elif not flow._path(product[kind]['path']).is_file():
+                raise ProjectError('找不到總成品，請重新合併。')
         value = settings(flow)
         stale = (value['sources'] != product['sources'] or value['pause_ms'] != product['pause_ms'])
         for source in product['sources']:
             try:
-                stale = stale or source != source_ref(flow, source['batch_id'])
+                stale = stale or source != source_ref(flow, source['batch_id'], verify_media=verify_media)
             except ProjectError:
                 stale = True
         product['stale'] = stale
         return product
     except (KeyError, TypeError, ValueError):
         raise ProjectError('總成品記錄損壞，請還原備份或重新合併。') from None
+
+
+async def inspect_total_audio(flow: ProjectWorkflow) -> dict | None:
+    product = total_audio(flow, verify_media=False)
+    if product is not None:
+        for kind in ('mp3', 'srt'):
+            await checked_file_async(flow, product[kind])
+        for source in product['sources']:
+            for kind in ('mp3', 'srt'):
+                try:
+                    await checked_file_async(flow, source[kind])
+                except ProjectError:
+                    product['stale'] = True
+    return product
+
+
+async def export(flow: ProjectWorkflow, folder: str | Path) -> None:
+    product = total_audio(flow, verify_media=False)
+    if product is None:
+        raise ProjectError('尚無成功總成品。')
+    target = Path(folder).resolve()
+    if target.exists():
+        raise ProjectError('另存資料夾已存在，請選擇新的資料夾名稱。')
+    temporary = None
+    try:
+        flow._space(target.parent, sum(flow._path(product[k]['path']).stat().st_size for k in ('mp3', 'srt')))
+        temporary = Path(tempfile.mkdtemp(prefix='.total-export-', dir=target.parent))
+        for kind in ('mp3', 'srt'):
+            ref = product[kind]
+            hasher = hashlib.sha256()
+            with flow._path(ref['path']).open('rb') as source, (temporary/('total.'+kind)).open('wb') as dest:
+                while data := source.read(1024*1024):
+                    await asyncio.sleep(0)
+                    hasher.update(data)
+                    dest.write(data)
+            if hasher.hexdigest() != ref['sha256']:
+                raise ProjectError('總成品已損壞，無法另存。請重新合併。')
+        temporary.rename(target)
+        temporary = None
+    except OSError:
+        raise ProjectError('無法另存總成品。請檢查資料夾權限與磁碟空間。') from None
+    finally:
+        if temporary is not None:
+            shutil.rmtree(temporary)
 
 
 def runs(flow: ProjectWorkflow) -> list[dict]:

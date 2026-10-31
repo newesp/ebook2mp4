@@ -27,6 +27,7 @@ class AssemblyPage(ttk.Frame):
         self.rows: list[dict] = []
         self.product = None
         self.last_status = ''
+        self.check_action = 'inspect'
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1, minsize=70)
 
@@ -191,6 +192,9 @@ class AssemblyPage(ttk.Frame):
 
     def select_valid(self):
         if self.job is None and self.check_job is None and not self.production_busy:
+            if not self.rows:
+                self.recheck()
+                return
             self.selected = [r['batch_id'] for r in self.rows if r['valid']]
             self.render_rows()
             self.changed()
@@ -209,7 +213,9 @@ class AssemblyPage(ttk.Frame):
         if self.job is not None or self.check_job is not None or self.closing:
             return
         async def inspect():
-            return self.flow.inspect_assembly(), self.flow.total_audio(), self.flow.total_audio_runs()
+            from .assembly import inspect, inspect_total_audio
+            return await inspect(self.flow), await inspect_total_audio(self.flow), self.flow.total_audio_runs()
+        self.check_action = 'inspect'
         self.check_job = VoiceJob(inspect, timeout=None)
         self.status.configure(text='正在檢查來源與成品版本…')
         self.update_controls()
@@ -221,10 +227,12 @@ class AssemblyPage(ttk.Frame):
             self.flow.save_assembly_settings(self.selected, self.pause_ms())
             self.saved_label.configure(text='合併設定已儲存')
             self.status.configure(text='合併設定已儲存。尚未開始合併，不傳送文字。')
+            self.app.notify('全書合併設定已儲存。')
             self.recheck()
             return True
         except ProjectError as error:
             self.status.configure(text=str(error))
+            self.app.notify(str(error), kind='error')
             return False
 
     def require_current(self):
@@ -254,6 +262,7 @@ class AssemblyPage(ttk.Frame):
             self.schedule()
         except ProjectError as error:
             self.status.configure(text=str(error))
+            self.app.notify(str(error), kind='error')
 
     def schedule(self):
         if self.timer is not None:
@@ -265,6 +274,7 @@ class AssemblyPage(ttk.Frame):
         self.job = None
         self.load_result()
         self.status.configure(text='總 MP3／SRT 已完成並保存。請播放檢查。')
+        self.app.notify('總 MP3／SRT 已完成並保存。')
 
     def poll(self):
         self.timer = None
@@ -273,16 +283,31 @@ class AssemblyPage(ttk.Frame):
                 self.schedule()
                 return
             try:
-                self.rows, self.product, runs = self.check_job.result
-                self.render_rows()
-                self.load_result()
-                last = runs[-1]['progress'] if runs else None
-                self.last_status = last['status'] if last else ''
-                labels = dict(cancelled='已取消', failed='失敗', interrupted='已中斷', completed='已完成')
-                self.status.configure(text=(f'上次合併：{labels.get(last["status"], "未完成")}。'+last.get('error', '')+' 舊成品保留，可重新合併。'
-                    if last and last['status'] != 'completed' else '請依序選批次、設定交接停頓，再製作總音訊。'))
-            except ProjectError as error:
+                if self.check_job.state['status'] == 'cancelled':
+                    if self.check_action == 'inspect':
+                        self.rows = []
+                    self.status.configure(text='已取消檢查或檔案操作。舊成品保留；可重新檢查來源。')
+                elif self.check_action == 'inspect':
+                    self.rows, self.product, runs = self.check_job.result
+                    self.render_rows()
+                    self.load_result()
+                    last = runs[-1]['progress'] if runs else None
+                    self.last_status = last['status'] if last else ''
+                    labels = dict(cancelled='已取消', failed='失敗', interrupted='已中斷', completed='已完成')
+                    self.status.configure(text=(f'上次合併：{labels.get(last["status"], "未完成")}。'+last.get('error', '')+' 舊成品保留，可重新合併。'
+                        if last and last['status'] != 'completed' else '請依序選批次、設定交接停頓，再製作總音訊。'))
+                else:
+                    path = self.check_job.result
+                    if self.check_action == 'play':
+                        self.player.play(path)
+                    elif self.check_action == 'folder':
+                        os.startfile(path)
+                    elif self.check_action == 'export':
+                        self.status.configure(text='總 MP3 與 SRT 已另存至新資料夾。')
+                        self.app.notify('總 MP3 與 SRT 已另存至新資料夾。')
+            except (ProjectError, OSError) as error:
                 self.status.configure(text=str(error))
+                self.app.notify(str(error), kind='error')
             self.check_job = None
         if self.job is not None:
             state = self.job.state
@@ -298,11 +323,20 @@ class AssemblyPage(ttk.Frame):
                     self.flow.discard_total_audio(self.job)
                     self.job = None
                     self.status.configure(text='已取消。上一版總成品保留。' if state['status'] == 'cancelled' else state['error'])
+                    if state['status'] == 'failed':
+                        for entry in state.get('sources', []):
+                            if entry['status'] == 'failed':
+                                row = next((r for r in self.rows if r['batch_id'] == entry['batch_id']), None)
+                                if row is not None:
+                                    row.update(valid=False, reason=state['error'])
+                        self.render_rows()
+                    self.app.notify(self.status.cget('text'), kind='error' if state['status'] == 'failed' else 'info')
                 else:
                     self.publish()
             except ProjectError as error:
                 self.closing = False
                 self.status.configure(text=str(error)+' 請重試保存，或關閉以捨棄本次結果。')
+                self.app.notify(self.status.cget('text'), kind='error')
         if self.closing and self.job is None and self.check_job is None:
             self.release()
             return
@@ -330,19 +364,27 @@ class AssemblyPage(ttk.Frame):
             '3 更新總 MP3／SRT →' if self.product else '3 製作總 MP3／SRT →')
         self.save_button.configure(state='disabled' if busy or not valid else 'normal')
         self.select_button.configure(state='disabled' if busy else 'normal')
+        self.select_button.configure(text='選取全部有效批次' if self.rows else '重新檢查來源')
         self.pause_control.configure(state='disabled' if busy else 'normal')
         focus = self.table.selection()
         index = self.selected.index(focus[0]) if focus and focus[0] in self.selected else -1
         self.up_button.configure(state='normal' if not busy and index > 0 else 'disabled')
         self.down_button.configure(state='normal' if not busy and 0 <= index < len(self.selected)-1 else 'disabled')
-        self.play_button.configure(state='normal' if self.product else 'disabled')
+        self.play_button.configure(state='normal' if self.product and self.check_job is None else 'disabled')
         self.stop_button.configure(state='normal' if self.player.alias is not None else 'disabled')
         self.export_button.configure(state='normal' if self.product and not busy else 'disabled')
-        self.folder_button.configure(state='normal' if self.product else 'disabled')
-        if self.job is not None and not stopped:
+        self.folder_button.configure(state='normal' if self.product and self.check_job is None else 'disabled')
+        if self.check_job is not None or self.job is not None and not stopped:
+            mode = 'indeterminate' if self.check_job is not None else 'determinate'
+            if str(self.progress.cget('mode')) != mode:
+                self.progress.stop()
+                self.progress.configure(mode=mode)
+                if self.check_job is not None:
+                    self.progress.start(15)
             self.progress.grid(row=5, column=0, sticky='ew')
             self.cancel_button.grid()
         else:
+            self.progress.stop()
             self.progress.grid_remove()
             self.cancel_button.grid_remove()
 
@@ -397,12 +439,7 @@ class AssemblyPage(ttk.Frame):
             self.app.narration()
 
     def play(self):
-        try:
-            self.player.play(self.flow.total_audio_path())
-            self.update_controls()
-            self.schedule()
-        except ProjectError as error:
-            self.status.configure(text=str(error))
+        self.file_action('play')
 
     def stop(self):
         try:
@@ -414,19 +451,35 @@ class AssemblyPage(ttk.Frame):
     def export(self):
         target = filedialog.asksaveasfilename(parent=self.app.root, title='另存總 MP3／SRT：輸入新資料夾名稱', initialfile='總音訊成品')
         if target:
-            try:
-                self.flow.export_total_audio(target)
-                self.status.configure(text='總 MP3 與 SRT 已另存至新資料夾。')
-            except ProjectError as error:
-                self.status.configure(text=str(error))
+            self.file_action('export', target)
 
     def open_folder(self):
-        try:
-            os.startfile(self.flow.total_audio_path().parent)
-        except (OSError, ProjectError):
-            self.status.configure(text='無法開啟資料夾，請從專案位置手動開啟。')
+        self.file_action('folder')
+
+    def file_action(self, action, target=None):
+        if self.check_job is not None:
+            return
+        self.stop()
+        async def operation():
+            from .assembly import export, inspect_total_audio
+            if action == 'export':
+                await export(self.flow, target)
+                return None
+            product = await inspect_total_audio(self.flow)
+            if product is None:
+                raise ProjectError('尚無成功總成品。')
+            path = self.flow._path(product['mp3']['path'])
+            return path.parent if action == 'folder' else path
+        self.check_action = action
+        self.check_job = VoiceJob(operation, timeout=None)
+        self.status.configure(text='正在驗證成品並處理檔案…')
+        self.update_controls()
+        self.schedule()
 
     def cancel(self):
+        if self.check_job is not None:
+            self.check_job.cancel()
+            self.status.configure(text='取消中，正在停止檢查並釋放檔案…')
         if self.job is not None:
             self.job.cancel()
             self.status.configure(text='取消中，正在停止媒體程序並釋放檔案…')
@@ -447,4 +500,5 @@ class AssemblyPage(ttk.Frame):
         if self.timer is not None:
             self.after_cancel(self.timer)
         self.tooltip.hide()
+        self.progress.stop()
         self.destroy()
