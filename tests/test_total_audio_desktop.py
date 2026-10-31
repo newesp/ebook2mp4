@@ -16,6 +16,7 @@ class TotalAudioDesktop(unittest.TestCase):
     prepare = fixture.TotalAudioJourney.prepare
     refresh_voices = fixture.TotalAudioJourney.refresh_voices
     audio = fixture.TotalAudioJourney.audio
+    merge = fixture.TotalAudioJourney.merge
 
     def setUp(self):
         fixture.TotalAudioJourney.setUp(self)
@@ -163,6 +164,54 @@ class TotalAudioDesktop(unittest.TestCase):
                 proceed.set()
         self.assertEqual(self.flow.total_audio_runs()[-1]['progress']['status'], 'cancelled')
         self.assertFalse((self.flow.root/'.production.lock').exists())
+
+    def test_leaving_page_cancels_pending_playback_verification(self):
+        self.flow.save_assembly_settings(self.ids)
+        self.merge()
+        self.app.total_audio()
+        page = self.app.production.current
+        self.wait_page(page)
+        source = self.flow.total_audio_path()
+        original = Path.open
+        opened, proceed = threading.Event(), threading.Event()
+        class SlowFile:
+            def __init__(self, stream): self.stream = stream
+            def __enter__(self): return self
+            def __exit__(self, *args): self.stream.close()
+            def read(self, *args):
+                opened.set()
+                proceed.wait(5)
+                return self.stream.read(*args)
+        def slow_open(path, *args, **kwargs):
+            stream = original(path, *args, **kwargs)
+            return SlowFile(stream) if path == source else stream
+        with patch.object(Path, 'open', slow_open), patch('ebook2mp4.voice_media.PreviewPlayer.play') as play:
+            try:
+                page.play_button.invoke()
+                self.assertTrue(opened.wait(5))
+                self.app.voice_settings()
+                proceed.set()
+                self.wait_page(page)
+                play.assert_not_called()
+                self.assertIsNone(page.player.alias)
+            finally:
+                proceed.set()
+
+    def test_damaged_old_total_does_not_block_rebuilding_from_valid_batches(self):
+        self.flow.save_assembly_settings(self.ids)
+        self.merge()
+        old = self.flow.total_audio_path()
+        old.unlink()
+        self.app.total_audio()
+        page = self.app.production.current
+        self.wait_page(page)
+        self.assertIn('舊總成品', page.status.cget('text'))
+        self.assertFalse(page.start_button.instate(['disabled']))
+        self.assertTrue(page.play_button.instate(['disabled']))
+        page.start_button.invoke()
+        self.wait_page(page)
+        self.assertTrue(self.flow.total_audio_path().is_file())
+        self.assertIn('目前總成品', page.result_info.cget('text'))
 
 
 if __name__ == '__main__':

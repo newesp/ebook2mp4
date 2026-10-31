@@ -214,7 +214,19 @@ class AssemblyPage(ttk.Frame):
             return
         async def inspect():
             from .assembly import inspect, inspect_total_audio
-            return await inspect(self.flow), await inspect_total_audio(self.flow), self.flow.total_audio_runs()
+            rows = await inspect(self.flow)
+            warning = ''
+            try:
+                product = await inspect_total_audio(self.flow)
+            except ProjectError as error:
+                product = None
+                warning = f'舊總成品無法驗證：{error} 可使用有效批次重新合併。'
+            try:
+                runs = self.flow.total_audio_runs()
+            except ProjectError as error:
+                runs = []
+                warning += f' 合併進度無法讀取：{error}'
+            return rows, product, runs, warning
         self.check_action = 'inspect'
         self.check_job = VoiceJob(inspect, timeout=None)
         self.status.configure(text='正在檢查來源與成品版本…')
@@ -288,7 +300,7 @@ class AssemblyPage(ttk.Frame):
                         self.rows = []
                     self.status.configure(text='已取消檢查或檔案操作。舊成品保留；可重新檢查來源。')
                 elif self.check_action == 'inspect':
-                    self.rows, self.product, runs = self.check_job.result
+                    self.rows, self.product, runs, warning = self.check_job.result
                     self.render_rows()
                     self.load_result()
                     last = runs[-1]['progress'] if runs else None
@@ -296,9 +308,13 @@ class AssemblyPage(ttk.Frame):
                     labels = dict(cancelled='已取消', failed='失敗', interrupted='已中斷', completed='已完成')
                     self.status.configure(text=(f'上次合併：{labels.get(last["status"], "未完成")}。'+last.get('error', '')+' 舊成品保留，可重新合併。'
                         if last and last['status'] != 'completed' else '請依序選批次、設定交接停頓，再製作總音訊。'))
+                    if warning:
+                        self.status.configure(text=warning)
+                        self.app.notify(warning, kind='warning')
                 else:
                     path = self.check_job.result
-                    if self.check_action == 'play':
+                    if (self.check_action == 'play' and not self.closing and self.app.step == 4
+                            and self.app.production.current is self and self.app.flow is self.flow):
                         self.player.play(path)
                     elif self.check_action == 'folder':
                         os.startfile(path)
@@ -371,7 +387,8 @@ class AssemblyPage(ttk.Frame):
         self.up_button.configure(state='normal' if not busy and index > 0 else 'disabled')
         self.down_button.configure(state='normal' if not busy and 0 <= index < len(self.selected)-1 else 'disabled')
         self.play_button.configure(state='normal' if self.product and self.check_job is None else 'disabled')
-        self.stop_button.configure(state='normal' if self.player.alias is not None else 'disabled')
+        self.stop_button.configure(state='normal' if self.player.alias is not None or
+            self.check_job is not None and self.check_action == 'play' else 'disabled')
         self.export_button.configure(state='normal' if self.product and not busy else 'disabled')
         self.folder_button.configure(state='normal' if self.product and self.check_job is None else 'disabled')
         if self.check_job is not None or self.job is not None and not stopped:
@@ -442,6 +459,8 @@ class AssemblyPage(ttk.Frame):
         self.file_action('play')
 
     def stop(self):
+        if self.check_job is not None and self.check_action == 'play':
+            self.check_job.cancel()
         try:
             self.player.stop()
         except ProjectError as error:
@@ -501,4 +520,5 @@ class AssemblyPage(ttk.Frame):
             self.after_cancel(self.timer)
         self.tooltip.hide()
         self.progress.stop()
+        self.stop()
         self.destroy()
