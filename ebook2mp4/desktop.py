@@ -450,7 +450,8 @@ class Workbench(ttk.Frame):
             self.notice.configure(text='步驟 4：設定語音與試聽，再前往製作與成品。')
             current = self.production.current
             if self.flow and (current is None or not current.winfo_exists() or
-                    getattr(current, 'flow', None) is not self.flow or getattr(current, 'batch_id', None) != self.batch_id):
+                    getattr(current, 'flow', None) is not self.flow or
+                    getattr(current, 'kind', None) != 'assembly' and getattr(current, 'batch_id', None) != self.batch_id):
                 self.production.show('voice')
             return
         if hasattr(self, 'production'):
@@ -1256,6 +1257,14 @@ class Workbench(ttk.Frame):
         self.step = 4
         self.render_step()
         self.production.show('narration')
+
+    def total_audio(self):
+        if not self.flow:
+            self.notice.configure(text='請先建立或開啟書籍專案，再進行全書合併。')
+            return
+        self.step = 4
+        self.render_step()
+        self.production.show('assembly')
 
     def gemini_settings(self):
         from .gemini_desktop import SettingsDialog

@@ -23,6 +23,7 @@ if TYPE_CHECKING:
     from .gemini import ReviewJob
     from .voice import VoiceJob
     from .narration import NarrationJob
+    from .assembly import TotalAudioJob
 
 
 class ProjectError(Exception):
@@ -92,6 +93,7 @@ class ProjectWorkflow:
         self._gemini_job: ReviewJob | None = None
         self._voice_job: VoiceJob | None = None
         self._narration_job: NarrationJob | None = None
+        self._total_audio_job: TotalAudioJob | None = None
 
     @property
     def state(self) -> dict:
@@ -1033,6 +1035,69 @@ class ProjectWorkflow:
             temporary = None
         except OSError:
             raise ProjectError('無法另存成品，請檢查資料夾權限與磁碟空間。') from None
+        finally:
+            if temporary is not None:
+                shutil.rmtree(temporary)
+
+    def assembly_settings(self) -> dict:
+        from .assembly import settings
+        return settings(self)
+
+    def save_assembly_settings(self, batch_ids: list[str], pause_ms: int = 500) -> None:
+        from .assembly import save_settings
+        save_settings(self, batch_ids, pause_ms)
+
+    def inspect_assembly(self) -> list[dict]:
+        from .assembly import inspect
+        return inspect(self)
+
+    def total_audio(self) -> dict | None:
+        from .assembly import total_audio
+        return total_audio(self)
+
+    def start_total_audio(self):
+        from .assembly import start
+        return start(self)
+
+    def finish_total_audio(self, job: TotalAudioJob) -> dict:
+        from .assembly import finish
+        return finish(self, job)
+
+    def discard_total_audio(self, job: TotalAudioJob) -> None:
+        if job is not self._total_audio_job or not job.wait(0):
+            raise ProjectError('請等待所屬全書合併任務停止後再捨棄。')
+        job.release(discard=True)
+        self._total_audio_job = None
+
+    def total_audio_runs(self) -> list[dict]:
+        from .assembly import runs
+        return runs(self)
+
+    def total_audio_path(self, kind: str = 'mp3') -> Path:
+        if kind not in ('mp3', 'srt'):
+            raise ProjectError('成品格式僅支援 MP3 或 SRT。')
+        product = self.total_audio()
+        if product is None:
+            raise ProjectError('尚無成功總成品，請先完成全書合併。')
+        return self._path(product[kind]['path'])
+
+    def export_total_audio(self, folder: str | Path) -> None:
+        product = self.total_audio()
+        if product is None:
+            raise ProjectError('尚無成功總成品。')
+        target = Path(folder).resolve()
+        if target.exists():
+            raise ProjectError('另存資料夾已存在，請選擇新的資料夾名稱。')
+        temporary = None
+        try:
+            temporary = Path(tempfile.mkdtemp(prefix='.total-export-', dir=target.parent))
+            self._space(target.parent, sum(self._path(product[k]['path']).stat().st_size for k in ('mp3', 'srt')))
+            for kind in ('mp3', 'srt'):
+                shutil.copyfile(self._path(product[kind]['path']), temporary/('total.'+kind))
+            temporary.rename(target)
+            temporary = None
+        except OSError:
+            raise ProjectError('無法另存總成品。請檢查資料夾權限與磁碟空間。') from None
         finally:
             if temporary is not None:
                 shutil.rmtree(temporary)

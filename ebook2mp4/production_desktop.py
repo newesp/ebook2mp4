@@ -40,6 +40,9 @@ class ProductionWorkspace(ttk.Frame):
         ttk.Label(tabs, text=' → ').pack(side='left')
         self.narration_tab = ttk.Button(tabs, text='製作與成品', command=app.narration)
         self.narration_tab.pack(side='left')
+        ttk.Label(tabs, text=' → ').pack(side='left')
+        self.assembly_tab = ttk.Button(tabs, text='全書合併', command=app.total_audio)
+        self.assembly_tab.pack(side='left')
         self.host = ttk.Frame(self)
         self.host.grid(row=1, column=0, sticky='nsew')
         self.host.columnconfigure(0, weight=1)
@@ -61,16 +64,20 @@ class ProductionWorkspace(ttk.Frame):
         self.current = page
         page.grid(row=0, column=0, sticky='nsew')
         self.refresh_task_controls()
-        kind = 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
+        kind = 'assembly' if getattr(page, 'kind', None) == 'assembly' else 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
         self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
         self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
+        self.assembly_tab.configure(style='CompactActive.TButton' if kind == 'assembly' else 'Compact.TButton')
 
     def show(self, kind):
         app = self.app
-        key = (id(app.flow), app.batch_id, kind)
+        key = (id(app.flow), None if kind == 'assembly' else app.batch_id, kind)
         page: Any = self.pages.get(key)
         if page is None or not page.winfo_exists():
-            if kind == 'voice':
+            if kind == 'assembly':
+                from .assembly_desktop import AssemblyPage
+                page = AssemblyPage(app)
+            elif kind == 'voice':
                 from .voice_desktop import VoiceDialog
                 page = VoiceDialog(app)
             else:
@@ -83,6 +90,8 @@ class ProductionWorkspace(ttk.Frame):
         if kind == 'narration' and page.job is None:
             page.load_runs()
             page.load_result()
+        if kind == 'assembly':
+            page.recheck()
         return page
 
     def manage_services(self, owner):
@@ -101,13 +110,21 @@ class ProductionWorkspace(ttk.Frame):
         self.grid_remove()
 
     def active_page(self):
-        return next((p for k, p in self.pages.items() if k[2] == 'narration' and p.winfo_exists() and p.job is not None), None)
+        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly') and p.winfo_exists() and p.job is not None), None)
 
     def show_active(self):
         page = self.active_page()
         if page is None:
             return
         app = self.app
+        if getattr(page, 'kind', None) == 'assembly':
+            if app.flow is not page.flow:
+                if not app.may_leave():
+                    return
+                app.flow, app.batch_id = page.flow, next((b['id'] for b in page.flow.state['batches']), None)
+                app.refresh()
+            app.total_audio()
+            return
         if app.flow is not page.flow or app.batch_id != page.batch_id:
             if not app.may_leave():
                 return
@@ -120,7 +137,7 @@ class ProductionWorkspace(ttk.Frame):
         page = self.active_page()
         if page is not None:
             state = page.job.state
-            batch = next((b['name'] for b in page.flow.state['batches'] if b['id'] == page.batch_id), '原批次')
+            batch = '全書合併' if getattr(page, 'kind', None) == 'assembly' else next((b['name'] for b in page.flow.state['batches'] if b['id'] == page.batch_id), '原批次')
             self.task_button.configure(text=f'{batch}｜{state.get("phase", "製作中")}｜完成 {state.get("completed", 0)}/{state.get("total", 0)} · 返回任務 →')
             self.task_button.grid(row=4, column=0, sticky='ew')
         else:
