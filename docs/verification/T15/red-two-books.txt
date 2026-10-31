@@ -1,0 +1,15 @@
+test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_edit_return_uses_current_book_when_two_books_have_pending_returns) ... FAIL
+
+======================================================================
+FAIL: test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_edit_return_uses_current_book_when_two_books_have_pending_returns)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 161, in test_edit_return_uses_current_book_when_two_books_have_pending_returns
+    self.assertIs(self.app.flow, second_flow)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.workflow.ProjectWorkflow object at 0x000002116B3B0AD0> is not <ebook2mp4.workflow.ProjectWorkflow object at 0x000002116BA31BD0>
+
+----------------------------------------------------------------------
+Ran 1 test in 11.345s
+
+FAILED (failures=1)

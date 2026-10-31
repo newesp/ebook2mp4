@@ -1,0 +1,15 @@
+test_source_changed_after_preview_preparation_is_not_played (test_assembly_joins.AssemblyJoinJourney.test_source_changed_after_preview_preparation_is_not_played) ... FAIL
+
+======================================================================
+FAIL: test_source_changed_after_preview_preparation_is_not_played (test_assembly_joins.AssemblyJoinJourney.test_source_changed_after_preview_preparation_is_not_played)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 174, in test_source_changed_after_preview_preparation_is_not_played
+    with self.assertRaises(ProjectError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: ProjectError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 5.023s
+
+FAILED (failures=1)

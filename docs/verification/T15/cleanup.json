@@ -1,0 +1,28 @@
+{
+  "removed_bytes": 381071885.0,
+  "removed_targets": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-native-project",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-suite.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-seed.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-package-check.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t15-package.pid",
+    "E:\\Leo\\Projects\\ebook2mp4\\.mypy_cache"
+  ],
+  "remaining_targets": [],
+  "package_files_checked": 1301,
+  "package_exclusive_open_failures": [],
+  "remaining_test_directories": [],
+  "computer_use_kernel_reset": true,
+  "preserved": [
+    "dist/T15",
+    "Other distributions",
+    "Requirements and approved mock",
+    "Final verification evidence",
+    "Existing uncommitted TTS work",
+    "User projects and voice-blocks"
+  ]
+}

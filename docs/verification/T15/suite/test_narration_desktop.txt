@@ -1,0 +1,8 @@
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_compact_page_has_no_outer_scroll_and_footer_stays_visible (test_narration_desktop.NarrationDesktop.test_compact_page_has_no_outer_scroll_and_footer_stays_visible) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 16.009s
+
+OK

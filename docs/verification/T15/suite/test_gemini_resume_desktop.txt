@@ -1,0 +1,7 @@
+test_cancel_keeps_window_responsive_and_preserves_completed_range (test_gemini_resume_desktop.ResumeDesktop.test_cancel_keeps_window_responsive_and_preserves_completed_range) ... ok
+test_partial_progress_ranges_adoption_and_retry_controls (test_gemini_resume_desktop.ResumeDesktop.test_partial_progress_ranges_adoption_and_retry_controls) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 9.499s
+
+OK

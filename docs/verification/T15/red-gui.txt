@@ -1,0 +1,15 @@
+test_join_page_save_preview_edit_return_and_sizes (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_join_page_save_preview_edit_return_and_sizes) ... ERROR
+
+======================================================================
+ERROR: test_join_page_save_preview_edit_return_and_sizes (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_join_page_save_preview_edit_return_and_sizes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 22, in test_join_page_save_preview_edit_return_and_sizes
+    page.join_button.invoke()
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'AssemblyPage' object has no attribute 'join_button'. Did you mean: 'down_button'?
+
+----------------------------------------------------------------------
+Ran 1 test in 7.142s
+
+FAILED (errors=1)

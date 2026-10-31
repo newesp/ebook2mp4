@@ -1,0 +1,6 @@
+test_source_changed_after_preview_preparation_is_not_played (test_assembly_joins.AssemblyJoinJourney.test_source_changed_after_preview_preparation_is_not_played) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.082s
+
+OK

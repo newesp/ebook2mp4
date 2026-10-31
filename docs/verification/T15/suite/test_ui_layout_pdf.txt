@@ -1,0 +1,8 @@
+test_source_warning_remains_visible_while_operation_messages_change (test_ui_layout_pdf.PdfReadingLayout.test_source_warning_remains_visible_while_operation_messages_change) ... ok
+test_standard_maximized_window_and_fixed_actions_at_minimum_size (test_ui_layout_pdf.PdfReadingLayout.test_standard_maximized_window_and_fixed_actions_at_minimum_size) ... ok
+test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change (test_ui_layout_pdf.PdfReadingLayout.test_zoom_pan_region_coordinates_survive_resize_and_reset_on_page_change) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 11.608s
+
+OK

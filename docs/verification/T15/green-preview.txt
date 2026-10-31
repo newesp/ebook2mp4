@@ -1,0 +1,32 @@
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... ok
+test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions) ... ok
+test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) ... 
+  test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=500) ... FAIL
+  test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=5000) ... FAIL
+
+======================================================================
+FAIL: test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=500)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 94, in test_preview_reuses_audio_matches_total_timeline_and_releases_files
+    self.assertEqual(set(pcm[210*48:(200+pause-10)*48]), {0})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+1
+255
+
+======================================================================
+FAIL: test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=5000)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 94, in test_preview_reuses_audio_matches_total_timeline_and_releases_files
+    self.assertEqual(set(pcm[210*48:(200+pause-10)*48]), {0})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+1
+255
+
+----------------------------------------------------------------------
+Ran 3 tests in 25.119s
+
+FAILED (failures=2)

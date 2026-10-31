@@ -1,0 +1,10 @@
+test_auto_language_recovers_reported_title_without_script_conversion (test_ocr_optimization.OcrOptimization.test_auto_language_recovers_reported_title_without_script_conversion) ... ok
+test_high_confidence_bad_region_still_needs_check_in_chinese_context (test_ocr_optimization.OcrOptimization.test_high_confidence_bad_region_still_needs_check_in_chinese_context) ... ok
+test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft (test_ocr_optimization.OcrOptimization.test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft) ... ok
+test_region_validation_and_cancellation_preserve_original_page_text (test_ocr_optimization.OcrOptimization.test_region_validation_and_cancellation_preserve_original_page_text) ... ok
+test_small_screenshot_stays_pending_when_confidence_is_low (test_ocr_optimization.OcrOptimization.test_small_screenshot_stays_pending_when_confidence_is_low) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 40.968s
+
+OK

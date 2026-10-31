@@ -1,0 +1,14 @@
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... ok
+test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions) ... ok
+test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) ... ok
+test_join_page_save_preview_edit_return_and_sizes (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_join_page_save_preview_edit_return_and_sizes) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 71.133s
+
+OK

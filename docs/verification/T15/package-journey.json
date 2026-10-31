@@ -1,0 +1,21 @@
+{
+  "pause_ms": 5000,
+  "selected": [
+    "第一章 · 清晨",
+    "第二章 · 散步",
+    "第三章 · 歸途"
+  ],
+  "warnings_accepted": [
+    true,
+    true
+  ],
+  "total_duration_ms": 10600,
+  "decoded_duration_ms": 10600,
+  "narration_run_counts": [
+    1,
+    1,
+    1
+  ],
+  "remaining_preview_dirs": 0,
+  "remaining_locks": []
+}

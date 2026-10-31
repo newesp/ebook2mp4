@@ -1,0 +1,15 @@
+test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions) ... ERROR
+
+======================================================================
+ERROR: test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 57, in test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions
+    joins = self.flow.inspect_assembly_joins([a, b, c])
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'inspect_assembly_joins'. Did you mean: 'inspect_assembly'?
+
+----------------------------------------------------------------------
+Ran 1 test in 13.530s
+
+FAILED (errors=1)

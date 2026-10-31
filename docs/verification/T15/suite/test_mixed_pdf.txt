@@ -1,0 +1,12 @@
+test_all_three_rotations_recover_sideways_or_upside_down_scans (test_mixed_pdf.MixedPdfJourney.test_all_three_rotations_recover_sideways_or_upside_down_scans) ... ok
+test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation (test_mixed_pdf.MixedPdfJourney.test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation) ... ok
+test_auto_retry_selected_candidate_preserves_corrected_original_and_confirmations (test_mixed_pdf.MixedPdfJourney.test_auto_retry_selected_candidate_preserves_corrected_original_and_confirmations) ... ok
+test_auto_without_models_preserves_text_and_flags_unread_pages (test_mixed_pdf.MixedPdfJourney.test_auto_without_models_preserves_text_and_flags_unread_pages) ... ok
+test_failed_only_recovers_and_publication_failure_keeps_candidate (test_mixed_pdf.MixedPdfJourney.test_failed_only_recovers_and_publication_failure_keeps_candidate) ... ok
+test_failed_only_retry_retains_untargeted_progress_and_cancelled_target (test_mixed_pdf.MixedPdfJourney.test_failed_only_retry_retains_untargeted_progress_and_cancelled_target) ... ok
+test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections (test_mixed_pdf.MixedPdfJourney.test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 12.389s
+
+OK

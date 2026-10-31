@@ -1,0 +1,32 @@
+{
+  "modules": 43,
+  "full_suite_cases": 249,
+  "failures": [],
+  "skipped": 0,
+  "seconds": 879.83,
+  "additional_review_regression_cases": 2,
+  "final_T15_retest_cases": 12,
+  "total_distinct_cases": 251,
+  "typechecked_sources": 28,
+  "compiled_modules_verified": 26,
+  "review": {
+    "spec": 0,
+    "standards": 0
+  },
+  "source_commits": [
+    "b5f7eee",
+    "437b5b7"
+  ],
+  "full_suite_note": "Full regression plus targeted final rerun after review fixes; initial red evidence retained.",
+  "package_sha256": "60c3d124402fb0ef279c805ac127e54692dd2bbc7984de2dba5fce5441956ae2",
+  "package_files": 1301,
+  "native_sizes": [
+    "1040x640",
+    "1360x800"
+  ],
+  "limitations": [
+    "Synthetic tone fixtures and real FFmpeg; no online TTS or human listening verification",
+    "Other DPI not tested",
+    "Video last-frame preview is deferred to video assembly"
+  ]
+}

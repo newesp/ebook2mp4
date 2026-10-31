@@ -1,0 +1,13 @@
+test_http_date_and_invalid_delays (test_tts_retry.RetryHeaders.test_http_date_and_invalid_delays) ... Executing <Task finished name='Task-2' coro=<RetryHeaders.test_http_date_and_invalid_delays() done, defined at E:\Leo\Projects\ebook2mp4\tests\test_tts_retry.py:246> result=None created at C:\Python314\Lib\asyncio\runners.py:109> took 0.593 seconds
+ok
+test_long_delay_is_retryable_for_both_providers (test_tts_retry.RetryHeaders.test_long_delay_is_retryable_for_both_providers) ... ok
+test_cancel_during_long_wait_releases_resources_and_keeps_successful_audio (test_tts_retry.RetryRecovery.test_cancel_during_long_wait_releases_resources_and_keeps_successful_audio) ... ok
+test_excessive_retry_after_stops_instead_of_waiting_21_hours (test_tts_retry.RetryRecovery.test_excessive_retry_after_stops_instead_of_waiting_21_hours) ... ok
+test_resume_after_excessive_cooldown_preserves_successful_block (test_tts_retry.RetryRecovery.test_resume_after_excessive_cooldown_preserves_successful_block) ... ok
+test_resume_block_36_waits_for_long_retry_after_and_reuses_first_35 (test_tts_retry.RetryRecovery.test_resume_block_36_waits_for_long_retry_after_and_reuses_first_35) ... ok
+test_retry_wait_budget_stops_at_five_minutes_total (test_tts_retry.RetryRecovery.test_retry_wait_budget_stops_at_five_minutes_total) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 17.181s
+
+OK

@@ -1,0 +1,8 @@
+test_defaults_apply_only_to_explicit_batches_and_survive_reopen (test_incremental_narration.IncrementalNarration.test_defaults_apply_only_to_explicit_batches_and_survive_reopen) ... ok
+test_edit_insert_and_pause_changes_reuse_actual_requests (test_incremental_narration.IncrementalNarration.test_edit_insert_and_pause_changes_reuse_actual_requests) ... ok
+test_new_revision_cancel_and_cache_loss_preserve_old_product (test_incremental_narration.IncrementalNarration.test_new_revision_cancel_and_cache_loss_preserve_old_product) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 25.368s
+
+OK

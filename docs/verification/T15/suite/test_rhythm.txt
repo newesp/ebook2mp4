@@ -1,0 +1,9 @@
+test_ascii_opening_quote_stays_with_its_sentence (test_rhythm.RhythmJourney.test_ascii_opening_quote_stays_with_its_sentence) ... ok
+test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range) ... ok
+test_quotes_and_punctuation_run_are_one_sentence_boundary (test_rhythm.RhythmJourney.test_quotes_and_punctuation_run_are_one_sentence_boundary) ... ok
+test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 10.011s
+
+OK

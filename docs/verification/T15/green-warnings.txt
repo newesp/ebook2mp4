@@ -1,0 +1,7 @@
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... ok
+test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 17.264s
+
+OK

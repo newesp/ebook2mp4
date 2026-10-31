@@ -1,0 +1,11 @@
+test_cancel_corruption_and_changed_manuscript_do_not_leave_preview_resources (test_assembly_joins.AssemblyJoinJourney.test_cancel_corruption_and_changed_manuscript_do_not_leave_preview_resources) ... ok
+test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) ... ok
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... ok
+test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions) ... ok
+test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) ... ok
+test_txt_and_single_batch_have_no_page_warnings (test_assembly_joins.AssemblyJoinJourney.test_txt_and_single_batch_have_no_page_warnings) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 55.086s
+
+OK

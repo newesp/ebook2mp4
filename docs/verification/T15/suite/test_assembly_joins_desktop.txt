@@ -1,0 +1,8 @@
+test_each_pdf_warning_requires_explicit_confirmation (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_each_pdf_warning_requires_explicit_confirmation) ... ok
+test_join_page_save_preview_edit_return_and_sizes (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_join_page_save_preview_edit_return_and_sizes) ... ok
+test_leave_during_preparation_never_starts_hidden_audio (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_leave_during_preparation_never_starts_hidden_audio) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 37.756s
+
+OK

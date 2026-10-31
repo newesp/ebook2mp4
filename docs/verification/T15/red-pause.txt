@@ -1,0 +1,26 @@
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... 
+  test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) (pause=5001) ... FAIL
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... FAIL
+
+======================================================================
+FAIL: test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) (pause=5001)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 22, in test_pause_bounds_and_reopen
+    with self.subTest(pause=pause), self.assertRaises(ProjectError):
+                                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: ProjectError not raised
+
+======================================================================
+FAIL: test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 24, in test_pause_bounds_and_reopen
+    self.assertEqual(self.flow.assembly_settings()['pause_ms'], 5000)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 5001 != 5000
+
+----------------------------------------------------------------------
+Ran 1 test in 4.692s
+
+FAILED (failures=2)

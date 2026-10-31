@@ -1,0 +1,10 @@
+test_check_service_reads_complete_chunked_json (test_tts_providers.ProviderDesktop.test_check_service_reads_complete_chunked_json) ... ok
+test_service_switch_enables_model_and_management_layout (test_tts_providers.ProviderDesktop.test_service_switch_enables_model_and_management_layout) ... ok
+test_fish_request_and_auth_error_preserve_previous_result (test_tts_providers.Providers.test_fish_request_and_auth_error_preserve_previous_result) ... ok
+test_gemini_custom_model_preview_formal_reuse_and_no_project_key (test_tts_providers.Providers.test_gemini_custom_model_preview_formal_reuse_and_no_project_key) ... ok
+test_profile_provider_cannot_change_and_fish_model_is_explicit (test_tts_providers.Providers.test_profile_provider_cannot_change_and_fish_model_is_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 12.429s
+
+OK

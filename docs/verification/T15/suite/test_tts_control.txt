@@ -1,0 +1,12 @@
+test_classification_and_malformed_payload (test_tts_control.ControlTests.test_classification_and_malformed_payload) ... ok
+test_configured_rpm_reserves_spacing_and_wait_is_cancellable (test_tts_control.ControlTests.test_configured_rpm_reserves_spacing_and_wait_is_cancellable) ... Executing <Task pending name='Task-8' coro=<ControlTests.test_configured_rpm_reserves_spacing_and_wait_is_cancellable() running at E:\Leo\Projects\ebook2mp4\tests\test_tts_control.py:57> cb=[_run_until_complete_cb() at C:\Python314\Lib\asyncio\base_events.py:181] created at C:\Python314\Lib\asyncio\runners.py:109> took 0.351 seconds
+ok
+test_expiry_and_account_model_isolation (test_tts_control.ControlTests.test_expiry_and_account_model_isolation) ... Executing <Task finished name='Task-14' coro=<ControlTests.test_expiry_and_account_model_isolation() done, defined at E:\Leo\Projects\ebook2mp4\tests\test_tts_control.py:40> result=None created at C:\Python314\Lib\asyncio\runners.py:109> took 0.352 seconds
+ok
+test_persisted_cooldown_blocks_http_and_other_profile_with_same_key (test_tts_control.ControlTests.test_persisted_cooldown_blocks_http_and_other_profile_with_same_key) ... Executing <Task finished name='Task-19' coro=<ControlTests.test_persisted_cooldown_blocks_http_and_other_profile_with_same_key() done, defined at E:\Leo\Projects\ebook2mp4\tests\test_tts_control.py:23> result=None created at C:\Python314\Lib\asyncio\runners.py:109> took 0.873 seconds
+ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.758s
+
+OK

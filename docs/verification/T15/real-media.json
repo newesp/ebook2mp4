@@ -1,0 +1,26 @@
+{
+  "previews": [
+    {
+      "pause_ms": 0,
+      "duration_ms": 400,
+      "tts_requests": 0
+    },
+    {
+      "pause_ms": 500,
+      "duration_ms": 900,
+      "tts_requests": 0
+    },
+    {
+      "pause_ms": 5000,
+      "duration_ms": 5400,
+      "tts_requests": 0
+    }
+  ],
+  "total_ms": 1600,
+  "source_durations": [
+    200,
+    200,
+    200
+  ],
+  "note": "Synthetic tone service substitute, real FFmpeg; no online synthesis or human listening assessment."
+}

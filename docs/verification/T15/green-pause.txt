@@ -1,0 +1,6 @@
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.068s
+
+OK
