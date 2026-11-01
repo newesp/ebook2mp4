@@ -1,5 +1,8 @@
 """Approved two-step journey in the native main window."""
 import time
+import json
+import os
+from pathlib import Path
 import tkinter as tk
 import unittest
 from unittest.mock import patch
@@ -14,6 +17,39 @@ class TotalVideoDesktop(unittest.TestCase):
     audio = fixture.TotalAudioDesktop.audio
     shutdown = fixture.TotalAudioDesktop.shutdown
     wait_page = fixture.TotalAudioDesktop.wait_page
+
+    def test_failed_publication_waits_for_explicit_save_retry(self):
+        self.flow.save_assembly_settings(self.ids)
+        fixture.TotalAudioDesktop.merge(self)
+        source = self.path/'封面.png'
+        Image.new('RGB', (160, 90), 'blue').save(source)
+        self.flow.save_total_video_settings(image=self.flow.inspect_total_video_image(source), resolution='720p')
+        self.app.total_video()
+        page = self.app.production.current
+        self.wait_page(page)
+        replace = os.replace
+        failures = []
+        def unavailable(src, dst):
+            if Path(dst).name == 'project.json' and json.loads(Path(src).read_bytes()).get('total_video'):
+                failures.append(str(dst))
+                raise PermissionError('output publication unavailable')
+            return replace(src, dst)
+        with patch('os.replace', side_effect=unavailable):
+            page.start_button.invoke()
+            deadline = time.monotonic()+25
+            while page.start_button.cget('text') != '重試保存' and time.monotonic()<deadline:
+                self.root.update()
+                time.sleep(.02)
+            self.assertEqual(page.start_button.cget('text'), '重試保存')
+            until = time.monotonic()+.3
+            while time.monotonic()<until:
+                self.root.update()
+                time.sleep(.01)
+            self.assertEqual(len(failures), 1)
+            self.assertIsNone(self.flow.total_video())
+        page.start_button.invoke()
+        self.wait_page(page)
+        self.assertIsNotNone(self.flow.total_video())
 
     def test_two_steps_encode_and_return_keep_picture_and_resolution(self):
         self.app.total_audio()

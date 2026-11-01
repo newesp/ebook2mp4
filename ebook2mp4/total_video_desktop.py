@@ -28,6 +28,7 @@ class TotalVideoPage(ttk.Frame):
         self.product = self.audio = self.pending_image = self.preview_image = self.photo = None
         self.action = ''
         self.last_status = ''
+        self.publish_error = False
         self.player = PreviewPlayer()
         self.playback_folder: Path | None = None
         self.playback_image = None
@@ -201,6 +202,7 @@ class TotalVideoPage(ttk.Frame):
             self.stop()
             self.job = self.flow.start_total_video()
             self.last_status = ''
+            self.publish_error = False
             self.status.configure(text='開始製片。本次音訊、字幕、圖片及解析度已固定。')
             self.update_controls()
             self.schedule()
@@ -208,6 +210,7 @@ class TotalVideoPage(ttk.Frame):
             self.report(error)
 
     def publish(self):
+        self.publish_error = False
         try:
             self.product = self.flow.finish_total_video(self.job)
             self.job = None
@@ -216,6 +219,7 @@ class TotalVideoPage(ttk.Frame):
             self.app.notify('總 MP4 已完成並保存。')
             self.update_controls()
         except ProjectError as error:
+            self.publish_error = True
             self.report(error)
 
     def recheck(self):
@@ -334,8 +338,9 @@ class TotalVideoPage(ttk.Frame):
                 if self.action == 'play' and self.player.alias is None:
                     self.cleanup_playback()
         if self.job is not None:
+            stopped = self.job.wait(0)
             state = self.job.state
-            if not self.job.wait(0):
+            if not stopped:
                 self.progress.configure(value=state.get('completed', 0))
                 self.status.configure(text='取消中，正在釋放媒體程序…' if state['status'] == 'cancelling' else
                                       f'{state.get("phase", "準備")} · {state.get("completed", 0)}%')
@@ -347,8 +352,9 @@ class TotalVideoPage(ttk.Frame):
                     self.production_busy = self.app.production.busy_for(self.flow)
                     self.status.configure(text='已取消。舊成品保留。' if state['status'] == 'cancelled' else state['error'])
                 except ProjectError as error:
+                    self.publish_error = True
                     self.report(error)
-            else:
+            elif not self.publish_error:
                 self.publish()
         if self.closing and self.job is None and self.check_job is None:
             self.stop()
@@ -367,7 +373,7 @@ class TotalVideoPage(ttk.Frame):
         except ProjectError as error:
             self.report(error)
             self.stop()
-        if self.job is not None and not self.job.wait(0) or self.check_job is not None or self.player.alias:
+        if self.job is not None and not self.publish_error or self.check_job is not None or self.player.alias:
             self.schedule()
 
     def update_controls(self):
