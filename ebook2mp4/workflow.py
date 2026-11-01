@@ -25,6 +25,7 @@ if TYPE_CHECKING:
     from .narration import NarrationJob
     from .assembly import TotalAudioJob
     from .assembly_joins import JoinPreviewJob
+    from .total_video import TotalVideoJob
 
 
 class ProjectError(Exception):
@@ -96,6 +97,7 @@ class ProjectWorkflow:
         self._narration_job: NarrationJob | None = None
         self._total_audio_job: TotalAudioJob | None = None
         self._assembly_preview_job: JoinPreviewJob | None = None
+        self._total_video_job: TotalVideoJob | None = None
 
     @property
     def state(self) -> dict:
@@ -1044,6 +1046,59 @@ class ProjectWorkflow:
     def assembly_settings(self) -> dict:
         from .assembly import settings
         return settings(self)
+
+    def total_video_settings(self) -> dict:
+        from .total_video import settings
+        return settings(self)
+
+    @staticmethod
+    def inspect_total_video_image(path: str | Path):
+        from .total_video import inspect_image
+        return inspect_image(path)
+
+    def save_total_video_settings(self, *, image=None, resolution: str = '1080p') -> None:
+        from .total_video import save_settings
+        save_settings(self, image, resolution)
+
+    def inspect_total_video(self) -> dict:
+        import asyncio
+        from .total_video import inspect_video
+        return asyncio.run(inspect_video(self))
+
+    def total_video(self) -> dict | None:
+        from .total_video import total_video
+        return total_video(self)
+
+    def start_total_video(self) -> TotalVideoJob:
+        from .total_video import start
+        return start(self)
+
+    def finish_total_video(self, job: TotalVideoJob) -> dict:
+        from .total_video import finish
+        return finish(self, job)
+
+    def discard_total_video(self, job: TotalVideoJob) -> None:
+        if job is not self._total_video_job:
+            raise ProjectError('找不到所屬製片任務。')
+        job.release(discard=True)
+        self._total_video_job = None
+
+    def total_video_runs(self) -> list[dict]:
+        from .total_video import runs
+        return runs(self)
+
+    def total_video_path(self, kind: str = 'mp4') -> Path:
+        if kind not in ('mp4', 'srt'):
+            raise ProjectError('影片成品格式僅支援 MP4 或 SRT。')
+        product = self.total_video()
+        if product is None:
+            raise ProjectError('尚無成功總影片。')
+        return self._path(product[kind]['path'])
+
+    def export_total_video(self, folder: str | Path) -> None:
+        import asyncio
+        from .total_video import export
+        asyncio.run(export(self, folder))
 
     def save_assembly_settings(self, batch_ids: list[str], pause_ms: int = 500, *,
                                accepted_joins: list[str] | None = None) -> None:

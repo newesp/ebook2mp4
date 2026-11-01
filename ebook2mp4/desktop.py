@@ -1266,6 +1266,13 @@ class Workbench(ttk.Frame):
         self.render_step()
         self.production.show('assembly')
 
+    def total_video(self):
+        if not self.flow:
+            return
+        self.step = 4
+        self.render_step()
+        self.production.show('video')
+
     def gemini_settings(self):
         from .gemini_desktop import SettingsDialog
         if self.gemini_settings_dialog is not None:
