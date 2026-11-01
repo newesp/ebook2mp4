@@ -178,6 +178,11 @@ class TotalVideoPage(ttk.Frame):
             self.flow.save_total_video_settings(image=self.pending_image, resolution=self.resolution.get())
             self.pending_image = None
             self.dirty = False
+            from .total_video import total_video
+            try:
+                self.product = total_video(self.flow, verify_media=False)
+            except ProjectError:
+                self.product = None  # A missing old movie must still permit rebuilding.
             self.status.configure(text='視覺設定已儲存。總音訊保留。')
             self.update_controls()
             return True
@@ -230,6 +235,8 @@ class TotalVideoPage(ttk.Frame):
             return
         self.stop()
         if action == 'play':
+            if self.playback_folder is not None:
+                return  # Keep the retained cleanup path until the old lock is released.
             self.playback_folder = Path(tempfile.mkdtemp(prefix='.video-preview-', dir=self.flow.root))
         async def operation():
             from .total_video import export, total_video, prepare_playback
