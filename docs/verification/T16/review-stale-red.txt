@@ -1,0 +1,15 @@
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... FAIL
+
+======================================================================
+FAIL: test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video_desktop.py", line 60, in test_two_steps_encode_and_return_keep_picture_and_resolution
+    self.assertIn('�ݧ�s', page.result_info.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '�ݧ�s' not found in '�ثe�`�v�� �P 0.9 �� �P 720p'
+
+----------------------------------------------------------------------
+Ran 1 test in 13.813s
+
+FAILED (failures=1)

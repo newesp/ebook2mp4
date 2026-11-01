@@ -1,0 +1,18 @@
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... FAIL
+
+======================================================================
+FAIL: test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video_desktop.py", line 53, in test_two_steps_encode_and_return_keep_picture_and_resolution
+    self.wait_page(page)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio_desktop.py", line 47, in wait_page
+    self.assertIsNone(page.job, page.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.total_video.TotalVideoJob object at 0x000001C8E4E34C20> is not None : ���ݫO�s �P 100%
+
+----------------------------------------------------------------------
+Ran 1 test in 30.113s
+
+FAILED (failures=1)

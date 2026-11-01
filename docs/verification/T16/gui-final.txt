@@ -1,0 +1,6 @@
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 14.538s
+
+OK

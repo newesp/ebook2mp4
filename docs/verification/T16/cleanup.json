@@ -1,0 +1,71 @@
+{
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-tools",
+      "bytes": 102876702,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-pip-cache",
+      "bytes": 22984682,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-build",
+      "bytes": 33140685,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-mypy",
+      "bytes": 20529381,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-native",
+      "bytes": 499219,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 101457920,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-run-suite.py",
+      "bytes": 1102,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-package-check.py",
+      "bytes": 1125,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t16-package-flow-check.py",
+      "bytes": 1218,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp7wolda8k",
+      "bytes": 1222,
+      "removed": true
+    }
+  ],
+  "remaining_targets": 0,
+  "remaining_task_processes": 0,
+  "exclusive_package_files": 1301,
+  "test_run_entries": 0,
+  "preserved": [
+    "dist/T16",
+    "docs/verification/T16",
+    "approved mock HTML",
+    "user books and models",
+    "existing TTS work",
+    "voice-blocks"
+  ]
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "module": "test_assembly_joins.py",
+    "exit_code": 1,
+    "cases": 1,
+    "skipped": 0,
+    "seconds": 0.49
+  },
+  {
+    "module": "test_assembly_joins_desktop.py",
+    "exit_code": 1,
+    "cases": 1,
+    "skipped": 0,
+    "seconds": 0.55
+  },
+  {
+    "module": "test_desktop.py",
+    "exit_code": 1,
+    "cases": 14,
+    "skipped": 0,
+    "seconds": 34.07
+  }
+]

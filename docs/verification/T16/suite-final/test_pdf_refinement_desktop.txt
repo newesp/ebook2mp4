@@ -1,0 +1,12 @@
+test_failed_region_unlocks_settings_and_missing_model_can_be_installed (test_pdf_refinement_desktop.PdfRefinementDesktop.test_failed_region_unlocks_settings_and_missing_model_can_be_installed) ... ok
+test_keep_original_choice_resets_selection_baseline_before_next_region (test_pdf_refinement_desktop.PdfRefinementDesktop.test_keep_original_choice_resets_selection_baseline_before_next_region) ... ok
+test_ready_model_does_not_offer_or_start_zero_byte_download (test_pdf_refinement_desktop.PdfRefinementDesktop.test_ready_model_does_not_offer_or_start_zero_byte_download) ... ok
+test_real_ocr_job_displays_indeterminate_busy_feedback (test_pdf_refinement_desktop.PdfRefinementDesktop.test_real_ocr_job_displays_indeterminate_busy_feedback) ... ok
+test_reject_third_region_keeps_first_two_when_recognizing_fourth (test_pdf_refinement_desktop.PdfRefinementDesktop.test_reject_third_region_keeps_first_two_when_recognizing_fourth) ... ok
+test_settings_unlock_and_next_region_uses_new_language_and_layout (test_pdf_refinement_desktop.PdfRefinementDesktop.test_settings_unlock_and_next_region_uses_new_language_and_layout) ... ok
+test_two_regions_accumulate_then_publish_one_batch (test_pdf_refinement_desktop.PdfRefinementDesktop.test_two_regions_accumulate_then_publish_one_batch) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 13.436s
+
+OK

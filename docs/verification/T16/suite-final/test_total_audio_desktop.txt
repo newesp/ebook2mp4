@@ -1,0 +1,22 @@
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... FAIL
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+
+======================================================================
+FAIL: test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio_desktop.py", line 69, in test_gui_selection_save_reorder_and_production_stay_in_main_window
+    self.wait_page(page)
+    ~~~~~~~~~~~~~~^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio_desktop.py", line 46, in wait_page
+    self.assertIsNone(page.check_job)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x000002B074C19E10> is not None
+
+----------------------------------------------------------------------
+Ran 5 tests in 31.739s
+
+FAILED (failures=1)

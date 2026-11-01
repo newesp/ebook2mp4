@@ -1,0 +1,23 @@
+test_assembly_joins (unittest.loader._FailedTest.test_assembly_joins) ... ERROR
+
+======================================================================
+ERROR: test_assembly_joins (unittest.loader._FailedTest.test_assembly_joins)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_assembly_joins
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 426, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python314\Lib\unittest\loader.py", line 367, in _get_module_from_name
+    __import__(name)
+    ~~~~~~~~~~^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

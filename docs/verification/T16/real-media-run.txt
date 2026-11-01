@@ -1,0 +1,1 @@
+[{"resolution": "720p", "picture": "portrait", "video_ms": 2900.0}, {"resolution": "1080p", "picture": "transparent", "video_ms": 2900.0}, {"resolution": "1080p", "picture": "landscape", "video_ms": 2900.0}]

@@ -1,0 +1,6 @@
+test_picture_is_copied_and_resolution_survives_reopen (test_total_video.TotalVideoJourney.test_picture_is_copied_and_resolution_survives_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.731s
+
+OK

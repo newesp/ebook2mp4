@@ -1,0 +1,60 @@
+{
+  "modules": 45,
+  "initial_full_suite_cases": 258,
+  "initial_failures": [
+    "test_total_audio_desktop.py",
+    "test_total_video_desktop.py"
+  ],
+  "initial_skipped": 6,
+  "all_initial_failures_fixed": true,
+  "all_skipped_cases_authorized_and_passed": true,
+  "total_distinct_passed_cases": 259,
+  "remaining_failures": 0,
+  "remaining_skipped": 0,
+  "typechecked_sources": 30,
+  "package_modules_verified": 28,
+  "package_files": 1301,
+  "package_sha256": "70deefd503af76800ceca6733088ee64e71a0ca52cec71e66e22af1244fed6a4",
+  "review": {
+    "standards_initial": 2,
+    "spec_initial": 1,
+    "standards_final": 0,
+    "spec_final": 0
+  },
+  "commits": [
+    "343de0e",
+    "b3a23ef",
+    "159ff08"
+  ],
+  "tools": {
+    "mypy": "2.4.1",
+    "Pillow": "13.0.0",
+    "edge-tts": "7.3.1",
+    "pypdfium2": "5.14.0",
+    "reportlab": "5.1.0",
+    "pyinstaller": "6.22.3"
+  },
+  "real_media": {
+    "source": "synthetic tone service fixture",
+    "online_tts": false,
+    "durations_ms": [
+      2900,
+      2900,
+      2900
+    ],
+    "new_tts_requests": 0
+  },
+  "limitations": [
+    "Other DPI and long-book human listening not tested",
+    "T16 supports a single still image and separate SRT"
+  ],
+  "cleanup": {
+    "remaining_targets": 0,
+    "remaining_task_processes": 0,
+    "exclusive_package_files": 1301,
+    "test_run_entries": 0,
+    "removed_bytes": 402903618
+  },
+  "computer_use_kernel_reset": true,
+  "package_native_flow": "open project -> audio step -> video step -> update MP4 -> playback ended -> normal exit"
+}

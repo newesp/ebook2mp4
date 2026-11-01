@@ -1,0 +1,10 @@
+test_auto_language_recovers_reported_title_without_script_conversion (test_ocr_optimization.OcrOptimization.test_auto_language_recovers_reported_title_without_script_conversion) ... skipped 'requires supplied book and real models'
+test_high_confidence_bad_region_still_needs_check_in_chinese_context (test_ocr_optimization.OcrOptimization.test_high_confidence_bad_region_still_needs_check_in_chinese_context) ... skipped 'requires supplied book and real models'
+test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft (test_ocr_optimization.OcrOptimization.test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft) ... skipped 'requires supplied book and real models'
+test_region_validation_and_cancellation_preserve_original_page_text (test_ocr_optimization.OcrOptimization.test_region_validation_and_cancellation_preserve_original_page_text) ... skipped 'requires supplied book and real models'
+test_small_screenshot_stays_pending_when_confidence_is_low (test_ocr_optimization.OcrOptimization.test_small_screenshot_stays_pending_when_confidence_is_low) ... skipped 'requires supplied book and real models'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK (skipped=5)

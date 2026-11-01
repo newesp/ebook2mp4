@@ -1,0 +1,83 @@
+[
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": true,
+    "state": "ready"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": false,
+    "state": "portrait"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": false,
+    "state": "transparent"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": false,
+    "state": "success"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": false,
+    "state": "stale"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": true,
+    "state": "invalid"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": true,
+    "state": "empty"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": false,
+    "state": "failed"
+  },
+  {
+    "outside": [],
+    "scroll": [
+      1040,
+      640
+    ],
+    "startDisabled": true,
+    "state": "busy"
+  }
+]

@@ -1,0 +1,8 @@
+test_ai_tools_exit_focus_mode_without_losing_selection (test_main_workflow_desktop.MainWorkflow.test_ai_tools_exit_focus_mode_without_losing_selection) ... ok
+test_failed_save_does_not_advance_or_lose_text (test_main_workflow_desktop.MainWorkflow.test_failed_save_does_not_advance_or_lose_text) ... ok
+test_save_next_edit_confirm_and_reconfirm (test_main_workflow_desktop.MainWorkflow.test_save_next_edit_confirm_and_reconfirm) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.777s
+
+OK

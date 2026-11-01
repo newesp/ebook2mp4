@@ -1,0 +1,19 @@
+{
+  "fixed_point": "cddefa06c5d6a4d88da377635c34a8c547da62b8",
+  "reviewed_head": "159ff08",
+  "standards": {
+    "initial": 2,
+    "remaining": 0,
+    "findings": [
+      "saved visual settings stale label",
+      "retained playback cleanup path"
+    ]
+  },
+  "spec": {
+    "initial": 1,
+    "remaining": 0,
+    "findings": [
+      "saved visual settings stale label"
+    ]
+  }
+}

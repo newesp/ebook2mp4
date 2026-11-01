@@ -1,0 +1,15 @@
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ERROR
+
+======================================================================
+ERROR: test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video_desktop.py", line 25, in test_two_steps_encode_and_return_keep_picture_and_resolution
+    self.assertTrue(assembly.video_button.winfo_viewable())
+                    ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'AssemblyPage' object has no attribute 'video_button'. Did you mean: 'info_button'?
+
+----------------------------------------------------------------------
+Ran 1 test in 7.517s
+
+FAILED (errors=1)

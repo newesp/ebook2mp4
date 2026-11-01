@@ -1,0 +1,10 @@
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 36.194s
+
+OK

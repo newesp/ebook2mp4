@@ -1,0 +1,11 @@
+test_assembly_cancel_joins_media_process_and_resumes_without_tts (test_narration_resume.NarrationRecovery.test_assembly_cancel_joins_media_process_and_resumes_without_tts) ... ok
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_corrupt_cache_is_not_reused (test_narration_resume.NarrationRecovery.test_corrupt_cache_is_not_reused) ... ok
+test_failed_assembly_resumes_offline_and_preserves_previous_product (test_narration_resume.NarrationRecovery.test_failed_assembly_resumes_offline_and_preserves_previous_product) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+test_offline_permission_is_enforced_after_cache_changes (test_narration_resume.NarrationRecovery.test_offline_permission_is_enforced_after_cache_changes) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 20.323s
+
+OK

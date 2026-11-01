@@ -1,0 +1,11 @@
+test_bulk_source_decisions_confirm_and_preserve_existing_statuses (test_ui_layout.WorkbenchLayout.test_bulk_source_decisions_confirm_and_preserve_existing_statuses) ... ok
+test_menu_disabled_state_and_real_export_action (test_ui_layout.WorkbenchLayout.test_menu_disabled_state_and_real_export_action) ... ok
+test_preview_view_choice_does_not_change_candidate_and_undo (test_ui_layout.WorkbenchLayout.test_preview_view_choice_does_not_change_candidate_and_undo) ... ok
+test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit (test_ui_layout.WorkbenchLayout.test_save_is_global_confirmation_only_in_confirm_and_all_tools_fit) ... ok
+test_selection_survives_ai_tab_and_focus_mode (test_ui_layout.WorkbenchLayout.test_selection_survives_ai_tab_and_focus_mode) ... ok
+test_source_blockers_remain_visible_after_save_and_in_other_tab (test_ui_layout.WorkbenchLayout.test_source_blockers_remain_visible_after_save_and_in_other_tab) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 6.825s
+
+OK

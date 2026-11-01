@@ -1,0 +1,15 @@
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ERROR
+
+======================================================================
+ERROR: test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video.py", line 52, in test_reopen_then_encode_without_batch_video_or_new_tts
+    job = flow.start_total_video()
+          ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'start_total_video'. Did you mean: 'start_total_audio'?
+
+----------------------------------------------------------------------
+Ran 1 test in 5.746s
+
+FAILED (errors=1)

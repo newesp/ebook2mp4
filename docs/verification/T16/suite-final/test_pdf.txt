@@ -1,0 +1,15 @@
+test_blank_and_failed_pages_block_confirmation_until_explicit_resolution (test_pdf.PdfJourney.test_blank_and_failed_pages_block_confirmation_until_explicit_resolution) ... ok
+test_cancellation_keeps_complete_pages_and_leaves_corrected_batch_intact (test_pdf.PdfJourney.test_cancellation_keeps_complete_pages_and_leaves_corrected_batch_intact) ... ok
+test_commit_failure_retains_candidate_and_previous_confirmed_content (test_pdf.PdfJourney.test_commit_failure_retains_candidate_and_previous_confirmed_content) ... ok
+test_failed_pdf_removal_retains_previous_project (test_pdf.PdfJourney.test_failed_pdf_removal_retains_previous_project) ... ok
+test_invalid_ranges_and_unreadable_corrupt_password_sources_do_not_start (test_pdf.PdfJourney.test_invalid_ranges_and_unreadable_corrupt_password_sources_do_not_start) ... ok
+test_line_break_cleanup_preview_never_rewrites_original_and_can_be_undone (test_pdf.PdfJourney.test_line_break_cleanup_preview_never_rewrites_original_and_can_be_undone) ... ok
+test_mapping_invalidates_on_edit_reload_and_original_export_has_no_labels (test_pdf.PdfJourney.test_mapping_invalidates_on_edit_reload_and_original_export_has_no_labels) ... ok
+test_real_multilingual_text_layer_preserves_script_numbers_and_punctuation (test_pdf.PdfJourney.test_real_multilingual_text_layer_preserves_script_numbers_and_punctuation) ... ok
+test_remove_selected_pdf_preserves_other_batches_and_source (test_pdf.PdfJourney.test_remove_selected_pdf_preserves_other_batches_and_source) ... ok
+test_selected_pages_are_independent_persistent_batches_with_txt (test_pdf.PdfJourney.test_selected_pages_are_independent_persistent_batches_with_txt) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 5.889s
+
+OK
