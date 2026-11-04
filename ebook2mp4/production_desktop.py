@@ -31,6 +31,7 @@ class ProductionWorkspace(ttk.Frame):
         self.pages: dict[tuple, Any] = {}
         self.current = None
         self.service_page = None
+        self.package_page = None
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
         tabs = ttk.Frame(self)
@@ -109,6 +110,14 @@ class ProductionWorkspace(ttk.Frame):
         self.service_page = ServiceDialog(owner, parent=self.host, on_return=self.app.voice_settings)
         self.activate(self.service_page)
 
+    def manage_local_packages(self,owner):
+        from .kokoro_desktop import PackagePage
+        if self.package_page is None or not self.package_page.winfo_exists():
+            self.package_page=PackagePage(owner)
+        else:
+            self.package_page.owner=owner;self.package_page.flow=owner.flow;self.package_page.refresh()
+        self.activate(self.package_page)
+
     def hide(self):
         if self.current is not None and self.current.winfo_exists() and hasattr(self.current, 'stop'):
             self.current.stop()
@@ -175,6 +184,7 @@ class ProductionWorkspace(ttk.Frame):
 
     def shutdown(self):
         pages = list(self.pages.values())
+        if self.package_page is not None:pages.insert(0,self.package_page)
         if self.service_page is not None:
             self.service_page.on_return = None
             pages.insert(0, self.service_page)

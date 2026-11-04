@@ -1,0 +1,61 @@
+test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success) ... ok
+test_corrupt_audio_and_conflicting_save_keep_previous_success (test_voice.VoiceJourney.test_corrupt_audio_and_conflicting_save_keep_previous_success) ... ok
+test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing (test_voice.VoiceJourney.test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing) ... ok
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ok
+test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause (test_voice.VoiceJourney.test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause) ... ok
+test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup) ... ok
+test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result) ... ok
+test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens) ... ERROR
+test_failed_retries_cancel_and_conflict_keep_previous_product (test_narration.NarrationJourney.test_failed_retries_cancel_and_conflict_keep_previous_product) ... ok
+test_indivisible_long_quotation_is_rejected_before_any_online_request (test_narration.NarrationJourney.test_indivisible_long_quotation_is_rejected_before_any_online_request) ... ok
+test_lock_cleanup_failure_cannot_discard_a_published_product (test_narration.NarrationJourney.test_lock_cleanup_failure_cannot_discard_a_published_product) ... ok
+test_long_english_prefers_complete_sentences_over_word_boundaries (test_narration.NarrationJourney.test_long_english_prefers_complete_sentences_over_word_boundaries) ... ok
+test_long_paragraph_preserves_protected_spans_and_exact_content (test_narration.NarrationJourney.test_long_paragraph_preserves_protected_spans_and_exact_content) ... ok
+test_surrounding_quotes_and_brackets_do_not_block_long_url_prose (test_narration.NarrationJourney.test_surrounding_quotes_and_brackets_do_not_block_long_url_prose) ... ok
+test_ascii_opening_quote_stays_with_its_sentence (test_rhythm.RhythmJourney.test_ascii_opening_quote_stays_with_its_sentence) ... ok
+test_pause_settings_persist_and_reject_out_of_range (test_rhythm.RhythmJourney.test_pause_settings_persist_and_reject_out_of_range) ... ok
+test_quotes_and_punctuation_run_are_one_sentence_boundary (test_rhythm.RhythmJourney.test_quotes_and_punctuation_run_are_one_sentence_boundary) ... ok
+test_shared_sentence_audio_reused_and_silence_has_no_caption (test_rhythm.RhythmJourney.test_shared_sentence_audio_reused_and_silence_has_no_caption) ... ok
+test_assembly_cancel_joins_media_process_and_resumes_without_tts (test_narration_resume.NarrationRecovery.test_assembly_cancel_joins_media_process_and_resumes_without_tts) ... ok
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_corrupt_cache_is_not_reused (test_narration_resume.NarrationRecovery.test_corrupt_cache_is_not_reused) ... ok
+test_failed_assembly_resumes_offline_and_preserves_previous_product (test_narration_resume.NarrationRecovery.test_failed_assembly_resumes_offline_and_preserves_previous_product) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+test_offline_permission_is_enforced_after_cache_changes (test_narration_resume.NarrationRecovery.test_offline_permission_is_enforced_after_cache_changes) ... ok
+test_defaults_apply_only_to_explicit_batches_and_survive_reopen (test_incremental_narration.IncrementalNarration.test_defaults_apply_only_to_explicit_batches_and_survive_reopen) ... ok
+test_edit_insert_and_pause_changes_reuse_actual_requests (test_incremental_narration.IncrementalNarration.test_edit_insert_and_pause_changes_reuse_actual_requests) ... ok
+test_new_revision_cancel_and_cache_loss_preserve_old_product (test_incremental_narration.IncrementalNarration.test_new_revision_cancel_and_cache_loss_preserve_old_product) ... ok
+test_http_date_and_invalid_delays (test_tts_retry.RetryHeaders.test_http_date_and_invalid_delays) ... ok
+test_long_delay_is_retryable_for_both_providers (test_tts_retry.RetryHeaders.test_long_delay_is_retryable_for_both_providers) ... ok
+test_cancel_during_long_wait_releases_resources_and_keeps_successful_audio (test_tts_retry.RetryRecovery.test_cancel_during_long_wait_releases_resources_and_keeps_successful_audio) ... ok
+test_excessive_retry_after_stops_instead_of_waiting_21_hours (test_tts_retry.RetryRecovery.test_excessive_retry_after_stops_instead_of_waiting_21_hours) ... ok
+test_resume_after_excessive_cooldown_preserves_successful_block (test_tts_retry.RetryRecovery.test_resume_after_excessive_cooldown_preserves_successful_block) ... ok
+test_resume_block_36_waits_for_long_retry_after_and_reuses_first_35 (test_tts_retry.RetryRecovery.test_resume_block_36_waits_for_long_retry_after_and_reuses_first_35) ... ok
+test_retry_wait_budget_stops_at_five_minutes_total (test_tts_retry.RetryRecovery.test_retry_wait_budget_stops_at_five_minutes_total) ... ok
+test_classification_and_malformed_payload (test_tts_control.ControlTests.test_classification_and_malformed_payload) ... ok
+test_configured_rpm_reserves_spacing_and_wait_is_cancellable (test_tts_control.ControlTests.test_configured_rpm_reserves_spacing_and_wait_is_cancellable) ... Executing <Task pending name='Task-787' coro=<ControlTests.test_configured_rpm_reserves_spacing_and_wait_is_cancellable() running at E:\Leo\Projects\ebook2mp4\tests\test_tts_control.py:57> cb=[_run_until_complete_cb() at C:\Python314\Lib\asyncio\base_events.py:181] created at C:\Python314\Lib\asyncio\runners.py:109> took 0.331 seconds
+ok
+test_expiry_and_account_model_isolation (test_tts_control.ControlTests.test_expiry_and_account_model_isolation) ... Executing <Task finished name='Task-793' coro=<ControlTests.test_expiry_and_account_model_isolation() done, defined at E:\Leo\Projects\ebook2mp4\tests\test_tts_control.py:40> result=None created at C:\Python314\Lib\asyncio\runners.py:109> took 0.562 seconds
+ok
+test_persisted_cooldown_blocks_http_and_other_profile_with_same_key (test_tts_control.ControlTests.test_persisted_cooldown_blocks_http_and_other_profile_with_same_key) ... Executing <Task finished name='Task-798' coro=<ControlTests.test_persisted_cooldown_blocks_http_and_other_profile_with_same_key() done, defined at E:\Leo\Projects\ebook2mp4\tests\test_tts_control.py:23> result=None created at C:\Python314\Lib\asyncio\runners.py:109> took 0.245 seconds
+ok
+test_check_service_reads_complete_chunked_json (test_tts_providers.ProviderDesktop.test_check_service_reads_complete_chunked_json) ... ok
+test_service_switch_enables_model_and_management_layout (test_tts_providers.ProviderDesktop.test_service_switch_enables_model_and_management_layout) ... ok
+test_fish_request_and_auth_error_preserve_previous_result (test_tts_providers.Providers.test_fish_request_and_auth_error_preserve_previous_result) ... ok
+test_gemini_custom_model_preview_formal_reuse_and_no_project_key (test_tts_providers.Providers.test_gemini_custom_model_preview_formal_reuse_and_no_project_key) ... ok
+test_profile_provider_cannot_change_and_fish_model_is_explicit (test_tts_providers.Providers.test_profile_provider_cannot_change_and_fish_model_is_explicit) ... ok
+
+======================================================================
+ERROR: test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 54, in test_confirmed_snapshot_outputs_measured_cues_and_reopens
+    pcm = subprocess.check_output([__import__('os').environ['EBOOK2MP4_FFMPEG'], '-v', 'error',
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+----------------------------------------------------------------------
+Ran 43 tests in 96.562s
+
+FAILED (errors=1)

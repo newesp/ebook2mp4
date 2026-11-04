@@ -1,0 +1,70 @@
+[
+  {
+    "file": "dates-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "dates-zm_010-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "first-preview-traditional-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "long-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "mixed-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "mixed-zm_010-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "numbers-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "numbers-zm_010-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "polyphonic-zf_001-original.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "polyphonic-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "polyphonic-zm_010-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "punctuation-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "punctuation-zm_010-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "traditional-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "traditional-zm_010-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "warm-repeat-1-zf_001-t2s.json",
+    "original_matches_corpus": true
+  },
+  {
+    "file": "warm-repeat-2-zf_001-t2s.json",
+    "original_matches_corpus": true
+  }
+]

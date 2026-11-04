@@ -766,6 +766,27 @@ class ProjectWorkflow:
         owner = self._batch(batch_id) if batch_id is not None else self._manifest
         return settings(owner.get('voice_settings', DEFAULT_SETTINGS))
 
+    def local_voice_packages(self) -> list[dict]:
+        from .kokoro_packages import catalog
+        return catalog()
+
+    def start_voice_package_import(self, path: Path):
+        from .kokoro_packages import install
+        from .voice import VoiceJob
+        return VoiceJob(lambda: install(path), timeout=None)
+
+    def remove_voice_package(self, identity: str):
+        from .kokoro_packages import remove
+        remove(identity)
+
+    def local_voice_status(self) -> dict:
+        from .kokoro_runtime import engine
+        return engine().status()
+
+    def unload_local_voice(self):
+        from .kokoro_runtime import engine
+        engine().stop_if_idle()
+
     def save_voice_settings(self, voice: str, rate: str = '+0%', *, batch_id: str | None = None,
                             sentence_pause_ms: int | None = None, paragraph_pause_ms: int | None = None, settings_override: dict | None = None):
         from .voice import require_voice, settings
@@ -845,7 +866,7 @@ class ProjectWorkflow:
         async def operation():
             audio = await synthesize(selected, value, tool, self._path(f'batches/{batch_id}/voice-blocks'))
             return snapshot, audio
-        self._voice_job = VoiceJob(operation)
+        self._voice_job = VoiceJob(operation,timeout=None if value['provider']=='kokoro' else 90)
         return self._voice_job
 
     def finish_voice_preview(self, job: VoiceJob) -> dict:

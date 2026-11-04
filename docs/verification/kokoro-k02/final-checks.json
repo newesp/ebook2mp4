@@ -1,0 +1,17 @@
+{
+  "python_scripts_compile": true,
+  "git_diff_check": true,
+  "design_links_valid": true,
+  "unique_regression_cases_passed": 46,
+  "preexisting_desktop_unchanged": true,
+  "new_ui_implemented": false,
+  "design_approval": "pending",
+  "source_sha256": {
+    "ebook2mp4\\tts_backend.py": "e104ebd70944590a9f889fbb09e1949d7ebf9545d52a703821a8aef719d6f867",
+    "ebook2mp4\\voice_media.py": "3780909ff7e5af6dd304b7812e9a28fdf5e4439e443812e6d64999e1ee82558c",
+    "ebook2mp4\\narration.py": "a057910d558c815ef018b5074cc9a7f53ca81df2ded4c3a10594584f31e92ea9",
+    "ebook2mp4\\tts_services.py": "01d67e144a862a87b6c11dc1c4f6465ad9c484241fc69b5978286af19f902660",
+    "tests\\test_tts_capabilities.py": "6d38c53e6dac996ce50b0c075a7c8e7186a71e33ba65bdecf986e2fbff402498",
+    "tools\\kokoro_k01\\draw_integration_design.py": "dc5b1228dc04efb1f5f2e8bd32cfb5f2ddaf1ceebfd9bf619d769ebdce6a8b3c"
+  }
+}

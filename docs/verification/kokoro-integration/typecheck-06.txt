@@ -1,0 +1,2 @@
+ebook2mp4\kokoro_runtime.py:102: error: Item "None" of "TemporaryDirectory[str] | None" has no attribute "cleanup"  [union-attr]
+Found 1 error in 1 file (checked 35 source files)

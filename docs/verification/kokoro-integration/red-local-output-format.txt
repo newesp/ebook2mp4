@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\soundfile.py", line 375, in write
+    with SoundFile(file, 'w', samplerate, channels,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\soundfile.py", line 706, in __init__
+    self._info = _create_info_struct(file, mode, samplerate, channels,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\soundfile.py", line 1583, in _create_info_struct
+    info.format = _format_int(format, subtype, endian)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\soundfile.py", line 1541, in _format_int
+    raise ValueError(
+ValueError: Invalid combination of format, subtype and endian

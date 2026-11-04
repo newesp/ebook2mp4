@@ -1,0 +1,15 @@
+test_invalid_package_does_not_activate_or_leave_installation (test_kokoro.LocalPackageJourney.test_invalid_package_does_not_activate_or_leave_installation) ... ERROR
+
+======================================================================
+ERROR: test_invalid_package_does_not_activate_or_leave_installation (test_kokoro.LocalPackageJourney.test_invalid_package_does_not_activate_or_leave_installation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_kokoro.py", line 27, in test_invalid_package_does_not_activate_or_leave_installation
+    job=self.flow.start_voice_package_import(archive)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'start_voice_package_import'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.199s
+
+FAILED (errors=1)

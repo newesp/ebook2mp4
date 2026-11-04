@@ -1,0 +1,121 @@
+6131 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+6132 INFO: Python: 3.14.3
+6525 INFO: Platform: Windows-11-10.0.26200-SP0
+6526 INFO: Python environment: C:\Python314
+34432 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev',
+ 'E:\\Leo\\Projects\\ebook2mp4',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+39425 INFO: Appending 'binaries' from .spec
+39426 INFO: Appending 'datas' from .spec
+39515 INFO: checking Analysis
+39515 INFO: Building Analysis because Analysis-00.toc is non existent
+39515 INFO: Looking for Python shared library...
+39515 INFO: Using Python shared library: C:\Python314\python314.dll
+39516 INFO: Running Analysis Analysis-00.toc
+39516 INFO: Target bytecode optimization level: 0
+39516 INFO: Initializing module dependency graph...
+39521 INFO: Initializing module graph hook caches...
+39721 INFO: Analyzing modules for base_library.zip ...
+44735 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+46553 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+47495 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+48106 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+48177 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+60874 INFO: Caching module dependency graph...
+60960 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+61238 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_find_module_path'
+61324 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+62518 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+63374 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+63649 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+63792 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+63965 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+64011 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+64856 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+65315 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+66702 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+66877 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+67815 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+69156 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+71896 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+72788 INFO: Processing standard module hook 'hook-opencc.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+73670 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+79147 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+80234 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+80323 INFO: SetuptoolsInfo: initializing cached setuptools info...
+86510 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+88543 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+95515 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+100982 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+101016 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+101031 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+101108 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+101244 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+101260 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+101293 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+101295 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+101782 INFO: Processing standard module hook 'hook-_osx_support.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+101889 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+102946 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+102966 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+105326 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+108281 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\pre_safe_import_module'
+108294 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+111068 INFO: Processing standard module hook 'hook-sqlite3.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+112005 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+114372 INFO: Analyzing hidden import 'pypdfium2.__main__'
+114546 INFO: Analyzing hidden import 'opencc.__main__'
+114590 INFO: Analyzing hidden import 'edge_tts.__main__'
+114716 INFO: Analyzing hidden import 'certifi.__main__'
+114721 INFO: Analyzing hidden import 'certifi.tests'
+114723 INFO: Analyzing hidden import 'certifi.tests.test_certify'
+115259 INFO: Processing module hooks (post-graph stage)...
+118460 INFO: Processing standard module hook 'hook-orjson.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\_pyinstaller_hooks_contrib\\stdhooks'
+130871 WARNING: Hidden import "tzdata" not found!
+132862 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+150701 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks'
+150746 INFO: Performing binary vs. data reclassification (1094 entries)
+168361 INFO: Looking for ctypes DLLs
+168610 INFO: Analyzing run-time hooks ...
+168619 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\rthooks'
+168658 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\rthooks'
+168696 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\rthooks'
+168716 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\dev\\PyInstaller\\hooks\\rthooks'
+168803 INFO: Creating base_library.zip...
+168834 INFO: Looking for dynamic libraries
+171103 INFO: Extra DLL search directories (AddDllDirectory): []
+171104 INFO: Extra DLL search directories (PATH): []
+178227 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\build\ebook2mp4\warn-ebook2mp4.txt
+178587 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\build\ebook2mp4\xref-ebook2mp4.html
+178858 INFO: checking PYZ
+178858 INFO: Building PYZ because PYZ-00.toc is non existent
+178859 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\build\ebook2mp4\PYZ-00.pyz
+180327 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\build\ebook2mp4\PYZ-00.pyz completed successfully.
+180370 INFO: checking PKG
+180371 INFO: Building PKG because PKG-00.toc is non existent
+180371 INFO: Building PKG (CArchive) ebook2mp4.pkg
+180472 INFO: Building PKG (CArchive) ebook2mp4.pkg completed successfully.
+180475 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\dev\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+180475 INFO: checking EXE
+180476 INFO: Building EXE because EXE-00.toc is non existent
+180476 INFO: Building EXE from EXE-00.toc
+180476 INFO: Copying bootloader EXE to E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\build\ebook2mp4\ebook2mp4.exe
+180835 INFO: Copying icon to EXE
+180954 INFO: Copying 0 resources to EXE
+180954 INFO: Embedding manifest in EXE
+181080 INFO: Appending PKG archive to EXE
+181208 INFO: Fixing EXE headers
+181842 INFO: Building EXE from EXE-00.toc completed successfully.
+181862 INFO: checking COLLECT
+181862 INFO: Building COLLECT because COLLECT-00.toc is non existent
+181862 INFO: Building COLLECT COLLECT-00.toc
+189341 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+189384 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist\Kokoro

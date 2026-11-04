@@ -1,0 +1,21 @@
+Installing E:\Leo\Projects\ebook2mp4\dist\kokoro\kokoro-zh-cpu-8a1e333cec56056d.zip
+0.28 模型已卸載
+completed in 117.46042989999114
+0.2 模型已卸載
+6.17 檢查語音包 0/997
+85.54 檢查語音包 200/997
+91.24 檢查語音包 400/997
+93.88 檢查語音包 600/997
+103.71 檢查語音包 800/997
+131.74 載入本機模型
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 60, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 48, in main
+    job=flow.start_voice_preview(batch,text=text,start=0,end=len(text));wait(flow,job)
+                                                                        ~~~~^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 25, in wait
+    if job.state['status']!='completed':raise RuntimeError(dict(job.state,worker=flow.local_voice_status()))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'status': 'failed', 'error': '本機模型載入逾時，請釋放系統資源或縮短文字後重試。', 'error_category': 'load-timeout', 'worker': {'busy': False, 'phase': '模型已卸載', 'pid': None, 'loads': 0, 'package': None, 'idle_seconds': 120, 'last_error': 'LocalSpeechError'}}

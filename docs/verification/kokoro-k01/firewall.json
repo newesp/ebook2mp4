@@ -1,0 +1,20 @@
+{
+  "direction": "Outbound",
+  "rule": "ebook2mp4-K01-offline-14cefc3f29704feea18b6146abe61879",
+  "profiles": [
+    {
+      "Name": "Domain",
+      "Enabled": 1
+    },
+    {
+      "Name": "Private",
+      "Enabled": 1
+    },
+    {
+      "Name": "Public",
+      "Enabled": 1
+    }
+  ],
+  "action": "Block",
+  "program": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-k01\\python\\cpython-3.12.15-windows-x86_64-none\\python.exe"
+}

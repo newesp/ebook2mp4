@@ -1,0 +1,269 @@
+diff --git a/ebook2mp4/narration.py b/ebook2mp4/narration.py
+index 21886fc..42eadeb 100644
+--- a/ebook2mp4/narration.py
++++ b/ebook2mp4/narration.py
+@@ -6,10 +6,12 @@ from bisect import bisect_right
+ from copy import deepcopy
+ from html import escape
+ import json
++import math
+ import os
+ from pathlib import Path
+ import re
+ import shutil
++import time
+ import uuid
+ import wave
+ 
+@@ -120,8 +122,11 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
+         raise ProjectError('朗讀稿含語音服務不支援的控制字元，請修正後重新確認。')
+     from .voice import settings as validate_settings
+     settings = validate_settings(settings)
++    from .tts_backend import capabilities
++    policy = capabilities(settings['provider'])
+     rules = dict(RULES, version='rhythm-block-v2', sentence_pause_ms=settings['sentence_pause_ms'],
+-                 paragraph_pause_ms=settings['paragraph_pause_ms'])
++                 paragraph_pause_ms=settings['paragraph_pause_ms'],
++                 request_escaped_utf8_bytes=policy.request_escaped_utf8_bytes, max_attempts=policy.max_attempts)
+     chunks: list[dict] = []
+     # Separators are saved separately, so the exact confirmed text is recoverable.
+     start = 0
+@@ -143,7 +148,7 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
+             costs.append(costs[-1] + request_size(char))
+         offset = 0
+         while offset < len(paragraph):
+-            limit = bisect_right(costs, costs[offset] + RULES['request_escaped_utf8_bytes']) - 1
++            limit = bisect_right(costs, costs[offset] + rules['request_escaped_utf8_bytes']) - 1
+             if limit >= len(paragraph):
+                 end = len(paragraph)
+             else:
+@@ -239,10 +244,13 @@ class NarrationJob(VoiceJob):
+                     self.save_progress(phase='驗證音訊區塊', current=index + 1)
+                     def progress(attempt):
+                         chunk.update(status='running', attempts=attempt)
+-                        self.save_progress(phase='線上合成')
++                        self.save_progress(phase='線上合成', retry_deadline=None)
++                    def retry_progress(attempt, delay):
++                        self.save_progress(phase=f'等待 {math.ceil(delay)} 秒後重試',
++                                           retry_deadline=time.monotonic() + delay)
+                     decoded, reused = await speech_block(
+                         chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
+-                        progress, allow_network=self.allow_network)
++                        progress, allow_network=self.allow_network, retry_progress=retry_progress)
+                     chunk.update(reused=reused)
+                     with wave.open(str(decoded), 'rb') as source:
+                         count = source.getnframes()
+diff --git a/ebook2mp4/narration_desktop.py b/ebook2mp4/narration_desktop.py
+index e268cca..1fe75c3 100644
+--- a/ebook2mp4/narration_desktop.py
++++ b/ebook2mp4/narration_desktop.py
+@@ -3,6 +3,8 @@ from __future__ import annotations
+ 
+ import os
+ import asyncio
++import math
++import time
+ import tkinter as tk
+ from tkinter import filedialog, messagebox, ttk
+ 
+@@ -134,6 +136,8 @@ class NarrationDialog(ttk.Frame):
+         self.load_runs(keep_current=True)
+ 
+     def show_block_error(self,_event=None):
++        if self.job is not None:
++            return
+         selected=self.details.selection()
+         if not selected or self.run is None:
+             return
+@@ -280,6 +284,11 @@ class NarrationDialog(ttk.Frame):
+             allow_network = bool(remaining) and self.consent.get()
+             self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=allow_network) if self.run is not None
+                         else self.flow.start_narration(self.batch_id, allow_network=allow_network))
++            state = self.job.state
++            state.setdefault('total', len(self.job.snapshot['chunks']))
++            state.setdefault('chunks', [dict(chunk, status='pending', attempts=0)
++                                        for chunk in self.job.snapshot['chunks']])
++            self.display_progress(state)
+             self.update_controls()
+             self.schedule()
+         except ProjectError as error:
+@@ -298,13 +307,31 @@ class NarrationDialog(ttk.Frame):
+         self.load_runs()
+         self.status.configure(text='MP3／SRT 已完成並保存。請播放檢查聽感與字幕。')
+ 
++    def display_progress(self, state):
++        phase = state.get('phase', '準備')
++        deadline = state.get('retry_deadline')
++        if deadline is not None:
++            phase = f'等待 {max(0, math.ceil(deadline - time.monotonic()))} 秒後重試'
++        self.status.configure(text=f'{phase} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
++                                   f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
++        self.run_summary.configure(text=f'執行中 · 完成 {state.get("completed", 0)}/{state.get("total", 0)} 塊')
++        chunks = state.get('chunks', [])
++        rows = self.details.get_children()
++        if len(rows) != len(chunks):
++            self.details.delete(*rows)
++            rows = tuple(self.details.insert('', 'end') for chunk in chunks)
++        for row, chunk in zip(rows, chunks):
++            values = (chunk['order'] + 1, STATUS_LABELS.get(chunk['status'], '待檢查'),
++                      chunk.get('attempts', 0), '查看原因' if chunk['status'] == 'failed' else '—')
++            if tuple(map(str, self.details.item(row, 'values'))) != tuple(map(str, values)):
++                self.details.item(row, values=values)
++
+     def poll(self):
+         self.timer = None
+         if self.job is not None:
+             if not self.job.wait(0):
+                 state = self.job.state
+-                self.status.configure(text=f'{state.get("phase", "準備")} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
+-                                      f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
++                self.display_progress(state)
+                 self.schedule()
+                 return
+             state = self.job.state
+diff --git a/ebook2mp4/tts_services.py b/ebook2mp4/tts_services.py
+index 5c8ba6c..fd89a9c 100644
+--- a/ebook2mp4/tts_services.py
++++ b/ebook2mp4/tts_services.py
+@@ -1,6 +1,9 @@
+ """Local TTS profiles and cancellable provider transports; no credentials in projects."""
+ import base64
++from datetime import datetime, timezone
++from email.utils import parsedate_to_datetime
+ import json
++import math
+ import re
+ from .workflow import ProjectError, ProjectWorkflow, encode
+ 
+@@ -68,6 +71,8 @@ def validate_model(model):
+ async def request_audio(text, value):
+     import aiohttp
+     key = credential(value)
++    from .tts_control import before_request, error_reason, record_limit
++    await before_request(value, key)
+     if value['provider'] == 'gemini-tts':
+         url = 'https://generativelanguage.googleapis.com/v1beta/interactions'
+         headers = {'x-goog-api-key': key}
+@@ -80,7 +85,8 @@ async def request_audio(text, value):
+         headers = {'Authorization': 'Bearer '+key, 'model': value['model']}
+         body = dict(text=text, reference_id=value['voice'], format='wav', normalize=False,
+                     prosody=dict(speed=1+int(value['rate'].strip('%'))/100))
+-    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=90)) as session:
++    from .tts_backend import capabilities
++    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=capabilities(value['provider']).synthesis_timeout_seconds)) as session:
+         async with session.post(url, headers=headers, json=body) as response:
+             if response.status != 200:
+                 status = response.status
+@@ -91,12 +97,20 @@ async def request_audio(text, value):
+                     delay=response.headers.get('Retry-After','0')
+                     try: seconds=max(0,float(delay))
+                     except ValueError:
+-                        from email.utils import parsedate_to_datetime
+-                        from datetime import datetime, timezone
+                         try: seconds=max(0,(parsedate_to_datetime(delay)-datetime.now(timezone.utc)).total_seconds())
+                         except (ValueError,TypeError,OverflowError): seconds=0
+-                    if seconds>60: raise ProjectError('服務要求等待超過60秒，請稍後重試。')
+-                    raise RetryableServiceError(f'TTS HTTP {status}：服務暫時不可用，請稍後重試。',seconds)
++                    if not math.isfinite(seconds): seconds=0
++                    server_wait = bool(seconds)
++                    reason = await error_reason(response) if status == 429 else '服務暫時不可用，請稍後重試'
++                    if status == 429 and not seconds:
++                        seconds = 60
++                    if seconds:
++                        record_limit(value, key, seconds, f'TTS HTTP {status}：{reason}。')
++                    wait = (f'；{"服務要求" if server_wait else "本機保護"}等待 {math.ceil(seconds)} 秒後重試'
++                            if seconds else '')
++                    if status == 429 and ('配額已用盡' in reason or '帳務' in reason):
++                        raise ProjectError(f'TTS HTTP 429：{reason}{wait}。已停止自動重試。')
++                    raise RetryableServiceError(f'TTS HTTP {status}：{reason}{wait}。',seconds)
+                 raise ProjectError(f'TTS HTTP {status}：{reasons.get(status, "服務暫時故障，請稍後重試")}；不會自動換模型或服務。')
+             data = bytearray()
+             async for block in response.content.iter_chunked(65536):
+diff --git a/ebook2mp4/voice_media.py b/ebook2mp4/voice_media.py
+index 9ad45cc..08933d2 100644
+--- a/ebook2mp4/voice_media.py
++++ b/ebook2mp4/voice_media.py
+@@ -15,6 +15,8 @@ import wave
+ 
+ from .workflow import ProjectError
+ 
++MAX_AUTOMATIC_RETRY_WAIT = 300
++
+ 
+ def ffmpeg() -> str:
+     configured = os.environ.get('EBOOK2MP4_FFMPEG')
+@@ -73,51 +75,49 @@ def cached_block(text: str, settings: dict, cache: Path) -> Path | None:
+     return None
+ 
+ 
+-async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True):
++async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True,
++                       retry_progress=None):
+     """Keep verified, immutable PCM speech independent of added pauses."""
+-    from .voice import edge_module
++    from .tts_backend import capabilities, write_speech
+     from .workflow import ProjectWorkflow, digest, encode
+     from .tts_services import RetryableServiceError
+     from aiohttp import ClientError
+     from edge_tts.exceptions import EdgeTTSException
++    policy = capabilities(settings['provider'])
+     cache.mkdir(parents=True, exist_ok=True)
+     target, manifest = block_paths(text, settings, cache)
+     valid = cached_block(text, settings, cache)
+     if valid is not None:
+         return valid, True
+-    if not allow_network:
++    if policy.requires_network and not allow_network:
+         raise ProjectError('音訊區塊已缺少或失效。請重新檢查並勾選同意傳送文字後續作。')
+     from .voice import require_voice
+     require_voice(settings['voice'], settings)
+     with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
+         raw, decoded = Path(directory) / 'speech.mp3', Path(directory) / 'speech.wav'
+-        for attempt in range(1, 4):
++        waited = 0
++        for attempt in range(1, policy.max_attempts + 1):
+             if progress:
+                 progress(attempt)
+             try:
+-                async def receive():
+-                    if settings['provider'] != 'edge-tts':
+-                        from .tts_services import request_audio
+-                        raw.write_bytes(await request_audio(text, settings))
+-                        return
+-                    size = 0
+-                    with raw.open('wb') as stream:
+-                        speaker = edge_module().Communicate(text, settings['voice'], rate=settings['rate'],
+-                                                            connect_timeout=10, receive_timeout=30)
+-                        async for packet in speaker.stream():
+-                            if packet['type'] == 'audio':
+-                                size += len(packet['data'])
+-                                if size > 30_000_000:
+-                                    raise ProjectError('區塊音訊回應過大，請縮短段落後重試。')
+-                                stream.write(packet['data'])
+-                        if not size:
+-                            raise ProjectError('Edge-TTS 未傳回音訊，請更新音色後重試。')
+-                await asyncio.wait_for(receive(), 90)
++                await asyncio.wait_for(write_speech(text, settings, raw), policy.synthesis_timeout_seconds)
+                 break
+             except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException, RetryableServiceError) as exc:
+-                if attempt == 3:
+-                    raise ProjectError('區塊連線或服務錯誤，3 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
+-                await asyncio.sleep(max(attempt, getattr(exc, 'retry_after', 0)))
++                if attempt == policy.max_attempts:
++                    if isinstance(exc, RetryableServiceError):
++                        raise ProjectError(f'區塊已嘗試 {policy.max_attempts} 次，服務仍未恢復。{exc}') from None
++                    raise ProjectError(f'區塊連線或服務錯誤，{policy.max_attempts} 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
++                delay = max(attempt, getattr(exc, 'retry_after', 0))
++                if waited + delay > MAX_AUTOMATIC_RETRY_WAIT:
++                    raise ProjectError(
++                        f'{exc} 本區塊自動等待上限為 300 秒，已停止自動重試。'
++                        '請稍後續作，或先檢查服務配額與狀態。') from None
++                if retry_progress:
++                    retry_progress(attempt, delay)
++                # Retry-After is a delay before the next request, not elapsed time.
++                # Sleep outside the per-request timeout; cancellation still interrupts it.
++                await asyncio.sleep(delay)
++                waited += delay
+         await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
+                                    '-c:a', 'pcm_s16le', str(decoded)])
+         with wave.open(str(decoded), 'rb') as source:

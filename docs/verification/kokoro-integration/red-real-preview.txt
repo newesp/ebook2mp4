@@ -1,0 +1,6 @@
+test_real_package_preview_reopen_and_offline_formal_reuse (test_kokoro.LocalPackageJourney.test_real_package_preview_reopen_and_offline_formal_reuse) ... skipped 'real offline package required'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK (skipped=1)

@@ -1,0 +1,4 @@
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\torch\nn\modules\rnn.py:1012: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\torch\nn\utils\weight_norm.py:145: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)

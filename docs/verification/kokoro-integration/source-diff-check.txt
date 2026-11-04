@@ -1,0 +1,1 @@
+Source whitespace check passed. Raw logs, patch snapshots, and SRT separators are preserved verbatim.

@@ -1,0 +1,20 @@
+{
+  "audio_recordings": 17,
+  "fully_decoded": true,
+  "text_coverage": true,
+  "max_phoneme_length": 136,
+  "zero_clipped_samples": true,
+  "zero_unknown_phoneme_symbols": true,
+  "offline_worker_count": 6,
+  "no_unexpected_python_network_attempts": true,
+  "stopped_pids": [
+    7464,
+    16508,
+    25496,
+    22112,
+    20964,
+    16324
+  ],
+  "manual_listening": "pending user review",
+  "issue_status": "pending user decision"
+}

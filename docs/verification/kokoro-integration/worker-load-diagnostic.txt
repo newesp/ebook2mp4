@@ -1,0 +1,235 @@
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1063 in source_to_code
+  File "<frozen importlib._bootstrap_external>", line 1133 in get_code
+  File "<frozen importlib._bootstrap_external>", line 995 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\compiled_autograd.py", line 43 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\variables\tensor.py", line 37 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\codegen.py", line 54 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\side_effects.py", line 53 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\variables\builder.py", line 132 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\variables\base.py", line 3543 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\variables\__init__.py", line 19 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1310 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\device_interface.py", line 775 in register_interface_for_device
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\device_interface.py", line 798 in init_device_reg
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\device_interface.py", line 792 in get_registered_device_interfaces
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_inductor\utils.py", line 125 in _gpu_types
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_inductor\utils.py", line 252 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_inductor\cpu_vec_isa.py", line 15 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_inductor\cpp_builder.py", line 32 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_inductor\standalone_compile.py", line 20 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_inductor\__init__.py", line 12 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1310 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\_dynamo\trace_rules.py", line 45 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  ...
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\nn\modules\rnn.py:1012: UserWarning: dropout option adds dropout after all but last recurrent layer, so non-zero dropout expects num_layers greater than 1, but got dropout=0.2 and num_layers=1
+  super().__init__("LSTM", *args, **kwargs)
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\nn\utils\weight_norm.py:145: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\torch\jit\_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\__init__.py:44: SyntaxWarning: invalid escape sequence '\.'
+  re_han_default = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._%\-]+)", re.U)
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\__init__.py:46: SyntaxWarning: invalid escape sequence '\s'
+  re_skip_default = re.compile("(\r\n|\s)", re.U)
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\finalseg\__init__.py:78: SyntaxWarning: invalid escape sequence '\.'
+  re_skip = re.compile("([a-zA-Z0-9]+(?:\.\d+)?%?)")
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py:16: SyntaxWarning: invalid escape sequence '\.'
+  re_skip_detail = re.compile("([\.0-9]+|[a-zA-Z0-9]+)")
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py:17: SyntaxWarning: invalid escape sequence '\.'
+  re_han_internal = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._]+)")
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py:18: SyntaxWarning: invalid escape sequence '\s'
+  re_skip_internal = re.compile("(\r\n|\s)")
+E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py:21: SyntaxWarning: invalid escape sequence '\.'
+  re_num = re.compile("[\.0-9]+")
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py", line 100 in load_word_tag
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py", line 82 in __init__
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\jieba\posseg\__init__.py", line 258 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\misaki\zh_frontend.py", line 21 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 999 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\misaki\zh.py", line 15 in __init__
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\runtime\Lib\site-packages\kokoro\pipeline.py", line 124 in __init__
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 36 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>
+Timeout (0:00:30)!
+Thread 0x00005a94 (most recent call first):
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 45 in main
+  File ".scratch\kokoro-integration\real-home\kokoro-zh-cpu-9791b8c9e04d45ed\worker.py", line 73 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 98 in _run_module_code
+  File "<frozen runpy>", line 287 in run_path
+  File "<string>", line 1 in <module>

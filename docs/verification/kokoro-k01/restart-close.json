@@ -1,0 +1,97 @@
+{
+  "label": "restart-close",
+  "pid": 22112,
+  "reason": "close",
+  "termination_seconds": 2.692751299997326,
+  "peak_working_set_bytes": 1931300864,
+  "returncode": 0,
+  "pid_alive": false,
+  "events": [
+    {
+      "elapsed": 0.2347317999956431,
+      "event": "os_network_probe",
+      "blocked": true,
+      "error": "PermissionError(13, '\u5617\u8a66\u5b58\u53d6\u901a\u8a0a\u7aef\u88ab\u62d2\u7d55\uff0c\u56e0\u70ba\u5b58\u53d6\u6b0a\u9650\u4e0d\u8db3\u3002', None, 10013, None)",
+      "seconds": 0.013702700001886114
+    },
+    {
+      "elapsed": 0.23473949999606702,
+      "event": "loading",
+      "pid": 22112
+    },
+    {
+      "elapsed": 17.399118100001942,
+      "event": "model_loading"
+    },
+    {
+      "elapsed": 29.329229800001485,
+      "event": "ready",
+      "import_seconds": 17.16447099999641,
+      "model_frontend_seconds": 11.928460299997823,
+      "load_seconds": 29.092933300009463,
+      "torch": "2.15.0+cpu",
+      "cuda": null,
+      "devices": [
+        "cpu"
+      ],
+      "threads": 4
+    },
+    {
+      "elapsed": 30.098169599994435,
+      "event": "inference",
+      "sample": "traditional-zf_001-t2s",
+      "segment": 0,
+      "phonemes": 40
+    },
+    {
+      "elapsed": 34.649459399995976,
+      "event": "segment_done",
+      "sample": "traditional-zf_001-t2s",
+      "segments": 1,
+      "audio_seconds": 3.625
+    },
+    {
+      "elapsed": 34.6541339999967,
+      "event": "inference",
+      "sample": "traditional-zf_001-t2s",
+      "segment": 1,
+      "phonemes": 59
+    },
+    {
+      "elapsed": 37.873294899996836,
+      "event": "segment_done",
+      "sample": "traditional-zf_001-t2s",
+      "segments": 2,
+      "audio_seconds": 8.45
+    },
+    {
+      "elapsed": 37.87810780000291,
+      "event": "inference",
+      "sample": "traditional-zf_001-t2s",
+      "segment": 2,
+      "phonemes": 40
+    },
+    {
+      "elapsed": 40.7923640999943,
+      "event": "segment_done",
+      "sample": "traditional-zf_001-t2s",
+      "segments": 3,
+      "audio_seconds": 12.125
+    },
+    {
+      "elapsed": 40.993801400007214,
+      "event": "completed",
+      "file": "traditional-zf_001-t2s.wav",
+      "seconds": 11.65100959999836,
+      "audio_seconds": 12.125,
+      "real_time_factor": 0.9609081731957969
+    },
+    {
+      "event": "unload",
+      "reason": "close"
+    }
+  ],
+  "cache_files": [
+    "restart-close\\temp\\jieba.cache"
+  ]
+}

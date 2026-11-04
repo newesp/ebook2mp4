@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_k01\worker.py", line 138, in <module>
+    main()
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_k01\worker.py", line 34, in main
+    raise RuntimeError('OS firewall did not block worker')
+RuntimeError: OS firewall did not block worker

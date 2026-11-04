@@ -1,0 +1,22 @@
+
+7-Zip 26.05 (x64) : Copyright (c) 1999-2026 Igor Pavlov : 2026-10-21
+
+Open archive: E:\Leo\Projects\ebook2mp4\dist\kokoro\kokoro-zh-cpu-8a1e333cec56056d.partial
+--
+Path = E:\Leo\Projects\ebook2mp4\dist\kokoro\kokoro-zh-cpu-8a1e333cec56056d.partial
+Type = zip
+Physical Size = 657211905
+
+Scanning the drive:
+2 files, 4998765 bytes (4882 KiB)
+
+Updating archive: E:\Leo\Projects\ebook2mp4\dist\kokoro\kokoro-zh-cpu-8a1e333cec56056d.partial
+
+Keep old data in archive: 28965 files, 1417314476 bytes (1352 MiB)
+Add new data to archive: 2 files, 4998765 bytes (4882 KiB)
+
+
+Files read from disk: 2
+Archive size: 657212068 bytes (627 MiB)
+Everything is Ok
+{"path": "E:\\Leo\\Projects\\ebook2mp4\\dist\\kokoro\\kokoro-zh-cpu-8a1e333cec56056d.zip", "bytes": 657212068, "sha256": "807b893f5e0675098acc8efe02ae04421d88c64ae7e082004edaebe52ea88bdd", "package": "kokoro-zh-cpu-8a1e333cec56056d"}

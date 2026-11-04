@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from pathlib import Path;import asyncio,json;from ebook2mp4.kokoro_packages import home,release,install; p=home()/release()['id'];p.mkdir(parents=True,exist_ok=True);(p/'package.json').write_text(json.dumps(release()),encoding='utf-8');a=next(Path('dist/kokoro').glob('*.zip'));asyncio.run(install(a))
+                                                                                                                                                                                                                                                                                          ~~~~~~~~~~~^^^^^^^^^^^^
+  File "C:\Python314\Lib\asyncio\runners.py", line 204, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\kokoro_packages.py", line 118, in install
+    await verify(target,metadata)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\kokoro_packages.py", line 93, in verify
+    raise ProjectError(f'語音包檔案缺少或校驗失敗：{entry["path"]}。請重新匯入完整語音包。') from None
+ebook2mp4.workflow.ProjectError: 語音包檔案缺少或校驗失敗：runtime/BUILD。請重新匯入完整語音包。

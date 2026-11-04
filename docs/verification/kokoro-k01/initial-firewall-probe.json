@@ -1,0 +1,17 @@
+{
+  "label": "first-offline",
+  "pid": 20748,
+  "reason": "cancel",
+  "termination_seconds": 9.100011084228754e-06,
+  "peak_working_set_bytes": 23134208,
+  "returncode": 1,
+  "pid_alive": false,
+  "events": [
+    {
+      "elapsed": 0.2820101999968756,
+      "event": "os_network_probe",
+      "blocked": false
+    }
+  ],
+  "cache_files": []
+}

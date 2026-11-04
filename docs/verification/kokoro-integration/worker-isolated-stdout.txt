@@ -1,0 +1,4 @@
+0.21 {"event": "phase", "phase": "\u8f09\u5165\u672c\u6a5f\u6a21\u578b"}
+51.3 {"event": "ready", "device": "cpu", "cuda": null, "pid": 6132}
+52.66 {"event": "phase", "phase": "\u672c\u6a5f\u5408\u6210"}
+55.2 {"event": "completed", "synthesis": "\u4eca\u5929\uff0c\u6b22\u8fce\u9605\u8bfb\u3002Hello world\u3002"}

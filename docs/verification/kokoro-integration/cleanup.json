@@ -1,0 +1,35 @@
+{
+  "preexistingPatchSnapshotsPreserved": true,
+  "remainingFirewallRules": 0,
+  "time": "2026-11-05T02:35:51.2880485+08:00",
+  "preservedPreexistingTestDirectories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "removedTargets": [
+    ".scratch/kokoro-integration",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime",
+    "outputs/kokoro-integration/book",
+    "outputs/kokoro-integration/source.txt",
+    "outputs/kokoro-integration/long-source.txt",
+    "outputs/kokoro-integration/cover.png",
+    "tools/probe_kokoro_worker.py",
+    "tools/diagnose_kokoro_flow.py",
+    "dist/Kokoro/kokoro-zh-cpu-9c4b249fef8ae0d8.zip",
+    "dist/Kokoro/kokoro-zh-cpu-dd39e8b68776bbca.zip",
+    "dist/Kokoro/kokoro-zh-cpu-9791b8c9e04d45ed.zip"
+  ],
+  "remainingTaskProcesses": [],
+  "retained": [
+    "dist/Kokoro/ebook2mp4",
+    "dist/Kokoro/ebook2mp4-kokoro-windows-x64.zip",
+    "dist/Kokoro/kokoro-zh-cpu-8a1e333cec56056d.zip",
+    "outputs/kokoro-integration/delivery",
+    "outputs/kokoro-k01",
+    "docs/verification/kokoro-k01",
+    "docs/verification/kokoro-k02",
+    "docs/verification/kokoro-integration"
+  ],
+  "remainingTargets": []
+}

@@ -1,0 +1,19 @@
+test_missing_package_explains_recovery_and_preserves_settings (test_kokoro.LocalPackageJourney.test_missing_package_explains_recovery_and_preserves_settings) ... FAIL
+
+======================================================================
+FAIL: test_missing_package_explains_recovery_and_preserves_settings (test_kokoro.LocalPackageJourney.test_missing_package_explains_recovery_and_preserves_settings)
+----------------------------------------------------------------------
+ebook2mp4.workflow.ProjectError: �y���]�w�L�ġC�y������ 0��1,500 ms�F�q������ 0��3,000 ms�C
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_kokoro.py", line 38, in test_missing_package_explains_recovery_and_preserves_settings
+    with self.assertRaisesRegex(ProjectError,'�y���]'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "�y���]" does not match "�y���]�w�L�ġC�y������ 0��1,500 ms�F�q������ 0��3,000 ms�C"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.166s
+
+FAILED (failures=1)

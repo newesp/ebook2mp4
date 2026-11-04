@@ -1,0 +1,24 @@
+{
+  "label": "cancel-load",
+  "pid": 16508,
+  "reason": "cancel",
+  "termination_seconds": 0.01800280000315979,
+  "peak_working_set_bytes": 25571328,
+  "returncode": 1,
+  "pid_alive": false,
+  "events": [
+    {
+      "elapsed": 0.6920850000024075,
+      "event": "os_network_probe",
+      "blocked": true,
+      "error": "PermissionError(13, '\u5617\u8a66\u5b58\u53d6\u901a\u8a0a\u7aef\u88ab\u62d2\u7d55\uff0c\u56e0\u70ba\u5b58\u53d6\u6b0a\u9650\u4e0d\u8db3\u3002', None, 10013, None)",
+      "seconds": 0.0590544000006048
+    },
+    {
+      "elapsed": 0.6922313000104623,
+      "event": "loading",
+      "pid": 16508
+    }
+  ],
+  "cache_files": []
+}

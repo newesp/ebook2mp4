@@ -1,0 +1,20 @@
+First offline load {'event': 'ready', 'import_seconds': 29.29723440000089, 'model_frontend_seconds': 33.675262000004295, 'load_seconds': 62.97249890000967, 'torch': '2.15.0+cpu', 'cuda': None, 'devices': ['cpu'], 'threads': 4}
+{'event': 'completed', 'file': 'traditional-zf_001-t2s.wav', 'seconds': 13.447111699992092, 'audio_seconds': 12.125, 'real_time_factor': 1.1090403546389558}
+{'event': 'completed', 'file': 'polyphonic-zf_001-t2s.wav', 'seconds': 10.446689499993226, 'audio_seconds': 14.950000000000001, 'real_time_factor': 0.6987752775919785}
+{'event': 'completed', 'file': 'numbers-zf_001-t2s.wav', 'seconds': 10.390881700004684, 'audio_seconds': 15.850000000000001, 'real_time_factor': 0.6555761829659794}
+{'event': 'completed', 'file': 'dates-zf_001-t2s.wav', 'seconds': 11.288700999997673, 'audio_seconds': 14.899999999999999, 'real_time_factor': 0.7576310067117643}
+{'event': 'completed', 'file': 'mixed-zf_001-t2s.wav', 'seconds': 10.082693999996991, 'audio_seconds': 14.0, 'real_time_factor': 0.7201924571428597}
+{'event': 'completed', 'file': 'punctuation-zf_001-t2s.wav', 'seconds': 14.305048900001566, 'audio_seconds': 18.275, 'real_time_factor': 0.7827660957599447}
+{'event': 'completed', 'file': 'long-zf_001-t2s.wav', 'seconds': 177.46324469998945, 'audio_seconds': 260.75, 'real_time_factor': 0.680587708916558}
+{'event': 'completed', 'file': 'traditional-zm_010-t2s.wav', 'seconds': 9.378542800011928, 'audio_seconds': 12.2, 'real_time_factor': 0.7687330737707136}
+{'event': 'completed', 'file': 'polyphonic-zm_010-t2s.wav', 'seconds': 10.077498800004832, 'audio_seconds': 14.775, 'real_time_factor': 0.6820642707273348}
+{'event': 'completed', 'file': 'numbers-zm_010-t2s.wav', 'seconds': 12.115434999999707, 'audio_seconds': 15.55, 'real_time_factor': 0.7791276720258514}
+{'event': 'completed', 'file': 'dates-zm_010-t2s.wav', 'seconds': 12.708167499993579, 'audio_seconds': 14.6, 'real_time_factor': 0.8704224657532457}
+{'event': 'completed', 'file': 'mixed-zm_010-t2s.wav', 'seconds': 11.470214700006181, 'audio_seconds': 14.075, 'real_time_factor': 0.8149353747777591}
+{'event': 'completed', 'file': 'punctuation-zm_010-t2s.wav', 'seconds': 13.906930000011926, 'audio_seconds': 18.325000000000003, 'real_time_factor': 0.7589048021828747}
+{'event': 'completed', 'file': 'polyphonic-zf_001-original.wav', 'seconds': 10.079850299996906, 'audio_seconds': 14.975, 'real_time_factor': 0.6731119933219406}
+first-offline finished peak MiB 1922.3
+cancel-load finished peak MiB 24.4
+cancel-inference finished peak MiB 1842.0
+{'event': 'completed', 'file': 'traditional-zf_001-t2s.wav', 'seconds': 11.65100959999836, 'audio_seconds': 12.125, 'real_time_factor': 0.9609081731957969}
+restart-close finished peak MiB 1841.8

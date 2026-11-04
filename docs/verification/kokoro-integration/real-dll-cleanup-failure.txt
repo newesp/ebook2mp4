@@ -1,0 +1,80 @@
+Installing E:\Leo\Projects\ebook2mp4\dist\kokoro\kokoro-zh-cpu-dd39e8b68776bbca.zip
+0.29 模型已卸載
+completed in 87.490888299988
+0.21 模型已卸載
+3.26 檢查語音包
+3.47 檢查語音包 0/997
+16.79 檢查語音包 200/997
+18.84 檢查語音包 400/997
+20.06 檢查語音包 600/997
+24.16 檢查語音包 800/997
+34.01 載入本機模型
+194.0 本機合成
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 48, in main
+    job=flow.start_voice_preview(batch,text=text,start=0,end=len(text));wait(flow,job)
+                                                                        ~~~~^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 25, in wait
+    if job.state['status']!='completed':raise RuntimeError(job.state)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'status': 'failed', 'error': 'TTS 網路或服務錯誤。請檢查連線及服務設定；不會自動換聲，仍可校對。'}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python314\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 5] 存取被拒。: 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\real-home\\.worker-bc8kayl0\\temp\\tmpas_0i8m3\\espeak-ng.dll'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 60, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 57, in main
+    finally:flow.unload_local_voice()
+            ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 788, in unload_local_voice
+    engine().stop_if_idle()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\kokoro_runtime.py", line 78, in stop_if_idle
+    self.stop()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\kokoro_runtime.py", line 95, in stop
+    if self.temp:self.temp.cleanup();self.temp=None
+                 ~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tempfile.py", line 975, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tempfile.py", line 955, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tempfile.py", line 930, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 5] 存取被拒。: 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\real-home\\.worker-bc8kayl0\\temp\\tmpas_0i8m3\\espeak-ng.dll'
+Exception ignored in atexit callback <function shutdown at 0x000001FB2E322820>:
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\kokoro_runtime.py", line 183, in shutdown
+    for value in list(_engines.values()):value.stop()
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\kokoro_runtime.py", line 95, in stop
+    if self.temp:self.temp.cleanup();self.temp=None
+  File "C:\Python314\Lib\tempfile.py", line 975, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Python314\Lib\tempfile.py", line 955, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Python314\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+  File "C:\Python314\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+  File "C:\Python314\Lib\tempfile.py", line 930, in onexc
+    _os.unlink(path)
+PermissionError: [WinError 5] 存取被拒。: 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\kokoro-integration\\real-home\\.worker-bc8kayl0\\temp\\tmpas_0i8m3\\espeak-ng.dll'

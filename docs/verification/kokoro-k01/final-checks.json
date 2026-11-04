@@ -1,0 +1,15 @@
+{
+  "experiment_scripts_compile": true,
+  "git_diff_check": true,
+  "documents_link_check": true,
+  "preexisting_source_hashes_unchanged": true,
+  "bytecode_files": 0,
+  "scratch_exists": false,
+  "source_hashes": {
+    "tools\\kokoro_k01\\extra.py": "ef09cb2f02c31b133bc54b07bcb34d215918f4f3b5c6213334bb76b3de82e457",
+    "tools\\kokoro_k01\\finalize.py": "74cd170b46ac4e0dc43dd159807dd230f4feebb8116425f3cadc2be89f3eff08",
+    "tools\\kokoro_k01\\prepare.py": "ccebb0f9134513be6fd1bde29b7cbccca16154195d20f197bca919e6c46f9f26",
+    "tools\\kokoro_k01\\run.py": "763e18b1d8f74b3e816332332964eda39416227727b2ccd9e9636b95b8242cdf",
+    "tools\\kokoro_k01\\worker.py": "1c1e176c051183cb27eb895465c4770c641a9c7f1efc85da36d336d60c054bdc"
+  }
+}

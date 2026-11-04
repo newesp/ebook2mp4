@@ -92,6 +92,7 @@ class NarrationDialog(ttk.Frame):
         self.consent=tk.BooleanVar(value=True)
         self.consent_control=ttk.Checkbutton(actions,text='同意傳送待處理文字（可能計費）',variable=self.consent)
         self.consent_control.grid(row=0,column=1,sticky='w',padx=8)
+        self.local_notice=ttk.Label(actions,text='文字僅在本機 CPU 處理，不傳送至雲端。')
         self.restart_button=ttk.Button(actions,text='重新開始…',command=self.restart)
         self.restart_button.grid(row=0,column=2,sticky='e')
         self.progress=ttk.Progressbar(controls,mode='indeterminate')
@@ -245,7 +246,12 @@ class NarrationDialog(ttk.Frame):
             self.source_info.configure(text=f'{len(self.source_text):,} 字元 · {self.source_settings["voice"] or "尚未選音色"} · '
                                        f'{self.source_settings["provider"]} {self.source_settings.get("model", "")} · {self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]} ms ／ '
                                        f'段落 {self.source_settings["paragraph_pause_ms"]} ms · 請先儲存本批設定。')
-            self.status.configure(text='請核對上方確認稿與音色，再勾選同意並產生。')
+            local=self.source_settings['provider']=='kokoro'
+            if local:
+                self.consent_control.grid_remove();self.local_notice.grid(row=0,column=1,sticky='w',padx=8)
+            else:
+                self.local_notice.grid_remove();self.consent_control.grid()
+            self.status.configure(text='請核對上方確認稿與音色，再開始本機製作。' if local else '請核對上方確認稿與音色，再勾選同意並產生。')
         except ProjectError as error:
             self.source_info.configure(text='目前沒有可合成的已確認稿。')
             self.status.configure(text=str(error))
@@ -269,7 +275,8 @@ class NarrationDialog(ttk.Frame):
                 raise ProjectError('稿件或設定已變更；請返回核對新版本，再重新開始。')
             remaining = self.run['remaining'] if self.run is not None else (
                 self.inspection['remaining'] if self.inspection is not None else 1)
-            if not self.consent.get() and remaining:
+            local=bool(self.source_settings and self.source_settings['provider']=='kokoro')
+            if not local and not self.consent.get() and remaining:
                 raise ProjectError('請先核對並勾選同意將確認稿傳送至線上語音服務。')
             if (self.flow.reading_text(self.batch_id) != self.source_text or
                     self.flow.voice_settings(self.batch_id) != self.source_settings):
@@ -277,7 +284,7 @@ class NarrationDialog(ttk.Frame):
                 self.consent.set(True)
                 raise ProjectError('確認稿或設定已變更。已重讀，請重新核對並勾選同意。')
             self.stop()
-            allow_network = bool(remaining) and self.consent.get()
+            allow_network = not local and bool(remaining) and self.consent.get()
             self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=allow_network) if self.run is not None
                         else self.flow.start_narration(self.batch_id, allow_network=allow_network))
             self.update_controls()
@@ -303,6 +310,9 @@ class NarrationDialog(ttk.Frame):
         if self.job is not None:
             if not self.job.wait(0):
                 state = self.job.state
+                if (self.source_settings and self.source_settings['provider']=='kokoro'
+                        and state['status']=='running' and state.get('phase')=='本機合成'):
+                    state['phase']=self.flow.local_voice_status()['phase']
                 self.status.configure(text=f'{state.get("phase", "準備")} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
                                       f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
                 self.schedule()

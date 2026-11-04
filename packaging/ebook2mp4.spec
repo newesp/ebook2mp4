@@ -23,12 +23,12 @@ a = Analysis(
     ['../run.pyw'],
     pathex=[],
     binaries=pdf_binaries + raw_binaries + voice_binaries + certificate_binaries,
-    datas=pdf_datas + raw_datas + conversion_datas + voice_datas + certificate_datas + copy_metadata('edge-tts') + copy_metadata('opencc-python-reimplemented') + copy_metadata('pillow') + [(str(voice_runtime), 'tools/ffmpeg'), (str(ocr_runtime), 'tools/tesseract'), (str(Path(SPECPATH) / 'licenses'), 'licenses')],
+    datas=pdf_datas + raw_datas + conversion_datas + voice_datas + certificate_datas + copy_metadata('edge-tts') + copy_metadata('opencc-python-reimplemented') + copy_metadata('pillow') + [(str(voice_runtime), 'tools/ffmpeg'), (str(ocr_runtime), 'tools/tesseract'), (str(Path(SPECPATH) / 'licenses'), 'licenses'), (str(Path(SPECPATH).parent / 'ebook2mp4/kokoro_release.json'), 'ebook2mp4')],
     hiddenimports=pdf_imports + raw_imports + conversion_imports + voice_imports + certificate_imports,
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
-    excludes=['numpy'],  # Optional PDFium array adapter; rendering uses Pillow.
+    excludes=['numpy','torch','kokoro','misaki'],  # Inference lives only in the independent voice package.
     noarchive=False,
     optimize=0,
 )

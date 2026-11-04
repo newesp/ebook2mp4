@@ -1,0 +1,16 @@
+[
+  {
+    "name": "kokoro",
+    "version": "0.9.4",
+    "requires_python": "<3.13,>=3.10",
+    "verified_record_hashes": 14,
+    "engine_changes": 0
+  },
+  {
+    "name": "misaki",
+    "version": "0.9.4",
+    "requires_python": "<3.13,>=3.8",
+    "verified_record_hashes": 63,
+    "engine_changes": 0
+  }
+]

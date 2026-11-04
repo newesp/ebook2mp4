@@ -1,0 +1,40 @@
+{
+  "id": "mixed",
+  "voice": "zf_001",
+  "policy": "t2s",
+  "original": "請開啟 Windows，選擇 OpenAI 的 API 設定。這份 PDF 有三頁，最後會輸出 MP3 與 MP4。Hello world，歡迎回到中文閱讀時間。",
+  "synthesis": "请开启 Windows，选择 OpenAI 的 API 设定。这份 PDF 有三页，最后会输出 MP3 与 MP4。Hello world，欢迎回到中文阅读时间。",
+  "original_sha256": "31cf7fd08748ec02c0402d6b60807fd9f7a93b50e25a60492a167aaf94e916c0",
+  "segments": [
+    {
+      "text": "请开启 Windows，选择 OpenAI 的 API 设定。",
+      "phonemes": "ㄑ应3/ㄎㄞ1ㄑㄧ3 wˈɪndOz , ㄒ元3ㄗㄜ2 ˌOpᵊnˈAˌI ㄉㄜ5 ˌApˌiˈI ㄕㄜ4ㄉ应4.",
+      "start": 0,
+      "end": 4.625,
+      "unknown_characters": [],
+      "peak": 0.4034455120563507
+    },
+    {
+      "text": "这份 PDF 有三页，最后会输出 MP3 与 MP4。",
+      "phonemes": "ㄓㄜ4ㄈㄣ4 pˌidˌiˈɛf 又3/ㄙㄢ1ㄝ4, ㄗ为4ㄏㄡ4/ㄏ为4/ㄕㄨ1ㄔㄨ1 ˌɛmpˈi ㄙㄢ1 ㄩ3 ˌɛmpˈi ㄙㄭ4.",
+      "start": 4.625,
+      "end": 9.875,
+      "unknown_characters": [],
+      "peak": 0.4437694847583771
+    },
+    {
+      "text": "Hello world，欢迎回到中文阅读时间。",
+      "phonemes": "həlˈO wˈɜɹld , ㄏ万1应2/ㄏ为2ㄉㄠ4/ㄓ中1文2/月4ㄉㄨ2/ㄕ十2ㄐ言1.",
+      "start": 9.875,
+      "end": 14.0,
+      "unknown_characters": [],
+      "peak": 0.39530372619628906
+    }
+  ],
+  "seconds": 10.082693999996991,
+  "audio_seconds": 14.0,
+  "real_time_factor": 0.7201924571428597,
+  "clipped_samples": 0,
+  "bytes": 672044,
+  "sha256": "ef0c338d01c5443525bf84e1121d4bd8d891fb347f7cbe81991a1e0b737de8da"
+}

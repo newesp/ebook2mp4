@@ -1,0 +1,10 @@
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_compact_page_has_no_outer_scroll_and_footer_stays_visible (test_narration_desktop.NarrationDesktop.test_compact_page_has_no_outer_scroll_and_footer_stays_visible) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 24.197s
+
+OK

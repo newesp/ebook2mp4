@@ -1,0 +1,10 @@
+{
+  "path": "E:\\Leo\\Projects\\ebook2mp4\\dist\\Kokoro\\ebook2mp4-kokoro-windows-x64.zip",
+  "bytes": 192192278,
+  "sha256": "4ffe0555715378dc600d669aebe01d4214045e3576790a5f6bd57dd1dbf0c755",
+  "unpacked_bytes": 420963902,
+  "files": 1305,
+  "python": "3.14.3",
+  "system_python_in_path": false,
+  "executable": "E:\\Leo\\Projects\\ebook2mp4\\dist\\Kokoro\\ebook2mp4\\ebook2mp4.exe"
+}

@@ -1,0 +1,50 @@
+{
+  "label": "cancel-inference",
+  "pid": 25496,
+  "reason": "cancel",
+  "termination_seconds": 0.12346650000836235,
+  "peak_working_set_bytes": 1931464704,
+  "returncode": 1,
+  "pid_alive": false,
+  "events": [
+    {
+      "elapsed": 0.1382960000046296,
+      "event": "os_network_probe",
+      "blocked": true,
+      "error": "PermissionError(13, '\u5617\u8a66\u5b58\u53d6\u901a\u8a0a\u7aef\u88ab\u62d2\u7d55\uff0c\u56e0\u70ba\u5b58\u53d6\u6b0a\u9650\u4e0d\u8db3\u3002', None, 10013, None)",
+      "seconds": 0.018670499994186684
+    },
+    {
+      "elapsed": 0.13830250001046807,
+      "event": "loading",
+      "pid": 25496
+    },
+    {
+      "elapsed": 59.24803500001144,
+      "event": "ready",
+      "import_seconds": 40.17393560000346,
+      "model_frontend_seconds": 18.934242899995297,
+      "load_seconds": 59.1081814999925,
+      "torch": "2.15.0+cpu",
+      "cuda": null,
+      "devices": [
+        "cpu"
+      ],
+      "threads": 4
+    },
+    {
+      "elapsed": 60.01549140000134,
+      "event": "inference",
+      "sample": "long-zf_001-t2s",
+      "segment": 0,
+      "phonemes": 17
+    }
+  ],
+  "cache_files": [
+    "cancel-inference\\temp\\jieba.cache",
+    "cancel-inference\\temp\\tmpf6y55zl9\\espeak-ng.dll",
+    "cancel-inference\\temp\\tmpvof24rhh\\espeak-ng.dll",
+    "cancel-inference\\temp\\tmpwzgmz6w3\\espeak-ng.dll",
+    "cancel-inference\\temp\\tmpyzbzi51e\\espeak-ng.dll"
+  ]
+}

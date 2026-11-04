@@ -1240,6 +1240,8 @@ class Workbench(ttk.Frame):
             self.pdf_dialog.close()
             self._closing = False
             return
+        from .kokoro_runtime import shutdown
+        shutdown()
         self.root.destroy()
 
     def voice_settings(self):

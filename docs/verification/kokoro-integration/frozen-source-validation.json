@@ -1,0 +1,21 @@
+{
+  "modules_match_working_sources": [
+    "desktop",
+    "workflow",
+    "narration",
+    "narration_desktop",
+    "voice",
+    "voice_desktop",
+    "voice_media",
+    "tts_backend",
+    "kokoro_runtime",
+    "kokoro_packages",
+    "kokoro_desktop"
+  ],
+  "limits": {
+    "IDLE_SECONDS": 120,
+    "LOAD_SECONDS": 300,
+    "SYNTHESIS_SECONDS": 180
+  },
+  "release_matches": true
+}

@@ -1,0 +1,26 @@
+{
+  "removedBytecodeDirectories": 74,
+  "firewallRules": [
+    {
+      "name": "ebook2mp4-K01-offline-14cefc3f29704feea18b6146abe61879",
+      "present": false
+    },
+    {
+      "name": "ebook2mp4-K01-offline-f0fccea9d2f24280ae768fda844713b7",
+      "present": false
+    }
+  ],
+  "remainingProcesses": 0,
+  "runtimeLocks": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-k01\\python\\cpython-3.12.15-windows-x86_64-none\\python.exe",
+      "exclusiveRead": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-k01\\python\\cpython-3.12.15-windows-x86_64-none\\Lib\\site-packages\\torch\\lib\\torch_cpu.dll",
+      "exclusiveRead": true
+    }
+  ],
+  "runtimeBytecodeDirectories": 0,
+  "scratchExists": false
+}

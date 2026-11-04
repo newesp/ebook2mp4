@@ -1,0 +1,18 @@
+[
+  {
+    "path": "ebook2mp4\\narration.py",
+    "unchanged": true
+  },
+  {
+    "path": "ebook2mp4\\narration_desktop.py",
+    "unchanged": true
+  },
+  {
+    "path": "ebook2mp4\\tts_services.py",
+    "unchanged": true
+  },
+  {
+    "path": "ebook2mp4\\voice_media.py",
+    "unchanged": true
+  }
+]

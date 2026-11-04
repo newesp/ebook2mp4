@@ -1,0 +1,10 @@
+Public workflow wait: 155.14s; completed
+Public workflow wait: 201.24s; completed
+Public workflow wait: 207.74s; completed
+Public workflow wait: 0.64s; completed
+test_real_package_preview_reopen_and_offline_formal_reuse (test_kokoro.LocalPackageJourney.test_real_package_preview_reopen_and_offline_formal_reuse) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 597.354s
+
+OK

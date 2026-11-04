@@ -17,6 +17,7 @@ class VoiceDialog(ttk.Frame):
         self.kind = ''
         self.timer = None
         self.closing = False
+        self.local_package_selection=None
         self.player = PreviewPlayer()
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
@@ -99,9 +100,14 @@ class VoiceDialog(ttk.Frame):
         text_frame.grid(row=0, column=0, sticky='nsew')
         text_frame.columnconfigure(0, weight=1)
         text_frame.rowconfigure(0, weight=1)
-        self.outgoing = tk.Text(text_frame, height=4, width=20, wrap='word', font=('Microsoft JhengHei', 11))
+        self.outgoing = tk.Text(text_frame, height=4, width=20, wrap='word', font=('Microsoft JhengHei', 11),undo=True)
         self.outgoing.insert('1.0', EXAMPLE)
         self.outgoing.bind('<<Modified>>', self.text_changed)
+        self.text_menu=tk.Menu(self.outgoing,tearoff=False)
+        self.text_menu.add_command(label='使用固定試聽範例',command=lambda:self.replace_preview_text(EXAMPLE))
+        self.text_menu.add_command(label='帶入主稿選取文字',command=self.selected_preview_text)
+        self.outgoing.bind('<Button-3>',lambda e:self.text_menu.tk_popup(e.x_root,e.y_root))
+        self.outgoing.bind('<Shift-F10>',lambda e:self.text_menu.tk_popup(self.outgoing.winfo_rootx()+12,self.outgoing.winfo_rooty()+12))
         self.outgoing.grid(row=0, column=0, sticky='nsew')
         text_scroll = ttk.Scrollbar(text_frame, command=self.outgoing.yview)
         text_scroll.grid(row=0, column=1, sticky='ns')
@@ -111,6 +117,7 @@ class VoiceDialog(ttk.Frame):
         self.consent = tk.BooleanVar(value=True)
         self.consent_control = ttk.Checkbutton(controls, text='同意傳送試聽文字（可能計費）', variable=self.consent)
         self.consent_control.grid(row=2, column=0, sticky='w', pady=2)
+        self.local_notice=ttk.Label(controls,text='文字僅在本機 CPU 處理，不會傳送至雲端。')
         actions = ttk.Frame(controls)
         actions.grid(row=3, column=0, sticky='ew')
         self.preview_button = ttk.Button(actions, text='產生並播放試聽', command=self.preview, style='Primary.TButton')
@@ -165,6 +172,7 @@ class VoiceDialog(ttk.Frame):
     def reload_services(self):
         from .tts_services import profiles
         self.service_labels={'edge-tts':'Edge-TTS'}
+        self.service_labels['kokoro']='Kokoro · 本機 CPU'
         self.service_labels.update({k:v['name']+' · '+k[:6] for k,v in profiles().items()})
         self.service_ids={v:k for k,v in self.service_labels.items()}
         self.service_control.configure(values=tuple(self.service_ids))
@@ -172,6 +180,7 @@ class VoiceDialog(ttk.Frame):
     def provider_name(self):
         from .tts_services import profiles
         identity=self.service_ids.get(self.service.get(),'edge-tts')
+        if identity=='kokoro':return 'kokoro'
         if identity=='edge-tts': return 'edge-tts'
         value=profiles().get(identity)
         if value is None: raise ProjectError('本機尚未連結此服務，請在管理服務重新設定。')
@@ -179,8 +188,11 @@ class VoiceDialog(ttk.Frame):
 
     def change_service(self, _event=None):
         provider=self.provider_name()
+        if provider=='kokoro':
+            from .kokoro_packages import release
+            self.local_package_selection=release()['id']
         self.voice.set('')
-        self.model.set('gemini-3.8-flash-lite-tts' if provider=='gemini-tts' else 's2.1-pro' if provider=='fish-audio' else '')
+        self.model.set('v1.1 zh（官方）' if provider=='kokoro' else 'gemini-3.8-flash-lite-tts' if provider=='gemini-tts' else 's2.1-pro' if provider=='fish-audio' else '')
         self.load_catalog()
         self.update_controls()
         self.status.configure(text='服務已切換；請重新選音色及試聽，尚未儲存。')
@@ -194,6 +206,9 @@ class VoiceDialog(ttk.Frame):
         if self.save(announce=False): self.app.narration()
 
     def manage_services(self):
+        if self.provider_name()=='kokoro':
+            self.app.production.manage_local_packages(self)
+            return
         self.app.production.manage_services(self)
 
     def open_defaults(self):
@@ -220,13 +235,14 @@ class VoiceDialog(ttk.Frame):
 
     def load_settings(self):
         value = self.flow.voice_settings(self.batch_id if self.scope.get() == '本批次' else None)
+        self.local_package_selection=value.get('package')
         self.reload_services()
-        identity=value.get('profile','edge-tts')
+        identity='kokoro' if value['provider']=='kokoro' else value.get('profile','edge-tts')
         if identity not in self.service_labels:
             self.service_labels[identity]='未連結服務 · '+identity[:6]
             self.service_ids[self.service_labels[identity]]=identity
         self.service.set(self.service_labels[identity])
-        self.model.set(value.get('model',''))
+        self.model.set('v1.1 zh（官方）' if value['provider']=='kokoro' else value.get('model',''))
         self.voice.set(value['voice'])
         self.rate.set('正常' if value['rate'] == '+0%' else value['rate'])
         self.sentence_pause.set(str(value['sentence_pause_ms']))
@@ -253,7 +269,13 @@ class VoiceDialog(ttk.Frame):
             edge = provider == 'edge-tts'
             self.model_control.configure(values=() if edge else
                                          ('s2.1-pro', 's2.1-pro-free') if provider == 'fish-audio' else MODELS)
-            if edge:
+            if provider=='kokoro':
+                self.catalog_actions.grid_remove()
+                packages=self.flow.local_voice_packages()
+                choices=tuple(v['id'] for v in packages[0]['voices']) if packages else ()
+                self.cache_info.configure(text=f'官方中文音色 {len(choices)} 種；尚無人工品質驗證音色。' if packages else '尚未安裝語音包。請按「管理本機語音包」。')
+                self.model_control.configure(values=('v1.1 zh（官方）',))
+            elif edge:
                 self.catalog_actions.grid()
                 catalog = self.flow.voice_catalog()
                 locale = {'台灣華語': 'zh-TW', '中國普通話': 'zh-CN', '英文': 'en-'}.get(self.locale.get(), '')
@@ -273,13 +295,35 @@ class VoiceDialog(ttk.Frame):
                 self.voice_control.grid()
             self.voice_label.configure(text='聲音 ID（可直接輸入）' if provider == 'fish-audio' else '音色（可選或輸入 ID）')
             self.rate_info.configure(text='Gemini 語速以風格指示控制，請試聽確認。' if provider == 'gemini-tts' else '')
+            if provider=='kokoro':
+                self.consent_control.grid_remove()
+                self.local_notice.grid(row=2,column=0,sticky='w',pady=2)
+                self.manage_button.configure(text='管理本機語音包…')
+            else:
+                self.local_notice.grid_remove();self.consent_control.grid()
+                self.manage_button.configure(text='新增／管理服務…')
         except ProjectError as error:
             self.status.configure(text=str(error))
 
     def prepare_text(self):
         value = self.outgoing.get('1.0', 'end-1c')
-        self.text_info.configure(text=f'{len(value):,}／3,000 字元 · 試聽不改校對稿。')
+        self.text_info.configure(text=f'{len(value):,}／3,000 字元 · 右鍵可帶入選取文字或範例。')
         return value
+
+    def replace_preview_text(self,text):
+        if self.job:return
+        current=self.outgoing.get('1.0','end-1c')
+        if current not in ('',EXAMPLE,text):
+            replace=messagebox.askyesnocancel('取代試聽文字',
+                '目前有編輯過的試聽文字。\n是：取代文字。\n否：保留文字。\n取消：返回。',parent=self)
+            if replace is not True:return
+        self.outgoing.edit_separator()
+        self.outgoing.delete('1.0','end');self.outgoing.insert('1.0',text)
+        self.outgoing.edit_separator();self.prepare_text()
+
+    def selected_preview_text(self):
+        try:self.replace_preview_text(self.app.editor.get('sel.first','sel.last'))
+        except tk.TclError:self.status.configure(text='請先在主稿選取文字，再返回並使用此命令。')
 
     def text_changed(self, _event=None):
         if self.outgoing.edit_modified():
@@ -294,10 +338,21 @@ class VoiceDialog(ttk.Frame):
                      paragraph_pause_ms=int(self.paragraph_pause.get()))
         provider=self.provider_name()
         value['provider']=provider
-        if provider!='edge-tts':
+        if provider=='kokoro':
+            from .kokoro_packages import release
+            metadata=release()
+            previous=self.flow.voice_settings(self.batch_id if self.scope.get()=='本批次' else None)
+            identity=self.local_package_selection or metadata['id']
+            use_current=identity==metadata['id']
+            value.update(package=identity,model=metadata['model'] if use_current else previous.get('model',metadata['model']),
+                         processing=metadata['processing'] if use_current else previous.get('processing',metadata['processing']))
+            value.pop('profile',None)
+        elif provider!='edge-tts':
             value.update(profile=self.service_ids.get(self.service.get(),''),model=self.model.get().strip())
+            value.pop('package',None);value['processing']='identity-v1'
         else:
             value.pop('profile',None);value.pop('model',None)
+            value.pop('package',None);value['processing']='identity-v1'
         return settings(value)
 
     def save(self, *, announce=True):
@@ -330,7 +385,7 @@ class VoiceDialog(ttk.Frame):
     def preview(self):
         if self.job or not self.batch_id:
             return
-        if not self.consent.get():
+        if self.provider_name()!='kokoro' and not self.consent.get():
             self.status.configure(text='請先勾選同意將試聽文字傳送至線上語音服務。')
             return
         value = self.prepare_text()
@@ -361,6 +416,8 @@ class VoiceDialog(ttk.Frame):
         self.timer = None
         if self.job is not None:
             if not self.job.wait(0):
+                if self.kind=='preview' and self.provider_name()=='kokoro':
+                    self.status.configure(text=self.flow.local_voice_status()['phase']+'…可取消。')
                 self.schedule()
                 return
             state = self.job.state
@@ -408,12 +465,13 @@ class VoiceDialog(ttk.Frame):
         self.scope_control.configure(state='disabled' if busy else 'readonly')
         self.rate_control.configure(state='disabled' if busy else 'readonly')
         self.service_control.configure(state='disabled' if busy else 'readonly')
-        self.model_control.configure(state='disabled' if busy or self.service_ids.get(self.service.get())=='edge-tts' else 'normal')
+        self.model_control.configure(state='disabled' if busy or self.service_ids.get(self.service.get()) in ('edge-tts','kokoro') else 'normal')
         self.manage_button.configure(state='disabled' if busy else 'normal')
         self.rhythm_control.configure(state='disabled' if busy else 'readonly')
         for spinbox in (self.sentence_control, self.paragraph_control):
             spinbox.configure(state='disabled' if busy else 'normal')
-        self.preview_button.configure(state='normal' if not busy and self.batch_id else 'disabled')
+        local_ready=self.service_ids.get(self.service.get())!='kokoro' or bool(self.flow.local_voice_packages())
+        self.preview_button.configure(state='normal' if not busy and self.batch_id and local_ready else 'disabled')
         self.cancel_button.configure(state='normal' if busy else 'disabled')
         self.produce_button.configure(state='disabled' if busy else 'normal')
         self.produce_button.grid_remove() if defaults else self.produce_button.grid()

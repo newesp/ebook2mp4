@@ -1,0 +1,28 @@
+{
+  "label": "cancel-model-load",
+  "pid": 20964,
+  "reason": "cancel",
+  "termination_seconds": 0.049622799997450784,
+  "peak_working_set_bytes": 621580288,
+  "returncode": 1,
+  "pid_alive": false,
+  "events": [
+    {
+      "elapsed": 0.14809339999919757,
+      "event": "os_network_probe",
+      "blocked": true,
+      "error": "PermissionError(13, '\u5617\u8a66\u5b58\u53d6\u901a\u8a0a\u7aef\u88ab\u62d2\u7d55\uff0c\u56e0\u70ba\u5b58\u53d6\u6b0a\u9650\u4e0d\u8db3\u3002', None, 10013, None)",
+      "seconds": 0.017363100007059984
+    },
+    {
+      "elapsed": 0.1481017000041902,
+      "event": "loading",
+      "pid": 20964
+    },
+    {
+      "elapsed": 17.949492799991276,
+      "event": "model_loading"
+    }
+  ],
+  "cache_files": []
+}

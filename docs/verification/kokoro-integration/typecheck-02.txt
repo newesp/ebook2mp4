@@ -1,0 +1,8 @@
+ebook2mp4\kokoro_runtime.py:91: error: Item "None" of "IO[str] | None" has no attribute "close"  [union-attr]
+ebook2mp4\kokoro_runtime.py:93: error: Item "None" of "IO[str] | None" has no attribute "close"  [union-attr]
+ebook2mp4\kokoro_runtime.py:115: error: Item "None" of "Popen[str] | None" has no attribute "stdin"  [union-attr]
+ebook2mp4\kokoro_runtime.py:115: error: Item "None" of "IO[str] | Any | None" has no attribute "write"  [union-attr]
+ebook2mp4\kokoro_runtime.py:115: error: Item "None" of "IO[str] | Any | None" has no attribute "flush"  [union-attr]
+ebook2mp4\kokoro_runtime.py:122: error: Item "None" of "Popen[str] | None" has no attribute "poll"  [union-attr]
+ebook2mp4\kokoro_runtime.py:155: error: Item "None" of "IO[str] | None" has no attribute "__iter__" (not iterable)  [union-attr]
+Found 7 errors in 1 file (checked 34 source files)

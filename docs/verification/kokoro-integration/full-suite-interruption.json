@@ -1,0 +1,5 @@
+{
+  "reason": "Repair test reached 600-second bound; stopped to release still-running installer before resuming remaining files",
+  "time": "2026-11-05T02:01:28.8213960+08:00",
+  "pid": 1316
+}

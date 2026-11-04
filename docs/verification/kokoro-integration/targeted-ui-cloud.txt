@@ -1,0 +1,447 @@
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+test_all_cloud_services_refuse_uncached_narration_without_consent (test_tts_capabilities.ServiceJourneys.test_all_cloud_services_refuse_uncached_narration_without_consent) ... ok
+test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline (test_tts_capabilities.ServiceJourneys.test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline) ... ok
+test_uninstalled_local_service_is_not_advertised_as_usable (test_tts_capabilities.ServiceJourneys.test_uninstalled_local_service_is_not_advertised_as_usable) ... ok
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... ok
+test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls) ... ok
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... ok
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... ok
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+FAIL
+test_check_service_reads_complete_chunked_json (test_tts_providers.ProviderDesktop.test_check_service_reads_complete_chunked_json) ... can't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!workbench.!frame3.!productionworkspace.!frame2.!voicedialog.!frame.!labelframe2.!progressbar 12 1"
+    ("after" script)
+invalid command name "1727544319744poll"
+    while executing
+"1727544319744poll"
+    ("after" script)
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+ok
+test_service_switch_enables_model_and_management_layout (test_tts_providers.ProviderDesktop.test_service_switch_enables_model_and_management_layout) ... Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+ok
+test_fish_request_and_auth_error_preserve_previous_result (test_tts_providers.Providers.test_fish_request_and_auth_error_preserve_previous_result) ... Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+ok
+test_gemini_custom_model_preview_formal_reuse_and_no_project_key (test_tts_providers.Providers.test_gemini_custom_model_preview_formal_reuse_and_no_project_key) ... Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+ok
+test_profile_provider_cannot_change_and_fish_model_is_explicit (test_tts_providers.Providers.test_profile_provider_cannot_change_and_fish_model_is_explicit) ... ok
+
+======================================================================
+FAIL: test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 195, in test_switching_batch_does_not_write_settings_through_old_dialog
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 49, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 44, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x0000019239ACE690> is not None : 正在取得線上音色清單…
+
+----------------------------------------------------------------------
+Ran 15 tests in 39.586s
+
+FAILED (failures=1)
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Exception ignored while calling deallocator <function Variable.__del__ at 0x00000192348638A0>:
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 416, in __del__
+    if self._tk.getboolean(self._tk.call("info", "exists", self._name)):
+RuntimeError: main thread is not in main loop
+Tcl_AsyncDelete: async handler deleted by the wrong thread

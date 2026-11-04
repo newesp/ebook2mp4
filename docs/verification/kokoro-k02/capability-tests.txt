@@ -1,0 +1,8 @@
+test_all_cloud_services_refuse_uncached_narration_without_consent (test_tts_capabilities.ServiceJourneys.test_all_cloud_services_refuse_uncached_narration_without_consent) ... ok
+test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline (test_tts_capabilities.ServiceJourneys.test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline) ... ok
+test_uninstalled_local_service_is_not_advertised_as_usable (test_tts_capabilities.ServiceJourneys.test_uninstalled_local_service_is_not_advertised_as_usable) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 4.948s
+
+OK

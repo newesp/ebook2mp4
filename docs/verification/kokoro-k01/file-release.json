@@ -1,0 +1,418 @@
+[
+  {
+    "path": "model\\kokoro-v1_1-zh.pth",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\af_maple.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\af_sol.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\bf_vale.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_001.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_002.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_003.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_004.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_005.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_006.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_007.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_008.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_017.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_018.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_019.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_021.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_022.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_023.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_024.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_026.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_027.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_028.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_032.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_036.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_038.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_039.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_040.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_042.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_043.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_044.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_046.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_047.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_048.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_049.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_051.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_059.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_060.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_067.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_070.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_071.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_072.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_073.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_074.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_075.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_076.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_077.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_078.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_079.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_083.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_084.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_085.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_086.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_087.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_088.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_090.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_092.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_093.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_094.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zf_099.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_009.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_010.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_011.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_012.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_013.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_014.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_015.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_016.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_020.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_025.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_029.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_030.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_031.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_033.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_034.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_035.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_037.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_041.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_045.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_050.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_052.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_053.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_054.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_055.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_056.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_057.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_058.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_061.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_062.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_063.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_064.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_065.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_066.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_068.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_069.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_080.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_081.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_082.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_089.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_091.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_095.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_096.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_097.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_098.pt",
+    "exclusive_read": true
+  },
+  {
+    "path": "model\\voices\\zm_100.pt",
+    "exclusive_read": true
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "event": "completed",
+    "file": "warm-repeat-1-zf_001-t2s.wav",
+    "seconds": 9.468903300003149,
+    "audio_seconds": 12.125,
+    "real_time_factor": 0.7809405690719152
+  },
+  {
+    "event": "completed",
+    "file": "warm-repeat-2-zf_001-t2s.wav",
+    "seconds": 6.882735899998806,
+    "audio_seconds": 12.125,
+    "real_time_factor": 0.5676483793805843
+  }
+]

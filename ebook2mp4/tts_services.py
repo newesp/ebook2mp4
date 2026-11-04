@@ -80,7 +80,8 @@ async def request_audio(text, value):
         headers = {'Authorization': 'Bearer '+key, 'model': value['model']}
         body = dict(text=text, reference_id=value['voice'], format='wav', normalize=False,
                     prosody=dict(speed=1+int(value['rate'].strip('%'))/100))
-    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=90)) as session:
+    from .tts_backend import capabilities
+    async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=capabilities(value['provider']).synthesis_timeout_seconds)) as session:
         async with session.post(url, headers=headers, json=body) as response:
             if response.status != 200:
                 status = response.status

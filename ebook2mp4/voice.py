@@ -5,6 +5,7 @@ import asyncio
 from copy import deepcopy
 import json
 import os
+import re
 from pathlib import Path
 import tempfile
 import threading
@@ -19,13 +20,19 @@ DEFAULT_SETTINGS = dict(provider='edge-tts', voice='', rate='+0%',
 
 
 def settings(value: dict) -> dict:
-    if (not isinstance(value, dict) or set(value) not in (set(DEFAULT_SETTINGS), set(DEFAULT_SETTINGS) | {'model', 'profile'})
-            or value['provider'] not in ('edge-tts', 'gemini-tts', 'fish-audio') or not isinstance(value['voice'], str)
-            or value['rate'] not in RATES or value['processing'] != 'identity-v1'
+    local=isinstance(value,dict) and value.get('provider')=='kokoro'
+    allowed=(set(DEFAULT_SETTINGS)|{'model','package'},) if local else (set(DEFAULT_SETTINGS),set(DEFAULT_SETTINGS)|{'model','profile'})
+    if (not isinstance(value, dict) or set(value) not in allowed
+            or value['provider'] not in ('edge-tts', 'gemini-tts', 'fish-audio','kokoro') or not isinstance(value['voice'], str)
+            or value['rate'] not in RATES or value['processing'] != ('kokoro-t2s-v1' if local else 'identity-v1')
             or type(value['sentence_pause_ms']) is not int or not 0 <= value['sentence_pause_ms'] <= 1500
             or type(value['paragraph_pause_ms']) is not int or not 0 <= value['paragraph_pause_ms'] <= 3000):
         raise ProjectError('語音設定無效。句尾須為 0～1,500 ms；段落須為 0～3,000 ms。')
-    if value['provider'] != 'edge-tts':
+    if local:
+        if (not isinstance(value.get('package'),str) or not re.fullmatch(r'kokoro-zh-cpu-[0-9a-f]{16}',value['package'])
+                or not isinstance(value.get('model'),str) or not re.fullmatch(r'[0-9a-f]{40}',value['model'])):
+            raise ProjectError('本機語音包版本設定無效，請重新選擇語音包。')
+    elif value['provider'] != 'edge-tts':
         from .tts_services import validate_model
         validate_model(value.get('model'))
         if value['provider']=='fish-audio' and value.get('model') not in ('s2.1-pro','s2.1-pro-free'):
@@ -61,6 +68,14 @@ def catalog() -> dict:
 
 
 def require_voice(voice: str, value=None):
+    if value and value['provider']=='kokoro':
+        from .kokoro_packages import package
+        _,metadata=package(value['package'])
+        if metadata['model']!=value['model'] or metadata['processing']!=value['processing']:
+            raise ProjectError('語音包模型或處理版本不符，請匯入專案所需版本。')
+        if voice not in {v['id'] for v in metadata['voices']}:
+            raise ProjectError('本機音色不存在，請從已安裝語音包重新選擇音色。')
+        return
     if value and value['provider'] != 'edge-tts':
         if not isinstance(voice, str) or not voice.strip() or any(ord(c)<32 for c in voice):
             raise ProjectError('請選擇或輸入音色 ID。')
@@ -130,12 +145,14 @@ class VoiceJob:
                 raise asyncio.CancelledError()
             return await asyncio.wait_for(self._operation(), self._timeout)
         status, error, result = 'completed', '', None
+        error_details={}
         try:
             result = asyncio.run(run())
         except asyncio.CancelledError:
             status = 'cancelled'
         except ProjectError as exc:
             status, error = 'failed', str(exc)
+            if hasattr(exc,'category'):error_details['error_category']=exc.category
         except Exception:
             status, error = 'failed', 'TTS 網路或服務錯誤。請檢查連線及服務設定；不會自動換聲，仍可校對。'
         with self._lock:
@@ -143,6 +160,7 @@ class VoiceJob:
                 status, result = 'cancelled', None
             self._loop = self._task = None
             self._state.update(status=status, error=error)
+            self._state.update(error_details)
             self._result = result
 
 

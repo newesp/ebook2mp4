@@ -1,0 +1,16 @@
+Installing E:\Leo\Projects\ebook2mp4\dist\kokoro\kokoro-zh-cpu-9c4b249fef8ae0d8.zip
+0.28 模型已卸載
+completed in 77.25716480000119
+0.23 模型已卸載
+3.95 檢查語音包
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 60, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 48, in main
+    job=flow.start_voice_preview(batch,text=text,start=0,end=len(text));wait(flow,job)
+                                                                        ~~~~^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 25, in wait
+    if job.state['status']!='completed':raise RuntimeError(job.state)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'status': 'failed', 'error': '無法載入或執行本機語音包。請檢查權限、記憶體或重新匯入語音包。'}

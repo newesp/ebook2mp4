@@ -1,0 +1,27 @@
+{
+  "frames": 5619600,
+  "duration_ms": 234150.0,
+  "cues": 19,
+  "exact_subtitle_offsets": true,
+  "pause_ms": 500,
+  "silences": [
+    {
+      "center_ms": 3825.0,
+      "window_ms": 10,
+      "peak": 0
+    }
+  ],
+  "videos": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-integration\\delivery\\kokoro-total-second-image.mp4",
+      "duration": "234.166667",
+      "audio_sha256": "bf338c3b7b5440afea5b0046920d378e1f59e1b0c05c151cf1d5772f0074e463"
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-integration\\delivery\\kokoro-total.mp4",
+      "duration": "234.166667",
+      "audio_sha256": "bf338c3b7b5440afea5b0046920d378e1f59e1b0c05c151cf1d5772f0074e463"
+    }
+  ],
+  "changed_image_preserves_audio": true
+}

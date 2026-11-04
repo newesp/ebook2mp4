@@ -1,0 +1,19 @@
+0.22 尚未載入
+1.36 檢查語音包
+1.56 檢查語音包 0/997
+1.78 檢查語音包 200/997
+1.98 檢查語音包 400/997
+2.38 檢查語音包 600/997
+2.59 檢查語音包 800/997
+5.24 載入本機模型
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 60, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 48, in main
+    job=flow.start_voice_preview(batch,text=text,start=0,end=len(text));wait(flow,job)
+                                                                        ~~~~^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 25, in wait
+    if job.state['status']!='completed':raise RuntimeError(job.state)
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'status': 'failed', 'error': '本機模型載入或合成逾時，請縮短文字或釋放系統資源後重試。'}

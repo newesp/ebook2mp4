@@ -1,0 +1,6 @@
+test_missing_package_explains_recovery_and_preserves_settings (test_kokoro.LocalPackageJourney.test_missing_package_explains_recovery_and_preserves_settings) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.175s
+
+OK

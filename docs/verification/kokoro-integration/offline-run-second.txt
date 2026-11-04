@@ -1,0 +1,14 @@
+network_probe 10013
+0.22 尚未載入
+completed in 2.0466153000015765
+0.21 尚未載入
+completed in 0.318981000003987
+process probe still active 15660 258
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_acceptance.py", line 153, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_acceptance.py", line 85, in main
+    flow.discard_voice_preview(job);assert dead(pid),(pid,job.state,flow.local_voice_status())
+                                           ~~~~^^^^^
+AssertionError: (15660, {'status': 'cancelled', 'error': ''}, {'busy': False, 'phase': '模型已卸載', 'pid': None, 'loads': 1, 'package': None, 'idle_seconds': 10, 'last_error': 'CancelledError', 'device': None})

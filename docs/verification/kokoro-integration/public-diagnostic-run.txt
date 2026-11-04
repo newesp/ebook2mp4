@@ -1,0 +1,20 @@
+0.21 尚未載入
+1.91 檢查語音包 0/997
+3.55 檢查語音包 200/997
+4.17 檢查語音包 400/997
+4.58 檢查語音包 600/997
+5.4 檢查語音包 800/997
+7.46 載入本機模型
+53.58 本機合成
+57.75 模型已卸載
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\diagnose_kokoro_flow.py", line 26, in <module>
+    main()
+    ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 48, in main
+    job=flow.start_voice_preview(batch,text=text,start=0,end=len(text));wait(flow,job)
+                                                                        ~~~~^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_real_check.py", line 25, in wait
+    if job.state['status']!='completed':raise RuntimeError(dict(job.state,worker=flow.local_voice_status()))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: {'status': 'failed', 'error': '本機語音合成失敗，請核對文字與音色後重試；不會改用雲端服務。', 'error_category': 'synthesis', 'worker': {'busy': False, 'phase': '模型已卸載', 'pid': None, 'loads': 1, 'package': None, 'idle_seconds': 120, 'last_error': 'LocalSpeechError', 'device': None}}

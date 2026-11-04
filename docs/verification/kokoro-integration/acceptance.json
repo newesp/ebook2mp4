@@ -1,0 +1,783 @@
+{
+  "warm_reuse": {
+    "before_loads": 1,
+    "after_loads": 1
+  },
+  "cancel_inference": {
+    "seconds": 0.33739020000211895,
+    "state": {
+      "status": "cancelled",
+      "error": ""
+    }
+  },
+  "cancel_load": {
+    "seconds": 0.10917039999912959,
+    "pid": 18148,
+    "dead": true
+  },
+  "idle": {
+    "test_seconds": 10,
+    "production_seconds": 120,
+    "elapsed": 10.214994999987539,
+    "pid": 12336,
+    "dead": true
+  },
+  "long_resume": {
+    "reused": 1,
+    "chunks": 18,
+    "duration_ms": 230075
+  },
+  "changed_voice_blocks_resume": true,
+  "total": {
+    "audio": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-integration\\delivery\\kokoro-total.mp3",
+    "video": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-integration\\delivery\\kokoro-total.mp4",
+    "second_image": "E:\\Leo\\Projects\\ebook2mp4\\outputs\\kokoro-integration\\delivery\\kokoro-total-second-image.mp4",
+    "no_new_model_loads": true
+  },
+  "parent_hard_exit": {
+    "pid": 19372,
+    "dead": true
+  },
+  "measurements": [
+    {
+      "seconds": 76.4697385999898,
+      "state": {
+        "status": "completed",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 18956,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-8a1e333cec56056d",
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "seconds": 4.906755899995915,
+      "state": {
+        "status": "completed",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 18956,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-8a1e333cec56056d",
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "seconds": 96.81860120000783,
+      "state": {
+        "status": "completed",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 12336,
+        "loads": 2,
+        "package": "kokoro-zh-cpu-8a1e333cec56056d",
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "seconds": 238.150252499996,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "current": 18,
+        "total": 18,
+        "completed": 18,
+        "failed": 0,
+        "chunks": [
+          {
+            "id": "b513d2e38dc4d79ee159259709f6cb5a21206ff1b4daece616843580bafafb89",
+            "order": 0,
+            "text": "第一節，出發。清晨六點，林先生把筆記本放進背包，沿著河岸慢慢走向車站。昨夜的雨已經停了，路邊的樹葉仍掛著水珠。",
+            "separator_after": "",
+            "text_sha256": "61dee3b080c2ded6d61162f6f3a19b03599fda6b987b24b81526299c3cd9c2c9",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 0,
+            "duration_ms": 11400,
+            "reused": true,
+            "frames": 273600,
+            "start_ms": 0,
+            "end_ms": 11400
+          },
+          {
+            "id": "4e7417ace9cc134c3178b1752a656c4eb20b19934d9bc3616cab3f0d009aec03",
+            "order": 1,
+            "text": "他原本打算搭最早的一班車，到山城拜訪一位多年未見的朋友。出門以前，他再次檢查車票、雨傘和水壺，確定沒有遺漏，才輕輕關上家門。",
+            "separator_after": "",
+            "text_sha256": "7e1c99bbf21aa9d30a587b4800eeff194f7a5670f72188f9e8eec2dc3fbdadec",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 13025,
+            "reused": false,
+            "frames": 312600,
+            "start_ms": 11400,
+            "end_ms": 24425
+          },
+          {
+            "id": "9c76575c6a33b70f32750480831407bb479ee9ed9860679e81f6b871effda4ea",
+            "order": 2,
+            "text": "街角的早餐店正在蒸饅頭，空氣裡有一股溫暖的麵香。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "65fd27d228f26bcb8cc937566ef8b99a4d6821ff61055b1dd86c01902c04e196",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 5700,
+            "reused": false,
+            "frames": 136800,
+            "start_ms": 24425,
+            "end_ms": 30125
+          },
+          {
+            "id": "bae014bc92b86ea25906416367d118ce3ecd3f1218240f7e6bc542c9b0d18de2",
+            "order": 3,
+            "text": "第二節，候車。月臺上的人不多，有人看報，有人低頭整理行李。一位母親牽著孩子，指向遠方剛升起的太陽。廣播提醒旅客，列車將在十分鐘後進站，請站在安全線後方。",
+            "separator_after": "",
+            "text_sha256": "1ba6104cf66c8d850f5430bc6d0c71fa1192551c00854ad0c8aaf198b5bfd45c",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 15875,
+            "reused": false,
+            "frames": 381000,
+            "start_ms": 30625,
+            "end_ms": 46500
+          },
+          {
+            "id": "9e54a465cfd808ca31566506387630a3ad8c720d6150ccf657f2f92863c84357",
+            "order": 4,
+            "text": "林先生坐在長椅上，翻開筆記本，寫下今天想問朋友的三個問題。他沒有急著列出答案，只在每個問題旁邊留了一小段空白。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "3db484403cfbee42864765a0d5a8e34dd86edbf5a6389fa3cfa25bb07592c4c8",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 11600,
+            "reused": false,
+            "frames": 278400,
+            "start_ms": 46500,
+            "end_ms": 58100
+          },
+          {
+            "id": "e35e9916873a92b9ffa438d7f964d3ba4af53b49ccc8c848cf2baefef94f21a2",
+            "order": 5,
+            "text": "第三節，窗景。列車離開城市以後，高樓逐漸被稻田取代。風從半開的窗戶吹進來，帶著泥土和青草的氣味。鐵橋下的溪水很清，幾隻白鳥站在淺灘上，一動也不動。",
+            "separator_after": "",
+            "text_sha256": "2372b01831c3fc764b960b1d7260fc7855bcba8c4c92f809ee0b2e512302c237",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 14875,
+            "reused": false,
+            "frames": 357000,
+            "start_ms": 58600,
+            "end_ms": 73475
+          },
+          {
+            "id": "8f88fe5cf831a1888ca68feaec6598bef55025ec48682c9d211f5c2f8ab01507",
+            "order": 6,
+            "text": "林先生想起小時候，父親常帶他到這條溪邊散步。當時他總覺得路很長，現在才發現，許多記憶只需要一個轉彎就會回來。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "14db82652cee80b3c642a8818a7a86eaccad9b0b79c6da2b50f987c07626bf90",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 11550,
+            "reused": false,
+            "frames": 277200,
+            "start_ms": 73475,
+            "end_ms": 85025
+          },
+          {
+            "id": "1b7a3c1cabd692c08a474510015c8a5dbf376c16ac1c30eb8361935e421da7d6",
+            "order": 7,
+            "text": "第四節，相見。到了山城，朋友已經站在出口等候。兩人先握了握手，接著忍不住笑了起來。他們走進市場旁的小茶館，點了一壺熱茶和兩盤點心。",
+            "separator_after": "",
+            "text_sha256": "ef18fa31d021d801dd8286e87233b429aa476d1fcc9add99628716a977bad7f2",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 13325,
+            "reused": false,
+            "frames": 319800,
+            "start_ms": 85525,
+            "end_ms": 98850
+          },
+          {
+            "id": "f405af9a3e579e41e35396ffac8ba03b08a0250c13d264df123a63cd497c4cad",
+            "order": 8,
+            "text": "朋友說，這幾年小鎮改變很多，老戲院變成展覽館，舊倉庫也重新開放。不過，每到傍晚，居民仍然習慣坐在門前聊天，等山上的霧慢慢降下來。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "1fd4b4ac7e4dbeeae5e7e131dff417e194333db3c2929545ff990c80b3e4fc41",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 13475,
+            "reused": false,
+            "frames": 323400,
+            "start_ms": 98850,
+            "end_ms": 112325
+          },
+          {
+            "id": "8f1ec61e62d2d207289087d163c4e1410f5bbafb12f818e045918f76e8a3513e",
+            "order": 9,
+            "text": "第五節，舊書。午飯後，他們到一間二手書店。店主把新收的書擺在木桌上，請客人自行翻閱。其中有一本旅行日記，封面已經褪色，內頁卻保存完整。",
+            "separator_after": "",
+            "text_sha256": "b03199bdeb495dba2a490c2962a93cd9bd9baaea696ba7976cb8cf97945611a1",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 13475,
+            "reused": false,
+            "frames": 323400,
+            "start_ms": 112825,
+            "end_ms": 126300
+          },
+          {
+            "id": "a8938ddfba048036203535809af35f89ae069e7d100c0c6ebdf9de1298a348a7",
+            "order": 10,
+            "text": "作者用簡短的句子記錄天氣、路線和沿途遇見的人。林先生讀到一段話，忽然停了下來：走得快，不一定看得多；願意停留，才有機會看見細節。他把書買下，準備帶回家慢慢閱讀。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "22dd1f96a8aa3cffd9d1b00723a745a72018e72e68441e06471d5495ff29f14e",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 15925,
+            "reused": false,
+            "frames": 382200,
+            "start_ms": 126300,
+            "end_ms": 142225
+          },
+          {
+            "id": "73f75645eb10bf63fa24c51f235b1450f4da5b4c992b05e994384aadb3a56f2c",
+            "order": 11,
+            "text": "第六節，山路。下午的陽光穿過竹林，照在彎曲的石階上。朋友帶他走一條較平緩的小路，途中經過茶園、水池和一座小橋。兩人遇到一位整理菜圃的老人，便停下來問路。",
+            "separator_after": "",
+            "text_sha256": "e03a0980d7287150e3f4820fac7716394d28402e466c8c3057ff0d2b91533168",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 15750,
+            "reused": false,
+            "frames": 378000,
+            "start_ms": 142725,
+            "end_ms": 158475
+          },
+          {
+            "id": "cb3bdc9b0348f4a39371ce06e7487415e8aea292cf7d01b2902e8622fd4d20e4",
+            "order": 12,
+            "text": "老人提醒他們，前方的階梯有些濕滑，最好靠右行走。他們道謝後繼續前進，沒有趕時間，也沒有試著一次走完所有景點。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "4f7d866c4f0c97e6a54e3890a5ca1814a8838b5e47c6e6fd75d938bbec88e547",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 11100,
+            "reused": false,
+            "frames": 266400,
+            "start_ms": 158475,
+            "end_ms": 169575
+          },
+          {
+            "id": "80a36175a7c1242779b7ef1cd99d78e3d19f19239a13ea30cad24cdea963b1b7",
+            "order": 13,
+            "text": "第七節，回程。傍晚五點，天空開始轉暗，遠處的燈一盞接著一盞亮起。林先生和朋友在車站告別，約好下次一起去看海。回程的車廂比早上安靜，有些旅客已經睡著。",
+            "separator_after": "",
+            "text_sha256": "87749baad4bed0e991a203fda8ddadca121f79d753dbfb5357b8c3d15abc243a",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 14950,
+            "reused": false,
+            "frames": 358800,
+            "start_ms": 170075,
+            "end_ms": 185025
+          },
+          {
+            "id": "a872ebfe3891d50f47fdd102c8cb8d4cf2f915b58b83cd37df182ec0bc62f49b",
+            "order": 14,
+            "text": "他靠著椅背，想起今天聽到的故事，才發現筆記本裡的三個問題，已經有了不同於出發前的意義。那些空白不是忘記填寫，而是留給以後繼續思考。",
+            "separator_after": "\r\n\r\n",
+            "text_sha256": "7de52b37f3feb282dc4f3cacfbbc7b1cde2ed5396cf08a4edd59f350bc83ccdc",
+            "pause_after_ms": 500,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 13350,
+            "reused": false,
+            "frames": 320400,
+            "start_ms": 185025,
+            "end_ms": 198375
+          },
+          {
+            "id": "79b753d58ccd420f96be7f928b64899f560dbe604f3e23521043b1b51a266bce",
+            "order": 15,
+            "text": "第八節，歸來。回到家，他先把雨傘晾好，再把新買的舊書放到桌上。窗外傳來幾聲短短的鳥鳴，街道也逐漸恢復夜晚的平靜。",
+            "separator_after": "",
+            "text_sha256": "89a237fb3d91be1325db1a74b0db681a221e85b73045a58abe85749124d2f5fc",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 11400,
+            "reused": false,
+            "frames": 273600,
+            "start_ms": 198875,
+            "end_ms": 210275
+          },
+          {
+            "id": "570899fd1aed8c5b896b1d86777ecce17fe51ad9562df711c5316b887e83c109",
+            "order": 16,
+            "text": "他沒有立刻開啟電腦，而是倒了一杯水，把今天的路線畫在紙上。最後，他在頁尾寫道：旅程已經結束，但對朋友的理解還會繼續。",
+            "separator_after": "",
+            "text_sha256": "1e3666df2fb277f70da88854e7636948860a342ddcbdec60daee5432eba42a2e",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 12000,
+            "reused": false,
+            "frames": 288000,
+            "start_ms": 210275,
+            "end_ms": 222275
+          },
+          {
+            "id": "e2cda98fa153fb28009b8a7e26fd2745d56b5f0cd629c332d28d17cadce49dd6",
+            "order": 17,
+            "text": "這是長段落測試的最後一句，請確認整句完整保留，並聽見最後的結束標記：晚安。",
+            "separator_after": "",
+            "text_sha256": "87f30d8538a8ac95be260b934542749d9922e5f83df90049b88be7dad0988f5e",
+            "pause_after_ms": 0,
+            "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 7800,
+            "reused": false,
+            "frames": 187200,
+            "start_ms": 222275,
+            "end_ms": 230075
+          }
+        ],
+        "resume_history": [
+          {
+            "status": "cancelled",
+            "phase": "已取消",
+            "current": 2,
+            "total": 18,
+            "completed": 1,
+            "failed": 0,
+            "error": "",
+            "chunks": [
+              {
+                "id": "b513d2e38dc4d79ee159259709f6cb5a21206ff1b4daece616843580bafafb89",
+                "order": 0,
+                "text": "第一節，出發。清晨六點，林先生把筆記本放進背包，沿著河岸慢慢走向車站。昨夜的雨已經停了，路邊的樹葉仍掛著水珠。",
+                "separator_after": "",
+                "text_sha256": "61dee3b080c2ded6d61162f6f3a19b03599fda6b987b24b81526299c3cd9c2c9",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "completed",
+                "attempts": 1,
+                "duration_ms": 11400,
+                "reused": false,
+                "frames": 273600,
+                "start_ms": 0,
+                "end_ms": 11400
+              },
+              {
+                "id": "4e7417ace9cc134c3178b1752a656c4eb20b19934d9bc3616cab3f0d009aec03",
+                "order": 1,
+                "text": "他原本打算搭最早的一班車，到山城拜訪一位多年未見的朋友。出門以前，他再次檢查車票、雨傘和水壺，確定沒有遺漏，才輕輕關上家門。",
+                "separator_after": "",
+                "text_sha256": "7e1c99bbf21aa9d30a587b4800eeff194f7a5670f72188f9e8eec2dc3fbdadec",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "cancelled",
+                "attempts": 1,
+                "duration_ms": null
+              },
+              {
+                "id": "9c76575c6a33b70f32750480831407bb479ee9ed9860679e81f6b871effda4ea",
+                "order": 2,
+                "text": "街角的早餐店正在蒸饅頭，空氣裡有一股溫暖的麵香。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "65fd27d228f26bcb8cc937566ef8b99a4d6821ff61055b1dd86c01902c04e196",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "bae014bc92b86ea25906416367d118ce3ecd3f1218240f7e6bc542c9b0d18de2",
+                "order": 3,
+                "text": "第二節，候車。月臺上的人不多，有人看報，有人低頭整理行李。一位母親牽著孩子，指向遠方剛升起的太陽。廣播提醒旅客，列車將在十分鐘後進站，請站在安全線後方。",
+                "separator_after": "",
+                "text_sha256": "1ba6104cf66c8d850f5430bc6d0c71fa1192551c00854ad0c8aaf198b5bfd45c",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "9e54a465cfd808ca31566506387630a3ad8c720d6150ccf657f2f92863c84357",
+                "order": 4,
+                "text": "林先生坐在長椅上，翻開筆記本，寫下今天想問朋友的三個問題。他沒有急著列出答案，只在每個問題旁邊留了一小段空白。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "3db484403cfbee42864765a0d5a8e34dd86edbf5a6389fa3cfa25bb07592c4c8",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "e35e9916873a92b9ffa438d7f964d3ba4af53b49ccc8c848cf2baefef94f21a2",
+                "order": 5,
+                "text": "第三節，窗景。列車離開城市以後，高樓逐漸被稻田取代。風從半開的窗戶吹進來，帶著泥土和青草的氣味。鐵橋下的溪水很清，幾隻白鳥站在淺灘上，一動也不動。",
+                "separator_after": "",
+                "text_sha256": "2372b01831c3fc764b960b1d7260fc7855bcba8c4c92f809ee0b2e512302c237",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "8f88fe5cf831a1888ca68feaec6598bef55025ec48682c9d211f5c2f8ab01507",
+                "order": 6,
+                "text": "林先生想起小時候，父親常帶他到這條溪邊散步。當時他總覺得路很長，現在才發現，許多記憶只需要一個轉彎就會回來。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "14db82652cee80b3c642a8818a7a86eaccad9b0b79c6da2b50f987c07626bf90",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "1b7a3c1cabd692c08a474510015c8a5dbf376c16ac1c30eb8361935e421da7d6",
+                "order": 7,
+                "text": "第四節，相見。到了山城，朋友已經站在出口等候。兩人先握了握手，接著忍不住笑了起來。他們走進市場旁的小茶館，點了一壺熱茶和兩盤點心。",
+                "separator_after": "",
+                "text_sha256": "ef18fa31d021d801dd8286e87233b429aa476d1fcc9add99628716a977bad7f2",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "f405af9a3e579e41e35396ffac8ba03b08a0250c13d264df123a63cd497c4cad",
+                "order": 8,
+                "text": "朋友說，這幾年小鎮改變很多，老戲院變成展覽館，舊倉庫也重新開放。不過，每到傍晚，居民仍然習慣坐在門前聊天，等山上的霧慢慢降下來。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "1fd4b4ac7e4dbeeae5e7e131dff417e194333db3c2929545ff990c80b3e4fc41",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "8f1ec61e62d2d207289087d163c4e1410f5bbafb12f818e045918f76e8a3513e",
+                "order": 9,
+                "text": "第五節，舊書。午飯後，他們到一間二手書店。店主把新收的書擺在木桌上，請客人自行翻閱。其中有一本旅行日記，封面已經褪色，內頁卻保存完整。",
+                "separator_after": "",
+                "text_sha256": "b03199bdeb495dba2a490c2962a93cd9bd9baaea696ba7976cb8cf97945611a1",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "a8938ddfba048036203535809af35f89ae069e7d100c0c6ebdf9de1298a348a7",
+                "order": 10,
+                "text": "作者用簡短的句子記錄天氣、路線和沿途遇見的人。林先生讀到一段話，忽然停了下來：走得快，不一定看得多；願意停留，才有機會看見細節。他把書買下，準備帶回家慢慢閱讀。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "22dd1f96a8aa3cffd9d1b00723a745a72018e72e68441e06471d5495ff29f14e",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "73f75645eb10bf63fa24c51f235b1450f4da5b4c992b05e994384aadb3a56f2c",
+                "order": 11,
+                "text": "第六節，山路。下午的陽光穿過竹林，照在彎曲的石階上。朋友帶他走一條較平緩的小路，途中經過茶園、水池和一座小橋。兩人遇到一位整理菜圃的老人，便停下來問路。",
+                "separator_after": "",
+                "text_sha256": "e03a0980d7287150e3f4820fac7716394d28402e466c8c3057ff0d2b91533168",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "cb3bdc9b0348f4a39371ce06e7487415e8aea292cf7d01b2902e8622fd4d20e4",
+                "order": 12,
+                "text": "老人提醒他們，前方的階梯有些濕滑，最好靠右行走。他們道謝後繼續前進，沒有趕時間，也沒有試著一次走完所有景點。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "4f7d866c4f0c97e6a54e3890a5ca1814a8838b5e47c6e6fd75d938bbec88e547",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "80a36175a7c1242779b7ef1cd99d78e3d19f19239a13ea30cad24cdea963b1b7",
+                "order": 13,
+                "text": "第七節，回程。傍晚五點，天空開始轉暗，遠處的燈一盞接著一盞亮起。林先生和朋友在車站告別，約好下次一起去看海。回程的車廂比早上安靜，有些旅客已經睡著。",
+                "separator_after": "",
+                "text_sha256": "87749baad4bed0e991a203fda8ddadca121f79d753dbfb5357b8c3d15abc243a",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "a872ebfe3891d50f47fdd102c8cb8d4cf2f915b58b83cd37df182ec0bc62f49b",
+                "order": 14,
+                "text": "他靠著椅背，想起今天聽到的故事，才發現筆記本裡的三個問題，已經有了不同於出發前的意義。那些空白不是忘記填寫，而是留給以後繼續思考。",
+                "separator_after": "\r\n\r\n",
+                "text_sha256": "7de52b37f3feb282dc4f3cacfbbc7b1cde2ed5396cf08a4edd59f350bc83ccdc",
+                "pause_after_ms": 500,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "79b753d58ccd420f96be7f928b64899f560dbe604f3e23521043b1b51a266bce",
+                "order": 15,
+                "text": "第八節，歸來。回到家，他先把雨傘晾好，再把新買的舊書放到桌上。窗外傳來幾聲短短的鳥鳴，街道也逐漸恢復夜晚的平靜。",
+                "separator_after": "",
+                "text_sha256": "89a237fb3d91be1325db1a74b0db681a221e85b73045a58abe85749124d2f5fc",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "570899fd1aed8c5b896b1d86777ecce17fe51ad9562df711c5316b887e83c109",
+                "order": 16,
+                "text": "他沒有立刻開啟電腦，而是倒了一杯水，把今天的路線畫在紙上。最後，他在頁尾寫道：旅程已經結束，但對朋友的理解還會繼續。",
+                "separator_after": "",
+                "text_sha256": "1e3666df2fb277f70da88854e7636948860a342ddcbdec60daee5432eba42a2e",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              },
+              {
+                "id": "e2cda98fa153fb28009b8a7e26fd2745d56b5f0cd629c332d28d17cadce49dd6",
+                "order": 17,
+                "text": "這是長段落測試的最後一句，請確認整句完整保留，並聽見最後的結束標記：晚安。",
+                "separator_after": "",
+                "text_sha256": "87f30d8538a8ac95be260b934542749d9922e5f83df90049b88be7dad0988f5e",
+                "pause_after_ms": 0,
+                "settings_sha256": "1fb68a5bfb02019e7bbe868ea9e869dde2d4374084e70dc2e08ae2a398ef4178",
+                "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+                "status": "pending",
+                "attempts": 0,
+                "duration_ms": null
+              }
+            ],
+            "retry_deadline": null
+          }
+        ],
+        "retry_deadline": null,
+        "duration_ms": 230075
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 12712,
+        "loads": 4,
+        "package": "kokoro-zh-cpu-8a1e333cec56056d",
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "seconds": 3.3784329000045545,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "current": 2,
+        "total": 2,
+        "completed": 2,
+        "sources": [
+          {
+            "batch_id": "7e7cf18e3e654556acfdfb50610e63aa",
+            "status": "completed",
+            "attempts": 1,
+            "frames": 85800,
+            "start_ms": 0,
+            "duration_ms": 3575
+          },
+          {
+            "batch_id": "531b8d420c1a434fb3e0b31cf47b5c54",
+            "status": "completed",
+            "attempts": 1,
+            "frames": 5521800,
+            "start_ms": 4075,
+            "duration_ms": 230075
+          }
+        ],
+        "attempt": 1,
+        "duration_ms": 234150,
+        "frames": 5619600,
+        "planned_frames": 5619600,
+        "artifacts": {
+          "mp3": {
+            "path": "assembly/run-e6a785e53de645c9ac1495aa986638fe/media/total.mp3",
+            "sha256": "392f24ed1a394abdc1fb904fdc00e0e2ba118f0622357e7e4d84db8c08243e04"
+          },
+          "srt": {
+            "path": "assembly/run-e6a785e53de645c9ac1495aa986638fe/media/total.srt",
+            "sha256": "449127a546d0741d46a120c9d7e4d6e206d8c0a71159ff8d066541b835bd51b2"
+          }
+        },
+        "artifact_stats": {
+          "mp3": [
+            2810925,
+            1793814218778815700,
+            1793814217439126000
+          ],
+          "srt": [
+            3979,
+            1793814218800316300,
+            1793814218800316300
+          ]
+        }
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 12712,
+        "loads": 4,
+        "package": "kokoro-zh-cpu-8a1e333cec56056d",
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "seconds": 47.78431730000011,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "completed": 100,
+        "total": 100
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 4,
+        "package": null,
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": null
+      }
+    },
+    {
+      "seconds": 39.37671450000198,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "completed": 100,
+        "total": 100
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 4,
+        "package": null,
+        "idle_seconds": 10,
+        "last_error": "",
+        "device": null
+      }
+    }
+  ]
+}

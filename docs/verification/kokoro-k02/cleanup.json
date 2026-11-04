@@ -1,0 +1,13 @@
+{
+  "preexistingTestDirectories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "removedTestDirectory": "tmpopismdhe",
+  "remainingTestDirectories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "noNewTestDirectories": true,
+  "oldSandboxTestProcesses": 0
+}

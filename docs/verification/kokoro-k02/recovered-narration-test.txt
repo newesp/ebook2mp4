@@ -1,0 +1,6 @@
+test_confirmed_snapshot_outputs_measured_cues_and_reopens (test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.528s
+
+OK

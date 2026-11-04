@@ -1,0 +1,15 @@
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... FAIL
+
+======================================================================
+FAIL: test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_kokoro_desktop.py", line 12, in test_local_service_reuses_controls_and_package_page_preserves_text
+    self.assertIn('kokoro',d.service_labels)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'kokoro' not found in {'edge-tts': 'Edge-TTS'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.991s
+
+FAILED (failures=1)

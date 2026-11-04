@@ -120,8 +120,11 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
         raise ProjectError('朗讀稿含語音服務不支援的控制字元，請修正後重新確認。')
     from .voice import settings as validate_settings
     settings = validate_settings(settings)
+    from .tts_backend import capabilities
+    policy = capabilities(settings['provider'])
     rules = dict(RULES, version='rhythm-block-v2', sentence_pause_ms=settings['sentence_pause_ms'],
-                 paragraph_pause_ms=settings['paragraph_pause_ms'])
+                 paragraph_pause_ms=settings['paragraph_pause_ms'],
+                 request_escaped_utf8_bytes=policy.request_escaped_utf8_bytes, max_attempts=policy.max_attempts)
     chunks: list[dict] = []
     # Separators are saved separately, so the exact confirmed text is recoverable.
     start = 0
@@ -143,7 +146,7 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
             costs.append(costs[-1] + request_size(char))
         offset = 0
         while offset < len(paragraph):
-            limit = bisect_right(costs, costs[offset] + RULES['request_escaped_utf8_bytes']) - 1
+            limit = bisect_right(costs, costs[offset] + rules['request_escaped_utf8_bytes']) - 1
             if limit >= len(paragraph):
                 end = len(paragraph)
             else:
@@ -156,6 +159,8 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
                     end = clauses[clause]
                 else:
                     end = boundaries[at] if at >= 0 else offset
+                if end<=offset and not policy.requires_network:
+                    end=limit
                 if end <= offset or not paragraph[offset:end].strip():
                     raise ProjectError('朗讀稿有過長且無法安全切分的引文、網址或句段。請加入自然分句後重新確認。')
             if settings['sentence_pause_ms']:
@@ -221,6 +226,11 @@ class NarrationJob(VoiceJob):
             self._state.update({k: deepcopy(v) for k, v in self.report.items() if k != 'status'})
 
     async def produce(self):
+        from .kokoro_runtime import local_session
+        async with local_session(self.snapshot['settings']):
+            return await self.produce_blocks()
+
+    async def produce_blocks(self):
         media = self.folder / 'media'
         success = False
         try:
@@ -239,7 +249,7 @@ class NarrationJob(VoiceJob):
                     self.save_progress(phase='驗證音訊區塊', current=index + 1)
                     def progress(attempt):
                         chunk.update(status='running', attempts=attempt)
-                        self.save_progress(phase='線上合成')
+                        self.save_progress(phase='本機合成' if settings['provider']=='kokoro' else '線上合成')
                     decoded, reused = await speech_block(
                         chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
                         progress, allow_network=self.allow_network)

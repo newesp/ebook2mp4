@@ -1,0 +1,23 @@
+Timeout (0:00:30)!
+Thread 0x00002644 (most recent call first):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\_parser.py", line 171 in _class_escape
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\_parser.py", line 775 in _parse
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\_parser.py", line 460 in _parse_sub
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\_parser.py", line 979 in parse
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\_compiler.py", line 750 in compile
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\__init__.py", line 307 in _compile
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\re\__init__.py", line 228 in compile
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\util.py", line 1270 in compile_infix_regex
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\language.py", line 118 in tokenizer_factory
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\language.py", line 224 in __init__
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\language.py", line 1861 in from_config
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\util.py", line 648 in load_model_from_config
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\util.py", line 600 in load_model_from_path
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\util.py", line 743 in load_model_from_init_py
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\en_core_web_sm\__init__.py", line 10 in load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\util.py", line 560 in load_model_from_package
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\util.py", line 524 in load_model
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\spacy\__init__.py", line 74 in load
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\runtime\Lib\site-packages\misaki\en.py", line 503 in __init__
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\diagnostic-worker.py", line 41 in main
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-integration\real-home\kokoro-zh-cpu-8a1e333cec56056d\diagnostic-worker.py", line 80 in <module>

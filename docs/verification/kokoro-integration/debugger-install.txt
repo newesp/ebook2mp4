@@ -1,0 +1,7 @@
+Using CPython 3.14.3 interpreter at: C:\Python314\python.exe
+Resolved 1 package in 574ms
+Downloading py-spy (1.8MiB)
+ Downloaded py-spy
+Prepared 1 package in 409ms
+Installed 1 package in 965ms
+ + py-spy==0.4.3

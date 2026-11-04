@@ -44,9 +44,13 @@ async def media_command(tool: str, arguments: list[str], *, timeout: float = 30)
 
 def block_paths(text: str, settings: dict, cache: Path):
     from .workflow import digest, encode
-    key = digest(encode(dict(text=text, provider=settings['provider'], voice=settings['voice'],
+    identity = dict(text=text, provider=settings['provider'], voice=settings['voice'],
                              rate=settings['rate'], processing=settings['processing'],
-                             model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')))
+                             model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')
+    if settings['provider']=='kokoro':
+        from opencc import OpenCC
+        identity.update(package=settings['package'],synthesis_text=OpenCC('t2s').convert(text))
+    key = digest(encode(identity))
     return cache / (key + '.wav'), cache / (key + '.json')
 
 
@@ -75,48 +79,37 @@ def cached_block(text: str, settings: dict, cache: Path) -> Path | None:
 
 async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True):
     """Keep verified, immutable PCM speech independent of added pauses."""
-    from .voice import edge_module
+    from .tts_backend import capabilities, write_speech
     from .workflow import ProjectWorkflow, digest, encode
     from .tts_services import RetryableServiceError
     from aiohttp import ClientError
     from edge_tts.exceptions import EdgeTTSException
+    policy = capabilities(settings['provider'])
     cache.mkdir(parents=True, exist_ok=True)
     target, manifest = block_paths(text, settings, cache)
     valid = cached_block(text, settings, cache)
     if valid is not None:
         return valid, True
-    if not allow_network:
+    if policy.requires_network and not allow_network:
         raise ProjectError('音訊區塊已缺少或失效。請重新檢查並勾選同意傳送文字後續作。')
     from .voice import require_voice
     require_voice(settings['voice'], settings)
     with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
-        raw, decoded = Path(directory) / 'speech.mp3', Path(directory) / 'speech.wav'
-        for attempt in range(1, 4):
+        raw = Path(directory) / ('speech.mp3' if policy.requires_network else 'speech-source.wav')
+        decoded = Path(directory) / 'speech.wav'
+        for attempt in range(1, policy.max_attempts + 1):
             if progress:
                 progress(attempt)
             try:
-                async def receive():
-                    if settings['provider'] != 'edge-tts':
-                        from .tts_services import request_audio
-                        raw.write_bytes(await request_audio(text, settings))
-                        return
-                    size = 0
-                    with raw.open('wb') as stream:
-                        speaker = edge_module().Communicate(text, settings['voice'], rate=settings['rate'],
-                                                            connect_timeout=10, receive_timeout=30)
-                        async for packet in speaker.stream():
-                            if packet['type'] == 'audio':
-                                size += len(packet['data'])
-                                if size > 30_000_000:
-                                    raise ProjectError('區塊音訊回應過大，請縮短段落後重試。')
-                                stream.write(packet['data'])
-                        if not size:
-                            raise ProjectError('Edge-TTS 未傳回音訊，請更新音色後重試。')
-                await asyncio.wait_for(receive(), 90)
+                if policy.requires_network:
+                    await asyncio.wait_for(write_speech(text, settings, raw), policy.synthesis_timeout_seconds)
+                else:
+                    # Local verification/load and inference have separate bounds.
+                    await write_speech(text,settings,raw)
                 break
             except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException, RetryableServiceError) as exc:
-                if attempt == 3:
-                    raise ProjectError('區塊連線或服務錯誤，3 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
+                if attempt == policy.max_attempts:
+                    raise ProjectError(f'區塊連線或服務錯誤，{policy.max_attempts} 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
                 await asyncio.sleep(max(attempt, getattr(exc, 'retry_after', 0)))
         await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
                                    '-c:a', 'pcm_s16le', str(decoded)])
@@ -130,6 +123,12 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
 
 
 async def synthesize(text: str, settings: dict, tool: str, cache: Path) -> bytes:
+    from .kokoro_runtime import local_session
+    async with local_session(settings):
+        return await assemble_preview(text,settings,tool,cache)
+
+
+async def assemble_preview(text: str, settings: dict, tool: str, cache: Path) -> bytes:
     from .narration import plan
     chunks = plan(text, settings, 'preview', 'preview')['chunks']
     with tempfile.TemporaryDirectory(prefix='ebook2mp4-voice-') as directory:

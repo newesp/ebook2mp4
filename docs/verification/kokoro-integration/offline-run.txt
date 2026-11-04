@@ -1,0 +1,22 @@
+network_probe 10013
+0.2 尚未載入
+2.05 檢查語音包 0/997
+3.07 檢查語音包 200/997
+3.69 檢查語音包 400/997
+3.9 檢查語音包 600/997
+4.72 檢查語音包 800/997
+6.98 載入本機模型
+50.03 本機合成
+56.2 本機合成完成
+completed in 56.856153300002916
+0.21 本機合成
+2.66 本機合成完成
+completed in 3.2217559999990044
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_acceptance.py", line 147, in <module>
+    if __name__=='__main__':main()
+                            ~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tools\kokoro_acceptance.py", line 79, in main
+    flow.discard_voice_preview(job);assert dead(pid)
+                                           ~~~~^^^^^
+AssertionError
