@@ -1,4 +1,6 @@
 """Join inspection inside the existing book assembly workspace."""
+from io import BytesIO
+from PIL import Image, ImageTk
 from pathlib import Path
 from functools import partial
 import tkinter as tk
@@ -18,6 +20,8 @@ class JoinPage(ttk.Frame):
         super().__init__(owner)
         self.owner, self.app, self.flow = owner, owner.app, owner.flow
         self.job = self.info_job = self.timer = None
+        self.movie_player = None
+        self.movie = getattr(owner, 'movie', False)
         self.player = PreviewPlayer()
         self.playing = self.allow_play = False
         self.joins: list[dict] = []
@@ -38,11 +42,13 @@ class JoinPage(ttk.Frame):
         self.previous.grid(row=0, column=2, padx=4)
         self.next = ttk.Button(selection, text='下一個', command=lambda: self.move(1))
         self.next.grid(row=0, column=3)
-        pair = ttk.Frame(self)
+        self.pair = pair = ttk.Frame(self)
         pair.grid(row=2, column=0, sticky='nsew')
         pair.columnconfigure((0, 1), weight=1, uniform='join')
         pair.rowconfigure(0, weight=1)
         self.headings = []
+        self.frame_labels = []
+        self.frame_photos = []
         for column, side in enumerate(('left', 'right')):
             panel = ttk.Frame(pair)
             panel.grid(row=0, column=column, sticky='nsew', padx=(0, 6) if column == 0 else (6, 0))
@@ -52,13 +58,19 @@ class JoinPage(ttk.Frame):
             heading.grid(row=0, column=0, columnspan=2, sticky='ew')
             self.headings.append(heading)
             text = tk.Text(panel, width=1, height=2, wrap='word', state='disabled', font=('Microsoft JhengHei', 11))
-            text.grid(row=1, column=0, sticky='nsew')
+            text.grid(row=2 if self.movie else 1, column=0, sticky='nsew')
+            if self.movie:
+                panel.rowconfigure(1,weight=0)
+                panel.rowconfigure(2,weight=1)
+                frame=ttk.Label(panel,anchor='center')
+                frame.grid(row=1,column=0,columnspan=2,sticky='ew')
+                self.frame_labels.append(frame)
             scrollbar = ttk.Scrollbar(panel, command=text.yview)
-            scrollbar.grid(row=1, column=1, sticky='ns')
+            scrollbar.grid(row=2 if self.movie else 1, column=1, sticky='ns')
             text.configure(yscrollcommand=scrollbar.set)
             edit = ttk.Button(panel, text='← 校對前批結尾' if column == 0 else '校對後批開頭 →',
                               command=partial(self.edit, side))
-            edit.grid(row=2, column=0, columnspan=2, sticky='ew', pady=(4, 0))
+            edit.grid(row=3 if self.movie else 2, column=0, columnspan=2, sticky='ew', pady=(4, 0))
             setattr(self, side+'_text', text)
             setattr(self, side+'_edit', edit)
         self.warning = ttk.Frame(self)
@@ -126,7 +138,22 @@ class JoinPage(ttk.Frame):
             return
         ids = list(self.owner.selected)
         async def inspect():
-            return self.flow.inspect_assembly_joins(ids)
+            joins=self.flow.inspect_video_merge_joins(ids) if self.movie else self.flow.inspect_assembly_joins(ids)
+            if self.movie:
+                from .video_merge import source_ref
+                from .total_video import background_frame
+                from .assembly import checked_file_async
+                for join in joins:
+                    for side in ('left','right'):
+                        item=join[side]
+                        if item['valid']:
+                            try:
+                                ref=source_ref(self.flow,item['batch_id'])
+                                path=await checked_file_async(self.flow,ref['mp4'])
+                                item['frame']=await background_frame(path,ref['duration_ms']/1000 if side=='left' else 0,last=side=='left')
+                            except ProjectError as error:
+                                item.update(valid=False,error=str(error))
+            return joins
         self.info_job = VoiceJob(inspect, timeout=None)
         self.status.configure(text='正在讀取接點文字與版本…')
         self.update_controls()
@@ -148,6 +175,7 @@ class JoinPage(ttk.Frame):
             return
         self.pair_control.current(self.index)
         join = self.joins[self.index]
+        self.frame_photos=[]
         for index, side in enumerate(('left', 'right')):
             item = join[side]
             pages = item['pages']
@@ -155,6 +183,12 @@ class JoinPage(ttk.Frame):
             if item['kind'] == 'pdf':
                 title += f'（物理頁 {pages["start"]}～{pages["end"]}）'
             self.headings[index].configure(text=title)
+            if self.movie:
+                if item.get('frame'):
+                    image=Image.open(BytesIO(item['frame']));image.thumbnail((240,100))
+                    photo=ImageTk.PhotoImage(image,master=self.frame_labels[index]);self.frame_photos.append(photo)
+                    self.frame_labels[index].configure(image=photo)
+                else:self.frame_labels[index].configure(image='')
             self.fill(getattr(self, side+'_text'), item['text'] if item['valid'] else item['error'])
         warning = join['warning']
         if warning:
@@ -211,7 +245,8 @@ class JoinPage(ttk.Frame):
             self.owner.require_current()
             if self.has_work():
                 return
-            self.job = self.flow.start_assembly_join_preview(list(self.owner.selected), self.index,
+            start = self.flow.start_video_join_preview if self.movie else self.flow.start_assembly_join_preview
+            self.job = start(list(self.owner.selected), self.index,
                          pause_ms=self.owner.pause_ms(), clip_ms=int(self.clip.get())*1000)
             self.allow_play = True
             self.status.configure(text='正在驗證來源並準備接點試聽…')
@@ -221,13 +256,24 @@ class JoinPage(ttk.Frame):
             self.status.configure(text=str(error))
             self.app.notify(str(error), kind='error')
 
+    def restore_pair(self):
+        self.pair.grid(row=2,column=0,sticky='nsew')
+        self.stop()
+
     def stop(self):
+        if self.movie_player is not None:
+            self.movie_player.stop()
+            self.movie_player.grid_remove()
+            self.pair.grid(row=2,column=0,sticky='nsew')
         self.allow_play = self.playing = False
         try:
             self.player.stop()
             if self.job is not None:
                 self.job.cancel()
-                if self.job.wait(0):
+                if self.job.wait(0) and (self.movie_player is None or not self.movie_player.has_work()):
+                    if self.movie_player is not None and self.movie_player.has_work():
+                        self.schedule()
+                        return
                     self.flow.discard_assembly_join_preview(self.job)
                     self.job = None
             if self.info_job is not None:
@@ -258,21 +304,32 @@ class JoinPage(ttk.Frame):
             if self.job is not None and self.job.wait(0):
                 if not self.allow_play or self.job.state['status'] != 'completed':
                     state = self.job.state
+                    if self.movie_player is not None and self.movie_player.has_work():
+                        self.schedule()
+                        return
                     self.flow.discard_assembly_join_preview(self.job)
                     self.job = None
                     self.status.configure(text='已取消接點試聽。' if state['status'] == 'cancelled' else state['error'] or '試聽已停止。')
                 elif not self.playing:
-                    result = self.flow.finish_assembly_join_preview(self.job)
+                    result = self.flow.finish_video_join_preview(self.job) if self.movie else self.flow.finish_assembly_join_preview(self.job)
                     if (self.winfo_viewable() and self.app.production.current is self.owner
                             and self.app.flow is self.flow and self.app.step == 4):
-                        self.player.play(Path(result['path']))
+                        if self.movie:
+                            from .movie_playback import MoviePlayback
+                            if self.movie_player is None:
+                                self.movie_player=MoviePlayback(self,self.flow,self.restore_pair)
+                            self.pair.grid_remove()
+                            self.movie_player.grid(row=2,column=0,sticky='nsew')
+                            self.movie_player.start(result)
+                        else:
+                            self.player.play(Path(result['path']))
                         self.playing = True
                         self.fill(self.left_text, result['left_text'] or '此片段沒有字幕文字。')
                         self.fill(self.right_text, result['right_text'] or '此片段沒有字幕文字。')
                         self.status.configure(text=f'正在試聽 · {result["duration_ms"]/1000:g} 秒 · 不呼叫 TTS')
                     else:
                         self.stop()
-                elif not self.player.playing():
+                elif (not self.movie_player.has_work() if self.movie and self.movie_player else not self.player.playing()):
                     self.stop()
                     self.status.configure(text='接點試聽已結束。')
         except (ProjectError, OSError) as error:
@@ -293,6 +350,8 @@ class JoinPage(ttk.Frame):
         except ProjectError:
             valid = False
             self.timeline.configure(text='請輸入 0～5 秒，最多三位小數。')
+        if self.movie:
+            self.play_button.configure(text='播放影音接點')
         self.play_button.configure(state='normal' if valid and not busy and not self.playing else 'disabled')
         self.stop_button.configure(state='normal' if self.job is not None else 'disabled')
         self.save_button.configure(state='normal' if valid and not busy else 'disabled')
@@ -315,6 +374,7 @@ class JoinPage(ttk.Frame):
 
     def release(self):
         self.stop()
+        if self.movie_player is not None: self.movie_player.release()
         if self.timer is not None:
             self.after_cancel(self.timer)
             self.timer = None

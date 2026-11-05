@@ -30,6 +30,7 @@ class ProductionWorkspace(ttk.Frame):
         self.app = app
         self.pages: dict[tuple, Any] = {}
         self.current = None
+        self.assembly_drafts = {}
         self.service_page = None
         self.package_page = None
         self.columnconfigure(0, weight=1)
@@ -44,6 +45,11 @@ class ProductionWorkspace(ttk.Frame):
         ttk.Label(tabs, text=' → ').pack(side='left')
         self.assembly_tab = ttk.Button(tabs, text='全書合併', command=app.total_audio)
         self.assembly_tab.pack(side='left')
+        self.method = tk.StringVar(value='總音訊製片')
+        self.method_control = ttk.Combobox(tabs, textvariable=self.method, state='readonly',
+            values=('總音訊製片', '合併既有批次影片'), width=20)
+        self.method_control.pack(side='right')
+        self.method_control.bind('<<ComboboxSelected>>', self.change_method)
         self.host = ttk.Frame(self)
         self.host.grid(row=1, column=0, sticky='nsew')
         self.host.columnconfigure(0, weight=1)
@@ -63,21 +69,48 @@ class ProductionWorkspace(ttk.Frame):
                 self.current.stop()
             self.current.grid_remove()
         self.current = page
+        if getattr(page, 'kind', None) == 'assembly':
+            self.assembly_drafts[id(page.flow)] = page
         page.grid(row=0, column=0, sticky='nsew')
         self.refresh_task_controls()
+        self.method_control.pack_forget()
+        if getattr(page, 'kind', None) in ('assembly', 'video') and not getattr(page, 'batch_id', None):
+            self.method.set('合併既有批次影片' if getattr(page, 'movie', False) else '總音訊製片')
+            self.method_control.pack(side='right')
         kind = 'narration' if getattr(page, 'batch_id', None) and getattr(page, 'kind', None) == 'video' else 'assembly' if getattr(page, 'kind', None) in ('assembly', 'video') else 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
         self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
         self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
         self.assembly_tab.configure(style='CompactActive.TButton' if kind == 'assembly' else 'Compact.TButton')
 
+    def change_method(self, event=None):
+        from .workflow import ProjectError
+        page=self.current
+        source=page if getattr(page,'kind',None)=='assembly' else self.assembly_drafts.get(id(self.app.flow))
+        movie=self.method.get()=='合併既有批次影片'
+        try:
+            if page is not None and (getattr(page,'job',None) is not None or getattr(page,'check_job',None) is not None):
+                raise ProjectError('請等待目前操作停止，再切換影片方式。')
+            self.app.flow.save_total_video_method('batch-videos' if movie else 'total-audio')
+            destination=self.show('merge' if movie else 'assembly')
+            if source is not None and source.winfo_exists():
+                destination.selected=list(source.selected)
+                destination.pause.set(source.pause.get())
+                destination.accepted_joins=set(source.accepted_joins)
+                destination.render_rows()
+        except ProjectError as error:
+            self.app.notify(str(error),kind='error')
+            if page is not None:self.method.set('合併既有批次影片' if getattr(page,'movie',False) else '總音訊製片')
+
     def show(self, kind):
         app = self.app
-        key = (id(app.flow), None if kind in ('assembly', 'video') else app.batch_id, kind)
+        if kind == 'assembly' and app.flow.state.get('total_video_method') == 'batch-videos':
+            kind = 'merge'
+        key = (id(app.flow), None if kind in ('assembly', 'video', 'merge') else app.batch_id, kind)
         page: Any = self.pages.get(key)
         if page is None or not page.winfo_exists():
-            if kind == 'assembly':
+            if kind in ('assembly', 'merge'):
                 from .assembly_desktop import AssemblyPage
-                page = AssemblyPage(app)
+                page = AssemblyPage(app, movie=kind == 'merge')
             elif kind == 'video':
                 from .total_video_desktop import TotalVideoPage
                 page = TotalVideoPage(app)
@@ -97,7 +130,7 @@ class ProductionWorkspace(ttk.Frame):
         if kind == 'narration' and page.job is None:
             page.load_runs()
             page.load_result()
-        if kind == 'assembly':
+        if kind in ('assembly', 'merge'):
             page.recheck()
         if kind in ('video', 'batch_video'):
             page.recheck()
@@ -127,7 +160,7 @@ class ProductionWorkspace(ttk.Frame):
         self.grid_remove()
 
     def active_page(self):
-        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly', 'video', 'batch_video') and p.winfo_exists() and p.job is not None), None)
+        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly', 'merge', 'video', 'batch_video') and p.winfo_exists() and p.job is not None), None)
 
     def show_active(self):
         page = self.active_page()
@@ -182,6 +215,7 @@ class ProductionWorkspace(ttk.Frame):
 
     def refresh_task_controls(self):
         page = self.current
+        self.method_control.configure(state='disabled' if page is not None and (getattr(page,'job',None) is not None or getattr(page,'check_job',None) is not None or self.busy_for(page.flow)) else 'readonly')
         if page is not None and page.winfo_exists() and hasattr(page, 'set_production_busy'):
             page.set_production_busy(self.busy_for(page.flow))
 

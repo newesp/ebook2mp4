@@ -288,6 +288,10 @@ def total_video(flow: ProjectWorkflow | BatchVideoTarget, *, verify_media=True) 
                 checked_file(flow.project if isinstance(flow, BatchVideoTarget) else flow, product[kind])
             elif not flow._path(product[kind]['path']).is_file():
                 raise ProjectError('總影片檔案遺失，請重新製作；總音訊保留。')
+        if product.get('method') == 'batch-videos' and isinstance(flow, ProjectWorkflow):
+            from .video_merge import stale
+            product['stale'] = stale(flow, product, verify_media=verify_media)
+            return product
         product['stale'] = normalized_visual(product['visual']) != settings(flow)
         try:
             product['stale'] |= product['audio'] != current_audio(flow, verify_media=verify_media)
@@ -578,6 +582,9 @@ def finish(flow: ProjectWorkflow | BatchVideoTarget, job: TotalVideoJob) -> dict
         raise ProjectError('請等待所屬製片任務停止。')
     report = job.result
     if not job.published:
+        if job.snapshot.get('method') == 'batch-videos' and isinstance(flow, ProjectWorkflow):
+            from .video_merge import validate_snapshot
+            validate_snapshot(flow, job)
         product = dict(deepcopy(job.snapshot), duration_ms=report['duration_ms'], completed_at=now())
         for kind in ('mp4', 'srt'):
             ref = report['artifacts'][kind]

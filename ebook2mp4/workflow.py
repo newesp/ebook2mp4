@@ -26,6 +26,7 @@ if TYPE_CHECKING:
     from .assembly import TotalAudioJob
     from .assembly_joins import JoinPreviewJob
     from .total_video import TotalVideoJob
+    from .video_merge import VideoJoinPreviewJob
 
 
 class ProjectError(Exception):
@@ -96,7 +97,7 @@ class ProjectWorkflow:
         self._voice_job: VoiceJob | None = None
         self._narration_job: NarrationJob | None = None
         self._total_audio_job: TotalAudioJob | None = None
-        self._assembly_preview_job: JoinPreviewJob | None = None
+        self._assembly_preview_job: JoinPreviewJob | VideoJoinPreviewJob | None = None
         self._total_video_job: TotalVideoJob | None = None
 
     @property
@@ -1072,6 +1073,45 @@ class ProjectWorkflow:
         """Use the shared video workflow with isolated batch settings and outputs."""
         from .video_target import BatchVideoTarget
         return BatchVideoTarget(self, batch_id)
+
+    def save_total_video_method(self, method: str) -> None:
+        from .production_lock import ProductionLease
+        if method not in ('total-audio', 'batch-videos'):
+            raise ProjectError('影片方式無效。')
+        lease = ProductionLease(self.root/'.production.lock')
+        try:
+            self._check_current()
+            manifest = self.state
+            manifest['total_video_method'] = method
+            self._commit(manifest, [])
+        finally:
+            lease.release()
+
+    def inspect_video_merge_joins(self, batch_ids: list[str]) -> list[dict]:
+        from .video_merge import inspect_joins
+        return inspect_joins(self, batch_ids)
+
+    def start_video_join_preview(self, batch_ids: list[str], index: int, *, pause_ms=500, clip_ms=5000):
+        from .video_merge import start_preview
+        return start_preview(self, batch_ids, index, pause_ms=pause_ms, clip_ms=clip_ms)
+
+    def finish_video_join_preview(self, job) -> dict:
+        from .video_merge import finish_preview
+        return finish_preview(self, job)
+
+    def save_video_merge_settings(self, batch_ids: list[str], pause_ms: int = 500, *,
+                                  resolution: str = '1080p', accepted_joins: list[str] | None = None) -> None:
+        from .video_merge import save_settings
+        save_settings(self, batch_ids, pause_ms, resolution=resolution, accepted_joins=accepted_joins)
+
+    def inspect_video_merge(self) -> list[dict]:
+        import asyncio
+        from .video_merge import inspect
+        return asyncio.run(inspect(self))
+
+    def start_video_merge(self) -> TotalVideoJob:
+        from .video_merge import start
+        return start(self)
 
     def total_video_settings(self) -> dict:
         from .total_video import settings
