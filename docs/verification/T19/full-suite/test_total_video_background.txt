@@ -1,0 +1,9 @@
+test_long_excluded_sound_does_not_delay_visual_loops (test_total_video_background.BackgroundJourney.test_long_excluded_sound_does_not_delay_visual_loops) ... ok
+test_loop_hold_trim_sound_and_subtitles_use_the_same_narration (test_total_video_background.BackgroundJourney.test_loop_hold_trim_sound_and_subtitles_use_the_same_narration) ... ok
+test_portrait_preview_black_padding_and_modes_survive_reopen (test_total_video_background.BackgroundJourney.test_portrait_preview_black_padding_and_modes_survive_reopen) ... ok
+test_validation_failures_cancellation_and_video_only_retry_protect_old_products (test_total_video_background.BackgroundJourney.test_validation_failures_cancellation_and_video_only_retry_protect_old_products) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 42.191s
+
+OK

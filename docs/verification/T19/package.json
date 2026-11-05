@@ -1,0 +1,168 @@
+{
+  "path": "E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4\\ebook2mp4.exe",
+  "sha256": "63600d23d17c0afefa7ff8234ebc3749cb62a8695ad6f567462cc9402702cd05",
+  "files": 1303,
+  "modules": [
+    {
+      "module": "ebook2mp4",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.assembly",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.assembly_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.assembly_joins",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.assembly_joins_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.gemini",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.gemini_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.kokoro_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.kokoro_packages",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.kokoro_runtime",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.movie_playback",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.narration",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.narration_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.ocr",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.pdf",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.pdf_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.production_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.production_lock",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.proofreading",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.service_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.total_video",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.total_video_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.tts_backend",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.tts_control",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.tts_services",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.ui_controls",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.video_diagnostics",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.video_merge",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.video_target",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.voice",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.voice_defaults_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.voice_desktop",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.voice_media",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.window_layout",
+      "matches": true
+    },
+    {
+      "module": "ebook2mp4.workflow",
+      "matches": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "ffmpeg",
+      "version": "ffmpeg version 8.1.1-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+      "sha256": "228d7a8556258de907fdb55f36850078ebc7680b84ec30d84ea02e99bec1d1eb"
+    },
+    {
+      "name": "ffprobe",
+      "version": "ffprobe version 8.1.1-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers",
+      "sha256": "0fde260f5abd35c9cafd96f594cc76365a780c1b73a90e35b6a3409ea1db1bf0"
+    }
+  ],
+  "excluded": [
+    "ebook2mp4.__main__",
+    "ebook2mp4.kokoro_worker",
+    "ebook2mp4.ui_mock"
+  ]
+}

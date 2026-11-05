@@ -1,0 +1,12 @@
+test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding) ... ok
+test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored (test_video_merge.MergeVideoJourney.test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored) ... ok
+test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs (test_video_merge.MergeVideoJourney.test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs) ... ok
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... ok
+test_moving_batch_holds_actual_final_frame_in_preview_and_total (test_video_merge.MergeVideoJourney.test_moving_batch_holds_actual_final_frame_in_preview_and_total) ... ok
+test_pdf_warnings_require_confirmation_and_survive_reopen (test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen) ... ok
+test_preview_matches_join_and_cleans_on_cancel (test_video_merge.MergeVideoJourney.test_preview_matches_join_and_cleans_on_cancel) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 166.448s
+
+OK

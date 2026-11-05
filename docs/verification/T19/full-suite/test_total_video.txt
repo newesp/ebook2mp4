@@ -1,0 +1,11 @@
+test_cancel_failure_export_and_retry_keep_previous_artifacts (test_total_video.TotalVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts) ... ok
+test_changed_source_blocks_video_and_corrupt_picture_preserves_settings (test_total_video.TotalVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings) ... ok
+test_corrupted_audio_is_not_current_and_cannot_publish_video (test_total_video.TotalVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video) ... ok
+test_picture_is_copied_and_resolution_survives_reopen (test_total_video.TotalVideoJourney.test_picture_is_copied_and_resolution_survives_reopen) ... ok
+test_publication_conflict_and_disk_shortage_keep_old_video (test_total_video.TotalVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video) ... ok
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 35.174s
+
+OK

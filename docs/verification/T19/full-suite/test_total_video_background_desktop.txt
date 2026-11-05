@@ -1,0 +1,7 @@
+test_background_mode_preview_save_return_and_render_are_connected (test_total_video_background_desktop.BackgroundDesktop.test_background_mode_preview_save_return_and_render_are_connected) ... ok
+test_required_controls_fit_sizes_and_long_background_hides_short_mode (test_total_video_background_desktop.BackgroundDesktop.test_required_controls_fit_sizes_and_long_background_hides_short_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 31.794s
+
+OK

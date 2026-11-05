@@ -1,0 +1,6 @@
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 39.596s
+
+OK

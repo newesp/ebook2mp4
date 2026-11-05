@@ -1,0 +1,7 @@
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+test_media_failure_stops_after_three_attempts_and_preserves_output (test_video_merge.MergeVideoJourney.test_media_failure_stops_after_three_attempts_and_preserves_output) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 12.753s
+
+OK

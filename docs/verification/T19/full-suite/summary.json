@@ -1,0 +1,317 @@
+[
+  {
+    "module": "test_assembly_joins",
+    "exit_code": 0,
+    "seconds": 74.087
+  },
+  {
+    "module": "test_assembly_joins_desktop",
+    "exit_code": 0,
+    "seconds": 55.865
+  },
+  {
+    "module": "test_batch_step_retention",
+    "exit_code": 0,
+    "seconds": 17.854
+  },
+  {
+    "module": "test_batch_video",
+    "exit_code": 0,
+    "seconds": 50.125
+  },
+  {
+    "module": "test_batch_video_desktop",
+    "exit_code": 0,
+    "seconds": 45.489
+  },
+  {
+    "module": "test_desktop",
+    "exit_code": 0,
+    "seconds": 46.215
+  },
+  {
+    "module": "test_gemini",
+    "exit_code": 0,
+    "seconds": 6.698
+  },
+  {
+    "module": "test_gemini_429_desktop",
+    "exit_code": 0,
+    "seconds": 41.06
+  },
+  {
+    "module": "test_gemini_429_recovery",
+    "exit_code": 0,
+    "seconds": 26.317
+  },
+  {
+    "module": "test_gemini_desktop",
+    "exit_code": 0,
+    "seconds": 9.999
+  },
+  {
+    "module": "test_gemini_resume",
+    "exit_code": 0,
+    "seconds": 13.884
+  },
+  {
+    "module": "test_gemini_resume_desktop",
+    "exit_code": 0,
+    "seconds": 12.043
+  },
+  {
+    "module": "test_incremental_desktop",
+    "exit_code": 0,
+    "seconds": 19.665
+  },
+  {
+    "module": "test_incremental_narration",
+    "exit_code": 0,
+    "seconds": 15.642
+  },
+  {
+    "module": "test_kokoro",
+    "exit_code": 0,
+    "seconds": 0.577
+  },
+  {
+    "module": "test_kokoro_desktop",
+    "exit_code": 1,
+    "seconds": 2.492
+  },
+  {
+    "module": "test_kokoro_remember_desktop",
+    "exit_code": 0,
+    "seconds": 3.824
+  },
+  {
+    "module": "test_main_workflow_desktop",
+    "exit_code": 0,
+    "seconds": 8.726
+  },
+  {
+    "module": "test_mixed_desktop",
+    "exit_code": 0,
+    "seconds": 22.803
+  },
+  {
+    "module": "test_mixed_pdf",
+    "exit_code": 0,
+    "seconds": 15.48
+  },
+  {
+    "module": "test_narration",
+    "exit_code": 0,
+    "seconds": 23.753
+  },
+  {
+    "module": "test_narration_desktop",
+    "exit_code": 0,
+    "seconds": 21.448
+  },
+  {
+    "module": "test_narration_resume",
+    "exit_code": 0,
+    "seconds": 23.047
+  },
+  {
+    "module": "test_notifications",
+    "exit_code": 0,
+    "seconds": 9.318
+  },
+  {
+    "module": "test_ocr",
+    "exit_code": 0,
+    "seconds": 10.908
+  },
+  {
+    "module": "test_ocr_desktop",
+    "exit_code": 0,
+    "seconds": 7.005
+  },
+  {
+    "module": "test_ocr_optimization",
+    "exit_code": 0,
+    "seconds": 0.44
+  },
+  {
+    "module": "test_optimization_desktop",
+    "exit_code": 0,
+    "seconds": 9.11
+  },
+  {
+    "module": "test_pdf",
+    "exit_code": 0,
+    "seconds": 7.007
+  },
+  {
+    "module": "test_pdf_candidate_refinement",
+    "exit_code": 0,
+    "seconds": 14.741
+  },
+  {
+    "module": "test_pdf_refinement_desktop",
+    "exit_code": 0,
+    "seconds": 27.028
+  },
+  {
+    "module": "test_production_pages",
+    "exit_code": 0,
+    "seconds": 16.416
+  },
+  {
+    "module": "test_proofreading_optimization",
+    "exit_code": 0,
+    "seconds": 5.26
+  },
+  {
+    "module": "test_rhythm",
+    "exit_code": 0,
+    "seconds": 11.607
+  },
+  {
+    "module": "test_rhythm_desktop",
+    "exit_code": 0,
+    "seconds": 4.854
+  },
+  {
+    "module": "test_service_form",
+    "exit_code": 0,
+    "seconds": 3.797
+  },
+  {
+    "module": "test_service_management",
+    "exit_code": 0,
+    "seconds": 36.129
+  },
+  {
+    "module": "test_startup_defaults",
+    "exit_code": 0,
+    "seconds": 1.235
+  },
+  {
+    "module": "test_status_help",
+    "exit_code": 0,
+    "seconds": 7.085
+  },
+  {
+    "module": "test_terminology_desktop",
+    "exit_code": 0,
+    "seconds": 4.787
+  },
+  {
+    "module": "test_total_audio",
+    "exit_code": 0,
+    "seconds": 60.959
+  },
+  {
+    "module": "test_total_audio_desktop",
+    "exit_code": 0,
+    "seconds": 51.665
+  },
+  {
+    "module": "test_total_video",
+    "exit_code": 0,
+    "seconds": 35.817
+  },
+  {
+    "module": "test_total_video_background",
+    "exit_code": 0,
+    "seconds": 42.617
+  },
+  {
+    "module": "test_total_video_background_desktop",
+    "exit_code": 0,
+    "seconds": 32.339
+  },
+  {
+    "module": "test_total_video_desktop",
+    "exit_code": 0,
+    "seconds": 36.429
+  },
+  {
+    "module": "test_tts_capabilities",
+    "exit_code": 0,
+    "seconds": 9.452
+  },
+  {
+    "module": "test_tts_control",
+    "exit_code": 0,
+    "seconds": 2.21
+  },
+  {
+    "module": "test_tts_providers",
+    "exit_code": 0,
+    "seconds": 15.72
+  },
+  {
+    "module": "test_tts_retry",
+    "exit_code": 0,
+    "seconds": 16.636
+  },
+  {
+    "module": "test_tts_retry_desktop",
+    "exit_code": 0,
+    "seconds": 21.237
+  },
+  {
+    "module": "test_ui_layout",
+    "exit_code": 0,
+    "seconds": 17.26
+  },
+  {
+    "module": "test_ui_layout_gemini",
+    "exit_code": 0,
+    "seconds": 28.987
+  },
+  {
+    "module": "test_ui_layout_pdf",
+    "exit_code": 0,
+    "seconds": 13.458
+  },
+  {
+    "module": "test_video_diagnostics",
+    "exit_code": 0,
+    "seconds": 0.539
+  },
+  {
+    "module": "test_video_diagnostics_desktop",
+    "exit_code": 0,
+    "seconds": 7.915
+  },
+  {
+    "module": "test_video_merge",
+    "exit_code": 0,
+    "seconds": 167.19
+  },
+  {
+    "module": "test_video_merge_desktop",
+    "exit_code": 0,
+    "seconds": 60.075
+  },
+  {
+    "module": "test_voice",
+    "exit_code": 0,
+    "seconds": 20.545
+  },
+  {
+    "module": "test_voice_desktop",
+    "exit_code": 0,
+    "seconds": 42.646
+  },
+  {
+    "module": "test_voice_setting_restore",
+    "exit_code": 0,
+    "seconds": 6.082
+  },
+  {
+    "module": "test_voice_settings_ui",
+    "exit_code": 0,
+    "seconds": 18.644
+  },
+  {
+    "module": "test_workflow",
+    "exit_code": 0,
+    "seconds": 17.868
+  }
+]

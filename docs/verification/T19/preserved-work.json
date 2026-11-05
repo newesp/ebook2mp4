@@ -1,0 +1,16 @@
+{
+  "unexpected_changes": [],
+  "restored_prior_evidence": [
+    "docs/verification/voice-settings-native.png"
+  ],
+  "prior_tts_kokoro_service_edits_preserved": true,
+  "baseline_entries": 1406,
+  "allowed_task_changes": [
+    "ebook2mp4/assembly_desktop.py",
+    "ebook2mp4/assembly_joins_desktop.py",
+    "ebook2mp4/production_desktop.py",
+    "ebook2mp4/total_video.py",
+    "ebook2mp4/workflow.py",
+    "docs/implementation-status.md"
+  ]
+}

@@ -1,0 +1,23 @@
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... FAIL
+
+======================================================================
+FAIL: test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 36, in test_merge_uses_only_movies_and_shared_order_without_total_audio
+    a,b = self.movies()
+          ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 18, in movies
+    ids = self.prepare(count)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 22, in prepare
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 6.681s
+
+FAILED (failures=1)

@@ -1,0 +1,12 @@
+test_english_numbers_code_and_identifiers_are_preserved (test_proofreading_optimization.ProofreadingOptimization.test_english_numbers_code_and_identifiers_are_preserved) ... ok
+test_full_batch_script_guides_selected_candidate_without_changing_outside (test_proofreading_optimization.ProofreadingOptimization.test_full_batch_script_guides_selected_candidate_without_changing_outside) ... ok
+test_model_cannot_change_protected_identifiers (test_proofreading_optimization.ProofreadingOptimization.test_model_cannot_change_protected_identifiers) ... ok
+test_quotes_with_url_and_code_keep_protected_content_unchanged (test_proofreading_optimization.ProofreadingOptimization.test_quotes_with_url_and_code_keep_protected_content_unchanged) ... ok
+test_shared_han_does_not_vote_and_ellipsis_is_one_mark (test_proofreading_optimization.ProofreadingOptimization.test_shared_han_does_not_vote_and_ellipsis_is_one_mark) ... ok
+test_simplified_and_ambiguous_detection_and_explicit_preserve (test_proofreading_optimization.ProofreadingOptimization.test_simplified_and_ambiguous_detection_and_explicit_preserve) ... ok
+test_unicode_filenames_paths_and_english_apostrophes_survive (test_proofreading_optimization.ProofreadingOptimization.test_unicode_filenames_paths_and_english_apostrophes_survive) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 4.774s
+
+OK

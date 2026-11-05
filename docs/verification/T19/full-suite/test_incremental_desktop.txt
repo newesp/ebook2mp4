@@ -1,0 +1,8 @@
+test_background_production_disables_defaults_and_cancel_releases_controls (test_incremental_desktop.IncrementalDesktop.test_background_production_disables_defaults_and_cancel_releases_controls) ... ok
+test_incremental_plan_and_stale_product_then_offline_reassembly (test_incremental_desktop.IncrementalDesktop.test_incremental_plan_and_stale_product_then_offline_reassembly) ... ok
+test_saved_defaults_apply_to_selected_batch_in_same_window (test_incremental_desktop.IncrementalDesktop.test_saved_defaults_apply_to_selected_batch_in_same_window) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 19.109s
+
+OK

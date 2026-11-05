@@ -1,0 +1,11 @@
+test_real_limiter_narration_recovers_block_36 (test_gemini_429_recovery.FullRecovery.test_real_limiter_narration_recovers_block_36) ... ok
+test_two_processes_share_request_spacing (test_gemini_429_recovery.FullRecovery.test_two_processes_share_request_spacing) ... ok
+test_classifies_quota_and_retry_info_without_exposing_payload (test_gemini_429_recovery.GeminiRecovery.test_classifies_quota_and_retry_info_without_exposing_payload) ... ok
+test_four_rate_limits_then_success (test_gemini_429_recovery.GeminiRecovery.test_four_rate_limits_then_success) ... ok
+test_persistent_limits_and_long_delay_stop_without_network_loop (test_gemini_429_recovery.GeminiRecovery.test_persistent_limits_and_long_delay_stop_without_network_loop) ... ok
+test_shared_cooldown_extends_and_cancel_leaves_database_available (test_gemini_429_recovery.GeminiRecovery.test_shared_cooldown_extends_and_cancel_leaves_database_available) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 25.617s
+
+OK

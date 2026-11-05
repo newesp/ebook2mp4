@@ -1,0 +1,8 @@
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check (test_production_pages.ProductionPages.test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 15.814s
+
+OK

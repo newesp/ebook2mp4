@@ -1,0 +1,6 @@
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.113s
+
+OK

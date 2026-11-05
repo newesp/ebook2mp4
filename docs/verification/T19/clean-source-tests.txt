@@ -1,0 +1,28 @@
+test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding) ... {"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+{"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 1600, "audio_ms": 1600}
+{"kind": "merged-video", "batches": 2, "pause_ms": 0, "video_ms": 400, "audio_ms": 405}
+{"kind": "merged-video", "batches": 2, "pause_ms": 5000, "video_ms": 5400, "audio_ms": 5419}
+{"kind": "merged-video", "batches": 3, "pause_ms": 17, "video_ms": 633, "audio_ms": 640}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+ok
+test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored (test_video_merge.MergeVideoJourney.test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored) ... {"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+ok
+test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs (test_video_merge.MergeVideoJourney.test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs) ... {"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+ok
+test_media_failure_stops_after_three_attempts_and_preserves_output (test_video_merge.MergeVideoJourney.test_media_failure_stops_after_three_attempts_and_preserves_output) ... {"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+ok
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... {"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+ok
+test_moving_batch_holds_actual_final_frame_in_preview_and_total (test_video_merge.MergeVideoJourney.test_moving_batch_holds_actual_final_frame_in_preview_and_total) ... {"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+ok
+test_pdf_warnings_require_confirmation_and_survive_reopen (test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen) ... {"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 12800, "audio_ms": 12800}
+ok
+test_preview_matches_join_and_cleans_on_cancel (test_video_merge.MergeVideoJourney.test_preview_matches_join_and_cleans_on_cancel) ... ok
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 287.194s
+
+OK

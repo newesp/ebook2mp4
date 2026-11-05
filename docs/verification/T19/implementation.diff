@@ -1,0 +1,1434 @@
+--- a/ebook2mp4/assembly_desktop.py
++++ b/ebook2mp4/assembly_desktop.py
+@@ -15,8 +15,10 @@
+ class AssemblyPage(ttk.Frame):
+     kind = 'assembly'
+ 
+-    def __init__(self, app):
++    def __init__(self, app, *, movie=False):
+         super().__init__(app.production.host)
++        self.movie = movie
++        self.movie_player = None
+         self.app, self.flow = app, app.flow
+         self.job = self.check_job = self.timer = None
+         self.closing = self.production_busy = self.info_open = False
+@@ -100,7 +102,7 @@
+         options = ttk.Frame(main)
+         options.grid(row=3, column=0, sticky='ew', pady=6)
+         options.columnconfigure(3, weight=1)
+-        ttk.Label(options, text='2 額外交接停頓').grid(row=0, column=0, sticky='w')
++        ttk.Label(options, text='額外交接停頓' if self.movie else '2 額外交接停頓').grid(row=0, column=0, sticky='w')
+         self.pause_control = ttk.Combobox(options, textvariable=self.pause, values=('0', '0.5', '1', '2', '5'), width=6)
+         self.pause_control.grid(row=0, column=1, padx=6)
+         ttk.Label(options, text='秒').grid(row=0, column=2)
+@@ -163,14 +165,40 @@
+         self.rebuild_requested = False
+         self.bind('<Configure>', self.resized)
+         self.pause.trace_add('write', lambda *args: self.changed())
++        if self.movie:
++            from .video_merge import resolution
++            self.resolution = tk.StringVar(value=resolution(self.flow))
++            self.resolution_control = ttk.Combobox(options, textvariable=self.resolution, state='readonly',
++                values=('1080p', '720p'), width=7)
++            ttk.Label(options, text='解析度').grid(row=0, column=5, padx=(6, 0))
++            self.resolution_control.grid(row=0, column=6, padx=(6, 0))
++            self.resolution.trace_add('write', lambda *_: self.changed())
++            options.grid()
++            for child in steps.winfo_children(): child.destroy()
++            ttk.Label(steps, text='1 選批次 → 2 檢查接點 → 3 合併 MP4', style='Heading.TLabel').pack(side='left')
++            self.video_step = ttk.Button(steps)  # Kept detached for shared control updates.
+         self.recheck()
++
++    def save_settings(self, *args, **kwargs):
++        if self.movie:
++            return self.flow.save_video_merge_settings(*args, resolution=self.resolution.get(), **kwargs)
++        return self.flow.save_assembly_settings(*args, **kwargs)
++
++    def begin_job(self):
++        return self.flow.start_video_merge() if self.movie else self.flow.start_total_audio()
++
++    def finish_job(self, job):
++        return self.flow.finish_total_video(job) if self.movie else self.flow.finish_total_audio(job)
++
++    def discard_job(self, job):
++        return self.flow.discard_total_video(job) if self.movie else self.flow.discard_total_audio(job)
+ 
+     def output_menu(self):
+         self.outputs_menu.delete(0, 'end')
+         for button in (self.play_button, self.stop_button, self.export_button, self.folder_button):
+             self.outputs_menu.add_command(label=button.cget('text'), command=button.invoke,
+                                          state='disabled' if button.instate(['disabled']) else 'normal')
+-        self.outputs_menu.add_command(label='重新合併音訊', command=self.rebuild,
++        self.outputs_menu.add_command(label='重新合併影片' if self.movie else '重新合併音訊', command=self.rebuild,
+             state='disabled' if self.job is not None or self.check_job is not None or self.production_busy else 'normal')
+ 
+     def rebuild(self):
+@@ -279,15 +307,24 @@
+             return
+         async def inspect():
+             from .assembly import inspect, inspect_total_audio
++            if self.movie:
++                from .video_merge import inspect
+             rows = await inspect(self.flow)
+             warning = ''
+             try:
+-                product = await inspect_total_audio(self.flow)
++                if self.movie:
++                    from .total_video import total_video
++                    from .assembly import checked_file_async
++                    product = total_video(self.flow, verify_media=False)
++                    if product:
++                        for kind in ('mp4', 'srt'): await checked_file_async(self.flow, product[kind])
++                else:
++                    product = await inspect_total_audio(self.flow)
+             except ProjectError as error:
+                 product = None
+                 warning = f'舊總成品無法驗證：{error} 可使用有效批次重新合併。'
+             try:
+-                runs = self.flow.total_audio_runs()
++                runs = self.flow.total_video_runs() if self.movie else self.flow.total_audio_runs()
+             except ProjectError as error:
+                 runs = []
+                 warning += f' 合併進度無法讀取：{error}'
+@@ -301,7 +338,7 @@
+     def save(self):
+         try:
+             self.require_current()
+-            self.flow.save_assembly_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
++            self.save_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
+             self.saved_label.configure(text='合併設定已儲存')
+             self.status.configure(text='合併設定已儲存。尚未開始合併，不傳送文字。')
+             self.app.notify('全書合併設定已儲存。')
+@@ -331,9 +368,9 @@
+                 return
+             self.require_current()
+             self.stop()
+-            self.flow.save_assembly_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
++            self.save_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
+             self.saved_label.configure(text='合併設定已儲存')
+-            self.job = self.flow.start_total_audio()
++            self.job = self.begin_job()
+             self.status.configure(text='開始合併；本次來源版本與順序已固定。')
+             self.update_controls()
+             self.schedule()
+@@ -347,13 +384,14 @@
+         self.timer = self.after(100, self.poll)
+ 
+     def publish(self):
+-        self.product = self.flow.finish_total_audio(self.job)
++        self.product = self.finish_job(self.job)
+         self.job = None
+         self.rebuild_requested = False
+         self.production_busy = self.app.production.busy_for(self.flow)
+         self.load_result()
+-        self.status.configure(text='總 MP3／SRT 已完成並保存。請播放檢查。')
+-        self.app.notify('總 MP3／SRT 已完成並保存。')
++        label='總 MP4／SRT' if self.movie else '總 MP3／SRT'
++        self.status.configure(text=label+' 已完成並保存。請播放檢查。')
++        self.app.notify(label+' 已完成並保存。')
+ 
+     def poll(self):
+         self.timer = None
+@@ -376,6 +414,8 @@
+                     self.status.configure(text=(f'上次合併：{labels.get(last["status"], "未完成")}。'+last.get('error', '')+' 舊成品保留，可重新合併。'
+                         if last and last['status'] != 'completed' else '音訊已完成。可取用成品，或加入圖片／背景影片製作 MP4。'
+                         if self.product and not self.product['stale'] else '請依序選批次、設定交接停頓，再製作總音訊。'))
++                    if self.movie and self.product and not self.product['stale']:
++                        self.status.configure(text='總影片已完成。可從成品操作播放、另存或開啟資料夾。')
+                     if warning:
+                         self.status.configure(text=warning)
+                         self.app.notify(warning, kind='warning')
+@@ -389,8 +429,9 @@
+                         os.startfile(path)
+                         self.status.configure(text='已開啟總成品資料夾。')
+                     elif self.check_action == 'export':
+-                        self.status.configure(text='總 MP3 與 SRT 已另存至新資料夾。')
+-                        self.app.notify('總 MP3 與 SRT 已另存至新資料夾。')
++                        label='總 MP4 與 SRT' if self.movie else '總 MP3 與 SRT'
++                        self.status.configure(text=label+' 已另存至新資料夾。')
++                        self.app.notify(label+' 已另存至新資料夾。')
+             except (ProjectError, OSError) as error:
+                 self.status.configure(text=str(error))
+                 self.app.notify(str(error), kind='error')
+@@ -409,7 +450,7 @@
+             try:
+                 self.last_status = state['status']
+                 if self.closing or state['status'] != 'completed':
+-                    self.flow.discard_total_audio(self.job)
++                    self.discard_job(self.job)
+                     self.job = None
+                     self.production_busy = self.app.production.busy_for(self.flow)
+                     self.status.configure(text='已取消。上一版總成品保留。' if state['status'] == 'cancelled' else state['error'])
+@@ -427,6 +468,9 @@
+                 self.closing = False
+                 self.status.configure(text=str(error)+' 請重試保存，或關閉以捨棄本次結果。')
+                 self.app.notify(self.status.cget('text'), kind='error')
++        if self.closing and self.movie_player is not None and self.movie_player.has_work():
++            self.schedule()
++            return
+         if self.closing and self.join_page is not None and self.join_page.has_work():
+             self.schedule()
+             return
+@@ -500,8 +544,9 @@
+         current = bool(product and not product['stale'])
+         if current and product:
+             try:
+-                current = (self.selected == [s['batch_id'] for s in product['sources']]
+-                           and self.pause_ms() == product['pause_ms'])
++                current = (self.selected == [s['batch_id'] for s in product.get('sources', [])]
++                           and self.pause_ms() == product.get('pause_ms')
++                           and (not self.movie or product['visual']['resolution'] == self.resolution.get()))
+             except ProjectError:
+                 current = False
+         self.video_step.configure(state='normal' if current and not busy else 'disabled')
+@@ -514,9 +559,18 @@
+             self.start_button.grid()
+         self.start_button.configure(text='重試保存' if can_save else '重試合併 MP3／SRT' if self.last_status in
+             ('failed', 'cancelled', 'interrupted') else '合併 MP3／SRT')
++        if self.movie:
++            self.video_step.configure(state='disabled')
++            self.video_button.grid_remove()
++            self.start_button.grid()
++            self.start_button.configure(text='重試保存' if can_save else '重試合併 MP4／SRT' if self.last_status in
++                ('failed', 'cancelled', 'interrupted') else '合併 MP4／SRT')
++            self.resolution_control.configure(state='disabled' if busy else 'readonly')
++            self.movie_labels()
+         self.settings_button.configure(state='disabled' if busy else 'normal')
+         self.join_button.configure(text='檢查接點')
+-        self.join_summary.configure(text=self.summary.cget('text') + (f' · {pending} 個警告待確認' if joins and pending else ''))
++        self.join_summary.configure(text=(f'2 檢查 {len(joins)} 個接點' if self.movie else self.summary.cget('text'))
++            + (f' · {pending} 個警告待確認' if joins and pending else ''))
+ 
+     def open_joins(self):
+         if self.join_button.instate(['disabled']):
+@@ -553,12 +607,15 @@
+         pending = False
+         if p:
+             try:
+-                pending = self.selected != [s['batch_id'] for s in p['sources']] or self.pause_ms() != p['pause_ms']
++                pending = (self.selected != [s['batch_id'] for s in p.get('sources', [])]
++                           or self.pause_ms() != p.get('pause_ms')
++                           or self.movie and (p.get('method') != 'batch-videos'
++                               or p['visual']['resolution'] != self.resolution.get()))
+             except ProjectError:
+                 pending = True
+         self.result_info.configure(text=(f'{"待更新 · 上一版總成品" if p["stale"] or pending else "目前總成品"}：'
+             f'{datetime.fromisoformat(p["completed_at"]).astimezone(timezone(timedelta(hours=8))):%Y-%m-%d %H:%M:%S} · '
+-            f'{len(p["sources"])} 批 · {p["duration_ms"]/1000:g} 秒'
++            f'{len(p.get("sources", []))} 批 · {p["duration_ms"]/1000:g} 秒'
+             if p else '尚無總成品。先選有效批次，再製作總音訊。'))
+ 
+     def toggle_info(self):
+@@ -574,6 +631,9 @@
+             content = (f'{row["name"]}\n{row["reason"]}\n版本：{source.get("product_id", "無有效成品")}\n'
+                        f'MP3：{source.get("mp3", {}).get("path", "—")}\nSRT：{source.get("srt", {}).get("path", "—")}\n\n' if row else '請先選擇批次列。\n\n')
+             content += '只合併目前確認稿與語音設定一致的 MP3／SRT。開始後完整解碼，依實際時長移動字幕。\n保留每批原有頭尾；只在相鄰批次間加靜音，靜音內不顯示字幕。\n全書選取與順序供後續總影片共用。不需圖片或批次 MP4，不呼叫 TTS。'
++            if self.movie:
++                content = (f'{row["name"]}\n{row["reason"]}\nMP4：{source.get("mp4",{}).get("path","—")}\n'
++                    f'SRT：{source.get("srt",{}).get("path","—")}\n\n' if row else '') + '只使用有效批次 MP4／SRT。保持比例補黑邊，統一解析度。額外停頓維持前批最後一格，字幕清空。保留原聲，不呼叫 TTS。'
+             self.info_text.configure(state='normal')
+             self.info_text.delete('1.0', 'end')
+             self.info_text.insert('1.0', content)
+@@ -589,10 +649,34 @@
+             self.app.refresh()
+             self.app.narration()
+ 
++    def movie_labels(self):
++        def visit(widget):
++            try:
++                text=widget.cget('text')
++                if isinstance(text,str): widget.configure(text=text.replace('MP3／SRT','MP4／SRT')
++                    .replace('總音訊','總影片').replace('音訊已完成','影片已完成').replace('合併音訊','合併影片'))
++            except tk.TclError: pass
++            for child in widget.winfo_children(): visit(child)
++        visit(self.main)
++
++    def close_movie(self):
++        (self.info_frame if self.info_open else self.table_frame).grid(row=2,column=0,sticky='nsew')
++
+     def play(self):
++        if self.movie and self.product:
++            from .movie_playback import MoviePlayback
++            try:
++                if self.movie_player is None:
++                    self.movie_player=MoviePlayback(self.main,self.flow,self.close_movie)
++                self.table_frame.grid_remove();self.info_frame.grid_remove()
++                self.movie_player.grid(row=2,column=0,sticky='nsew')
++                self.movie_player.start(self.product)
++            except ProjectError as error: self.status.configure(text=str(error))
++            return
+         self.file_action('play')
+ 
+     def stop(self):
++        if self.movie_player is not None: self.movie_player.stop()
+         if self.join_page is not None:
+             self.join_page.stop()
+         was_playing = self.player.alias is not None
+@@ -607,7 +691,7 @@
+         self.update_controls()
+ 
+     def export(self):
+-        target = filedialog.asksaveasfilename(parent=self.app.root, title='另存總 MP3／SRT：輸入新資料夾名稱', initialfile='總音訊成品')
++        target = filedialog.asksaveasfilename(parent=self.app.root, title='另存總 MP4／SRT：輸入新資料夾名稱' if self.movie else '另存總 MP3／SRT：輸入新資料夾名稱', initialfile='總影片成品' if self.movie else '總音訊成品')
+         if target:
+             self.file_action('export', target)
+ 
+@@ -620,6 +704,16 @@
+         self.stop()
+         async def operation():
+             from .assembly import export, inspect_total_audio
++            if self.movie:
++                from .total_video import export, total_video
++                from .assembly import checked_file_async
++                if action == 'export':
++                    await export(self.flow, target)
++                    return None
++                product = total_video(self.flow, verify_media=False)
++                if product is None: raise ProjectError('尚無總影片。')
++                path = await checked_file_async(self.flow, product['mp4'])
++                return path.parent
+             if action == 'export':
+                 await export(self.flow, target)
+                 return None
+@@ -657,6 +751,9 @@
+     def release(self):
+         if self.timer is not None:
+             self.after_cancel(self.timer)
++        if self.movie_player is not None and not self.movie_player.release():
++            self.schedule()
++            return
+         self.tooltip.hide()
+         self.progress.stop()
+         self.stop()
+--- a/ebook2mp4/assembly_joins_desktop.py
++++ b/ebook2mp4/assembly_joins_desktop.py
+@@ -1,4 +1,6 @@
+ """Join inspection inside the existing book assembly workspace."""
++from io import BytesIO
++from PIL import Image, ImageTk
+ from pathlib import Path
+ from functools import partial
+ import tkinter as tk
+@@ -18,6 +20,8 @@
+         super().__init__(owner)
+         self.owner, self.app, self.flow = owner, owner.app, owner.flow
+         self.job = self.info_job = self.timer = None
++        self.movie_player = None
++        self.movie = getattr(owner, 'movie', False)
+         self.player = PreviewPlayer()
+         self.playing = self.allow_play = False
+         self.joins: list[dict] = []
+@@ -26,7 +30,7 @@
+         self.accepted = tk.BooleanVar(value=False)
+         self.columnconfigure(0, weight=1)
+         self.rowconfigure(2, weight=1, minsize=70)
+-        ttk.Label(self, text='3 檢查交接接點 · 對照文字，再試聽', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
++        ttk.Label(self, text='2 檢查影音接點 · 對照畫面與文字，再播放' if self.movie else '3 檢查交接接點 · 對照文字，再試聽', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
+         selection = ttk.Frame(self)
+         selection.grid(row=1, column=0, sticky='ew', pady=4)
+         selection.columnconfigure(1, weight=1)
+@@ -38,11 +42,13 @@
+         self.previous.grid(row=0, column=2, padx=4)
+         self.next = ttk.Button(selection, text='下一個', command=lambda: self.move(1))
+         self.next.grid(row=0, column=3)
+-        pair = ttk.Frame(self)
++        self.pair = pair = ttk.Frame(self)
+         pair.grid(row=2, column=0, sticky='nsew')
+         pair.columnconfigure((0, 1), weight=1, uniform='join')
+         pair.rowconfigure(0, weight=1)
+         self.headings = []
++        self.frame_labels = []
++        self.frame_photos = []
+         for column, side in enumerate(('left', 'right')):
+             panel = ttk.Frame(pair)
+             panel.grid(row=0, column=column, sticky='nsew', padx=(0, 6) if column == 0 else (6, 0))
+@@ -52,13 +58,19 @@
+             heading.grid(row=0, column=0, columnspan=2, sticky='ew')
+             self.headings.append(heading)
+             text = tk.Text(panel, width=1, height=2, wrap='word', state='disabled', font=('Microsoft JhengHei', 11))
+-            text.grid(row=1, column=0, sticky='nsew')
++            text.grid(row=2 if self.movie else 1, column=0, sticky='nsew')
++            if self.movie:
++                panel.rowconfigure(1,weight=0)
++                panel.rowconfigure(2,weight=1)
++                frame=ttk.Label(panel,anchor='center')
++                frame.grid(row=1,column=0,columnspan=2,sticky='ew')
++                self.frame_labels.append(frame)
+             scrollbar = ttk.Scrollbar(panel, command=text.yview)
+-            scrollbar.grid(row=1, column=1, sticky='ns')
++            scrollbar.grid(row=2 if self.movie else 1, column=1, sticky='ns')
+             text.configure(yscrollcommand=scrollbar.set)
+             edit = ttk.Button(panel, text='← 校對前批結尾' if column == 0 else '校對後批開頭 →',
+                               command=partial(self.edit, side))
+-            edit.grid(row=2, column=0, columnspan=2, sticky='ew', pady=(4, 0))
++            edit.grid(row=3 if self.movie else 2, column=0, columnspan=2, sticky='ew', pady=(4, 0))
+             setattr(self, side+'_text', text)
+             setattr(self, side+'_edit', edit)
+         self.warning = ttk.Frame(self)
+@@ -126,7 +138,22 @@
+             return
+         ids = list(self.owner.selected)
+         async def inspect():
+-            return self.flow.inspect_assembly_joins(ids)
++            joins=self.flow.inspect_video_merge_joins(ids) if self.movie else self.flow.inspect_assembly_joins(ids)
++            if self.movie:
++                from .video_merge import source_ref
++                from .total_video import background_frame
++                from .assembly import checked_file_async
++                for join in joins:
++                    for side in ('left','right'):
++                        item=join[side]
++                        if item['valid']:
++                            try:
++                                ref=source_ref(self.flow,item['batch_id'])
++                                path=await checked_file_async(self.flow,ref['mp4'])
++                                item['frame']=await background_frame(path,ref['duration_ms']/1000 if side=='left' else 0,last=side=='left')
++                            except ProjectError as error:
++                                item.update(valid=False,error=str(error))
++            return joins
+         self.info_job = VoiceJob(inspect, timeout=None)
+         self.status.configure(text='正在讀取接點文字與版本…')
+         self.update_controls()
+@@ -148,6 +175,7 @@
+             return
+         self.pair_control.current(self.index)
+         join = self.joins[self.index]
++        self.frame_photos=[]
+         for index, side in enumerate(('left', 'right')):
+             item = join[side]
+             pages = item['pages']
+@@ -155,6 +183,12 @@
+             if item['kind'] == 'pdf':
+                 title += f'（物理頁 {pages["start"]}～{pages["end"]}）'
+             self.headings[index].configure(text=title)
++            if self.movie:
++                if item.get('frame'):
++                    image=Image.open(BytesIO(item['frame']));image.thumbnail((240,100))
++                    photo=ImageTk.PhotoImage(image,master=self.frame_labels[index]);self.frame_photos.append(photo)
++                    self.frame_labels[index].configure(image=photo)
++                else:self.frame_labels[index].configure(image='')
+             self.fill(getattr(self, side+'_text'), item['text'] if item['valid'] else item['error'])
+         warning = join['warning']
+         if warning:
+@@ -211,7 +245,8 @@
+             self.owner.require_current()
+             if self.has_work():
+                 return
+-            self.job = self.flow.start_assembly_join_preview(list(self.owner.selected), self.index,
++            start = self.flow.start_video_join_preview if self.movie else self.flow.start_assembly_join_preview
++            self.job = start(list(self.owner.selected), self.index,
+                          pause_ms=self.owner.pause_ms(), clip_ms=int(self.clip.get())*1000)
+             self.allow_play = True
+             self.status.configure(text='正在驗證來源並準備接點試聽…')
+@@ -221,13 +256,24 @@
+             self.status.configure(text=str(error))
+             self.app.notify(str(error), kind='error')
+ 
++    def restore_pair(self):
++        self.pair.grid(row=2,column=0,sticky='nsew')
++        self.stop()
++
+     def stop(self):
++        if self.movie_player is not None:
++            self.movie_player.stop()
++            self.movie_player.grid_remove()
++            self.pair.grid(row=2,column=0,sticky='nsew')
+         self.allow_play = self.playing = False
+         try:
+             self.player.stop()
+             if self.job is not None:
+                 self.job.cancel()
+-                if self.job.wait(0):
++                if self.job.wait(0) and (self.movie_player is None or not self.movie_player.has_work()):
++                    if self.movie_player is not None and self.movie_player.has_work():
++                        self.schedule()
++                        return
+                     self.flow.discard_assembly_join_preview(self.job)
+                     self.job = None
+             if self.info_job is not None:
+@@ -258,21 +304,32 @@
+             if self.job is not None and self.job.wait(0):
+                 if not self.allow_play or self.job.state['status'] != 'completed':
+                     state = self.job.state
++                    if self.movie_player is not None and self.movie_player.has_work():
++                        self.schedule()
++                        return
+                     self.flow.discard_assembly_join_preview(self.job)
+                     self.job = None
+                     self.status.configure(text='已取消接點試聽。' if state['status'] == 'cancelled' else state['error'] or '試聽已停止。')
+                 elif not self.playing:
+-                    result = self.flow.finish_assembly_join_preview(self.job)
++                    result = self.flow.finish_video_join_preview(self.job) if self.movie else self.flow.finish_assembly_join_preview(self.job)
+                     if (self.winfo_viewable() and self.app.production.current is self.owner
+                             and self.app.flow is self.flow and self.app.step == 4):
+-                        self.player.play(Path(result['path']))
++                        if self.movie:
++                            from .movie_playback import MoviePlayback
++                            if self.movie_player is None:
++                                self.movie_player=MoviePlayback(self,self.flow,self.restore_pair)
++                            self.pair.grid_remove()
++                            self.movie_player.grid(row=2,column=0,sticky='nsew')
++                            self.movie_player.start(result)
++                        else:
++                            self.player.play(Path(result['path']))
+                         self.playing = True
+                         self.fill(self.left_text, result['left_text'] or '此片段沒有字幕文字。')
+                         self.fill(self.right_text, result['right_text'] or '此片段沒有字幕文字。')
+                         self.status.configure(text=f'正在試聽 · {result["duration_ms"]/1000:g} 秒 · 不呼叫 TTS')
+                     else:
+                         self.stop()
+-                elif not self.player.playing():
++                elif (not self.movie_player.has_work() if self.movie and self.movie_player else not self.player.playing()):
+                     self.stop()
+                     self.status.configure(text='接點試聽已結束。')
+         except (ProjectError, OSError) as error:
+@@ -293,6 +350,8 @@
+         except ProjectError:
+             valid = False
+             self.timeline.configure(text='請輸入 0～5 秒，最多三位小數。')
++        if self.movie:
++            self.play_button.configure(text='播放影音接點')
+         self.play_button.configure(state='normal' if valid and not busy and not self.playing else 'disabled')
+         self.stop_button.configure(state='normal' if self.job is not None else 'disabled')
+         self.save_button.configure(state='normal' if valid and not busy else 'disabled')
+@@ -315,6 +374,7 @@
+ 
+     def release(self):
+         self.stop()
++        if self.movie_player is not None: self.movie_player.release()
+         if self.timer is not None:
+             self.after_cancel(self.timer)
+             self.timer = None
+--- a/ebook2mp4/production_desktop.py
++++ b/ebook2mp4/production_desktop.py
+@@ -30,6 +30,7 @@
+         self.app = app
+         self.pages: dict[tuple, Any] = {}
+         self.current = None
++        self.assembly_drafts = {}
+         self.service_page = None
+         self.package_page = None
+         self.columnconfigure(0, weight=1)
+@@ -44,6 +45,11 @@
+         ttk.Label(tabs, text=' → ').pack(side='left')
+         self.assembly_tab = ttk.Button(tabs, text='全書合併', command=app.total_audio)
+         self.assembly_tab.pack(side='left')
++        self.method = tk.StringVar(value='總音訊製片')
++        self.method_control = ttk.Combobox(tabs, textvariable=self.method, state='readonly',
++            values=('總音訊製片', '合併既有批次影片'), width=20)
++        self.method_control.pack(side='right')
++        self.method_control.bind('<<ComboboxSelected>>', self.change_method)
+         self.host = ttk.Frame(self)
+         self.host.grid(row=1, column=0, sticky='nsew')
+         self.host.columnconfigure(0, weight=1)
+@@ -63,21 +69,48 @@
+                 self.current.stop()
+             self.current.grid_remove()
+         self.current = page
++        if getattr(page, 'kind', None) == 'assembly':
++            self.assembly_drafts[id(page.flow)] = page
+         page.grid(row=0, column=0, sticky='nsew')
+         self.refresh_task_controls()
++        self.method_control.pack_forget()
++        if getattr(page, 'kind', None) in ('assembly', 'video') and not getattr(page, 'batch_id', None):
++            self.method.set('合併既有批次影片' if getattr(page, 'movie', False) else '總音訊製片')
++            self.method_control.pack(side='right')
+         kind = 'narration' if getattr(page, 'batch_id', None) and getattr(page, 'kind', None) == 'video' else 'assembly' if getattr(page, 'kind', None) in ('assembly', 'video') else 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
+         self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
+         self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
+         self.assembly_tab.configure(style='CompactActive.TButton' if kind == 'assembly' else 'Compact.TButton')
+ 
++    def change_method(self, event=None):
++        from .workflow import ProjectError
++        page=self.current
++        source=page if getattr(page,'kind',None)=='assembly' else self.assembly_drafts.get(id(self.app.flow))
++        movie=self.method.get()=='合併既有批次影片'
++        try:
++            if page is not None and (getattr(page,'job',None) is not None or getattr(page,'check_job',None) is not None):
++                raise ProjectError('請等待目前操作停止，再切換影片方式。')
++            self.app.flow.save_total_video_method('batch-videos' if movie else 'total-audio')
++            destination=self.show('merge' if movie else 'assembly')
++            if source is not None and source.winfo_exists():
++                destination.selected=list(source.selected)
++                destination.pause.set(source.pause.get())
++                destination.accepted_joins=set(source.accepted_joins)
++                destination.render_rows()
++        except ProjectError as error:
++            self.app.notify(str(error),kind='error')
++            if page is not None:self.method.set('合併既有批次影片' if getattr(page,'movie',False) else '總音訊製片')
++
+     def show(self, kind):
+         app = self.app
+-        key = (id(app.flow), None if kind in ('assembly', 'video') else app.batch_id, kind)
++        if kind == 'assembly' and app.flow.state.get('total_video_method') == 'batch-videos':
++            kind = 'merge'
++        key = (id(app.flow), None if kind in ('assembly', 'video', 'merge') else app.batch_id, kind)
+         page: Any = self.pages.get(key)
+         if page is None or not page.winfo_exists():
+-            if kind == 'assembly':
++            if kind in ('assembly', 'merge'):
+                 from .assembly_desktop import AssemblyPage
+-                page = AssemblyPage(app)
++                page = AssemblyPage(app, movie=kind == 'merge')
+             elif kind == 'video':
+                 from .total_video_desktop import TotalVideoPage
+                 page = TotalVideoPage(app)
+@@ -99,7 +132,7 @@
+         if kind == 'narration' and page.job is None:
+             page.load_runs()
+             page.load_result()
+-        if kind == 'assembly':
++        if kind in ('assembly', 'merge'):
+             page.recheck()
+         if kind in ('video', 'batch_video'):
+             page.recheck()
+@@ -153,7 +186,7 @@
+         self.grid_remove()
+ 
+     def active_page(self):
+-        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly', 'video', 'batch_video') and p.winfo_exists() and p.job is not None), None)
++        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly', 'merge', 'video', 'batch_video') and p.winfo_exists() and p.job is not None), None)
+ 
+     def show_active(self):
+         page = self.active_page()
+@@ -208,6 +241,7 @@
+ 
+     def refresh_task_controls(self):
+         page = self.current
++        self.method_control.configure(state='disabled' if page is not None and (getattr(page,'job',None) is not None or getattr(page,'check_job',None) is not None or self.busy_for(page.flow)) else 'readonly')
+         if page is not None and page.winfo_exists() and hasattr(page, 'set_production_busy'):
+             page.set_production_busy(self.busy_for(page.flow))
+ 
+--- a/ebook2mp4/total_video.py
++++ b/ebook2mp4/total_video.py
+@@ -288,6 +288,10 @@
+                 checked_file(flow.project if isinstance(flow, BatchVideoTarget) else flow, product[kind])
+             elif not flow._path(product[kind]['path']).is_file():
+                 raise ProjectError('總影片檔案遺失，請重新製作；總音訊保留。')
++        if product.get('method') == 'batch-videos' and isinstance(flow, ProjectWorkflow):
++            from .video_merge import stale
++            product['stale'] = stale(flow, product, verify_media=verify_media)
++            return product
+         product['stale'] = normalized_visual(product['visual']) != settings(flow)
+         try:
+             product['stale'] |= product['audio'] != current_audio(flow, verify_media=verify_media)
+@@ -578,6 +582,9 @@
+         raise ProjectError('請等待所屬製片任務停止。')
+     report = job.result
+     if not job.published:
++        if job.snapshot.get('method') == 'batch-videos' and isinstance(flow, ProjectWorkflow):
++            from .video_merge import validate_snapshot
++            validate_snapshot(flow, job)
+         product = dict(deepcopy(job.snapshot), duration_ms=report['duration_ms'], completed_at=now())
+         for kind in ('mp4', 'srt'):
+             ref = report['artifacts'][kind]
+--- a/ebook2mp4/workflow.py
++++ b/ebook2mp4/workflow.py
+@@ -26,6 +26,7 @@
+     from .assembly import TotalAudioJob
+     from .assembly_joins import JoinPreviewJob
+     from .total_video import TotalVideoJob
++    from .video_merge import VideoJoinPreviewJob
+ 
+ 
+ class ProjectError(Exception):
+@@ -96,7 +97,7 @@
+         self._voice_job: VoiceJob | None = None
+         self._narration_job: NarrationJob | None = None
+         self._total_audio_job: TotalAudioJob | None = None
+-        self._assembly_preview_job: JoinPreviewJob | None = None
++        self._assembly_preview_job: JoinPreviewJob | VideoJoinPreviewJob | None = None
+         self._total_video_job: TotalVideoJob | None = None
+ 
+     @property
+@@ -1109,6 +1110,45 @@
+         from .video_target import BatchVideoTarget
+         return BatchVideoTarget(self, batch_id)
+ 
++    def save_total_video_method(self, method: str) -> None:
++        from .production_lock import ProductionLease
++        if method not in ('total-audio', 'batch-videos'):
++            raise ProjectError('影片方式無效。')
++        lease = ProductionLease(self.root/'.production.lock')
++        try:
++            self._check_current()
++            manifest = self.state
++            manifest['total_video_method'] = method
++            self._commit(manifest, [])
++        finally:
++            lease.release()
++
++    def inspect_video_merge_joins(self, batch_ids: list[str]) -> list[dict]:
++        from .video_merge import inspect_joins
++        return inspect_joins(self, batch_ids)
++
++    def start_video_join_preview(self, batch_ids: list[str], index: int, *, pause_ms=500, clip_ms=5000):
++        from .video_merge import start_preview
++        return start_preview(self, batch_ids, index, pause_ms=pause_ms, clip_ms=clip_ms)
++
++    def finish_video_join_preview(self, job) -> dict:
++        from .video_merge import finish_preview
++        return finish_preview(self, job)
++
++    def save_video_merge_settings(self, batch_ids: list[str], pause_ms: int = 500, *,
++                                  resolution: str = '1080p', accepted_joins: list[str] | None = None) -> None:
++        from .video_merge import save_settings
++        save_settings(self, batch_ids, pause_ms, resolution=resolution, accepted_joins=accepted_joins)
++
++    def inspect_video_merge(self) -> list[dict]:
++        import asyncio
++        from .video_merge import inspect
++        return asyncio.run(inspect(self))
++
++    def start_video_merge(self) -> TotalVideoJob:
++        from .video_merge import start
++        return start(self)
++
+     def total_video_settings(self) -> dict:
+         from .total_video import settings
+         return settings(self)
+--- /dev/null
++++ b/ebook2mp4/movie_playback.py
+@@ -0,0 +1,120 @@
++"""Bounded native playback of delivered video, with explicit cancellation and cleanup."""
++from io import BytesIO
++from pathlib import Path
++import queue
++import shutil
++import tempfile
++import tkinter as tk
++from tkinter import ttk
++from PIL import Image, ImageTk
++from .voice import VoiceJob
++from .voice_media import PreviewPlayer
++from .workflow import ProjectError
++
++
++class MoviePlayback(ttk.Frame):
++    def __init__(self,parent,flow,on_close):
++        super().__init__(parent)
++        self.flow,self.on_close=flow,on_close
++        self.player=PreviewPlayer()
++        self.prepare_job=self.frame_job=self.timer=None
++        self.folder=None
++        self.frames: queue.Queue=queue.Queue(maxsize=1)
++        self.image=self.photo=None
++        self.allow=False
++        self.columnconfigure(0,weight=1);self.rowconfigure(0,weight=1)
++        self.canvas=tk.Canvas(self,width=1,height=1,background='black',highlightthickness=0)
++        self.canvas.grid(row=0,column=0,sticky='nsew');self.canvas.bind('<Configure>',lambda e:self.draw())
++        self.caption=ttk.Label(self,text='',anchor='center',width=1)
++        self.caption.grid(row=1,column=0,sticky='ew')
++        actions=ttk.Frame(self);actions.grid(row=2,column=0,sticky='ew');actions.columnconfigure(0,weight=1)
++        self.status=ttk.Label(actions,text='準備播放…',width=1);self.status.grid(row=0,column=0,sticky='ew')
++        ttk.Button(actions,text='停止並返回',command=self.leave).grid(row=0,column=1)
++        self.cues=[]
++
++    def has_work(self):
++        return self.prepare_job is not None or self.frame_job is not None or self.folder is not None
++
++    def start(self,product):
++        from .total_video import prepare_playback
++        self.stop()
++        if self.has_work(): raise ProjectError('請等待上一段播放釋放檔案。')
++        self.allow=True
++        folder=self.folder=Path(tempfile.mkdtemp(prefix='.movie-play-',dir=self.flow.root))
++        async def prepare():
++            from .assembly import checked_file_async,captions
++            path=await checked_file_async(self.flow,product['srt'])
++            self.cues=captions(path,product['duration_ms']) if path.stat().st_size else []
++            return await prepare_playback(self.flow,product,folder)
++        self.prepare_job=VoiceJob(prepare,timeout=None)
++        self.schedule()
++
++    def emit(self,data,milliseconds):
++        try:self.frames.get_nowait()
++        except queue.Empty:pass
++        self.frames.put_nowait((data,milliseconds))
++
++    def draw(self):
++        self.canvas.delete('all')
++        if self.image:
++            image=self.image.copy();image.thumbnail((max(1,self.canvas.winfo_width()),max(1,self.canvas.winfo_height())))
++            self.photo=ImageTk.PhotoImage(image,master=self.canvas)
++            self.canvas.create_image(self.canvas.winfo_width()/2,self.canvas.winfo_height()/2,image=self.photo)
++
++    def schedule(self):
++        if self.timer is not None:self.after_cancel(self.timer)
++        self.timer=self.after(50,self.poll)
++
++    def poll(self):
++        self.timer=None
++        try:
++            if self.prepare_job is not None and self.prepare_job.wait(0):
++                task,self.prepare_job=self.prepare_job,None
++                if self.allow:
++                    result=task.result
++                    self.image=Image.open(BytesIO(result['frame']));self.draw()
++                    self.player.play(result['audio'])
++                    async def frames():
++                        from .total_video import stream_frames
++                        await stream_frames(result['video'],result['duration_ms'],'',self.emit)
++                    self.frame_job=VoiceJob(frames,timeout=None)
++                    self.status.configure(text='正在播放影音')
++            if self.frame_job is not None:
++                try:
++                    data,milliseconds=self.frames.get_nowait()
++                    self.image=Image.frombytes('RGB',(960,540),data);self.draw()
++                    self.caption.configure(text='\n'.join(t for a,b,t in self.cues if a<=milliseconds<b))
++                except queue.Empty:pass
++                if self.frame_job.wait(0):
++                    task,self.frame_job=self.frame_job,None
++                    if self.allow and task.state['status']=='failed':raise ProjectError(task.state['error'])
++                    self.stop();self.status.configure(text='播放已結束。')
++            if not self.allow and self.prepare_job is None and self.frame_job is None:
++                self.cleanup()
++        except (ProjectError,OSError) as error:
++            try:self.stop()
++            except ProjectError:pass
++            self.status.configure(text=str(error))
++        if self.prepare_job is not None or self.frame_job is not None:self.schedule()
++
++    def cleanup(self):
++        if self.folder is not None:
++            try:shutil.rmtree(self.folder);self.folder=None
++            except OSError:raise ProjectError('播放暫存仍被占用，請停止後重試。') from None
++
++    def stop(self):
++        self.allow=False
++        self.player.stop()
++        for task in (self.prepare_job,self.frame_job):
++            if task is not None:task.cancel()
++        if self.prepare_job is None and self.frame_job is None:self.cleanup()
++        else:self.schedule()
++
++    def leave(self):
++        self.stop();self.grid_remove();self.on_close()
++
++    def release(self):
++        self.stop()
++        if self.has_work():return False
++        if self.timer is not None:self.after_cancel(self.timer);self.timer=None
++        return True
+--- /dev/null
++++ b/ebook2mp4/video_merge.py
+@@ -0,0 +1,322 @@
++"""Offline assembly of versioned batch MP4/SRT, independent of total audio."""
++from __future__ import annotations
++from copy import deepcopy
++from pathlib import Path
++import asyncio
++import shutil
++import tempfile
++import uuid
++
++from .workflow import ProjectWorkflow, ProjectError, digest, encode, now
++from . import assembly
++from .assembly_joins import metadata, ordered_batches
++from .narration import timestamp
++from .total_video import TotalVideoJob, probe_background, normalized_visual
++from .voice_media import ffmpeg
++
++
++def audio_identity(flow: ProjectWorkflow, batch_id: str) -> dict:
++    """Compare version metadata without requiring the original MP3 to exist."""
++    batch = flow._batch(batch_id)
++    product = batch.get('narration')
++    if (not product or not batch.get('current_reading') or product['reading_id'] != batch['current_reading']
++            or product['settings'] != flow.voice_settings(batch_id)
++            or not product['chunks'] or any(c['status'] != 'completed' for c in product['chunks'])):
++        raise ProjectError('朗讀稿或語音設定已變更，請更新本批音訊及影片。')
++    return dict(batch_id=batch_id, product_id=product['id'], reading_id=product['reading_id'],
++        settings_sha256=digest(encode(product['settings'])), mp3=deepcopy(product['mp3']), srt=deepcopy(product['srt']))
++
++
++def source_ref(flow: ProjectWorkflow, batch_id: str, *, verify_media=False) -> dict:
++    try:
++        batch = flow._batch(batch_id)
++        saved = batch.get('video', {})
++        product = saved.get('total_video')
++        if not product:
++            raise ProjectError('缺少批次 MP4／SRT，請先製作本批影片。')
++        audio = audio_identity(flow, batch_id)
++        expected_audio = dict(id=audio['product_id'], mp3=audio['mp3'], srt=audio['srt'],
++                              duration_ms=batch['narration']['duration_ms'])
++        if (product['audio'] != expected_audio or normalized_visual(product['visual']) !=
++                normalized_visual(saved['total_video_settings'])):
++            raise ProjectError('批次影片待更新，請重新製作本批 MP4／SRT。')
++        result = dict(batch_id=batch_id, product_id=product['id'], audio=audio,
++                      duration_ms=product['duration_ms'], mp4=deepcopy(product['mp4']), srt=deepcopy(product['srt']))
++        for kind in ('mp4', 'srt'):
++            if verify_media:
++                assembly.checked_file(flow, result[kind])
++            elif not flow._path(result[kind]['path']).is_file():
++                raise ProjectError('缺少批次 MP4／SRT，請重新製作本批影片。')
++        return result
++    except (KeyError, TypeError):
++        raise ProjectError('批次影片記錄損壞，請重新製作本批影片。') from None
++
++
++def resolution(flow: ProjectWorkflow) -> str:
++    value = flow.state.get('video_merge_resolution', '1080p')
++    if value not in ('1080p', '720p'):
++        raise ProjectError('合併影片解析度無效，請重新儲存設定。')
++    return value
++
++
++def save_settings(flow: ProjectWorkflow, batch_ids: list[str], pause_ms: int = 500, *,
++                  resolution: str = '1080p', accepted_joins: list[str] | None = None) -> None:
++    from .production_lock import ProductionLease
++    if not batch_ids or len(set(batch_ids)) != len(batch_ids):
++        raise ProjectError('請至少選取一個有效批次，不可重複。')
++    if type(pause_ms) is not int or not 0 <= pause_ms <= 5000:
++        raise ProjectError('額外交接停頓須為 0～5 秒，精確至毫秒。')
++    if resolution not in ('1080p', '720p'):
++        raise ProjectError('影片解析度只支援 1080p 或 720p。')
++    if accepted_joins is not None and (not isinstance(accepted_joins, list) or any(not isinstance(k,str) for k in accepted_joins)):
++        raise ProjectError('接點確認記錄無效。')
++    lease = ProductionLease(flow.root/'.production.lock')
++    try:
++        flow._check_current()
++        for identity in batch_ids:
++            source_ref(flow, identity)
++        accepted = assembly.settings(flow).get('accepted_joins', []) if accepted_joins is None else accepted_joins
++        manifest = flow.state
++        manifest['assembly_settings'] = dict(sources=[audio_identity(flow, i) for i in batch_ids], pause_ms=pause_ms,
++            accepted_joins=[j['key'] for j in metadata(flow, batch_ids) if j['key'] in accepted])
++        manifest['video_merge_resolution'] = resolution
++        flow._commit(manifest, [])
++    finally:
++        lease.release()
++
++
++async def validate_source(flow: ProjectWorkflow, source: dict, command) -> dict:
++    for kind in ('mp4','srt'):
++        await assembly.checked_file_async(flow, source[kind])
++    path = flow._path(source['mp4']['path'])
++    info = await probe_background(path)
++    duration = info['duration_ms']
++    # Both streams must decode, even when only a short join will be shown.
++    await command(['-xerror','-err_detect','explode','-i',str(path),'-map','0:v:0','-map','0:a:0',
++                   '-f','null','-'], phase='驗證批次影音', duration_ms=duration)
++    if abs(duration-source['duration_ms']) > 200:
++        raise ProjectError('批次影片實際時長與成品記錄不符，請重新製作。')
++    return dict(info, cues=assembly.captions(flow._path(source['srt']['path']),duration))
++
++
++async def inspect(flow: ProjectWorkflow) -> list[dict]:
++    from .voice_media import media_command
++    async def command(args, **kwargs):
++        await media_command(ffmpeg(), args, timeout=86400)
++    flow._check_current()
++    rows = []
++    for batch in ordered_batches(flow):
++        row = dict(batch_id=batch['id'],name=batch['name'],valid=False,duration_ms=0)
++        try:
++            source = source_ref(flow,batch['id'])
++            info = await validate_source(flow,source,command)
++            row.update(valid=True,source=source,duration_ms=info['duration_ms'],reason='有效 · MP4／SRT 已驗證')
++        except (ProjectError,OSError) as error:
++            row['reason'] = str(error)
++        rows.append(row)
++    voices = {digest(encode(flow.voice_settings(r['batch_id']))) for r in rows if r['valid']}
++    if len(voices)>1:
++        for row in rows:
++            if row['valid']: row['reason'] += ' · 音色／語速可能不同，保留原聲'
++    return rows
++
++
++def stale(flow: ProjectWorkflow, product: dict, *, verify_media=False) -> bool:
++    value=assembly.settings(flow)
++    if (product['pause_ms'] != value['pause_ms'] or product['visual']['resolution'] != resolution(flow)
++            or [s['batch_id'] for s in product['sources']] != [s['batch_id'] for s in value['sources']]):
++        return True
++    try:
++        return any(s != source_ref(flow,s['batch_id'],verify_media=verify_media) for s in product['sources'])
++    except ProjectError:
++        return True
++
++
++class MergeVideoJob(TotalVideoJob):
++    async def command(self, args, *, phase, duration_ms):
++        for attempt in range(1,4):
++            self.progress(attempt=attempt)
++            try:
++                return await super().command(args,phase=phase,duration_ms=duration_ms)
++            except ProjectError:
++                if attempt==3: raise
++                await asyncio.sleep(attempt/2)
++        raise AssertionError('unreachable')
++
++    async def produce(self):
++        media=self.folder/'media'
++        success=False
++        try:
++            media.mkdir()
++            flow=ProjectWorkflow.open(self.root)
++            source_stats={ref['path']:assembly.file_signature(flow._path(ref['path']))
++                          for source in self.snapshot['sources'] for ref in (source['mp4'],source['srt'])}
++            cues: list[str]=[]
++            texts=[]
++            timeline=[]
++            offset=0
++            concat=[]
++            width,height=(1920,1080) if self.snapshot['visual']['resolution']=='1080p' else (1280,720)
++            for index,source in enumerate(self.snapshot['sources']):
++                if source_ref(flow,source['batch_id']) != source:
++                    raise ProjectError('批次影片版本已變更，請重新檢查來源。')
++                info=await validate_source(flow,source,self.command)
++                path=media/f'source-{index}.mp4'
++                await assembly.copy_verified_source(self.root,source['mp4'],path)
++                duration=info['duration_ms']
++                start=0
++                if self.snapshot.get('clip_ms'):
++                    take=min(duration,self.snapshot['clip_ms'])
++                    start=duration-take if index==0 else 0
++                    duration=take
++                pause=self.snapshot['pause_ms'] if index<len(self.snapshot['sources'])-1 else 0
++                relevant=[]
++                for begin,end,text in info['cues']:
++                    begin,end=max(0,begin-start),min(duration,end-start)
++                    if begin<end:
++                        cues.append(f'{len(cues)+1}\n{timestamp(offset+begin)} --> {timestamp(offset+end)}\n{text}\n\n')
++                        relevant.append(text)
++                texts.append('\n'.join(relevant))
++                segment=media/f'segment-{index}.mkv'
++                length=duration+pause
++                # PCM avoids encoder padding at intermediate joins. Exact concat durations preserve millisecond pauses.
++                await self.command(['-y','-ss',f'{start/1000:.6f}','-i',str(path),
++                    '-map','0:v:0','-map','0:a:0','-vf',
++                    f'setpts=PTS-STARTPTS,scale={width}:{height}:force_original_aspect_ratio=decrease,pad={width}:{height}:(ow-iw)/2:(oh-ih)/2:black,setsar=1,fps=30,tpad=stop_mode=clone:stop_duration={pause/1000+1:.6f}',
++                    '-af',f'atrim=duration={duration/1000:.6f},asetpts=PTS-STARTPTS,apad',
++                    '-c:v','libx264','-preset','fast','-pix_fmt','yuv420p','-c:a','pcm_s16le','-ar','48000','-ac','2',
++                    '-t',f'{length/1000:.6f}',str(segment)],phase=f'處理批次 {index+1}/{len(self.snapshot["sources"])}',duration_ms=length)
++                concat.append(f"file '{segment.name}'\nduration {length/1000:.6f}\n")
++                timeline.append(dict(batch_id=source['batch_id'],start_ms=offset,duration_ms=duration,pause_ms=pause))
++                offset+=length
++                path.unlink()
++            (media/'concat.txt').write_text(''.join(concat),encoding='utf-8')
++            await self.command(['-y','-f','concat','-safe','1','-i',str(media/'concat.txt'),
++                '-map','0:v:0','-map','0:a:0','-vf','fps=30','-af','aresample=async=1:first_pts=0',
++                '-c:v','libx264','-preset','fast','-pix_fmt','yuv420p','-c:a','aac','-profile:a','aac_low',
++                '-b:a','192k','-ar','48000','-ac','2','-t',f'{offset/1000:.6f}',
++                '-movflags','+faststart',str(media/'total.mp4')],phase='合併總 MP4',duration_ms=offset)
++            info=await self.command(['-xerror','-err_detect','explode','-i',str(media/'total.mp4'),'-map','0:v:0',
++                '-an','-f','null','-'],phase='完整驗證總影片',duration_ms=offset)
++            video_ms=round(int(info.get('frame','0'))*1000/30)
++            sound=await self.command(['-xerror','-err_detect','explode','-i',str(media/'total.mp4'),'-map','0:a:0',
++                '-vn','-af','asetpts=N/SR/TB','-f','null','-'],phase='完整驗證總音軌',duration_ms=offset)
++            sound_ms=round(int(sound.get('out_time_us','0'))/1000)
++            if video_ms<=0 or abs(video_ms-offset)>200 or abs(sound_ms-offset)>200:
++                raise ProjectError('總影片時長差超過 200 毫秒，未發布成品。')
++            (media/'total.srt').write_text(''.join(cues),encoding='utf-8')
++            if cues: assembly.captions(media/'total.srt',video_ms)
++            artifacts={k:dict(path=(media/f'total.{k}').relative_to(self.root).as_posix(),
++                sha256=await assembly.file_digest_async(media/f'total.{k}')) for k in ('mp4','srt')}
++            for path in list(media.iterdir()):
++                if path.name not in ('total.mp4','total.srt'): path.unlink()
++            self.progress(phase='等待保存',completed=100,timeline=timeline)
++            success=True
++            return dict(duration_ms=video_ms,audio_duration_ms=sound_ms,artifacts=artifacts,
++                artifact_stats={k:assembly.file_signature(media/f'total.{k}') for k in ('mp4','srt')},texts=texts,source_stats=source_stats)
++        finally:
++            if not success and media.exists(): shutil.rmtree(media)
++
++
++def start(flow: ProjectWorkflow) -> MergeVideoJob:
++    from .production_lock import ProductionLease
++    if flow._total_video_job is not None:
++        raise ProjectError('已有製片任務，請先保存或捨棄結果。')
++    lease=ProductionLease(flow.root/'.production.lock')
++    folder=None
++    committed=False
++    try:
++        flow._check_current()
++        value=assembly.settings(flow)
++        if not value['sources'] or not 0<=value['pause_ms']<=5000:
++            raise ProjectError('請選取有效批次並儲存 0～5 秒交接停頓。')
++        sources=[source_ref(flow,s['batch_id']) for s in value['sources']]
++        if any(s['audio']!=a for s,a in zip(sources,value['sources'])):
++            raise ProjectError('來源版本已變更，請重新儲存合併設定。')
++        if any(j['warning'] and not j['accepted'] for j in metadata(flow)):
++            raise ProjectError('請先確認 PDF 頁碼警告，再合併影片。')
++        total=sum(s['duration_ms'] for s in sources)+(len(sources)-1)*value['pause_ms']
++        flow._space(flow.root,total*1000+50_000_000)
++        snapshot=dict(id=uuid.uuid4().hex,created_at=now(),method='batch-videos',sources=sources,
++            pause_ms=value['pause_ms'],visual=dict(resolution=resolution(flow)))
++        folder=flow._path(f'video/run-{snapshot["id"]}')
++        folder.mkdir(parents=True)
++        flow._atomic(folder/'progress.json',encode(dict(status='pending',phase='準備',completed=0,total=100)))
++        data=encode(snapshot);relative=(folder/'plan.json').relative_to(flow.root).as_posix()
++        manifest=flow.state
++        manifest.setdefault('total_video_runs',[]).append(dict(id=snapshot['id'],path=relative,sha256=digest(data),
++            progress_path=(folder/'progress.json').relative_to(flow.root).as_posix()))
++        flow._commit(manifest,[(relative,data)])
++        committed=True
++        job=MergeVideoJob(snapshot,folder,flow.root,ffmpeg(),lease)
++        flow._total_video_job=job
++        return job
++    finally:
++        if flow._total_video_job is None:
++            lease.release()
++            if folder is not None and folder.exists() and not committed: shutil.rmtree(folder)
++
++
++class VideoJoinPreviewJob(MergeVideoJob):
++    def release(self, *, discard=True):
++        if not self.wait(0):
++            raise ProjectError('請等待影音接點準備停止。')
++        try:
++            if self.folder.exists(): shutil.rmtree(self.folder)
++        except OSError:
++            raise ProjectError('影音接點暫存仍被占用，請停止播放後重試。') from None
++
++
++def start_preview(flow: ProjectWorkflow, batch_ids: list[str], index: int, *, pause_ms=500, clip_ms=5000):
++    from .production_lock import production_active
++    flow._check_current()
++    if flow._assembly_preview_job is not None or production_active(flow.root/'.production.lock'):
++        raise ProjectError('請先停止其他任務及接點預覽。')
++    if type(index) is not int or not 0<=index<len(batch_ids)-1 or len(set(batch_ids))!=len(batch_ids):
++        raise ProjectError('請選取相鄰兩批的接點。')
++    if type(pause_ms) is not int or not 0<=pause_ms<=5000 or type(clip_ms) is not int or clip_ms not in (3000,5000,10000):
++        raise ProjectError('停頓須為 0～5 秒，前後預覽須為 3、5 或 10 秒。')
++    sources=[source_ref(flow,i) for i in batch_ids[index:index+2]]
++    flow._space(flow.root,100_000_000)
++    folder=Path(tempfile.mkdtemp(prefix='.video-join-',dir=flow.root))
++    job=VideoJoinPreviewJob(dict(method='batch-videos',sources=sources,pause_ms=pause_ms,
++        clip_ms=clip_ms,visual=dict(resolution='720p')),folder,flow.root,ffmpeg(),None)
++    flow._assembly_preview_job=job
++    return job
++
++
++def validate_snapshot(flow: ProjectWorkflow, job: TotalVideoJob) -> None:
++    flow._check_current()
++    report=job.result
++    for source in job.snapshot['sources']:
++        if source!=source_ref(flow,source['batch_id']):
++            raise ProjectError('批次影片版本已變更，請重新合併或預覽。')
++    for path,signature in report['source_stats'].items():
++        if signature!=assembly.file_signature(flow._path(path)):
++            raise ProjectError('批次影音檔已變更，請重新合併或預覽。')
++
++
++def finish_preview(flow: ProjectWorkflow, job: VideoJoinPreviewJob) -> dict:
++    if job is not flow._assembly_preview_job or not job.wait(0):
++        raise ProjectError('請等待所屬影音接點預覽完成。')
++    validate_snapshot(flow,job)
++    result=job.result
++    for kind,ref in result['artifacts'].items():
++        if assembly.file_signature(flow._path(ref['path']))!=result['artifact_stats'][kind]:
++            raise ProjectError('影音接點檔已變更，請重新預覽。')
++    return dict(mp4=result['artifacts']['mp4'],srt=result['artifacts']['srt'],
++        duration_ms=result['duration_ms'],left_text=result['texts'][0],right_text=result['texts'][1])
++
++
++def inspect_joins(flow: ProjectWorkflow, batch_ids: list[str]) -> list[dict]:
++    joins=metadata(flow,batch_ids)
++    for join in joins:
++        for side,tail in (('left',True),('right',False)):
++            item=join[side]
++            try:
++                source=source_ref(flow,item['batch_id'])
++                text=flow.reading_text(item['batch_id'],source['audio']['reading_id'])
++                item.update(valid=True,text=text[-1000:] if tail else text[:1000],error='')
++            except ProjectError as error:
++                item.update(valid=False,text='',error=str(error))
++    return joins
+--- /dev/null
++++ b/tests/test_video_merge.py
+@@ -0,0 +1,204 @@
++"""Existing batch movies merge through the public workflow using real local tools."""
++import os
++import subprocess
++from unittest.mock import patch
++from pathlib import Path
++import unittest
++import json
++import hashlib
++from ebook2mp4.workflow import ProjectError
++import test_total_video as fixture
++from ebook2mp4.workflow import ProjectWorkflow
++
++class MergeVideoJourney(unittest.TestCase):
++    setUp = fixture.TotalVideoJourney.setUp
++    prepare = fixture.TotalVideoJourney.prepare
++    refresh_voices = fixture.TotalVideoJourney.refresh_voices
++    audio = fixture.TotalVideoJourney.audio
++    picture = fixture.TotalVideoJourney.picture
++
++    def movies(self, count=2):
++        ids = self.prepare(count)
++        for i, identity in enumerate(ids):
++            target = self.flow.batch_video_target(identity)
++            from PIL import Image
++            image=self.picture()
++            Image.new('RGB',(80,120),'red' if i%2==0 else 'blue').save(image)
++            target.save_total_video_settings(image=self.flow.inspect_total_video_image(image),
++                resolution='720p' if i % 2 == 0 else '1080p')
++            job = target.start_total_video()
++            self.assertTrue(job.wait(40), job.state)
++            target.finish_total_video(job)
++        return ids
++
++    def merge_video(self):
++        with patch('edge_tts.Communicate', side_effect=AssertionError('No TTS')):
++            job = self.flow.start_video_merge()
++            self.assertTrue(job.wait(60), job.state)
++            self.assertEqual(job.state['status'], 'completed', job.state)
++            result=self.flow.finish_total_video(job)
++            print(json.dumps(dict(kind='merged-video',batches=len(result['sources']),pause_ms=result['pause_ms'],
++                video_ms=result['duration_ms'],audio_ms=job.result['audio_duration_ms']),ensure_ascii=False),flush=True)
++            return result
++
++    def test_merge_uses_only_movies_and_shared_order_without_total_audio(self):
++        a,b = self.movies()
++        before = [self.flow.batch_video_target(i).total_video_path().read_bytes() for i in (a,b)]
++        self.flow.save_video_merge_settings([b,a], resolution='720p')
++        # Completed MP4 and its SRT suffice even if the original MP3 is no longer available.
++        for i in (a,b): self.flow.narration_path(i).unlink()
++        self.flow = ProjectWorkflow.open(self.flow.root)
++        result = self.merge_video()
++        self.assertIsNone(self.flow.total_audio())
++        self.assertFalse(result['stale'])
++        self.assertLessEqual(abs(result['duration_ms']-900),200)
++        self.assertEqual([s['batch_id'] for s in result['sources']],[b,a])
++        srt=self.flow.total_video_path('srt').read_text(encoding='utf-8')
++        self.assertLess(srt.index('第 2 批。'),srt.index('第 1 批。'))
++        self.assertIn('00:00:00,700 --> ',srt)
++        self.assertEqual([self.flow.batch_video_target(i).total_video_path().read_bytes() for i in (a,b)],before)
++        reopened=ProjectWorkflow.open(self.flow.root)
++        self.assertFalse(reopened.total_video()['stale'])
++        self.assertEqual([s['batch_id'] for s in reopened.assembly_settings()['sources']],[b,a])
++
++
++    def test_default_counts_extreme_pauses_actual_frames_silence_and_encoding(self):
++        ids=self.movies(3)
++        for count,pause,expected in ((1,500,200),(2,500,900),(3,500,1600),(2,0,400),(2,5000,5400),(3,17,634)):
++            with self.subTest(count=count,pause=pause):
++                self.flow.save_video_merge_settings(ids[:count],pause,resolution='720p')
++                result=self.merge_video()
++                self.assertLessEqual(abs(result['duration_ms']-expected),200)
++                self.assertEqual(self.flow.total_video_path('srt').read_text(encoding='utf-8').count(' --> '),count)
++        self.flow.save_video_merge_settings(ids[:2],500,resolution='720p');self.merge_video()
++        path=self.flow.total_video_path()
++        metadata=json.loads(subprocess.check_output([os.environ['EBOOK2MP4_FFPROBE'],'-v','error','-show_streams','-of','json',str(path)]))
++        v,a=metadata['streams']
++        self.assertEqual((v['codec_name'],v['width'],v['height'],v['pix_fmt'],v['r_frame_rate']),('h264',1280,720,'yuv420p','30/1'))
++        self.assertEqual((a['codec_name'],a['profile'],a['sample_rate'],a['channels']),('aac','LC','48000',2))
++        def pixel(second):
++            return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'],'-v','error','-ss',str(second),'-i',str(path),
++                '-frames:v','1','-vf','crop=2:2:640:360','-pix_fmt','rgb24','-f','rawvideo','-'])[:3]
++        self.assertGreater(pixel(.1)[0],200)
++        self.assertGreater(pixel(.45)[0],200)
++        self.assertGreater(pixel(.75)[2],200)
++        pcm=subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'],'-v','error','-ss','0.35','-i',str(path),'-t','0.15',
++            '-vn','-ac','1','-ar','24000','-f','s16le','-'])
++        import array
++        values=array.array('h',pcm)
++        self.assertLessEqual(max(abs(x) for x in values),2)
++        raw=path.read_bytes();self.assertLess(raw.index(b'moov'),raw.index(b'mdat'))
++
++    def test_preview_matches_join_and_cleans_on_cancel(self):
++        a,b=self.movies()
++        self.flow.save_video_merge_settings([a,b],500,resolution='720p')
++        preview=self.flow.start_video_join_preview([a,b],0,pause_ms=500,clip_ms=3000)
++        self.assertTrue(preview.wait(60),preview.state)
++        result=self.flow.finish_video_join_preview(preview)
++        self.assertLessEqual(abs(result['duration_ms']-900),200)
++        self.assertIn('第 1 批。',result['left_text']);self.assertIn('第 2 批。',result['right_text'])
++        from ebook2mp4.workflow import digest
++        self.assertEqual(digest((self.flow.root/result['mp4']['path']).read_bytes()),result['mp4']['sha256'])
++        self.flow.discard_assembly_join_preview(preview)
++        self.assertFalse(list(self.flow.root.glob('.video-join-*')))
++        job=self.flow.start_video_join_preview([a,b],0,pause_ms=5000);job.cancel()
++        self.assertTrue(job.wait(30));self.flow.discard_assembly_join_preview(job)
++        self.assertFalse(list(self.flow.root.glob('.video-join-*')))
++
++    def test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs(self):
++        a,b=self.movies()
++        self.flow.save_assembly_settings([a,b]);audiojob=self.flow.start_total_audio()
++        self.assertTrue(audiojob.wait(30));audio=self.flow.finish_total_audio(audiojob)
++        self.flow.save_video_merge_settings([a,b],resolution='720p');old=self.merge_video()
++        before=self.flow.total_video_path().read_bytes()
++        job=self.flow.start_video_merge();job.cancel();self.assertTrue(job.wait(30));self.flow.discard_total_video(job)
++        self.assertEqual(self.flow.total_video()['id'],old['id'])
++        job=self.flow.start_video_merge();self.assertTrue(job.wait(60),job.state)
++        self.flow.batch_video_target(a).total_video_path().write_bytes(b'broken')
++        with self.assertRaises(ProjectError):self.flow.finish_total_video(job)
++        self.flow.discard_total_video(job)
++        self.assertEqual(self.flow.total_video_path().read_bytes(),before)
++        self.assertEqual(self.flow.total_audio()['id'],audio['id'])
++        invalid=next(r for r in self.flow.inspect_video_merge() if r['batch_id']==a)
++        self.assertFalse(invalid['valid'])
++        job=self.flow.start_video_merge();self.assertTrue(job.wait(30),job.state)
++        self.assertEqual(job.state['status'],'failed');self.flow.discard_total_video(job)
++        self.assertEqual(self.flow.total_video()['id'],old['id'])
++        self.assertFalse((self.flow.root/'.production.lock').exists())
++        target=self.path/'export-video';self.flow.export_total_video(target)
++        self.assertEqual((target/'total.mp4').read_bytes(),before)
++        self.flow.save_draft(b,'已修改。')
++        self.assertTrue(self.flow.total_video()['stale'])
++        with self.assertRaises(ProjectError):self.flow.save_video_merge_settings([b])
++
++
++    def test_pdf_warnings_require_confirmation_and_survive_reopen(self):
++        from test_assembly_joins import AssemblyJoinJourney
++        ids=AssemblyJoinJourney.pdf_batches(self)
++        AssemblyJoinJourney.narrate(self,ids)
++        for identity in ids:
++            target=self.flow.batch_video_target(identity)
++            target.save_total_video_settings(image=self.flow.inspect_total_video_image(self.picture()),resolution='720p')
++            job=target.start_total_video();self.assertTrue(job.wait(40),job.state);target.finish_total_video(job)
++        joins=self.flow.inspect_video_merge_joins(ids)
++        self.assertEqual([j['warning']['kind'] for j in joins],['overlap','gap'])
++        self.flow.save_video_merge_settings(ids,resolution='720p')
++        with self.assertRaisesRegex(ProjectError,'頁碼'):self.flow.start_video_merge()
++        self.flow.save_video_merge_settings(ids,resolution='720p',accepted_joins=[j['key'] for j in joins])
++        self.flow=ProjectWorkflow.open(self.flow.root)
++        self.assertTrue(all(j['accepted'] for j in self.flow.inspect_video_merge_joins(ids)))
++        self.merge_video()
++        self.flow.save_video_merge_settings(ids[::-1],resolution='720p')
++        with self.assertRaisesRegex(ProjectError,'頁碼'):self.flow.start_video_merge()
++
++    def test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored(self):
++        a,b=self.movies()
++        self.flow.save_video_merge_settings([a],resolution='720p');old=self.merge_video()
++        self.flow.save_draft(b,'未選批次變更。')
++        self.assertFalse(self.flow.total_video()['stale'])
++        self.flow.save_video_merge_settings([a],1000,resolution='720p')
++        job=self.flow.start_video_merge();self.assertTrue(job.wait(40),job.state)
++        artifact=(self.flow.root/job.result['artifacts']['mp4']['path']).read_bytes()
++        original=os.replace
++        def denied(source,target):
++            if Path(target)==self.flow.root/'project.json':raise PermissionError('test publication failure')
++            return original(source,target)
++        with patch('os.replace',side_effect=denied):
++            with self.assertRaises(ProjectError):self.flow.finish_total_video(job)
++        self.assertEqual(self.flow.total_video()['id'],old['id'])
++        result=self.flow.finish_total_video(job)
++        self.assertNotEqual(result['id'],old['id'])
++        self.assertEqual(self.flow.total_video_path().read_bytes(),artifact)
++        self.assertFalse((self.flow.root/'.production.lock').exists())
++
++
++    def test_moving_batch_holds_actual_final_frame_in_preview_and_total(self):
++        from test_total_video_background import background,pixel
++        a,b=self.movies()
++        source=background(self.path/'moving.mp4',.2)
++        target=self.flow.batch_video_target(a)
++        target.save_total_video_settings(background=self.flow.inspect_total_video_background(source),source_type='video',resolution='720p')
++        job=target.start_total_video();self.assertTrue(job.wait(40),job.state);target.finish_total_video(job)
++        self.flow.save_video_merge_settings([a,b],500,resolution='720p');self.merge_video()
++        path=self.flow.total_video_path()
++        self.assertGreater(pixel(path,.01)[0],200)
++        self.assertGreater(pixel(path,.09)[1],200)
++        self.assertGreater(pixel(path,.45)[2],200)
++        preview=self.flow.start_video_join_preview([a,b],0,pause_ms=500,clip_ms=3000)
++        self.assertTrue(preview.wait(40),preview.state)
++        result=self.flow.finish_video_join_preview(preview)
++        self.assertGreater(pixel(self.flow.root/result['mp4']['path'],.45)[2],200)
++        self.flow.discard_assembly_join_preview(preview)
++
++
++    def test_media_failure_stops_after_three_attempts_and_preserves_output(self):
++        import sys
++        ids=self.movies(1)
++        self.flow.save_video_merge_settings(ids,resolution='720p');old=self.merge_video()
++        with patch.dict(os.environ,EBOOK2MP4_FFMPEG=sys.executable):
++            job=self.flow.start_video_merge();self.assertTrue(job.wait(20),job.state)
++            self.assertEqual(job.state['status'],'failed')
++            self.assertEqual(job.state['attempt'],3)
++            self.flow.discard_total_video(job)
++        self.assertEqual(self.flow.total_video()['id'],old['id'])
++        self.assertFalse((self.flow.root/'.production.lock').exists())
+--- /dev/null
++++ b/tests/test_video_merge_desktop.py
+@@ -0,0 +1,87 @@
++"""Approved T19 mode selection and merge journey in the actual native window."""
++import time
++import tkinter as tk
++import unittest
++from unittest.mock import patch
++import test_video_merge as core
++import test_total_audio_desktop as gui
++from ebook2mp4.desktop import make_app
++
++class MergeVideoDesktop(unittest.TestCase):
++    setUp=core.MergeVideoJourney.setUp
++    prepare=core.MergeVideoJourney.prepare
++    refresh_voices=core.MergeVideoJourney.refresh_voices
++    audio=core.MergeVideoJourney.audio
++    picture=core.MergeVideoJourney.picture
++    movies=core.MergeVideoJourney.movies
++    shutdown=gui.TotalAudioDesktop.shutdown
++    wait_page=gui.TotalAudioDesktop.wait_page
++
++    def test_switch_shared_selection_merge_preview_and_restore(self):
++        ids=self.movies()
++        self.root,self.app=make_app();self.addCleanup(self.shutdown)
++        self.errors=[];self.root.report_callback_exception=lambda *e:self.errors.append(str(e))
++        self.app.flow,self.app.batch_id=self.flow,self.batch;self.app.refresh();self.root.update()
++        self.app.total_audio();audio=self.app.production.current;self.wait_page(audio)
++        audio.select_button.invoke();audio.pause.set('1.25')
++        workspace=self.app.production
++        workspace.method.set('合併既有批次影片');workspace.method_control.event_generate('<<ComboboxSelected>>')
++        page=workspace.current;self.wait_page(page)
++        self.assertTrue(page.movie)
++        self.assertEqual(page.selected,ids)
++        self.assertEqual(page.pause.get(),'1.25')
++        page.resolution.set('720p');page.start_button.invoke();self.wait_page(page)
++        self.assertEqual(self.flow.total_video()['method'],'batch-videos')
++        self.assertIsNone(self.flow.total_audio())
++        page.resolution.set('1080p');self.root.update()
++        self.assertIn('待更新',page.result_info.cget('text'))
++        page.resolution.set('720p')
++        page.join_button.invoke();join=page.join_page
++        deadline=time.monotonic()+10
++        while join.info_job is not None and time.monotonic()<deadline:self.root.update();time.sleep(.02)
++        self.assertEqual(len(join.joins),1)
++        self.assertEqual(len(join.frame_photos),2)
++        self.root.state('normal')
++        for size in ('1040x640','1360x800'):
++            self.root.geometry(size);self.root.update()
++            for widget in (join.play_button,join.back_button,join.save_button,join.pause_control,join.clip_control):
++                self.assertTrue(widget.winfo_viewable())
++                self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(),self.root.winfo_rootx()+self.root.winfo_width())
++                self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),self.root.winfo_rooty()+self.root.winfo_height())
++        join.play_button.invoke()
++        deadline=time.monotonic()+40
++        while (join.job is not None or join.movie_player and join.movie_player.has_work()) and time.monotonic()<deadline:
++            self.root.update();time.sleep(.02)
++        self.assertIsNone(join.job,join.status.cget('text'))
++        self.assertIsNotNone(join.movie_player)
++        self.assertIsNone(join.movie_player.folder)
++        join.back_button.invoke()
++        self.root.state('normal')
++        for size in ('1040x640','1360x800'):
++            self.root.geometry(size);self.root.update()
++            for widget in (workspace.method_control,page.start_button,page.pause_control,page.resolution_control,page.back_button,page.outputs_button):
++                self.assertTrue(widget.winfo_viewable(),str(widget))
++                self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(),self.root.winfo_rootx()+self.root.winfo_width())
++                self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),self.root.winfo_rooty()+self.root.winfo_height())
++        workspace.method.set('總音訊製片');workspace.method_control.event_generate('<<ComboboxSelected>>')
++        self.assertIs(workspace.current,audio);self.wait_page(audio)
++        self.assertEqual(audio.pause.get(),'1.25')
++        self.assertEqual(self.errors,[])
++
++
++    def test_switch_from_total_video_keeps_latest_shared_draft(self):
++        ids=self.movies()
++        self.root,self.app=make_app();self.addCleanup(self.shutdown)
++        self.app.flow,self.app.batch_id=self.flow,self.batch;self.app.refresh();self.root.update()
++        self.app.total_audio();audio=self.app.production.current;self.wait_page(audio)
++        workspace=self.app.production
++        workspace.method.set('合併既有批次影片');workspace.change_method()
++        merge=workspace.current;self.wait_page(merge)
++        merge.select_button.invoke()
++        workspace.method.set('總音訊製片');workspace.change_method();self.wait_page(audio)
++        audio.selected=ids[::-1];audio.pause.set('1.25');audio.save_button.invoke();self.wait_page(audio)
++        self.app.total_video();video=workspace.current;self.wait_page(video)
++        workspace.method.set('合併既有批次影片');workspace.change_method();self.wait_page(merge)
++        self.assertIs(workspace.current,merge)
++        self.assertEqual(merge.selected,ids[::-1])
++        self.assertEqual(merge.pause.get(),'1.25')

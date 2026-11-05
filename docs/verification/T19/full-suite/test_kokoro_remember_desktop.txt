@@ -1,0 +1,6 @@
+test_success_reopens_path_failure_preserves_it_and_missing_file_clears_it (test_kokoro_remember_desktop.RememberArchive.test_success_reopens_path_failure_preserves_it_and_missing_file_clears_it) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.247s
+
+OK

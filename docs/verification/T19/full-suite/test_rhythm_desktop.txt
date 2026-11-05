@@ -1,0 +1,6 @@
+test_presets_custom_validation_and_minimum_window (test_rhythm_desktop.RhythmDesktop.test_presets_custom_validation_and_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.389s
+
+OK

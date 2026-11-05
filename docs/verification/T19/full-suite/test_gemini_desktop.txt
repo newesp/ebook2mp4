@@ -1,0 +1,9 @@
+test_deciding_older_candidate_keeps_same_candidate_selected (test_gemini_desktop.GeminiDesktop.test_deciding_older_candidate_keeps_same_candidate_selected) ... ok
+test_finished_candidate_can_be_discarded_when_another_window_changed_project (test_gemini_desktop.GeminiDesktop.test_finished_candidate_can_be_discarded_when_another_window_changed_project) ... ok
+test_malformed_local_settings_can_be_replaced_in_settings_dialog (test_gemini_desktop.GeminiDesktop.test_malformed_local_settings_can_be_replaced_in_settings_dialog) ... ok
+test_selected_text_preview_adopt_and_undo (test_gemini_desktop.GeminiDesktop.test_selected_text_preview_adopt_and_undo) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 9.546s
+
+OK

@@ -1,0 +1,8 @@
+test_failed_restore_keeps_previous_settings_and_releases_lock (test_voice_setting_restore.SettingsRecovery.test_failed_restore_keeps_previous_settings_and_releases_lock) ... ok
+test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript (test_voice_setting_restore.SettingsRecovery.test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript) ... ok
+test_timestamp_voice_names_and_independent_records_survive_reopen (test_voice_setting_restore.SettingsRecovery.test_timestamp_voice_names_and_independent_records_survive_reopen) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.052s
+
+OK

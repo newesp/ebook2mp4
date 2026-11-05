@@ -1,0 +1,9 @@
+test_categories_have_actionable_guidance_and_bounded_evidence (test_video_diagnostics.VideoDiagnostics.test_categories_have_actionable_guidance_and_bounded_evidence) ... ok
+test_failed_ffmpeg_preserves_reason_and_specific_recovery (test_video_diagnostics.VideoDiagnostics.test_failed_ffmpeg_preserves_reason_and_specific_recovery) ... ok
+test_unknown_progress_timestamp_does_not_fail_successful_encoding (test_video_diagnostics.VideoDiagnostics.test_unknown_progress_timestamp_does_not_fail_successful_encoding) ... ok
+test_unknown_python_error_is_not_reported_as_network_failure (test_video_diagnostics.VideoDiagnostics.test_unknown_python_error_is_not_reported_as_network_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.044s
+
+OK

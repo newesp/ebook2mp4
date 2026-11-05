@@ -1,0 +1,9 @@
+test_173_rows_and_countdown_follow_current_progress_without_losing_selection (test_tts_retry_desktop.RetryDesktop.test_173_rows_and_countdown_follow_current_progress_without_losing_selection) ... ok
+test_excessive_wait_stops_and_enables_resume_at_minimum_window (test_tts_retry_desktop.RetryDesktop.test_excessive_wait_stops_and_enables_resume_at_minimum_window) ... ok
+test_resume_refreshes_old_failed_row_while_next_block_waits (test_tts_retry_desktop.RetryDesktop.test_resume_refreshes_old_failed_row_while_next_block_waits) ... ok
+test_wait_status_and_cancel_at_minimum_window (test_tts_retry_desktop.RetryDesktop.test_wait_status_and_cancel_at_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 20.694s
+
+OK

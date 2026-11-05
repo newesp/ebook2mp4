@@ -1,0 +1,98 @@
+{
+  "exe_sha256": "63600d23d17c0afefa7ff8234ebc3749cb62a8695ad6f567462cc9402702cd05",
+  "product": {
+    "id": "9c9996c443464536983f1219f68da21d",
+    "created_at": "2026-11-05T15:33:22.536351+00:00",
+    "method": "batch-videos",
+    "sources": [
+      {
+        "batch_id": "c9423fb6403341e09c30057df47ce5ef",
+        "product_id": "ead6525124b54ef0aaaa2a5c259a36ac",
+        "audio": {
+          "batch_id": "c9423fb6403341e09c30057df47ce5ef",
+          "product_id": "a6aebdc773da49c6a176938b9edb469a",
+          "reading_id": "0f6288bb59a84d268a0f364ceed3dc24",
+          "settings_sha256": "49156970aea3762a02f73c29b829a9dd15468e18000e082b4957439c5c5061c8",
+          "mp3": {
+            "path": "batches/c9423fb6403341e09c30057df47ce5ef/narration-a6aebdc773da49c6a176938b9edb469a/media/narration.mp3",
+            "sha256": "c4c257b0a8d97df8a1e06f5fc267c8e79b4d55b9c25711c9756212719553f530"
+          },
+          "srt": {
+            "path": "batches/c9423fb6403341e09c30057df47ce5ef/narration-a6aebdc773da49c6a176938b9edb469a/media/narration.srt",
+            "sha256": "2b7346a381cf39abd2330d344bac6371e88931c33ab3bc4c085149649aefa935"
+          }
+        },
+        "duration_ms": 1200,
+        "mp4": {
+          "path": "video/run-ead6525124b54ef0aaaa2a5c259a36ac/media/total.mp4",
+          "sha256": "f525e21c9ddd161591dfda5f11377d033cff2bc36050035620c9c0d6e86e8b80"
+        },
+        "srt": {
+          "path": "video/run-ead6525124b54ef0aaaa2a5c259a36ac/media/total.srt",
+          "sha256": "2b7346a381cf39abd2330d344bac6371e88931c33ab3bc4c085149649aefa935"
+        }
+      },
+      {
+        "batch_id": "577c8f2649744243a1963e803bf81074",
+        "product_id": "b68738631d58461eaeff2edc2b82c1dc",
+        "audio": {
+          "batch_id": "577c8f2649744243a1963e803bf81074",
+          "product_id": "3ab803cce7f54aaa82f9154a2dc56994",
+          "reading_id": "ef30454993274572ba693483b530f0f5",
+          "settings_sha256": "49156970aea3762a02f73c29b829a9dd15468e18000e082b4957439c5c5061c8",
+          "mp3": {
+            "path": "batches/577c8f2649744243a1963e803bf81074/narration-3ab803cce7f54aaa82f9154a2dc56994/media/narration.mp3",
+            "sha256": "c4c257b0a8d97df8a1e06f5fc267c8e79b4d55b9c25711c9756212719553f530"
+          },
+          "srt": {
+            "path": "batches/577c8f2649744243a1963e803bf81074/narration-3ab803cce7f54aaa82f9154a2dc56994/media/narration.srt",
+            "sha256": "396dfda4af480a8190fa4b7c84c24a1ae238a08e639720d3dca14beb1d5269ed"
+          }
+        },
+        "duration_ms": 1200,
+        "mp4": {
+          "path": "video/run-b68738631d58461eaeff2edc2b82c1dc/media/total.mp4",
+          "sha256": "ed0642151b6115f7d00925c32ed008d0e53d4dda6c24acef0583beecac006f6a"
+        },
+        "srt": {
+          "path": "video/run-b68738631d58461eaeff2edc2b82c1dc/media/total.srt",
+          "sha256": "396dfda4af480a8190fa4b7c84c24a1ae238a08e639720d3dca14beb1d5269ed"
+        }
+      }
+    ],
+    "pause_ms": 500,
+    "visual": {
+      "resolution": "720p"
+    },
+    "duration_ms": 2900,
+    "completed_at": "2026-11-05T15:33:31.054521+00:00",
+    "mp4": {
+      "path": "video/run-9c9996c443464536983f1219f68da21d/media/total.mp4",
+      "sha256": "4661cb8077dac9a39c564843d7a350764771b16f6fea5dae515e90f6604a5567"
+    },
+    "srt": {
+      "path": "video/run-9c9996c443464536983f1219f68da21d/media/total.srt",
+      "sha256": "54e3a02b20bd2dafbce97b670fe07aabe6f3d522c9b1ceac45f4011e31c2e545"
+    },
+    "stale": false
+  },
+  "source_products_unchanged": true,
+  "total_audio_required": false,
+  "narration_runs_unchanged": true,
+  "temporary_paths": [],
+  "production_lock": false,
+  "full_decode": true,
+  "observed_ui": [
+    "startup maximized",
+    "open native file picker",
+    "saved method restored",
+    "merge completes",
+    "playback blue then red with matching captions",
+    "playback ended",
+    "normal exit observed; no packaged window remains"
+  ],
+  "evidence_media": [
+    "media/total.mp4",
+    "media/total.srt"
+  ]
+}

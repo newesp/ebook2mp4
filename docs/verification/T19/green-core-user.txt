@@ -1,0 +1,6 @@
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 14.778s
+
+OK

@@ -1,0 +1,8 @@
+test_cancel_unsaved_switch_keeps_page_and_batch (test_batch_step_retention.BatchStepRetention.test_cancel_unsaved_switch_keeps_page_and_batch) ... ok
+test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) ... ok
+test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 17.278s
+
+OK

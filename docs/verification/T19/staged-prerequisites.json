@@ -1,0 +1,74 @@
+[
+  {
+    "path": "ebook2mp4/assembly_desktop.py",
+    "blob": "3f20008763a3307ca393ee99159903166425b5e8"
+  },
+  {
+    "path": "ebook2mp4/total_video.py",
+    "blob": "bbdb6b7a6abd256aec6b1488696620a8bf7b25c8"
+  },
+  {
+    "path": "ebook2mp4/total_video_desktop.py",
+    "blob": "c8d5cb23bc47572d2d2507ecb4246b7e4721130d"
+  },
+  {
+    "path": "ebook2mp4/video_target.py",
+    "blob": "7f13fc2e4a5b71393ab2696a1b876808344a7956"
+  },
+  {
+    "path": "ebook2mp4/video_diagnostics.py",
+    "blob": "fa7a6b8d6147508928a4b1ca904c0e6d30b9c532"
+  },
+  {
+    "path": "packaging/ebook2mp4.spec",
+    "blob": "ceffa868bace72e3c83b38297f017e6a94fa7e73"
+  },
+  {
+    "path": "packaging/prepare_voice.py",
+    "blob": "057adae2ec7383ce7c29ed790792358f72b0a350"
+  },
+  {
+    "path": "packaging/VOICE-NOTICES.md",
+    "blob": "594b2fd053d036654bc5f168f226bdde5107a371"
+  },
+  {
+    "path": "tests/test_batch_video.py",
+    "blob": "7b6148cb64ef02a22f3e6d6c9c94f6ecf6994c75"
+  },
+  {
+    "path": "tests/test_batch_video_desktop.py",
+    "blob": "1d4bab0f34d2341e21c35950e80b5de3cffe8f17"
+  },
+  {
+    "path": "tests/test_total_video_background.py",
+    "blob": "87dcc92f277009707fa7f0b21219c407468df3b9"
+  },
+  {
+    "path": "tests/test_total_video_background_desktop.py",
+    "blob": "54a6ade1576d324f228aae660618f16bf355b865"
+  },
+  {
+    "path": "tests/test_video_diagnostics.py",
+    "blob": "5db584057b34d887d057c2ecfddfaa863a5b803b"
+  },
+  {
+    "path": "tests/test_video_diagnostics_desktop.py",
+    "blob": "d1123dfbaa0d5e381918db1adb75053005f90775"
+  },
+  {
+    "path": "ebook2mp4/workflow.py",
+    "blob": "9a83fa5d696556f100345e81db68b14672f4b626"
+  },
+  {
+    "path": "ebook2mp4/desktop.py",
+    "blob": "31bd97ea9ccb2c6cee8ced5cd3a64092a48f0d4d"
+  },
+  {
+    "path": "ebook2mp4/narration_desktop.py",
+    "blob": "eeb6fbbcada688cafd5a943b21c5924cff8edd94"
+  },
+  {
+    "path": "ebook2mp4/production_desktop.py",
+    "blob": "e2c1f0b8cb5e7e50c8e4413fdf378e277f946a78"
+  }
+]

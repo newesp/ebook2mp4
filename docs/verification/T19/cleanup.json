@@ -1,0 +1,84 @@
+{
+  "removed_bytes": 569540771,
+  "preserved": [
+    "dist/ebook2mp4",
+    "docs/verification/T19",
+    "docs/mock-ui/t19-batch-merge-v1",
+    "需求文件",
+    "outputs",
+    "使用者模型",
+    "兩個2026-11-02既有測試目錄",
+    "其餘既有未提交修改"
+  ],
+  "remaining_targets": [],
+  "removed": [
+    {
+      "bytes": 75304064,
+      "path": ".scratch/t19-baseline"
+    },
+    {
+      "bytes": 104488558,
+      "path": ".scratch/build-tools"
+    },
+    {
+      "bytes": 202708992,
+      "path": ".scratch/voice-runtime"
+    },
+    {
+      "bytes": 121410362,
+      "path": ".scratch/ocr-runtime"
+    },
+    {
+      "bytes": 33525206,
+      "path": ".scratch/pyinstaller-build"
+    },
+    {
+      "bytes": 0,
+      "path": ".scratch/t19-pip-temp"
+    },
+    {
+      "bytes": 387105,
+      "path": ".scratch/t19-package-fixture"
+    },
+    {
+      "bytes": 8492075,
+      "path": ".scratch/t19-committed-check"
+    },
+    {
+      "bytes": 20713701,
+      "path": ".mypy_cache"
+    },
+    {
+      "bytes": 1328900,
+      "path": "ebook2mp4/__pycache__"
+    },
+    {
+      "bytes": 1166225,
+      "path": "tests/__pycache__"
+    },
+    {
+      "bytes": 1274,
+      "path": ".scratch/t19-clean-check.py"
+    },
+    {
+      "bytes": 1257,
+      "path": ".scratch/t19-full-suite.py"
+    },
+    {
+      "bytes": 2349,
+      "path": ".scratch/t19-package-check.py"
+    },
+    {
+      "bytes": 1235,
+      "path": ".scratch/t19-package-fixture.py"
+    },
+    {
+      "bytes": 4437,
+      "path": ".scratch/t19-stage-source.py"
+    },
+    {
+      "bytes": 5031,
+      "path": ".scratch/t19-stage.py"
+    }
+  ]
+}

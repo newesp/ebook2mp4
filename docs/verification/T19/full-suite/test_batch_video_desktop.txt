@@ -1,0 +1,8 @@
+test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_batch_video_desktop.BatchVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_batch_video_desktop.BatchVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 44.938s
+
+OK

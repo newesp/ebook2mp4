@@ -1,0 +1,15 @@
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... ERROR
+
+======================================================================
+ERROR: test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 44, in test_merge_uses_only_movies_and_shared_order_without_total_audio
+    self.flow.save_video_merge_settings([b,a], resolution='720p')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'ProjectWorkflow' object has no attribute 'save_video_merge_settings'
+
+----------------------------------------------------------------------
+Ran 1 test in 16.152s
+
+FAILED (errors=1)

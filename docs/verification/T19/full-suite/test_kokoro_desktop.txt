@@ -1,0 +1,18 @@
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... FAIL
+
+======================================================================
+FAIL: test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_kokoro_desktop.py", line 16, in test_local_service_reuses_controls_and_package_page_preserves_text
+    self.assertEqual(str(d.preview_button.cget('state')),'disabled')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'normal' != 'disabled'
+- normal
++ disabled
+
+
+----------------------------------------------------------------------
+Ran 1 test in 2.075s
+
+FAILED (failures=1)

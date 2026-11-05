@@ -1,0 +1,9 @@
+test_invalid_package_does_not_activate_or_leave_installation (test_kokoro.LocalPackageJourney.test_invalid_package_does_not_activate_or_leave_installation) ... Public workflow wait: 0.13s; failed
+ok
+test_missing_package_explains_recovery_and_preserves_settings (test_kokoro.LocalPackageJourney.test_missing_package_explains_recovery_and_preserves_settings) ... ok
+test_real_package_preview_reopen_and_offline_formal_reuse (test_kokoro.LocalPackageJourney.test_real_package_preview_reopen_and_offline_formal_reuse) ... skipped 'real offline package required'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.245s
+
+OK (skipped=1)

@@ -1,0 +1,12 @@
+test_accepted_paragraph_can_be_edited_and_adopted_again (test_ui_layout_gemini.GeminiLayout.test_accepted_paragraph_can_be_edited_and_adopted_again) ... ok
+test_adoption_has_one_notification_and_editing_does_not_emit_toasts (test_ui_layout_gemini.GeminiLayout.test_adoption_has_one_notification_and_editing_does_not_emit_toasts) ... ok
+test_dirty_and_stale_warnings_survive_success_messages (test_ui_layout_gemini.GeminiLayout.test_dirty_and_stale_warnings_survive_success_messages) ... ok
+test_edit_candidate_navigate_save_reopen_adopt_and_undo (test_ui_layout_gemini.GeminiLayout.test_edit_candidate_navigate_save_reopen_adopt_and_undo) ... ok
+test_empty_candidate_or_save_failure_keeps_edits_and_window (test_ui_layout_gemini.GeminiLayout.test_empty_candidate_or_save_failure_keeps_edits_and_window) ... ok
+test_navigation_decisions_and_batch_menu_preserve_candidate_scope (test_ui_layout_gemini.GeminiLayout.test_navigation_decisions_and_batch_menu_preserve_candidate_scope) ... ok
+test_notes_and_primary_actions_remain_available_at_restored_size (test_ui_layout_gemini.GeminiLayout.test_notes_and_primary_actions_remain_available_at_restored_size) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 28.351s
+
+OK

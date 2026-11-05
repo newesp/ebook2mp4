@@ -1,0 +1,22 @@
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... FAIL
+
+======================================================================
+FAIL: test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge_desktop.py", line 81, in test_switch_from_total_video_keeps_latest_shared_draft
+    self.assertEqual(merge.selected,ids[::-1])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['62d6cbd80dd24181820d27ba4acb79bc', 'e5815ae219e84e3a8db2f6059ee4801a'] != ['e5815ae219e84e3a8db2f6059ee4801a', '62d6cbd80dd24181820d27ba4acb79bc']
+
+First differing element 0:
+'62d6cbd80dd24181820d27ba4acb79bc'
+'e5815ae219e84e3a8db2f6059ee4801a'
+
+- ['62d6cbd80dd24181820d27ba4acb79bc', 'e5815ae219e84e3a8db2f6059ee4801a']
++ ['e5815ae219e84e3a8db2f6059ee4801a', '62d6cbd80dd24181820d27ba4acb79bc']
+
+----------------------------------------------------------------------
+Ran 1 test in 25.483s
+
+FAILED (failures=1)

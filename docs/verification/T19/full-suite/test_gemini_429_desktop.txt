@@ -1,0 +1,10 @@
+test_173_rows_and_countdown_follow_current_progress_without_losing_selection (test_gemini_429_desktop.GeminiWait.test_173_rows_and_countdown_follow_current_progress_without_losing_selection) ... ok
+test_excessive_wait_stops_and_enables_resume_at_minimum_window (test_gemini_429_desktop.GeminiWait.test_excessive_wait_stops_and_enables_resume_at_minimum_window) ... ok
+test_gemini_wait_and_cancel (test_gemini_429_desktop.GeminiWait.test_gemini_wait_and_cancel) ... ok
+test_resume_refreshes_old_failed_row_while_next_block_waits (test_gemini_429_desktop.GeminiWait.test_resume_refreshes_old_failed_row_while_next_block_waits) ... ok
+test_wait_status_and_cancel_at_minimum_window (test_gemini_429_desktop.GeminiWait.test_wait_status_and_cancel_at_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 40.371s
+
+OK

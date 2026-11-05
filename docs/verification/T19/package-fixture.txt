@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\t19-package-fixture.py", line 5, in <module>
+    from test_video_merge import MergeVideoJourney
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 9, in <module>
+    from ebook2mp4.workflow import ProjectError
+ModuleNotFoundError: No module named 'ebook2mp4'

@@ -1,0 +1,6 @@
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 20.496s
+
+OK

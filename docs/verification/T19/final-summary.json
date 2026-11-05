@@ -1,0 +1,45 @@
+{
+  "modules": 63,
+  "initial_cases": 326,
+  "initial_passed": 318,
+  "initial_failed": 1,
+  "skipped": [
+    {
+      "module": "test_kokoro",
+      "case": "test_real_package_preview_reopen_and_offline_formal_reuse (test_kokoro.LocalPackageJourney.test_real_package_preview_reopen_and_offline_formal_reuse) ... skipped 'real offline package required'"
+    },
+    {
+      "module": "test_ocr",
+      "case": "test_user_book_nine_scanned_pages_export_to_utf8_txt (test_ocr.RealOcrJourney.test_user_book_nine_scanned_pages_export_to_utf8_txt) ... skipped 'requires the user-provided book1-ch1.pdf'"
+    },
+    {
+      "module": "test_ocr_optimization",
+      "case": "test_auto_language_recovers_reported_title_without_script_conversion (test_ocr_optimization.OcrOptimization.test_auto_language_recovers_reported_title_without_script_conversion) ... skipped 'requires supplied book and real models'"
+    },
+    {
+      "module": "test_ocr_optimization",
+      "case": "test_high_confidence_bad_region_still_needs_check_in_chinese_context (test_ocr_optimization.OcrOptimization.test_high_confidence_bad_region_still_needs_check_in_chinese_context) ... skipped 'requires supplied book and real models'"
+    },
+    {
+      "module": "test_ocr_optimization",
+      "case": "test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft (test_ocr_optimization.OcrOptimization.test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft) ... skipped 'requires supplied book and real models'"
+    },
+    {
+      "module": "test_ocr_optimization",
+      "case": "test_region_validation_and_cancellation_preserve_original_page_text (test_ocr_optimization.OcrOptimization.test_region_validation_and_cancellation_preserve_original_page_text) ... skipped 'requires supplied book and real models'"
+    },
+    {
+      "module": "test_ocr_optimization",
+      "case": "test_small_screenshot_stays_pending_when_confidence_is_low (test_ocr_optimization.OcrOptimization.test_small_screenshot_stays_pending_when_confidence_is_low) ... skipped 'requires supplied book and real models'"
+    }
+  ],
+  "recovered": [
+    "test_kokoro_desktop: isolated empty package home"
+  ],
+  "additional_cases": [
+    "test_media_failure_stops_after_three_attempts_and_preserves_output"
+  ],
+  "final_passed": 320,
+  "remaining_failures": 0,
+  "total_seconds": 1460.11
+}

@@ -1,0 +1,29 @@
+test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding) ... Invalid duration for option ss: .35
+Error parsing options for input file E:\Leo\Projects\ebook2mp4\.scratch\test-runs\tmpgymmredq\書籍\video\run-61f6c9e0b9934c7681d02dddc3a1a1bd\media\total.mp4.
+Error opening input files: Invalid argument
+ERROR
+test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs (test_video_merge.MergeVideoJourney.test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs) ... ok
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... ok
+test_preview_matches_join_and_cleans_on_cancel (test_video_merge.MergeVideoJourney.test_preview_matches_join_and_cleans_on_cancel) ... ok
+
+======================================================================
+ERROR: test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 82, in test_default_counts_extreme_pauses_actual_frames_silence_and_encoding
+    pcm=subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'],'-v','error','-ss','.35','-i',str(path),'-t','.15',
+        '-vn','-ac','1','-ar','24000','-f','s16le','-'])
+  File "C:\Python314\Lib\subprocess.py", line 472, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+           ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               **kwargs).stdout
+               ^^^^^^^^^
+  File "C:\Python314\Lib\subprocess.py", line 577, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['C:\\ProgramData\\chocolatey\\bin\\ffmpeg.exe', '-v', 'error', '-ss', '.35', '-i', 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmpgymmredq\\���y\\video\\run-61f6c9e0b9934c7681d02dddc3a1a1bd\\media\\total.mp4', '-t', '.15', '-vn', '-ac', '1', '-ar', '24000', '-f', 's16le', '-']' returned non-zero exit status 4294967274.
+
+----------------------------------------------------------------------
+Ran 4 tests in 88.885s
+
+FAILED (errors=1)

@@ -1,0 +1,21 @@
+ebook2mp4\tts_control.py:185: error: Incompatible types in assignment (expression has type "float", variable has type "int")  [assignment]
+ebook2mp4\voice_media.py:58: error: Skipping analyzing "opencc": module is installed, but missing library stubs or py.typed marker  [import-untyped]
+ebook2mp4\voice_media.py:58: note: See https://mypy.readthedocs.io/en/stable/running_mypy.html#missing-imports
+ebook2mp4\voice_media.py:127: error: Argument 1 to "set" of "ContextVar" has incompatible type "tuple[None, Callable[[Any], Any] | None]"; expected "tuple[None, None]"  [arg-type]
+ebook2mp4\voice_media.py:127: error: Argument 1 to "set" of "ContextVar" has incompatible type "tuple[float | None, Callable[[Any], Any] | None]"; expected "tuple[None, None]"  [arg-type]
+ebook2mp4\voice_media.py:143: error: Item "OSError" of "OSError | ClientError | EdgeTTSException | RetryableServiceError" has no attribute "retry_after"  [union-attr]
+ebook2mp4\voice_media.py:143: error: Item "ClientError" of "OSError | ClientError | EdgeTTSException | RetryableServiceError" has no attribute "retry_after"  [union-attr]
+ebook2mp4\voice_media.py:143: error: Item "EdgeTTSException" of "OSError | ClientError | EdgeTTSException | RetryableServiceError" has no attribute "retry_after"  [union-attr]
+ebook2mp4\total_video.py:293: error: Argument 1 to "stale" has incompatible type "ProjectWorkflow | BatchVideoTarget"; expected "ProjectWorkflow"  [arg-type]
+ebook2mp4\total_video.py:587: error: Argument 1 to "validate_snapshot" has incompatible type "ProjectWorkflow | BatchVideoTarget"; expected "ProjectWorkflow"  [arg-type]
+ebook2mp4\total_video.py:587: error: Argument 2 to "validate_snapshot" has incompatible type "TotalVideoJob"; expected "MergeVideoJob"  [arg-type]
+ebook2mp4\video_merge.py:154: error: Need type annotation for "cues" (hint: "cues: list[<type>] = ...")  [var-annotated]
+ebook2mp4\video_merge.py:284: error: Incompatible types in assignment (expression has type "VideoJoinPreviewJob", variable has type "JoinPreviewJob | None")  [assignment]
+ebook2mp4\movie_playback.py:22: error: Need type annotation for "frames"  [var-annotated]
+ebook2mp4\movie_playback.py:35: error: Signature of "busy" incompatible with supertype "tkinter.Misc"  [override]
+ebook2mp4\movie_playback.py:35: note:      Superclass:
+ebook2mp4\movie_playback.py:35: note:          def tk_busy_hold(self, *, cursor: str | tuple[str] | tuple[str, str] | tuple[str, str, str] | tuple[str, str, str, str]) -> None
+ebook2mp4\movie_playback.py:35: note:      Subclass:
+ebook2mp4\movie_playback.py:35: note:          def busy(self) -> Any
+ebook2mp4\movie_playback.py:48: error: Argument 3 to "prepare_playback" has incompatible type "Any | None"; expected "Path"  [arg-type]
+Found 15 errors in 5 files (checked 7 source files)

@@ -1,0 +1,15 @@
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pyinstaller/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pyinstaller/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pyinstaller/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pyinstaller/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/pyinstaller/
+ERROR: Could not find a version that satisfies the requirement pyinstaller==6.22.3 (from versions: none)
+ERROR: No matching distribution found for pyinstaller==6.22.3
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{c1add893-117c-4f98-b271-9a41ace9ec22}\AC\Temp\pip-build-tracker-h78882hf'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{c1add893-117c-4f98-b271-9a41ace9ec22}\AC\Temp\pip-target-72mval2w'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{c1add893-117c-4f98-b271-9a41ace9ec22}\AC\Temp\pip-ephem-wheel-cache-gznuos_r'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{c1add893-117c-4f98-b271-9a41ace9ec22}\AC\Temp\pip-install-2qw1p84c'.
+You can safely remove it manually.

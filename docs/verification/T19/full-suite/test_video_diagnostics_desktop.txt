@@ -1,0 +1,6 @@
+test_existing_details_shows_failure_reason_and_recovery (test_video_diagnostics_desktop.DiagnosticDesktop.test_existing_details_shows_failure_reason_and_recovery) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 7.302s
+
+OK
