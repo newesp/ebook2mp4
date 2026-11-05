@@ -1,0 +1,34 @@
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\__init__.py:44: SyntaxWarning: invalid escape sequence '\.'
+  re_han_default = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._%\-]+)", re.U)
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\__init__.py:46: SyntaxWarning: invalid escape sequence '\s'
+  re_skip_default = re.compile("(\r\n|\s)", re.U)
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\finalseg\__init__.py:78: SyntaxWarning: invalid escape sequence '\.'
+  re_skip = re.compile("([a-zA-Z0-9]+(?:\.\d+)?%?)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:16: SyntaxWarning: invalid escape sequence '\.'
+  re_skip_detail = re.compile("([\.0-9]+|[a-zA-Z0-9]+)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:17: SyntaxWarning: invalid escape sequence '\.'
+  re_han_internal = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._]+)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:18: SyntaxWarning: invalid escape sequence '\s'
+  re_skip_internal = re.compile("(\r\n|\s)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:21: SyntaxWarning: invalid escape sequence '\.'
+  re_num = re.compile("[\.0-9]+")
+Building prefix dict from the default dictionary ...
+Dumping model to file cache C:\Users\ADMINI~1\AppData\Local\Temp\jieba.cache
+Loading model cost 1.284 seconds.
+Prefix dict has been built successfully.
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-text-fix\probe.py", line 12, in <module>
+    print(json.dumps(dict(text=value,phonemes=phonemes,unknown=unknown),ensure_ascii=False),flush=True)
+UnicodeEncodeError: 'cp950' codec can't encode character '\u9634' in position 113: illegal multibyte sequence
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-text-fix\probe.py", line 12, in <module>
+    print(json.dumps(dict(text=value,phonemes=phonemes,unknown=unknown),ensure_ascii=False),flush=True)
+UnicodeEncodeError: 'cp950' codec can't encode character '\u9634' in position 73: illegal multibyte sequence
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\kokoro-text-fix\probe.py", line 12, in <module>
+    print(json.dumps(dict(text=value,phonemes=phonemes,unknown=unknown),ensure_ascii=False),flush=True)
+UnicodeEncodeError: 'cp950' codec can't encode character '\u538b' in position 52: illegal multibyte sequence
+{"text": "�M�ӡA���S�O�A�û��L�kĲ�Ϊ��C", "phonemes": "����2��2, �y��1/�S4/���Q4/�z��3��2��3/��2�w��3/����4����2/�x��5.", "unknown": []}
+{"text": "2. �٬�", "phonemes": "��4. �v��2�x��4", "unknown": []}
+{"text": "�٬�", "phonemes": "�v��2�x��4", "unknown": []}
+{"text": "Ĳ��", "phonemes": "����4����2", "unknown": []}

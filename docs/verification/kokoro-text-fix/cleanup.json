@@ -1,0 +1,10 @@
+{
+  "formalProductsRetained": true,
+  "time": "2026-11-05T13:18:41.9731268+08:00",
+  "removed": [
+    ".scratch/kokoro-text-fix",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime"
+  ],
+  "probeCacheRemoved": true
+}

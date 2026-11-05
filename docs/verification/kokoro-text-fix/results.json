@@ -1,0 +1,83 @@
+{
+  "records": [
+    {
+      "seconds": 86.58635660001892,
+      "state": {
+        "status": "completed",
+        "error": ""
+      }
+    },
+    {
+      "seconds": 275.94151089998195,
+      "state": {
+        "status": "completed",
+        "error": ""
+      }
+    },
+    {
+      "seconds": 6.7942307999765035,
+      "state": {
+        "status": "completed",
+        "error": ""
+      }
+    },
+    {
+      "seconds": 7.736164400004782,
+      "state": {
+        "status": "completed",
+        "error": ""
+      }
+    },
+    {
+      "seconds": 6.695443000004161,
+      "state": {
+        "status": "completed",
+        "error": ""
+      }
+    },
+    {
+      "seconds": 7.423621499998262,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "current": 1,
+        "total": 1,
+        "completed": 1,
+        "failed": 0,
+        "chunks": [
+          {
+            "id": "816a6a496fa4405aeaf0f79dc0317480e939cd46296baf1a6d5a691f1c87c3af",
+            "order": 0,
+            "text": "開悟比你的皮膚還要接近你，\r\n比你的下一口氣出現得還要快，\r\n然而，它又是你永遠無法觸及的。\r\n2. 矛盾",
+            "separator_after": "",
+            "text_sha256": "fbd3b3c24d7359eb6f90def1365f615ca06948daf3b8be482ea76fce42fde9cd",
+            "pause_after_ms": 0,
+            "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+            "rules_sha256": "a4ed0e96494f89b2c408174d2f697b876bb1cfa056a8c2612a4f333fa9655488",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 9525,
+            "reused": false,
+            "frames": 228600,
+            "start_ms": 0,
+            "end_ms": 9525
+          }
+        ],
+        "retry_deadline": null,
+        "duration_ms": 9525
+      }
+    }
+  ],
+  "status": {
+    "busy": false,
+    "phase": "本機合成完成",
+    "pid": 3260,
+    "loads": 1,
+    "package": "kokoro-zh-cpu-78fb4b82d084294e",
+    "idle_seconds": 120,
+    "last_error": "",
+    "device": "cpu"
+  },
+  "original": "開悟比你的皮膚還要接近你，\n比你的下一口氣出現得還要快，\n然而，它又是你永遠無法觸及的。\n2. 矛盾"
+}

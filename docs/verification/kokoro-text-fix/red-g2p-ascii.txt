@@ -1,0 +1,25 @@
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\__init__.py:44: SyntaxWarning: invalid escape sequence '\.'
+  re_han_default = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._%\-]+)", re.U)
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\__init__.py:46: SyntaxWarning: invalid escape sequence '\s'
+  re_skip_default = re.compile("(\r\n|\s)", re.U)
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\finalseg\__init__.py:78: SyntaxWarning: invalid escape sequence '\.'
+  re_skip = re.compile("([a-zA-Z0-9]+(?:\.\d+)?%?)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:16: SyntaxWarning: invalid escape sequence '\.'
+  re_skip_detail = re.compile("([\.0-9]+|[a-zA-Z0-9]+)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:17: SyntaxWarning: invalid escape sequence '\.'
+  re_han_internal = re.compile("([\u4E00-\u9FD5a-zA-Z0-9+#&\._]+)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:18: SyntaxWarning: invalid escape sequence '\s'
+  re_skip_internal = re.compile("(\r\n|\s)")
+E:\Leo\Projects\ebook2mp4\outputs\kokoro-k01\python\cpython-3.12.15-windows-x86_64-none\Lib\site-packages\jieba\posseg\__init__.py:21: SyntaxWarning: invalid escape sequence '\.'
+  re_num = re.compile("[\.0-9]+")
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Users\ADMINI~1\AppData\Local\Temp\jieba.cache
+Loading model cost 1.422 seconds.
+Prefix dict has been built successfully.
+{"text": "\u958b\u609f\u6bd4\u4f60\u7684\u76ae\u819a\u9084\u8981\u63a5\u8fd1\u4f60\uff0c\n\u6bd4\u4f60\u7684\u4e0b\u4e00\u53e3\u6c23\u51fa\u73fe\u5f97\u9084\u8981\u5feb\uff0c\n\u7136\u800c\uff0c\u5b83\u53c8\u662f\u4f60\u6c38\u9060\u7121\u6cd5\u89f8\u53ca\u7684\u3002\n2. \u77db\u76fe", "phonemes": "\u310e\u311e1\u31284/\u3105\u31272\u310b\u31273/\u3109\u311c5/\u3106\u31272\u3108\u31281/\u310f\u311e2\u89814/\u3110\u311d1\u3110\u96344/\u310b\u31273, \n\u3105\u31272\u310b\u31273/\u3109\u311c5/\u3112\u538b4/\u31274\u310e\u31213\u3111\u31274/\u3114\u31281\u3112\u8a004/\u3109\u311c5/\u310f\u311e2\u89814/\u310e\u59164, \n\u3116\u31222\u31262, \u310a\u311a1/\u53c84/\u3115\u53414/\u310b\u31273\u75282\u51433/\u31282\u3108\u311a3/\u3114\u31284\u3110\u31272/\u3109\u311c5. \n\u31264. \u3107\u31202\u3109\u65874", "unknown": ["\n"]}
+{"text": "\u958b\u609f\u6bd4\u4f60\u7684\u76ae\u819a\u9084\u8981\u63a5\u8fd1\u4f60\uff0c", "phonemes": "\u310e\u311e1\u31284/\u3105\u31272\u310b\u31273/\u3109\u311c5/\u3106\u31272\u3108\u31281/\u310f\u311e2\u89814/\u3110\u311d1\u3110\u96344/\u310b\u31273,", "unknown": []}
+{"text": "\u6bd4\u4f60\u7684\u4e0b\u4e00\u53e3\u6c23\u51fa\u73fe\u5f97\u9084\u8981\u5feb\uff0c", "phonemes": "\u3105\u31272\u310b\u31273/\u3109\u311c5/\u3112\u538b4/\u31274\u310e\u31213\u3111\u31274/\u3114\u31281\u3112\u8a004/\u3109\u311c5/\u310f\u311e2\u89814/\u310e\u59164,", "unknown": []}
+{"text": "\u7136\u800c\uff0c\u5b83\u53c8\u662f\u4f60\u6c38\u9060\u7121\u6cd5\u89f8\u53ca\u7684\u3002", "phonemes": "\u3116\u31222\u31262, \u310a\u311a1/\u53c84/\u3115\u53414/\u310b\u31273\u75282\u51433/\u31282\u3108\u311a3/\u3114\u31284\u3110\u31272/\u3109\u311c5.", "unknown": []}
+{"text": "2. \u77db\u76fe", "phonemes": "\u31264. \u3107\u31202\u3109\u65874", "unknown": []}
+{"text": "\u77db\u76fe", "phonemes": "\u3107\u31202\u3109\u65874", "unknown": []}
+{"text": "\u89f8\u53ca", "phonemes": "\u3114\u31284\u3110\u31272", "unknown": []}

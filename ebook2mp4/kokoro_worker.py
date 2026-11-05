@@ -57,6 +57,10 @@ def main():
         while pending:
             part=pending.pop(0)
             phonemes,_=pipeline.g2p(part)
+            # Misaki preserves intra-paragraph LF/CRLF/tab as token whitespace.
+            # Kokoro accepts ASCII spaces, not those layout characters. Keep
+            # every spoken token and normalize only whitespace in this copy.
+            phonemes=''.join(' ' if p.isspace() else p for p in phonemes)
             if len(phonemes)>510:
                 if len(part)<2:raise ValueError('Phoneme overflow')
                 at=len(part)//2;pending[:0]=[part[:at],part[at:]];continue

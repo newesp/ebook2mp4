@@ -1,0 +1,27 @@
+[
+  {
+    "file": "female-crlf.mp3",
+    "bytes": 127053,
+    "sha256": "b41e56366bf950a620950a64f6040aa38e01d4bcc180a78b16cf5360c5e5b915"
+  },
+  {
+    "file": "female-lf.mp3",
+    "bytes": 115821,
+    "sha256": "9272e4b49b0019fc66df78fdd98a8e8d28bb5540d2d8a3c0dcf54e9c3c4bd40d"
+  },
+  {
+    "file": "female-tab.mp3",
+    "bytes": 115821,
+    "sha256": "31617b154946b6c8489ce3d5ef14bb52291d5233b8edbdceb1682f13f0f62e83"
+  },
+  {
+    "file": "formal.mp3",
+    "bytes": 115245,
+    "sha256": "f78ace1acf970ab7bd62376d8613e5a94ce400f95579e40da363488d3550b110"
+  },
+  {
+    "file": "male-lf.mp3",
+    "bytes": 117549,
+    "sha256": "039e7c89c454f115c1303b9e8001b9f3a72359789167d4e0db8cebdc8f4e7352"
+  }
+]

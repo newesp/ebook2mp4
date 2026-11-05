@@ -65,7 +65,9 @@ class LocalPackageJourney(unittest.TestCase):
         repaired=self.flow.start_voice_package_import(archive)
         self.wait_for(repaired,600)
         self.assertEqual(repaired.state['status'],'completed',repaired.state)
-        source=self.path/'source.txt';source.write_text('今天，歡迎閱讀。Hello world。',encoding='utf-8')
+        source=self.path/'source.txt';source.write_text(
+            '開悟比你的皮膚還要接近你，\n比你的下一口氣出現得還要快，\n'
+            '然而，它又是你永遠無法觸及的。\n2. 矛盾',encoding='utf-8')
         batch=self.flow.import_txt(self.flow.inspect_txt(source))
         value=dict(self.flow.voice_settings(batch),provider='kokoro',voice='zf_001',
                    package=installed[0]['id'],model=installed[0]['model'],processing='kokoro-t2s-v1')

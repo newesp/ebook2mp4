@@ -1,0 +1,827 @@
+diff --git a/ebook2mp4/narration.py b/ebook2mp4/narration.py
+index a227774a..ae6b46a7 100644
+--- a/ebook2mp4/narration.py
++++ b/ebook2mp4/narration.py
+@@ -6,10 +6,12 @@ from bisect import bisect_right
+ from copy import deepcopy
+ from html import escape
+ import json
++import math
+ import os
+ from pathlib import Path
+ import re
+ import shutil
++import time
+ import uuid
+ import wave
+ 
+@@ -249,10 +251,13 @@ class NarrationJob(VoiceJob):
+                     self.save_progress(phase='驗證音訊區塊', current=index + 1)
+                     def progress(attempt):
+                         chunk.update(status='running', attempts=attempt)
+-                        self.save_progress(phase='本機合成' if settings['provider']=='kokoro' else '線上合成')
++                        self.save_progress(phase='本機合成' if settings['provider']=='kokoro' else '線上合成', retry_deadline=None)
++                    def retry_progress(attempt, delay):
++                        self.save_progress(phase=f'等待 {math.ceil(delay)} 秒後重試',
++                                           retry_deadline=time.monotonic() + delay)
+                     decoded, reused = await speech_block(
+                         chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
+-                        progress, allow_network=self.allow_network)
++                        progress, allow_network=self.allow_network, retry_progress=retry_progress)
+                     chunk.update(reused=reused)
+                     with wave.open(str(decoded), 'rb') as source:
+                         count = source.getnframes()
+diff --git a/ebook2mp4/narration_desktop.py b/ebook2mp4/narration_desktop.py
+index 80f29489..b9714770 100644
+--- a/ebook2mp4/narration_desktop.py
++++ b/ebook2mp4/narration_desktop.py
+@@ -3,6 +3,8 @@ from __future__ import annotations
+ 
+ import os
+ import asyncio
++import math
++import time
+ import tkinter as tk
+ from tkinter import filedialog, messagebox, ttk
+ 
+@@ -135,6 +137,8 @@ class NarrationDialog(ttk.Frame):
+         self.load_runs(keep_current=True)
+ 
+     def show_block_error(self,_event=None):
++        if self.job is not None:
++            return
+         selected=self.details.selection()
+         if not selected or self.run is None:
+             return
+@@ -287,6 +291,11 @@ class NarrationDialog(ttk.Frame):
+             allow_network = not local and bool(remaining) and self.consent.get()
+             self.job = (self.flow.resume_narration(self.batch_id,self.run['snapshot']['id'],allow_network=allow_network) if self.run is not None
+                         else self.flow.start_narration(self.batch_id, allow_network=allow_network))
++            state = self.job.state
++            state.setdefault('total', len(self.job.snapshot['chunks']))
++            state.setdefault('chunks', [dict(chunk, status='pending', attempts=0)
++                                        for chunk in self.job.snapshot['chunks']])
++            self.display_progress(state)
+             self.update_controls()
+             self.schedule()
+         except ProjectError as error:
+@@ -305,6 +314,25 @@ class NarrationDialog(ttk.Frame):
+         self.load_runs()
+         self.status.configure(text='MP3／SRT 已完成並保存。請播放檢查聽感與字幕。')
+ 
++    def display_progress(self, state):
++        phase = state.get('phase', '準備')
++        deadline = state.get('retry_deadline')
++        if deadline is not None:
++            phase = f'等待 {max(0, math.ceil(deadline - time.monotonic()))} 秒後重試'
++        self.status.configure(text=f'{phase} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
++                                   f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
++        self.run_summary.configure(text=f'執行中 · 完成 {state.get("completed", 0)}/{state.get("total", 0)} 塊')
++        chunks = state.get('chunks', [])
++        rows = self.details.get_children()
++        if len(rows) != len(chunks):
++            self.details.delete(*rows)
++            rows = tuple(self.details.insert('', 'end') for chunk in chunks)
++        for row, chunk in zip(rows, chunks):
++            values = (chunk['order'] + 1, STATUS_LABELS.get(chunk['status'], '待檢查'),
++                      chunk.get('attempts', 0), '查看原因' if chunk['status'] == 'failed' else '—')
++            if tuple(map(str, self.details.item(row, 'values'))) != tuple(map(str, values)):
++                self.details.item(row, values=values)
++
+     def poll(self):
+         self.timer = None
+         if self.job is not None:
+@@ -313,8 +341,7 @@ class NarrationDialog(ttk.Frame):
+                 if (self.source_settings and self.source_settings['provider']=='kokoro'
+                         and state['status']=='running' and state.get('phase')=='本機合成'):
+                     state['phase']=self.flow.local_voice_status()['phase']
+-                self.status.configure(text=f'{state.get("phase", "準備")} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
+-                                      f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
++                self.display_progress(state)
+                 self.schedule()
+                 return
+             state = self.job.state
+diff --git a/ebook2mp4/production_desktop.py b/ebook2mp4/production_desktop.py
+index 6a5908af..0f24a0a6 100644
+--- a/ebook2mp4/production_desktop.py
++++ b/ebook2mp4/production_desktop.py
+@@ -100,16 +100,39 @@ class ProductionWorkspace(ttk.Frame):
+             page.recheck()
+         return page
+ 
+-    def manage_services(self, owner):
++    def manage_services(self, owner, *, profile_id=None):
+         from .service_desktop import ServiceDialog
+         if self.service_page is not None and self.service_page.winfo_exists():
+             self.service_page.owner = owner
+             self.service_page.on_return = self.app.voice_settings
+             self.activate(self.service_page)
++            self.service_page.request_profile(profile_id)
+             return
+-        self.service_page = ServiceDialog(owner, parent=self.host, on_return=self.app.voice_settings)
++        self.service_page = ServiceDialog(owner, parent=self.host, on_return=self.app.voice_settings, profile_id=profile_id)
+         self.activate(self.service_page)
+ 
++    def service_changes_busy(self):
++        # Credentials are shared by all batches. Do not mutate them during a task.
++        pages=[p for p in self.pages.values() if p.winfo_exists()]
++        return any(getattr(p,'job',None) is not None for p in pages) or any(
++            self.busy_for(p.flow) for p in pages if hasattr(p,'flow'))
++
++    def refresh_services(self, identity=None, *, deleted=None):
++        for key,page in self.pages.items():
++            if key[2]!='voice' or not page.winfo_exists(): continue
++            previous=page.service_ids.get(page.service.get())
++            page.reload_services()
++            if previous==deleted or (page is self.service_page.owner and identity!=previous):
++                page.service.set(page.service_labels.get(identity or 'edge-tts','Edge-TTS'))
++                page.change_service()
++            elif previous in page.service_labels:
++                page.service.set(page.service_labels[previous])
++            if previous not in (identity,deleted) and page is not self.service_page.owner:
++                continue
++            page.stop()
++            page.play_button.configure(state='disabled')
++            page.result_info.configure(text='服務設定已變更；請重新試聽。')
++
+     def manage_local_packages(self,owner):
+         from .kokoro_desktop import PackagePage
+         if self.package_page is None or not self.package_page.winfo_exists():
+diff --git a/ebook2mp4/service_desktop.py b/ebook2mp4/service_desktop.py
+index 55f450b9..b665a310 100644
+--- a/ebook2mp4/service_desktop.py
++++ b/ebook2mp4/service_desktop.py
+@@ -1,123 +1,314 @@
+-"""Local credential setup, separate from daily synthesis controls."""
++"""Local service editor in the production workspace, with explicit save/delete."""
+ import tkinter as tk
+ from tkinter import ttk
+ from .workflow import ProjectError
+-from .tts_services import profiles, save_profile
++from .tts_services import profiles, save_profile, delete_profile, credential, check_service
++from .production_desktop import ScrollPage
++
++
++PROVIDERS = {'Google Gemini TTS': 'gemini-tts', 'Fish Audio': 'fish-audio'}
+ 
+ 
+ class ServiceDialog(ttk.Frame):
+-    def __init__(self, owner, *, parent=None, on_return=None):
+-        super().__init__(parent if parent is not None else owner)
+-        self.on_return=on_return;self.owner=owner;self.job=None;self.identity=None;self.timer=None
+-        if parent is None:
+-            self.pack(fill='both',expand=True)
+-        self.columnconfigure(0,weight=1)
+-        form=ttk.Frame(self,padding=20);form.grid(sticky='nsew');form.columnconfigure(1,weight=1)
+-        ttk.Label(form,text='1 選服務 → 2 填資料 → 3 檢查服務並返回試聽',style='Heading.TLabel').grid(row=0,column=0,columnspan=2,pady=12)
+-        self.existing=tk.StringVar(value='新增服務')
+-        self.items={'新增服務':None};self.items.update({v['name']+' · '+k[:6]:k for k,v in profiles().items()})
+-        combo=ttk.Combobox(form,textvariable=self.existing,values=tuple(self.items),state='readonly');combo.grid(row=1,column=1,sticky='ew',pady=8)
+-        ttk.Label(form,text='設定檔').grid(row=1,column=0,sticky='w');combo.bind('<<ComboboxSelected>>',self.load)
+-        self.provider=tk.StringVar(value='Google Gemini TTS');self.name=tk.StringVar(value='Google Gemini TTS');self.key=tk.StringVar();self.reuse=tk.BooleanVar(value=False)
+-        ttk.Label(form,text='服務類型').grid(row=2,column=0,sticky='w')
+-        self.provider_control=ttk.Combobox(form,textvariable=self.provider,values=('Google Gemini TTS','Fish Audio'),state='readonly')
+-        self.provider_control.grid(row=2,column=1,sticky='ew',pady=8)
++    def __init__(self, owner, *, parent=None, on_return=None, profile_id=None):
++        super().__init__(parent if parent is not None else owner, padding=12)
++        self.owner, self.on_return = owner, on_return
++        self.workspace = owner.app.production if hasattr(owner, 'app') else None
++        self.flow = getattr(owner, 'flow', None)
++        self.job = self.timer = None
++        self.closing = False
++        self.identity = None
++        self.manual_key = ''
++        self.baseline = None
++        self.pending = None
++        self.profile_unavailable = False
++        if parent is None: self.pack(fill='both', expand=True)
++        self.columnconfigure(0, weight=1)
++        self.rowconfigure(1, weight=1)
++        ttk.Style(self).configure('ServiceDanger.TButton', foreground='#963b32')
++        self.title = ttk.Label(self, style='Heading.TLabel')
++        self.title.grid(row=0, column=0, sticky='w', pady=(0,12))
++        body = ttk.Frame(self)
++        body.grid(row=1, column=0, sticky='nsew')
++        body.columnconfigure(0, weight=3, uniform='service-editor')
++        body.columnconfigure(1, weight=1, uniform='service-editor')
++        body.rowconfigure(0, weight=1)
++        self.scroll = ScrollPage(body)
++        self.scroll.grid(row=0, column=0, sticky='nsew', padx=(0,16))
++        form = self.scroll.content
++        form.columnconfigure(0, weight=1)
++        self.provider = tk.StringVar(value='Google Gemini TTS')
++        self.name = tk.StringVar(value='Google Gemini TTS')
++        self.key = tk.StringVar()
++        self.reuse = tk.BooleanVar(value=False)
++        ttk.Label(form,text='服務類型').grid(row=0,column=0,sticky='w')
++        self.provider_control = ttk.Combobox(form,textvariable=self.provider,values=tuple(PROVIDERS),state='readonly',width=1)
++        self.provider_control.grid(row=1,column=0,sticky='ew',pady=(4,4))
+         self.provider_control.bind('<<ComboboxSelected>>',self.provider_changed)
+-        ttk.Label(form,text='顯示名稱').grid(row=3,column=0,sticky='w');ttk.Entry(form,textvariable=self.name).grid(row=3,column=1,sticky='ew',pady=8)
+-        ttk.Label(form,text='API 金鑰').grid(row=4,column=0,sticky='w');self.key_entry=ttk.Entry(form,textvariable=self.key,show='•');self.key_entry.grid(row=4,column=1,sticky='ew',pady=8)
+-        self.reuse_check=ttk.Checkbutton(form,text='Google：沿用本機 Gemini 校對金鑰',variable=self.reuse,command=self.reuse_changed)
+-        self.reuse_check.grid(row=5,column=1,sticky='w')
+-        self.manual_key='' 
+-        ttk.Label(form,text='金鑰只在本機加密保存；編輯時留空保留原金鑰。\n儲存不會送出文字。返回後請選模型與音色，再按試聽驗證。\n本版支援 Gemini API 與 Fish 原生 API；尚不支援任意相容端點。',wraplength=600).grid(row=6,column=0,columnspan=2,sticky='w',pady=16)
+-        self.check_button=ttk.Button(form,text='檢查連線與音色（不產生語音）',command=self.check)
+-        self.check_button.grid(row=7,column=0,columnspan=2,sticky='ew',pady=8)
+-        self.status=ttk.Label(form,text='',wraplength=600);self.status.grid(row=8,column=0,columnspan=2,sticky='ew')
+-        ttk.Button(form,text='取消',command=self.close).grid(row=9,column=0,pady=16)
+-        ttk.Button(form,text='儲存並返回試聽 →',command=self.save,style='Primary.TButton').grid(row=9,column=1,sticky='e')
+-
+-    def load(self,_event=None):
+-        self.identity=self.items[self.existing.get()]
+-        value=profiles().get(self.identity)
+-        self.key.set('')
+-        self.manual_key=''
+-        if value:
+-            self.name.set(value['name']);self.provider.set({'gemini-tts':'Google Gemini TTS','fish-audio':'Fish Audio'}[value['provider']]);self.reuse.set(value.get('reuse',False))
+-        else:
+-            self.provider.set('Google Gemini TTS');self.name.set('Google Gemini TTS');self.reuse.set(False)
+-        self.update_provider()
+-        self.reuse_changed()
++        self.provider_help = ttk.Label(form,wraplength=500)
++        self.provider_help.grid(row=2,column=0,sticky='ew',pady=(0,12))
++        ttk.Label(form,text='顯示名稱').grid(row=3,column=0,sticky='w')
++        self.name_entry = ttk.Entry(form,textvariable=self.name,width=1)
++        self.name_entry.grid(row=4,column=0,sticky='ew',pady=(4,12))
++        self.key_label = ttk.Label(form)
++        self.key_label.grid(row=5,column=0,sticky='w')
++        key_row = ttk.Frame(form)
++        key_row.grid(row=6,column=0,sticky='ew',pady=(4,4))
++        key_row.columnconfigure(0,weight=1)
++        self.key_entry = ttk.Entry(key_row,textvariable=self.key,show='•',width=1)
++        self.key_entry.grid(row=0,column=0,sticky='ew')
++        self.show_button = ttk.Button(key_row,text='顯示',command=self.toggle_key,width=5)
++        self.show_button.grid(row=0,column=1,padx=(8,0))
++        self.key_help = ttk.Label(form,wraplength=500)
++        self.key_help.grid(row=7,column=0,sticky='ew',pady=(0,8))
++        # Status stays near the credential fields and is visible in narrow windows.
++        self.status = ttk.Label(form,text='',wraplength=500)
++        self.status.grid(row=8,column=0,sticky='ew',pady=4)
++        self.reuse_check = ttk.Checkbutton(form,text='沿用本機 Gemini 校對金鑰',variable=self.reuse,command=self.reuse_changed)
++        self.reuse_check.grid(row=9,column=0,sticky='w',pady=(0,8))
++        self.check_button = ttk.Button(form,text='檢查連線與音色（不產生語音）',command=self.check)
++        self.check_button.grid(row=10,column=0,sticky='w',pady=4)
++        self.discard_frame = ttk.LabelFrame(form,text='要放棄尚未儲存的修改嗎？',padding=8)
++        self.discard_frame.grid(row=11,column=0,sticky='ew',pady=12)
++        self.keep_button = ttk.Button(self.discard_frame,text='繼續編輯',command=self.keep_editing)
++        self.keep_button.pack(side='left')
++        self.discard_button = ttk.Button(self.discard_frame,text='放棄修改',command=self.discard)
++        self.discard_button.pack(side='right')
++        self.discard_frame.grid_remove()
++        self.delete_frame = ttk.LabelFrame(form,text='刪除此服務？',padding=8)
++        self.delete_frame.grid(row=12,column=0,sticky='ew',pady=12)
++        self.delete_frame.columnconfigure(0,weight=1)
++        self.delete_text = ttk.Label(self.delete_frame,wraplength=500)
++        self.delete_text.grid(row=0,column=0,columnspan=2,sticky='ew')
++        self.cancel_delete_button = ttk.Button(self.delete_frame,text='保留服務',command=self.cancel_delete)
++        self.cancel_delete_button.grid(row=1,column=0,sticky='w',pady=(8,0))
++        self.confirm_delete_button = ttk.Button(self.delete_frame,text='確認刪除服務',command=self.delete,style='ServiceDanger.TButton')
++        self.confirm_delete_button.grid(row=1,column=1,sticky='e',pady=(8,0))
++        self.delete_frame.grid_remove()
++        aside = ttk.Frame(body,padding=8)
++        aside.grid(row=0,column=1,sticky='new')
++        aside.columnconfigure(0,weight=1)
++        self.help = ttk.Label(aside,text='修改後，回到原來的試聽頁\n\n儲存後選用此服務，保留試聽文字及節奏設定。\n\n金鑰只在本機加密保存。儲存不送出文字；請返回後重新試聽。',wraplength=220,justify='left')
++        self.help.grid(row=0,column=0,sticky='ew')
++        self.details_button = ttk.Button(aside,text='查看設定檔識別碼',command=self.toggle_details)
++        self.details_button.grid(row=1,column=0,sticky='w',pady=12)
++        self.details = ttk.Label(aside,text='',wraplength=220)
++        self.details.grid(row=2,column=0,sticky='ew')
++        self.details.grid_remove()
++        footer = ttk.Frame(self)
++        footer.grid(row=2,column=0,sticky='ew',pady=(12,0))
++        footer.columnconfigure(1,weight=1)
++        self.back_button = ttk.Button(footer,text='← 取消並返回試聽',command=self.request_return)
++        self.back_button.grid(row=0,column=0,sticky='w')
++        self.delete_button = ttk.Button(footer,text='刪除此服務…',command=self.confirm_delete,style='ServiceDanger.TButton')
++        self.delete_button.grid(row=0,column=2,padx=8)
++        self.save_button = ttk.Button(footer,text='儲存並返回試聽 →',command=self.save,style='Primary.TButton')
++        self.save_button.grid(row=0,column=3,sticky='e')
++        self.scroll.bind_scroll()
++        form.bind('<Configure>',self.resize,add='+')
++        aside.bind('<Configure>',lambda e:self.help.configure(wraplength=max(160,e.width-16)),add='+')
++        self.load_profile(profile_id)
++
++    def resize(self, event):
++        width=max(180,event.width-20)
++        for label in (self.status,self.key_help,self.provider_help,self.delete_text):
++            label.configure(wraplength=width)
++
++    def snapshot(self):
++        return self.provider.get(),self.name.get(),self.key.get(),self.reuse.get()
++
++    def load_profile(self, identity):
++        try:
++            value=profiles().get(identity) if identity else None
++            if identity and not value: raise ProjectError('此服務已被移除；請返回後重新選擇服務。')
++        except ProjectError as error:
++            self.profile_unavailable=True
++            self.identity=identity
++            self.status.configure(text=str(error))
++            self.save_button.configure(state='disabled')
++            return
++        self.profile_unavailable=False
++        self.identity=identity
++        self.key.set('');self.manual_key=''
++        self.provider.set(next(k for k,v in PROVIDERS.items() if v==value['provider']) if value else 'Google Gemini TTS')
++        self.name.set(value['name'] if value else self.provider.get())
++        self.reuse.set(bool(value and value.get('reuse')))
++        self.title.configure(text='編輯服務' if identity else '新增服務')
++        self.provider_help.configure(text='既有服務類型固定。如需更換類型，請新增服務。' if identity else '選擇服務類型，再填名稱與金鑰。')
++        self.key_label.configure(text='更換 API 金鑰' if identity else 'API 金鑰')
++        self.details.configure(text=identity or '儲存後建立識別碼。')
++        self.details.grid_remove()
++        self.delete_button.grid() if identity else self.delete_button.grid_remove()
++        self.delete_frame.grid_remove();self.discard_frame.grid_remove()
++        self.status.configure(text='')
++        self.key_entry.configure(show='•');self.show_button.configure(text='顯示')
++        self.update_provider();self.update_controls()
++        self.baseline=self.snapshot()
++        self.scroll.canvas.yview_moveto(0)
++
++    def request_profile(self, identity):
++        self.flow=getattr(self.owner,'flow',None)
++        if identity==self.identity: return
++        if self.job:
++            self.status.configure(text='請先取消服務檢查。');return
++        self.request_action(lambda:self.load_profile(identity))
++
++    def request_action(self, action):
++        if self.baseline is not None and self.snapshot()!=self.baseline:
++            self.pending=action
++            self.delete_frame.grid_remove();self.discard_frame.grid()
++            self.keep_button.focus_set();self.reveal_confirmation()
++        else: action()
++
++    def request_return(self):
++        if not self.job: self.request_action(self.close)
++
++    def keep_editing(self):
++        self.pending=None;self.discard_frame.grid_remove()
++
++    def discard(self):
++        action=self.pending
++        self.keep_editing()
++        if action: action()
++
++    def toggle_details(self):
++        self.details.grid_remove() if self.details.winfo_manager() else self.details.grid()
++
++    def toggle_key(self):
++        show=bool(self.key_entry.cget('show'))
++        self.key_entry.configure(show='' if show else '•')
++        self.show_button.configure(text='隱藏' if show else '顯示')
+ 
+     def provider_changed(self, _event=None):
+-        self.name.set(self.provider.get())
+-        self.reuse.set(False)
+-        self.manual_key=''
+-        self.key.set('')
+-        self.update_provider()
+-        self.reuse_changed()
++        self.name.set(self.provider.get());self.reuse.set(False)
++        self.manual_key='';self.key.set('');self.update_provider()
+ 
+     def update_provider(self):
+-        if self.provider.get() == 'Google Gemini TTS':
+-            self.reuse_check.grid()
+-        else:
+-            self.reuse_check.grid_remove()
++        self.reuse_check.grid() if self.provider.get()=='Google Gemini TTS' else self.reuse_check.grid_remove()
++        self.key_help.configure(text='已保存金鑰。留白則保留原金鑰。' if self.identity else '請輸入 API 金鑰。金鑰只在本機加密保存。')
++        self.update_controls()
+ 
+     def reuse_changed(self):
+-        if self.reuse.get() and self.provider.get() == 'Google Gemini TTS':
++        if self.reuse.get():
+             from .gemini import load_settings
+             try:
+                 key=load_settings()['key']
+-                if not key:
+-                    raise ProjectError('尚未設定 Gemini 校對金鑰；請先設定或自行輸入。')
++                if not key: raise ProjectError('尚未設定 Gemini 校對金鑰；請先設定或自行輸入。')
+             except ProjectError as error:
+-                self.reuse.set(False)
+-                self.status.configure(text=str(error))
+-                return
+-            self.manual_key=self.key.get()
+-            self.key.set(key)
+-            self.key_entry.configure(state='readonly')
+-            self.status.configure(text='已沿用 Gemini 校對金鑰。')
++                self.reuse.set(False);self.status.configure(text=str(error));return
++            self.manual_key=self.key.get();self.key.set(key)
+         else:
+-            self.key_entry.configure(state='normal')
+-            self.key.set(self.manual_key)
+-            self.manual_key=''
+-            self.status.configure(text='')
++            self.key.set(self.manual_key);self.manual_key=''
++        self.update_controls()
++
++    def mutation_busy(self):
++        return bool(self.workspace and self.workspace.service_changes_busy())
++
++    def set_production_busy(self, _busy):
++        self.update_controls()
++
++    def update_controls(self):
++        busy=self.job is not None
++        blocked=busy or self.profile_unavailable or self.mutation_busy()
++        for control in (self.name_entry,self.reuse_check,self.show_button):
++            control.configure(state='disabled' if busy else 'normal')
++        self.provider_control.configure(state='disabled' if busy or self.identity else 'readonly')
++        self.key_entry.configure(state='disabled' if busy else 'readonly' if self.reuse.get() else 'normal')
++        for control in (self.save_button,self.delete_button,self.confirm_delete_button):
++            control.configure(state='disabled' if blocked else 'normal')
++        self.back_button.configure(state='disabled' if busy else 'normal')
++        self.check_button.configure(text='取消檢查' if busy else '檢查連線與音色（不產生語音）')
++
++    def ensure_mutable(self):
++        if self.profile_unavailable:
++            self.status.configure(text='服務設定無法讀取；請返回後重新選擇服務。')
++            return False
++        if self.job or self.mutation_busy():
++            self.status.configure(text='請先完成或取消進行中的語音任務，再儲存或刪除服務。')
++            return False
++        return True
+ 
+     def save(self):
+-        if self.job:
+-            self.status.configure(text='請等待服務檢查完成。');return
++        if not self.ensure_mutable(): return
+         try:
+-            identity=save_profile(self.name.get(),{'Google Gemini TTS':'gemini-tts','Fish Audio':'fish-audio'}[self.provider.get()],'' if self.reuse.get() else self.key.get(),self.reuse.get(),self.identity)
++            identity=save_profile(self.name.get(),PROVIDERS[self.provider.get()],'' if self.reuse.get() else self.key.get(),self.reuse.get(),self.identity)
+             self.identity=identity
+-            self.key.set('');self.owner.reload_services();self.owner.service.set(self.owner.service_labels[identity]);self.owner.change_service();self.close()
+-        except (ProjectError,OSError) as error:self.status.configure(text=str(error) if isinstance(error,ProjectError) else '無法儲存本機服務設定。')
++            if self.workspace:
++                self.workspace.refresh_services(identity)
++            else:
++                self.owner.reload_services();self.owner.service.set(self.owner.service_labels[identity]);self.owner.change_service()
++            self.owner.status.configure(text='服務已儲存。請重新試聽。')
++            self.close()
++        except (ProjectError,OSError) as error:
++            self.status.configure(text=str(error) if isinstance(error,ProjectError) else '無法儲存本機服務設定；原設定保留，請重試。')
+ 
++    def reveal_confirmation(self):
++        self.update_idletasks();self.scroll.canvas.yview_moveto(1)
++
++    def confirm_delete(self):
++        if not self.identity or not self.ensure_mutable(): return
++        try:
++            stored=profiles().get(self.identity)
++            if not stored: raise ProjectError('此服務不存在或已被移除。')
++        except ProjectError as error:
++            self.status.configure(text=str(error));return
++        self.delete_text.configure(text=f'將刪除「{stored["name"]}」的本機設定與此設定保存的金鑰。\n返回後改用 Edge-TTS，請重新選音色。\n既有音訊、字幕與稿件保留。其他引用此服務的批次下次使用前須重新選服務。共用的 Gemini 校對金鑰保留。')
++        self.discard_frame.grid_remove();self.delete_frame.grid()
++        self.cancel_delete_button.focus_set();self.reveal_confirmation()
++
++    def cancel_delete(self):
++        self.delete_frame.grid_remove();self.delete_button.focus_set()
++
++    def delete(self):
++        if not self.identity or not self.delete_frame.winfo_manager() or not self.ensure_mutable(): return
++        try:
++            identity=self.identity
++            delete_profile(identity)
++            if self.workspace: self.workspace.refresh_services(deleted=identity)
++            else:
++                self.owner.reload_services();self.owner.service.set('Edge-TTS');self.owner.change_service()
++            self.owner.status.configure(text='服務已刪除。已切換至 Edge-TTS；請重新選音色。')
++            self.close()
++        except (ProjectError,OSError) as error:
++            self.status.configure(text=str(error) if isinstance(error,ProjectError) else '無法刪除本機服務設定；請重試。')
+ 
+     def check(self):
+-        if self.job:return
++        if self.job:
++            self.job.cancel();self.status.configure(text='正在取消檢查…');return
+         try:
+-            self.identity=save_profile(self.name.get(),{'Google Gemini TTS':'gemini-tts','Fish Audio':'fish-audio'}[self.provider.get()],'' if self.reuse.get() else self.key.get(),self.reuse.get(),self.identity)
+-            if not self.reuse.get(): self.key.set('')
++            provider=PROVIDERS[self.provider.get()]
++            if not self.name.get().strip(): raise ProjectError('請填服務名稱。')
++            key=self.key.get()
++            if self.reuse.get():
++                from .gemini import load_settings
++                key=load_settings()['key']
++            elif not key.strip() and self.identity:
++                key=credential(dict(profile=self.identity,provider=provider))
++            if not key.strip(): raise ProjectError('請輸入 API 金鑰。')
++            if '\n' in key or '\r' in key: raise ProjectError('金鑰不可含換行。')
+             from .voice import VoiceJob
+-            from .tts_services import check_profile
+-            self.job=VoiceJob(lambda:check_profile(self.identity))
+-            self.status.configure(text='已儲存本機設定，正在檢查服務…')
+-            self.check_button.configure(state='disabled')
+-            self.timer=self.after(100,self.poll)
+-        except (ProjectError,OSError) as error:self.status.configure(text=str(error) if isinstance(error,ProjectError) else '本機設定無法儲存。')
++            self.job=VoiceJob(lambda:check_service(provider,key))
++            self.status.configure(text='正在檢查連線與音色…尚未儲存修改。')
++            self.update_controls();self.timer=self.after(100,self.poll)
++        except (ProjectError,OSError) as error:
++            self.status.configure(text=str(error) if isinstance(error,ProjectError) else '無法讀取本機服務設定。')
+ 
+     def poll(self):
+         self.timer=None
+-        if not self.job:return
+-        if not self.job.wait(0):self.timer=self.after(100,self.poll);return
+-        self.status.configure(text=self.job.result if self.job.state['status']=='completed' else self.job.state['error'] or '已取消')
+-        self.job=None;self.check_button.configure(state='normal')
++        if not self.job: return
++        if not self.job.wait(0): self.timer=self.after(100,self.poll);return
++        self.status.configure(text=(self.job.result+' 尚未儲存修改。') if self.job.state['status']=='completed' else
++                              '已取消檢查。尚未儲存修改。' if self.job.state['status']=='cancelled' else self.job.state['error'] or '檢查失敗。')
++        self.job=None;self.update_controls()
++        if self.closing: self.close()
+ 
+     def close(self):
+-        if self.timer is not None:
+-            self.after_cancel(self.timer);self.timer=None
++        if not self.winfo_exists(): return
++        if self.timer is not None: self.after_cancel(self.timer);self.timer=None
+         if self.job:
+-            self.job.cancel()
+-            if not self.job.wait(0):self.timer=self.after(100,self.close);return
++            self.closing=True;self.job.cancel()
++            if not self.job.wait(0): self.timer=self.after(100,self.close);return
+             self.job=None
+-        self.key.set('');self.destroy()
+-        if self.on_return is not None:self.on_return()
++        self.key.set('');self.manual_key='';self.baseline=None;self.pending=None
++        self.destroy()
++        if self.on_return is not None: self.on_return()
+diff --git a/ebook2mp4/tts_services.py b/ebook2mp4/tts_services.py
+index cd173038..d9e34645 100644
+--- a/ebook2mp4/tts_services.py
++++ b/ebook2mp4/tts_services.py
+@@ -1,6 +1,9 @@
+ """Local TTS profiles and cancellable provider transports; no credentials in projects."""
+ import base64
++from datetime import datetime, timezone
++from email.utils import parsedate_to_datetime
+ import json
++import math
+ import re
+ from .workflow import ProjectError, ProjectWorkflow, encode
+ 
+@@ -35,6 +38,8 @@ def save_profile(name, provider, key='', reuse=False, profile_id=None):
+     values = profiles()
+     identity = profile_id or uuid.uuid4().hex
+     previous = values.get(identity, {})
++    if profile_id and not previous:
++        raise ProjectError('此服務已被移除；請返回並新增服務。')
+     if previous and previous.get('provider') != provider:
+         raise ProjectError('既有設定檔不能更換服務類型；請新增設定檔並填入該服務金鑰。')
+     protected = base64.b64encode(protect(key.strip().encode())).decode() if key.strip() else previous.get('key', '')
+@@ -46,6 +51,16 @@ def save_profile(name, provider, key='', reuse=False, profile_id=None):
+     return identity
+ 
+ 
++def delete_profile(identity):
++    """Remove only one local profile; project snapshots and shared keys stay intact."""
++    from .voice import cache_path
++    values = profiles()
++    if identity not in values:
++        raise ProjectError('此服務不存在或已被移除。')
++    del values[identity]
++    ProjectWorkflow._atomic(cache_path().parent / 'services.json', encode(values))
++
++
+ def credential(value):
+     from .gemini import protect, load_settings
+     profile = profiles().get(value.get('profile', ''))
+@@ -68,6 +83,8 @@ def validate_model(model):
+ async def request_audio(text, value):
+     import aiohttp
+     key = credential(value)
++    from .tts_control import before_request, error_reason, record_limit
++    await before_request(value, key)
+     if value['provider'] == 'gemini-tts':
+         url = 'https://generativelanguage.googleapis.com/v1beta/interactions'
+         headers = {'x-goog-api-key': key}
+@@ -92,12 +109,20 @@ async def request_audio(text, value):
+                     delay=response.headers.get('Retry-After','0')
+                     try: seconds=max(0,float(delay))
+                     except ValueError:
+-                        from email.utils import parsedate_to_datetime
+-                        from datetime import datetime, timezone
+                         try: seconds=max(0,(parsedate_to_datetime(delay)-datetime.now(timezone.utc)).total_seconds())
+                         except (ValueError,TypeError,OverflowError): seconds=0
+-                    if seconds>60: raise ProjectError('服務要求等待超過60秒，請稍後重試。')
+-                    raise RetryableServiceError(f'TTS HTTP {status}：服務暫時不可用，請稍後重試。',seconds)
++                    if not math.isfinite(seconds): seconds=0
++                    server_wait = bool(seconds)
++                    reason = await error_reason(response) if status == 429 else '服務暫時不可用，請稍後重試'
++                    if status == 429 and not seconds:
++                        seconds = 60
++                    if seconds:
++                        record_limit(value, key, seconds, f'TTS HTTP {status}：{reason}。')
++                    wait = (f'；{"服務要求" if server_wait else "本機保護"}等待 {math.ceil(seconds)} 秒後重試'
++                            if seconds else '')
++                    if status == 429 and ('配額已用盡' in reason or '帳務' in reason):
++                        raise ProjectError(f'TTS HTTP 429：{reason}{wait}。已停止自動重試。')
++                    raise RetryableServiceError(f'TTS HTTP {status}：{reason}{wait}。',seconds)
+                 raise ProjectError(f'TTS HTTP {status}：{reasons.get(status, "服務暫時故障，請稍後重試")}；不會自動換模型或服務。')
+             data = bytearray()
+             async for block in response.content.iter_chunked(65536):
+@@ -117,11 +142,20 @@ async def request_audio(text, value):
+ 
+ 
+ async def check_profile(identity):
+-    import aiohttp
+-    profile=profiles()[identity]
++    profile=profiles().get(identity)
++    if not profile: raise ProjectError('此服務不存在或已被移除。')
+     value=dict(provider=profile['provider'],profile=identity)
+-    key=credential(value)
+-    google=profile['provider']=='gemini-tts'
++    return await check_service(profile['provider'], credential(value))
++
++
++async def check_service(provider, key):
++    """Check a draft credential without persisting the service form."""
++    import aiohttp
++    if provider not in ('gemini-tts', 'fish-audio') or not key.strip():
++        raise ProjectError('請選服務並輸入 API 金鑰。')
++    if '\n' in key or '\r' in key: raise ProjectError('金鑰不可含換行。')
++    key=key.strip()
++    google=provider=='gemini-tts'
+     url='https://generativelanguage.googleapis.com/v1beta/voices' if google else 'https://api.fish.audio/model'
+     headers={'x-goog-api-key':key} if google else {'Authorization':'Bearer '+key}
+     async with aiohttp.ClientSession(timeout=aiohttp.ClientTimeout(total=25)) as session:
+diff --git a/ebook2mp4/voice_desktop.py b/ebook2mp4/voice_desktop.py
+index 04c91c61..dfbdcb08 100644
+--- a/ebook2mp4/voice_desktop.py
++++ b/ebook2mp4/voice_desktop.py
+@@ -34,7 +34,11 @@ class VoiceDialog(ttk.Frame):
+         self.model = tk.StringVar()
+         self.model_control = ttk.Combobox(service_panel, textvariable=self.model, width=16)
+         self.model_control.grid(row=0, column=3, sticky='ew')
+-        self.manage_button = ttk.Button(service_panel, text='新增／管理服務…', command=self.manage_services)
++        self.manage_button = ttk.Menubutton(service_panel, text='新增／管理服務…')
++        self.service_menu = tk.Menu(self.manage_button, tearoff=False, postcommand=self.update_service_menu)
++        self.service_menu.add_command(label='新增服務…', command=self.manage_services)
++        self.service_menu.add_command(label='編輯目前服務…', command=self.manage_current_service)
++        self.manage_button.configure(menu=self.service_menu)
+         self.manage_button.grid(row=0, column=4, padx=(6, 0))
+ 
+         body = ttk.Frame(self)
+@@ -206,11 +210,30 @@ class VoiceDialog(ttk.Frame):
+         if self.save(announce=False): self.app.narration()
+ 
+     def manage_services(self):
+-        if self.provider_name()=='kokoro':
+-            self.app.production.manage_local_packages(self)
+-            return
++        if self.job is not None: return
+         self.app.production.manage_services(self)
+ 
++    def update_service_menu(self):
++        identity=self.service_ids.get(self.service.get())
++        busy=self.job is not None or self.app.production.service_changes_busy()
++        self.service_menu.entryconfigure(0,state='disabled' if busy else 'normal')
++        local=identity=='kokoro'
++        self.service_menu.entryconfigure(1,label='管理本機語音包…' if local else
++                                         '編輯目前服務…（內建服務不適用）' if identity=='edge-tts' else '編輯目前服務…',
++                                         state='disabled' if busy or identity=='edge-tts' else 'normal')
++
++    def manage_current_service(self):
++        if self.service_ids.get(self.service.get())=='kokoro': self.manage_local_packages()
++        else: self.edit_service()
++
++    def manage_local_packages(self):
++        if self.job is None: self.app.production.manage_local_packages(self)
++
++    def edit_service(self):
++        identity=self.service_ids.get(self.service.get())
++        if self.job is None and identity not in (None,'edge-tts','kokoro'):
++            self.app.production.manage_services(self, profile_id=identity)
++
+     def open_defaults(self):
+         if self.job is not None or self.scope.get() != '全書預設':
+             return
+@@ -298,10 +321,8 @@ class VoiceDialog(ttk.Frame):
+             if provider=='kokoro':
+                 self.consent_control.grid_remove()
+                 self.local_notice.grid(row=2,column=0,sticky='w',pady=2)
+-                self.manage_button.configure(text='管理本機語音包…')
+             else:
+                 self.local_notice.grid_remove();self.consent_control.grid()
+-                self.manage_button.configure(text='新增／管理服務…')
+         except ProjectError as error:
+             self.status.configure(text=str(error))
+ 
+diff --git a/ebook2mp4/voice_media.py b/ebook2mp4/voice_media.py
+index 2925d706..dc6e1f74 100644
+--- a/ebook2mp4/voice_media.py
++++ b/ebook2mp4/voice_media.py
+@@ -15,6 +15,8 @@ import wave
+ 
+ from .workflow import ProjectError
+ 
++MAX_AUTOMATIC_RETRY_WAIT = 300
++
+ 
+ def ffmpeg() -> str:
+     configured = os.environ.get('EBOOK2MP4_FFMPEG')
+@@ -77,7 +79,8 @@ def cached_block(text: str, settings: dict, cache: Path) -> Path | None:
+     return None
+ 
+ 
+-async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True):
++async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True,
++                       retry_progress=None):
+     """Keep verified, immutable PCM speech independent of added pauses."""
+     from .tts_backend import capabilities, write_speech
+     from .workflow import ProjectWorkflow, digest, encode
+@@ -97,6 +100,7 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
+     with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
+         raw = Path(directory) / ('speech.mp3' if policy.requires_network else 'speech-source.wav')
+         decoded = Path(directory) / 'speech.wav'
++        waited = 0
+         for attempt in range(1, policy.max_attempts + 1):
+             if progress:
+                 progress(attempt)
+@@ -109,8 +113,20 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
+                 break
+             except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException, RetryableServiceError) as exc:
+                 if attempt == policy.max_attempts:
++                    if isinstance(exc, RetryableServiceError):
++                        raise ProjectError(f'區塊已嘗試 {policy.max_attempts} 次，服務仍未恢復。{exc}') from None
+                     raise ProjectError(f'區塊連線或服務錯誤，{policy.max_attempts} 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
+-                await asyncio.sleep(max(attempt, getattr(exc, 'retry_after', 0)))
++                delay = max(attempt, getattr(exc, 'retry_after', 0))
++                if waited + delay > MAX_AUTOMATIC_RETRY_WAIT:
++                    raise ProjectError(
++                        f'{exc} 本區塊自動等待上限為 300 秒，已停止自動重試。'
++                        '請稍後續作，或先檢查服務配額與狀態。') from None
++                if retry_progress:
++                    retry_progress(attempt, delay)
++                # Retry-After is a delay before the next request, not elapsed time.
++                # Sleep outside the per-request timeout; cancellation still interrupts it.
++                await asyncio.sleep(delay)
++                waited += delay
+         await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
+                                    '-c:a', 'pcm_s16le', str(decoded)])
+         with wave.open(str(decoded), 'rb') as source:
+diff --git a/tests/test_kokoro_desktop.py b/tests/test_kokoro_desktop.py
+index eb66355f..8b3d68a5 100644
+--- a/tests/test_kokoro_desktop.py
++++ b/tests/test_kokoro_desktop.py
+@@ -15,7 +15,7 @@ class LocalDesktop(unittest.TestCase):
+         self.assertFalse(d.refresh_button.winfo_ismapped())
+         self.assertEqual(str(d.preview_button.cget('state')),'disabled')
+         d.outgoing.delete('1.0','end');d.outgoing.insert('1.0','保留試聽編輯。')
+-        d.manage_button.invoke();self.root.update()
++        d.update_service_menu();d.service_menu.invoke(1);self.root.update()
+         page=self.app.production.package_page
+         self.assertTrue(page.winfo_ismapped())
+         page.back_button.invoke();self.root.update()
+diff --git a/tests/test_production_pages.py b/tests/test_production_pages.py
+index 55520447..55d83628 100644
+--- a/tests/test_production_pages.py
++++ b/tests/test_production_pages.py
+@@ -45,7 +45,7 @@ class ProductionPages(unittest.TestCase):
+         self.app.voice_settings()
+         self.root.update()
+         self.assertEqual(voice.outgoing.get('1.0', 'end-1c'), '往返後仍保留的試聽文字。')
+-        voice.manage_button.invoke()
++        voice.service_menu.invoke(0)
+         self.root.update()
+         service = self.app.production.service_page
+         self.assertIs(service.winfo_toplevel(), self.root)
+@@ -57,7 +57,7 @@ class ProductionPages(unittest.TestCase):
+         self.app.refresh()
+         self.app.voice_settings()
+         other_voice=self.app.voice_dialog
+-        other_voice.manage_button.invoke()
++        other_voice.service_menu.invoke(0)
+         self.root.update()
+         self.assertIs(service.owner,other_voice)
+         service.close()
+diff --git a/tests/test_tts_providers.py b/tests/test_tts_providers.py
+index 92d3fed0..3a62ddaf 100644
+--- a/tests/test_tts_providers.py
++++ b/tests/test_tts_providers.py
+@@ -94,14 +94,14 @@ class ProviderDesktop(unittest.TestCase):
+         self.assertEqual(self.dialog.current_settings()['model'],'future-voice-model')
+         self.dialog.service.set('Edge-TTS');self.dialog.change_service()
+         self.assertEqual(str(self.dialog.model_control.cget('state')),'disabled')
+-        self.dialog.manage_button.invoke()
++        self.dialog.service_menu.invoke(0)
+         window=self.app.production.service_page;self.addCleanup(window.close);self.root.update()
+         self.assertEqual(int(window.status.grid_info()['row']),8)
+ 
+     def test_check_service_reads_complete_chunked_json(self):
+         import time
+         from ebook2mp4.service_desktop import ServiceDialog
+-        self.dialog.manage_button.invoke()
++        self.dialog.service_menu.invoke(0)
+         window=self.app.production.service_page;self.addCleanup(window.close)
+         window.key.set('test-key')
+         class Content:
