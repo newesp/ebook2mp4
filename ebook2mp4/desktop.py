@@ -1268,6 +1268,13 @@ class Workbench(ttk.Frame):
         self.render_step()
         self.production.show('assembly')
 
+    def batch_video(self):
+        if not self.flow or not self.batch_id:
+            return
+        self.step = 4
+        self.render_step()
+        self.production.show('batch_video')
+
     def total_video(self):
         if not self.flow:
             return

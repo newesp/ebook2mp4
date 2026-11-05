@@ -6,3 +6,5 @@
 - 執行 `python packaging/prepare_voice.py <ffmpeg.exe 的完整路徑>` 校驗後放入 `.scratch/voice-runtime`，PyInstaller 收錄為 `_internal/tools/ffmpeg/ffmpeg.exe`；授權全文為 `licenses/FFmpeg-LICENSE.txt`。不依賴系統 PATH 的 FFmpeg。
 - 開發時可設 `EBOOK2MP4_FFMPEG` 明確指定工具、`EBOOK2MP4_VOICE_HOME` 指定音色快取目錄。一般使用者從完整封裝直接啟動。
 - T23 仍需整理所有依賴及 FFmpeg build configuration 對應的完整源碼／交付義務與乾淨 Windows 安裝驗收；本開發成品及以上來源連結不等於已完成 T23 發布驗收。
+
+T17 背景 MP4 檢查另收錄同一本機已安裝 Gyan FFmpeg 8.1.1 build 的 `ffprobe.exe`，SHA-256 `0fde260f5abd35c9cafd96f594cc76365a780c1b73a90e35b6a3409ea1db1bf0`。沿用上述 GPL 授權及 build configuration。`prepare_voice.py` 會同時校驗並複製相鄰的 FFprobe，正式包由 `_internal/tools/ffmpeg/ffprobe.exe` 讀取串流資訊，不依賴系統 PATH。開發環境可用 `EBOOK2MP4_FFPROBE` 指定工具。

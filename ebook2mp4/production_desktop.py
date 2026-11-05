@@ -65,7 +65,7 @@ class ProductionWorkspace(ttk.Frame):
         self.current = page
         page.grid(row=0, column=0, sticky='nsew')
         self.refresh_task_controls()
-        kind = 'assembly' if getattr(page, 'kind', None) in ('assembly', 'video') else 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
+        kind = 'narration' if getattr(page, 'batch_id', None) and getattr(page, 'kind', None) == 'video' else 'assembly' if getattr(page, 'kind', None) in ('assembly', 'video') else 'voice' if hasattr(page, 'kind') or page is self.service_page else 'narration'
         self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
         self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
         self.assembly_tab.configure(style='CompactActive.TButton' if kind == 'assembly' else 'Compact.TButton')
@@ -81,6 +81,9 @@ class ProductionWorkspace(ttk.Frame):
             elif kind == 'video':
                 from .total_video_desktop import TotalVideoPage
                 page = TotalVideoPage(app)
+            elif kind == 'batch_video':
+                from .total_video_desktop import TotalVideoPage
+                page = TotalVideoPage(app, app.batch_id)
             elif kind == 'voice':
                 from .voice_desktop import VoiceDialog
                 page = VoiceDialog(app)
@@ -96,7 +99,7 @@ class ProductionWorkspace(ttk.Frame):
             page.load_result()
         if kind == 'assembly':
             page.recheck()
-        if kind == 'video':
+        if kind in ('video', 'batch_video'):
             page.recheck()
         return page
 
@@ -124,7 +127,7 @@ class ProductionWorkspace(ttk.Frame):
         self.grid_remove()
 
     def active_page(self):
-        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly', 'video') and p.winfo_exists() and p.job is not None), None)
+        return next((p for k, p in self.pages.items() if k[2] in ('narration', 'assembly', 'video', 'batch_video') and p.winfo_exists() and p.job is not None), None)
 
     def show_active(self):
         page = self.active_page()
@@ -134,7 +137,7 @@ class ProductionWorkspace(ttk.Frame):
         if page is None:
             return
         app = self.app
-        if getattr(page, 'kind', None) in ('assembly', 'video'):
+        if getattr(page, 'kind', None) in ('assembly', 'video') and not getattr(page, 'batch_id', None):
             if app.flow is not page.flow:
                 if not app.may_leave():
                     return
@@ -147,14 +150,14 @@ class ProductionWorkspace(ttk.Frame):
                 return
             app.flow, app.batch_id = page.flow, page.batch_id
             app.refresh()
-        app.narration()
+        (app.batch_video if getattr(page, 'kind', None) == 'video' else app.narration)()
 
     def poll(self):
         self.timer = None
         page = self.active_page()
         if page is not None:
             state = page.job.state
-            batch = '全書製片' if getattr(page, 'kind', None) == 'video' else '全書合併' if getattr(page, 'kind', None) == 'assembly' else next((b['name'] for b in page.flow.state['batches'] if b['id'] == page.batch_id), '原批次')
+            batch = '全書製片' if getattr(page, 'kind', None) == 'video' and not getattr(page, 'batch_id', None) else '全書合併' if getattr(page, 'kind', None) == 'assembly' else next((b['name'] for b in page.flow.state['batches'] if b['id'] == page.batch_id), '原批次')
             self.task_button.configure(text=f'{batch}｜{state.get("phase", "製作中")}｜完成 {state.get("completed", 0)}/{state.get("total", 0)} · 返回任務 →')
             self.task_button.grid(row=4, column=0, sticky='ew')
         else:

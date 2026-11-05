@@ -102,6 +102,8 @@ class NarrationDialog(ttk.Frame):
         outputs.columnconfigure(0,weight=1)
         self.result_info=ttk.Label(outputs,text='',width=1)
         self.result_info.grid(row=0,column=0,sticky='ew')
+        self.video_button = ttk.Button(outputs, text='加入素材，製作 MP4 →', command=self.app.batch_video)
+        self.video_button.grid(row=0,column=1,sticky='e')
         self.play_button=ttk.Button(outputs,text='播放成品',command=self.play)
         self.stop_button=ttk.Button(outputs,text='停止播放',command=self.stop)
         self.export_button=ttk.Button(outputs,text='另存 MP3／SRT',command=self.export)

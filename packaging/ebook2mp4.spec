@@ -15,6 +15,8 @@ certificate_datas, certificate_binaries, certificate_imports = collect_all('cert
 voice_runtime = Path(SPECPATH).parent / '.scratch' / 'voice-runtime'
 if not (voice_runtime / 'ffmpeg.exe').is_file():
     raise RuntimeError('Run packaging/prepare_voice.py with verified FFmpeg before building.')
+if not (voice_runtime / 'ffprobe.exe').is_file():
+    raise RuntimeError('Run packaging/prepare_voice.py with matching verified FFprobe before building.')
 ocr_runtime = Path(SPECPATH).parent / '.scratch' / 'ocr-runtime'
 if not (ocr_runtime / 'tesseract.exe').is_file():
     raise RuntimeError('Run packaging/prepare_ocr.py with build dependencies before building.')

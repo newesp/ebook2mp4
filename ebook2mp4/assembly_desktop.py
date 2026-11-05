@@ -46,7 +46,7 @@ class AssemblyPage(ttk.Frame):
         steps.grid(row=0, column=0, sticky='w')
         ttk.Button(steps, text='① 合併音訊', style='CompactActive.TButton').pack(side='left')
         ttk.Label(steps, text=' → ').pack(side='left')
-        self.video_step = ttk.Button(steps, text='② 製作影片', command=self.open_video)
+        self.video_step = ttk.Button(steps, text='② 製作影片', command=self.open_video, style='Compact.TButton')
         self.video_step.pack(side='left')
         ttk.Label(header, text='本機合併 · 不傳送文字').grid(row=0, column=1, sticky='e')
         toolbar = ttk.Frame(main)
@@ -135,7 +135,7 @@ class AssemblyPage(ttk.Frame):
         self.saved_label.grid(row=0, column=1, sticky='ew', padx=6)
         self.start_button = ttk.Button(actions, text='4 製作總 MP3／SRT →', command=self.start, style='Primary.TButton')
         self.start_button.grid(row=0, column=2, sticky='e')
-        self.video_button = ttk.Button(actions, text='加入圖片，製作 MP4 →', command=self.open_video, style='Primary.TButton')
+        self.video_button = ttk.Button(actions, text='加入視覺素材，製作 MP4 →', command=self.open_video, style='Primary.TButton')
         self.video_button.grid(row=0, column=2, sticky='e')
         self.video_button.grid_remove()
         self.cancel_button = ttk.Button(actions, text='取消任務', command=self.cancel)
@@ -374,7 +374,7 @@ class AssemblyPage(ttk.Frame):
                     self.last_status = last['status'] if last else ''
                     labels = dict(cancelled='已取消', failed='失敗', interrupted='已中斷', completed='已完成')
                     self.status.configure(text=(f'上次合併：{labels.get(last["status"], "未完成")}。'+last.get('error', '')+' 舊成品保留，可重新合併。'
-                        if last and last['status'] != 'completed' else '音訊已完成。可取用成品，或加入圖片製作 MP4。'
+                        if last and last['status'] != 'completed' else '音訊已完成。可取用成品，或加入圖片／背景影片製作 MP4。'
                         if self.product and not self.product['stale'] else '請依序選批次、設定交接停頓，再製作總音訊。'))
                     if warning:
                         self.status.configure(text=warning)

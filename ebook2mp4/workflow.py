@@ -1068,6 +1068,11 @@ class ProjectWorkflow:
         from .assembly import settings
         return settings(self)
 
+    def batch_video_target(self, batch_id: str):
+        """Use the shared video workflow with isolated batch settings and outputs."""
+        from .video_target import BatchVideoTarget
+        return BatchVideoTarget(self, batch_id)
+
     def total_video_settings(self) -> dict:
         from .total_video import settings
         return settings(self)
@@ -1077,9 +1082,16 @@ class ProjectWorkflow:
         from .total_video import inspect_image
         return inspect_image(path)
 
-    def save_total_video_settings(self, *, image=None, resolution: str = '1080p') -> None:
+    @staticmethod
+    def inspect_total_video_background(path: str | Path):
+        import asyncio
+        from .total_video import inspect_background
+        return asyncio.run(inspect_background(path))
+
+    def save_total_video_settings(self, *, image=None, resolution: str = '1080p', background=None,
+                                  source_type: str | None = None, background_mode: str | None = None) -> None:
         from .total_video import save_settings
-        save_settings(self, image, resolution)
+        save_settings(self, image, resolution, background=background, source_type=source_type, background_mode=background_mode)
 
     def inspect_total_video(self) -> dict:
         import asyncio
@@ -1099,7 +1111,8 @@ class ProjectWorkflow:
         return finish(self, job)
 
     def discard_total_video(self, job: TotalVideoJob) -> None:
-        if job is not self._total_video_job:
+        if (job is not self._total_video_job
+                or job.snapshot.get('batch_id') != getattr(self, 'batch_id', None)):
             raise ProjectError('找不到所屬製片任務。')
         job.release(discard=True)
         self._total_video_job = None
