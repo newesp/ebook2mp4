@@ -30,7 +30,7 @@ class JoinPage(ttk.Frame):
         self.accepted = tk.BooleanVar(value=False)
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1, minsize=70)
-        ttk.Label(self, text='3 檢查交接接點 · 對照文字，再試聽', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
+        ttk.Label(self, text='2 檢查影音接點 · 對照畫面與文字，再播放' if self.movie else '3 檢查交接接點 · 對照文字，再試聽', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
         selection = ttk.Frame(self)
         selection.grid(row=1, column=0, sticky='ew', pady=4)
         selection.columnconfigure(1, weight=1)

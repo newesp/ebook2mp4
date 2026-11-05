@@ -102,7 +102,7 @@ class AssemblyPage(ttk.Frame):
         options = ttk.Frame(main)
         options.grid(row=3, column=0, sticky='ew', pady=6)
         options.columnconfigure(3, weight=1)
-        ttk.Label(options, text='2 額外交接停頓').grid(row=0, column=0, sticky='w')
+        ttk.Label(options, text='額外交接停頓' if self.movie else '2 額外交接停頓').grid(row=0, column=0, sticky='w')
         self.pause_control = ttk.Combobox(options, textvariable=self.pause, values=('0', '0.5', '1', '2', '5'), width=6)
         self.pause_control.grid(row=0, column=1, padx=6)
         ttk.Label(options, text='秒').grid(row=0, column=2)
@@ -170,7 +170,8 @@ class AssemblyPage(ttk.Frame):
             self.resolution = tk.StringVar(value=resolution(self.flow))
             self.resolution_control = ttk.Combobox(options, textvariable=self.resolution, state='readonly',
                 values=('1080p', '720p'), width=7)
-            self.resolution_control.grid(row=0, column=5, padx=(6, 0))
+            ttk.Label(options, text='解析度').grid(row=0, column=5, padx=(6, 0))
+            self.resolution_control.grid(row=0, column=6, padx=(6, 0))
             self.resolution.trace_add('write', lambda *_: self.changed())
             options.grid()
             for child in steps.winfo_children(): child.destroy()
@@ -568,7 +569,8 @@ class AssemblyPage(ttk.Frame):
             self.movie_labels()
         self.settings_button.configure(state='disabled' if busy else 'normal')
         self.join_button.configure(text='檢查接點')
-        self.join_summary.configure(text=self.summary.cget('text') + (f' · {pending} 個警告待確認' if joins and pending else ''))
+        self.join_summary.configure(text=(f'2 檢查 {len(joins)} 個接點' if self.movie else self.summary.cget('text'))
+            + (f' · {pending} 個警告待確認' if joins and pending else ''))
 
     def open_joins(self):
         if self.join_button.instate(['disabled']):
