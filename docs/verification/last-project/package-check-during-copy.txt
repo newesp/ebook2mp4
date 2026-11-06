@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\.scratch\last-project-session\check_package.py", line 12, in <module>
+    assert path.stem in ('__main__','kokoro_worker','ui_mock'),name
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ebook2mp4.app_session

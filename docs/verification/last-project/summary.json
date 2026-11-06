@@ -1,0 +1,104 @@
+{
+  "feature": "啟動時載入上次成功專案",
+  "baseline": "0360e71ac2afbcb9decb068cc6c2a231b5c00640",
+  "native_tests": 7,
+  "native_tests_passed": true,
+  "standards_findings": 0,
+  "spec_findings": 0,
+  "private_books_read": false,
+  "official_distribution": "dist/ebook2mp4",
+  "notes": [
+    "make_app defaults to isolated workbench for existing fixtures; desktop.main enables restoration.",
+    "Existing uncommitted changes remain outside the feature commit."
+  ],
+  "regression_notes": [
+    "Existing batch-video GUI cleanup emitted invalid command name ...poll Tcl warnings; case result remained ok. Full suite log preserves warnings."
+  ],
+  "build_staging": ".scratch/last-project-session/package-stage (temporary only; official distribution remains dist/ebook2mp4)",
+  "full_suite_cases": 333,
+  "full_suite_seconds": 926.792,
+  "initial_passed": 314,
+  "initial_errors": 1,
+  "skipped": 18,
+  "final_passed": 315,
+  "unresolved_failures": 0,
+  "skips": [
+    [
+      "test_real_package_preview_reopen_and_offline_formal_reuse (test_kokoro.LocalPackageJourney.test_real_package_preview_reopen_and_offline_formal_reuse)",
+      "'real offline package required'"
+    ],
+    [
+      "test_retry_compare_reject_and_preserve_unsaved_editor (test_mixed_desktop.MixedDesktopJourney.test_retry_compare_reject_and_preserve_unsaved_editor)",
+      "'requires real OCR models and engine'"
+    ],
+    [
+      "test_all_three_rotations_recover_sideways_or_upside_down_scans (test_mixed_pdf.MixedPdfJourney.test_all_three_rotations_recover_sideways_or_upside_down_scans)",
+      "'requires real models and engine'"
+    ],
+    [
+      "test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation (test_mixed_pdf.MixedPdfJourney.test_auto_and_retry_digit_only_ocr_require_explicit_page_confirmation)",
+      "'requires real models and engine'"
+    ],
+    [
+      "test_auto_retry_selected_candidate_preserves_corrected_original_and_confirmations (test_mixed_pdf.MixedPdfJourney.test_auto_retry_selected_candidate_preserves_corrected_original_and_confirmations)",
+      "'requires real models and engine'"
+    ],
+    [
+      "test_failed_only_recovers_and_publication_failure_keeps_candidate (test_mixed_pdf.MixedPdfJourney.test_failed_only_recovers_and_publication_failure_keeps_candidate)",
+      "'requires real models and engine'"
+    ],
+    [
+      "test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections (test_mixed_pdf.MixedPdfJourney.test_retry_raw_draft_reopens_resolutions_that_depended_on_manual_corrections)",
+      "'requires real models and engine'"
+    ],
+    [
+      "test_real_cancellation_keeps_complete_pages_and_failed_engine_is_not_success (test_ocr.RealOcrJourney.test_real_cancellation_keeps_complete_pages_and_failed_engine_is_not_success)",
+      "'requires real downloaded models and engine'"
+    ],
+    [
+      "test_three_real_scripts_blank_page_and_retry_preserve_corrected_snapshot (test_ocr.RealOcrJourney.test_three_real_scripts_blank_page_and_retry_preserve_corrected_snapshot)",
+      "'requires real downloaded models and engine'"
+    ],
+    [
+      "test_user_book_nine_scanned_pages_export_to_utf8_txt (test_ocr.RealOcrJourney.test_user_book_nine_scanned_pages_export_to_utf8_txt)",
+      "'requires real downloaded models and engine'"
+    ],
+    [
+      "test_verified_model_install_and_cancel_release_download_resources (test_ocr.RealOcrJourney.test_verified_model_install_and_cancel_release_download_resources)",
+      "'requires real downloaded models and engine'"
+    ],
+    [
+      "test_model_failure_retry_and_explicit_candidate_acceptance (test_ocr_desktop.OcrDesktopJourney.test_model_failure_retry_and_explicit_candidate_acceptance)",
+      "'requires real downloaded models and engine'"
+    ],
+    [
+      "test_auto_language_recovers_reported_title_without_script_conversion (test_ocr_optimization.OcrOptimization.test_auto_language_recovers_reported_title_without_script_conversion)",
+      "'requires supplied book and real models'"
+    ],
+    [
+      "test_high_confidence_bad_region_still_needs_check_in_chinese_context (test_ocr_optimization.OcrOptimization.test_high_confidence_bad_region_still_needs_check_in_chinese_context)",
+      "'requires supplied book and real models'"
+    ],
+    [
+      "test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft (test_ocr_optimization.OcrOptimization.test_region_retry_replaces_only_selected_raw_text_and_keeps_manual_draft)",
+      "'requires supplied book and real models'"
+    ],
+    [
+      "test_region_validation_and_cancellation_preserve_original_page_text (test_ocr_optimization.OcrOptimization.test_region_validation_and_cancellation_preserve_original_page_text)",
+      "'requires supplied book and real models'"
+    ],
+    [
+      "test_small_screenshot_stays_pending_when_confidence_is_low (test_ocr_optimization.OcrOptimization.test_small_screenshot_stays_pending_when_confidence_is_low)",
+      "'requires supplied book and real models'"
+    ],
+    [
+      "test_canvas_region_and_selected_raw_text_produce_partial_candidate (test_optimization_desktop.OptimizationDesktop.test_canvas_region_and_selected_raw_text_produce_partial_candidate)",
+      "'requires installed model files'"
+    ]
+  ],
+  "media_retry": "Missing EBOOK2MP4_FFPROBE in harness; case passed after supplying bundled FFprobe. No application source change.",
+  "isolated_native_cases": 6,
+  "isolated_native_passed": true,
+  "packaged_restart_passed": true,
+  "synthetic_book_unchanged": true
+}

@@ -1,0 +1,31 @@
+{
+  "preserved": [
+    "dist/ebook2mp4",
+    "docs/verification/last-project",
+    "docs/mock-ui",
+    "user projects and models",
+    "two old 2026-11-02 test-run directories"
+  ],
+  "targets": [
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\last-project-session",
+      "bytes": 1220123060.0
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 202708992.0
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362.0
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "bytes": 163044.0
+    }
+  ]
+}

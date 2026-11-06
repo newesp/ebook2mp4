@@ -1,0 +1,13 @@
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+{"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 1600, "audio_ms": 1600}
+{"kind": "merged-video", "batches": 2, "pause_ms": 0, "video_ms": 400, "audio_ms": 405}
+{"kind": "merged-video", "batches": 2, "pause_ms": 5000, "video_ms": 5400, "audio_ms": 5419}
+{"kind": "merged-video", "batches": 3, "pause_ms": 17, "video_ms": 633, "audio_ms": 640}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 33.358s
+
+OK

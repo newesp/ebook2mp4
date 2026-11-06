@@ -1,0 +1,13 @@
+{
+  "exe": "dist/ebook2mp4/ebook2mp4.exe",
+  "isolated_settings": true,
+  "manual_open_saved_record": true,
+  "normal_first_exit": true,
+  "second_launch_without_file_dialog": true,
+  "window_title": "啟動載入驗證・合成書籍 — ebook2mp4",
+  "visible_saved_draft": "已保存校對稿：重新開啟後應自動顯示。",
+  "visible_status": "已自動載入上次專案。",
+  "normal_second_exit": true,
+  "book_hashes_unchanged": true,
+  "evidence": "Native CUA window inventory and screenshot observed in this chat; no unrelated application images retained as files."
+}

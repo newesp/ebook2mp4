@@ -1,0 +1,6 @@
+test_relaunch_loads_last_successfully_opened_book_and_saved_draft (test_last_project.LastProjectJourney.test_relaunch_loads_last_successfully_opened_book_and_saved_draft) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.482s
+
+OK

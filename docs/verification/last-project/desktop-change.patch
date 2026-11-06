@@ -1,0 +1,88 @@
+--- a/ebook2mp4/desktop.py
++++ b/ebook2mp4/desktop.py
+@@ -47,9 +47,10 @@
+ 
+ 
+ class Workbench(ttk.Frame):
+-    def __init__(self, root):
++    def __init__(self, root, *, restore_last_project=False):
+         super().__init__(root, padding=16)
+         self.root = root
++        self.remember_last_project = restore_last_project
+         self.flow: ProjectWorkflow | None = None
+         self.batch_id: str | None = None
+         self.saved_text = ''
+@@ -75,6 +76,32 @@
+         self.root.bind('<Control-f>', self.focus_search)
+         self.root.bind('<F6>', self.toggle_focus)
+         self.refresh()
++
++    def restore_project(self) -> None:
++        from .app_session import last_project
++        try:
++            path = last_project()
++            if path is None:
++                return
++            flow = ProjectWorkflow.open(path)
++            self.flow = flow
++            self.batch_id = None
++            self.step = 2 if flow.state['batches'] else 1
++            self.refresh()
++            self.status.configure(text='已自動載入上次專案。')
++        except ProjectError as error:
++            self.status.configure(text='無法自動載入上次專案。'+str(error)+
++                                  ' 請從「專案 → 開啟專案」重新選擇。')
++
++    def remember_project(self) -> None:
++        if not self.remember_last_project or self.flow is None:
++            return
++        from .app_session import remember_project
++        try:
++            remember_project(self.flow.root)
++        except ProjectError as error:
++            self.status.configure(text=str(error))
++            self.notify(str(error), kind='error')
+ 
+     def _build(self):
+         from .ui_controls import CellTooltip, MenuAction, MessageLine, command_menu
+@@ -694,6 +721,7 @@
+             self.step = 1
+             self.refresh()
+             self.notify('書籍專案已建立。')
++            self.remember_project()
+         except ProjectError as e:
+             self.report(e)
+ 
+@@ -710,6 +738,7 @@
+             self.step = 2 if flow.state['batches'] else 1
+             self.refresh()
+             self.notify('書籍專案已開啟。')
++            self.remember_project()
+         except ProjectError as e:
+             self.report(e)
+ 
+@@ -1341,7 +1370,8 @@
+             self.report(e)
+ 
+ 
+-def make_app():
++def make_app(*, restore_last_project=False):
++    """Create a workbench; production startup opts into per-user restoration."""
+     root = tk.Tk()
+     from .window_layout import install_dialog_placement
+     install_dialog_placement(root)
+@@ -1373,9 +1403,12 @@
+             root.unbind('<Map>', startup_binding)
+             root.after_idle(lambda: root.state('zoomed') if root.winfo_exists() else None)
+     startup_binding = root.bind('<Map>', maximize_on_first_map)
+-    return root, Workbench(root)
++    app = Workbench(root, restore_last_project=restore_last_project)
++    if restore_last_project:
++        app.restore_project()
++    return root, app
+ 
+ 
+ def main():
+-    root, _app = make_app()
++    root, _app = make_app(restore_last_project=True)
+     root.mainloop()

@@ -1,0 +1,18 @@
+test_relaunch_loads_last_successfully_opened_book_and_saved_draft (test_last_project.LastProjectJourney.test_relaunch_loads_last_successfully_opened_book_and_saved_draft) ... ERROR
+
+======================================================================
+ERROR: test_relaunch_loads_last_successfully_opened_book_and_saved_draft (test_last_project.LastProjectJourney.test_relaunch_loads_last_successfully_opened_book_and_saved_draft)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_last_project.py", line 48, in test_relaunch_loads_last_successfully_opened_book_and_saved_draft
+    root, app = self.launch()
+                ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_last_project.py", line 26, in launch
+    root, app = make_app(restore_last_project=True)
+                ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: make_app() got an unexpected keyword argument 'restore_last_project'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.408s
+
+FAILED (errors=1)

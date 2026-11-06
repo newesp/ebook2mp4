@@ -1,0 +1,12 @@
+test_bad_session_record_does_not_block_manual_open (test_last_project.LastProjectJourney.test_bad_session_record_does_not_block_manual_open) ... ok
+test_cancelled_or_failed_open_keeps_last_successful_project (test_last_project.LastProjectJourney.test_cancelled_or_failed_open_keeps_last_successful_project) ... ok
+test_create_is_remembered_and_no_record_starts_empty (test_last_project.LastProjectJourney.test_create_is_remembered_and_no_record_starts_empty) ... ok
+test_missing_or_corrupt_book_leaves_usable_empty_workbench (test_last_project.LastProjectJourney.test_missing_or_corrupt_book_leaves_usable_empty_workbench) ... ok
+test_relaunch_loads_last_successfully_opened_book_and_saved_draft (test_last_project.LastProjectJourney.test_relaunch_loads_last_successfully_opened_book_and_saved_draft) ... ok
+test_unwritable_settings_does_not_fail_project_open (test_last_project.LastProjectJourney.test_unwritable_settings_does_not_fail_project_open) ... ok
+test_main_window_starts_maximized (test_startup_defaults.StartupDefaults.test_main_window_starts_maximized) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 13.464s
+
+OK
