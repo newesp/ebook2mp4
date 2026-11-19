@@ -26,6 +26,8 @@
 
 `verify.ps1` 先解析 Python 的實際路徑，再針對該執行檔建立 outbound block 規則。每個 worker 在安裝 Python audit guard **之前**，先對 `1.1.1.1:443` 執行真實連線探測；連線成功就停止，不會誤列離線通過。探測後，audit guard 額外拒絕 Python 連線、DNS 及 UDP 傳送，並設 Hugging Face／Transformers 離線模式。每個 worker 都使用新建且空白的 HOME、HF、Torch、XDG、TEMP 目錄。模型只以本地路徑載入，無需模型快取。
 
+以 `./tools/kokoro_k01/verify.ps1 -Numbers` 重跑兩個音色的數字樣本。要求 Windows 錯誤 10013 才繼續，逾時或其他連線失敗會中止。數字規則只作用於這輪的合成副本，輸出後綴為 `t2s-numbers`，原本的 `t2s` 基準音檔仍可比較。此模式結束時會清掉自己新建的隔離目錄。
+
 只允許本工具新增的單一防火牆規則；`finally` 移除規則。不變更整台電腦的連線或預設防火牆政策。若強制結束 PowerShell 而無法執行 `finally`，依 `firewall.json` 中的規則名稱移除殘留規則，再重跑。
 
 ## 推論與文字政策

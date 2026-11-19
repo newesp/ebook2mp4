@@ -1,0 +1,147 @@
+{
+  "label": "numbers-followup",
+  "pid": 2424,
+  "reason": "close",
+  "termination_seconds": 3.4324152000008326,
+  "peak_working_set_bytes": 1928372224,
+  "returncode": 0,
+  "pid_alive": false,
+  "events": [
+    {
+      "elapsed": 1.1541723999998794,
+      "event": "os_network_probe",
+      "blocked": true,
+      "error": "PermissionError(13, '\u5617\u8a66\u5b58\u53d6\u901a\u8a0a\u7aef\u88ab\u62d2\u7d55\uff0c\u56e0\u70ba\u5b58\u53d6\u6b0a\u9650\u4e0d\u8db3\u3002', None, 10013, None)",
+      "seconds": 0.38236680000045453
+    },
+    {
+      "elapsed": 1.1542822999999771,
+      "event": "loading",
+      "pid": 2424
+    },
+    {
+      "elapsed": 167.42171919999964,
+      "event": "model_loading"
+    },
+    {
+      "elapsed": 200.616272199999,
+      "event": "ready",
+      "import_seconds": 166.26738020000084,
+      "model_frontend_seconds": 33.18938039999921,
+      "load_seconds": 199.45676540000022,
+      "torch": "2.15.0+cpu",
+      "cuda": null,
+      "devices": [
+        "cpu"
+      ],
+      "threads": 4
+    },
+    {
+      "elapsed": 201.53490280000005,
+      "event": "inference",
+      "sample": "numbers-zf_001-t2s-numbers",
+      "segment": 0,
+      "phonemes": 78
+    },
+    {
+      "elapsed": 208.47390059999998,
+      "event": "segment_done",
+      "sample": "numbers-zf_001-t2s-numbers",
+      "segments": 1,
+      "audio_seconds": 6.025
+    },
+    {
+      "elapsed": 208.48266329999933,
+      "event": "inference",
+      "sample": "numbers-zf_001-t2s-numbers",
+      "segment": 1,
+      "phonemes": 62
+    },
+    {
+      "elapsed": 211.81976079999913,
+      "event": "segment_done",
+      "sample": "numbers-zf_001-t2s-numbers",
+      "segments": 2,
+      "audio_seconds": 10.925
+    },
+    {
+      "elapsed": 211.82390779999878,
+      "event": "inference",
+      "sample": "numbers-zf_001-t2s-numbers",
+      "segment": 2,
+      "phonemes": 52
+    },
+    {
+      "elapsed": 215.5233215999997,
+      "event": "segment_done",
+      "sample": "numbers-zf_001-t2s-numbers",
+      "segments": 3,
+      "audio_seconds": 15.525
+    },
+    {
+      "elapsed": 215.75286609999966,
+      "event": "completed",
+      "file": "numbers-zf_001-t2s-numbers.wav",
+      "seconds": 15.11149689999911,
+      "audio_seconds": 15.525,
+      "real_time_factor": 0.9733654492753187
+    },
+    {
+      "elapsed": 215.80676820000008,
+      "event": "inference",
+      "sample": "numbers-zm_010-t2s-numbers",
+      "segment": 0,
+      "phonemes": 78
+    },
+    {
+      "elapsed": 220.07558040000004,
+      "event": "segment_done",
+      "sample": "numbers-zm_010-t2s-numbers",
+      "segments": 1,
+      "audio_seconds": 6.05
+    },
+    {
+      "elapsed": 220.08205660000021,
+      "event": "inference",
+      "sample": "numbers-zm_010-t2s-numbers",
+      "segment": 1,
+      "phonemes": 62
+    },
+    {
+      "elapsed": 223.3891719000003,
+      "event": "segment_done",
+      "sample": "numbers-zm_010-t2s-numbers",
+      "segments": 2,
+      "audio_seconds": 10.774999999999999
+    },
+    {
+      "elapsed": 223.39550000000054,
+      "event": "inference",
+      "sample": "numbers-zm_010-t2s-numbers",
+      "segment": 2,
+      "phonemes": 52
+    },
+    {
+      "elapsed": 226.96706640000048,
+      "event": "segment_done",
+      "sample": "numbers-zm_010-t2s-numbers",
+      "segments": 3,
+      "audio_seconds": 15.299999999999999
+    },
+    {
+      "elapsed": 227.3912034999994,
+      "event": "completed",
+      "file": "numbers-zm_010-t2s-numbers.wav",
+      "seconds": 11.631751900000381,
+      "audio_seconds": 15.299999999999999,
+      "real_time_factor": 0.7602453725490004
+    },
+    {
+      "event": "unload",
+      "reason": "close"
+    }
+  ],
+  "cache_files": [
+    "numbers-followup\\temp\\jieba.cache"
+  ]
+}

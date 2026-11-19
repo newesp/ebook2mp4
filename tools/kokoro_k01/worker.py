@@ -10,6 +10,8 @@ import sys
 import threading
 import time
 
+from number_reading import normalize_numbers
+
 ROOT = Path(__file__).resolve().parents[2]
 EVIDENCE = ROOT / 'docs/verification/kokoro-k01'
 BUNDLE = ROOT / 'outputs/kokoro-k01'
@@ -30,10 +32,15 @@ def main():
     probe = time.perf_counter()
     try:
         with socket.create_connection(('1.1.1.1', 443), timeout=2):
-            emit('os_network_probe', blocked=False)
-            raise RuntimeError('OS firewall did not block worker')
-    except (TimeoutError, OSError) as error:
-        emit('os_network_probe', blocked=True, error=repr(error), seconds=time.perf_counter()-probe)
+            pass
+    except OSError as error:
+        blocked = getattr(error, 'winerror', None) == 10013
+        emit('os_network_probe', blocked=blocked, error=repr(error), seconds=time.perf_counter()-probe)
+        if not blocked:
+            raise RuntimeError('OS firewall block was not verified') from error
+    else:
+        emit('os_network_probe', blocked=False)
+        raise RuntimeError('OS firewall did not block worker')
     sys.addaudithook(deny_network)
     emit('loading', pid=os.getpid())
     start = time.perf_counter()
@@ -81,7 +88,9 @@ def main():
         voice = command['voice']
         policy = command.get('policy', 't2s')
         original = sample['text']
-        synthesis = converter.convert(original) if policy == 't2s' else original
+        synthesis = converter.convert(original) if policy in ('t2s', 't2s-numbers') else original
+        if policy == 't2s-numbers':
+            synthesis = normalize_numbers(synthesis)
         filename = f"{sample['id']}-{voice}-{policy}"
         started = time.perf_counter()
         pack = pipeline.load_voice(str(model_dir/'voices'/f'{voice}.pt'))

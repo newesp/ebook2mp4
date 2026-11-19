@@ -7,6 +7,7 @@ import platform
 import queue
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import psutil
@@ -19,9 +20,10 @@ SAMPLES = json.loads((Path(__file__).with_name('samples.json')).read_text(encodi
 
 
 class Worker:
-    def __init__(self, label):
+    def __init__(self, label, scratch=SCRATCH):
         self.label = label
-        private = SCRATCH/label
+        self.scratch = scratch
+        private = scratch/label
         assert not private.exists(), 'Use a fresh isolated cache directory'
         for sub in ('home', 'temp', 'hf', 'torch', 'xdg'):
             (private/sub).mkdir(parents=True)
@@ -83,7 +85,7 @@ class Worker:
 
     def finish(self, reason):
         started = time.perf_counter()
-        if reason == 'cancel':
+        if reason == 'cancel' and self.process.poll() is None:
             self.process.kill()
         elif reason == 'close':
             self.send({'action':'close'})
@@ -103,15 +105,37 @@ class Worker:
         result = dict(label=self.label, pid=self.pid, reason=reason,
                       termination_seconds=elapsed, peak_working_set_bytes=self.peak,
                       returncode=self.process.returncode, pid_alive=alive, events=self.events,
-                      cache_files=[str(p.relative_to(SCRATCH)) for p in (SCRATCH/self.label).rglob('*') if p.is_file()])
+                      cache_files=[str(p.relative_to(self.scratch)) for p in (self.scratch/self.label).rglob('*') if p.is_file()])
         (EVIDENCE/f'{self.label}.json').write_text(json.dumps(result, indent=2), encoding='utf-8')
         print(self.label, 'finished', 'peak MiB', round(self.peak/2**20,1), flush=True)
         return result
 
 
+def verify_numbers():
+    sample = next(sample for sample in SAMPLES if sample['id'] == 'numbers')
+    with tempfile.TemporaryDirectory(prefix='k01-numbers-', dir=ROOT/'.scratch') as scratch:
+        worker = Worker('numbers-followup', Path(scratch))
+        try:
+            worker.wait('ready', 600)
+            for voice in ('zf_001', 'zm_010'):
+                worker.send(dict(action='synthesize', sample=sample, voice=voice, policy='t2s-numbers'))
+                print(worker.wait('completed'), flush=True)
+        except BaseException:
+            worker.finish('cancel')
+            raise
+        else:
+            if worker.finish('close')['returncode'] != 0:
+                raise RuntimeError('Number verification worker did not exit cleanly')
+
+
 def main():
     assert os.environ.get('K01_FIREWALL_ACTIVE') == '1', 'Use verify.ps1 to enforce OS network isolation'
     EVIDENCE.mkdir(exist_ok=True)
+    if sys.argv[1:] == ['--numbers']:
+        verify_numbers()
+        return
+    if sys.argv[1:]:
+        raise SystemExit('Usage: run.py [--numbers]')
     hardware = dict(windows=platform.platform(), python=sys.version, executable=sys.executable,
                     logical_cpus=psutil.cpu_count(), physical_cpus=psutil.cpu_count(logical=False),
                     ram=psutil.virtual_memory().total, threads=4,

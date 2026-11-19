@@ -1,3 +1,7 @@
+# 2026-11-20 K01 可行性結案
+
+覆核 [#3／K01](https://github.com/newesp/ebook2mp4/issues/3) 的官方 CPU、隔離離線、效能與資源釋放證據。在驗證工具修正標準千位金額、帶前導零的編號及電話分機讀法，保留正式語音包的現行政策。多音字、中英混讀與額外人工覆核依使用者決定不處理。[結果與音檔](verification/kokoro-k01/closeout.md)。下一張為 [#4／K02](https://github.com/newesp/ebook2mp4/issues/4)。
+
 # 2026-11-20 K09 本機驗收交付
 
 [#11](https://github.com/newesp/ebook2mp4/issues/11) 完成現有主機的真實 CPU 離線操作。兩批 MP3／SRT、反向合併、500 ms 交接停頓及換圖製片通過。正式 EXE 完成空目錄匯入、首次離線試聽、續作、移除及既有 Edge 專案重開。工單已關閉。使用者確認不執行乾淨 Windows 測試，人工聽感已完成且沒有問題。兩項畫面問題仍待修。[結果、樣本與複測路徑](verification/kokoro-k09/README.md)
