@@ -17,6 +17,8 @@ class ResumeDesktop(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(dir=base)
         self.addCleanup(self.temp.cleanup)
         self.root, self.app = make_app()
+        from legacy_manuscript_fixture import install
+        install(self.app)
         self.addCleanup(self.root.destroy)
         folder = Path(self.temp.name)
         self.app.flow = ProjectWorkflow.create(folder / 'book', '長稿續作')

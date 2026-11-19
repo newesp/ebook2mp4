@@ -17,6 +17,8 @@ class PdfReadingLayout(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory(prefix='pdf-layout-', dir=base)
         self.addCleanup(self.temp.cleanup)
         self.root, self.app = make_app()
+        from legacy_manuscript_fixture import install
+        install(self.app)
         self.addCleanup(self.root.destroy)
         folder = Path(self.temp.name)
         source = folder / 'book.pdf'

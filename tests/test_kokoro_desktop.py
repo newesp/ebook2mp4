@@ -15,7 +15,7 @@ class LocalDesktop(unittest.TestCase):
         self.assertFalse(d.refresh_button.winfo_ismapped())
         self.assertEqual(str(d.preview_button.cget('state')),'disabled')
         d.outgoing.delete('1.0','end');d.outgoing.insert('1.0','保留試聽編輯。')
-        d.manage_button.invoke();self.root.update()
+        d.update_service_menu();d.service_menu.invoke(1);self.root.update()
         page=self.app.production.package_page
         self.assertTrue(page.winfo_ismapped())
         page.back_button.invoke();self.root.update()

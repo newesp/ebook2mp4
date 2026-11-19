@@ -19,6 +19,7 @@ class JoinPage(ttk.Frame):
     def __init__(self, owner):
         super().__init__(owner)
         self.owner, self.app, self.flow = owner, owner.app, owner.flow
+        self.page_id = 'video.joins' if owner.movie else 'audio.joins'
         self.job = self.info_job = self.timer = None
         self.movie_player = None
         self.movie = getattr(owner, 'movie', False)
@@ -28,9 +29,26 @@ class JoinPage(ttk.Frame):
         self.index = 0
         self.clip = tk.StringVar(value='5')
         self.accepted = tk.BooleanVar(value=False)
+        self.content_kind = 'source'
+        self._displayed_key = self._source_signature = None
+        self._reading_positions = {}
+        self._reading_restore = None
+        self._reading_timer = None
+        self._reading_anchor = self._reading_reflow = None
+        self._invalid_pause = self._preview_failed = False
+        if not self.movie:
+            from .assembly_join_workspace import AudioJoinWorkspace
+            self.workspace = AudioJoinWorkspace(self)
+            for pane in self.workspace.panes:
+                for event in ('<ButtonPress-1>', '<MouseWheel>', '<KeyPress>'):
+                    pane.text.bind(event, self.cancel_reading_restore, add='+')
+                pane.scroll.bind('<ButtonPress-1>', self.cancel_reading_restore, add='+')
+                pane.text.bind('<Configure>', self.reflow_reading, add='+')
+            self.bind('<Destroy>', self.destroyed, add='+')
+            return
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1, minsize=70)
-        ttk.Label(self, text='2 檢查影音接點 · 對照畫面與文字，再播放' if self.movie else '3 檢查交接接點 · 對照文字，再試聽', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
+        ttk.Label(self, text='2 檢查影音接點 · 對照畫面與文字，再播放' if self.movie else '檢查交接接點 · 對照文字，再試聽', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
         selection = ttk.Frame(self)
         selection.grid(row=1, column=0, sticky='ew', pady=4)
         selection.columnconfigure(1, weight=1)
@@ -65,7 +83,8 @@ class JoinPage(ttk.Frame):
                 frame=ttk.Label(panel,anchor='center')
                 frame.grid(row=1,column=0,columnspan=2,sticky='ew')
                 self.frame_labels.append(frame)
-            scrollbar = ttk.Scrollbar(panel, command=text.yview)
+            from .ui_controls import AutoHideScrollbar
+            scrollbar = AutoHideScrollbar(panel, command=text.yview)
             scrollbar.grid(row=2 if self.movie else 1, column=1, sticky='ns')
             text.configure(yscrollcommand=scrollbar.set)
             edit = ttk.Button(panel, text='← 校對前批結尾' if column == 0 else '校對後批開頭 →',
@@ -111,13 +130,12 @@ class JoinPage(ttk.Frame):
         self.cancel_button = ttk.Button(playback, text='取消準備', command=self.stop)
         self.cancel_button.grid(row=0, column=3)
         self.progress = ttk.Progressbar(self, mode='indeterminate')
-        actions = ttk.Frame(self)
-        actions.grid(row=9, column=0, sticky='ew', pady=4)
+        self.shell_footer = actions = self.app.shell.create_footer(self)
         actions.columnconfigure(1, weight=1)
-        self.back_button = ttk.Button(actions, text='← 返回全書合併', command=owner.return_from_joins)
+        self.back_button = actions.button('← 返回全書合併',owner.return_from_joins,role='back')
         self.back_button.grid(row=0, column=0)
         ttk.Label(actions, text='返回保留輸入；按儲存才會保存。').grid(row=0, column=1, sticky='w', padx=6)
-        self.save_button = ttk.Button(actions, text='儲存設定並返回 →', command=self.save)
+        self.save_button = actions.button('儲存設定並返回 →',self.save)
         self.save_button.grid(row=0, column=2)
         self.bind('<Configure>', self.resized)
 
@@ -132,6 +150,7 @@ class JoinPage(ttk.Frame):
         return self.job is not None or self.info_job is not None
 
     def load(self):
+        self.remember_reading()
         self.stop()
         if self.has_work():
             self.status.configure(text='請等待目前試聽停止，再返回檢查。')
@@ -161,12 +180,16 @@ class JoinPage(ttk.Frame):
 
     @staticmethod
     def fill(widget, text):
+        if widget.get('1.0', 'end-1c') == text:
+            return
         widget.configure(state='normal')
         widget.delete('1.0', 'end')
         widget.insert('1.0', text)
         widget.configure(state='disabled')
 
     def render(self):
+        if not self.movie:
+            return self.render_audio()
         self.index = max(0, min(self.index, len(self.joins)-1))
         self.pair_control.configure(values=[f'{i+1}／{len(self.joins)}　{j["left"]["name"]} → {j["right"]["name"]}'
                                             for i, j in enumerate(self.joins)])
@@ -203,6 +226,106 @@ class JoinPage(ttk.Frame):
         self.accepted.set(join['key'] in self.owner.accepted_joins)
         self.update_controls()
 
+    def remember_reading(self):
+        if not self.movie and self._displayed_key is not None and self._reading_restore is None:
+            self._reading_positions[self._displayed_key] = (
+                self._source_signature, self.left_text.yview()[0], self.right_text.yview()[0])
+
+    def cancel_reading_restore(self, _event=None):
+        # An explicit reader gesture takes priority over queued initial layout.
+        if self._reading_timer is not None:
+            self.after_cancel(self._reading_timer)
+            self._reading_timer = None
+        self._reading_restore = None
+        self._reading_anchor = self._reading_reflow = None
+
+    def reflow_reading(self, _event=None):
+        # Keep the initial endpoint anchored through later native resizes.
+        # A reader gesture releases this anchor before normal Tk scrolling.
+        if (self._reading_anchor is not None and self._reading_timer is None
+                and self.content_kind == 'source' and self.winfo_viewable()):
+            self._reading_restore = self._reading_anchor
+            self._reading_timer = self.after_idle(self._reading_reflow)
+
+    def render_audio(self):
+        self.remember_reading()
+        restore = None
+        self.index = max(0, min(self.index, len(self.joins)-1))
+        self.pair_control.configure(values=[f'{i+1}／{len(self.joins)}　{j["left"]["name"]} → {j["right"]["name"]}'
+                                            for i, j in enumerate(self.joins)])
+        join = self.joins[self.index] if self.joins else None
+        if join:
+            self.pair_control.current(self.index)
+            signature = tuple((join[s]['text'], join[s]['valid'], join[s].get('error', '')) for s in ('left','right'))
+            unchanged = self._displayed_key == join['key'] and self._source_signature == signature
+            if not unchanged:
+                self.content_kind = 'source'
+                for side in ('left','right'):
+                    item = join[side]
+                    self.fill(getattr(self, side+'_text'), item['text'] if item['valid'] else item['error'])
+                previous = self._reading_positions.get(join['key'])
+                restore = (join['key'], signature,
+                           previous[1:] if previous and previous[0] == signature else (1., 0.))
+            self._displayed_key, self._source_signature = join['key'], signature
+            self.accepted.set(join['key'] in self.owner.accepted_joins)
+            self.audio_headings()
+        else:
+            self.cancel_reading_restore()
+            self._displayed_key = self._source_signature = None
+            self.accepted.set(False)
+            for text in (self.left_text, self.right_text):
+                self.fill(text, '')
+        self.workspace.render(join)
+        self.update_controls()
+        if restore is not None:
+            self.restore_reading_position(restore)
+
+    def restore_reading_position(self, restore):
+        """One keyed restore path for initial load, pairs and secondary views."""
+        self.cancel_reading_restore()
+        self._reading_restore = restore
+        self._reading_anchor = restore
+        measured = None
+        placed_views = None
+        def apply_reading():
+            nonlocal measured, placed_views
+            self._reading_timer = None
+            if (not self.winfo_exists() or self._reading_restore is not restore
+                    or (self._displayed_key, self._source_signature) != restore[:2]):
+                return
+            geometry = tuple((w.winfo_width(),w.winfo_height()) for w in
+                             (self, self.left_text, self.right_text, self.workspace.footer))
+            views = (self.left_text.yview(),self.right_text.yview())
+            if measured == geometry and placed_views == views:
+                self._reading_restore = None
+                return
+            measured = geometry
+            for text,position in zip((self.left_text,self.right_text),restore[2]):
+                if position == 1.:
+                    # Anchor an index. Text's fractional total can still be
+                    # estimated while newly loaded line metrics resolve.
+                    text.yview('end')
+                elif position == 0.:
+                    text.yview('1.0')
+                else:
+                    text.yview_moveto(position)
+            placed_views = (self.left_text.yview(),self.right_text.yview())
+            # Confirm both geometry and actual Text views across the
+            # shell's 60ms reflow; line metrics can settle after geometry.
+            self._reading_timer = self.after(80, apply_reading)
+        # Run after the new pair and warning/footer tracks have settled.
+        self._reading_reflow = apply_reading
+        self._reading_timer = self.after_idle(apply_reading)
+
+    def audio_headings(self):
+        if self.movie or not self.joins:
+            return
+        join = self.joins[self.index]
+        for i, side in enumerate(('left','right')):
+            name = ('前批字幕' if i == 0 else '後批字幕') if self.content_kind == 'subtitle' else ('前批結尾' if i == 0 else '後批開頭')
+            self.headings[i].full_text = f'{name} · {join[side]["name"]}'
+            self.headings[i].configure(text=self.headings[i].full_text)
+
     def acknowledge(self):
         if self.joins:
             key = self.joins[self.index]['key']
@@ -214,11 +337,13 @@ class JoinPage(ttk.Frame):
             self.owner.update_controls()
 
     def select_pair(self, event=None):
+        self.remember_reading()
         self.stop()
         self.index = self.pair_control.current()
         self.render()
 
     def move(self, delta):
+        self.remember_reading()
         self.stop()
         self.index += delta
         self.render()
@@ -228,7 +353,14 @@ class JoinPage(ttk.Frame):
         if self.has_work():
             self.status.configure(text='請等待試聽停止後再儲存。')
         elif self.owner.save():
+            if not self.movie:
+                self.workspace.save_error = False
+                self.update_controls()
             self.owner.return_from_joins()
+        elif not self.movie:
+            self.workspace.save_error = True
+            self.status.configure(text='設定未寫入，輸入已保留。'+self.owner.status.cget('text'))
+            self.update_controls()
 
     def edit(self, side):
         if not self.joins or not self.app.may_leave():
@@ -248,13 +380,16 @@ class JoinPage(ttk.Frame):
             start = self.flow.start_video_join_preview if self.movie else self.flow.start_assembly_join_preview
             self.job = start(list(self.owner.selected), self.index,
                          pause_ms=self.owner.pause_ms(), clip_ms=int(self.clip.get())*1000)
+            self._preview_failed = False
             self.allow_play = True
             self.status.configure(text='正在驗證來源並準備接點試聽…')
             self.update_controls()
             self.schedule()
         except (ProjectError, ValueError) as error:
+            self._preview_failed = True
             self.status.configure(text=str(error))
             self.app.notify(str(error), kind='error')
+            self.update_controls()
 
     def restore_pair(self):
         self.pair.grid(row=2,column=0,sticky='nsew')
@@ -298,7 +433,7 @@ class JoinPage(ttk.Frame):
                 if job.state['status'] == 'completed':
                     self.joins = job.result
                     self.render()
-                    self.status.configure(text='確認稿節錄。播放後顯示本次片段對應字幕文字。')
+                    self.status.configure(text='確認稿節錄。播放後顯示本次片段對應字幕文字。' if self.movie else self.workspace.NORMAL_HINT)
                 elif job.state['status'] == 'failed':
                     raise ProjectError(job.state['error'])
             if self.job is not None and self.job.wait(0):
@@ -324,8 +459,12 @@ class JoinPage(ttk.Frame):
                         else:
                             self.player.play(Path(result['path']))
                         self.playing = True
+                        self.cancel_reading_restore()
                         self.fill(self.left_text, result['left_text'] or '此片段沒有字幕文字。')
                         self.fill(self.right_text, result['right_text'] or '此片段沒有字幕文字。')
+                        if not self.movie:
+                            self.content_kind = 'subtitle'
+                            self.audio_headings()
                         self.status.configure(text=f'正在試聽 · {result["duration_ms"]/1000:g} 秒 · 不呼叫 TTS')
                     else:
                         self.stop()
@@ -333,6 +472,7 @@ class JoinPage(ttk.Frame):
                     self.stop()
                     self.status.configure(text='接點試聽已結束。')
         except (ProjectError, OSError) as error:
+            self._preview_failed = True
             self.stop()
             self.status.configure(text=str(error))
             self.app.notify(str(error), kind='error')
@@ -346,12 +486,19 @@ class JoinPage(ttk.Frame):
         try:
             pause = self.owner.pause_ms()
             valid = bool(self.joins) and all(self.joins[self.index][s]['valid'] for s in ('left', 'right'))
-            self.timeline.configure(text=f'前批結尾   →   ＋ {pause/1000:g} 秒額外靜音   →   後批開頭')
+            if self._invalid_pause and not self.movie:
+                self.status.configure(text=self.workspace.NORMAL_HINT)
+            self._invalid_pause = False
+            if self.movie:self.timeline.configure(text=f'前批結尾   →   ＋ {pause/1000:g} 秒額外靜音   →   後批開頭')
         except ProjectError:
             valid = False
-            self.timeline.configure(text='請輸入 0～5 秒，最多三位小數。')
+            self._invalid_pause = True
+            if self.movie:self.timeline.configure(text='請輸入 0～5 秒，最多三位小數。')
+            else:self.status.configure(text='請輸入 0～5 秒，最多三位小數。')
         if self.movie:
             self.play_button.configure(text='播放影音接點')
+        else:
+            self.play_button.configure(text='重試試聽' if self._preview_failed else '準備中' if preparing else '播放接點')
         self.play_button.configure(state='normal' if valid and not busy and not self.playing else 'disabled')
         self.stop_button.configure(state='normal' if self.job is not None else 'disabled')
         self.save_button.configure(state='normal' if valid and not busy else 'disabled')
@@ -363,7 +510,9 @@ class JoinPage(ttk.Frame):
         for button in (self.left_edit, self.right_edit):
             button.configure(state='normal' if self.joins and not preparing else 'disabled')
         self.ack_control.configure(state='disabled' if busy else 'normal')
-        if preparing:
+        if not self.movie:
+            self.workspace.update(preparing, busy, valid)
+        elif preparing:
             self.cancel_button.grid()
             self.progress.grid(row=8, column=0, sticky='ew')
             self.progress.start(15)
@@ -373,9 +522,18 @@ class JoinPage(ttk.Frame):
             self.progress.grid_remove()
 
     def release(self):
+        if not self.movie:
+            self.cancel_reading_restore()
         self.stop()
         if self.movie_player is not None: self.movie_player.release()
         if self.timer is not None:
             self.after_cancel(self.timer)
             self.timer = None
         self.progress.stop()
+        if not self.movie:
+            self.workspace.release()
+
+    def destroyed(self, event):
+        if event.widget is self:
+            self.cancel_reading_restore()
+            self.workspace.destroy()

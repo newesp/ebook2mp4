@@ -101,6 +101,8 @@ class GeminiJourney(unittest.TestCase):
                 self.assertTrue(job.wait(3))
                 self.flow.finish_gemini_review(job)
                 body = json.loads(connection.request.call_args.kwargs['body'])
+                from ebook2mp4.gemini import INSTRUCTION
+                self.assertEqual(body['systemInstruction']['parts'][0]['text'], INSTRUCTION)
                 outgoing = json.loads(body['contents'][0]['parts'][0]['text'])
                 self.assertEqual(outgoing, dict(paragraphs=['這是錯宇。\n']))
                 self.assertNotIn('外面保留', json.dumps(body, ensure_ascii=False))

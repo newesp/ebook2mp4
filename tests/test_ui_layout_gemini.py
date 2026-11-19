@@ -16,6 +16,8 @@ class GeminiLayout(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.path = Path(self.temp.name)
         self.root, self.app = make_app()
+        from legacy_manuscript_fixture import install
+        install(self.app)
         self.addCleanup(self.root.destroy)
         self.app.flow = ProjectWorkflow.create(self.path / 'book', '候選配置')
         source = self.path / 'source.txt'
@@ -169,7 +171,10 @@ class GeminiLayout(unittest.TestCase):
         dialog.status.configure(text='已完成其他操作。')
         self.assertIn('未存編輯', dialog.blocking.cget('text'))
         self.assertTrue(dialog.accept_button.instate(('disabled',)))
-        self.assertTrue(self.app.save())
+        # Legacy adapter staleness concerns the committed source revision.
+        # Main-window Ctrl+S now only checkpoints the workspace buffer.
+        self.app.flow.save_draft(self.app.batch_id, self.app.current_text)
+        self.app.saved_text = self.app.current_text
         dialog.update_availability()
         dialog.status.configure(text='已儲存。')
         self.assertIn('原稿版本已變更', dialog.blocking.cget('text'))

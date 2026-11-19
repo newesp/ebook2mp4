@@ -7,6 +7,17 @@ from ebook2mp4.workflow import ProjectWorkflow
 class Providers(unittest.TestCase):
     setUp=fixture.VoiceJourney.setUp
     audio=fixture.VoiceJourney.audio
+    def test_mandarin_policy_changes_only_gemini_cache(self):
+        from ebook2mp4.voice_media import block_paths
+        value = dict(provider='gemini-tts', voice='Kore', rate='+0%', processing={})
+        before = block_paths('繁體中文 Hello', value, self.path)
+        with patch('ebook2mp4.tts_services.MANDARIN_POLICY', 'future-policy'):
+            self.assertNotEqual(before, block_paths('繁體中文 Hello', value, self.path))
+        value['provider'] = 'fish-audio'
+        before = block_paths('繁體中文 Hello', value, self.path)
+        with patch('ebook2mp4.tts_services.MANDARIN_POLICY', 'future-policy'):
+            self.assertEqual(before, block_paths('繁體中文 Hello', value, self.path))
+
     def test_gemini_custom_model_preview_formal_reuse_and_no_project_key(self):
         identity=save_profile('Google','gemini-tts','synthetic-secret')
         value=self.flow.voice_settings(self.batch)
@@ -33,6 +44,10 @@ class Providers(unittest.TestCase):
             job=self.flow.start_narration(self.batch);self.assertTrue(job.wait(15));product=self.flow.finish_narration(job)
         self.assertEqual(len(requests),1)
         self.assertEqual(requests[0][1]['json']['model'],'future-tts-model')
+        body = requests[0][1]['json']
+        self.assertEqual(body['generation_config']['speech_config'][0]['language'], 'cmn-CN')
+        self.assertEqual(body['input'][0]['content'][0]['text'], 'Hello.')
+        self.assertIn('Standard Mandarin', body['input'][0]['content'][0]['annotations'][0]['style'])
         self.assertEqual(requests[0][1]['headers']['x-goog-api-key'],'synthetic-secret')
         self.assertTrue(product['chunks'][0]['reused'])
         self.assertNotIn('synthetic-secret',json.dumps(self.flow.state))
@@ -94,14 +109,14 @@ class ProviderDesktop(unittest.TestCase):
         self.assertEqual(self.dialog.current_settings()['model'],'future-voice-model')
         self.dialog.service.set('Edge-TTS');self.dialog.change_service()
         self.assertEqual(str(self.dialog.model_control.cget('state')),'disabled')
-        self.dialog.manage_button.invoke()
+        self.dialog.service_menu.invoke(0)
         window=self.app.production.service_page;self.addCleanup(window.close);self.root.update()
         self.assertEqual(int(window.status.grid_info()['row']),8)
 
     def test_check_service_reads_complete_chunked_json(self):
         import time
         from ebook2mp4.service_desktop import ServiceDialog
-        self.dialog.manage_button.invoke()
+        self.dialog.service_menu.invoke(0)
         window=self.app.production.service_page;self.addCleanup(window.close)
         window.key.set('test-key')
         class Content:

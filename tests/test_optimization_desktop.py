@@ -18,6 +18,8 @@ class OptimizationDesktop(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.path = Path(self.temp.name)
         self.root, self.app = make_app()
+        from legacy_manuscript_fixture import install
+        install(self.app)
         self.addCleanup(self.root.destroy)
         self.app.flow = ProjectWorkflow.create(self.path/'book', '優化')
         # Match real use: finish initial Map/maximize before opening a child dialog.
@@ -40,7 +42,7 @@ class OptimizationDesktop(unittest.TestCase):
                 patch.dict(os.environ, GEMINI_API_KEY='fake'), \
                 patch('ebook2mp4.desktop.messagebox.askyesno', return_value=True) as confirm:
             self.app.gemini_all_button.invoke()
-            self.assertIn('本次採 繁體', confirm.call_args.args[1])
+            confirm.assert_not_called()
             dialog = self.app.gemini_dialog
             self.until(lambda: dialog.job is None)
             dialog.geometry('740x570')

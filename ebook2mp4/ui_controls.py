@@ -5,9 +5,19 @@ from tkinter import ttk
 from collections.abc import Callable
 
 
+class AutoHideScrollbar(ttk.Scrollbar):
+    """A grid-owned scrollbar whose track exists only for actual overflow."""
+    def set(self, first, last):
+        if float(first) <= 0 and float(last) >= 1:
+            self.grid_remove()
+        elif not self.winfo_manager():
+            self.grid()
+        super().set(first, last)
+
+
 class CellTooltip:
     """Delayed cell help without changing selection or taking keyboard focus."""
-    def __init__(self, widget: ttk.Treeview,
+    def __init__(self, widget: tk.Misc,
                  resolve: Callable[[int, int], tuple[str, str] | None], delay: int = 400):
         self.widget, self.resolve, self.delay = widget, resolve, delay
         self.window: tk.Toplevel | None = None
@@ -119,9 +129,10 @@ def command_menu(parent, title):
 
 class MessageLine(ttk.Label):
     """Fixed-height result summary; longer, selectable messages remain in history."""
-    def __init__(self, parent, **options):
+    def __init__(self, parent, *, on_change=None, **options):
         self.history: list[str] = []
         self.full_text = ''
+        self.on_change = on_change
         super().__init__(parent, anchor='w', width=1, **options)
 
     def remember(self, value):
@@ -139,7 +150,10 @@ class MessageLine(ttk.Label):
             options['text'] = value.replace('\n', '  ')
             if 'foreground' not in options:
                 options['foreground'] = '#58695f'
-        return super().configure(**options)
+        result = super().configure(**options)
+        if 'text' in options and self.on_change is not None:
+            self.on_change()
+        return result
 
 
 class NotificationLayer:

@@ -161,6 +161,22 @@ class NarrationJourney(unittest.TestCase):
         self.assertEqual(self.flow.narration_runs(self.batch), [])
         self.assertFalse((self.flow.root / '.production.lock').exists())
 
+    def test_mismatched_dialogue_quotes_produce_mp3_and_srt(self):
+        text = '“對話？"\n' + '這是完整句子。' * 200
+        self.prepare(text)
+        audio, requests = self.audio(), []
+        class Service:
+            def __init__(self, text, *args, **options): requests.append(text)
+            async def stream(self): yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service):
+            job = self.flow.start_narration(self.batch)
+            self.assertTrue(job.wait(30), job.state)
+            self.flow.finish_narration(job)
+        self.assertEqual(''.join(requests), text)
+        self.assertTrue(self.flow.narration_path(self.batch, 'mp3').is_file())
+        self.assertIn('這是完整句子。', self.flow.narration_path(self.batch, 'srt').read_text(encoding='utf-8'))
+        self.assertFalse((self.flow.root / '.production.lock').exists())
+
     def test_long_english_prefers_complete_sentences_over_word_boundaries(self):
         text = 'Dr. Chen reads the value 3.14 and a complete sentence. ' * 100
         self.prepare(text)

@@ -19,6 +19,8 @@ class GeminiDesktop(unittest.TestCase):
         source = self.path / 'source.txt'
         source.write_bytes('前文。\n\n錯宇。\n\n後文。'.encode('utf-8'))
         self.root, self.app = make_app()
+        from legacy_manuscript_fixture import install
+        install(self.app)
         self.addCleanup(self.root.destroy)
         self.app.flow = ProjectWorkflow.create(self.path / 'book', 'Gemini 校對')
         self.app.batch_id = self.app.flow.import_txt(self.app.flow.inspect_txt(source))

@@ -1,6 +1,8 @@
 __pycache__/
 *.pyc
 dist/
+archives/
+.scratch/v2-work/
 .scratch/test-runs/
 .scratch/t01-visual/
 .scratch/build-tools/

@@ -92,9 +92,9 @@ class LastProjectJourney(unittest.TestCase):
     def test_create_is_remembered_and_no_record_starts_empty(self):
         root, app = self.launch()
         self.assertIsNone(app.flow)
-        with patch('ebook2mp4.desktop.simpledialog.askstring', side_effect=['新書', 'new-book']), \
-                patch('ebook2mp4.desktop.filedialog.askdirectory', return_value=str(self.directory)):
-            app.create()
+        app.new_name.set('新書')
+        app.new_folder.set(str(self.directory / 'new-book'))
+        app.create()
         self.destroy(root)
         _, reopened = self.launch()
         self.assertEqual(reopened.book.cget('text'), '新書')

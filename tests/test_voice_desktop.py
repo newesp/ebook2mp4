@@ -1,6 +1,7 @@
 """Native Tk voice journeys; external Edge service and audio device controlled."""
 from pathlib import Path
 import asyncio
+import os
 import tempfile
 import time
 import unittest
@@ -14,12 +15,13 @@ import test_voice as fixture
 
 class VoiceDesktop(unittest.TestCase):
     def setUp(self):
-        base = Path(__file__).resolve().parents[1] / '.scratch/test-runs'
+        base = Path(os.environ.get('EBOOK2MP4_TEST_RUNS',
+                                  Path(__file__).resolve().parents[1] / '.scratch/test-runs'))
         base.mkdir(parents=True, exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(dir=base)
         self.addCleanup(self.temp.cleanup)
         self.path = Path(self.temp.name)
-        env = patch.dict('os.environ', EBOOK2MP4_VOICE_HOME=str(self.path / 'cache'))
+        env = patch.dict('os.environ', EBOOK2MP4_VOICE_HOME=str(self.path / 'cache'), EBOOK2MP4_KOKORO_HOME=str(self.path / 'kokoro'))
         env.start()
         self.addCleanup(env.stop)
         self.root, self.app = make_app()
@@ -30,7 +32,7 @@ class VoiceDesktop(unittest.TestCase):
         self.app.batch_id = self.app.flow.import_txt(self.app.flow.inspect_txt(source))
         self.app.refresh()
         self.root.update()
-        self.app.steps[3].invoke()
+        self.app.voice_settings()
         self.dialog = self.app.voice_dialog
         self.addCleanup(lambda: self.dialog.close() if self.dialog.winfo_exists() else None)
         self.root.update()
@@ -136,7 +138,7 @@ class VoiceDesktop(unittest.TestCase):
                 self.assertGreaterEqual(x, 0)
                 self.assertGreaterEqual(y, 0)
                 self.assertLessEqual(x+control.winfo_width(), d.winfo_width())
-                self.assertLessEqual(y+control.winfo_height(), d.winfo_height())
+                self.assertLessEqual(control.winfo_rooty()+control.winfo_height(), self.root.winfo_rooty()+self.root.winfo_height())
             self.assertEqual(d.save_button.winfo_rooty(), d.produce_button.winfo_rooty())
             self.assertEqual(d.scope_control.winfo_rooty()+d.scope_control.winfo_height()//2,
                              d.produce_button.winfo_rooty()+d.produce_button.winfo_height()//2)
@@ -201,7 +203,7 @@ class VoiceDesktop(unittest.TestCase):
         self.root.update()
         self.dialog.rate.set('+20%')
         self.dialog.save_button.invoke()
-        self.assertIn('已切換', self.dialog.status.cget('text'))
+        self.assertFalse(self.dialog.workspace_layout.active)
         self.assertEqual(self.app.flow.voice_settings(previous)['voice'], '')
         self.assertEqual(self.app.flow.voice_settings(self.app.batch_id)['voice'], '')
         self.dialog.consent.set(True)

@@ -85,7 +85,10 @@ class ImportPreview:
         return len(self.data)
 
 
-class ProjectWorkflow:
+from .manuscript import ManuscriptWorkflow
+
+
+class ProjectWorkflow(ManuscriptWorkflow):
     """Public create → inspect → import → edit → save → reopen operations."""
 
     def __init__(self, root: Path, manifest: dict, committed: str):
@@ -99,6 +102,7 @@ class ProjectWorkflow:
         self._total_audio_job: TotalAudioJob | None = None
         self._assembly_preview_job: JoinPreviewJob | VideoJoinPreviewJob | None = None
         self._total_video_job: TotalVideoJob | None = None
+        self._output_job = None
 
     @property
     def state(self) -> dict:
@@ -190,6 +194,7 @@ class ProjectWorkflow:
                 else:
                     flow.pdf_pages(batch['id'])
                 flow._read(batch['draft']).decode('utf-8')
+                flow.workspace_state(batch['id'])
                 flow.gemini_reviews(batch['id'])
                 readings = batch.get('readings', [])
                 copies = batch.get('draft_copies', [])
@@ -802,7 +807,43 @@ class ProjectWorkflow:
         manifest = self.state
         owner = next(b for b in manifest['batches'] if b['id'] == batch_id) if batch_id is not None else manifest
         owner['voice_settings'] = value
+        from datetime import timedelta
+        stamp = datetime.now(timezone(timedelta(hours=8)))
+        owner.setdefault('voice_history', []).append(dict(
+            id=uuid.uuid4().hex, name=f'{stamp:%Y/%m/%d %H:%M} ({value["voice"]})',
+            saved_at=stamp.isoformat(), settings=deepcopy(value)))
         self._commit(manifest, [])
+
+    def voice_setting_sources(self, batch_id=None):
+        """Saved settings and verified immutable task settings, without synthesis."""
+        from .narration import validate_plan
+        from .voice import settings
+        owner = self._batch(batch_id) if batch_id else self._manifest
+        result = []
+        for entry in owner.get('voice_history', []):
+            result.append(dict(id=entry['id'], name=entry['name'], settings=settings(entry['settings'])))
+        for index, ref in enumerate(owner.get('narration_runs', []), 1):
+            snapshot = json.loads(self._read(ref))
+            validate_plan(snapshot)
+            if snapshot['batch_id'] != batch_id:
+                raise ProjectError('任務不屬於目前批次。')
+            result.append(dict(id=ref['id'], name=f'原任務第 {index} 次 · {snapshot["settings"]["voice"]}',
+                               settings=settings(snapshot['settings']), run_id=ref['id']))
+        return result
+
+    def restore_narration_settings(self, batch_id, run_id):
+        from .production_lock import ProductionLease
+        with_lease = ProductionLease(self.root / '.production.lock')
+        try:
+            source = next((s for s in self.voice_setting_sources(batch_id) if s.get('run_id') == run_id), None)
+            if source is None:
+                raise ProjectError('找不到原任務設定。')
+            manifest = self.state
+            owner = next(b for b in manifest['batches'] if b['id'] == batch_id)
+            owner['voice_settings'] = deepcopy(source['settings'])
+            self._commit(manifest, [])
+        finally:
+            with_lease.release()
 
     def apply_voice_defaults(self, batch_ids: list[str]) -> None:
         """Copy saved defaults to explicit batches in one atomic project write."""
@@ -1069,6 +1110,32 @@ class ProjectWorkflow:
         from .assembly import settings
         return settings(self)
 
+    def output_formats(self) -> list[str]:
+        from .outputs import selection
+        return selection(self)
+
+    def save_output_formats(self, formats: list[str]) -> None:
+        from .outputs import save_selection
+        save_selection(self, formats)
+
+    def save_output_plan(self, batch_ids: list[str], pause_ms: int = 500, *,
+                         accepted_joins: list[str] | None = None, resolution: str = '1080p') -> None:
+        from .outputs import save_plan
+        save_plan(self, batch_ids, pause_ms, accepted_joins=accepted_joins, resolution=resolution)
+
+    def inspect_outputs(self) -> dict:
+        import asyncio
+        from .outputs import inspect
+        return asyncio.run(inspect(self))
+
+    def start_outputs(self):
+        from .outputs import start
+        return start(self)
+
+    def finish_outputs(self, job) -> dict:
+        from .outputs import finish
+        return finish(self, job)
+
     def batch_video_target(self, batch_id: str):
         """Use the shared video workflow with isolated batch settings and outputs."""
         from .video_target import BatchVideoTarget
@@ -1138,9 +1205,15 @@ class ProjectWorkflow:
         from .total_video import inspect_video
         return asyncio.run(inspect_video(self))
 
-    def total_video(self) -> dict | None:
+    def output_versions(self) -> list[dict]:
+        """Inspect each output route without changing selection or stored products."""
+        import asyncio
+        from .output_versions import inspect_versions
+        return asyncio.run(inspect_versions(self))
+
+    def total_video(self, *, method: str | None = None) -> dict | None:
         from .total_video import total_video
-        return total_video(self)
+        return total_video(self, method=method)
 
     def start_total_video(self) -> TotalVideoJob:
         from .total_video import start
@@ -1157,22 +1230,22 @@ class ProjectWorkflow:
         job.release(discard=True)
         self._total_video_job = None
 
-    def total_video_runs(self) -> list[dict]:
+    def total_video_runs(self, *, method: str | None = None) -> list[dict]:
         from .total_video import runs
-        return runs(self)
+        return runs(self, method=method)
 
-    def total_video_path(self, kind: str = 'mp4') -> Path:
+    def total_video_path(self, kind: str = 'mp4', *, method: str | None = None) -> Path:
         if kind not in ('mp4', 'srt'):
             raise ProjectError('影片成品格式僅支援 MP4 或 SRT。')
-        product = self.total_video()
+        product = self.total_video(method=method)
         if product is None:
             raise ProjectError('尚無成功總影片。')
         return self._path(product[kind]['path'])
 
-    def export_total_video(self, folder: str | Path) -> None:
+    def export_total_video(self, folder: str | Path, *, method: str | None = None) -> None:
         import asyncio
         from .total_video import export
-        asyncio.run(export(self, folder))
+        asyncio.run(export(self, folder, method=method))
 
     def save_assembly_settings(self, batch_ids: list[str], pause_ms: int = 500, *,
                                accepted_joins: list[str] | None = None) -> None:
@@ -1264,7 +1337,7 @@ class ProjectWorkflow:
         if type(start) is not int or type(end) is not int or not 0 <= start < end <= len(text) or not text[start:end].strip():
             raise ProjectError('請選取有效且非空白的校對範圍。')
         settings = self.gemini_settings()
-        return dict(service='Gemini', model=settings['model'], start=start, end=end,
+        return dict(service='Gemini', model=self.state.get('manuscript_settings', {}).get('model', settings['model']), start=start, end=end,
                     characters=end-start, revision=self._batch(batch_id)['revision'],
                     normalization=profile(text, script, punctuation))
 

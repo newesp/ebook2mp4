@@ -158,8 +158,6 @@ class MergeVideoJob(TotalVideoJob):
             concat=[]
             width,height=(1920,1080) if self.snapshot['visual']['resolution']=='1080p' else (1280,720)
             for index,source in enumerate(self.snapshot['sources']):
-                if source_ref(flow,source['batch_id']) != source:
-                    raise ProjectError('批次影片版本已變更，請重新檢查來源。')
                 info=await validate_source(flow,source,self.command)
                 path=media/f'source-{index}.mp4'
                 await assembly.copy_verified_source(self.root,source['mp4'],path)
@@ -218,11 +216,11 @@ class MergeVideoJob(TotalVideoJob):
             if not success and media.exists(): shutil.rmtree(media)
 
 
-def start(flow: ProjectWorkflow) -> MergeVideoJob:
+def start(flow: ProjectWorkflow, *, _lease=None) -> MergeVideoJob:
     from .production_lock import ProductionLease
     if flow._total_video_job is not None:
         raise ProjectError('已有製片任務，請先保存或捨棄結果。')
-    lease=ProductionLease(flow.root/'.production.lock')
+    lease=_lease if _lease is not None else ProductionLease(flow.root/'.production.lock')
     folder=None
     committed=False
     try:
@@ -239,6 +237,7 @@ def start(flow: ProjectWorkflow) -> MergeVideoJob:
         flow._space(flow.root,total*1000+50_000_000)
         snapshot=dict(id=uuid.uuid4().hex,created_at=now(),method='batch-videos',sources=sources,
             pause_ms=value['pause_ms'],visual=dict(resolution=resolution(flow)))
+        snapshot['source_details'] = assembly.source_details(flow, sources, movie=True)
         folder=flow._path(f'video/run-{snapshot["id"]}')
         folder.mkdir(parents=True)
         flow._atomic(folder/'progress.json',encode(dict(status='pending',phase='準備',completed=0,total=100)))
@@ -285,12 +284,13 @@ def start_preview(flow: ProjectWorkflow, batch_ids: list[str], index: int, *, pa
     return job
 
 
-def validate_snapshot(flow: ProjectWorkflow, job: TotalVideoJob) -> None:
+def validate_snapshot(flow: ProjectWorkflow, job: TotalVideoJob, *, allow_stale=False) -> None:
     flow._check_current()
     report=job.result
-    for source in job.snapshot['sources']:
-        if source!=source_ref(flow,source['batch_id']):
-            raise ProjectError('批次影片版本已變更，請重新合併或預覽。')
+    if not allow_stale:
+        for source in job.snapshot['sources']:
+            if source!=source_ref(flow,source['batch_id']):
+                raise ProjectError('批次影片版本已變更，請重新合併或預覽。')
     for path,signature in report['source_stats'].items():
         if signature!=assembly.file_signature(flow._path(path)):
             raise ProjectError('批次影音檔已變更，請重新合併或預覽。')

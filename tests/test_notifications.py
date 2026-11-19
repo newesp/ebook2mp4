@@ -2,10 +2,13 @@
 import time
 import tkinter as tk
 import unittest
+import tempfile
+from pathlib import Path
 from unittest.mock import patch
 
 from ebook2mp4.desktop import make_app
 from ebook2mp4.ui_controls import notify
+from ebook2mp4.workflow import ProjectWorkflow
 
 
 class Notifications(unittest.TestCase):
@@ -14,6 +17,17 @@ class Notifications(unittest.TestCase):
         self.errors = []
         self.root.report_callback_exception = lambda *error: self.errors.append(error)
         self.root.geometry('1040x640+20+20')
+        # Focus cannot be placed in the hidden editor of an empty workbench.
+        base=Path('.scratch/test-runs')
+        base.mkdir(parents=True,exist_ok=True)
+        self.temp=tempfile.TemporaryDirectory(dir=base)
+        self.addCleanup(self.temp.cleanup)
+        folder=Path(self.temp.name)
+        source=folder/'source.txt'
+        source.write_text('通知焦點驗收稿件。',encoding='utf-8')
+        self.app.flow=ProjectWorkflow.create(folder/'book','通知驗收')
+        self.app.batch_id=self.app.flow.import_txt(self.app.flow.inspect_txt(source))
+        self.app.refresh()
         # Manuscript focus contracts apply to the proofreading surface.
         self.app.show_step(2)
         self.root.update()
@@ -29,8 +43,10 @@ class Notifications(unittest.TestCase):
             time.sleep(.01)
 
     def test_top_center_tracks_owner_without_stealing_editor_focus(self):
+        self.assertTrue(self.app.editor.winfo_ismapped())
         self.app.editor.focus_force()
         self.root.update()
+        self.assertIs(self.root.focus_displayof(), self.app.editor)
         layer = self.app.notify('校對稿已儲存。')
         self.root.update()
         self.assertIs(self.root.focus_displayof(), self.app.editor)

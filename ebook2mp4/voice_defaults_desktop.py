@@ -2,21 +2,23 @@
 from tkinter import ttk
 
 from .workflow import ProjectError
+from .ui_controls import AutoHideScrollbar
 
 
 class VoiceDefaultsPage(ttk.Frame):
     kind = 'defaults'
+    page_id = 'voice.defaults'
 
     def __init__(self, owner):
-        super().__init__(owner.app.production.host, padding=6)
+        super().__init__(owner.app.production.host)
         self.owner, self.flow = owner, owner.flow
         self.production_busy = False
         self.selected: set[str] = set()
         self.value = self.flow.voice_settings()
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1)
-        ttk.Label(self, text='套用全書預設：選擇批次 → 檢查影響 → 套用',
-                  style='Heading.TLabel').grid(row=0, column=0, sticky='w')
+        self.shell_header=ttk.Label(self, text='套用全書預設：選擇批次 → 檢查影響 → 套用',style='Heading.TLabel')
+        self.shell_header.grid(row=0,column=0,sticky='w')
         self.summary = ttk.Label(self)
         self.summary.grid(row=1, column=0, sticky='w', pady=6)
         table_frame = ttk.Frame(self)
@@ -30,20 +32,18 @@ class VoiceDefaultsPage(ttk.Frame):
             self.table.heading(key, text=label)
             self.table.column(key, width=width, minwidth=40, stretch=key != 'pick')
         self.table.grid(row=0, column=0, sticky='nsew')
-        scrollbar = ttk.Scrollbar(table_frame, command=self.table.yview)
+        scrollbar = AutoHideScrollbar(table_frame, command=self.table.yview)
         scrollbar.grid(row=0, column=1, sticky='ns')
         self.table.configure(yscrollcommand=scrollbar.set)
         self.table.bind('<ButtonRelease-1>', self.toggle_selected)
         self.table.bind('<space>', self.toggle_selected)
         self.status = ttk.Label(self, text='尚未選取批次。套用只儲存設定，不會傳送文字。', wraplength=650)
         self.status.grid(row=3, column=0, sticky='ew', pady=6)
-        footer = ttk.Frame(self)
-        footer.grid(row=4, column=0, sticky='ew')
+        self.shell_footer = footer = owner.app.shell.create_footer(self,workspace_aligned=True)
         footer.columnconfigure(1, weight=1)
-        self.back_button = ttk.Button(footer, text='← 返回語音設定', command=self.back)
+        self.back_button = footer.button('← 返回語音設定',self.back,role='back')
         self.back_button.grid(row=0, column=0)
-        self.apply_button = ttk.Button(footer, text='套用至 0 個批次', command=self.apply,
-                                       style='Primary.TButton', state='disabled')
+        self.apply_button = footer.button('套用至 0 個批次',self.apply,role='primary',state='disabled')
         self.apply_button.grid(row=0, column=2)
         self.bind('<Configure>', lambda e: self.status.configure(wraplength=max(180, e.width-24))
                   if e.widget is self else None)

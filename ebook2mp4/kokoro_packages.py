@@ -19,6 +19,20 @@ def home():
                 str(Path(os.environ.get('LOCALAPPDATA',Path.home()))/'ebook2mp4/kokoro'))
 
 
+def remembered_archive():
+    try:
+        value=json.loads((home()/'last-archive.json').read_text(encoding='utf-8'))
+        path=Path(value['path'])
+        return str(path) if path.is_absolute() and path.is_file() else ''
+    except (OSError,ValueError,KeyError,TypeError):
+        return ''
+
+
+def remember_archive(path):
+    from .workflow import ProjectWorkflow, encode
+    ProjectWorkflow._atomic(home()/'last-archive.json',encode(dict(path=str(Path(path).resolve()))))
+
+
 @lru_cache(maxsize=1)
 def release():
     try:

@@ -10,6 +10,7 @@ from tkinter import filedialog, ttk
 from .voice import VoiceJob
 from .voice_media import PreviewPlayer
 from .workflow import ProjectError
+from .ui_controls import AutoHideScrollbar
 
 
 class AssemblyPage(ttk.Frame):
@@ -18,6 +19,8 @@ class AssemblyPage(ttk.Frame):
     def __init__(self, app, *, movie=False):
         super().__init__(app.production.host)
         self.movie = movie
+        self.page_id = 'video.merge' if movie else 'audio.assembly'
+        self.output_controls = None
         self.movie_player = None
         self.app, self.flow = app, app.flow
         self.job = self.check_job = self.timer = None
@@ -34,6 +37,13 @@ class AssemblyPage(ttk.Frame):
         self.accepted_joins = set(value.get('accepted_joins', []))
         self.edit_return = False
         self.join_page = None
+        self.rebuild_requested = False
+        if not movie:
+            from .assembly_workspace import AudioAssemblyWorkspace
+            self.assembly_workspace = AudioAssemblyWorkspace(self)
+            self.pause.trace_add('write', lambda *args: self.changed())
+            self.recheck()
+            return
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
         self.main = main = ttk.Frame(self)
@@ -50,7 +60,8 @@ class AssemblyPage(ttk.Frame):
         ttk.Label(steps, text=' → ').pack(side='left')
         self.video_step = ttk.Button(steps, text='② 製作影片', command=self.open_video, style='Compact.TButton')
         self.video_step.pack(side='left')
-        ttk.Label(header, text='本機合併 · 不傳送文字').grid(row=0, column=1, sticky='e')
+        self.versions_button = ttk.Button(header, text='成品版本 ▸', command=app.production.show_versions)
+        self.versions_button.grid(row=0, column=1, sticky='e')
         toolbar = ttk.Frame(main)
         toolbar.grid(row=1, column=0, sticky='ew', pady=(0, 6))
         toolbar.columnconfigure(0, weight=1)
@@ -74,7 +85,7 @@ class AssemblyPage(ttk.Frame):
             self.table.heading(key, text=label)
             self.table.column(key, width=width, minwidth=40, stretch=stretch)
         self.table.grid(row=0, column=0, sticky='nsew')
-        scroll = ttk.Scrollbar(table_frame, command=self.table.yview)
+        scroll = AutoHideScrollbar(table_frame, command=self.table.yview)
         scroll.grid(row=0, column=1, sticky='ns')
         self.table.configure(yscrollcommand=scroll.set)
         self.table.bind('<ButtonRelease-1>', self.toggle_selected)
@@ -90,7 +101,7 @@ class AssemblyPage(ttk.Frame):
         self.info_text = tk.Text(self.info_frame, wrap='word', height=4, width=1, relief='flat',
                                   font=('Microsoft JhengHei', 10), padx=12, pady=10)
         self.info_text.grid(row=0, column=0, sticky='nsew')
-        info_scroll = ttk.Scrollbar(self.info_frame, command=self.info_text.yview)
+        info_scroll = AutoHideScrollbar(self.info_frame, command=self.info_text.yview)
         info_scroll.grid(row=0, column=1, sticky='ns')
         self.info_text.configure(yscrollcommand=info_scroll.set, state='disabled')
         detail_actions = ttk.Frame(self.info_frame)
@@ -125,22 +136,22 @@ class AssemblyPage(ttk.Frame):
         settings_menu.add_command(label='交接停頓與儲存…', command=self.toggle_options)
         settings_menu.add_command(label='來源詳情…', command=self.toggle_info)
         self.settings_button.configure(menu=settings_menu)
-        self.status = ttk.Label(main, text='正在檢查來源…', wraplength=620)
+        from .ui_controls import MessageLine
+        self.status = MessageLine(main, text='正在檢查來源…') if movie else ttk.Label(main, text='正在檢查來源…', wraplength=620)
         self.status.grid(row=5, column=0, sticky='ew', pady=(0, 4))
         self.progress = ttk.Progressbar(main, mode='determinate')
-        actions = ttk.Frame(main)
-        actions.grid(row=7, column=0, sticky='ew', pady=4)
+        self.shell_footer = actions = app.shell.create_footer(self)
         actions.columnconfigure(1, weight=1)
-        self.back_button = ttk.Button(actions, text='← 返回批次製作', command=app.narration)
+        self.back_button = actions.button('← 返回批次製作',app.narration,role='back')
         self.back_button.grid(row=0, column=0, sticky='w')
         self.saved_label = ttk.Label(actions, text='合併設定已儲存' if self.selected else '尚未選取批次', width=1)
         self.saved_label.grid(row=0, column=1, sticky='ew', padx=6)
-        self.start_button = ttk.Button(actions, text='4 製作總 MP3／SRT →', command=self.start, style='Primary.TButton')
+        self.start_button = actions.button('4 製作總 MP3／SRT →',self.start,role='primary')
         self.start_button.grid(row=0, column=2, sticky='e')
-        self.video_button = ttk.Button(actions, text='加入視覺素材，製作 MP4 →', command=self.open_video, style='Primary.TButton')
+        self.video_button = actions.button('加入視覺素材，製作 MP4 →',self.open_video,role='primary')
         self.video_button.grid(row=0, column=2, sticky='e')
         self.video_button.grid_remove()
-        self.cancel_button = ttk.Button(actions, text='取消任務', command=self.cancel)
+        self.cancel_button = actions.button('取消任務',self.cancel)
         self.cancel_button.grid(row=0, column=3, padx=(6, 0))
 
         self.result_info = ttk.Label(main, text='', width=1)
@@ -177,12 +188,66 @@ class AssemblyPage(ttk.Frame):
             for child in steps.winfo_children(): child.destroy()
             ttk.Label(steps, text='1 選批次 → 2 檢查接點 → 3 合併 MP4', style='Heading.TLabel').pack(side='left')
             self.video_step = ttk.Button(steps)  # Kept detached for shared control updates.
+        from .outputs_desktop import OutputControls
+        self.output_controls = OutputControls(self)
+        if self.movie:
+            self.build_video_workspace(header, toolbar, join_actions)
         self.recheck()
 
+    def build_video_workspace(self, header, toolbar, joins):
+        from .video_workspace import VideoTabs, readonly_text, workspace_styles
+        header.grid_remove()
+        self.notebook = VideoTabs(self.main)
+        self.notebook.grid(row=2, column=0, sticky='nsew')
+        visual, sources, results = self.notebook.panels
+        visual.rowconfigure(0, weight=0)
+        ttk.Label(visual, text='沿用各批影片的畫面與原聲。\n不需要總 MP3 或全片素材。\n交接停頓使用前批末格；字幕清空。',
+                  justify='left').grid(row=0, column=0, sticky='nw', pady=8)
+        self.options.grid(in_=visual, row=1, column=0, sticky='ew')
+        for child in self.options.grid_slaves():
+            column = int(child.grid_info()['column'])
+            if column >= 5:
+                child.grid_configure(row=1, column=column-5, pady=(8, 0))
+        visual.rowconfigure(2, weight=1)
+        ttk.Button(visual, text='檢查各批畫面與接點', command=self.open_joins).grid(row=3, column=0, sticky='e')
+        toolbar.grid(in_=sources, row=0, column=0, sticky='ew')
+        sources.rowconfigure(0, weight=0)
+        sources.rowconfigure(1, weight=1)
+        self.table_frame.grid(in_=sources, row=1, column=0, sticky='nsew')
+        self.info_frame.grid(in_=sources, row=1, column=0, sticky='nsew')
+        self.info_frame.grid_remove()
+        joins.grid(in_=sources, row=3, column=0, sticky='ew')
+        self.settings_button.grid_remove()
+        self.info_button.grid()
+        self.output_controls.frame.grid(in_=results, row=0, column=0, sticky='ew')
+        self.output_controls.results.grid(in_=results, row=1, column=0, sticky='ew')
+        self.output_controls.summary.grid(in_=results, row=2, column=0, sticky='ew')
+        for widget in (toolbar, self.table_frame, self.info_frame, joins, self.options,
+                       self.output_controls.frame, self.output_controls.results, self.output_controls.summary):
+            widget.lift()
+        results.rowconfigure(0, weight=0)
+        results.rowconfigure(3, weight=1)
+        self.task_panel, self.task_text = readonly_text(results)
+        self.task_panel.grid(row=3, column=0, sticky='nsew')
+        ttk.Button(results, text='版本與來源比較', command=self.app.production.show_versions).grid(row=4, column=0, sticky='e')
+        self.back_button.configure(text='← 全書合併', command=self.return_to_audio)
+        # Product actions stay reachable outside the tab's bounded content.
+        self.result_info.master.grid_remove()
+        actions = self.start_button.master
+        self.outputs_button = ttk.Menubutton(actions, text='成品操作', menu=self.outputs_menu)
+        self.outputs_button.grid(row=0, column=2, padx=6)
+        self.start_button.grid_configure(column=4)
+        self.notebook.select(1)
+        workspace_styles(self)
+
+    def return_to_audio(self):
+        self.app.production.return_from_video(self, lambda: self.app.production.show('audio_assembly'))
+
     def save_settings(self, *args, **kwargs):
-        if self.movie:
-            return self.flow.save_video_merge_settings(*args, resolution=self.resolution.get(), **kwargs)
-        return self.flow.save_assembly_settings(*args, **kwargs)
+        if not self.movie:
+            return self.flow.save_assembly_settings(*args, **kwargs)
+        return self.flow.save_output_plan(*args, resolution=self.resolution.get() if self.movie else
+            self.flow.state.get('video_merge_resolution', '1080p'), **kwargs)
 
     def begin_job(self):
         return self.flow.start_video_merge() if self.movie else self.flow.start_total_audio()
@@ -217,8 +282,15 @@ class AssemblyPage(ttk.Frame):
 
     def resized(self, event):
         if event.widget is self:
-            self.status.configure(wraplength=max(180, event.width-12))
+            self.status.configure(wraplength=0 if self.movie else max(180, event.width-12))
             self.result_info.configure(wraplength=max(180, event.width-12))
+            if self.movie and hasattr(self, 'notebook'):
+                required = sum(w.winfo_reqwidth() for w in (self.back_button, self.outputs_button, self.start_button)) + 160
+                row = 1 if event.width < required else 0
+                self.outputs_button.grid_configure(row=row)
+                self.start_button.grid_configure(row=row)
+                if self.cancel_button.winfo_manager():
+                    self.cancel_button.grid_configure(row=row)
 
     def cell_help(self, x, y):
         row = self.table.identify_row(y)
@@ -241,11 +313,14 @@ class AssemblyPage(ttk.Frame):
         if self.join_page is not None:
             self.join_page.stop()
         self.saved_label.configure(text='合併設定尚未儲存')
+        if not self.movie:
+            self.status.configure(text='合併設定尚未儲存；製作時會先儲存。')
         self.load_result()
         self.update_controls()
 
     def render_rows(self):
         focus = self.table.selection()
+        offset = self.table.yview()[0]
         self.tooltip.hide()
         self.table.delete(*self.table.get_children())
         by_id = {r['batch_id']: r for r in self.rows}
@@ -262,6 +337,7 @@ class AssemblyPage(ttk.Frame):
                 if row['duration_ms'] > 0 else '—', reason))
         if focus and self.table.exists(focus[0]):
             self.table.selection_set(focus)
+        self.table.yview_moveto(offset)
         self.update_controls()
 
     def toggle_selected(self, event=None):
@@ -275,7 +351,7 @@ class AssemblyPage(ttk.Frame):
         for identity in identities:
             if identity in self.selected:
                 self.selected.remove(identity)
-            elif any(r['batch_id'] == identity and r['valid'] for r in self.rows):
+            elif any(r['batch_id'] == identity for r in self.rows):
                 self.selected.append(identity)
             else:
                 self.status.configure(text='此來源無效。請查看來源詳情，或前往該批次製作。')
@@ -315,7 +391,7 @@ class AssemblyPage(ttk.Frame):
                 if self.movie:
                     from .total_video import total_video
                     from .assembly import checked_file_async
-                    product = total_video(self.flow, verify_media=False)
+                    product = total_video(self.flow, verify_media=False, method='batch-videos')
                     if product:
                         for kind in ('mp4', 'srt'): await checked_file_async(self.flow, product[kind])
                 else:
@@ -324,11 +400,15 @@ class AssemblyPage(ttk.Frame):
                 product = None
                 warning = f'舊總成品無法驗證：{error} 可使用有效批次重新合併。'
             try:
-                runs = self.flow.total_video_runs() if self.movie else self.flow.total_audio_runs()
+                runs = self.flow.total_video_runs(method='batch-videos') if self.movie else self.flow.total_audio_runs()
             except ProjectError as error:
                 runs = []
                 warning += f' 合併進度無法讀取：{error}'
-            return rows, product, runs, warning
+            output_plan = None
+            if self.movie:
+                from .outputs import inspect as inspect_outputs
+                output_plan = await inspect_outputs(self.flow)
+            return rows, product, runs, warning, output_plan
         self.check_action = 'inspect'
         self.check_job = VoiceJob(inspect, timeout=None)
         self.status.configure(text='正在檢查來源與成品版本…')
@@ -339,12 +419,16 @@ class AssemblyPage(ttk.Frame):
         try:
             self.require_current()
             self.save_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
+            if not self.movie and self.join_page is not None:
+                self.join_page.workspace.save_error = False
             self.saved_label.configure(text='合併設定已儲存')
             self.status.configure(text='合併設定已儲存。尚未開始合併，不傳送文字。')
             self.app.notify('全書合併設定已儲存。')
             self.recheck()
             return True
         except ProjectError as error:
+            if not self.movie and self.join_page is not None:
+                self.join_page.workspace.save_error = True
             self.status.configure(text=str(error))
             self.app.notify(str(error), kind='error')
             return False
@@ -363,6 +447,11 @@ class AssemblyPage(ttk.Frame):
     def start(self):
         try:
             if self.job is not None:
+                from .outputs import OutputJob
+                if isinstance(self.job, OutputJob) and self.job.publish_pending:
+                    self.job.retry_save()
+                    self.schedule()
+                    return
                 if self.job.wait(0) and self.job.state['status'] == 'completed':
                     self.publish()
                 return
@@ -370,7 +459,7 @@ class AssemblyPage(ttk.Frame):
             self.stop()
             self.save_settings(self.selected, self.pause_ms(), accepted_joins=list(self.accepted_joins))
             self.saved_label.configure(text='合併設定已儲存')
-            self.job = self.begin_job()
+            self.job = self.flow.start_outputs() if self.movie else self.begin_job()
             self.status.configure(text='開始合併；本次來源版本與順序已固定。')
             self.update_controls()
             self.schedule()
@@ -395,6 +484,11 @@ class AssemblyPage(ttk.Frame):
 
     def poll(self):
         self.timer = None
+        from .outputs import OutputJob
+        if isinstance(self.job, OutputJob):
+            assert self.output_controls is not None
+            self.output_controls.poll()
+            return
         if self.check_job is not None:
             if not self.check_job.wait(0):
                 self.schedule()
@@ -405,17 +499,25 @@ class AssemblyPage(ttk.Frame):
                         self.rows = []
                     self.status.configure(text='已取消檢查或檔案操作。舊成品保留；可重新檢查來源。')
                 elif self.check_action == 'inspect':
-                    self.rows, self.product, runs, warning = self.check_job.result
+                    self.rows, self.product, runs, warning, output_plan = self.check_job.result
+                    if self.output_controls is not None:
+                        self.output_controls.plan = output_plan
+                        for kind, value in self.output_controls.values.items():
+                            value.set(kind in output_plan['formats'])
                     self.render_rows()
                     self.load_result()
                     last = runs[-1]['progress'] if runs else None
                     self.last_status = last['status'] if last else ''
                     labels = dict(cancelled='已取消', failed='失敗', interrupted='已中斷', completed='已完成')
                     self.status.configure(text=(f'上次合併：{labels.get(last["status"], "未完成")}。'+last.get('error', '')+' 舊成品保留，可重新合併。'
-                        if last and last['status'] != 'completed' else '音訊已完成。可取用成品，或加入圖片／背景影片製作 MP4。'
+                        if last and last['status'] != 'completed' else '合併 MP3 與同版 SRT 已完成並保存。'
                         if self.product and not self.product['stale'] else '請依序選批次、設定交接停頓，再製作總音訊。'))
                     if self.movie and self.product and not self.product['stale']:
                         self.status.configure(text='總影片已完成。可從成品操作播放、另存或開啟資料夾。')
+                    if output_plan and output_plan['status'] == 'completed':
+                        self.status.configure(text='各要求格式與同版 SRT 均已保存。可從成品操作播放或另存。')
+                    elif output_plan and output_plan['status'] == 'partial':
+                        self.status.configure(text='請補齊缺項或查看失敗原因，再只重試未完成格式；成功成品保留。')
                     if warning:
                         self.status.configure(text=warning)
                         self.app.notify(warning, kind='warning')
@@ -489,6 +591,9 @@ class AssemblyPage(ttk.Frame):
             self.stop()
 
     def update_controls(self):
+        if not self.movie:
+            self.assembly_workspace.refresh()
+            return
         busy = self.job is not None or self.check_job is not None or self.production_busy
         valid = bool(self.selected) and all(any(r['batch_id'] == i and r['valid'] for r in self.rows) for i in self.selected)
         try:
@@ -532,7 +637,7 @@ class AssemblyPage(ttk.Frame):
                 self.progress.configure(mode='indeterminate' if self.check_job is not None else 'determinate')
                 if self.check_job is not None:
                     self.progress.start(15)
-            self.progress.grid(row=6, column=0, sticky='ew')
+            self.progress.grid(row=9, column=0, sticky='ew')
             self.cancel_button.grid()
         else:
             self.progress.stop()
@@ -571,6 +676,14 @@ class AssemblyPage(ttk.Frame):
         self.join_button.configure(text='檢查接點')
         self.join_summary.configure(text=(f'2 檢查 {len(joins)} 個接點' if self.movie else self.summary.cget('text'))
             + (f' · {pending} 個警告待確認' if joins and pending else ''))
+        if self.output_controls is not None:
+            self.output_controls.refresh()
+        if hasattr(self, 'notebook'):
+            from .video_workspace import replace_text
+            text = self.status.full_text + '\n\n' + self.result_info.cget('text')
+            if self.product:
+                text += '\n\n' + '\n'.join(f'{k.upper()}：{self.product[k]["path"]}' for k in ('mp4', 'srt'))
+            replace_text(self.task_text, text)
 
     def open_joins(self):
         if self.join_button.instate(['disabled']):
@@ -580,7 +693,11 @@ class AssemblyPage(ttk.Frame):
             from .assembly_joins_desktop import JoinPage
             self.join_page = JoinPage(self)
         self.main.grid_remove()
-        self.join_page.grid(row=0, column=0, sticky='nsew')
+        if not self.movie:
+            self.assembly_workspace.header.grid_remove()
+            self.assembly_workspace.set_active(False)
+        self.join_page.grid(row=0, column=0, rowspan=2 if not self.movie else 1, sticky='nsew')
+        self.app.production.sync_chrome()
         self.join_page.load()
 
     def return_from_joins(self):
@@ -588,8 +705,12 @@ class AssemblyPage(ttk.Frame):
             return
         self.join_page.stop()
         self.join_page.grid_remove()
-        self.main.grid(row=0, column=0, sticky='nsew')
+        self.main.grid(row=1 if not self.movie else 0, column=0, sticky='nsew')
+        if not self.movie:
+            self.assembly_workspace.header.grid()
+            self.assembly_workspace.set_active(True)
         self.edit_return = False
+        self.app.production.sync_chrome()
         self.update_controls()
 
     def set_production_busy(self, busy):
@@ -622,8 +743,8 @@ class AssemblyPage(ttk.Frame):
         self.info_open = not self.info_open
         self.table_frame.grid_remove()
         self.info_frame.grid_remove()
-        (self.info_frame if self.info_open else self.table_frame).grid(row=2, column=0, sticky='nsew')
-        self.info_button.configure(text='返回清單 ▾' if self.info_open else '來源詳情 ▸')
+        (self.info_frame if self.info_open else self.table_frame).grid(row=1 if hasattr(self, 'notebook') else 2, column=0, sticky='nsew')
+        self.info_button.configure(text=('← 返回清單' if self.info_open else '來源詳情 →') if not self.movie else '返回清單 ▾' if self.info_open else '來源詳情 ▸')
         if self.info_open:
             focus = self.table.selection()
             row = next((r for r in self.rows if focus and r['batch_id'] == focus[0]), None)
@@ -647,10 +768,16 @@ class AssemblyPage(ttk.Frame):
                 return
             self.app.batch_id = focus[0]
             self.app.refresh()
-            self.app.narration()
+            (self.app.batch_video if self.movie else self.app.narration)()
+            if self.movie:
+                destination = self.app.production.current
+                destination.return_origin = self
+                destination.back_button.configure(text='← 返回全書影片')
 
     def movie_labels(self):
         def visit(widget):
+            if self.output_controls is not None and widget in (self.output_controls.frame, self.output_controls.results):
+                return
             try:
                 text=widget.cget('text')
                 if isinstance(text,str): widget.configure(text=text.replace('MP3／SRT','MP4／SRT')
@@ -660,6 +787,10 @@ class AssemblyPage(ttk.Frame):
         visit(self.main)
 
     def close_movie(self):
+        if hasattr(self, 'notebook'):
+            (self.info_frame if self.info_open else self.table_frame).grid(row=1, column=0, sticky='nsew')
+            self.notebook.grid()
+            return
         (self.info_frame if self.info_open else self.table_frame).grid(row=2,column=0,sticky='nsew')
 
     def play(self):
@@ -669,6 +800,8 @@ class AssemblyPage(ttk.Frame):
                 if self.movie_player is None:
                     self.movie_player=MoviePlayback(self.main,self.flow,self.close_movie)
                 self.table_frame.grid_remove();self.info_frame.grid_remove()
+                if hasattr(self, 'notebook'):
+                    self.notebook.grid_remove()
                 self.movie_player.grid(row=2,column=0,sticky='nsew')
                 self.movie_player.start(self.product)
             except ProjectError as error: self.status.configure(text=str(error))
@@ -705,12 +838,12 @@ class AssemblyPage(ttk.Frame):
         async def operation():
             from .assembly import export, inspect_total_audio
             if self.movie:
-                from .total_video import export, total_video
+                from .total_video import export as export_video, total_video
                 from .assembly import checked_file_async
                 if action == 'export':
-                    await export(self.flow, target)
+                    await export_video(self.flow, target, method='batch-videos')
                     return None
-                product = total_video(self.flow, verify_media=False)
+                product = total_video(self.flow, verify_media=False, method='batch-videos')
                 if product is None: raise ProjectError('尚無總影片。')
                 path = await checked_file_async(self.flow, product['mp4'])
                 return path.parent
@@ -759,4 +892,8 @@ class AssemblyPage(ttk.Frame):
         self.stop()
         if self.join_page is not None:
             self.join_page.release()
+        if not self.movie:
+            self.assembly_workspace.pause_help.hide()
+            self.assembly_workspace.set_active(False)
+            self.assembly_workspace.actions.destroy()
         self.destroy()

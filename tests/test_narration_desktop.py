@@ -90,9 +90,9 @@ class NarrationDesktop(unittest.TestCase):
                         self.dialog.export_button, self.dialog.folder_button, self.dialog.consent_control):
             if not control.winfo_ismapped():
                 continue
-            self.assertGreaterEqual(control.winfo_rootx(), self.dialog.winfo_rootx())
-            self.assertLessEqual(control.winfo_rootx()+control.winfo_width(), self.dialog.winfo_rootx()+self.dialog.winfo_width())
-            self.assertLessEqual(control.winfo_rooty()+control.winfo_height(), self.dialog.winfo_rooty()+self.dialog.winfo_height())
+            self.assertGreaterEqual(control.winfo_rootx(), self.root.winfo_rootx())
+            self.assertLessEqual(control.winfo_rootx()+control.winfo_width(), self.root.winfo_rootx()+self.root.winfo_width())
+            self.assertLessEqual(control.winfo_rooty()+control.winfo_height(), self.root.winfo_rooty()+self.root.winfo_height())
         self.flow.save_voice_settings('zh-TW-TestNeural','+10%',batch_id=self.batch)
         self.dialog.load_runs()
         self.poll()
@@ -125,13 +125,14 @@ class NarrationDesktop(unittest.TestCase):
                 yield from children(child)
         self.assertFalse(any(isinstance(w,tk.Canvas) for w in children(self.dialog)))
         self.assertFalse(self.dialog.source_info.winfo_ismapped())
-        for widget in (self.dialog.details,self.dialog.start_button,self.dialog.consent_control,self.dialog.folder_button):
+        for widget in (self.dialog.details,self.dialog.start_button,self.dialog.consent_control,self.dialog.output_button):
             self.assertTrue(widget.winfo_ismapped())
             self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),self.root.winfo_rooty()+self.root.winfo_height())
         self.dialog.info_button.invoke()
         self.root.update()
         self.assertTrue(self.dialog.source_info.winfo_ismapped())
-        self.assertFalse(self.dialog.outgoing.winfo_ismapped())
+        self.assertTrue(self.dialog.outgoing.winfo_ismapped())
+        self.assertFalse(self.dialog.details.winfo_ismapped())
         self.dialog.info_button.invoke()
         self.root.geometry('1360x800')
         self.root.update()

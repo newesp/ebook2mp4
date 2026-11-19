@@ -1,5 +1,6 @@
 """Approved join controls through the native main-window surface."""
 import unittest
+import os
 import time
 from unittest.mock import patch
 import threading
@@ -38,10 +39,14 @@ class AssemblyJoinsDesktop(unittest.TestCase):
         join = page.join_page
         self.wait_join(join)
         self.assertIs(join.winfo_toplevel(), self.root)
+        self.assertTrue(join.workspace.footer.winfo_ismapped())
         self.root.state('normal')
         for size in ('1040x640', '1360x800'):
             self.root.geometry(size)
             self.root.update()
+            self.assertTrue(join.workspace.footer.winfo_ismapped())
+            self.assertLessEqual(self.root.winfo_rooty()+self.root.winfo_height()-
+                                 join.save_button.winfo_rooty()-join.save_button.winfo_height(),32)
             for widget in (join.play_button, join.back_button, join.save_button, join.left_edit,
                            join.right_edit, join.pause_control, join.pair_control):
                 self.assertTrue(widget.winfo_viewable())
@@ -51,6 +56,8 @@ class AssemblyJoinsDesktop(unittest.TestCase):
         page.pause.set('5')
         join.save_button.invoke()
         self.wait_page(page)
+        self.assertTrue(self.app.actions.winfo_ismapped())
+        self.assertTrue(page.start_button.winfo_viewable())
         self.assertEqual(ProjectWorkflow.open(self.flow.root).assembly_settings()['pause_ms'], 5000)
         page.join_button.invoke()
         self.wait_join(join)
@@ -64,7 +71,8 @@ class AssemblyJoinsDesktop(unittest.TestCase):
             self.assertIn('第 1 批', join.left_text.get('1.0', 'end'))
             join.right_edit.invoke()
             self.root.update()
-            self.assertEqual(self.app.step, 2)
+            self.assertEqual(self.app.step, 1)
+            self.assertTrue(self.app.editor.winfo_viewable())
             self.assertEqual(self.app.batch_id, self.ids[1])
             self.assertIsNone(join.player.alias)
         self.app.total_audio()
@@ -125,6 +133,16 @@ class AssemblyJoinsDesktop(unittest.TestCase):
             try:
                 join.play_button.invoke()
                 self.assertTrue(opened.wait(5))
+                self.root.update()
+                if hasattr(join, 'workspace'):
+                    from PIL import ImageGrab
+                    self.assertTrue(join.save_button.instate(['disabled']))
+                    self.assertTrue(join.pause_control.instate(['disabled']))
+                    self.assertTrue(join.left_edit.instate(['disabled']))
+                    self.assertTrue(self.app.shell.documents.import_control.instate(['disabled']))
+                    self.assertTrue(join.progress.winfo_ismapped())
+                    self.assertEqual(join.stop_button.cget('text'),'取消準備')
+                    ImageGrab.grab(window=self.root.winfo_id()).save(Path(os.environ.get('JOIN_QA_EVIDENCE', 'docs/verification/audio-join-workspace'))/'native-preparing.png')
                 self.app.voice_settings()
                 proceed.set()
                 deadline = time.monotonic()+15

@@ -278,8 +278,16 @@ def current_audio(flow: ProjectWorkflow | BatchVideoTarget, *, verify_media=Fals
     return {k: deepcopy(product[k]) for k in ('id', 'mp3', 'srt', 'duration_ms')}
 
 
-def total_video(flow: ProjectWorkflow | BatchVideoTarget, *, verify_media=True) -> dict | None:
-    product = deepcopy(flow.state.get('total_video'))
+def total_video(flow: ProjectWorkflow | BatchVideoTarget, *, verify_media=True, method=None) -> dict | None:
+    if method is not None and method not in ('total-audio', 'batch-videos'):
+        raise ProjectError('影片來源路徑無效。')
+    state = flow.state
+    product = deepcopy(state.get('total_video'))
+    if method is not None and isinstance(flow, ProjectWorkflow):
+        product = deepcopy(state.get('total_video_products', {}).get(method))
+        legacy = state.get('total_video')
+        if product is None and legacy and legacy.get('method', 'total-audio') == method:
+            product = deepcopy(legacy)
     if product is None:
         return None
     try:
@@ -312,7 +320,8 @@ async def inspect_video(flow: ProjectWorkflow | BatchVideoTarget) -> dict:
         audio = None
         warning = str(error)
     try:
-        product = total_video(flow, verify_media=False)
+        product = total_video(flow, verify_media=False,
+                              method='total-audio' if isinstance(flow, ProjectWorkflow) else None)
         if product:
             for kind in ('mp4', 'srt'):
                 await checked_file_async(flow.project if isinstance(flow, BatchVideoTarget) else flow, product[kind])
@@ -331,7 +340,7 @@ async def inspect_video(flow: ProjectWorkflow | BatchVideoTarget) -> dict:
         except ProjectError as error:
             warning += f' 素材無法驗證：{error}'
     try:
-        history = runs(flow)
+        history = runs(flow, method='total-audio' if isinstance(flow, ProjectWorkflow) else None)
     except ProjectError as error:
         history = []
         warning += ' '+str(error)
@@ -449,14 +458,8 @@ class TotalVideoJob(VoiceJob):
         try:
             media.mkdir()
             audio = self.snapshot['audio']
-            reopened = ProjectWorkflow.open(self.root)
-            if self.snapshot.get('batch_id'):
-                from .video_target import BatchVideoTarget
-                checked = await BatchVideoTarget(reopened, self.snapshot['batch_id']).inspect_audio()
-            else:
-                checked = await inspect_total_audio(reopened)
-            if checked is None or checked['stale'] or any(checked[k] != audio[k] for k in audio):
-                raise ProjectError('總音訊缺少或已失效。請先更新總 MP3／SRT。')
+            # Start already checked freshness. Read only the immutable launch references here;
+            # edits made during production must not replace them with the current settings.
             for kind in ('mp3', 'srt'):
                 await copy_verified_source(self.root, audio[kind], media/('source.'+kind))
             visual = self.snapshot['visual']
@@ -535,12 +538,12 @@ class TotalVideoJob(VoiceJob):
             raise ProjectError('無法釋放製片暫存或任務鎖，請解除占用後重試。') from None
 
 
-def start(flow: ProjectWorkflow | BatchVideoTarget) -> TotalVideoJob:
+def start(flow: ProjectWorkflow | BatchVideoTarget, *, _lease=None) -> TotalVideoJob:
     from .production_lock import ProductionLease
     if flow._total_video_job is not None:
         raise ProjectError('已有製片任務，請先保存或捨棄結果。')
     tool = ffmpeg()
-    lease = ProductionLease(flow.root/'.production.lock')
+    lease = _lease if _lease is not None else ProductionLease(flow.root/'.production.lock')
     folder = None
     committed = False
     try:
@@ -552,6 +555,9 @@ def start(flow: ProjectWorkflow | BatchVideoTarget) -> TotalVideoJob:
         audio = current_audio(flow)
         flow._space(flow.root, audio['duration_ms']*600 + asset.get('size', 0)*2 + 50_000_000)
         snapshot = dict(id=uuid.uuid4().hex, created_at=now(), audio=audio, visual=visual)
+        if isinstance(flow, ProjectWorkflow):
+            snapshot['method'] = 'total-audio'
+            snapshot['audio_snapshot'] = deepcopy(flow.state['total_audio'])
         if isinstance(flow, BatchVideoTarget):
             snapshot['batch_id'] = flow.batch_id
         folder = flow._path(f'video/run-{snapshot["id"]}')
@@ -584,7 +590,7 @@ def finish(flow: ProjectWorkflow | BatchVideoTarget, job: TotalVideoJob) -> dict
     if not job.published:
         if job.snapshot.get('method') == 'batch-videos' and isinstance(flow, ProjectWorkflow):
             from .video_merge import validate_snapshot
-            validate_snapshot(flow, job)
+            validate_snapshot(flow, job, allow_stale=True)
         product = dict(deepcopy(job.snapshot), duration_ms=report['duration_ms'], completed_at=now())
         for kind in ('mp4', 'srt'):
             ref = report['artifacts'][kind]
@@ -592,6 +598,12 @@ def finish(flow: ProjectWorkflow | BatchVideoTarget, job: TotalVideoJob) -> dict
                 raise ProjectError('已驗證的影片在發布前變更，請重新製作。舊成品保留。')
             product[kind] = deepcopy(ref)
         manifest = flow.state
+        if isinstance(flow, ProjectWorkflow):
+            products = manifest.setdefault('total_video_products', {})
+            legacy = manifest.get('total_video')
+            if legacy:
+                products.setdefault(legacy.get('method', 'total-audio'), deepcopy(legacy))
+            products[product.get('method', 'total-audio')] = deepcopy(product)
         manifest['total_video'] = product
         next(r for r in manifest['total_video_runs'] if r['id'] == product['id'])['published'] = True
         flow._commit(manifest, [])
@@ -603,22 +615,28 @@ def finish(flow: ProjectWorkflow | BatchVideoTarget, job: TotalVideoJob) -> dict
     return result
 
 
-def runs(flow: ProjectWorkflow | BatchVideoTarget) -> list[dict]:
+def runs(flow: ProjectWorkflow | BatchVideoTarget, *, method=None) -> list[dict]:
     from .production_lock import production_active
     try:
         result = []
         for ref in flow.state.get('total_video_runs', []):
+            snapshot = json.loads(flow._read(ref))
+            if method is not None and snapshot.get('method', 'total-audio') != method:
+                continue
             progress = json.loads(flow._path(ref['progress_path']).read_bytes())
+            published = ref.get('published', False)
             if progress['status'] in ('pending', 'running', 'cancelling') and not production_active(flow.root/'.production.lock'):
                 progress['status'] = 'interrupted'
-            result.append(dict(snapshot=json.loads(flow._read(ref)), progress=progress, published=ref.get('published', False)))
+            elif published and progress['status'] == 'completed':
+                progress['phase'] = '已保存成品'
+            result.append(dict(snapshot=snapshot, progress=progress, published=published))
         return result
     except (OSError, KeyError, TypeError, ValueError):
         raise ProjectError('製片進度無法讀取。請還原專案備份。') from None
 
 
-async def export(flow: ProjectWorkflow | BatchVideoTarget, folder: str | Path) -> None:
-    product = total_video(flow, verify_media=False)
+async def export(flow: ProjectWorkflow | BatchVideoTarget, folder: str | Path, *, method=None) -> None:
+    product = total_video(flow, verify_media=False, method=method)
     if product is None:
         raise ProjectError('尚無成功總影片。')
     target = Path(folder).resolve()

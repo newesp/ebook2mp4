@@ -21,6 +21,12 @@ class ProductionPages(unittest.TestCase):
         self.addCleanup(self.stop_ui)
 
     def stop_ui(self):
+        try:
+            exists = self.root.winfo_exists()
+        except tk.TclError:
+            return
+        if not exists:
+            return
         deadline=time.monotonic()+10
         while self.app.production.shutdown() != 'complete' and time.monotonic()<deadline:
             self.root.update()
@@ -32,7 +38,7 @@ class ProductionPages(unittest.TestCase):
         gc.collect()
 
     def test_voice_production_and_service_management_share_main_window(self):
-        self.app.steps[3].invoke()
+        self.app.voice_settings()
         self.root.update()
         voice = self.app.voice_dialog
         self.assertIs(voice.winfo_toplevel(), self.root)
@@ -45,11 +51,11 @@ class ProductionPages(unittest.TestCase):
         self.app.voice_settings()
         self.root.update()
         self.assertEqual(voice.outgoing.get('1.0', 'end-1c'), '往返後仍保留的試聽文字。')
-        voice.manage_button.invoke()
+        voice.service_menu.invoke(0)
         self.root.update()
         service = self.app.production.service_page
         self.assertIs(service.winfo_toplevel(), self.root)
-        self.assertEqual(self.app.production.voice_tab.cget('style'),'CompactActive.TButton')
+        self.assertEqual(self.app.production.voice_tab.cget('style'),'Primary.TButton')
         first=self.app.batch_id
         source=self.folder/'另一批次.txt'
         source.write_text('另一批次。',encoding='utf-8')
@@ -57,7 +63,7 @@ class ProductionPages(unittest.TestCase):
         self.app.refresh()
         self.app.voice_settings()
         other_voice=self.app.voice_dialog
-        other_voice.manage_button.invoke()
+        other_voice.service_menu.invoke(0)
         self.root.update()
         self.assertIs(service.owner,other_voice)
         service.close()
@@ -122,21 +128,16 @@ class ProductionPages(unittest.TestCase):
             self.assertIsNone(page.job)
         self.assertIsNotNone(flow.narration(batch))
 
-    def test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check(self):
-        dialog=tk.Toplevel(self.root)
-        dialog.close=dialog.destroy
-        self.app.gemini_settings_dialog=dialog
-        self.app.close()
-        self.assertFalse(self.app._closing)
-        self.assertIsNotNone(self.app.production.timer)
-        self.app.editor.insert('end','未存稿必須保留。')
+    def test_close_autosaves_manuscript_without_confirmation_page(self):
+        from ebook2mp4.workflow import ProjectWorkflow
+        folder = self.app.flow.root
+        batch = self.app.batch_id
+        self.app.editor.insert('end', '關閉前保留的草稿。')
         self.root.update()
-        with patch('ebook2mp4.desktop.messagebox.askyesnocancel',return_value=None) as prompt:
+        expected = self.app.current_text
+        with patch('ebook2mp4.desktop.messagebox.askyesnocancel') as prompt:
             self.app.close()
-        prompt.assert_called_once()
-        self.assertTrue(self.root.winfo_exists())
-        self.assertTrue(self.app.dirty)
-
-
-if __name__ == '__main__':
-    unittest.main()
+        prompt.assert_not_called()
+        self.assertEqual(ProjectWorkflow.open(folder).workspace_state(batch)['text'], expected)
+        with self.assertRaises(tk.TclError):
+            self.root.winfo_exists()

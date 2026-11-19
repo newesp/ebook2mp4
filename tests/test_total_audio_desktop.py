@@ -171,7 +171,10 @@ class TotalAudioDesktop(unittest.TestCase):
                 self.wait_page(page)
             finally:
                 proceed.set()
-        self.assertEqual(self.flow.total_audio_runs()[-1]['progress']['status'], 'cancelled')
+        # Audio assembly owns its job independently of MP4 output preferences.
+        self.assertEqual(page.last_status, 'cancelled')
+        self.assertIn('已取消', page.status.cget('text'))
+        self.assertIsNone(self.flow.total_audio())
         self.assertFalse((self.flow.root/'.production.lock').exists())
 
     def test_leaving_page_cancels_pending_playback_verification(self):

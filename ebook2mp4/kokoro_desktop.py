@@ -1,22 +1,28 @@
 """Optional voice-package management inside the incumbent production workspace."""
 import tkinter as tk
+from pathlib import Path
 from tkinter import ttk,filedialog
 from .workflow import ProjectError
+from .ui_controls import AutoHideScrollbar
 
 
 class PackagePage(ttk.Frame):
     kind='local-package'
+    page_id='voice.packages'
     def __init__(self,owner):
-        super().__init__(owner.app.production.host,padding=8)
+        super().__init__(owner.app.production.host)
         self.owner=owner;self.app=owner.app;self.flow=owner.flow
         ttk.Style(self).configure('KokoroDanger.TButton',foreground='#963b32')
         self.job=None;self.timer=None;self.closing=False
         self.columnconfigure(0,weight=1);self.rowconfigure(4,weight=1)
-        ttk.Label(self,text='本機語音包',style='Heading.TLabel').grid(row=0,column=0,sticky='w',pady=(0,8))
+        self.shell_header=ttk.Label(self,text='本機語音包',style='Heading.TLabel')
+        self.shell_header.grid(row=0,column=0,sticky='w',pady=(0,8))
         self.summary=ttk.Label(self,text='',wraplength=650)
         self.summary.grid(row=1,column=0,sticky='ew',pady=8)
         row=ttk.Frame(self);row.grid(row=2,column=0,sticky='ew',pady=8);row.columnconfigure(0,weight=1)
-        self.path=tk.StringVar()
+        from .kokoro_packages import remembered_archive
+        self.saved_path=remembered_archive()
+        self.path=tk.StringVar(value=self.saved_path)
         self.entry=ttk.Entry(row,textvariable=self.path,width=24);self.entry.grid(row=0,column=0,sticky='ew')
         self.choose_button=ttk.Button(row,text='選擇離線語音包…',command=self.choose)
         self.choose_button.grid(row=0,column=1,padx=(8,0))
@@ -34,7 +40,7 @@ class PackagePage(ttk.Frame):
         self.detail_frame.columnconfigure(0,weight=1);self.detail_frame.rowconfigure(0,weight=1)
         self.detail_text=tk.Text(self.detail_frame,height=5,width=1,wrap='word',state='disabled')
         self.detail_text.grid(row=0,column=0,sticky='nsew')
-        bar=ttk.Scrollbar(self.detail_frame,command=self.detail_text.yview);bar.grid(row=0,column=1,sticky='ns')
+        bar=AutoHideScrollbar(self.detail_frame,command=self.detail_text.yview);bar.grid(row=0,column=1,sticky='ns')
         self.detail_text.configure(yscrollcommand=bar.set)
         self.detail_frame.grid_remove()
         self.confirm=ttk.Frame(self)
@@ -47,7 +53,8 @@ class PackagePage(ttk.Frame):
         self.status.grid(row=6,column=0,sticky='ew',pady=8)
         self.progress=ttk.Progressbar(self,mode='indeterminate');self.progress.grid(row=7,column=0,sticky='ew')
         self.progress.grid_remove()
-        self.back_button=ttk.Button(self,text='← 返回語音設定',command=self.back)
+        self.shell_footer=footer=self.app.shell.create_footer(self,workspace_aligned=True)
+        self.back_button=footer.button('← 返回語音設定',self.back,role='back')
         self.back_button.grid(row=8,column=0,sticky='w',pady=8)
         self.bind('<Configure>',self.resize,add='+')
         self.refresh()
@@ -58,6 +65,8 @@ class PackagePage(ttk.Frame):
             self.status.configure(wraplength=max(200,event.width-24))
 
     def refresh(self):
+        if self.saved_path and self.path.get()==self.saved_path and not Path(self.saved_path).is_file():
+            self.path.set('');self.saved_path=''
         packages=self.flow.local_voice_packages()
         self.summary.configure(text='Kokoro 官方中文模型 · CPU · 已安裝 · 100 種中文音色' if packages else '尚未安裝可用語音包。請選擇與主程式相符的完整 ZIP。')
         busy=self.job is not None
@@ -98,7 +107,15 @@ class PackagePage(ttk.Frame):
         if self.job is None:return
         if not self.job.wait(0):self.timer=self.after(100,self.poll);return
         state=self.job.state;self.job=None;self.refresh()
-        self.status.configure(text='語音包已就緒，可返回選擇音色。' if state['status']=='completed' else '已取消匯入；原有效安裝保留。' if state['status']=='cancelled' else state['error'])
+        if state['status']=='completed':
+            from .kokoro_packages import remember_archive
+            try:
+                remember_archive(self.path.get());self.saved_path=str(Path(self.path.get()).resolve())
+                self.status.configure(text='語音包已就緒，可返回選擇音色。')
+            except OSError:
+                self.status.configure(text='語音包已匯入，但無法記住 ZIP 路徑；下次請重新選擇。')
+        else:
+            self.status.configure(text='已取消匯入；原有效安裝保留。' if state['status']=='cancelled' else state['error'])
         if self.closing:self.close()
 
     def cancel(self):

@@ -25,6 +25,8 @@ class PdfRefinementDesktop(unittest.TestCase):
         source = folder / 'book.pdf'
         source.write_bytes(pdf_bytes(1))
         self.root, self.app = make_app()
+        from legacy_manuscript_fixture import install
+        install(self.app)
         self.addCleanup(self.root.destroy)
         self.flow = ProjectWorkflow.create(folder / 'book', 'Refinement')
         job = self.flow.start_pdf_extraction(self.flow.inspect_pdf(source), 1, 1)

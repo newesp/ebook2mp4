@@ -59,10 +59,13 @@ class MergeVideoDesktop(unittest.TestCase):
         self.root.state('normal')
         for size in ('1040x640','1360x800'):
             self.root.geometry(size);self.root.update()
-            for widget in (workspace.method_control,page.start_button,page.pause_control,page.resolution_control,page.back_button,page.outputs_button):
+            page.notebook.select(0);self.root.update()
+            for widget in (workspace.video_method_control,page.start_button,page.pause_control,page.resolution_control,page.back_button):
                 self.assertTrue(widget.winfo_viewable(),str(widget))
                 self.assertLessEqual(widget.winfo_rootx()+widget.winfo_width(),self.root.winfo_rootx()+self.root.winfo_width())
                 self.assertLessEqual(widget.winfo_rooty()+widget.winfo_height(),self.root.winfo_rooty()+self.root.winfo_height())
+            page.notebook.select(2);self.root.update()
+            self.assertTrue(page.output_controls.labels['mp4'][3].winfo_viewable())
         workspace.method.set('總音訊製片');workspace.method_control.event_generate('<<ComboboxSelected>>')
         self.assertIs(workspace.current,audio);self.wait_page(audio)
         self.assertEqual(audio.pause.get(),'1.25')

@@ -16,9 +16,11 @@ from PIL import Image, ImageTk
 from .voice import VoiceJob
 from .voice_media import PreviewPlayer
 from .workflow import ProjectError
+from .ui_controls import AutoHideScrollbar
 
 
 class TotalVideoPage(ttk.Frame):
+    page_id = 'video.uniform'
     kind = 'video'
     details_panel: ttk.Frame
 
@@ -33,6 +35,7 @@ class TotalVideoPage(ttk.Frame):
         self.product = self.audio = self.pending_image = self.preview_image = self.photo = None
         self.action = ''
         self.last_status = ''
+        self.runs = []
         self.publish_error = False
         self.player = PreviewPlayer()
         self.playback_folder: Path | None = None
@@ -56,6 +59,9 @@ class TotalVideoPage(ttk.Frame):
         ttk.Label(steps, text=' → ').pack(side='left')
         ttk.Button(steps, text='② 製作影片', style='CompactActive.TButton').pack(side='left')
         ttk.Label(steps, text=(app.flow._batch(batch_id)['name']+' · 批次影片' if batch_id else '全書 · 總影片')).pack(side='right')
+        if not batch_id:
+            self.versions_button = ttk.Button(steps, text='成品版本 ▸', command=app.production.show_versions)
+            self.versions_button.pack(side='right', padx=6)
         source = ttk.Frame(self)
         source.grid(row=1, column=0, sticky='ew', pady=(0, 6))
         source.columnconfigure(0, weight=1)
@@ -67,13 +73,12 @@ class TotalVideoPage(ttk.Frame):
         self.detail_button.grid(row=0, column=2)
         self.editor = editor = ttk.Frame(self)
         editor.grid(row=2, column=0, sticky='nsew')
-        editor.columnconfigure(0, weight=2, uniform='video')
-        editor.columnconfigure(1, weight=3, uniform='video')
-        editor.rowconfigure(0, weight=1)
-        material = ttk.Frame(editor)
-        material.grid(row=0, column=0, sticky='nsew', padx=(0, 10))
-        material.columnconfigure(0, weight=1)
-        ttk.Label(material, text='選擇全片共用素材', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
+        editor.columnconfigure(0, weight=1)
+        editor.rowconfigure(1, weight=1)
+        self.material = material = ttk.Frame(editor)
+        material.grid(row=0, column=0, sticky='ew', pady=(0, 8))
+        material.columnconfigure(3, weight=1)
+        self.material_label = ttk.Label(material, text='素材')
         self.kind_control = ttk.Combobox(material, textvariable=self.source_kind, state='readonly',
                                         values=('圖片（JPEG／PNG）', '背景影片（MP4）'))
         self.kind_control.grid(row=1, column=0, sticky='ew', pady=4)
@@ -96,10 +101,9 @@ class TotalVideoPage(ttk.Frame):
         self.material_rule.grid_remove()
         self.material_note.grid_remove()
         preview = ttk.Frame(editor)
-        preview.grid(row=0, column=1, sticky='nsew')
+        preview.grid(row=1, column=0, sticky='nsew')
         preview.columnconfigure(0, weight=1)
         preview.rowconfigure(1, weight=1)
-        ttk.Label(preview, text='檢查畫面，再選解析度', style='Heading.TLabel').grid(row=0, column=0, sticky='w')
         self.canvas = tk.Canvas(preview, width=1, height=1, highlightthickness=0, background='#e9eee6')
         self.canvas.grid(row=1, column=0, sticky='nsew', pady=6)
         self.canvas.bind('<Configure>', self.draw)
@@ -114,51 +118,144 @@ class TotalVideoPage(ttk.Frame):
         self.seek_control.bind('<KeyRelease>', self.scrub)
         self.seek_info = ttk.Label(self.preview_controls, text='無聲預覽')
         self.seek_info.grid(row=1, column=0, columnspan=2, sticky='w')
-        controls = ttk.Frame(preview)
-        controls.grid(row=3, column=0, sticky='ew')
-        controls.columnconfigure(1, weight=1)
-        ttk.Label(controls, text='解析度').grid(row=0, column=0, padx=(0, 6))
+        controls = material
+        self.resolution_label = ttk.Label(controls, text='解析度')
         self.resolution_control = ttk.Combobox(controls, textvariable=self.resolution, state='readonly',
                                              values=('1080p', '720p'), width=7)
         self.resolution_control.grid(row=0, column=1, sticky='w')
-        ttk.Label(controls, text='16:9 · 30 fps').grid(row=0, column=2)
+        ttk.Label(preview, text='16:9 · 30 fps').grid(row=0, column=0, sticky='w')
         self.explanation = ttk.Label(self, text='沿用完整總 MP3／SRT。交接停頓已在音訊內，不再添加。', wraplength=650)
-        self.explanation.grid(row=3, column=0, sticky='ew', pady=6)
-        self.status = ttk.Label(self, text='請選擇素材，再檢查右側畫面。', width=1, wraplength=650)
+        from .ui_controls import MessageLine
+        self.status = MessageLine(self, text='請選擇素材，再檢查右側畫面。')
         self.status.grid(row=4, column=0, sticky='ew', pady=4)
         self.progress = ttk.Progressbar(self, maximum=100)
-        actions = ttk.Frame(self)
-        actions.grid(row=6, column=0, sticky='ew', pady=4)
-        actions.columnconfigure(1, weight=1)
-        self.back_button = ttk.Button(actions, text='← 返回合併音訊', command=self.return_page)
+        self.shell_footer = self.actions = actions = app.shell.create_footer(self)
+        actions.columnconfigure(2, weight=1)
+        self.back_button = actions.button('← 返回合併音訊',self.return_page,role='back')
         self.back_button.grid(row=0, column=0)
-        ttk.Label(actions, text='製作時一併儲存設定', width=1).grid(row=0, column=1, sticky='ew', padx=6)
-        self.cancel_button = ttk.Button(actions, text='取消任務', command=self.cancel)
+        self.saved_label = ttk.Label(actions, text='', width=1)
+        self.saved_label.grid(row=0, column=2, sticky='ew', padx=8)
+        if not batch_id:
+            self.save_return_button = actions.button('儲存素材並返回',self.save_return)
+            self.save_return_button.grid(row=0, column=1, sticky='e', padx=6)
+        self.cancel_button = actions.button('取消任務',self.cancel)
         self.cancel_button.grid(row=0, column=2, padx=6)
-        self.start_button = ttk.Button(actions, text='製作總 MP4', command=self.start, style='Primary.TButton')
+        self.start_button = actions.button('製作總 MP4',self.start,role='primary')
         self.start_button.grid(row=0, column=3)
         result = ttk.Frame(self)
         result.grid(row=7, column=0, sticky='ew', pady=4)
         result.columnconfigure(0, weight=1)
         self.result_info = ttk.Label(result, text='尚無總影片。', width=1)
         self.result_info.grid(row=0, column=0, sticky='ew')
-        self.outputs_button = ttk.Menubutton(result, text='成品操作 ▾')
+        self.outputs_button = ttk.Menubutton(actions, text='成品操作')
         self.outputs_button.grid(row=0, column=1)
         self.menu = tk.Menu(self.outputs_button, tearoff=False, postcommand=self.output_menu)
         self.outputs_button.configure(menu=self.menu)
         self.resolution.trace_add('write', lambda *_: self.changed())
         self.mode.trace_add('write', lambda *_: self.changed())
         self.bind('<Configure>', self.resized)
+        self.build_workspace(steps, source, result)
         self.update_controls()
+
+    def build_workspace(self, steps, source, result):
+        from .video_workspace import VideoTabs, readonly_text, workspace_styles
+        steps.grid_remove()
+        self.detail_button.grid_remove()
+        self.notebook = VideoTabs(self)
+        self.notebook.grid(row=2, column=0, sticky='nsew')
+        visual, sources, results = self.notebook.panels
+        self.editor.grid(in_=visual, row=0, column=0, sticky='nsew')
+        self.editor.lift()
+        source.grid(in_=sources, row=0, column=0, sticky='ew')
+        source.lift()
+        sources.rowconfigure(0, weight=0)
+        sources.rowconfigure(1, weight=1)
+        self.details_panel, self.details_text = readonly_text(sources)
+        self.details_panel.grid(row=1, column=0, sticky='nsew')
+        self.task_panel, self.task_text = readonly_text(results)
+        self.task_panel.grid(row=0, column=0, sticky='nsew')
+        if not self.batch_id:
+            ttk.Button(results, text='版本與來源比較', command=self.app.production.show_versions).grid(row=1, column=0, sticky='e')
+        result.grid_remove()
+        self.back_button.configure(text='← 音訊製做' if self.batch_id else '← 全書合併')
+        self.back_button.configure(command=lambda: self.app.production.return_from_video(self, self.return_page))
+        if not self.batch_id:
+            self.save_return_button.configure(text='保存製作設定', command=self.save)
+        else:
+            self.save_return_button = self.actions.button('保存製作設定',self.save)
+            self.save_return_button.grid(row=0, column=1, sticky='e', padx=6)
+        self.notebook.bind('<<NotebookTabChanged>>', lambda event: self.refresh_workspace())
+        self.editor.bind('<Configure>', lambda event: self.layout_workspace())
+        workspace_styles(self)
+        self.layout_workspace()
+
+    def layout_workspace(self):
+        if not hasattr(self, 'notebook'):
+            return
+        width = max(1, self.editor.winfo_width())
+        narrow = width < (self.kind_control.winfo_reqwidth() + self.choose_button.winfo_reqwidth()
+                          + self.resolution_control.winfo_reqwidth() + 240)
+        self.material.columnconfigure(3, weight=0 if narrow else 1)
+        self.material.columnconfigure(2, weight=1 if narrow else 0)
+        self.material_label.grid(row=0, column=0, padx=(0, 8))
+        self.kind_control.grid(row=0, column=1, sticky='w', padx=(0, 8), pady=0)
+        self.choose_button.grid(row=0, column=2, sticky='w', padx=(0, 8), pady=0)
+        self.image_info.grid(row=1 if narrow else 0, column=0 if narrow else 3,
+                             columnspan=3 if narrow else 1, sticky='ew', pady=(4, 0) if narrow else 0)
+        self.resolution_label.grid(row=1 if narrow else 0, column=4, padx=8)
+        self.resolution_control.grid(row=1 if narrow else 0, column=5, sticky='e')
+        short = self.is_background() and self.background_info and self.audio and self.background_info['duration_ms'] < self.audio['duration_ms']
+        if short:
+            self.mode_label.grid(row=2, column=0, columnspan=2, sticky='w')
+            self.mode_control.grid(row=2, column=2, columnspan=2, sticky='w')
+        else:
+            self.mode_label.grid_remove()
+            self.mode_control.grid_remove()
+        self.material_rule.grid_remove()
+        self.material_note.grid_remove()
+        required = sum(w.winfo_reqwidth() for w in (self.back_button, self.save_return_button,
+                        self.outputs_button, self.start_button)) + 170
+        footer_row = 1 if self.winfo_width() < required else 0
+        self.save_return_button.grid(row=0, column=1, sticky='w', padx=(8, 0))
+        self.outputs_button.grid(row=footer_row, column=3, padx=(8, 0), sticky='e')
+        if self.job is not None or self.check_job is not None:
+            self.cancel_button.grid(row=footer_row, column=4)
+        else:
+            self.cancel_button.grid_remove()
+        self.start_button.grid(row=footer_row, column=5, padx=(8, 0), sticky='e')
+
+    def refresh_workspace(self):
+        if not hasattr(self, 'notebook'):
+            return
+        from .video_workspace import replace_text
+        self.details(select=False)
+        text = self.status.full_text + '\n\n' + self.result_info.cget('text')
+        text += '\n\n' + ('製作設定尚未保存。' if self.dirty else '目前使用已保存的製作設定。')
+        if self.job is not None:
+            state = self.job.state
+            text += '\n\n' + str(state.get('phase', '')) + '\n' + str(state.get('error', ''))
+        if self.product:
+            text += '\n\n' + '\n'.join(f'{kind.upper()}：{self.product[kind]["path"]}' for kind in ('mp4', 'srt'))
+            text += '\n成品使用音訊版本：' + str(self.product.get('audio', {}).get('id', ''))
+            text += '\n目前音訊版本：' + str(self.audio.get('id', '') if self.audio else '缺少')
+        try:
+            for run in reversed(self.runs):
+                progress = run.get('progress', {})
+                text += '\n\n' + str(run.get('id', '')) + ' · ' + str(progress.get('status', ''))
+                text += '\n' + str(progress.get('error', '') or progress.get('phase', ''))
+        except ProjectError as error:
+            text += '\n' + str(error)
+        replace_text(self.task_text, self.scope_text(text))
 
     def resized(self, event):
         if event.widget is self:
-            self.status.configure(wraplength=max(180, event.width-12))
+            self.status.configure(wraplength=0)
             self.explanation.configure(wraplength=max(180, event.width-12))
             self.image_info.configure(wraplength=max(140, event.width*2//5-12))
             for label in (self.material_rule, self.material_note):
                 label.configure(wraplength=max(140, event.width*2//5-12))
             self.update_controls()
+            self.layout_workspace()
 
     def draw(self, event=None):
         w, h = self.canvas.winfo_width(), self.canvas.winfo_height()
@@ -320,7 +417,7 @@ class TotalVideoPage(ttk.Frame):
             self.dirty = False
             from .total_video import total_video
             try:
-                self.product = total_video(self.video_flow, verify_media=False)
+                self.product = total_video(self.video_flow, verify_media=False, method=None if self.batch_id else 'total-audio')
             except ProjectError:
                 self.product = None  # A missing old movie must still permit rebuilding.
             self.status.configure(text='視覺設定已儲存。總音訊保留。')
@@ -347,6 +444,10 @@ class TotalVideoPage(ttk.Frame):
             self.schedule()
         except ProjectError as error:
             self.report(error)
+
+    def save_return(self):
+        if self.save():
+            self.return_page()
 
     def publish(self):
         self.publish_error = False
@@ -378,6 +479,7 @@ class TotalVideoPage(ttk.Frame):
             return
         self.stop()
         if action == 'play':
+            self.notebook.select(0)
             if self.playback_folder is not None:
                 return  # Keep the retained cleanup path until the old lock is released.
             self.playback_folder = Path(tempfile.mkdtemp(prefix='.video-preview-', dir=self.video_flow.root))
@@ -385,9 +487,9 @@ class TotalVideoPage(ttk.Frame):
             from .total_video import export, total_video, prepare_playback
             from .assembly import checked_file_async
             if action == 'export':
-                await export(self.video_flow, target)
+                await export(self.video_flow, target, method=None if self.batch_id else 'total-audio')
                 return None
-            product = total_video(self.video_flow, verify_media=False)
+            product = total_video(self.video_flow, verify_media=False, method=None if self.batch_id else 'total-audio')
             if product is None:
                 raise ProjectError('尚無成功總影片。')
             for kind in ('mp4', 'srt'):
@@ -407,11 +509,15 @@ class TotalVideoPage(ttk.Frame):
         if target:
             self.file_action('export', target)
 
-    def details(self):
+    def details(self, select=True):
         audio = self.audio
         text = ('總音訊版本：'+audio['id']+'\nMP3：'+audio['mp3']['path']+'\nSRT：'+audio['srt']['path'] if audio else '尚無有效總音訊。')
+        if audio:
+            names = {batch['id']: batch['name'] for batch in self.flow.state['batches']}
+            for index, source in enumerate(audio.get('sources', []), 1):
+                text += f'\n{index}. {names.get(source.get("batch_id"), "已移除批次")} · {source.get("product_id", "")}'
         try:
-            history = self.video_flow.total_video_runs()
+            history = self.runs
             diagnostic = history[-1]['progress'].get('diagnostic') if history else None
             if diagnostic:
                 text += '\n\n最近失敗診斷：'+diagnostic['message']+'\n階段：'+diagnostic['phase']+'\n原因：'+diagnostic['detail']
@@ -422,6 +528,12 @@ class TotalVideoPage(ttk.Frame):
         if info:
             get = (lambda key: info[key]) if isinstance(info, dict) else (lambda key: getattr(info, key))
             text += f'\n\n素材：{get("name")}\n尺寸：{get("width")} × {get("height")}\n素材保存於專案，可重開與離線製片。'
+        if hasattr(self, 'notebook'):
+            from .video_workspace import replace_text
+            replace_text(self.details_text, self.scope_text(text))
+            if select:
+                self.notebook.select(1)
+            return
         if hasattr(self, 'details_panel') and self.details_panel.winfo_manager():
             self.details_panel.grid_remove()
             self.editor.grid()
@@ -432,7 +544,7 @@ class TotalVideoPage(ttk.Frame):
             self.details_panel.rowconfigure(0, weight=1)
             self.details_text = tk.Text(self.details_panel, width=1, height=1, wrap='word', font=('Microsoft JhengHei', 10))
             self.details_text.grid(row=0, column=0, sticky='nsew')
-            scroll = ttk.Scrollbar(self.details_panel, command=self.details_text.yview)
+            scroll = AutoHideScrollbar(self.details_panel, command=self.details_text.yview)
             scroll.grid(row=0, column=1, sticky='ns')
             self.details_text.configure(yscrollcommand=scroll.set)
             ttk.Button(self.details_panel, text='返回素材預覽', command=self.details).grid(row=1, column=0)
@@ -453,6 +565,7 @@ class TotalVideoPage(ttk.Frame):
                 else:
                     value = task.result
                     if self.action == 'inspect':
+                        self.runs = value['runs']
                         self.audio, self.product = value['audio'], value['product']
                         if not self.loaded or not self.dirty:
                             self.resolution.set(value['visual']['resolution'])
@@ -581,7 +694,7 @@ class TotalVideoPage(ttk.Frame):
             name = get('name')
             suffix = f' · {get("duration_ms")/1000:g} 秒' if background else f' · {get("width")} × {get("height")}'
             font = tkfont.Font(font=self.image_info.cget('font'))
-            available = max(140, self.choose_button.winfo_width()-8)
+            available = max(140, self.image_info.winfo_width()-8)
             display = name
             while len(display)>4 and font.measure(display+suffix)>available:
                 display = display[:-2]+'…'
@@ -600,7 +713,8 @@ class TotalVideoPage(ttk.Frame):
             self.preview_controls.grid()
         else:
             self.preview_controls.grid_remove()
-        self.seek_control.configure(to=self.audio['duration_ms']/1000 if self.audio else 1, state='disabled' if busy or not info else 'normal')
+        duration_ms = self.audio['duration_ms'] if self.audio else self.background_info['duration_ms'] if background and self.background_info else 1000
+        self.seek_control.configure(to=duration_ms/1000, state='disabled' if busy or not info else 'normal')
         self.preview_button.configure(text='停止預覽' if self.preview_playing else '播放預覽', state='disabled' if busy or not info else 'normal')
         self.kind_control.configure(state='disabled' if busy else 'readonly')
         self.mode_control.configure(state='disabled' if busy else 'readonly')
@@ -609,6 +723,7 @@ class TotalVideoPage(ttk.Frame):
                                     text='重試保存' if completed else '重試製片' if self.last_status in ('failed', 'cancelled', 'interrupted') else
                                     '更新總 MP4' if self.product else '製作總 MP4')
         self.choose_button.configure(state='disabled' if busy else 'normal', text='選擇背景影片…' if background else '選擇圖片…')
+        self.save_return_button.configure(state='normal' if image and not busy else 'disabled')
         self.resolution_control.configure(state='disabled' if busy else 'readonly')
         audio = self.audio
         self.source_info.configure(text=f'總 MP3／SRT 有效 · {audio["duration_ms"]/1000:g} 秒' if valid and audio else '總音訊缺少或已失效，請先更新。')
@@ -635,13 +750,15 @@ class TotalVideoPage(ttk.Frame):
             f'{p["duration_ms"]/1000:g} 秒 · {p["visual"]["resolution"]}' if p else '尚無總影片。'))
 
         self.scope_labels()
+        self.saved_label.configure(text='設定未保存 · 製作時保存' if self.dirty else '設定已保存')
+        self.refresh_workspace()
 
     def scope_text(self, text):
         if not self.batch_id:
             return text
         return (text.replace('總音訊', '本批音訊').replace('總 MP', '本批 MP')
                 .replace('總影片', '本批影片').replace('全片共用', '本批次')
-                .replace('合併音訊', '製作與成品')
+                .replace('合併音訊', '音訊製做')
                 .replace('交接停頓已在音訊內，不再添加。', '不添加全書交接停頓。'))
 
     def scope_labels(self):
@@ -709,6 +826,8 @@ class TotalVideoPage(ttk.Frame):
                 self.status.configure(text='播放暫存仍被占用。請停止播放後再關閉程式。')
 
     def close(self):
+        if self.closing:
+            return
         self.closing = True
         self.stop()
         self.cancel()

@@ -14,6 +14,7 @@ class BatchVideoDesktop(fixture.TotalVideoDesktop):
         page=self.app.production.current
         self.wait_page(page)
         self.assertEqual(page.batch_id,self.batch)
+        self.assertEqual(page.back_button.cget('text'),'← 音訊製做')
         self.assertIn('本批',page.source_info.cget('text'))
         source=self.path/'圖片.png'
         Image.new('RGBA',(80,120),(255,0,0,128)).save(source)

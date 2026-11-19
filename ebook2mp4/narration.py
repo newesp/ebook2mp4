@@ -6,10 +6,12 @@ from bisect import bisect_right
 from copy import deepcopy
 from html import escape
 import json
+import math
 import os
 from pathlib import Path
 import re
 import shutil
+import time
 import uuid
 import wave
 
@@ -31,14 +33,19 @@ def request_size(text: str) -> int:
     return len(escape(text, quote=False).encode('utf-8'))
 
 
-def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
+def safe_boundaries(text: str, *, split_quotes: bool = False) -> tuple[list[int], list[int], list[int]]:
     """Only divide outside paired punctuation, at sentence/clause/word boundaries.
 
     Sentence ends take precedence over clauses and word boundaries. Abbreviations,
-    decimals, URLs and paired punctuation are never divided internally.
+    decimals, URLs and paired punctuation are never divided internally, unless
+    split_quotes enables natural boundaries inside quotation marks only.
     """
     pairs = {'(': ')', '[': ']', '{': '}', '「': '」', '『': '』',
              '（': '）', '【': '】', '“': '”', '‘': '’', '《': '》'}
+    if split_quotes:
+        # A long or malformed quotation may contain natural spoken boundaries.
+        # Keep brackets and URLs protected even during this fallback.
+        pairs = {key: value for key, value in pairs.items() if key not in '「『“‘'}
     stack: list[str] = []
     result = []
     sentences, clauses = [], []
@@ -58,13 +65,13 @@ def safe_boundaries(text: str) -> tuple[list[int], list[int], list[int]]:
             stack.append(pairs[char])
         elif stack and char == stack[-1]:
             stack.pop()
-        elif char == '"':
+        elif not split_quotes and char == '"':
             if stack and stack[-1] == '"':
                 stack.pop()
             else:
                 stack.append('"')
         # An apostrophe inside a word is not a quotation mark.
-        elif char == "'" and not (0 < index < len(text)-1 and
+        elif not split_quotes and char == "'" and not (0 < index < len(text)-1 and
                                    text[index-1].isalnum() and text[index+1].isalnum()):
             if stack and stack[-1] == "'":
                 stack.pop()
@@ -122,7 +129,7 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
     settings = validate_settings(settings)
     from .tts_backend import capabilities
     policy = capabilities(settings['provider'])
-    rules = dict(RULES, version='rhythm-block-v2', sentence_pause_ms=settings['sentence_pause_ms'],
+    rules = dict(RULES, version='rhythm-block-v3', sentence_pause_ms=settings['sentence_pause_ms'],
                  paragraph_pause_ms=settings['paragraph_pause_ms'],
                  request_escaped_utf8_bytes=policy.request_escaped_utf8_bytes, max_attempts=policy.max_attempts)
     chunks: list[dict] = []
@@ -140,6 +147,7 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
         pieces[-1] = (paragraph, separator + text[start:])
     for paragraph, separator in pieces:
         boundaries, sentences, clauses = safe_boundaries(paragraph)
+        quote_boundaries = None
         boundaries.append(len(paragraph))
         costs = [0]
         for char in paragraph:
@@ -159,6 +167,16 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
                     end = clauses[clause]
                 else:
                     end = boundaries[at] if at >= 0 else offset
+                if end <= offset:
+                    if quote_boundaries is None:
+                        _, quote_sentences, quote_clauses = safe_boundaries(paragraph, split_quotes=True)
+                        quote_boundaries = (quote_sentences, quote_clauses)
+                    for candidates in quote_boundaries:
+                        candidate = bisect_right(candidates, limit) - 1
+                        if candidate >= 0 and candidates[candidate] > offset:
+                            end = candidates[candidate]
+                            sentences = sorted(set(sentences) | set(quote_boundaries[0]))
+                            break
                 if end<=offset and not policy.requires_network:
                     end=limit
                 if end <= offset or not paragraph[offset:end].strip():
@@ -249,10 +267,13 @@ class NarrationJob(VoiceJob):
                     self.save_progress(phase='驗證音訊區塊', current=index + 1)
                     def progress(attempt):
                         chunk.update(status='running', attempts=attempt)
-                        self.save_progress(phase='本機合成' if settings['provider']=='kokoro' else '線上合成')
+                        self.save_progress(phase='本機合成' if settings['provider']=='kokoro' else '線上合成', retry_deadline=None)
+                    def retry_progress(attempt, delay):
+                        self.save_progress(phase=f'等待 {math.ceil(delay)} 秒後重試',
+                                           retry_deadline=time.monotonic() + delay)
                     decoded, reused = await speech_block(
                         chunk['text'], settings, self.tool, self.folder.parent / 'voice-blocks',
-                        progress, allow_network=self.allow_network)
+                        progress, allow_network=self.allow_network, retry_progress=retry_progress)
                     chunk.update(reused=reused)
                     with wave.open(str(decoded), 'rb') as source:
                         count = source.getnframes()
@@ -346,10 +367,12 @@ def read_run(flow: ProjectWorkflow, ref: dict, *, verify_audio=True) -> dict:
         cache = flow._path(f'batches/{snapshot["batch_id"]}/voice-blocks')
         reusable = sum(cached_block(c['text'], snapshot['settings'], cache) is not None for c in snapshot['chunks']) if verify_audio else 0
         batch = flow._batch(snapshot['batch_id'])
-        stale = (batch.get('current_reading') != snapshot['reading_id'] or
-                 flow.voice_settings(snapshot['batch_id']) != snapshot['settings'])
+        reading_changed = batch.get('current_reading') != snapshot['reading_id']
+        settings_changed = flow.voice_settings(snapshot['batch_id']) != snapshot['settings']
+        stale = reading_changed or settings_changed
         published = ref.get('published', False) or batch.get('narration', {}).get('id') == snapshot['id']
         return dict(snapshot=snapshot, progress=progress, reusable=reusable,
-                    stale=stale, published=published, remaining=len(snapshot['chunks'])-reusable)
+                    stale=stale, reading_changed=reading_changed, settings_changed=settings_changed,
+                    published=published, remaining=len(snapshot['chunks'])-reusable)
     except (OSError, ValueError, KeyError, TypeError):
         raise ProjectError('合成任務記錄無法讀取，請還原專案備份。') from None

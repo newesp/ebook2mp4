@@ -4,6 +4,8 @@ from __future__ import annotations
 import asyncio
 import ctypes
 import os
+import random
+import time
 from pathlib import Path
 import json
 import shutil
@@ -14,6 +16,8 @@ import uuid
 import wave
 
 from .workflow import ProjectError
+
+MAX_AUTOMATIC_RETRY_WAIT = 300
 
 
 def ffmpeg() -> str:
@@ -47,6 +51,9 @@ def block_paths(text: str, settings: dict, cache: Path):
     identity = dict(text=text, provider=settings['provider'], voice=settings['voice'],
                              rate=settings['rate'], processing=settings['processing'],
                              model=settings.get('model', ''), profile=settings.get('profile', ''), decoding='pcm-s16le-24000-v1')
+    if settings['provider'] == 'gemini-tts':
+        from .tts_services import MANDARIN_LANGUAGE, MANDARIN_POLICY
+        identity.update(language=MANDARIN_LANGUAGE, speech_policy=MANDARIN_POLICY)
     if settings['provider']=='kokoro':
         from opencc import OpenCC
         identity.update(package=settings['package'],synthesis_text=OpenCC('t2s').convert(text))
@@ -77,7 +84,8 @@ def cached_block(text: str, settings: dict, cache: Path) -> Path | None:
     return None
 
 
-async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True):
+async def speech_block(text: str, settings: dict, tool: str, cache: Path, progress=None, *, allow_network=True,
+                       retry_progress=None):
     """Keep verified, immutable PCM speech independent of added pauses."""
     from .tts_backend import capabilities, write_speech
     from .workflow import ProjectWorkflow, digest, encode
@@ -97,20 +105,64 @@ async def speech_block(text: str, settings: dict, tool: str, cache: Path, progre
     with tempfile.TemporaryDirectory(prefix='.block-', dir=cache) as directory:
         raw = Path(directory) / ('speech.mp3' if policy.requires_network else 'speech-source.wav')
         decoded = Path(directory) / 'speech.wav'
-        for attempt in range(1, policy.max_attempts + 1):
+        waited = 0
+        attempt = 0
+        failures = 0
+        limits = 0
+        deadline = None
+        while True:
+            attempt += 1
             if progress:
                 progress(attempt)
             try:
                 if policy.requires_network:
-                    await asyncio.wait_for(write_speech(text, settings, raw), policy.synthesis_timeout_seconds)
+                    # Gemini's transport has its own request timeout. Its shared
+                    # rate limiter may legitimately wait longer than that.
+                    timeout = 1800 if settings['provider'] == 'gemini-tts' else policy.synthesis_timeout_seconds
+                    if deadline is not None:
+                        timeout = min(timeout, deadline - time.monotonic())
+                        if timeout <= 0:
+                            raise ProjectError('連續限流超過恢復上限，已停止自動重試。')
+                    from .tts_control import request_context
+                    token = request_context.set((deadline, (lambda delay: retry_progress(attempt, delay)) if retry_progress else None))
+                    try:
+                        await asyncio.wait_for(write_speech(text, settings, raw), timeout)
+                    finally:
+                        request_context.reset(token)
                 else:
                     # Local verification/load and inference have separate bounds.
                     await write_speech(text,settings,raw)
                 break
             except (OSError, asyncio.TimeoutError, ClientError, EdgeTTSException, RetryableServiceError) as exc:
-                if attempt == policy.max_attempts:
+                is_gemini_limit = (settings['provider'] == 'gemini-tts' and
+                                   isinstance(exc, RetryableServiceError) and exc.status == 429)
+                if is_gemini_limit:
+                    limits += 1
+                    if deadline is None:
+                        deadline = time.monotonic() + 1800
+                    delay = max(min(60, 5 * 2 ** min(limits - 1, 4)) + random.uniform(0, 5), exc.retry_after)
+                    if limits >= 30 or time.monotonic() + delay >= deadline:
+                        raise ProjectError(f'{exc} 連續限流或服務要求的等待超過自動恢復上限，已停止自動重試。') from None
+                    if retry_progress:
+                        retry_progress(attempt, delay)
+                    await asyncio.sleep(delay)
+                    continue
+                failures += 1
+                if failures >= policy.max_attempts:
+                    if isinstance(exc, RetryableServiceError):
+                        raise ProjectError(f'區塊已嘗試 {policy.max_attempts} 次，服務仍未恢復。{exc}') from None
                     raise ProjectError(f'區塊連線或服務錯誤，{policy.max_attempts} 次嘗試後仍失敗。請檢查連線、更新音色後重試。') from None
-                await asyncio.sleep(max(attempt, getattr(exc, 'retry_after', 0)))
+                delay = max(failures, getattr(exc, 'retry_after', 0))
+                if waited + delay > MAX_AUTOMATIC_RETRY_WAIT:
+                    raise ProjectError(
+                        f'{exc} 本區塊自動等待上限為 300 秒，已停止自動重試。'
+                        '請稍後續作，或先檢查服務配額與狀態。') from None
+                if retry_progress:
+                    retry_progress(attempt, delay)
+                # Retry-After is a delay before the next request, not elapsed time.
+                # Sleep outside the per-request timeout; cancellation still interrupts it.
+                await asyncio.sleep(delay)
+                waited += delay
         await media_command(tool, ['-y', '-i', str(raw), '-ac', '1', '-ar', '24000',
                                    '-c:a', 'pcm_s16le', str(decoded)])
         with wave.open(str(decoded), 'rb') as source:

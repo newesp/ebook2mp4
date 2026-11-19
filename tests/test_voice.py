@@ -1,5 +1,6 @@
 """Voice journeys through the agreed ProjectWorkflow boundary."""
 from pathlib import Path
+import os
 import tempfile
 import unittest
 from unittest.mock import patch, AsyncMock
@@ -17,7 +18,8 @@ VOICES = [dict(ShortName='zh-TW-TestNeural', FriendlyName='測試台灣人聲', 
 
 class VoiceJourney(unittest.TestCase):
     def setUp(self):
-        base = Path(__file__).resolve().parents[1] / '.scratch/test-runs'
+        base = Path(os.environ.get('EBOOK2MP4_TEST_RUNS',
+                                  Path(__file__).resolve().parents[1] / '.scratch/test-runs'))
         base.mkdir(parents=True, exist_ok=True)
         self.temp = tempfile.TemporaryDirectory(dir=base)
         self.addCleanup(self.temp.cleanup)

@@ -315,12 +315,23 @@ class TotalAudioJob(VoiceJob):
             raise ProjectError('無法釋放合併暫存或任務鎖。請解除占用後重試，已發布成品保留。') from None
 
 
-def start(flow: ProjectWorkflow) -> TotalAudioJob:
+def source_details(flow: ProjectWorkflow, sources: list[dict], *, movie=False) -> list[dict]:
+    result = []
+    for source in sources:
+        batch = flow._batch(source['batch_id'])
+        detail = dict(batch_id=batch['id'], name=batch['name'], voice=deepcopy(batch['narration']['settings']))
+        if movie:
+            detail['visual'] = deepcopy(batch['video']['total_video']['visual'])
+        result.append(detail)
+    return result
+
+
+def start(flow: ProjectWorkflow, *, _lease=None) -> TotalAudioJob:
     from .production_lock import ProductionLease
     if flow._total_audio_job is not None:
         raise ProjectError('已有全書合併任務，請先保存或捨棄結果。')
     tool = ffmpeg()
-    lease = ProductionLease(flow.root/'.production.lock')
+    lease = _lease if _lease is not None else ProductionLease(flow.root/'.production.lock')
     folder = None
     committed = False
     try:
@@ -343,6 +354,7 @@ def start(flow: ProjectWorkflow) -> TotalAudioJob:
             raise ProjectError('總音訊超過目前 WAV 組裝上限（約 23 小時）。請減少批次或交接停頓。')
         flow._space(flow.root, total_ms*48*3+25_000_000)
         snapshot = dict(id=uuid.uuid4().hex, created_at=now(), **value)
+        snapshot['source_details'] = source_details(flow, value['sources'])
         folder = flow._path(f'assembly/run-{snapshot["id"]}')
         folder.mkdir(parents=True)
         flow._atomic(folder/'progress.json', encode(dict(status='pending', sources=[])))
@@ -491,9 +503,12 @@ def runs(flow: ProjectWorkflow) -> list[dict]:
         for ref in flow.state.get('total_audio_runs', []):
             snapshot = json.loads(flow._read(ref))
             progress = json.loads(flow._path(ref['progress_path']).read_bytes())
+            published = ref.get('published', False)
             if progress['status'] in ('pending', 'running', 'cancelling') and not production_active(flow.root/'.production.lock'):
                 progress['status'] = 'interrupted'
-            result.append(dict(snapshot=snapshot, progress=progress, published=ref.get('published', False)))
+            elif published and progress['status'] == 'completed':
+                progress['phase'] = '已保存成品'
+            result.append(dict(snapshot=snapshot, progress=progress, published=published))
         return result
     except (OSError, KeyError, ValueError, TypeError):
         raise ProjectError('全書合併進度無法讀取，請還原專案備份。') from None

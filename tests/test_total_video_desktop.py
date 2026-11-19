@@ -58,9 +58,10 @@ class TotalVideoDesktop(unittest.TestCase):
         assembly.select_button.invoke()
         assembly.start_button.invoke()
         self.wait_page(assembly)
-        self.assertTrue(assembly.video_button.winfo_viewable())
-        self.assertFalse(assembly.start_button.winfo_viewable())
-        assembly.video_button.invoke()
+        self.assertTrue(assembly.start_button.winfo_viewable())
+        # Video work now has one explicit global entry; audio has no formats.
+        self.assertIsNone(assembly.output_controls)
+        self.app.production.video_tab.invoke()
         page = self.app.production.current
         self.wait_page(page)
         self.assertIs(page.winfo_toplevel(), self.root)
@@ -72,7 +73,7 @@ class TotalVideoDesktop(unittest.TestCase):
         page.resolution.set('720p')
         page.back_button.invoke()
         self.wait_page(assembly)
-        assembly.video_button.invoke()
+        self.app.production.video_tab.invoke()
         self.wait_page(page)
         self.assertEqual(page.resolution.get(), '720p')
         self.assertIn('封面.png', page.image_info.cget('text'))
