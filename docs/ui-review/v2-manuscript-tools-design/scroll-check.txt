@@ -1,0 +1,4 @@
+SCROLL QA FAILED
+尚未完成全部頁面／尺寸／狀態的捲動盤點
+settings / 1360x820 / connection collapsed: 捲軸顯隱與實際溢出不符
+settings / 1360x820 / connection collapsed: 滑塊比例與可見內容不符

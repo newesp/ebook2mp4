@@ -1,0 +1,6 @@
+test_gemini_wait_and_cancel (test_gemini_429_desktop.GeminiWait.test_gemini_wait_and_cancel) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 4.455s
+
+OK

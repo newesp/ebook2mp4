@@ -1,0 +1,14 @@
+{
+  "product_started": false,
+  "background_process_started": false,
+  "drawing_commands_exited": true,
+  "python_bytecode_cache_created": false,
+  "retained": [
+    "reference images",
+    "before drawing and measurements",
+    "red-corrected drawings",
+    "review and checklist",
+    "geometry evidence"
+  ],
+  "product_or_dist_modified": false
+}

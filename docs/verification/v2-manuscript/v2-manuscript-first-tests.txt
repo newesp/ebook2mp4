@@ -1,0 +1,38 @@
+test_collapsed_list_releases_track_and_ratio_survives_navigation (test_manuscript_v6.ManuscriptV6.test_collapsed_list_releases_track_and_ratio_survives_navigation) ... ok
+test_long_version_diff_owns_scroll_and_editor_state_returns (test_manuscript_v6.ManuscriptV6.test_long_version_diff_owns_scroll_and_editor_state_returns) ... ok
+test_pdf_reextract_preview_and_region_retry_keep_original_manuscript (test_manuscript_v6.ManuscriptV6.test_pdf_reextract_preview_and_region_retry_keep_original_manuscript) ... ok
+test_pdf_source_open_missing_zoom_rotate_and_region_coordinates (test_manuscript_v6.ManuscriptV6.test_pdf_source_open_missing_zoom_rotate_and_region_coordinates) ... ok
+test_proof_menu_real_candidate_diff_restore_and_discard (test_manuscript_v6.ManuscriptV6.test_proof_menu_real_candidate_diff_restore_and_discard) ... ok
+test_reopen_list_with_hidden_source_and_narrow_window (test_manuscript_v6.ManuscriptV6.test_reopen_list_with_hidden_source_and_narrow_window) ... ok
+test_restored_comparison_reflows_groups_without_clipping (test_manuscript_v6.ManuscriptV6.test_restored_comparison_reflows_groups_without_clipping) ... ok
+test_search_replace_export_reload_cleanup_new_edit_menu (test_manuscript_v6.ManuscriptV6.test_search_replace_export_reload_cleanup_new_edit_menu) ... ok
+test_three_content_edges_align_and_controls_match_height (test_manuscript_v6.ManuscriptV6.test_three_content_edges_align_and_controls_match_height) ... ok
+test_apply_persists_backup_and_is_one_undo_unit (test_manuscript_cleanup.CleanupWorkspace.test_apply_persists_backup_and_is_one_undo_unit) ... ok
+test_entry_is_cleanup_not_source_and_exit_retains_context (test_manuscript_cleanup.CleanupWorkspace.test_entry_is_cleanup_not_source_and_exit_retains_context) ... ok
+test_failed_apply_keeps_text_and_reading_confirmation (test_manuscript_cleanup.CleanupWorkspace.test_failed_apply_keeps_text_and_reading_confirmation) ... ok
+test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows) ... FAIL
+test_global_messages_stay_available_across_pages_and_without_project (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_stay_available_across_pages_and_without_project) ... ok
+test_long_diff_scrolls_alone_with_fixed_actions (test_manuscript_cleanup.CleanupWorkspace.test_long_diff_scrolls_alone_with_fixed_actions) ... ok
+test_partial_controls_are_adjacent_and_cleanup_keeps_partial_contract (test_manuscript_cleanup.CleanupWorkspace.test_partial_controls_are_adjacent_and_cleanup_keeps_partial_contract) ... ok
+test_stale_preview_rejects_newer_editor_text (test_manuscript_cleanup.CleanupWorkspace.test_stale_preview_rejects_newer_editor_text) ... ok
+test_unchanged_preview_never_backs_up_or_invalidates_reading (test_manuscript_cleanup.CleanupWorkspace.test_unchanged_preview_never_backs_up_or_invalidates_reading) ... ok
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_close_autosaves_manuscript_without_confirmation_page (test_production_pages.ProductionPages.test_close_autosaves_manuscript_without_confirmation_page) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+test_autosaved_switch_keeps_draft_in_original_batch (test_batch_step_retention.BatchStepRetention.test_autosaved_switch_keeps_draft_in_original_batch) ... ok
+test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) ... ok
+test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) ... ok
+
+======================================================================
+FAIL: test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_manuscript_cleanup.py", line 122, in test_global_messages_align_with_project_in_normal_and_reduced_windows
+    self.assertLessEqual(abs(buttons[0].winfo_rooty()-buttons[1].winfo_rooty()), 2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 8 not less than or equal to 2
+
+----------------------------------------------------------------------
+Ran 24 tests in 72.361s
+
+FAILED (failures=1)

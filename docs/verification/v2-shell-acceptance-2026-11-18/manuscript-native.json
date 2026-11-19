@@ -1,0 +1,127 @@
+[
+  {
+    "state": "version-short",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "visible_scroll": false
+  },
+  {
+    "state": "version-long",
+    "content": [
+      4860
+    ],
+    "viewport": 297,
+    "input": {
+      "wheel": [
+        0.00823045267489712,
+        0.06728395061728396
+      ],
+      "keyboard": [
+        0.04938271604938271,
+        0.10843621399176955
+      ],
+      "scrollbar": [
+        0.9409465020576132,
+        1.0
+      ]
+    },
+    "final_view": [
+      0.9409465020576132,
+      1.0
+    ],
+    "fixed_before": [
+      331,
+      152,
+      400,
+      37
+    ],
+    "fixed_after": [
+      331,
+      152,
+      400,
+      37
+    ]
+  },
+  {
+    "state": "ai-expanded",
+    "viewport": 379,
+    "bbox": [
+      0,
+      0,
+      593,
+      287
+    ],
+    "view": [
+      0.0,
+      1.0
+    ],
+    "fields": [
+      {
+        "box": [
+          263,
+          224,
+          1,
+          37
+        ],
+        "visible": false
+      },
+      {
+        "box": [
+          263,
+          224,
+          1,
+          37
+        ],
+        "visible": false
+      },
+      {
+        "box": [
+          263,
+          224,
+          1,
+          37
+        ],
+        "visible": false
+      },
+      {
+        "box": [
+          263,
+          224,
+          1,
+          37
+        ],
+        "visible": false
+      },
+      {
+        "box": [
+          263,
+          224,
+          1,
+          37
+        ],
+        "visible": false
+      }
+    ]
+  },
+  {
+    "state": "source-empty",
+    "visible_scroll": false
+  },
+  {
+    "state": "source-txt",
+    "viewport": 335,
+    "bbox": [
+      0,
+      0,
+      593,
+      37
+    ],
+    "view": [
+      0.0,
+      1.0
+    ],
+    "fields": false
+  }
+]

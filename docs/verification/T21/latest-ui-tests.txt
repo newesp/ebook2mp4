@@ -1,0 +1,8 @@
+test_batch_mp4_only_uses_movies_without_original_mp3_or_total_audio (test_outputs.OutputsJourney.test_batch_mp4_only_uses_movies_without_original_mp3_or_total_audio) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_partial_retry_material_return_and_window_sizes (test_outputs_desktop.OutputsDesktop.test_partial_retry_material_return_and_window_sizes) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 46.326s
+
+OK

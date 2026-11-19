@@ -1,0 +1,6 @@
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 23.280s
+
+OK

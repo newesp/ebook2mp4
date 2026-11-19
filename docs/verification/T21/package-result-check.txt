@@ -1,0 +1,1 @@
+Packaged UI outputs verified: 900 ms, unchanged MP3, one movie, matching SRT, no TTS or leaked lock.

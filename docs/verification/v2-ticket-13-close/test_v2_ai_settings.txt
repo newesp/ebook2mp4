@@ -1,0 +1,8 @@
+test_form_fits_and_preserves_inputs_after_failure_and_return (test_v2_ai_settings.AiSettingsTests.test_form_fits_and_preserves_inputs_after_failure_and_return) ... ok
+test_save_settings_includes_local_connection_and_project_preferences (test_v2_ai_settings.AiSettingsTests.test_save_settings_includes_local_connection_and_project_preferences) ... ok
+test_shared_host_and_connection_commands_in_both_states (test_v2_ai_settings.AiSettingsTests.test_shared_host_and_connection_commands_in_both_states) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 6.690s
+
+OK

@@ -1,0 +1,76 @@
+1
+00:00:00,000 --> 00:00:00,200
+Chapter 1: Hello 3.14 U.S.A. - original text.
+
+2
+00:00:00,700 --> 00:00:00,900
+Chapter 2: Hello 3.14 U.S.A. - original text.
+
+3
+00:00:01,400 --> 00:00:01,600
+Chapter 3: Hello 3.14 U.S.A. - original text.
+
+4
+00:00:02,100 --> 00:00:02,300
+Chapter 4: Hello 3.14 U.S.A. - original text.
+
+5
+00:00:02,800 --> 00:00:03,000
+Chapter 5: Hello 3.14 U.S.A. - original text.
+
+6
+00:00:03,500 --> 00:00:03,700
+Chapter 6: Hello 3.14 U.S.A. - original text.
+
+7
+00:00:04,200 --> 00:00:04,400
+Chapter 7: Hello 3.14 U.S.A. - original text.
+
+8
+00:00:04,900 --> 00:00:05,100
+Chapter 8: Hello 3.14 U.S.A. - original text.
+
+9
+00:00:05,600 --> 00:00:05,800
+Chapter 8: Hello 3.14 U.S.A. - original text.
+
+10
+00:00:06,300 --> 00:00:06,500
+Chapter 9: Hello 3.14 U.S.A. - original text.
+
+11
+00:00:07,000 --> 00:00:07,200
+Chapter 10: Hello 3.14 U.S.A. - original text.
+
+12
+00:00:07,700 --> 00:00:07,900
+Chapter 11: Hello 3.14 U.S.A. - original text.
+
+13
+00:00:08,400 --> 00:00:08,600
+Chapter 12: Hello 3.14 U.S.A. - original text.
+
+14
+00:00:09,100 --> 00:00:09,300
+Chapter 13: Hello 3.14 U.S.A. - original text.
+
+15
+00:00:09,800 --> 00:00:10,000
+Chapter 14: Hello 3.14 U.S.A. - original text.
+
+16
+00:00:10,500 --> 00:00:10,700
+Chapter 15: Hello 3.14 U.S.A. - original text.
+
+17
+00:00:11,200 --> 00:00:11,400
+Chapter 18: Hello 3.14 U.S.A. - original text.
+
+18
+00:00:11,900 --> 00:00:12,100
+Chapter 19: Hello 3.14 U.S.A. - original text.
+
+19
+00:00:12,600 --> 00:00:12,800
+Chapter 20: Hello 3.14 U.S.A. - original text.
+

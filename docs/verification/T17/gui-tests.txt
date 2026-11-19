@@ -1,0 +1,9 @@
+test_background_mode_preview_save_return_and_render_are_connected (test_total_video_background_desktop.BackgroundDesktop.test_background_mode_preview_save_return_and_render_are_connected) ... ok
+test_required_controls_fit_sizes_and_long_background_hides_short_mode (test_total_video_background_desktop.BackgroundDesktop.test_required_controls_fit_sizes_and_long_background_hides_short_mode) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 36.466s
+
+OK

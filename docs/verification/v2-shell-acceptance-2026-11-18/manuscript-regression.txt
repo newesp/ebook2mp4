@@ -1,0 +1,78 @@
+test_backup_has_no_delete_and_failed_restore_preserves_editor (test_v2_versions.VersionTests.test_backup_has_no_delete_and_failed_restore_preserves_editor) ... ok
+test_delete_cancel_and_restore_backup (test_v2_versions.VersionTests.test_delete_cancel_and_restore_backup) ... ok
+test_empty_short_long_and_return_to_other_inner_page (test_v2_versions.VersionTests.test_empty_short_long_and_return_to_other_inner_page) ... ok
+test_form_fits_and_preserves_inputs_after_failure_and_return (test_v2_ai_settings.AiSettingsTests.test_form_fits_and_preserves_inputs_after_failure_and_return) ... ok
+test_save_settings_includes_local_connection_and_project_preferences (test_v2_ai_settings.AiSettingsTests.test_save_settings_includes_local_connection_and_project_preferences) ... ok
+test_shared_host_and_connection_commands_in_both_states (test_v2_ai_settings.AiSettingsTests.test_shared_host_and_connection_commands_in_both_states) ... ok
+test_empty_issues_have_no_scroll_owner_after_processing (test_source_issue_view.SourceIssueViewTests.test_empty_issues_have_no_scroll_owner_after_processing) ... ok
+test_issue_view_and_return_to_processing (test_source_issue_view.SourceIssueViewTests.test_issue_view_and_return_to_processing) ... ok
+test_ai_commit_failure_retries_without_new_network_request (test_unified_manuscript.ManuscriptTests.test_ai_commit_failure_retries_without_new_network_request) ... ERROR
+test_atomic_publication_exact_text_and_deduplication (test_unified_manuscript.ManuscriptTests.test_atomic_publication_exact_text_and_deduplication) ... ok
+test_autosaved_workspace_reopens_without_reading_confirmation (test_unified_manuscript.ManuscriptTests.test_autosaved_workspace_reopens_without_reading_confirmation) ... ok
+test_cancelled_late_ai_output_keeps_original_and_can_resume (test_unified_manuscript.ManuscriptTests.test_cancelled_late_ai_output_keeps_original_and_can_resume) ... FAIL
+test_failed_ui_save_preserves_buffer_and_cannot_advance (test_unified_manuscript.ManuscriptTests.test_failed_ui_save_preserves_buffer_and_cannot_advance) ... ok
+test_full_ai_candidate_edit_publish_and_layout_retained (test_unified_manuscript.ManuscriptTests.test_full_ai_candidate_edit_publish_and_layout_retained) ... FAIL
+test_legacy_project_and_reading_survive_workspace_reopen (test_unified_manuscript.ManuscriptTests.test_legacy_project_and_reading_survive_workspace_reopen) ... ok
+test_manual_edit_publish_same_editor_and_two_navigation_steps (test_unified_manuscript.ManuscriptTests.test_manual_edit_publish_same_editor_and_two_navigation_steps) ... ok
+test_merge_retry_preserves_human_edits (test_unified_manuscript.ManuscriptTests.test_merge_retry_preserves_human_edits) ... ok
+test_new_txt_import_does_not_send_ai_or_open_window (test_unified_manuscript.ManuscriptTests.test_new_txt_import_does_not_send_ai_or_open_window) ... ok
+test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits (test_unified_manuscript.ManuscriptTests.test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits) ... FAIL
+test_pdf_ai_preserves_physical_page_and_column_width (test_unified_manuscript.ManuscriptTests.test_pdf_ai_preserves_physical_page_and_column_width) ... ERROR
+test_publication_failure_rolls_back_both_and_keeps_workspace (test_unified_manuscript.ManuscriptTests.test_publication_failure_rolls_back_both_and_keeps_workspace) ... ok
+test_settings_model_persisted_without_credentials (test_unified_manuscript.ManuscriptTests.test_settings_model_persisted_without_credentials) ... ok
+test_source_anomaly_blocks_publication_until_explicit_resolution (test_unified_manuscript.ManuscriptTests.test_source_anomaly_blocks_publication_until_explicit_resolution) ... ok
+test_stale_ai_never_overwrites_later_manual_text (test_unified_manuscript.ManuscriptTests.test_stale_ai_never_overwrites_later_manual_text) ... ok
+test_tool_switch_preserves_search_selection_and_editor (test_unified_manuscript.ManuscriptTests.test_tool_switch_preserves_search_selection_and_editor) ... ok
+test_txt_reload_preview_and_backup_without_window (test_unified_manuscript.ManuscriptTests.test_txt_reload_preview_and_backup_without_window) ... ok
+test_version_restore_previews_then_backs_up_current_draft (test_unified_manuscript.ManuscriptTests.test_version_restore_previews_then_backs_up_current_draft) ... ok
+
+======================================================================
+ERROR: test_ai_commit_failure_retries_without_new_network_request (test_unified_manuscript.ManuscriptTests.test_ai_commit_failure_retries_without_new_network_request)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 280, in test_ai_commit_failure_retries_without_new_network_request
+    self.assertTrue(app.workspace_job.wait(4))
+                    ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'wait'
+
+======================================================================
+ERROR: test_pdf_ai_preserves_physical_page_and_column_width (test_unified_manuscript.ManuscriptTests.test_pdf_ai_preserves_physical_page_and_column_width)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 291, in test_pdf_ai_preserves_physical_page_and_column_width
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+======================================================================
+FAIL: test_cancelled_late_ai_output_keeps_original_and_can_resume (test_unified_manuscript.ManuscriptTests.test_cancelled_late_ai_output_keeps_original_and_can_resume)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 221, in test_cancelled_late_ai_output_keeps_original_and_can_resume
+    self.assertTrue(started.wait(2))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_full_ai_candidate_edit_publish_and_layout_retained (test_unified_manuscript.ManuscriptTests.test_full_ai_candidate_edit_publish_and_layout_retained)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 203, in test_full_ai_candidate_edit_publish_and_layout_retained
+    self.assertTrue(app.current_text.startswith('序章'))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits (test_unified_manuscript.ManuscriptTests.test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 261, in test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits
+    self.assertTrue(app.next_button.instate(['disabled']))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 27 tests in 87.067s
+
+FAILED (failures=3, errors=2)

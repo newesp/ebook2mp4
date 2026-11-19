@@ -1,0 +1,84 @@
+test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video (test_outputs.OutputsJourney.test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video) ... ok
+test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies (test_outputs.OutputsJourney.test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies) ... ok
+test_missing_visual_publishes_audio_reopen_only_encodes_video (test_outputs.OutputsJourney.test_missing_visual_publishes_audio_reopen_only_encodes_video) ... ok
+test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual (test_outputs.OutputsJourney.test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual) ... ok
+test_source_change_during_audio_stops_next_stage_without_mixing_sources (test_outputs.OutputsJourney.test_source_change_during_audio_stops_next_stage_without_mixing_sources) ... ok
+test_validation_and_missing_sources_are_observable (test_outputs.OutputsJourney.test_validation_and_missing_sources_are_observable) ... ok
+test_video_failure_reopens_as_partial_and_cancel_releases_lease (test_outputs.OutputsJourney.test_video_failure_reopens_as_partial_and_cancel_releases_lease) ... ok
+test_partial_retry_material_return_and_window_sizes (test_outputs_desktop.OutputsDesktop.test_partial_retry_material_return_and_window_sizes) ... ok
+test_cancel_conflict_and_disk_shortage_preserve_previous_product (test_total_audio.TotalAudioJourney.test_cancel_conflict_and_disk_shortage_preserve_previous_product) ... ok
+test_cleanup_failure_cannot_discard_an_already_published_total (test_total_audio.TotalAudioJourney.test_cleanup_failure_cannot_discard_an_already_published_total) ... ok
+test_fractional_millisecond_sources_do_not_overlap_at_zero_pause (test_total_audio.TotalAudioJourney.test_fractional_millisecond_sources_do_not_overlap_at_zero_pause) ... ok
+test_invalid_caption_timeline_is_not_published_even_with_matching_checksum (test_total_audio.TotalAudioJourney.test_invalid_caption_timeline_is_not_published_even_with_matching_checksum) ... ok
+test_invalid_selection_and_missing_sources_are_reported (test_total_audio.TotalAudioJourney.test_invalid_selection_and_missing_sources_are_reported) ... ok
+test_media_failure_has_three_attempts_and_keeps_old_publication (test_total_audio.TotalAudioJourney.test_media_failure_has_three_attempts_and_keeps_old_publication) ... ok
+test_new_selected_audio_version_requires_explicit_saved_selection (test_total_audio.TotalAudioJourney.test_new_selected_audio_version_requires_explicit_saved_selection) ... ok
+test_one_two_three_batches_use_decoded_timeline_and_no_tts (test_total_audio.TotalAudioJourney.test_one_two_three_batches_use_decoded_timeline_and_no_tts) ... ok
+test_only_selected_sources_and_shared_settings_invalidate_total (test_total_audio.TotalAudioJourney.test_only_selected_sources_and_shared_settings_invalidate_total) ... ok
+test_output_changed_after_verification_does_not_replace_previous_total (test_total_audio.TotalAudioJourney.test_output_changed_after_verification_does_not_replace_previous_total) ... ok
+test_selection_order_and_versions_survive_reopen (test_total_audio.TotalAudioJourney.test_selection_order_and_versions_survive_reopen) ... ok
+test_zero_pause_order_and_publication_conflict_preserve_old_total (test_total_audio.TotalAudioJourney.test_zero_pause_order_and_publication_conflict_preserve_old_total) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+test_cancel_failure_export_and_retry_keep_previous_artifacts (test_total_video.TotalVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts) ... ok
+test_changed_source_blocks_video_and_corrupt_picture_preserves_settings (test_total_video.TotalVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings) ... ok
+test_corrupted_audio_is_not_current_and_cannot_publish_video (test_total_video.TotalVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video) ... ok
+test_picture_is_copied_and_resolution_survives_reopen (test_total_video.TotalVideoJourney.test_picture_is_copied_and_resolution_survives_reopen) ... ok
+test_publication_conflict_and_disk_shortage_keep_old_video (test_total_video.TotalVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video) ... ok
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... FAIL
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+{"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 1600, "audio_ms": 1600}
+{"kind": "merged-video", "batches": 2, "pause_ms": 0, "video_ms": 400, "audio_ms": 405}
+{"kind": "merged-video", "batches": 2, "pause_ms": 5000, "video_ms": 5400, "audio_ms": 5419}
+{"kind": "merged-video", "batches": 3, "pause_ms": 17, "video_ms": 633, "audio_ms": 640}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding) ... ok
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored (test_video_merge.MergeVideoJourney.test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored) ... ok
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs (test_video_merge.MergeVideoJourney.test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs) ... ok
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+test_media_failure_stops_after_three_attempts_and_preserves_output (test_video_merge.MergeVideoJourney.test_media_failure_stops_after_three_attempts_and_preserves_output) ... ok
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... ok
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_moving_batch_holds_actual_final_frame_in_preview_and_total (test_video_merge.MergeVideoJourney.test_moving_batch_holds_actual_final_frame_in_preview_and_total) ... ok
+{"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 12800, "audio_ms": 12800}
+test_pdf_warnings_require_confirmation_and_survive_reopen (test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen) ... ok
+test_preview_matches_join_and_cleans_on_cancel (test_video_merge.MergeVideoJourney.test_preview_matches_join_and_cleans_on_cancel) ... ok
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... FAIL
+test_empty_and_legacy_project_migration (test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration) ... ok
+test_route_matrix_retains_both_movies_exports_and_reopens (test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens) ... ok
+test_source_text_voice_new_audio_and_launch_snapshot (test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot) ... ok
+test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local (test_output_versions.OutputVersionsJourney.test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local) ... ok
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ok
+
+======================================================================
+FAIL: test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video_desktop.py", line 61, in test_two_steps_encode_and_return_keep_picture_and_resolution
+    self.assertTrue(assembly.video_button.winfo_viewable())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not true
+
+======================================================================
+FAIL: test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge_desktop.py", line 63, in test_switch_shared_selection_merge_preview_and_restore
+    self.assertTrue(widget.winfo_viewable(),str(widget))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not true : .!workbench.!frame3.!productionworkspace.!frame2.!assemblypage2.!frame.!frame8.!menubutton
+
+----------------------------------------------------------------------
+Ran 48 tests in 437.303s
+
+FAILED (failures=2)

@@ -1,0 +1,18 @@
+test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page) ... FAIL
+
+======================================================================
+FAIL: test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_close_lifecycle.py", line 48, in test_close_after_video_page
+    self.close_window()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_close_lifecycle.py", line 29, in close_window
+    self.assertFalse(alive,repr(errors))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : []
+
+----------------------------------------------------------------------
+Ran 1 test in 4.290s
+
+FAILED (failures=1)

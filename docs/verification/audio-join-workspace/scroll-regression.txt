@@ -1,0 +1,6 @@
+test_native_scroll_owners_and_short_fit_overflow_contract (test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 9.524s
+
+OK

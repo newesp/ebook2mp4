@@ -1,0 +1,89 @@
+{
+  "coverage_complete": false,
+  "regions": [
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-False-False",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-False-True",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 1064,
+      "thumb_fraction": 0.24
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "900-text-False-False",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 114,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "900-text-False-True",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 114,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 1286,
+      "thumb_fraction": 0.08142857142857143
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-True-False",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-True-True",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 1064,
+      "thumb_fraction": 0.24
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "900-text-True-False",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 114,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "900-text-True-True",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 114,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 1286,
+      "thumb_fraction": 0.08142857142857143
+    }
+  ]
+}

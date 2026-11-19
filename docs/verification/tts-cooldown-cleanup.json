@@ -1,0 +1,23 @@
+{
+  "removed": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-cooldown-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-cooldown-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-cooldown-mypy",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-cooldown-package-check.py"
+  ],
+  "remaining_test_directories": [],
+  "remaining_related_processes": [
+    {
+      "Id": 22100,
+      "ProcessName": "ebook2mp4"
+    }
+  ],
+  "preexisting_user_process": 22100,
+  "exclusive_read_open_passed": [
+    "E:\\Leo\\Projects\\ebook2mp4\\dist\\TTS-cooldown\\ebook2mp4\\ebook2mp4.exe",
+    "E:\\Leo\\Projects\\ebook2mp4\\docs\\verification\\tts-cooldown-package.json"
+  ],
+  "note": "No test process remains. No pre-existing user process was stopped by this task."
+}

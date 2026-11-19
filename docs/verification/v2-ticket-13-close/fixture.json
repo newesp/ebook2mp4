@@ -1,0 +1,11 @@
+{
+  "uses_synthetic_sources": true,
+  "bundled_media_in_packaged_run": true,
+  "verified_routes": [
+    "audio",
+    "total-audio",
+    "batch-videos"
+  ],
+  "long_batch": "c1f65ba8d6854d82bc746c49a4fe951d",
+  "pdf_batch": "99e166a7b3c64b1f8b993cbee53401cd"
+}

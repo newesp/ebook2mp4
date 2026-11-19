@@ -1,0 +1,34 @@
+{
+  "source_sha256": "e74347799677fdcdd1d846cc6bee22629746762f9e0c9ddf19f2d1dea6bbae35",
+  "cases": [
+    {
+      "page": "試聽區",
+      "test": "test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes",
+      "route": "開啟語音設定 → 切換視窗尺寸與字級 → 量測試聽列及底部操作列",
+      "status": "通過",
+      "checks": [
+        "button-size",
+        "horizontal-gap",
+        "vertical-gap",
+        "viewport-matrix"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [
+        "voice/native-layout-regression.json"
+      ],
+      "errors": []
+    },
+    {
+      "page": "試聽區",
+      "test": "test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider",
+      "route": "開啟語音設定 → 切換服務 → 輸入自訂值 → 儲存 → 重開設定",
+      "status": "通過",
+      "checks": [],
+      "category": "功能回歸",
+      "evidence": [],
+      "errors": []
+    }
+  ],
+  "full_ui_acceptance": "未完成",
+  "packaged_exe": "未測"
+}

@@ -1,0 +1,13 @@
+{
+  "modules_match_source": {
+    "tts_services": true,
+    "voice_media": true,
+    "narration": true,
+    "narration_desktop": true
+  },
+  "sha256": "320cab620d9c2923b5335a7ba84a888da974ca9548576231d4665cdb95df1605",
+  "smoke_pid": 14136,
+  "native_window_created": true,
+  "exit_code": 0,
+  "process_released": true
+}

@@ -1,0 +1,16 @@
+{
+  "removed": [
+    ".scratch/t13-close",
+    ".scratch/build-tools",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime",
+    ".scratch/pyinstaller-build"
+  ],
+  "remaining_owned_processes": [],
+  "final_preflight_exit_code": 0,
+  "fixed_exe_sha256": "47d55fb73b17dbbabc1ad1dc97d9fb29e50dc26542d3a60117ad2ae2a00d843f",
+  "test_runs_retained": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ]
+}

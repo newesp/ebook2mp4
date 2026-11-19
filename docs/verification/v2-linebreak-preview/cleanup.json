@@ -1,0 +1,80 @@
+{
+  "production_locks_remaining": 0,
+  "failed_pip_temporaries": [
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\AC\\#!sandbox.{5f115207-246a-45fc-b088-a9d5cc84f703}\\Temp\\pip-build-tracker-9_7e87cc",
+      "remaining": false
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\AC\\#!sandbox.{5f115207-246a-45fc-b088-a9d5cc84f703}\\Temp\\pip-target-hygk_qky",
+      "remaining": false
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\AC\\#!sandbox.{5f115207-246a-45fc-b088-a9d5cc84f703}\\Temp\\pip-ephem-wheel-cache-4k0ldmc2",
+      "remaining": false
+    },
+    {
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\Packages\\OpenAI.Codex_2p2nqsd0c76g0\\AC\\#!sandbox.{5f115207-246a-45fc-b088-a9d5cc84f703}\\Temp\\pip-install-9vrd212u",
+      "remaining": false
+    }
+  ],
+  "removed": [
+    {
+      "files": 4089,
+      "bytes": 47761671.0,
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools"
+    },
+    {
+      "files": 374,
+      "bytes": 8723645.0,
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-tools"
+    },
+    {
+      "files": 2,
+      "bytes": 202708992.0,
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime"
+    },
+    {
+      "files": 28,
+      "bytes": 121410362.0,
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime"
+    },
+    {
+      "files": 16,
+      "bytes": 33952263.0,
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build"
+    },
+    {
+      "files": 51,
+      "bytes": 742495.0,
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\v2-cleanup-work"
+    }
+  ],
+  "owned_processes_remaining": 0,
+  "product_pycache_directories": [
+    "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__"
+  ],
+  "resource_checks": [
+    {
+      "files": 1905,
+      "failures": [],
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4"
+    },
+    {
+      "files": 1905,
+      "failures": [],
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\archives\\v1\\ebook2mp4"
+    }
+  ],
+  "preserved_old_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "process_snapshot": []
+}

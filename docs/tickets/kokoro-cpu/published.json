@@ -1,0 +1,90 @@
+{
+  "parent": "https://github.com/newesp/ebook2mp4/issues/2",
+  "tickets": [
+    {
+      "key": "K01",
+      "title": "官方中文版 CPU 可行性驗證",
+      "number": 3,
+      "url": "https://github.com/newesp/ebook2mp4/issues/3",
+      "blocked_by": []
+    },
+    {
+      "key": "K02",
+      "title": "前置整理：共用語音服務能力與合成接點",
+      "number": 4,
+      "url": "https://github.com/newesp/ebook2mp4/issues/4",
+      "blocked_by": [
+        3
+      ]
+    },
+    {
+      "key": "K03",
+      "title": "確認 Kokoro 操作流程與介面設計圖",
+      "number": 5,
+      "url": "https://github.com/newesp/ebook2mp4/issues/5",
+      "blocked_by": [
+        3
+      ]
+    },
+    {
+      "key": "K04",
+      "title": "在主程式安裝與移除離線語音包",
+      "number": 6,
+      "url": "https://github.com/newesp/ebook2mp4/issues/6",
+      "blocked_by": [
+        5
+      ]
+    },
+    {
+      "key": "K05",
+      "title": "選擇 Kokoro 音色並完成本機試聽",
+      "number": 7,
+      "url": "https://github.com/newesp/ebook2mp4/issues/7",
+      "blocked_by": [
+        4,
+        6
+      ]
+    },
+    {
+      "key": "K06",
+      "title": "連續試聽、閒置卸載與程序清理",
+      "number": 8,
+      "url": "https://github.com/newesp/ebook2mp4/issues/8",
+      "blocked_by": [
+        7
+      ]
+    },
+    {
+      "key": "K07",
+      "title": "由已確認朗讀稿製作批次 MP3／SRT",
+      "number": 9,
+      "url": "https://github.com/newesp/ebook2mp4/issues/9",
+      "blocked_by": [
+        7
+      ]
+    },
+    {
+      "key": "K08",
+      "title": "中斷續作與模型版本變更保護",
+      "number": 10,
+      "url": "https://github.com/newesp/ebook2mp4/issues/10",
+      "blocked_by": [
+        9
+      ]
+    },
+    {
+      "key": "K09",
+      "title": "封裝交付與全書離線流程驗收",
+      "number": 11,
+      "url": "https://github.com/newesp/ebook2mp4/issues/11",
+      "blocked_by": [
+        8,
+        10
+      ]
+    }
+  ],
+  "verified": true,
+  "native_parent_links": true,
+  "native_blocking_edges": 10,
+  "parent_title_body_state_labels_unchanged": true
+}

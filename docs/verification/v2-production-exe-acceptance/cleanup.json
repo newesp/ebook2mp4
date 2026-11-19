@@ -1,0 +1,20 @@
+{
+  "removed": [
+    ".scratch/t13-production-proof",
+    ".scratch/t13-production-deps"
+  ],
+  "remaining_owned_folders": [],
+  "remaining_owned_processes": [],
+  "packaged_app_exit_codes": [
+    0,
+    0
+  ],
+  "active_production_lock": false,
+  "playback_temp_count": 0,
+  "package_preflight_exit_code": 0,
+  "fixed_exe_sha256": "bfdd98c705af4ebcc9e09af35d17d084ba05e1d52916184750a31d6cc656d7ac",
+  "test_runs_retained": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "E:\\Leo\\Projects\\ebook2mp4\\archives\\v1\\ebook2mp4\\ebook2mp4.exe"
+  ],
+  "cwd": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\v2-work\\v1-package",
+  "pid": 10512,
+  "isolated_settings": true,
+  "system_only_path": true,
+  "book": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\v2-work\\v1-package\\book",
+  "exit_code": 0,
+  "normal_exit": true
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t21-tools",
+    "bytes": 104474248.0,
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t21-mypy",
+    "bytes": 15872229.0,
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t21-pyinstaller-build",
+    "bytes": 33681810.0,
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t21-package",
+    "bytes": 95695.0,
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "bytes": 202708992.0,
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "bytes": 121410362.0,
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+    "bytes": 203.0,
+    "removed": true
+  }
+]

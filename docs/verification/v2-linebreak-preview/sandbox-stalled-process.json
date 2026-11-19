@@ -1,0 +1,5 @@
+{
+  "ProcessId": 11396,
+  "ExecutablePath": "C:\\Python314\\python.exe",
+  "CommandLine": "\"C:\\Python314\\python.exe\" -B -m unittest test_v2_cleanup_shell test_manuscript_cleanup test_v2_manuscript_shell test_manuscript_v6 test_unified_manuscript test_batch_step_retention test_main_workflow_desktop test_close_lifecycle -v"
+}

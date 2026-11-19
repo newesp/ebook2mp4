@@ -1,0 +1,6 @@
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 55.442s
+
+OK

@@ -1,0 +1,278 @@
+{
+  "editor_frame": {
+    "x": 771,
+    "y": 88,
+    "width": 749,
+    "height": 658,
+    "reqwidth": 503,
+    "reqheight": 275,
+    "viewable": 1,
+    "manager": "panedwindow",
+    "grid": {},
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!label",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!text",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!scrollbar",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame2"
+    ]
+  },
+  "editor_nav": {
+    "x": 771,
+    "y": 94,
+    "width": 749,
+    "height": 41,
+    "reqwidth": 503,
+    "reqheight": 41,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame",
+      "column": "0",
+      "row": "0",
+      "columnspan": "2",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "0",
+      "pady": "0",
+      "sticky": "ew"
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2"
+    ]
+  },
+  "editor_actions": {
+    "x": 1047,
+    "y": 94,
+    "width": 473,
+    "height": 41,
+    "reqwidth": 473,
+    "reqheight": 41,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame",
+      "column": "1",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "0",
+      "pady": "0",
+      "sticky": "e"
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!button",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!menubutton",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!menubutton2",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!menubutton3",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!button2"
+    ]
+  },
+  "editor_title": {
+    "x": 771,
+    "y": 104,
+    "width": 30,
+    "height": 21,
+    "reqwidth": 30,
+    "reqheight": 21,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame",
+      "column": "0",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "0",
+      "pady": "0",
+      "sticky": "w"
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame.!button",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame.!label"
+    ]
+  },
+  "source_toggle": {
+    "x": 1049,
+    "y": 96,
+    "width": 114,
+    "height": 37,
+    "reqwidth": 114,
+    "reqheight": 37,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2",
+      "column": "0",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "2",
+      "pady": "2",
+      "sticky": ""
+    },
+    "children": []
+  },
+  "edit_control": {
+    "x": 1167,
+    "y": 96,
+    "width": 75,
+    "height": 37,
+    "reqwidth": 75,
+    "reqheight": 37,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2",
+      "column": "1",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "2",
+      "pady": "2",
+      "sticky": ""
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!menubutton.!menu"
+    ]
+  },
+  "proof_control": {
+    "x": 1246,
+    "y": 96,
+    "width": 75,
+    "height": 37,
+    "reqwidth": 75,
+    "reqheight": 37,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2",
+      "column": "2",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "2",
+      "pady": "2",
+      "sticky": ""
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!menubutton2.!menu"
+    ]
+  },
+  "version_control": {
+    "x": 1325,
+    "y": 96,
+    "width": 75,
+    "height": 37,
+    "reqwidth": 75,
+    "reqheight": 37,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2",
+      "column": "3",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "2",
+      "pady": "2",
+      "sticky": ""
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2.!menubutton3.!menu"
+    ]
+  },
+  "save_button": {
+    "x": 1404,
+    "y": 96,
+    "width": 114,
+    "height": 37,
+    "reqwidth": 114,
+    "reqheight": 37,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame.!frame.!frame2",
+      "column": "4",
+      "row": "0",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "2",
+      "pady": "2",
+      "sticky": ""
+    },
+    "children": []
+  },
+  "right_stack": {
+    "x": 771,
+    "y": 88,
+    "width": 749,
+    "height": 658,
+    "reqwidth": 503,
+    "reqheight": 448,
+    "viewable": 1,
+    "manager": "panedwindow",
+    "grid": {},
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow.!frame"
+    ]
+  },
+  "source_frame": {
+    "x": 16,
+    "y": 88,
+    "width": 749,
+    "height": 658,
+    "reqwidth": 463,
+    "reqheight": 318,
+    "viewable": 1,
+    "manager": "panedwindow",
+    "grid": {},
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!frame.!frame",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!frame.!frame2",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!frame.!frame3"
+    ]
+  },
+  "panes": {
+    "x": 16,
+    "y": 88,
+    "width": 1504,
+    "height": 658,
+    "reqwidth": 1504,
+    "reqheight": 448,
+    "viewable": 1,
+    "manager": "grid",
+    "grid": {
+      "in": ".!workbench.!frame.!workspaceframe",
+      "column": "0",
+      "row": "2",
+      "columnspan": "1",
+      "rowspan": "1",
+      "ipadx": "0",
+      "ipady": "0",
+      "padx": "0",
+      "pady": "0",
+      "sticky": "nesw"
+    },
+    "children": [
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!frame",
+      ".!workbench.!frame.!workspaceframe.!panedwindow.!panedwindow"
+    ]
+  }
+}

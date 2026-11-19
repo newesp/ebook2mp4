@@ -1,0 +1,314 @@
+[
+  {
+    "size": [
+      1360,
+      820
+    ],
+    "text_scale": 1,
+    "tk_scaling": 1.334646962233169,
+    "editor_lines": 23,
+    "editor": {
+      "x": 254,
+      "y": 232,
+      "width": 1073,
+      "height": 443
+    },
+    "notebook": "TNotebook",
+    "controls": {
+      "flow": {
+        "x": 430,
+        "y": 47,
+        "width": 114,
+        "height": 37
+      },
+      "step": {
+        "x": 146,
+        "y": 47,
+        "width": 114,
+        "height": 37
+      },
+      "task": {
+        "x": 308,
+        "y": 96,
+        "width": 916,
+        "height": 37
+      },
+      "info": {
+        "x": 1232,
+        "y": 96,
+        "width": 120,
+        "height": 37
+      },
+      "consent": {
+        "x": 833,
+        "y": 723,
+        "width": 216,
+        "height": 23
+      },
+      "recheck": {
+        "x": 1061,
+        "y": 716,
+        "width": 169,
+        "height": 37
+      },
+      "status": {
+        "x": 1238,
+        "y": 716,
+        "width": 114,
+        "height": 37
+      },
+      "play": {
+        "x": 822,
+        "y": 792,
+        "width": 114,
+        "height": 37
+      },
+      "products": {
+        "x": 942,
+        "y": 792,
+        "width": 131,
+        "height": 37
+      },
+      "next": {
+        "x": 1207,
+        "y": 792,
+        "width": 145,
+        "height": 37
+      }
+    }
+  },
+  {
+    "size": [
+      900,
+      640
+    ],
+    "text_scale": 1,
+    "tk_scaling": 1.334646962233169,
+    "editor_lines": 9,
+    "editor": {
+      "x": 254,
+      "y": 277,
+      "width": 613,
+      "height": 193
+    },
+    "notebook": "TNotebook",
+    "controls": {
+      "flow": {
+        "x": 186,
+        "y": 92,
+        "width": 114,
+        "height": 37
+      },
+      "step": {
+        "x": 146,
+        "y": 47,
+        "width": 114,
+        "height": 37
+      },
+      "task": {
+        "x": 308,
+        "y": 141,
+        "width": 456,
+        "height": 37
+      },
+      "info": {
+        "x": 772,
+        "y": 141,
+        "width": 120,
+        "height": 37
+      },
+      "consent": {
+        "x": 373,
+        "y": 543,
+        "width": 216,
+        "height": 23
+      },
+      "recheck": {
+        "x": 601,
+        "y": 536,
+        "width": 169,
+        "height": 37
+      },
+      "status": {
+        "x": 778,
+        "y": 536,
+        "width": 114,
+        "height": 37
+      },
+      "play": {
+        "x": 362,
+        "y": 612,
+        "width": 114,
+        "height": 37
+      },
+      "products": {
+        "x": 482,
+        "y": 612,
+        "width": 131,
+        "height": 37
+      },
+      "next": {
+        "x": 747,
+        "y": 612,
+        "width": 145,
+        "height": 37
+      }
+    }
+  },
+  {
+    "size": [
+      1360,
+      820
+    ],
+    "text_scale": 1.25,
+    "tk_scaling": 1.334646962233169,
+    "editor_lines": 17,
+    "editor": {
+      "x": 266,
+      "y": 247,
+      "width": 1061,
+      "height": 418
+    },
+    "notebook": "TNotebook",
+    "controls": {
+      "flow": {
+        "x": 502,
+        "y": 47,
+        "width": 136,
+        "height": 42
+      },
+      "step": {
+        "x": 168,
+        "y": 47,
+        "width": 136,
+        "height": 42
+      },
+      "task": {
+        "x": 320,
+        "y": 103,
+        "width": 875,
+        "height": 37
+      },
+      "info": {
+        "x": 1203,
+        "y": 101,
+        "width": 149,
+        "height": 42
+      },
+      "consent": {
+        "x": 707,
+        "y": 713,
+        "width": 276,
+        "height": 28
+      },
+      "recheck": {
+        "x": 995,
+        "y": 706,
+        "width": 213,
+        "height": 42
+      },
+      "status": {
+        "x": 1216,
+        "y": 706,
+        "width": 136,
+        "height": 42
+      },
+      "play": {
+        "x": 719,
+        "y": 787,
+        "width": 136,
+        "height": 42
+      },
+      "products": {
+        "x": 861,
+        "y": 787,
+        "width": 153,
+        "height": 42
+      },
+      "next": {
+        "x": 1170,
+        "y": 787,
+        "width": 182,
+        "height": 42
+      }
+    }
+  },
+  {
+    "size": [
+      900,
+      640
+    ],
+    "text_scale": 1.25,
+    "tk_scaling": 1.334646962233169,
+    "editor_lines": 3,
+    "editor": {
+      "x": 266,
+      "y": 297,
+      "width": 601,
+      "height": 85
+    },
+    "notebook": "TNotebook",
+    "controls": {
+      "flow": {
+        "x": 214,
+        "y": 97,
+        "width": 136,
+        "height": 42
+      },
+      "step": {
+        "x": 168,
+        "y": 47,
+        "width": 136,
+        "height": 42
+      },
+      "task": {
+        "x": 320,
+        "y": 153,
+        "width": 415,
+        "height": 37
+      },
+      "info": {
+        "x": 743,
+        "y": 151,
+        "width": 149,
+        "height": 42
+      },
+      "consent": {
+        "x": 535,
+        "y": 448,
+        "width": 276,
+        "height": 28
+      },
+      "recheck": {
+        "x": 535,
+        "y": 480,
+        "width": 213,
+        "height": 42
+      },
+      "status": {
+        "x": 756,
+        "y": 480,
+        "width": 136,
+        "height": 42
+      },
+      "play": {
+        "x": 312,
+        "y": 607,
+        "width": 136,
+        "height": 42
+      },
+      "products": {
+        "x": 454,
+        "y": 607,
+        "width": 153,
+        "height": 42
+      },
+      "next": {
+        "x": 710,
+        "y": 607,
+        "width": 182,
+        "height": 42
+      }
+    }
+  }
+]

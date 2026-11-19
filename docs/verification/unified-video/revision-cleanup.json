@@ -1,0 +1,13 @@
+{
+  "removed": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\video-layout-package"
+  ],
+  "remaining_targets": [],
+  "related_process_count": 0,
+  "evidence_preserved": true,
+  "formal_exe_exclusive_read": "passed"
+}

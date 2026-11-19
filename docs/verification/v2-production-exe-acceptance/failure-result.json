@@ -1,0 +1,12 @@
+{
+  "hashes_match": true,
+  "status": "failed",
+  "original": "9d712d61c7ff46e1a3990f4cd064e6b8",
+  "diagnostic": {
+    "category": "encoding",
+    "message": "媒體編碼失敗。請查看「來源詳情」的失敗診斷 → 確認素材可播放 → 改選另一個素材後重試製片。",
+    "detail": "Error while opening encoder [controlled fixture]\r\n",
+    "phase": "製作總 MP4"
+  },
+  "lock_exists": false
+}

@@ -1,0 +1,256 @@
+{
+  "distinct_tests": 62,
+  "passed": 62,
+  "skipped": 0,
+  "unresolved": 0,
+  "tests": {
+    "test_backup_failure_prevents_workspace_save_and_preserves_readiness (test_v2_cleanup_shell.CleanupShellTests.test_backup_failure_prevents_workspace_save_and_preserves_readiness)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_cleanup_uses_fixed_shared_ports_and_only_current_actions (test_v2_cleanup_shell.CleanupShellTests.test_cleanup_uses_fixed_shared_ports_and_only_current_actions)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit (test_v2_cleanup_shell.CleanupShellTests.test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_list_collapse_reclaims_track_and_reopen_restores_aligned_edges (test_v2_cleanup_shell.CleanupShellTests.test_list_collapse_reclaims_track_and_reopen_restores_aligned_edges)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_long_save_error_wraps_without_clipping_actions_or_ancestors (test_v2_cleanup_shell.CleanupShellTests.test_long_save_error_wraps_without_clipping_actions_or_ancestors)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_return_keeps_unsaved_text_search_selection_cursor_and_scroll (test_v2_cleanup_shell.CleanupShellTests.test_return_keeps_unsaved_text_search_selection_cursor_and_scroll)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_shared_header_and_content_origins_at_supported_sizes_and_18pt (test_v2_cleanup_shell.CleanupShellTests.test_shared_header_and_content_origins_at_supported_sizes_and_18pt)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_stale_flow_batch_and_busy_source_guards_never_write (test_v2_cleanup_shell.CleanupShellTests.test_stale_flow_batch_and_busy_source_guards_never_write)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_apply_persists_backup_and_is_one_undo_unit (test_manuscript_cleanup.CleanupWorkspace.test_apply_persists_backup_and_is_one_undo_unit)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_entry_is_cleanup_not_source_and_exit_retains_context (test_manuscript_cleanup.CleanupWorkspace.test_entry_is_cleanup_not_source_and_exit_retains_context)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_failed_apply_keeps_text_and_reading_confirmation (test_manuscript_cleanup.CleanupWorkspace.test_failed_apply_keeps_text_and_reading_confirmation)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_global_messages_stay_available_across_pages_and_without_project (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_stay_available_across_pages_and_without_project)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_long_diff_scrolls_alone_with_fixed_actions (test_manuscript_cleanup.CleanupWorkspace.test_long_diff_scrolls_alone_with_fixed_actions)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_partial_controls_are_adjacent_and_cleanup_keeps_partial_contract (test_manuscript_cleanup.CleanupWorkspace.test_partial_controls_are_adjacent_and_cleanup_keeps_partial_contract)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_stale_preview_rejects_newer_editor_text (test_manuscript_cleanup.CleanupWorkspace.test_stale_preview_rejects_newer_editor_text)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_unchanged_preview_never_backs_up_or_invalidates_reading (test_manuscript_cleanup.CleanupWorkspace.test_unchanged_preview_never_backs_up_or_invalidates_reading)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_action_replacement_removes_old_callback_and_busy_disables_current (test_v2_manuscript_shell.ManuscriptShellTests.test_action_replacement_removes_old_callback_and_busy_disables_current)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_return_stays_left_and_busy_cancel_remains_available (test_v2_manuscript_shell.ManuscriptShellTests.test_return_stays_left_and_busy_cancel_remains_available)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_shell_survives_tools_production_and_collapsing_without_losing_editor (test_v2_manuscript_shell.ManuscriptShellTests.test_shell_survives_tools_production_and_collapsing_without_losing_editor)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_wide_collapsed_editor_toolbar_stays_inside_its_pane (test_v2_manuscript_shell.ManuscriptShellTests.test_wide_collapsed_editor_toolbar_stays_inside_its_pane)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_collapsed_list_releases_track_and_ratio_survives_navigation (test_manuscript_v6.ManuscriptV6.test_collapsed_list_releases_track_and_ratio_survives_navigation)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_long_version_diff_owns_scroll_and_editor_state_returns (test_manuscript_v6.ManuscriptV6.test_long_version_diff_owns_scroll_and_editor_state_returns)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_pdf_reextract_preview_and_region_retry_keep_original_manuscript (test_manuscript_v6.ManuscriptV6.test_pdf_reextract_preview_and_region_retry_keep_original_manuscript)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_pdf_source_open_missing_zoom_rotate_and_region_coordinates (test_manuscript_v6.ManuscriptV6.test_pdf_source_open_missing_zoom_rotate_and_region_coordinates)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_proof_menu_real_candidate_diff_restore_and_discard (test_manuscript_v6.ManuscriptV6.test_proof_menu_real_candidate_diff_restore_and_discard)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_reopen_list_with_hidden_source_and_narrow_window (test_manuscript_v6.ManuscriptV6.test_reopen_list_with_hidden_source_and_narrow_window)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_restored_comparison_reflows_groups_without_clipping (test_manuscript_v6.ManuscriptV6.test_restored_comparison_reflows_groups_without_clipping)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_search_replace_export_reload_cleanup_new_edit_menu (test_manuscript_v6.ManuscriptV6.test_search_replace_export_reload_cleanup_new_edit_menu)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_three_content_edges_align_and_controls_match_height (test_manuscript_v6.ManuscriptV6.test_three_content_edges_align_and_controls_match_height)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_ai_commit_failure_retries_without_new_network_request (test_unified_manuscript.ManuscriptTests.test_ai_commit_failure_retries_without_new_network_request)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_atomic_publication_exact_text_and_deduplication (test_unified_manuscript.ManuscriptTests.test_atomic_publication_exact_text_and_deduplication)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_autosaved_workspace_reopens_without_reading_confirmation (test_unified_manuscript.ManuscriptTests.test_autosaved_workspace_reopens_without_reading_confirmation)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_cancelled_late_ai_output_keeps_original_and_can_resume (test_unified_manuscript.ManuscriptTests.test_cancelled_late_ai_output_keeps_original_and_can_resume)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_failed_ui_save_preserves_buffer_and_cannot_advance (test_unified_manuscript.ManuscriptTests.test_failed_ui_save_preserves_buffer_and_cannot_advance)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_full_ai_candidate_edit_publish_and_layout_retained (test_unified_manuscript.ManuscriptTests.test_full_ai_candidate_edit_publish_and_layout_retained)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_legacy_project_and_reading_survive_workspace_reopen (test_unified_manuscript.ManuscriptTests.test_legacy_project_and_reading_survive_workspace_reopen)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_manual_edit_publish_same_editor_and_two_navigation_steps (test_unified_manuscript.ManuscriptTests.test_manual_edit_publish_same_editor_and_two_navigation_steps)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_merge_retry_preserves_human_edits (test_unified_manuscript.ManuscriptTests.test_merge_retry_preserves_human_edits)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_new_txt_import_does_not_send_ai_or_open_window (test_unified_manuscript.ManuscriptTests.test_new_txt_import_does_not_send_ai_or_open_window)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits (test_unified_manuscript.ManuscriptTests.test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_pdf_ai_preserves_physical_page_and_column_width (test_unified_manuscript.ManuscriptTests.test_pdf_ai_preserves_physical_page_and_column_width)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_publication_failure_rolls_back_both_and_keeps_workspace (test_unified_manuscript.ManuscriptTests.test_publication_failure_rolls_back_both_and_keeps_workspace)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_settings_model_persisted_without_credentials (test_unified_manuscript.ManuscriptTests.test_settings_model_persisted_without_credentials)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_source_anomaly_blocks_publication_until_explicit_resolution (test_unified_manuscript.ManuscriptTests.test_source_anomaly_blocks_publication_until_explicit_resolution)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_stale_ai_never_overwrites_later_manual_text (test_unified_manuscript.ManuscriptTests.test_stale_ai_never_overwrites_later_manual_text)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_tool_switch_preserves_search_selection_and_editor (test_unified_manuscript.ManuscriptTests.test_tool_switch_preserves_search_selection_and_editor)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_txt_reload_preview_and_backup_without_window (test_unified_manuscript.ManuscriptTests.test_txt_reload_preview_and_backup_without_window)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_version_restore_previews_then_backs_up_current_draft (test_unified_manuscript.ManuscriptTests.test_version_restore_previews_then_backs_up_current_draft)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_main_step_suspends_hidden_preview_commands_and_resumes_on_return (test_v2_cleanup_shell.CleanupShellTests.test_main_step_suspends_hidden_preview_commands_and_resumes_on_return)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_unsaved_invalid_font_setting_does_not_break_preview (test_v2_cleanup_shell.CleanupShellTests.test_unsaved_invalid_font_setting_does_not_break_preview)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_autosaved_switch_keeps_draft_in_original_batch (test_batch_step_retention.BatchStepRetention.test_autosaved_switch_keeps_draft_in_original_batch)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_failed_save_does_not_advance_or_lose_text (test_main_workflow_desktop.MainWorkflow.test_failed_save_does_not_advance_or_lose_text)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_save_stays_in_manuscript_then_continue_and_return_keeps_editor (test_main_workflow_desktop.MainWorkflow.test_save_stays_in_manuscript_then_continue_and_return_keeps_editor)": {
+      "result": "ok",
+      "evidence": "regression-final.txt"
+    },
+    "test_close_after_returning_from_audio (test_close_lifecycle.CloseLifecycle.test_close_after_returning_from_audio)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_close_cancels_running_narration_and_releases_lock (test_close_lifecycle.CloseLifecycle.test_close_cancels_running_narration_and_releases_lock)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_close_from_audio (test_close_lifecycle.CloseLifecycle.test_close_from_audio)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    },
+    "test_close_with_service_page (test_close_lifecycle.CloseLifecycle.test_close_with_service_page)": {
+      "result": "ok",
+      "evidence": "followup-final.txt"
+    }
+  }
+}

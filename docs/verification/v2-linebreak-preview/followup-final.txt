@@ -1,0 +1,20 @@
+test_close_after_returning_from_audio (test_close_lifecycle.CloseLifecycle.test_close_after_returning_from_audio) ... ok
+test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page) ... ok
+test_close_cancels_running_narration_and_releases_lock (test_close_lifecycle.CloseLifecycle.test_close_cancels_running_narration_and_releases_lock) ... ok
+test_close_from_audio (test_close_lifecycle.CloseLifecycle.test_close_from_audio) ... ok
+test_close_with_service_page (test_close_lifecycle.CloseLifecycle.test_close_with_service_page) ... ok
+test_backup_failure_prevents_workspace_save_and_preserves_readiness (test_v2_cleanup_shell.CleanupShellTests.test_backup_failure_prevents_workspace_save_and_preserves_readiness) ... ok
+test_cleanup_uses_fixed_shared_ports_and_only_current_actions (test_v2_cleanup_shell.CleanupShellTests.test_cleanup_uses_fixed_shared_ports_and_only_current_actions) ... ok
+test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit (test_v2_cleanup_shell.CleanupShellTests.test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit) ... ok
+test_list_collapse_reclaims_track_and_reopen_restores_aligned_edges (test_v2_cleanup_shell.CleanupShellTests.test_list_collapse_reclaims_track_and_reopen_restores_aligned_edges) ... ok
+test_long_save_error_wraps_without_clipping_actions_or_ancestors (test_v2_cleanup_shell.CleanupShellTests.test_long_save_error_wraps_without_clipping_actions_or_ancestors) ... ok
+test_main_step_suspends_hidden_preview_commands_and_resumes_on_return (test_v2_cleanup_shell.CleanupShellTests.test_main_step_suspends_hidden_preview_commands_and_resumes_on_return) ... ok
+test_return_keeps_unsaved_text_search_selection_cursor_and_scroll (test_v2_cleanup_shell.CleanupShellTests.test_return_keeps_unsaved_text_search_selection_cursor_and_scroll) ... ok
+test_shared_header_and_content_origins_at_supported_sizes_and_18pt (test_v2_cleanup_shell.CleanupShellTests.test_shared_header_and_content_origins_at_supported_sizes_and_18pt) ... ok
+test_stale_flow_batch_and_busy_source_guards_never_write (test_v2_cleanup_shell.CleanupShellTests.test_stale_flow_batch_and_busy_source_guards_never_write) ... ok
+test_unsaved_invalid_font_setting_does_not_break_preview (test_v2_cleanup_shell.CleanupShellTests.test_unsaved_invalid_font_setting_does_not_break_preview) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 52.258s
+
+OK

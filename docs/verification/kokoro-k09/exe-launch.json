@@ -1,0 +1,12 @@
+{
+  "exe": "E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4\\ebook2mp4.exe",
+  "sha256": "47d55fb73b17dbbabc1ad1dc97d9fb29e50dc26542d3a60117ad2ae2a00d843f",
+  "path": "C:\\Windows\\System32;C:\\Windows",
+  "system_python_required": false,
+  "uses_bundled_media_tools": true,
+  "clean_windows": false,
+  "started": 1795064935.7436635,
+  "pid": 30632,
+  "exit_code": 0,
+  "finished": 1795065914.791939
+}

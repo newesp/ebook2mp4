@@ -1,0 +1,6 @@
+test_mock_parent_grid_and_native_red_green (test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 15.390s
+
+OK

@@ -1,0 +1,15 @@
+ebook2mp4\outputs.py:105: error: Need type annotation for "rows"  [var-annotated]
+ebook2mp4\outputs.py:121: error: No overload variant of "update" of "MutableMapping" matches argument types "dict[Any, Any]", "str", "str"  [call-overload]
+ebook2mp4\outputs.py:121: note: Possible overload variants:
+ebook2mp4\outputs.py:121: note:     def update(self, SupportsKeysAndGetItem[str, list[Any] | str | None], /) -> None
+ebook2mp4\outputs.py:121: note:     def update(self, SupportsKeysAndGetItem[str, list[Any] | str | None], /, **kwargs: list[Any] | str | None) -> None
+ebook2mp4\outputs.py:121: note:     def update(self, Iterable[tuple[str, list[Any] | str | None]], /) -> None
+ebook2mp4\outputs.py:121: note:     def update(self, Iterable[tuple[str, list[Any] | str | None]], /, **kwargs: list[Any] | str | None) -> None
+ebook2mp4\outputs.py:121: note:     def update(self, **kwargs: list[Any] | str | None) -> None
+ebook2mp4\outputs_desktop.py:37: error: Cannot infer type of lambda  [misc]
+ebook2mp4\outputs_desktop.py:121: error: Incompatible types in assignment (expression has type "str", variable has type "Label")  [assignment]
+ebook2mp4\outputs_desktop.py:122: error: Invalid index type "Label" for "dict[str, str]"; expected type "str"  [index]
+ebook2mp4\output_versions_desktop.py:107: error: Cannot determine type of "requested_route"  [has-type]
+ebook2mp4\assembly_desktop.py:410: error: Item "None" of "OutputControls | None" has no attribute "poll"  [union-attr]
+ebook2mp4\assembly_desktop.py:423: error: Item "None" of "OutputControls | None" has no attribute "plan"  [union-attr]
+Found 8 errors in 4 files (checked 9 source files)

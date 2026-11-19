@@ -1,0 +1,61 @@
+{
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-join-review",
+      "files": 72,
+      "bytes": 599145.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "files": 4498,
+      "bytes": 57383064.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "files": 2,
+      "bytes": 202708992.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "files": 28,
+      "bytes": 121410362.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "files": 16,
+      "bytes": 34128364.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp_n0l3i6o",
+      "files": 26,
+      "bytes": 110785.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp29lqwdcm",
+      "files": 25,
+      "bytes": 50370.0,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmpaywv9uua",
+      "files": 44,
+      "bytes": 134387.0,
+      "removed": true
+    }
+  ],
+  "remainingTestDirectories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "processes": [],
+  "final_files": 1905,
+  "formal_file_locks": [],
+  "final_exe_sha256": "704ee5c16ee63da4c29c6d09dace827cf1c8caf78469bbfe0d1937bab09b5d56",
+  "removed_bytes": 416525469.0
+}

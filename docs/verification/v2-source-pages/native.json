@@ -1,0 +1,34 @@
+[
+  {
+    "size": "1360x820",
+    "page": "processing",
+    "host": "manuscript.source",
+    "left": 370,
+    "right": 696,
+    "title": "來源處理"
+  },
+  {
+    "size": "1360x820",
+    "page": "issues",
+    "host": "manuscript.source",
+    "left": 319,
+    "right": 747,
+    "title": "來源異常"
+  },
+  {
+    "size": "900x640",
+    "page": "processing",
+    "host": "manuscript.source",
+    "left": 606,
+    "right": 747,
+    "title": "來源處理"
+  },
+  {
+    "size": "900x640",
+    "page": "issues",
+    "host": "manuscript.source",
+    "left": 606,
+    "right": 747,
+    "title": "來源異常"
+  }
+]

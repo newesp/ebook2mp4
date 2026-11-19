@@ -1,0 +1,13 @@
+{
+  "owned_processes_remaining": 0,
+  "source_and_executable_normal_exit": true,
+  "test_projects_removed": true,
+  "temporary_data_removed": true,
+  "archive_hashes_match": true,
+  "distribution_resource_check": {
+    "path": "archives/v1/ebook2mp4",
+    "files": 1905,
+    "failures": []
+  },
+  "cleanup_evidence": "../v2-manuscript/cleanup.json"
+}

@@ -1,0 +1,10 @@
+{
+  "batches": [
+    "806cf02d7a264687986ba33fc5b81b6d",
+    "207c03b7d85148ef9e71510fdd5e367a",
+    "4e716035ef394ab18024da5551b00a08"
+  ],
+  "real_ffmpeg": true,
+  "external_tts": false,
+  "private_text": false
+}

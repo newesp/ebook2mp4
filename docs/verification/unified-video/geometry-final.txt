@@ -1,0 +1,6 @@
+test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 15.484s
+
+OK

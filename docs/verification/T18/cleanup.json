@@ -1,0 +1,66 @@
+{
+  "targets": [
+    {
+      "path": ".scratch/build-tools",
+      "removed_bytes": 47761671,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/type-tools",
+      "removed_bytes": 47453532,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/voice-runtime",
+      "removed_bytes": 202708992,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/ocr-runtime",
+      "removed_bytes": 121410362,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/pyinstaller-cache",
+      "removed_bytes": 0,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/pyinstaller-build",
+      "removed_bytes": 32924454,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/t18-mypy-cache",
+      "removed_bytes": 15859941,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/test-runs/tmpznkd_xnn",
+      "removed_bytes": 0,
+      "remaining": false
+    },
+    {
+      "path": "ebook2mp4/__pycache__",
+      "removed_bytes": 1923738,
+      "remaining": false
+    },
+    {
+      "path": "tests/__pycache__",
+      "removed_bytes": 1316012,
+      "remaining": false
+    },
+    {
+      "path": "packaging/__pycache__",
+      "removed_bytes": 0,
+      "remaining": false
+    }
+  ],
+  "removed_bytes": 471358702,
+  "retained_previous_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "remaining_test_build_media_processes": 0,
+  "exclusive_distribution_files_checked": 1227
+}

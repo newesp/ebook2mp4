@@ -1,0 +1,20 @@
+$ErrorActionPreference='Stop'
+$taskRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+$evidence=Join-Path $taskRoot 'docs/verification/kokoro-k09'
+$receipt=Get-Content -Raw -LiteralPath (Join-Path $taskRoot 'ebook2mp4/kokoro_release.json') | ConvertFrom-Json
+$programs=@((Join-Path $PSScriptRoot ('gui-packages/'+$receipt.id+'/runtime/python.exe')),(Join-Path $taskRoot 'dist/ebook2mp4/ebook2mp4.exe'))
+$rules=@()
+try {
+    if ((Get-NetFirewallProfile).Enabled -contains $false) { throw 'Firewall profiles must be enabled.' }
+    foreach($program in $programs) {
+        $ruleName='ebook2mp4-k09-exe-'+[guid]::NewGuid().ToString('N')
+        New-NetFirewallRule -Name $ruleName -DisplayName $ruleName -Direction Outbound -Program $program -Action Block -Profile Any | Out-Null
+        $rules+=@{program=$program;rule=$ruleName}
+    }
+    $rules | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'exe-firewall.json')
+    & C:/Python314/python.exe -B (Join-Path $PSScriptRoot 'launch-exe.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Formal EXE launch helper failed.' }
+} finally {
+    foreach($rule in $rules) { Remove-NetFirewallRule -Name $rule.rule }
+    @($rules | ForEach-Object { @{rule=$_.rule;removed=(-not [bool](Get-NetFirewallRule -Name $_.rule -ErrorAction SilentlyContinue))} }) | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'exe-firewall-cleanup.json')
+}

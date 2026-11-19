@@ -1,0 +1,52 @@
+test_backup_failure_prevents_workspace_save_and_preserves_readiness (test_v2_cleanup_shell.CleanupShellTests.test_backup_failure_prevents_workspace_save_and_preserves_readiness) ... ok
+test_cleanup_uses_fixed_shared_ports_and_only_current_actions (test_v2_cleanup_shell.CleanupShellTests.test_cleanup_uses_fixed_shared_ports_and_only_current_actions) ... ok
+test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit (test_v2_cleanup_shell.CleanupShellTests.test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit) ... ok
+test_list_collapse_reclaims_track_and_reopen_restores_aligned_edges (test_v2_cleanup_shell.CleanupShellTests.test_list_collapse_reclaims_track_and_reopen_restores_aligned_edges) ... ok
+test_long_save_error_wraps_without_clipping_actions_or_ancestors (test_v2_cleanup_shell.CleanupShellTests.test_long_save_error_wraps_without_clipping_actions_or_ancestors) ... ok
+test_main_step_suspends_hidden_preview_commands_and_resumes_on_return (test_v2_cleanup_shell.CleanupShellTests.test_main_step_suspends_hidden_preview_commands_and_resumes_on_return) ... ok
+test_return_keeps_unsaved_text_search_selection_cursor_and_scroll (test_v2_cleanup_shell.CleanupShellTests.test_return_keeps_unsaved_text_search_selection_cursor_and_scroll) ... ok
+test_shared_header_and_content_origins_at_supported_sizes_and_18pt (test_v2_cleanup_shell.CleanupShellTests.test_shared_header_and_content_origins_at_supported_sizes_and_18pt) ... ok
+test_stale_flow_batch_and_busy_source_guards_never_write (test_v2_cleanup_shell.CleanupShellTests.test_stale_flow_batch_and_busy_source_guards_never_write) ... ok
+test_unsaved_invalid_font_setting_does_not_break_preview (test_v2_cleanup_shell.CleanupShellTests.test_unsaved_invalid_font_setting_does_not_break_preview) ... ok
+test_action_replacement_removes_old_callback_and_busy_disables_current (test_v2_manuscript_shell.ManuscriptShellTests.test_action_replacement_removes_old_callback_and_busy_disables_current) ... ok
+test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) ... ok
+test_return_stays_left_and_busy_cancel_remains_available (test_v2_manuscript_shell.ManuscriptShellTests.test_return_stays_left_and_busy_cancel_remains_available) ... ok
+test_shell_survives_tools_production_and_collapsing_without_losing_editor (test_v2_manuscript_shell.ManuscriptShellTests.test_shell_survives_tools_production_and_collapsing_without_losing_editor) ... ok
+test_wide_collapsed_editor_toolbar_stays_inside_its_pane (test_v2_manuscript_shell.ManuscriptShellTests.test_wide_collapsed_editor_toolbar_stays_inside_its_pane) ... ok
+test_cancel_then_confirm_delete_preserves_projects_and_shared_credentials (test_service_management.ServiceManagement.test_cancel_then_confirm_delete_preserves_projects_and_shared_credentials) ... ok
+test_check_uses_draft_without_persisting_and_cancel_releases_job (test_service_management.ServiceManagement.test_check_uses_draft_without_persisting_and_cancel_releases_job) ... ok
+test_deleted_profile_cannot_be_recreated_by_stale_editor (test_service_management.ServiceManagement.test_deleted_profile_cannot_be_recreated_by_stale_editor) ... ok
+test_menu_builtin_states_and_busy_guard (test_service_management.ServiceManagement.test_menu_builtin_states_and_busy_guard) ... ok
+test_one_menu_opens_selected_profile_and_preserves_settings_on_save (test_service_management.ServiceManagement.test_one_menu_opens_selected_profile_and_preserves_settings_on_save) ... ok
+test_replacing_key_and_reloading_preserves_profile_and_reuse_reference (test_service_management.ServiceManagement.test_replacing_key_and_reloading_preserves_profile_and_reuse_reference) ... ok
+test_restored_window_keeps_footer_and_confirmation_inside_page (test_service_management.ServiceManagement.test_restored_window_keeps_footer_and_confirmation_inside_page) ... FAIL
+test_unsaved_edits_cancel_and_write_failures_keep_editor_open (test_service_management.ServiceManagement.test_unsaved_edits_cancel_and_write_failures_keep_editor_open) ... ok
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_close_autosaves_manuscript_without_confirmation_page (test_production_pages.ProductionPages.test_close_autosaves_manuscript_without_confirmation_page) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+test_merge_without_total_audio_keeps_task_and_tab_content (test_unified_video_workspace.UnifiedVideoWorkspace.test_merge_without_total_audio_keeps_task_and_tab_content) ... ok
+test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership) ... ok
+test_routes_keep_drafts_native_tabs_and_real_products (test_unified_video_workspace.UnifiedVideoWorkspace.test_routes_keep_drafts_native_tabs_and_real_products) ... ok
+test_action_to_content_gap (test_voice_spacing.VoiceSpacing.test_action_to_content_gap) ... ok
+test_adjacent_action_gaps (test_voice_spacing.VoiceSpacing.test_adjacent_action_gaps) ... ok
+test_same_group_button_dimensions (test_voice_spacing.VoiceSpacing.test_same_group_button_dimensions) ... ok
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_batch_video_desktop.BatchVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_batch_video_desktop.BatchVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+
+======================================================================
+FAIL: test_restored_window_keeps_footer_and_confirmation_inside_page (test_service_management.ServiceManagement.test_restored_window_keeps_footer_and_confirmation_inside_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_service_management.py", line 155, in test_restored_window_keeps_footer_and_confirmation_inside_page
+    self.assertLessEqual(control.winfo_rooty()+control.winfo_height(),bounds.winfo_rooty()+bounds.winfo_height())
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 708 not less than or equal to 561
+
+----------------------------------------------------------------------
+Ran 38 tests in 195.348s
+
+FAILED (failures=1)

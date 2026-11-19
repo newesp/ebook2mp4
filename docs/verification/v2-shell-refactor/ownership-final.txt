@@ -1,0 +1,70 @@
+test_generic_pages_use_shell_actions_without_losing_preview_draft (test_unified_shell_integration.UnifiedShellIntegration.test_generic_pages_use_shell_actions_without_losing_preview_draft) ... ERROR
+test_hidden_actions_dynamic_commands_and_old_project_are_guarded (test_unified_shell_integration.UnifiedShellIntegration.test_hidden_actions_dynamic_commands_and_old_project_are_guarded) ... FAIL
+test_real_routes_keep_fixed_parents_and_exclusive_action_port (test_unified_shell_integration.UnifiedShellIntegration.test_real_routes_keep_fixed_parents_and_exclusive_action_port) ... ERROR
+test_scroll_page_removes_fit_track_and_resets_after_long_content (test_unified_shell_integration.UnifiedShellIntegration.test_scroll_page_removes_fit_track_and_resets_after_long_content) ... ok
+test_cancel_then_confirm_delete_preserves_projects_and_shared_credentials (test_service_management.ServiceManagement.test_cancel_then_confirm_delete_preserves_projects_and_shared_credentials) ... ok
+test_check_uses_draft_without_persisting_and_cancel_releases_job (test_service_management.ServiceManagement.test_check_uses_draft_without_persisting_and_cancel_releases_job) ... ok
+test_deleted_profile_cannot_be_recreated_by_stale_editor (test_service_management.ServiceManagement.test_deleted_profile_cannot_be_recreated_by_stale_editor) ... ok
+test_menu_builtin_states_and_busy_guard (test_service_management.ServiceManagement.test_menu_builtin_states_and_busy_guard) ... ok
+test_one_menu_opens_selected_profile_and_preserves_settings_on_save (test_service_management.ServiceManagement.test_one_menu_opens_selected_profile_and_preserves_settings_on_save) ... ok
+test_replacing_key_and_reloading_preserves_profile_and_reuse_reference (test_service_management.ServiceManagement.test_replacing_key_and_reloading_preserves_profile_and_reuse_reference) ... FAIL
+test_restored_window_keeps_footer_and_confirmation_inside_page (test_service_management.ServiceManagement.test_restored_window_keeps_footer_and_confirmation_inside_page) ... ok
+test_unsaved_edits_cancel_and_write_failures_keep_editor_open (test_service_management.ServiceManagement.test_unsaved_edits_cancel_and_write_failures_keep_editor_open) ... ok
+test_each_pdf_warning_requires_explicit_confirmation (test_audio_join_corrections.JoinCorrections.test_each_pdf_warning_requires_explicit_confirmation) ... FAIL
+test_first_load_long_real_sources_after_footer_layout (test_audio_join_corrections.JoinCorrections.test_first_load_long_real_sources_after_footer_layout) ... ok
+
+======================================================================
+ERROR: test_generic_pages_use_shell_actions_without_losing_preview_draft (test_unified_shell_integration.UnifiedShellIntegration.test_generic_pages_use_shell_actions_without_losing_preview_draft)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 32, in <lambda>
+    self.addCleanup(lambda: app.close() if root.winfo_exists() else None)
+                                           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1248, in winfo_exists
+    self.tk.call('winfo', 'exists', self._w))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: can't invoke "winfo" command: application has been destroyed
+
+======================================================================
+ERROR: test_real_routes_keep_fixed_parents_and_exclusive_action_port (test_unified_shell_integration.UnifiedShellIntegration.test_real_routes_keep_fixed_parents_and_exclusive_action_port)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 32, in <lambda>
+    self.addCleanup(lambda: app.close() if root.winfo_exists() else None)
+                                           ~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1248, in winfo_exists
+    self.tk.call('winfo', 'exists', self._w))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: can't invoke "winfo" command: application has been destroyed
+
+======================================================================
+FAIL: test_hidden_actions_dynamic_commands_and_old_project_are_guarded (test_unified_shell_integration.UnifiedShellIntegration.test_hidden_actions_dynamic_commands_and_old_project_are_guarded)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_shell_integration.py", line 25, in shutdown
+    self.fail('Owned test window did not close normally')
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Owned test window did not close normally
+
+======================================================================
+FAIL: test_replacing_key_and_reloading_preserves_profile_and_reuse_reference (test_service_management.ServiceManagement.test_replacing_key_and_reloading_preserves_profile_and_reuse_reference)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_service_management.py", line 131, in test_replacing_key_and_reloading_preserves_profile_and_reuse_reference
+    self.assertTrue(profiles()[identity]['reuse'])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_each_pdf_warning_requires_explicit_confirmation (test_audio_join_corrections.JoinCorrections.test_each_pdf_warning_requires_explicit_confirmation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 106, in test_each_pdf_warning_requires_explicit_confirmation
+    self.assertFalse(page.start_button.instate(['disabled']))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 14 tests in 119.750s
+
+FAILED (failures=3, errors=2)

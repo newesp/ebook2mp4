@@ -1,0 +1,1 @@
+startup_state zoomed geometry 1536x793+52+5

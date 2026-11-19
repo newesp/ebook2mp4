@@ -1,0 +1,6 @@
+test_wait_status_and_cancel_at_minimum_window (test_tts_retry_desktop.RetryDesktop.test_wait_status_and_cancel_at_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 7.215s
+
+OK

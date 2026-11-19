@@ -1,0 +1,144 @@
+test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) ... 
+  test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) (size='900x640', font_points=13) ... FAIL
+
+======================================================================
+FAIL: test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) (size='900x640', font_points=13)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_spacing.py", line 94, in test_spacing_at_acceptance_sizes
+    self.assertTrue(viewable, '試聽文字框應可見')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : 試聽文字框應可見
+
+----------------------------------------------------------------------
+Ran 1 test in 9.324s
+
+FAILED (failures=1)
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.782s
+
+OK
+test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace) ... ERROR
+
+======================================================================
+ERROR: test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_audio_join_workspace
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_workspace.py", line 12, in <module>
+    from test_assembly_joins_desktop import AssemblyJoinsDesktop
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 12, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.014s
+
+FAILED (errors=1)
+test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace) ... ERROR
+
+======================================================================
+ERROR: test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_audio_join_workspace
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_workspace.py", line 12, in <module>
+    from test_assembly_joins_desktop import AssemblyJoinsDesktop
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 12, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.019s
+
+FAILED (errors=1)
+test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace) ... ERROR
+
+======================================================================
+ERROR: test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_audio_join_workspace
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_workspace.py", line 12, in <module>
+    from test_assembly_joins_desktop import AssemblyJoinsDesktop
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 12, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.015s
+
+FAILED (errors=1)
+test_audio_join_corrections (unittest.loader._FailedTest.test_audio_join_corrections) ... ERROR
+
+======================================================================
+ERROR: test_audio_join_corrections (unittest.loader._FailedTest.test_audio_join_corrections)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_audio_join_corrections
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_corrections.py", line 9, in <module>
+    import test_audio_join_workspace as fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_workspace.py", line 12, in <module>
+    from test_assembly_joins_desktop import AssemblyJoinsDesktop
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 12, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.018s
+
+FAILED (errors=1)
+test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace) ... ERROR
+
+======================================================================
+ERROR: test_audio_join_workspace (unittest.loader._FailedTest.test_audio_join_workspace)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_audio_join_workspace
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_workspace.py", line 12, in <module>
+    from test_assembly_joins_desktop import AssemblyJoinsDesktop
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 12, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.013s
+
+FAILED (errors=1)

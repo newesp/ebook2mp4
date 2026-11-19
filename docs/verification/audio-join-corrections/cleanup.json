@@ -1,0 +1,24 @@
+{
+  "removed": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-join-corrections",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp7r5pf52v"
+  ],
+  "removed_bytes": 416588466.0,
+  "remaining_task_processes": [],
+  "preserved_old_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "preserved_existing_source_cache": true,
+  "formal_distribution": "dist/ebook2mp4",
+  "evidence": "docs/verification/audio-join-corrections",
+  "final_resources": {
+    "checked_files": 1905,
+    "blocked": [],
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  }
+}

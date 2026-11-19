@@ -1,0 +1,10 @@
+[
+  {
+    "rule": "ebook2mp4-k09-exe-9c68b37c4e7d418988b5e6f874bd6c22",
+    "program": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\k09\\gui-packages\\kokoro-zh-cpu-78fb4b82d084294e\\runtime\\python.exe"
+  },
+  {
+    "rule": "ebook2mp4-k09-exe-bcd9c9bba370459e95e3d4d0fa465b9e",
+    "program": "E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4\\ebook2mp4.exe"
+  }
+]

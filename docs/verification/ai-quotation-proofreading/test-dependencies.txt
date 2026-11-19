@@ -1,0 +1,6 @@
+Collecting reportlab==5.1.0
+  Downloading reportlab-5.1.0-py3-none-any.whl.metadata (1.6 kB)
+Downloading reportlab-5.1.0-py3-none-any.whl (2.0 MB)
+   ---------------------------------------- 2.0/2.0 MB 8.4 MB/s  0:00:00
+Installing collected packages: reportlab
+Successfully installed reportlab-5.1.0

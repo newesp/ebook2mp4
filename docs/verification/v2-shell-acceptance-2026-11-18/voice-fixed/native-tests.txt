@@ -1,0 +1,12 @@
+test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.544s
+
+OK
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.510s
+
+OK

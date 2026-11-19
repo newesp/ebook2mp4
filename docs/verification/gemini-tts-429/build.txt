@@ -1,0 +1,120 @@
+754 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+755 INFO: Python: 3.14.3
+806 INFO: Platform: Windows-11-10.0.26200-SP0
+806 INFO: Python environment: C:\Python314
+8707 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+10047 INFO: Appending 'binaries' from .spec
+10048 INFO: Appending 'datas' from .spec
+10055 INFO: checking Analysis
+10055 INFO: Building Analysis because Analysis-00.toc is non existent
+10055 INFO: Looking for Python shared library...
+10055 INFO: Using Python shared library: C:\Python314\python314.dll
+10055 INFO: Running Analysis Analysis-00.toc
+10055 INFO: Target bytecode optimization level: 0
+10056 INFO: Initializing module dependency graph...
+10057 INFO: Initializing module graph hook caches...
+10107 INFO: Analyzing modules for base_library.zip ...
+12492 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+13266 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+15790 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+15809 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+15989 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+18107 INFO: Caching module dependency graph...
+18156 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+18287 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_find_module_path'
+18340 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+18955 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+19300 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+19361 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+19372 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+19407 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+19461 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+20110 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+20339 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+21200 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+21240 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+22113 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+23142 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+24451 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+25371 INFO: Processing standard module hook 'hook-opencc.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+26224 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+31843 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+32624 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+32664 INFO: SetuptoolsInfo: initializing cached setuptools info...
+36813 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+38554 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+45991 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+49930 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+49933 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+50072 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+50165 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+50367 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+50370 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+50457 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+50458 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+51001 INFO: Processing standard module hook 'hook-_osx_support.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+51153 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+52812 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+52817 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+55038 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+57977 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+57979 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+61463 INFO: Processing standard module hook 'hook-sqlite3.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+62215 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+64400 INFO: Analyzing hidden import 'pypdfium2.__main__'
+64528 INFO: Analyzing hidden import 'opencc.__main__'
+64550 INFO: Analyzing hidden import 'edge_tts.__main__'
+64630 INFO: Analyzing hidden import 'certifi.__main__'
+64634 INFO: Analyzing hidden import 'certifi.tests'
+64635 INFO: Analyzing hidden import 'certifi.tests.test_certify'
+65016 INFO: Processing module hooks (post-graph stage)...
+66163 WARNING: Hidden import "tzdata" not found!
+67980 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+75796 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks'
+75831 INFO: Performing binary vs. data reclassification (1093 entries)
+83693 INFO: Looking for ctypes DLLs
+83962 INFO: Analyzing run-time hooks ...
+83974 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\rthooks'
+84047 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\rthooks'
+84077 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\rthooks'
+84101 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\gemini-build-tools\\PyInstaller\\hooks\\rthooks'
+84218 INFO: Creating base_library.zip...
+84259 INFO: Looking for dynamic libraries
+86102 INFO: Extra DLL search directories (AddDllDirectory): []
+86102 INFO: Extra DLL search directories (PATH): []
+89454 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\gemini-build\ebook2mp4\warn-ebook2mp4.txt
+89744 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\gemini-build\ebook2mp4\xref-ebook2mp4.html
+89935 INFO: checking PYZ
+89936 INFO: Building PYZ because PYZ-00.toc is non existent
+89936 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\gemini-build\ebook2mp4\PYZ-00.pyz
+91325 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\gemini-build\ebook2mp4\PYZ-00.pyz completed successfully.
+91371 INFO: checking PKG
+91371 INFO: Building PKG because PKG-00.toc is non existent
+91372 INFO: Building PKG (CArchive) ebook2mp4.pkg
+91468 INFO: Building PKG (CArchive) ebook2mp4.pkg completed successfully.
+91470 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\gemini-build-tools\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+91470 INFO: checking EXE
+91470 INFO: Building EXE because EXE-00.toc is non existent
+91470 INFO: Building EXE from EXE-00.toc
+91470 INFO: Copying bootloader EXE to E:\Leo\Projects\ebook2mp4\.scratch\gemini-build\ebook2mp4\ebook2mp4.exe
+91683 INFO: Copying icon to EXE
+91769 INFO: Copying 0 resources to EXE
+91769 INFO: Embedding manifest in EXE
+91870 INFO: Appending PKG archive to EXE
+92001 INFO: Fixing EXE headers
+92472 INFO: Building EXE from EXE-00.toc completed successfully.
+92512 INFO: checking COLLECT
+92512 INFO: Building COLLECT because COLLECT-00.toc is non existent
+92513 INFO: Removing dir E:\Leo\Projects\ebook2mp4\dist\ebook2mp4
+93147 INFO: Building COLLECT COLLECT-00.toc
+104968 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+105014 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist

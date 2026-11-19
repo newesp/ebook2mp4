@@ -1,0 +1,493 @@
+{
+  "coverage_complete": true,
+  "regions": [
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-False-short",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-False-fit",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 336,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide-fit",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide-fit",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-False-overflow",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 392,
+      "scrollbar_visible": true,
+      "max_offset": 56,
+      "thumb_fraction": 0.8571428571428571
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide-overflow",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide-overflow",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-False-long",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 1064,
+      "thumb_fraction": 0.24
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide-long",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-online-wide-long",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-True-short",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-True-fit",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 336,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide-fit",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide-fit",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-True-overflow",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 392,
+      "scrollbar_visible": true,
+      "max_offset": 56,
+      "thumb_fraction": 0.8571428571428571
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide-overflow",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide-overflow",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-settings-True-long",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 336,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 1064,
+      "thumb_fraction": 0.24
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide-long",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 532,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1360-local-wide-long",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 595,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-False-short",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-False-fit",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 516,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide-fit",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide-fit",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-False-overflow",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 560,
+      "scrollbar_visible": true,
+      "max_offset": 44,
+      "thumb_fraction": 0.9214285714285714
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide-overflow",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide-overflow",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-False-long",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 884,
+      "thumb_fraction": 0.36857142857142855
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide-long",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-online-wide-long",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-True-short",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 56,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-True-fit",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 516,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide-fit",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide-fit",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-True-overflow",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 560,
+      "scrollbar_visible": true,
+      "max_offset": 44,
+      "thumb_fraction": 0.9214285714285714
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide-overflow",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide-overflow",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-settings-True-long",
+      "owner": "試聽文字",
+      "measurement_source": "draw_v2_voice_settings.py 行數×28，文字框高度減內距",
+      "viewport_height": 516,
+      "content_height": 1400,
+      "scrollbar_visible": true,
+      "max_offset": 884,
+      "thumb_fraction": 0.36857142857142855
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide-long",
+      "owner": "聲音設定",
+      "measurement_source": "同份繪圖資料：最後控制項底部top+289",
+      "viewport_height": 712,
+      "content_height": 289,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "語音設定與試聽",
+      "state": "1920-local-wide-long",
+      "owner": "文件列表",
+      "measurement_source": "同份繪圖資料：四列90像素",
+      "viewport_height": 775,
+      "content_height": 360,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "different_cases": 54,
+  "passed": 54,
+  "cases": {
+    "test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration": {
+      "status": "ok",
+      "evidence": "final-tests.txt"
+    },
+    "test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens": {
+      "status": "ok",
+      "evidence": "final-tests.txt"
+    },
+    "test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot": {
+      "status": "ok",
+      "evidence": "final-tests.txt"
+    },
+    "test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout": {
+      "status": "ok",
+      "evidence": "last-recheck.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_cancel_conflict_and_disk_shortage_preserve_previous_product": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_cleanup_failure_cannot_discard_an_already_published_total": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_fractional_millisecond_sources_do_not_overlap_at_zero_pause": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_invalid_caption_timeline_is_not_published_even_with_matching_checksum": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_invalid_selection_and_missing_sources_are_reported": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_media_failure_has_three_attempts_and_keeps_old_publication": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_new_selected_audio_version_requires_explicit_saved_selection": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_one_two_three_batches_use_decoded_timeline_and_no_tts": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_only_selected_sources_and_shared_settings_invalidate_total": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_output_changed_after_verification_does_not_replace_previous_total": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_selection_order_and_versions_survive_reopen": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio.TotalAudioJourney.test_zero_pause_order_and_publication_conflict_preserve_old_total": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video.TotalVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video.TotalVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video.TotalVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video.TotalVideoJourney.test_picture_is_copied_and_resolution_survives_reopen": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video.TotalVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_background_modes_cancel_and_wrong_target_publication": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_batch_image_offline_isolation_and_stale_source": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_picture_is_copied_and_resolution_survives_reopen": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video.BatchVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_media_failure_stops_after_three_attempts_and_preserves_output": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_moving_batch_holds_actual_final_frame_in_preview_and_total": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge.MergeVideoJourney.test_preview_matches_join_and_cleans_on_cancel": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_incremental_narration.IncrementalNarration.test_defaults_apply_only_to_explicit_batches_and_survive_reopen": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_incremental_narration.IncrementalNarration.test_edit_insert_and_pause_changes_reuse_actual_requests": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_incremental_narration.IncrementalNarration.test_new_revision_cancel_and_cache_loss_preserve_old_product": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video_desktop.BatchVideoDesktop.test_failed_publication_waits_for_explicit_save_retry": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_batch_video_desktop.BatchVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation": {
+      "status": "ok",
+      "evidence": "regression-tests.txt"
+    },
+    "test_output_versions.OutputVersionsJourney.test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local": {
+      "status": "ok",
+      "evidence": "last-recheck.txt"
+    }
+  }
+}

@@ -1,0 +1,79 @@
+# UI 驗收清單
+
+來源與驗收程式 SHA-256 `d2326e10e603526bb73c333ce54a94db8c51b5fbc41cf66d8f167d86a3e550c3`
+
+整體 UI 驗收未完成。表中的測試結果涵蓋已量測的案例。其餘情境、畫面判讀及正式 EXE 操作待驗。
+
+## 已執行的原生測試
+
+- 功能回歸　通過 1　不通過 1　未測 0
+- 原生布局與捲動　通過 0　不通過 5　未測 0
+- 正式 EXE　未測
+
+- 案例 1　**不通過**　試聽區　開啟語音設定 → 切換視窗尺寸與字級 → 量測試聽列及底部操作列
+  [測試紀錄](native-tests.txt) · `test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes` · [voice/native-layout-regression.json](voice/native-layout-regression.json)
+- 案例 2　**通過**　試聽區　開啟語音設定 → 切換服務 → 輸入自訂值 → 儲存 → 重開設定
+  [測試紀錄](native-tests.txt) · `test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider`
+- 案例 3　**不通過**　檢查接點　開啟音訊組裝 → 選取批次 → 檢查接點 → 量測操作列與文字區
+  [測試紀錄](native-tests.txt) · `test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green`
+  - 缺少本次證據 native-layout-regression.json
+  - 缺少本次證據 native-maximized.png
+- 案例 4　**不通過**　檢查接點　開啟檢查接點 → 輸入不同長度內容 → 量測捲動區的顯隱、比例與行程
+  [測試紀錄](native-tests.txt) · `test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract`
+  - 缺少本次證據 scroll-contract.json
+  - 缺少本次證據 native-scroll.json
+  - 缺少來源布局量測
+  - 漏測：檢查接點 / 900x640 / 前批 / fit
+  - 漏測：檢查接點 / 900x640 / 前批 / long
+  - 漏測：檢查接點 / 900x640 / 前批 / overflow
+  - 漏測：檢查接點 / 900x640 / 前批 / short
+  - 漏測：檢查接點 / 900x640 / 後批 / fit
+  - 漏測：檢查接點 / 900x640 / 後批 / long
+  - 漏測：檢查接點 / 900x640 / 後批 / overflow
+  - 漏測：檢查接點 / 900x640 / 後批 / short
+  - 漏測：檢查接點 / 900x640 / 文件列表 / fit
+  - 漏測：檢查接點 / 900x640 / 文件列表 / long
+  - 漏測：檢查接點 / 900x640 / 文件列表 / overflow
+  - 漏測：檢查接點 / 900x640 / 文件列表 / short
+  - 漏測：檢查接點 / 900x640 / 警告詳情 / fit
+  - 漏測：檢查接點 / 900x640 / 警告詳情 / long
+  - 漏測：檢查接點 / 900x640 / 警告詳情 / overflow
+  - 漏測：檢查接點 / 900x640 / 警告詳情 / short
+- 案例 5　**不通過**　檢查接點　開啟檢查接點 → 捲至長文末端 → 收合及返回 → 切換空狀態
+  [測試紀錄](native-tests.txt) · `test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context`
+- 案例 6　**不通過**　檢查接點　從 PDF 文稿進入檢查接點 → 收合及展開文件列表 → 量測標頭與內容起點
+  [測試紀錄](native-tests.txt) · `test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors`
+  - 缺少本次證據 shell-anchors.json
+- 案例 7　**不通過**　檢查接點　開啟檢查接點 → 試聽 → 修改設定 → 模擬儲存失敗 → 重試儲存
+  [測試紀錄](native-tests.txt) · `test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure`
+  - 缺少本次證據 native-save-failed.png
+
+## 1. UI scroll
+
+- **未測**（部分量測見案例 4、5）　短內容／空狀態 → 確認完整容納時沒有捲軸、空軌道或殘留可捲範圍；空狀態提示可見。
+- **未測**（部分量測見案例 4）　剛好容納、溢出及長內容 → 確認捲軸只屬於實際溢出的區域，滑塊比例及行程符合內容範圍。
+- **未測**　捲到首末 → 用滾輪、捲軸及鍵盤確認完整內容與最後一行可達；標頭、導覽及主要操作保持固定。
+- **未測**（部分量測見案例 5）　長內容頁 → 空狀態頁 → 返回 → 確認未殘留前頁的捲動範圍或軌道。
+- **未測**（部分量測見案例 5）　改變視窗、字級及展開／收合區域 → 確認重新計算溢出，沒有裁切、非必要水平捲動或整頁包內部捲動。
+
+## 2. UI／元件風格一致性
+
+- **未測**　比較同組 Button、Entry、Combobox → 確認字型、字級、邊框、內距及互動狀態一致，主要／次要操作依既有共用樣式區分。
+- **未測**　比較同一表單欄位位置的按鈕與輸入元件 → 確認外框寬、高相同，差異不超過 2 個 Tk 座標像素。例如「下載／安裝 OCR 模型」按鈕須與同欄其他 input 同寬，並與旁邊「旋轉角度」輸入元件同高。
+- **未測**（部分量測見案例 1）　比較同組同角色文字按鈕 → 記錄每個原生外框寬、高，確認共用尺寸且文字完整；不得僅以相同 style 名稱判定通過。試聽區「使用固定試聽範例／帶入選取文字」為必要案例。
+- **未測**　檢查預設、焦點、停用及忙碌狀態 → 確認不因狀態切換改變尺寸，文字與圖示完整可辨，下拉指示只出現一次。
+
+## 3. UI／元件整齊對齊
+
+- **未測**（部分量測見案例 3）　比較左右同列控制項 → 確認上緣、下緣及高度一致，差異不超過 2 個 Tk 座標像素。欄位標籤與輸入區分開對齊，避免按鈕對到標籤列。
+- **未測**（部分量測見案例 3）　比較上下同欄控制項 → 確認左右邊界一致，欄距、列距遵循共用規範。
+- **未測**（部分量測見案例 1、3）　比較每組相鄰動作 → 記錄「右元件左緣－左元件右緣」，確認符合元件規範的水平淨距；底部「儲存設定／前往音訊製做」為必要案例。
+- **未測**（部分量測見案例 1、3）　比較操作列與下方內容區 → 記錄「內容區上緣－操作列最下方控制項下緣」，確認符合元件規範的垂直淨距；試聽區兩個文字按鈕與Text為必要案例。
+- **未測**（部分量測見案例 6）　比較相鄰區塊 → 分別量測標頭帶與內容起點，確認齊頭；固定操作列整齊，沒有重疊、裁切或祖先容器遮擋。文件列表／檢查接點的量測元件與正常布局路徑依[元件規範](../../../ui-components.md#文件列表與檢查接點的兩條基準線)。
+- **未測**（部分量測見案例 1、3、6）　在最大化、1360×820、1280×720、900×640及適用字級／列表收合狀態重查 → 確認尺寸、對齊和操作可達性仍符合上述要求。
+
+## 交付判定
+
+- **未測**　功能回歸、原生布局與正式 EXE 驗收分別記錄結果。靜態 mock、測試數量、成功封裝或啟動，不代替原生及正式 EXE 的畫面與操作檢查。
+- **未測**　每個適用項目都有本次版本的通過證據；未解決落差列為未完成。已核准的尺寸角色例外須記錄核准依據、原因及影響。
+- **未測**　本輪若修正尺寸或間距缺陷 → 保留缺陷版失敗、修正版通過的針對性原生量測／回歸結果。驗收表逐對列出元件、預期值、實測值與證據位置；「風格一致／原尺寸已看過」不能代替數值。

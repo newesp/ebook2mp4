@@ -1,0 +1,14 @@
+{
+  "duration_ms": 2900,
+  "audio_id_unchanged": true,
+  "srt_identical": true,
+  "narration_runs": [
+    1,
+    1
+  ],
+  "production_lock": false,
+  "preview_folders": 0,
+  "background_mode": "hold",
+  "no_system_tools_in_launch_path": true,
+  "normal_exit": true
+}

@@ -1,0 +1,43 @@
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes) ... ok
+test_publication_failure_retries_same_completed_media (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_publication_failure_retries_same_completed_media) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_source_reading_does_not_block_main_window_cancellation) ... ok
+test_video_preferences_cannot_redirect_or_start_video (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_video_preferences_cannot_redirect_or_start_video) ... ok
+test_assembly_joins_desktop (unittest.loader._FailedTest.test_assembly_joins_desktop) ... ERROR
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ERROR
+
+======================================================================
+ERROR: test_assembly_joins_desktop (unittest.loader._FailedTest.test_assembly_joins_desktop)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_assembly_joins_desktop
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 11, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+======================================================================
+ERROR: test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video_desktop.py", line 62, in test_two_steps_encode_and_return_keep_picture_and_resolution
+    assembly.output_controls.values['mp4'].set(True)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'values'
+
+----------------------------------------------------------------------
+Ran 13 tests in 132.100s
+
+FAILED (errors=2)

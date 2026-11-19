@@ -1,0 +1,26 @@
+test_video_text_scrollbars_follow_overflow (test_unified_video_workspace.UnifiedVideoWorkspace.test_video_text_scrollbars_follow_overflow) ... 
+  test_video_text_scrollbars_follow_overflow (test_unified_video_workspace.UnifiedVideoWorkspace.test_video_text_scrollbars_follow_overflow) (tab=1) ... FAIL
+  test_video_text_scrollbars_follow_overflow (test_unified_video_workspace.UnifiedVideoWorkspace.test_video_text_scrollbars_follow_overflow) (tab=2) ... FAIL
+
+======================================================================
+FAIL: test_video_text_scrollbars_follow_overflow (test_unified_video_workspace.UnifiedVideoWorkspace.test_video_text_scrollbars_follow_overflow) (tab=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_video_workspace.py", line 43, in test_video_text_scrollbars_follow_overflow
+    self.assertFalse(scrollbar.winfo_viewable(), 'Fitting text must not reserve a scrollbar')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 is not false : Fitting text must not reserve a scrollbar
+
+======================================================================
+FAIL: test_video_text_scrollbars_follow_overflow (test_unified_video_workspace.UnifiedVideoWorkspace.test_video_text_scrollbars_follow_overflow) (tab=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_video_workspace.py", line 43, in test_video_text_scrollbars_follow_overflow
+    self.assertFalse(scrollbar.winfo_viewable(), 'Fitting text must not reserve a scrollbar')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 is not false : Fitting text must not reserve a scrollbar
+
+----------------------------------------------------------------------
+Ran 1 test in 28.166s
+
+FAILED (failures=2)

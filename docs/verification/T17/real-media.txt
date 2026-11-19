@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\total_video_background_real_check.py", line 9, in <module>
+    import test_total_video_background as fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video_background.py", line 12, in <module>
+    import test_total_video as fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_video.py", line 12, in <module>
+    import test_total_audio as fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 12, in <module>
+    import test_voice as fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 11, in <module>
+    from ebook2mp4.workflow import ProjectWorkflow, ProjectError
+ModuleNotFoundError: No module named 'ebook2mp4'

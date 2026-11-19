@@ -1,0 +1,15 @@
+{
+  "executable": "E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4\\ebook2mp4.exe",
+  "rebuilt_exe": true,
+  "removed_paths": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\service-release-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\service-release-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\service-release-mypy-cache",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime"
+  ],
+  "remaining_temporary_paths": [],
+  "voice_zip_backup_remaining": false,
+  "additional_main_program_output_directories": [],
+  "remaining_task_processes": 0
+}

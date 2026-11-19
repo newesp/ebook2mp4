@@ -1,0 +1,151 @@
+{
+  "source_sha256": "da40bf7d790e9ef18dad48ac073e7865e16f5481888050c5ab8f5087cb896705",
+  "results": [
+    {
+      "size": "1360x820",
+      "widgets": {
+        "left_text": {
+          "x": 346,
+          "y": 188,
+          "width": 549,
+          "height": 440
+        },
+        "right_text": {
+          "x": 907,
+          "y": 188,
+          "width": 549,
+          "height": 440
+        },
+        "left_edit": {
+          "x": 346,
+          "y": 632,
+          "width": 549,
+          "height": 37
+        },
+        "right_edit": {
+          "x": 907,
+          "y": 632,
+          "width": 549,
+          "height": 37
+        },
+        "pause_control": {
+          "x": 434,
+          "y": 673,
+          "width": 69,
+          "height": 23
+        },
+        "clip_control": {
+          "x": 1388,
+          "y": 673,
+          "width": 45,
+          "height": 23
+        },
+        "play_button": {
+          "x": 346,
+          "y": 754,
+          "width": 114,
+          "height": 37
+        },
+        "stop_button": {
+          "x": 466,
+          "y": 754,
+          "width": 114,
+          "height": 37
+        },
+        "previous": {
+          "x": 1224,
+          "y": 126,
+          "width": 114,
+          "height": 37
+        },
+        "next": {
+          "x": 1342,
+          "y": 126,
+          "width": 114,
+          "height": 37
+        },
+        "save_button": {
+          "x": 1323,
+          "y": 799,
+          "width": 133,
+          "height": 37
+        }
+      },
+      "header_above_text": false,
+      "playback_gap": 6
+    },
+    {
+      "size": "900x640",
+      "widgets": {
+        "left_text": {
+          "x": 128,
+          "y": 233,
+          "width": 428,
+          "height": 215
+        },
+        "right_text": {
+          "x": 568,
+          "y": 233,
+          "width": 428,
+          "height": 215
+        },
+        "left_edit": {
+          "x": 128,
+          "y": 452,
+          "width": 428,
+          "height": 37
+        },
+        "right_edit": {
+          "x": 568,
+          "y": 452,
+          "width": 428,
+          "height": 37
+        },
+        "pause_control": {
+          "x": 216,
+          "y": 493,
+          "width": 69,
+          "height": 23
+        },
+        "clip_control": {
+          "x": 928,
+          "y": 493,
+          "width": 45,
+          "height": 23
+        },
+        "play_button": {
+          "x": 128,
+          "y": 574,
+          "width": 114,
+          "height": 37
+        },
+        "stop_button": {
+          "x": 248,
+          "y": 574,
+          "width": 114,
+          "height": 37
+        },
+        "previous": {
+          "x": 764,
+          "y": 171,
+          "width": 114,
+          "height": 37
+        },
+        "next": {
+          "x": 882,
+          "y": 171,
+          "width": 114,
+          "height": 37
+        },
+        "save_button": {
+          "x": 863,
+          "y": 619,
+          "width": 133,
+          "height": 37
+        }
+      },
+      "header_above_text": false,
+      "playback_gap": 6
+    }
+  ]
+}

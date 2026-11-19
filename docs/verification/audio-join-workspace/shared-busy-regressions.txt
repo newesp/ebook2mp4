@@ -1,0 +1,12 @@
+test_each_pdf_warning_requires_explicit_confirmation (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_each_pdf_warning_requires_explicit_confirmation) ... ok
+test_preview_content_scope_stop_on_edit_and_save_failure (test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure) ... ok
+test_leave_during_preparation_never_starts_hidden_audio (test_audio_join_workspace.AudioJoinWorkspace.test_leave_during_preparation_never_starts_hidden_audio) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+test_action_to_content_gap (test_voice_spacing.VoiceSpacing.test_action_to_content_gap) ... ok
+test_adjacent_action_gaps (test_voice_spacing.VoiceSpacing.test_adjacent_action_gaps) ... ok
+test_same_group_button_dimensions (test_voice_spacing.VoiceSpacing.test_same_group_button_dimensions) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 65.573s
+
+OK

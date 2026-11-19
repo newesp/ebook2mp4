@@ -1,0 +1,13 @@
+test_long_excluded_sound_does_not_delay_visual_loops (test_total_video_background.BackgroundJourney.test_long_excluded_sound_does_not_delay_visual_loops) ... ok
+test_loop_hold_trim_sound_and_subtitles_use_the_same_narration (test_total_video_background.BackgroundJourney.test_loop_hold_trim_sound_and_subtitles_use_the_same_narration) ... ok
+test_portrait_preview_black_padding_and_modes_survive_reopen (test_total_video_background.BackgroundJourney.test_portrait_preview_black_padding_and_modes_survive_reopen) ... ok
+test_validation_failures_cancellation_and_video_only_retry_protect_old_products (test_total_video_background.BackgroundJourney.test_validation_failures_cancellation_and_video_only_retry_protect_old_products) ... ok
+test_background_mode_preview_save_return_and_render_are_connected (test_total_video_background_desktop.BackgroundDesktop.test_background_mode_preview_save_return_and_render_are_connected) ... ok
+test_required_controls_fit_sizes_and_long_background_hides_short_mode (test_total_video_background_desktop.BackgroundDesktop.test_required_controls_fit_sizes_and_long_background_hides_short_mode) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 75.623s
+
+OK

@@ -1,0 +1,296 @@
+{
+  "coverage_complete": true,
+  "regions": [
+    {
+      "page": "版本紀錄",
+      "state": "short-1360",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 428,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "fit-1360",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 428,
+      "content_height": 428,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "overflow-1360",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 428,
+      "content_height": 476,
+      "scrollbar_visible": true,
+      "max_offset": 48,
+      "thumb_fraction": 0.8991596638655462
+    },
+    {
+      "page": "版本紀錄",
+      "state": "long-1360",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 428,
+      "content_height": 1960,
+      "scrollbar_visible": true,
+      "max_offset": 1532,
+      "thumb_fraction": 0.21836734693877552
+    },
+    {
+      "page": "版本紀錄",
+      "state": "empty-1360",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 428,
+      "content_height": 0,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "candidate-1360",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 428,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "short-1280",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 328,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "fit-1280",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 328,
+      "content_height": 328,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "overflow-1280",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 328,
+      "content_height": 364,
+      "scrollbar_visible": true,
+      "max_offset": 36,
+      "thumb_fraction": 0.9010989010989011
+    },
+    {
+      "page": "版本紀錄",
+      "state": "long-1280",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 328,
+      "content_height": 1960,
+      "scrollbar_visible": true,
+      "max_offset": 1632,
+      "thumb_fraction": 0.1673469387755102
+    },
+    {
+      "page": "版本紀錄",
+      "state": "empty-1280",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 328,
+      "content_height": 0,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "candidate-1280",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 328,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "short-900",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "fit-900",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 248,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "overflow-900",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 280,
+      "scrollbar_visible": true,
+      "max_offset": 32,
+      "thumb_fraction": 0.8857142857142857
+    },
+    {
+      "page": "版本紀錄",
+      "state": "long-900",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 1960,
+      "scrollbar_visible": true,
+      "max_offset": 1712,
+      "thumb_fraction": 0.12653061224489795
+    },
+    {
+      "page": "版本紀錄",
+      "state": "empty-900",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 0,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "candidate-900",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "short-900-collapsed",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 196,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "fit-900-collapsed",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 248,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "overflow-900-collapsed",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 280,
+      "scrollbar_visible": true,
+      "max_offset": 32,
+      "thumb_fraction": 0.8857142857142857
+    },
+    {
+      "page": "版本紀錄",
+      "state": "long-900-collapsed",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 1960,
+      "scrollbar_visible": true,
+      "max_offset": 1712,
+      "thumb_fraction": 0.12653061224489795
+    },
+    {
+      "page": "版本紀錄",
+      "state": "empty-900-collapsed",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 0,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "short-900-18pt",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 252,
+      "scrollbar_visible": true,
+      "max_offset": 4,
+      "thumb_fraction": 0.9841269841269841
+    },
+    {
+      "page": "版本紀錄",
+      "state": "fit-900-18pt",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 248,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    },
+    {
+      "page": "版本紀錄",
+      "state": "overflow-900-18pt",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 288,
+      "scrollbar_visible": true,
+      "max_offset": 40,
+      "thumb_fraction": 0.8611111111111112
+    },
+    {
+      "page": "版本紀錄",
+      "state": "long-900-18pt",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 2520,
+      "scrollbar_visible": true,
+      "max_offset": 2272,
+      "thumb_fraction": 0.09841269841269841
+    },
+    {
+      "page": "版本紀錄",
+      "state": "empty-900-18pt",
+      "owner": "版本差異",
+      "measurement_source": "draw_v2_versions_revision.py: 行數×行高與內容區幾何",
+      "viewport_height": 248,
+      "content_height": 0,
+      "scrollbar_visible": false,
+      "max_offset": 0
+    }
+  ]
+}

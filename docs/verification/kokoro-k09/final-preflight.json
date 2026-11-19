@@ -1,0 +1,12 @@
+{
+  "paths_checked": 1909,
+  "failed": [
+    {
+      "path": "dist\\ebook2mp4",
+      "kind": "directory",
+      "error": "成品無法獨占開啟：E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4（Windows 錯誤 32）"
+    }
+  ],
+  "formal_exe_running": false,
+  "check_only_full_pass": false
+}

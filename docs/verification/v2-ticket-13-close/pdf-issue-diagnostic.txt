@@ -1,0 +1,10 @@
+parent 1 1108 536 403 190
+main 1 320 515 423 200
+scroll 1 320 515 423 200
+issue_frame 1 304 37 431 200
+issue_selector 1 304 37 431 200
+preview 0 1 1 0 0
+region_frame 0 1 1 423 200
+issue_empty 0 1 1 423 200
+page_frame 1 748 515 743 200
+contents (0.0, 1.0) 37 (0, 0, 320, 37)

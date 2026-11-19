@@ -1,0 +1,267 @@
+[
+  {
+    "evidence": "final-native-1360.json",
+    "geometry": "1360x820+0+0",
+    "dpi": 96.09458128078816,
+    "tk_scaling": 1.334646962233169,
+    "source_sizes": [
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ]
+    ],
+    "source_gaps": [
+      4,
+      4,
+      4
+    ],
+    "pause_state_x_difference": 0,
+    "pause_state_width_difference": 0,
+    "pause_state_height_difference": 0,
+    "join_menu_x_difference": 0,
+    "menu_versions_gap": 4,
+    "save_start_sizes": [
+      [
+        196,
+        37
+      ],
+      [
+        196,
+        37
+      ]
+    ],
+    "save_start_gap": 4,
+    "toolbar_content_gap": 8,
+    "document_content_y_difference": 0,
+    "source_height": 447,
+    "source_yview": [
+      0.0,
+      0.625
+    ],
+    "errors": []
+  },
+  {
+    "evidence": "final-native-1280.json",
+    "geometry": "1280x720+0+0",
+    "dpi": 96.09458128078816,
+    "tk_scaling": 1.334646962233169,
+    "source_sizes": [
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ]
+    ],
+    "source_gaps": [
+      4,
+      4,
+      4
+    ],
+    "pause_state_x_difference": 0,
+    "pause_state_width_difference": 0,
+    "pause_state_height_difference": 0,
+    "join_menu_x_difference": 0,
+    "menu_versions_gap": 4,
+    "save_start_sizes": [
+      [
+        196,
+        37
+      ],
+      [
+        196,
+        37
+      ]
+    ],
+    "save_start_gap": 4,
+    "toolbar_content_gap": 8,
+    "document_content_y_difference": 0,
+    "source_height": 347,
+    "source_yview": [
+      0.0,
+      0.4375
+    ],
+    "errors": []
+  },
+  {
+    "evidence": "final-native-900.json",
+    "geometry": "900x640+0+0",
+    "dpi": 96.09458128078816,
+    "tk_scaling": 1.334646962233169,
+    "source_sizes": [
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ],
+      [
+        144,
+        37
+      ]
+    ],
+    "source_gaps": [
+      4,
+      4,
+      4
+    ],
+    "pause_state_x_difference": 0,
+    "pause_state_width_difference": 0,
+    "pause_state_height_difference": 0,
+    "join_menu_x_difference": 0,
+    "menu_versions_gap": 4,
+    "save_start_sizes": [
+      [
+        196,
+        37
+      ],
+      [
+        196,
+        37
+      ]
+    ],
+    "save_start_gap": 4,
+    "toolbar_content_gap": 8,
+    "document_content_y_difference": null,
+    "source_height": 222,
+    "source_yview": [
+      0.0,
+      0.25
+    ],
+    "errors": []
+  },
+  {
+    "evidence": "final-native-font130.json",
+    "geometry": "900x640+0+0",
+    "dpi": 96.09458128078816,
+    "tk_scaling": 1.334646962233169,
+    "source_sizes": [
+      [
+        144,
+        42
+      ],
+      [
+        144,
+        42
+      ],
+      [
+        144,
+        42
+      ],
+      [
+        144,
+        42
+      ]
+    ],
+    "source_gaps": [
+      4,
+      4,
+      4
+    ],
+    "pause_state_x_difference": 0,
+    "pause_state_width_difference": 0,
+    "pause_state_height_difference": 0,
+    "join_menu_x_difference": 0,
+    "menu_versions_gap": 4,
+    "save_start_sizes": [
+      [
+        196,
+        42
+      ],
+      [
+        196,
+        42
+      ]
+    ],
+    "save_start_gap": 4,
+    "toolbar_content_gap": 8,
+    "document_content_y_difference": null,
+    "source_height": 187,
+    "source_yview": [
+      0.0,
+      0.1875
+    ],
+    "errors": []
+  },
+  {
+    "evidence": "final-native-font130-expanded.json",
+    "geometry": "900x640+0+0",
+    "dpi": 96.09458128078816,
+    "tk_scaling": 1.334646962233169,
+    "source_sizes": [
+      [
+        130,
+        42
+      ],
+      [
+        130,
+        42
+      ],
+      [
+        130,
+        42
+      ],
+      [
+        130,
+        42
+      ]
+    ],
+    "source_gaps": [
+      4,
+      4,
+      4
+    ],
+    "pause_state_x_difference": 0,
+    "pause_state_width_difference": 0,
+    "pause_state_height_difference": 0,
+    "join_menu_x_difference": 0,
+    "menu_versions_gap": 4,
+    "save_start_sizes": [
+      [
+        196,
+        42
+      ],
+      [
+        196,
+        42
+      ]
+    ],
+    "save_start_gap": 4,
+    "toolbar_content_gap": 8,
+    "document_content_y_difference": 0,
+    "source_height": 187,
+    "source_yview": [
+      0.0,
+      0.1875
+    ],
+    "errors": []
+  }
+]

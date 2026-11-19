@@ -1,0 +1,6 @@
+test_wide_collapsed_editor_toolbar_stays_inside_its_pane (test_v2_manuscript_shell.ManuscriptShellTests.test_wide_collapsed_editor_toolbar_stays_inside_its_pane) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.307s
+
+OK

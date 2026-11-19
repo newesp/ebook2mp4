@@ -1,0 +1,19 @@
+Collecting reportlab
+  Using cached reportlab-5.1.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting pillow>=9.0.0 (from reportlab)
+  Using cached pillow-13.0.0-cp314-cp314-win_amd64.whl.metadata (9.3 kB)
+Collecting charset-normalizer (from reportlab)
+  Using cached charset_normalizer-3.5.2-cp314-cp314-win_amd64.whl.metadata (47 kB)
+Using cached reportlab-5.1.0-py3-none-any.whl (2.0 MB)
+Using cached pillow-13.0.0-cp314-cp314-win_amd64.whl (7.3 MB)
+Using cached charset_normalizer-3.5.2-cp314-cp314-win_amd64.whl (210 kB)
+Installing collected packages: pillow, charset-normalizer, reportlab
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+simple-lama-inpainting 0.1.2 requires fire<0.6.0,>=0.5.0, but you have fire 0.7.1 which is incompatible.
+simple-lama-inpainting 0.1.2 requires numpy<2.0.0,>=1.24.3, but you have numpy 2.5.0 which is incompatible.
+simple-lama-inpainting 0.1.2 requires pillow<10.0.0,>=9.5.0, but you have pillow 13.0.0 which is incompatible.
+Successfully installed charset-normalizer-3.5.2 pillow-13.0.0 reportlab-5.1.0
+
+[notice] A new release of pip is available: 26.2 -> 26.3
+[notice] To update, run: python.exe -m pip install --upgrade pip

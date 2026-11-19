@@ -1,0 +1,14 @@
+test_apply_persists_backup_and_is_one_undo_unit (test_manuscript_cleanup.CleanupWorkspace.test_apply_persists_backup_and_is_one_undo_unit) ... ok
+test_entry_is_cleanup_not_source_and_exit_retains_context (test_manuscript_cleanup.CleanupWorkspace.test_entry_is_cleanup_not_source_and_exit_retains_context) ... ok
+test_failed_apply_keeps_text_and_reading_confirmation (test_manuscript_cleanup.CleanupWorkspace.test_failed_apply_keeps_text_and_reading_confirmation) ... ok
+test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows) ... ok
+test_global_messages_stay_available_across_pages_and_without_project (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_stay_available_across_pages_and_without_project) ... ok
+test_long_diff_scrolls_alone_with_fixed_actions (test_manuscript_cleanup.CleanupWorkspace.test_long_diff_scrolls_alone_with_fixed_actions) ... ok
+test_partial_controls_are_adjacent_and_cleanup_keeps_partial_contract (test_manuscript_cleanup.CleanupWorkspace.test_partial_controls_are_adjacent_and_cleanup_keeps_partial_contract) ... ok
+test_stale_preview_rejects_newer_editor_text (test_manuscript_cleanup.CleanupWorkspace.test_stale_preview_rejects_newer_editor_text) ... ok
+test_unchanged_preview_never_backs_up_or_invalidates_reading (test_manuscript_cleanup.CleanupWorkspace.test_unchanged_preview_never_backs_up_or_invalidates_reading) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 102.752s
+
+OK

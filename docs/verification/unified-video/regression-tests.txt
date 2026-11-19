@@ -1,0 +1,105 @@
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ok
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_close_autosaves_manuscript_without_confirmation_page (test_production_pages.ProductionPages.test_close_autosaves_manuscript_without_confirmation_page) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes) ... FAIL
+test_failed_publication_waits_for_explicit_save_retry (test_batch_video_desktop.BatchVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_batch_video_desktop.BatchVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_partial_retry_material_return_and_window_sizes (test_outputs_desktop.OutputsDesktop.test_partial_retry_material_return_and_window_sizes) ... FAIL
+test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) ... ok
+test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action) ... ok
+test_background_task_track_never_covers_footer_and_releases_space (test_audio_production_ui.AudioProductionWorkspace.test_background_task_track_never_covers_footer_and_releases_space) ... ok
+test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch (test_audio_production_ui.AudioProductionWorkspace.test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch) ... ok
+test_historical_snapshot_stale_guard_and_local_consent_context (test_audio_production_ui.AudioProductionWorkspace.test_historical_snapshot_stale_guard_and_local_consent_context) ... ok
+test_multiline_failure_stays_one_line_and_full_message_is_reachable (test_audio_production_ui.AudioProductionWorkspace.test_multiline_failure_stays_one_line_and_full_message_is_reachable) ... ok
+test_no_product_keeps_video_entry_and_product_menu_gates_media (test_audio_production_ui.AudioProductionWorkspace.test_no_product_keeps_video_entry_and_product_menu_gates_media) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_same_play_button_stops_finishes_and_recovers_from_failure (test_audio_production_ui.AudioProductionWorkspace.test_same_play_button_stops_finishes_and_recovers_from_failure) ... ok
+test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis (test_audio_production_ui.AudioProductionWorkspace.test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+test_summary_reclaims_status_column_but_keeps_errors_visible (test_audio_production_ui.AudioProductionWorkspace.test_summary_reclaims_status_column_but_keeps_errors_visible) ... ok
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... ok
+test_cancel_failure_export_and_retry_keep_previous_artifacts (test_total_video.TotalVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts) ... ok
+test_changed_source_blocks_video_and_corrupt_picture_preserves_settings (test_total_video.TotalVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings) ... ok
+test_corrupted_audio_is_not_current_and_cannot_publish_video (test_total_video.TotalVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video) ... ok
+test_picture_is_copied_and_resolution_survives_reopen (test_total_video.TotalVideoJourney.test_picture_is_copied_and_resolution_survives_reopen) ... ok
+test_publication_conflict_and_disk_shortage_keep_old_video (test_total_video.TotalVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video) ... ok
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+{"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 1600, "audio_ms": 1600}
+{"kind": "merged-video", "batches": 2, "pause_ms": 0, "video_ms": 400, "audio_ms": 405}
+{"kind": "merged-video", "batches": 2, "pause_ms": 5000, "video_ms": 5400, "audio_ms": 5419}
+{"kind": "merged-video", "batches": 3, "pause_ms": 17, "video_ms": 633, "audio_ms": 640}
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_default_counts_extreme_pauses_actual_frames_silence_and_encoding (test_video_merge.MergeVideoJourney.test_default_counts_extreme_pauses_actual_frames_silence_and_encoding) ... ok
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored (test_video_merge.MergeVideoJourney.test_failed_publication_can_retry_without_reencoding_and_unselected_changes_are_ignored) ... ok
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs (test_video_merge.MergeVideoJourney.test_failure_cancel_stale_and_changed_publication_preserve_previous_outputs) ... ok
+{"kind": "merged-video", "batches": 1, "pause_ms": 500, "video_ms": 200, "audio_ms": 213}
+test_media_failure_stops_after_three_attempts_and_preserves_output (test_video_merge.MergeVideoJourney.test_media_failure_stops_after_three_attempts_and_preserves_output) ... ok
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_merge_uses_only_movies_and_shared_order_without_total_audio (test_video_merge.MergeVideoJourney.test_merge_uses_only_movies_and_shared_order_without_total_audio) ... ok
+{"kind": "merged-video", "batches": 2, "pause_ms": 500, "video_ms": 900, "audio_ms": 917}
+test_moving_batch_holds_actual_final_frame_in_preview_and_total (test_video_merge.MergeVideoJourney.test_moving_batch_holds_actual_final_frame_in_preview_and_total) ... ok
+test_pdf_warnings_require_confirmation_and_survive_reopen (test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen) ... ERROR
+test_preview_matches_join_and_cleans_on_cancel (test_video_merge.MergeVideoJourney.test_preview_matches_join_and_cleans_on_cancel) ... ok
+test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video (test_outputs.OutputsJourney.test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video) ... ok
+test_batch_mp4_only_uses_movies_without_original_mp3_or_total_audio (test_outputs.OutputsJourney.test_batch_mp4_only_uses_movies_without_original_mp3_or_total_audio) ... ok
+test_failed_publication_waits_for_explicit_retry_and_preserves_other_format (test_outputs.OutputsJourney.test_failed_publication_waits_for_explicit_retry_and_preserves_other_format) ... ok
+test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies (test_outputs.OutputsJourney.test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies) ... ok
+test_missing_visual_publishes_audio_reopen_only_encodes_video (test_outputs.OutputsJourney.test_missing_visual_publishes_audio_reopen_only_encodes_video) ... ok
+test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual (test_outputs.OutputsJourney.test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual) ... ok
+test_source_change_during_audio_stops_next_stage_without_mixing_sources (test_outputs.OutputsJourney.test_source_change_during_audio_stops_next_stage_without_mixing_sources) ... ok
+test_validation_and_missing_sources_are_observable (test_outputs.OutputsJourney.test_validation_and_missing_sources_are_observable) ... ok
+test_video_failure_reopens_as_partial_and_cancel_releases_lease (test_outputs.OutputsJourney.test_video_failure_reopens_as_partial_and_cancel_releases_lease) ... ok
+test_video_worker_failure_and_cancellation_preserve_successful_audio (test_outputs.OutputsJourney.test_video_worker_failure_and_cancellation_preserve_successful_audio) ... ok
+test_empty_and_legacy_project_migration (test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration) ... ok
+test_route_matrix_retains_both_movies_exports_and_reopens (test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens) ... ok
+test_source_text_voice_new_audio_and_launch_snapshot (test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot) ... ok
+test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local (test_output_versions.OutputVersionsJourney.test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local) ... ok
+
+======================================================================
+ERROR: test_pdf_warnings_require_confirmation_and_survive_reopen (test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 136, in test_pdf_warnings_require_confirmation_and_survive_reopen
+    from test_assembly_joins import AssemblyJoinJourney
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+======================================================================
+FAIL: test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_batch_video_desktop.py", line 17, in test_batch_entry_render_return_isolation_and_sizes
+    self.assertEqual(page.back_button.cget('text'),'�� ��^���T�s��')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '�� ���T�s��' != '�� ��^���T�s��'
+- �� ���T�s��
++ �� ��^���T�s��
+?   ++
+
+
+======================================================================
+FAIL: test_partial_retry_material_return_and_window_sizes (test_outputs_desktop.OutputsDesktop.test_partial_retry_material_return_and_window_sizes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_outputs_desktop.py", line 67, in test_partial_retry_material_return_and_window_sizes
+    self.assertIn('�����n�D�w����', controls.summary.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '�����n�D�w����' not found in '�������� �P 1��2 �ӭn�D�榡����'
+
+----------------------------------------------------------------------
+Ran 54 tests in 468.226s
+
+FAILED (failures=2, errors=1)

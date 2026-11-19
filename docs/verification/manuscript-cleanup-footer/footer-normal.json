@@ -1,0 +1,139 @@
+{
+  "geometry": "1536x793+130+5",
+  "dpi": 96.09458128078816,
+  "active_tool": null,
+  "title": "",
+  "text_sha256": "7a69e7d6dc921432bd303d4f3e454d1181635cdf57d81620afc3f65dc42480ff",
+  "cursor": "599.10",
+  "yview": [
+    0.0,
+    0.03064246863051322
+  ],
+  "selected": [],
+  "reading_ready": false,
+  "allow_partial": false,
+  "preview_changes": 0,
+  "diff_yview": [
+    0.0,
+    0.05
+  ],
+  "controls": {
+    "next": {
+      "x": 1406,
+      "y": 754,
+      "width": 114,
+      "height": 37,
+      "mapped": true,
+      "text": "儲存為朗讀稿",
+      "disabled": false
+    },
+    "message": {
+      "x": 1284,
+      "y": 754,
+      "width": 114,
+      "height": 37,
+      "mapped": true,
+      "text": "訊息記錄",
+      "disabled": false
+    },
+    "retry": {
+      "x": 12,
+      "y": 23,
+      "width": 117,
+      "height": 37,
+      "mapped": false,
+      "text": "繼續未完成範圍",
+      "disabled": false
+    },
+    "keep": {
+      "x": 133,
+      "y": 23,
+      "width": 130,
+      "height": 37,
+      "mapped": false,
+      "text": "保留未完成處原文",
+      "disabled": false
+    },
+    "job": {
+      "x": 0,
+      "y": 23,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "",
+      "disabled": false
+    },
+    "status": {
+      "x": 0,
+      "y": 23,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "",
+      "disabled": false
+    },
+    "cancel": {
+      "x": 40,
+      "y": 145,
+      "width": 114,
+      "height": 37,
+      "mapped": false,
+      "text": "取消",
+      "disabled": false
+    },
+    "apply": {
+      "x": 162,
+      "y": 145,
+      "width": 114,
+      "height": 37,
+      "mapped": false,
+      "text": "套用換行整理",
+      "disabled": false
+    },
+    "result": {
+      "x": 16,
+      "y": 133,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "",
+      "disabled": false
+    },
+    "diff": {
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "",
+      "disabled": false
+    },
+    "empty": {
+      "x": 16,
+      "y": 88,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "目前沒有需要整理的換行，文稿未變更。",
+      "disabled": false
+    },
+    "source_run": {
+      "x": 16,
+      "y": 125,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "重新擷取，預覽差異",
+      "disabled": false
+    },
+    "source_settings": {
+      "x": 16,
+      "y": 125,
+      "width": 1,
+      "height": 1,
+      "mapped": false,
+      "text": "處理設定",
+      "disabled": false
+    }
+  }
+}

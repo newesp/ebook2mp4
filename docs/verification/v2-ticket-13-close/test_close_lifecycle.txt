@@ -1,0 +1,10 @@
+test_close_after_returning_from_audio (test_close_lifecycle.CloseLifecycle.test_close_after_returning_from_audio) ... ok
+test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page) ... ok
+test_close_cancels_running_narration_and_releases_lock (test_close_lifecycle.CloseLifecycle.test_close_cancels_running_narration_and_releases_lock) ... ok
+test_close_from_audio (test_close_lifecycle.CloseLifecycle.test_close_from_audio) ... ok
+test_close_with_service_page (test_close_lifecycle.CloseLifecycle.test_close_with_service_page) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 30.808s
+
+OK

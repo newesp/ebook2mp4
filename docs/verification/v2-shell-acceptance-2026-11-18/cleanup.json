@@ -1,0 +1,42 @@
+[
+  {
+    "path": ".scratch/v2-shell-acceptance-2026-11-18",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/build-tools",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/ocr-runtime",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/voice-runtime",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/pyinstaller-build",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/pyinstaller-cache",
+    "status": "absent"
+  },
+  {
+    "path": ".scratch/test-runs/tmpbpf93g8w",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/test-runs/tmpd4e1buj6",
+    "status": "removed"
+  },
+  {
+    "path": ".scratch/test-runs/tmpw0jng7ir",
+    "status": "removed"
+  },
+  {
+    "path": "docs/verification/v2-shell-acceptance-2026-11-18/join-windows/fixtures-vjrmgcy7",
+    "status": "removed"
+  }
+]

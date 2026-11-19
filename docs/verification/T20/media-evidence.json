@@ -1,0 +1,52 @@
+{
+  "project": "合成測試書籍",
+  "selected": [
+    "a5951248b0e4444f9659aff98f1e420d",
+    "19a26626eb0a458e8673711430c5424c"
+  ],
+  "pause_ms": 500,
+  "routes": {
+    "audio": {
+      "id": "f3ce2186e602422f94441310aa497ac6",
+      "duration_ms": 900,
+      "artifacts": {
+        "mp3": {
+          "path": "docs/verification/T20/media/audio.mp3",
+          "sha256": "715b30ac4933eec0d722cc6e911c2b109887e2110a4f43115edca6f05f032323"
+        },
+        "srt": {
+          "path": "docs/verification/T20/media/audio.srt",
+          "sha256": "b4cd4769192551cb03b0bb23d7e6b6ae9e9eec68bc04c50c1c970a07459b4f4a"
+        }
+      }
+    },
+    "total-audio": {
+      "id": "69430c21b7b04ba4b05ac1f2b865d35c",
+      "duration_ms": 900,
+      "artifacts": {
+        "mp4": {
+          "path": "docs/verification/T20/media/total-audio.mp4",
+          "sha256": "bc33ee03bfe8462d3c65e016f62278bb4db2f23bfda9569e0e4d77fcce69def3"
+        },
+        "srt": {
+          "path": "docs/verification/T20/media/total-audio.srt",
+          "sha256": "b4cd4769192551cb03b0bb23d7e6b6ae9e9eec68bc04c50c1c970a07459b4f4a"
+        }
+      }
+    },
+    "batch-videos": {
+      "id": "99988920fefd49b19c8f5295ba8c79f3",
+      "duration_ms": 900,
+      "artifacts": {
+        "mp4": {
+          "path": "docs/verification/T20/media/batch-videos.mp4",
+          "sha256": "9a749daebc02b90713681181b4b4a95ee99e54ed34bd20c11ec5309fad31a48c"
+        },
+        "srt": {
+          "path": "docs/verification/T20/media/batch-videos.srt",
+          "sha256": "610af9459d350aa10539c4ce7bda0f958dd05a1db4a12e2a663fd2d7ab911bdb"
+        }
+      }
+    }
+  }
+}

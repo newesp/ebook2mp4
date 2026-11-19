@@ -1,0 +1,156 @@
+{
+  "name": "native-collapsed-900",
+  "pid": 25780,
+  "geometry": "900x640+26+5",
+  "tk_scaling": 1.334646962233169,
+  "dpi": 96.09458128078816,
+  "windows_scale_percent": 125,
+  "font_linespace": 30,
+  "visible_lines": [
+    11
+  ],
+  "characters": 21490,
+  "text_sha256": "59ffaf33856e823db3681e2d2fa4b559c4d6a570de3f677136560e4405ef1728",
+  "cursor": "799.52",
+  "selection": [],
+  "yview": [
+    0.9763399539757367,
+    0.9856341741325767
+  ],
+  "tools_open": false,
+  "gaps": [
+    4,
+    4,
+    4,
+    4
+  ],
+  "metrics": {
+    "client": {
+      "x": 34,
+      "y": 36,
+      "width": 900,
+      "height": 640,
+      "mapped": true
+    },
+    "source": {
+      "x": 50,
+      "y": 101,
+      "width": 639,
+      "height": 658,
+      "mapped": false
+    },
+    "editor_pane": {
+      "x": 50,
+      "y": 101,
+      "width": 868,
+      "height": 505,
+      "mapped": true
+    },
+    "editor": {
+      "x": 50,
+      "y": 154,
+      "width": 853,
+      "height": 452,
+      "mapped": true
+    },
+    "list": {
+      "x": 50,
+      "y": 154,
+      "width": 208,
+      "height": 452,
+      "mapped": false
+    },
+    "center": {
+      "x": 50,
+      "y": 101,
+      "width": 868,
+      "height": 505,
+      "mapped": true
+    },
+    "body": {
+      "x": 50,
+      "y": 101,
+      "width": 868,
+      "height": 505,
+      "mapped": true
+    },
+    "next": {
+      "x": 804,
+      "y": 614,
+      "width": 114,
+      "height": 37,
+      "mapped": true
+    },
+    "source_menu": {
+      "x": 612,
+      "y": 109,
+      "width": 75,
+      "height": 37,
+      "mapped": false
+    },
+    "previous": {
+      "x": 328,
+      "y": 109,
+      "width": 42,
+      "height": 37,
+      "mapped": false
+    },
+    "page": {
+      "x": 374,
+      "y": 109,
+      "width": 52,
+      "height": 37,
+      "mapped": false
+    },
+    "total": {
+      "x": 426,
+      "y": 117,
+      "width": 17,
+      "height": 21,
+      "mapped": false
+    },
+    "next_page": {
+      "x": 447,
+      "y": 109,
+      "width": 42,
+      "height": 37,
+      "mapped": false
+    },
+    "zoom": {
+      "x": 493,
+      "y": 109,
+      "width": 115,
+      "height": 37,
+      "mapped": false
+    },
+    "tool": {
+      "x": 50,
+      "y": 150,
+      "width": 648,
+      "height": 456,
+      "mapped": false
+    },
+    "tool_back": {
+      "x": 92,
+      "y": 101,
+      "width": 114,
+      "height": 37,
+      "mapped": false
+    },
+    "project": {
+      "x": 665,
+      "y": 52,
+      "width": 131,
+      "height": 37,
+      "mapped": true
+    },
+    "messages": {
+      "x": 804,
+      "y": 52,
+      "width": 114,
+      "height": 37,
+      "mapped": true
+    }
+  },
+  "errors": []
+}

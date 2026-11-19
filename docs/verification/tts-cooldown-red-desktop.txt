@@ -1,0 +1,18 @@
+test_resume_refreshes_old_failed_row_while_next_block_waits (test_tts_retry_desktop.RetryDesktop.test_resume_refreshes_old_failed_row_while_next_block_waits) ... FAIL
+
+======================================================================
+FAIL: test_resume_refreshes_old_failed_row_while_next_block_waits (test_tts_retry_desktop.RetryDesktop.test_resume_refreshes_old_failed_row_while_next_block_waits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_tts_retry_desktop.py", line 87, in test_resume_refreshes_old_failed_row_while_next_block_waits
+    self.assertEqual(self.dialog.details.set(rows[0], 'status'), '已完成')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '失敗' != '已完成'
+- 失敗
++ 已完成
+
+
+----------------------------------------------------------------------
+Ran 1 test in 13.694s
+
+FAILED (failures=1)

@@ -1,0 +1,15 @@
+test_generic_pages_use_shell_actions_without_losing_preview_draft (test_unified_shell_integration.UnifiedShellIntegration.test_generic_pages_use_shell_actions_without_losing_preview_draft) ... ok
+test_hidden_actions_dynamic_commands_and_old_project_are_guarded (test_unified_shell_integration.UnifiedShellIntegration.test_hidden_actions_dynamic_commands_and_old_project_are_guarded) ... ok
+test_real_routes_keep_fixed_parents_and_exclusive_action_port (test_unified_shell_integration.UnifiedShellIntegration.test_real_routes_keep_fixed_parents_and_exclusive_action_port) ... ok
+test_scroll_page_removes_fit_track_and_resets_after_long_content (test_unified_shell_integration.UnifiedShellIntegration.test_scroll_page_removes_fit_track_and_resets_after_long_content) ... ok
+test_video_header_track_is_released_before_returning_to_other_pages (test_unified_shell_integration.UnifiedShellIntegration.test_video_header_track_is_released_before_returning_to_other_pages) ... ok
+test_voice_settings_overflow_has_its_own_reachable_viewport (test_unified_shell_integration.UnifiedShellIntegration.test_voice_settings_overflow_has_its_own_reachable_viewport) ... ok
+test_action_to_content_gap (test_voice_spacing.VoiceSpacing.test_action_to_content_gap) ... ok
+test_adjacent_action_gaps (test_voice_spacing.VoiceSpacing.test_adjacent_action_gaps) ... ok
+test_same_group_button_dimensions (test_voice_spacing.VoiceSpacing.test_same_group_button_dimensions) ... ok
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 45.217s
+
+OK

@@ -1,0 +1,98 @@
+test_generic_pages_use_shell_actions_without_losing_preview_draft (test_unified_shell_integration.UnifiedShellIntegration.test_generic_pages_use_shell_actions_without_losing_preview_draft) ... ok
+test_hidden_actions_dynamic_commands_and_old_project_are_guarded (test_unified_shell_integration.UnifiedShellIntegration.test_hidden_actions_dynamic_commands_and_old_project_are_guarded) ... ok
+test_real_routes_keep_fixed_parents_and_exclusive_action_port (test_unified_shell_integration.UnifiedShellIntegration.test_real_routes_keep_fixed_parents_and_exclusive_action_port) ... ok
+test_scroll_page_removes_fit_track_and_resets_after_long_content (test_unified_shell_integration.UnifiedShellIntegration.test_scroll_page_removes_fit_track_and_resets_after_long_content) ... ok
+test_cancel_then_confirm_delete_preserves_projects_and_shared_credentials (test_service_management.ServiceManagement.test_cancel_then_confirm_delete_preserves_projects_and_shared_credentials) ... ok
+test_check_uses_draft_without_persisting_and_cancel_releases_job (test_service_management.ServiceManagement.test_check_uses_draft_without_persisting_and_cancel_releases_job) ... ok
+test_deleted_profile_cannot_be_recreated_by_stale_editor (test_service_management.ServiceManagement.test_deleted_profile_cannot_be_recreated_by_stale_editor) ... ok
+test_menu_builtin_states_and_busy_guard (test_service_management.ServiceManagement.test_menu_builtin_states_and_busy_guard) ... ok
+test_one_menu_opens_selected_profile_and_preserves_settings_on_save (test_service_management.ServiceManagement.test_one_menu_opens_selected_profile_and_preserves_settings_on_save) ... ok
+test_replacing_key_and_reloading_preserves_profile_and_reuse_reference (test_service_management.ServiceManagement.test_replacing_key_and_reloading_preserves_profile_and_reuse_reference) ... FAIL
+test_restored_window_keeps_footer_and_confirmation_inside_page (test_service_management.ServiceManagement.test_restored_window_keeps_footer_and_confirmation_inside_page) ... ok
+test_unsaved_edits_cancel_and_write_failures_keep_editor_open (test_service_management.ServiceManagement.test_unsaved_edits_cancel_and_write_failures_keep_editor_open) ... ok
+test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) ... ok
+test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action) ... ok
+test_background_task_track_never_covers_footer_and_releases_space (test_audio_production_ui.AudioProductionWorkspace.test_background_task_track_never_covers_footer_and_releases_space) ... ok
+test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch (test_audio_production_ui.AudioProductionWorkspace.test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch) ... ok
+test_historical_snapshot_stale_guard_and_local_consent_context (test_audio_production_ui.AudioProductionWorkspace.test_historical_snapshot_stale_guard_and_local_consent_context) ... ok
+test_multiline_failure_stays_one_line_and_full_message_is_reachable (test_audio_production_ui.AudioProductionWorkspace.test_multiline_failure_stays_one_line_and_full_message_is_reachable) ... ok
+test_no_product_keeps_video_entry_and_product_menu_gates_media (test_audio_production_ui.AudioProductionWorkspace.test_no_product_keeps_video_entry_and_product_menu_gates_media) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_same_play_button_stops_finishes_and_recovers_from_failure (test_audio_production_ui.AudioProductionWorkspace.test_same_play_button_stops_finishes_and_recovers_from_failure) ... ok
+test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis (test_audio_production_ui.AudioProductionWorkspace.test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+test_summary_reclaims_status_column_but_keeps_errors_visible (test_audio_production_ui.AudioProductionWorkspace.test_summary_reclaims_status_column_but_keeps_errors_visible) ... ok
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes) ... ok
+test_publication_failure_retries_same_completed_media (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_publication_failure_retries_same_completed_media) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_source_reading_does_not_block_main_window_cancellation) ... ok
+Native menu caption: outer=144, required=52, old-label=8, fixed-label=52
+test_video_preferences_cannot_redirect_or_start_video (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_video_preferences_cannot_redirect_or_start_video) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_corrections.JoinCorrections.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+test_each_pdf_warning_requires_explicit_confirmation (test_audio_join_corrections.JoinCorrections.test_each_pdf_warning_requires_explicit_confirmation) ... FAIL
+test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_audio_join_corrections.JoinCorrections.test_edit_return_uses_current_book_when_two_books_have_pending_returns) ... ok
+test_file_selection_uses_existing_document_command_without_changing_join_order (test_audio_join_corrections.JoinCorrections.test_file_selection_uses_existing_document_command_without_changing_join_order) ... ok
+test_first_load_long_real_sources_after_footer_layout (test_audio_join_corrections.JoinCorrections.test_first_load_long_real_sources_after_footer_layout) ... FAIL
+test_initial_endpoints_and_retained_reading (test_audio_join_corrections.JoinCorrections.test_initial_endpoints_and_retained_reading) ... ok
+test_join_page_save_preview_edit_return_and_sizes (test_audio_join_corrections.JoinCorrections.test_join_page_save_preview_edit_return_and_sizes) ... ok
+test_leave_during_preparation_never_starts_hidden_audio (test_audio_join_corrections.JoinCorrections.test_leave_during_preparation_never_starts_hidden_audio) ... ok
+test_mock_parent_grid_and_native_red_green (test_audio_join_corrections.JoinCorrections.test_mock_parent_grid_and_native_red_green) ... ok
+test_native_scroll_owners_and_short_fit_overflow_contract (test_audio_join_corrections.JoinCorrections.test_native_scroll_owners_and_short_fit_overflow_contract) ... ok
+test_preview_content_scope_stop_on_edit_and_save_failure (test_audio_join_corrections.JoinCorrections.test_preview_content_scope_stop_on_edit_and_save_failure) ... ok
+test_release_cancels_pending_reading_callback (test_audio_join_corrections.JoinCorrections.test_release_cancels_pending_reading_callback) ... ok
+test_saved_dirty_reverted_failed_and_reloaded (test_audio_join_corrections.JoinCorrections.test_saved_dirty_reverted_failed_and_reloaded) ... ok
+test_shared_header_and_content_anchors (test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors) ... ok
+test_action_to_content_gap (test_voice_spacing.VoiceSpacing.test_action_to_content_gap) ... ok
+test_adjacent_action_gaps (test_voice_spacing.VoiceSpacing.test_adjacent_action_gaps) ... ok
+test_same_group_button_dimensions (test_voice_spacing.VoiceSpacing.test_same_group_button_dimensions) ... ok
+
+======================================================================
+FAIL: test_replacing_key_and_reloading_preserves_profile_and_reuse_reference (test_service_management.ServiceManagement.test_replacing_key_and_reloading_preserves_profile_and_reuse_reference)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_service_management.py", line 131, in test_replacing_key_and_reloading_preserves_profile_and_reuse_reference
+    self.assertTrue(profiles()[identity]['reuse'])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_each_pdf_warning_requires_explicit_confirmation (test_audio_join_corrections.JoinCorrections.test_each_pdf_warning_requires_explicit_confirmation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 106, in test_each_pdf_warning_requires_explicit_confirmation
+    self.assertFalse(page.start_button.instate(['disabled']))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_first_load_long_real_sources_after_footer_layout (test_audio_join_corrections.JoinCorrections.test_first_load_long_real_sources_after_footer_layout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_workspace.py", line 21, in <lambda>
+    self.addCleanup(lambda:self.assertEqual(self.callback_errors,[]))
+                           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['image "pyimage1" doesn\'t exist', 'image[58 chars]ist'] != []
+
+First list contains 3 additional elements.
+First extra element 0:
+'image "pyimage1" doesn\'t exist'
+
++ []
+- ['image "pyimage1" doesn\'t exist',
+-  'image "pyimage2" doesn\'t exist',
+-  'image "pyimage3" doesn\'t exist']
+
+----------------------------------------------------------------------
+Ran 56 tests in 482.323s
+
+FAILED (failures=3)

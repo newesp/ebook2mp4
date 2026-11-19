@@ -1,0 +1,17 @@
+{
+  "removed": [
+    ".scratch/global-message-build",
+    ".scratch/global-message-fixture",
+    ".scratch/global-message-temp",
+    ".scratch/global-message-tools",
+    ".scratch/global-message-measure.py",
+    ".scratch/global-message-package.py",
+    ".scratch/global-message-red.py",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime"
+  ],
+  "release_files_exclusively_opened": 1905,
+  "test_and_build_sessions_finished": true,
+  "package_exit_code": 0,
+  "forced_termination": false
+}

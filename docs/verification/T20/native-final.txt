@@ -1,0 +1,15 @@
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ERROR
+
+======================================================================
+ERROR: test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions_desktop.py", line 92, in test_versions_details_return_exports_playback_and_layout
+    self.assertEqual(self.app.production.current.kind, 'narration')
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NarrationDialog' object has no attribute 'kind'. Did you mean: 'bind'?
+
+----------------------------------------------------------------------
+Ran 1 test in 44.928s
+
+FAILED (errors=1)

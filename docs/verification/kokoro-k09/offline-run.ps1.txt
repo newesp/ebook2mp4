@@ -1,0 +1,23 @@
+$ErrorActionPreference='Stop'
+$taskRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
+$evidence=Join-Path $taskRoot 'docs/verification/kokoro-k09'
+$receipt=Get-Content -Raw -LiteralPath (Join-Path $taskRoot 'ebook2mp4/kokoro_release.json') | ConvertFrom-Json
+$workerPython=Join-Path $PSScriptRoot ('packages/'+$receipt.id+'/runtime/python.exe')
+$ruleName='ebook2mp4-k09-'+[guid]::NewGuid().ToString('N')
+$created=$false
+try {
+    if ((Get-NetFirewallProfile).Enabled -contains $false) { throw 'Firewall profiles must be enabled.' }
+    New-NetFirewallRule -Name $ruleName -DisplayName $ruleName -Direction Outbound -Program $workerPython -Action Block -Profile Any | Out-Null
+    $created=$true
+    @{program=$workerPython;rule=$ruleName;scope='K09 owned runtime only';created=$true} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'firewall.json')
+    $env:PYTHONPATH=(Join-Path $PSScriptRoot 'dev')+';'+$taskRoot
+    $env:PYTHONDONTWRITEBYTECODE='1'
+    $env:PYTHONUTF8='1'
+    $env:EBOOK2MP4_FFMPEG=Join-Path $taskRoot 'dist/ebook2mp4/_internal/tools/ffmpeg/ffmpeg.exe'
+    $env:EBOOK2MP4_FFPROBE=Join-Path $taskRoot 'dist/ebook2mp4/_internal/tools/ffmpeg/ffprobe.exe'
+    & C:/Python314/python.exe -B (Join-Path $PSScriptRoot 'acceptance.py') 2>&1 | Tee-Object -FilePath (Join-Path $evidence 'host-run.txt')
+    if ($LASTEXITCODE -ne 0) { throw 'K09 host acceptance failed; inspect preserved log.' }
+} finally {
+    if ($created) { Remove-NetFirewallRule -Name $ruleName }
+    @{rule=$ruleName;removed=(-not [bool](Get-NetFirewallRule -Name $ruleName -ErrorAction SilentlyContinue))} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $evidence 'firewall-cleanup.json')
+}

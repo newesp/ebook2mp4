@@ -1,0 +1,19 @@
+{
+  "baseline_sha256": "271d440e5baa814b34efe52626fa771f64416b0ba3e4bd228a5a8a00dda7fbce",
+  "updated_sha256": "d64e376eeffb3a5a0e67b7fae57eba35711817db9f998596d309dea7c9b14925",
+  "status_left": 414,
+  "status_text_width": 56.0,
+  "output_action_left": 1164,
+  "status_to_action_gap": 694.0,
+  "action_row_tops": [
+    526,
+    574,
+    616,
+    660
+  ],
+  "source_viewport_900": 84,
+  "fixed_output_height_900": 142,
+  "native_dpi": "not measured; drawing pixels only",
+  "blue_status": "failed; retained for assessment, not corrected",
+  "red_status": "arrows and separator restored in drawing"
+}

@@ -1,0 +1,497 @@
+[
+  {
+    "name": "maximized",
+    "client": [
+      1536,
+      793
+    ],
+    "dpi": 96.09458128078816,
+    "windows_scale_percent": 125,
+    "font": "{Microsoft JhengHei} 12",
+    "visible_lines": [
+      18
+    ],
+    "controls": {
+      "client": {
+        "x": 0,
+        "y": 23,
+        "width": 1536,
+        "height": 793,
+        "mapped": true
+      },
+      "body": {
+        "x": 16,
+        "y": 88,
+        "width": 1504,
+        "height": 650,
+        "mapped": true
+      },
+      "center": {
+        "x": 16,
+        "y": 88,
+        "width": 1504,
+        "height": 650,
+        "mapped": true
+      },
+      "list": {
+        "x": 16,
+        "y": 88,
+        "width": 1,
+        "height": 1,
+        "mapped": false
+      },
+      "source": {
+        "x": 16,
+        "y": 88,
+        "width": 749,
+        "height": 650,
+        "mapped": true
+      },
+      "editor_pane": {
+        "x": 771,
+        "y": 88,
+        "width": 749,
+        "height": 650,
+        "mapped": true
+      },
+      "editor": {
+        "x": 771,
+        "y": 141,
+        "width": 734,
+        "height": 597,
+        "mapped": true
+      },
+      "tool": {
+        "x": 16,
+        "y": 88,
+        "width": 1,
+        "height": 1,
+        "mapped": false
+      },
+      "next": {
+        "x": 1387,
+        "y": 750,
+        "width": 133,
+        "height": 37,
+        "mapped": true
+      },
+      "button": {
+        "x": 422,
+        "y": 96,
+        "width": 42,
+        "height": 37,
+        "mapped": true
+      },
+      "entry": {
+        "x": 464,
+        "y": 96,
+        "width": 52,
+        "height": 37,
+        "mapped": true
+      },
+      "combo": {
+        "x": 575,
+        "y": 96,
+        "width": 115,
+        "height": 37,
+        "mapped": true
+      }
+    }
+  },
+  {
+    "name": "collapsed",
+    "client": [
+      1536,
+      793
+    ],
+    "dpi": 96.09458128078816,
+    "windows_scale_percent": 125,
+    "font": "{Microsoft JhengHei} 12",
+    "visible_lines": [
+      20
+    ],
+    "controls": {
+      "client": {
+        "x": 0,
+        "y": 23,
+        "width": 1536,
+        "height": 793,
+        "mapped": true
+      },
+      "body": {
+        "x": 16,
+        "y": 88,
+        "width": 1504,
+        "height": 650,
+        "mapped": true
+      },
+      "center": {
+        "x": 236,
+        "y": 88,
+        "width": 1284,
+        "height": 650,
+        "mapped": true
+      },
+      "list": {
+        "x": 16,
+        "y": 141,
+        "width": 208,
+        "height": 597,
+        "mapped": true
+      },
+      "source": {
+        "x": 236,
+        "y": 88,
+        "width": 639,
+        "height": 650,
+        "mapped": true
+      },
+      "editor_pane": {
+        "x": 881,
+        "y": 88,
+        "width": 639,
+        "height": 650,
+        "mapped": true
+      },
+      "editor": {
+        "x": 881,
+        "y": 141,
+        "width": 624,
+        "height": 597,
+        "mapped": true
+      },
+      "tool": {
+        "x": 236,
+        "y": 88,
+        "width": 1,
+        "height": 1,
+        "mapped": false
+      },
+      "next": {
+        "x": 1387,
+        "y": 750,
+        "width": 133,
+        "height": 37,
+        "mapped": true
+      },
+      "button": {
+        "x": 532,
+        "y": 96,
+        "width": 42,
+        "height": 37,
+        "mapped": true
+      },
+      "entry": {
+        "x": 574,
+        "y": 96,
+        "width": 52,
+        "height": 37,
+        "mapped": true
+      },
+      "combo": {
+        "x": 685,
+        "y": 96,
+        "width": 115,
+        "height": 37,
+        "mapped": true
+      }
+    }
+  },
+  {
+    "name": "restored",
+    "client": [
+      1100,
+      760
+    ],
+    "dpi": 96.09458128078816,
+    "windows_scale_percent": 125,
+    "font": "{Microsoft JhengHei} 12",
+    "visible_lines": [
+      20
+    ],
+    "controls": {
+      "client": {
+        "x": 60,
+        "y": 36,
+        "width": 1100,
+        "height": 760,
+        "mapped": true
+      },
+      "body": {
+        "x": 76,
+        "y": 101,
+        "width": 1068,
+        "height": 617,
+        "mapped": true
+      },
+      "center": {
+        "x": 76,
+        "y": 101,
+        "width": 1068,
+        "height": 617,
+        "mapped": true
+      },
+      "list": {
+        "x": 76,
+        "y": 154,
+        "width": 208,
+        "height": 597,
+        "mapped": false
+      },
+      "source": {
+        "x": 76,
+        "y": 101,
+        "width": 531,
+        "height": 617,
+        "mapped": true
+      },
+      "editor_pane": {
+        "x": 613,
+        "y": 101,
+        "width": 531,
+        "height": 617,
+        "mapped": true
+      },
+      "editor": {
+        "x": 613,
+        "y": 154,
+        "width": 516,
+        "height": 564,
+        "mapped": true
+      },
+      "tool": {
+        "x": 76,
+        "y": 101,
+        "width": 1,
+        "height": 1,
+        "mapped": false
+      },
+      "next": {
+        "x": 1011,
+        "y": 730,
+        "width": 133,
+        "height": 37,
+        "mapped": true
+      },
+      "button": {
+        "x": 264,
+        "y": 109,
+        "width": 42,
+        "height": 37,
+        "mapped": true
+      },
+      "entry": {
+        "x": 306,
+        "y": 109,
+        "width": 52,
+        "height": 37,
+        "mapped": true
+      },
+      "combo": {
+        "x": 417,
+        "y": 109,
+        "width": 115,
+        "height": 37,
+        "mapped": true
+      }
+    }
+  },
+  {
+    "name": "narrow-large-text",
+    "client": [
+      900,
+      640
+    ],
+    "dpi": 96.09458128078816,
+    "windows_scale_percent": 125,
+    "font": "{Microsoft JhengHei} 18",
+    "visible_lines": [
+      11
+    ],
+    "controls": {
+      "client": {
+        "x": 60,
+        "y": 36,
+        "width": 900,
+        "height": 640,
+        "mapped": true
+      },
+      "body": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": true
+      },
+      "center": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": true
+      },
+      "list": {
+        "x": 76,
+        "y": 154,
+        "width": 208,
+        "height": 597,
+        "mapped": false
+      },
+      "source": {
+        "x": 76,
+        "y": 101,
+        "width": 431,
+        "height": 497,
+        "mapped": false
+      },
+      "editor_pane": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": true
+      },
+      "editor": {
+        "x": 76,
+        "y": 154,
+        "width": 853,
+        "height": 444,
+        "mapped": true
+      },
+      "tool": {
+        "x": 76,
+        "y": 101,
+        "width": 1,
+        "height": 1,
+        "mapped": false
+      },
+      "next": {
+        "x": 811,
+        "y": 610,
+        "width": 133,
+        "height": 37,
+        "mapped": true
+      },
+      "button": {
+        "x": 164,
+        "y": 109,
+        "width": 42,
+        "height": 37,
+        "mapped": false
+      },
+      "entry": {
+        "x": 206,
+        "y": 109,
+        "width": 52,
+        "height": 37,
+        "mapped": false
+      },
+      "combo": {
+        "x": 317,
+        "y": 109,
+        "width": 115,
+        "height": 37,
+        "mapped": false
+      }
+    }
+  },
+  {
+    "name": "narrow-settings",
+    "client": [
+      900,
+      640
+    ],
+    "dpi": 96.09458128078816,
+    "windows_scale_percent": 125,
+    "font": "{Microsoft JhengHei} 18",
+    "visible_lines": [
+      11
+    ],
+    "controls": {
+      "client": {
+        "x": 60,
+        "y": 36,
+        "width": 900,
+        "height": 640,
+        "mapped": true
+      },
+      "body": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": true
+      },
+      "center": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": true
+      },
+      "list": {
+        "x": 76,
+        "y": 154,
+        "width": 208,
+        "height": 597,
+        "mapped": false
+      },
+      "source": {
+        "x": 76,
+        "y": 101,
+        "width": 431,
+        "height": 497,
+        "mapped": false
+      },
+      "editor_pane": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": false
+      },
+      "editor": {
+        "x": 76,
+        "y": 154,
+        "width": 853,
+        "height": 444,
+        "mapped": false
+      },
+      "tool": {
+        "x": 76,
+        "y": 101,
+        "width": 868,
+        "height": 497,
+        "mapped": true
+      },
+      "next": {
+        "x": 811,
+        "y": 610,
+        "width": 133,
+        "height": 37,
+        "mapped": true
+      },
+      "button": {
+        "x": 164,
+        "y": 109,
+        "width": 42,
+        "height": 37,
+        "mapped": false
+      },
+      "entry": {
+        "x": 206,
+        "y": 109,
+        "width": 52,
+        "height": 37,
+        "mapped": false
+      },
+      "combo": {
+        "x": 317,
+        "y": 109,
+        "width": 115,
+        "height": 37,
+        "mapped": false
+      }
+    }
+  }
+]

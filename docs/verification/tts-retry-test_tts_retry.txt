@@ -1,0 +1,10 @@
+test_http_date_and_invalid_delays (test_tts_retry.RetryHeaders.test_http_date_and_invalid_delays) ... Executing <Task finished name='Task-2' coro=<RetryHeaders.test_http_date_and_invalid_delays() done, defined at E:\Leo\Projects\ebook2mp4\tests\test_tts_retry.py:156> result=None created at C:\Python314\Lib\asyncio\runners.py:109> took 0.293 seconds
+ok
+test_long_delay_is_retryable_for_both_providers (test_tts_retry.RetryHeaders.test_long_delay_is_retryable_for_both_providers) ... ok
+test_cancel_during_long_wait_releases_resources_and_keeps_successful_audio (test_tts_retry.RetryRecovery.test_cancel_during_long_wait_releases_resources_and_keeps_successful_audio) ... ok
+test_resume_block_36_waits_for_long_retry_after_and_reuses_first_35 (test_tts_retry.RetryRecovery.test_resume_block_36_waits_for_long_retry_after_and_reuses_first_35) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 10.864s
+
+OK

@@ -1,0 +1,6 @@
+test_video_text_scrollbars_follow_overflow (test_unified_video_workspace.UnifiedVideoWorkspace.test_video_text_scrollbars_follow_overflow) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 15.951s
+
+OK

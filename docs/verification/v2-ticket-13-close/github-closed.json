@@ -1,0 +1,37 @@
+{
+  "method": "browser UI; independently read back using GitHub connector",
+  "connector_update_error": {
+    "error": "GitHub API error 403: {\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/issues/issues#update-an-issue\",\"status\":\"403\"}",
+    "error_code": "FORBIDDEN",
+    "error_data": {
+      "message": "Resource not accessible by integration",
+      "documentation_url": "https://docs.github.com/rest/issues/issues#update-an-issue",
+      "status": "403"
+    }
+  },
+  "issue": {
+    "id": 6355859678,
+    "url": "https://github.com/newesp/ebook2mp4/issues/13",
+    "title": "[v2] 統一全頁外框 → 全頁接入共用布局／元件 → 專屬 UI 與功能",
+    "issue_number": 13,
+    "body": "# v2 全頁共用外框：結案紀錄\n\n父規格：[Spec v2 #12](https://github.com/newesp/ebook2mp4/issues/12)。2026-11-19，A～E 完成。使用者要求完成後關閉本票，並明確確認「確認沿用現行介面」，包含 Kokoro。\n\n## 完成範圍\n\n- [x] A：盤點入口、子狀態、父容器與功能契約。依使用者指示沿用現有 UI，保存原生基線；歷史新增外框 mock 不採用。\n- [x] B：整合 DesktopShell、InnerPageHost、ProductionPageLayout，建立固定父容器與內容 port。\n- [x] C：全頁接入共用布局、標頭、操作列與固定 dispatcher。實測元件及父容器保持同一實例、跨頁幾何一致、隱藏頁命令受阻擋。\n- [x] D：在固定內容 port 接回現有功能，補齊繼承的文稿、版本、AI、來源、語音及製作頁驗收。Kokoro 現行介面已獲使用者確認。\n- [x] E：功能／布局回歸、根目錄 18 項 check-list、正式 EXE 獨立執行及清理完成。\n\n## 驗收與修正\n\n114 項功能與介面回歸通過，另有成品版本完整操作回歸、專案規定的試聽／接點七案。原生矩陣 66 張畫面涵蓋 16 個 page id、最大化與 1360×820、1280×720、900×640，以及文稿／版本適用的 18 pt。共用標頭差在 2 Tk 像素內，回呼錯誤為零。\n\n成品操作列三個次要按鈕在 10／13 pt 同寬，相鄰動作淨距 4 Tk 像素。停止播放於待命／完成時停用；音訊準備中可取消，晚到結果不啟動播放。已發布任務顯示「已保存成品」。\n\n正式 EXE 已操作長短文稿差異、版本還原、AI 缺金鑰阻擋、放大字級、PDF 異常逐項處理至空狀態、來源擷取預覽與放棄、線上試聽拒絕同意、Kokoro 缺包／包管理返回、成品播放／停止。前批正式取消、編碼失敗、重新發布、接點捲動／保存及 MP4／SRT 同版另存證據已由本批回歸覆核。\n\n## 全頁交付對照\n\n| 頁面／狀態 | C／D 結果及證據入口 |\n| --- | --- |\n| 文稿、換行預覽、版本／備份／差異、AI 候選與設定 | 共用宿主接入，編輯／還原／保存／阻擋回歸與原生／EXE 操作通過 |\n| PDF／TXT 來源、來源異常、專案位置／來源資訊 | 接入完成；擷取／預覽／放棄／草稿保留／處置／返回通過 |\n| 語音、本批／全書預設、服務管理、Kokoro 包管理 | 接入完成；同意／值保存／缺包／返回及專案原生驗收通過；現行 Kokoro UI 已確認 |\n| 音訊、任務稿／錯誤、全書合併與接點 | 接入完成；任務／停頓／捲動／閱讀位置／保存狀態回歸通過 |\n| 本批影片、全書統一素材、沿用各批影片及影片接點 | 接入完成；設定隔離、取消／失敗／重試、原生與正式操作通過 |\n| 成品版本、來源比較、播放、另存 | 接入完成；按鈕六組尺寸量測、停止狀態、正式播放及同版另存通過 |\n| 專案／匯入／訊息等輔助入口與跨頁生命週期 | 入口及返回已盤點；原生選檔／確認依使用者沿用 UI 指示保留，宿主與關閉回歸通過 |\n\n逐頁 page id、port、布局／資料／任務責任與功能／原生／EXE 分開對照，存於工作區 `docs/verification/v2-shell-refactor/integration.md` 及 `docs/verification/v2-ticket-13-close/README.md`。\n\n## 成品與證據\n\n正式成品：`dist/ebook2mp4/ebook2mp4.exe`。SHA-256：`47d55fb73b17dbbabc1ad1dc97d9fb29e50dc26542d3a60117ad2ae2a00d843f`。52 個封裝應用模組與來源一致，三條合成成品由內附 FFmpeg 完整解碼；最後正式程序正常退出，占用預檢通過。\n\n本機結案證據：`docs/verification/v2-ticket-13-close/README.md`、`check-list.md`、`final-audit.json`、`package.json`、`cleanup.json`、`final-preflight.txt`。來源規格：`docs/v2-unified-shell-spec.md`；執行及歷史完整盤點：`docs/tickets/v2-unified-shell.md`。本輪未提交或推送，因此這些證據路徑目前在工作區。\n\n## 保留原功能票的邊界\n\nK03 八項介面條件已納入父規格並以現行 UI 確認。真實付費服務、無快取 Kokoro CPU／品質／離線、語音包完整生命週期及乾淨 Windows 封裝驗收仍由原 #2～#11 適用工單追蹤，不因 #13 關閉視為完成。真實 Kokoro 包與下載 OCR 模型各一項條件式測試跳過。v1 封存維持現狀。\n",
+    "state": "closed",
+    "user": {
+      "login": "newesp",
+      "name": "newesp",
+      "email": null,
+      "avatar_url": "https://avatars.githubusercontent.com/u/59996719?v=4",
+      "id": 59996719
+    },
+    "assignees": null,
+    "labels": null,
+    "milestone": null,
+    "state_reason": "completed",
+    "comments": 0,
+    "created_at": "2026-11-12T17:56:03Z",
+    "updated_at": "2026-11-19T04:33:40Z",
+    "closed_at": "2026-11-19T04:33:40Z",
+    "display_url": "https://github.com/newesp/ebook2mp4/issues/13",
+    "display_title": "[v2] 統一全頁外框 → 全頁接入共用布局／元件 → 專屬 UI 與功能"
+  }
+}

@@ -1,0 +1,15 @@
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/mypy/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/mypy/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/mypy/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/mypy/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NameResolutionError("HTTPSConnection(host='pypi.org', port=443): Failed to resolve 'pypi.org' ([Errno 11001] getaddrinfo failed)")': /simple/mypy/
+ERROR: Could not find a version that satisfies the requirement mypy (from versions: none)
+ERROR: No matching distribution found for mypy
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{b25795c7-c381-4ce6-bec6-a93146e8450e}\AC\Temp\pip-build-tracker-xwu1vsom'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{b25795c7-c381-4ce6-bec6-a93146e8450e}\AC\Temp\pip-target-m99mh0_w'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{b25795c7-c381-4ce6-bec6-a93146e8450e}\AC\Temp\pip-ephem-wheel-cache-_sale_54'.
+You can safely remove it manually.
+WARNING: Failed to remove contents in a temporary directory 'C:\Users\Administrator\AppData\Local\Packages\sandbox.{b25795c7-c381-4ce6-bec6-a93146e8450e}\AC\Temp\pip-install-rfiifphr'.
+You can safely remove it manually.

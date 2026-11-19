@@ -1,0 +1,8 @@
+test_backup_has_no_delete_and_failed_restore_preserves_editor (test_v2_versions.VersionTests.test_backup_has_no_delete_and_failed_restore_preserves_editor) ... ok
+test_delete_cancel_and_restore_backup (test_v2_versions.VersionTests.test_delete_cancel_and_restore_backup) ... ok
+test_empty_short_long_and_return_to_other_inner_page (test_v2_versions.VersionTests.test_empty_short_long_and_return_to_other_inner_page) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 6.544s
+
+OK

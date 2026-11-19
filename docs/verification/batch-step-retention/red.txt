@@ -1,0 +1,48 @@
+test_cancel_unsaved_switch_keeps_page_and_batch (test_batch_step_retention.BatchStepRetention.test_cancel_unsaved_switch_keeps_page_and_batch) ... ok
+test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) ... 
+  test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) (step=1) ... FAIL
+test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) ... 
+  test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) (kind='narration') ... FAIL
+  test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) (kind='video') ... FAIL
+  test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) (kind='batch_video') ... FAIL
+
+======================================================================
+FAIL: test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) (step=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_batch_step_retention.py", line 60, in test_main_steps_survive_batch_switch
+    self.assertEqual(self.app.step, step)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) (kind='narration')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_batch_step_retention.py", line 48, in test_production_subpages_survive_batch_switch_in_both_directions
+    self.assertIs(self.app.production.current, self.app.production.pages.get(key))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice_desktop.VoiceDialog object .!workbench.!frame3.!productionworkspace.!frame2.!voicedialog2> is not None
+
+======================================================================
+FAIL: test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) (kind='video')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_batch_step_retention.py", line 48, in test_production_subpages_survive_batch_switch_in_both_directions
+    self.assertIs(self.app.production.current, self.app.production.pages.get(key))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice_desktop.VoiceDialog object .!workbench.!frame3.!productionworkspace.!frame2.!voicedialog2> is not <ebook2mp4.total_video_desktop.TotalVideoPage object .!workbench.!frame3.!productionworkspace.!frame2.!totalvideopage>
+
+======================================================================
+FAIL: test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) (kind='batch_video')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_batch_step_retention.py", line 48, in test_production_subpages_survive_batch_switch_in_both_directions
+    self.assertIs(self.app.production.current, self.app.production.pages.get(key))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice_desktop.VoiceDialog object .!workbench.!frame3.!productionworkspace.!frame2.!voicedialog2> is not None
+
+----------------------------------------------------------------------
+Ran 3 tests in 19.006s
+
+FAILED (failures=4)

@@ -1,0 +1,20 @@
+{
+  "batches": [
+    "9820c0a9337b440180fa1e50390299ed",
+    "6a9079de838e46d39cbac02975a4668e",
+    "186513dee0494a829b20bff2e6354ca2"
+  ],
+  "original_video": "9d712d61c7ff46e1a3990f4cd064e6b8",
+  "original_mp4": "video/run-9d712d61c7ff46e1a3990f4cd064e6b8/media/total.mp4",
+  "media": {
+    "sha256": "a4ae804ec09abf22c3f020a2fea96c8b65d45eb437b57de659ac2d9044afdbdc",
+    "decoded": true,
+    "codecs": [
+      "h264",
+      "aac"
+    ],
+    "seconds": 13.0
+  },
+  "original_srt": "video/run-9d712d61c7ff46e1a3990f4cd064e6b8/media/total.srt",
+  "srt_sha256": "37a6bc1e4779f70dd8ff057198853f7291b5e049f28c269ed47a1c02e80ccf19"
+}

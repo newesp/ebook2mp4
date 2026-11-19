@@ -1,0 +1,18 @@
+{
+  "progress": {
+    "frame": "90",
+    "fps": "27.50",
+    "stream_0_0_q": "-1.0",
+    "bitrate": "2339.4kbits/s",
+    "total_size": "857774",
+    "out_time_us": "2933333",
+    "out_time_ms": "2933333",
+    "out_time": "00:00:02.933333",
+    "dup_frames": "0",
+    "drop_frames": "0",
+    "speed": "0.896x",
+    "progress": "end"
+  },
+  "status": "completed",
+  "original_project_modified": false
+}

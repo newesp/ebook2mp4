@@ -1,0 +1,1498 @@
+{
+  "before-track-fix": {
+    "frames": 66,
+    "headers": [
+      {
+        "view": "manuscript-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-1360x820",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-1280x720",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-900x640",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-maximized",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "assembly-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "assembly-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "outputs-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          45,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "outputs-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          45,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "outputs-900x640",
+        "header": "header-0-0",
+        "delta": [
+          45,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "outputs-maximized",
+        "header": "header-0-0",
+        "delta": [
+          45,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "services-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          57,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "services-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          57,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "services-900x640",
+        "header": "header-0-0",
+        "delta": [
+          57,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "services-maximized",
+        "header": "header-0-0",
+        "delta": [
+          57,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "packages-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          53,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "packages-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          53,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "packages-900x640",
+        "header": "header-0-0",
+        "delta": [
+          53,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "packages-maximized",
+        "header": "header-0-0",
+        "delta": [
+          53,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "defaults-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          51,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "defaults-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          51,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "defaults-900x640",
+        "header": "header-0-0",
+        "delta": [
+          51,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "defaults-maximized",
+        "header": "header-0-0",
+        "delta": [
+          51,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "joins-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          45,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "joins-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          45,
+          0
+        ],
+        "passed": false
+      },
+      {
+        "view": "video-joins-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-18pt",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-18pt",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-18pt",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      }
+    ],
+    "failed_headers": 18,
+    "fixed_instances": {
+      "navigation": true,
+      "documents": true,
+      "workspace": true,
+      "footer": true,
+      "editor": true
+    },
+    "voice_spacing": [
+      {
+        "name": "voice-1360x820",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "voice-1280x720",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "voice-900x640",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "voice-maximized",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      }
+    ],
+    "join_content": [],
+    "callback_errors": []
+  },
+  "native-final": {
+    "frames": 72,
+    "headers": [
+      {
+        "view": "manuscript-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-1360x820",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-1280x720",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-900x640",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-maximized",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "ai-settings-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "source-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "audio-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-batch-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-book-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-merge-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "outputs-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "outputs-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "outputs-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "outputs-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "services-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "services-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "services-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "services-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "packages-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "packages-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "packages-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "packages-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "defaults-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "defaults-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "defaults-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "defaults-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-1360x820",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-1280x720",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-900x640",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "video-joins-maximized",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-18pt",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "manuscript-18pt",
+        "header": "header-1-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "versions-18pt",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "route-voice",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-settings-wheel-end",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-settings-thumb-start",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-settings-keyboard-end",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-settings-wide-fit",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      },
+      {
+        "view": "voice-settings-wide-fit",
+        "header": "header-0-0",
+        "delta": [
+          0,
+          0
+        ],
+        "passed": true
+      }
+    ],
+    "failed_headers": 0,
+    "fixed_instances": {
+      "navigation": true,
+      "documents": true,
+      "workspace": true,
+      "footer": true,
+      "editor": true
+    },
+    "voice_spacing": [
+      {
+        "name": "voice-1360x820",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "voice-1280x720",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "voice-900x640",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "voice-maximized",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "前往音訊製做 →",
+        "raw_footer_gap": 4
+      },
+      {
+        "name": "route-voice",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "套用到既有批次…",
+        "raw_footer_gap": 647
+      },
+      {
+        "name": "voice-settings-wheel-end",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "套用到既有批次…",
+        "raw_footer_gap": 647
+      },
+      {
+        "name": "voice-settings-thumb-start",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "套用到既有批次…",
+        "raw_footer_gap": 647
+      },
+      {
+        "name": "voice-settings-keyboard-end",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "套用到既有批次…",
+        "raw_footer_gap": 647
+      },
+      {
+        "name": "voice-settings-wide-fit",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "套用到既有批次…",
+        "raw_footer_gap": 187
+      },
+      {
+        "name": "voice-settings-wide-fit",
+        "pair": [
+          [
+            130,
+            37
+          ],
+          [
+            130,
+            37
+          ]
+        ],
+        "pair_gap": 4,
+        "footer_gap": 4,
+        "text_gap": 8,
+        "active_next_label": "套用到既有批次…",
+        "raw_footer_gap": 187
+      }
+    ],
+    "join_content": [],
+    "callback_errors": []
+  },
+  "expanded_join_anchors": {
+    "rows": 24,
+    "maximum_delta": 0.5
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "removed": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-retry-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-retry-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-retry-mypy",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-retry-package-check.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmpbytshwmw",
+    "E:\\Leo\\Projects\\ebook2mp4\\docs\\verification\\tts-retry-tests.txt"
+  ],
+  "remaining_test_directories": [],
+  "remaining_related_processes": [],
+  "preexisting_user_process": 10780,
+  "note": "No test process remains. No pre-existing user process was stopped by this task."
+}

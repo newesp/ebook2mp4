@@ -1,0 +1,19 @@
+Command: python -m unittest test_narration test_incremental_narration test_narration_resume test_voice_setting_restore -v
+Environment: PYTHONPATH includes repo/tests/pinned runtime; PYTHONDONTWRITEBYTECODE=1.
+Services are mocked. All project and voice-cache data use isolated TemporaryDirectory fixtures.
+
+Observed initial result: 20 tests in 62.367s; 19 passed, 1 environment error.
+The error was KeyError: EBOOK2MP4_FFMPEG in the measured-output test's own subprocess invocation.
+
+Corrected environment: EBOOK2MP4_FFMPEG=(Get-Command ffmpeg).Source
+Rerun command: python -m unittest test_narration.NarrationJourney.test_confirmed_snapshot_outputs_measured_cues_and_reopens -v
+Observed rerun result: 1 test in 4.168s, OK.
+
+All 20 selected cases passed across the initial run and corrected rerun.
+Coverage: immutable source snapshots, measured output/reopen, failure/cancel preservation,
+incremental reuse, interrupted run recovery, offline permission checks after cache changes,
+failed assembly reuse, settings restoration and save failure lock cleanup.
+
+The initial sandbox-only runs stalled before mocked service invocation while creating
+asyncio's local socketpair. Two owned stalled processes (25292,23228) were inspected and stopped.
+Final tests ran outside that filesystem sandbox with no real cloud service calls.

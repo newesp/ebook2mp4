@@ -1,0 +1,19 @@
+ebook2mp4\manuscript_desktop.py:282: error: Item "Button" of "Any | Button" has no attribute "help_text"  [union-attr]
+ebook2mp4\manuscript_desktop.py:283: error: Argument 1 to "CellTooltip" has incompatible type "Any | Button"; expected "Treeview"  [arg-type]
+ebook2mp4\manuscript_desktop.py:283: error: Cannot infer type of lambda  [misc]
+ebook2mp4\manuscript_desktop.py:284: error: No overload variant of "bind" of "Widget" matches argument types "str", "Callable[[Any, Any], Any]", "str"  [call-overload]
+ebook2mp4\manuscript_desktop.py:284: note: Possible overload variants:
+ebook2mp4\manuscript_desktop.py:284: note:     def bind(self, sequence: str | None = ..., func: Callable[[Event[Button]], object] | None = ..., add: Literal['', '+'] | bool | None = ...) -> str
+ebook2mp4\manuscript_desktop.py:284: note:     def bind(self, sequence: str | None, func: str, add: Literal['', '+'] | bool | None = ...) -> None
+ebook2mp4\manuscript_desktop.py:284: note:     def bind(self, *, func: str, add: Literal['', '+'] | bool | None = ...) -> None
+ebook2mp4\manuscript_desktop.py:407: error: Argument 2 has incompatible type "**dict[str, Widget]"; expected "Mapping[str, Any] | None"  [arg-type]
+ebook2mp4\manuscript_desktop.py:407: error: Argument 2 has incompatible type "**dict[str, Widget]"; expected "Literal['nw', 'n', 'ne', 'w', 'center', 'e', 'sw', 's', 'se']"  [arg-type]
+ebook2mp4\manuscript_desktop.py:407: error: Argument 2 has incompatible type "**dict[str, Widget]"; expected "Literal[0, 1] | bool"  [arg-type]
+ebook2mp4\manuscript_desktop.py:407: error: Argument 2 has incompatible type "**dict[str, Widget]"; expected "Literal['none', 'x', 'y', 'both']"  [arg-type]
+ebook2mp4\manuscript_desktop.py:407: error: Argument 2 has incompatible type "**dict[str, Widget]"; expected "float | str"  [arg-type]
+ebook2mp4\manuscript_desktop.py:407: error: Argument 2 has incompatible type "**dict[str, Widget]"; expected "float | str | tuple[float | str, float | str]"  [arg-type]
+ebook2mp4\manuscript_desktop.py:668: error: Cannot determine type of "tools_open"  [has-type]
+ebook2mp4\manuscript_desktop.py:1246: error: "Canvas" has no attribute "page_image"  [attr-defined]
+ebook2mp4\manuscript_desktop.py:1248: error: "Canvas" has no attribute "page_image"  [attr-defined]
+ebook2mp4\manuscript_desktop.py:1251: error: "Canvas" has no attribute "page_image"  [attr-defined]
+Found 14 errors in 1 file (checked 4 source files)

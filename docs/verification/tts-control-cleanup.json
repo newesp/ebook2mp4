@@ -1,0 +1,14 @@
+{
+  "removed": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-control-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-control-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-control-mypy",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\tts-control-package-check.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\docs\\verification\\tts-control-tests.txt"
+  ],
+  "remaining_test_directories": [],
+  "remaining_related_processes": [],
+  "note": "Test processes exited; no pre-existing user process was stopped."
+}

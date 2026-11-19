@@ -1,0 +1,82 @@
+{
+  "exe_sha256": "47d55fb73b17dbbabc1ad1dc97d9fb29e50dc26542d3a60117ad2ae2a00d843f",
+  "native_cases_passed": 7,
+  "regression_passed": 7,
+  "host_cpu_workflow": "passed",
+  "packaged_exe_host_workflow": "passed",
+  "clean_windows": "not available; not tested",
+  "full_ticket_complete": false,
+  "ui_source_sha256": "e4e99551d66051af7cf43e25f8b821486ac8966a0d36c9fcdea51a2a8c50ae51",
+  "products": [
+    {
+      "path": "products/batch-1.mp3",
+      "bytes": 49581,
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4"
+    },
+    {
+      "path": "products/batch-1.srt",
+      "bytes": 81,
+      "sha256": "6abbbabd78be1a2a7d9579267cba1997c93197e2dd7624bf0b5b414d3d92b140"
+    },
+    {
+      "path": "products/batch-2.mp3",
+      "bytes": 48141,
+      "sha256": "a976527404c7774411bfe958e816a1fb01df6979139145b147dd01692497e6e7"
+    },
+    {
+      "path": "products/batch-2.srt",
+      "bytes": 82,
+      "sha256": "7e6db23c5347184d420e2b450bed126b2226b73d923699f489688d3ef98a1f15"
+    },
+    {
+      "path": "products/exe-fixed-example.mp3",
+      "bytes": 83565,
+      "sha256": "a2365ea052f804830ceb3b4c753ec720ed25a4bf43354577d6cb8f072b89f775"
+    },
+    {
+      "path": "products/exe-formal.mp3",
+      "bytes": 49581,
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4"
+    },
+    {
+      "path": "products/exe-formal.srt",
+      "bytes": 81,
+      "sha256": "6abbbabd78be1a2a7d9579267cba1997c93197e2dd7624bf0b5b414d3d92b140"
+    },
+    {
+      "path": "products/preview.mp3",
+      "bytes": 49581,
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4"
+    },
+    {
+      "path": "products/source-1.txt",
+      "bytes": 47,
+      "sha256": "d0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084"
+    },
+    {
+      "path": "products/source-2.txt",
+      "bytes": 48,
+      "sha256": "bb8fc92743846bd8b9f29286c6d4dcb9b218dca2e6f07c35581955871ef67143"
+    },
+    {
+      "path": "products/total-image-1.mp4",
+      "bytes": 213773,
+      "sha256": "5349572fb60a074ddd35b77b1488b54e56d7c3fbafc7e67cc60c6cad00bb3d82"
+    },
+    {
+      "path": "products/total-image-2.mp4",
+      "bytes": 213775,
+      "sha256": "93403372072fed05128b5fc5921c3f05839fbf0dc1c296451b1348efe7b69076"
+    },
+    {
+      "path": "products/total.mp3",
+      "bytes": 102861,
+      "sha256": "b504b392d395a7d8373b6c797725d9bdc3d938b0a60c1c9dc1b3db08d57c76cf"
+    },
+    {
+      "path": "products/total.srt",
+      "bytes": 163,
+      "sha256": "ed411aab4fa294a95afdbd724a80b937ce954d69121ffb4bdbdf2b7bfdfc8aa9"
+    }
+  ]
+}

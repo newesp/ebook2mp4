@@ -1,0 +1,12 @@
+{
+  "modules_match_source": {
+    "tts_control": true,
+    "tts_services": true,
+    "voice_media": true,
+    "narration": true,
+    "narration_desktop": true
+  },
+  "sha256": "d0e66914cf4eae148e8c1321663322fa9433a4e77be896703020850c28d867c9",
+  "exit_code": 0,
+  "process_released": true
+}

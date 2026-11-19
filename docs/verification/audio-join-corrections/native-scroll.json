@@ -1,0 +1,254 @@
+[
+  {
+    "owner": "前批",
+    "state": "short",
+    "viewport_height": 196,
+    "content_height": 17,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "前批",
+    "state": "fit",
+    "viewport_height": 196,
+    "content_height": 187,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "前批",
+    "state": "overflow",
+    "viewport_height": 196,
+    "content_height": 204,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.9607843137254902
+    ],
+    "end": [
+      0.0392156862745098,
+      1.0
+    ]
+  },
+  {
+    "owner": "前批",
+    "state": "long",
+    "viewport_height": 196,
+    "content_height": 3060,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.06405228758169934
+    ],
+    "end": [
+      0.9359477124183007,
+      1.0
+    ]
+  },
+  {
+    "owner": "後批",
+    "state": "short",
+    "viewport_height": 196,
+    "content_height": 17,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "後批",
+    "state": "fit",
+    "viewport_height": 196,
+    "content_height": 187,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "後批",
+    "state": "overflow",
+    "viewport_height": 196,
+    "content_height": 204,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.9607843137254902
+    ],
+    "end": [
+      0.0392156862745098,
+      1.0
+    ]
+  },
+  {
+    "owner": "後批",
+    "state": "long",
+    "viewport_height": 196,
+    "content_height": 3060,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.06405228758169934
+    ],
+    "end": [
+      0.9359477124183007,
+      1.0
+    ]
+  },
+  {
+    "owner": "警告詳情",
+    "state": "short",
+    "viewport_height": 155,
+    "content_height": 17,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "警告詳情",
+    "state": "fit",
+    "viewport_height": 155,
+    "content_height": 153,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "警告詳情",
+    "state": "overflow",
+    "viewport_height": 155,
+    "content_height": 170,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.9117647058823529
+    ],
+    "end": [
+      0.08823529411764706,
+      1.0
+    ]
+  },
+  {
+    "owner": "警告詳情",
+    "state": "long",
+    "viewport_height": 155,
+    "content_height": 3060,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.05065359477124183
+    ],
+    "end": [
+      0.9493464052287581,
+      1.0
+    ]
+  },
+  {
+    "owner": "文件列表",
+    "state": "short",
+    "rows": 1,
+    "rowheight": 68,
+    "viewport_height": 340,
+    "content_height": 68,
+    "widget_height": 386,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "文件列表",
+    "state": "fit",
+    "rows": 5,
+    "rowheight": 68,
+    "viewport_height": 340,
+    "content_height": 340,
+    "widget_height": 386,
+    "scrollbar_visible": false,
+    "first": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ]
+  },
+  {
+    "owner": "文件列表",
+    "state": "overflow",
+    "rows": 6,
+    "rowheight": 68,
+    "viewport_height": 340,
+    "content_height": 408,
+    "widget_height": 386,
+    "scrollbar_visible": true,
+    "first": [
+      0.0,
+      0.8333333333333334
+    ],
+    "end": [
+      0.16666666666666666,
+      1.0
+    ]
+  },
+  {
+    "owner": "文件列表",
+    "state": "long",
+    "rows": 40,
+    "rowheight": 68,
+    "viewport_height": 340,
+    "content_height": 2720,
+    "widget_height": 386,
+    "scrollbar_visible": true,
+    "first": [
+      0.025,
+      0.15
+    ],
+    "end": [
+      0.875,
+      1.0
+    ]
+  }
+]

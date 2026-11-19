@@ -1,0 +1,33 @@
+.EF...........F..........
+======================================================================
+ERROR: test_delete_cancel_and_restore_backup (test_v2_versions.VersionTests.test_delete_cancel_and_restore_backup)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_versions.py", line 47, in test_delete_cancel_and_restore_backup
+    app.inner_host.actions.buttons['versions.delete'].invoke()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'versions.delete'
+
+======================================================================
+FAIL: test_empty_short_long_and_return_to_other_inner_page (test_v2_versions.VersionTests.test_empty_short_long_and_return_to_other_inner_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_versions.py", line 20, in test_empty_short_long_and_return_to_other_inner_page
+    self.assertEqual(app.inner_host.actions.visible_ids, {'versions.delete','versions.restore'})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the second set but not the first:
+'versions.delete'
+
+======================================================================
+FAIL: test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit (test_v2_cleanup_shell.CleanupShellTests.test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_cleanup_shell.py", line 235, in test_dispatchers_are_reused_and_hidden_page_callbacks_cannot_commit
+    self.assertTrue(app.tools_open)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 25 tests in 66.463s
+
+FAILED (failures=2, errors=1)

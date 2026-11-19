@@ -1,0 +1,1244 @@
+{
+  "source_sha256": "3332ceba6e34ccb4e85bccba8a02006b195a2794bbff15d1584e60271db0e022",
+  "pairs": [
+    {
+      "page": "1360-empty",
+      "group": "source-action",
+      "pair": [
+        "重新檢查來源",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-empty",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-empty",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-empty",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-fit",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-fit",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-fit",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-fit",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-overflow",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-overflow",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-overflow",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-overflow",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long-end",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long-end",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long-end",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-long-end",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1920-short",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1920-short",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1920-short",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1920-short",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1280-short",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1280-short",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1280-short",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1280-short",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-short",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-short",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-short",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-short",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-short",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-short",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-short",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-short",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-both-short",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-both-short",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-both-short",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "900-both-short",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-missing",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-missing",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-missing",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-missing",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-partial",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-partial",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-partial",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-partial",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "只重試未完成輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-running",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-running",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-running",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-cancelled",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-cancelled",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-cancelled",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-cancelled",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "只重試未完成輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-pending",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-pending",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-pending",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-pending",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "重試保存"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-done",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-done",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-done",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-both-done",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "輸出均已完成"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-fit",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-fit",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-fit",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-fit",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-long",
+      "group": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-long",
+      "group": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-long",
+      "group": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 144,
+      "height": 36,
+      "gap": 4
+    },
+    {
+      "page": "1360-short-files-long",
+      "group": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4
+    }
+  ],
+  "space_and_association": [
+    {
+      "page": "1360-empty",
+      "kind": "status-action",
+      "status": "未檢查",
+      "distance": 78.0
+    },
+    {
+      "page": "1360-empty",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-short",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-fit",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-fit",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-overflow",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-overflow",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-long",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-long",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-long-end",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-long-end",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1920-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1920-short",
+      "kind": "space-budget",
+      "source_viewport": 539,
+      "fixed_output_height": 88,
+      "join_top": 756,
+      "output_top": 800,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1280-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1280-short",
+      "kind": "space-budget",
+      "source_viewport": 214,
+      "fixed_output_height": 88,
+      "join_top": 476,
+      "output_top": 520,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "900-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "900-short",
+      "kind": "space-budget",
+      "source_viewport": 183,
+      "fixed_output_height": 88,
+      "join_top": 396,
+      "output_top": 440,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-short",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "900-both-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "900-both-short",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "900-both-short",
+      "kind": "space-budget",
+      "source_viewport": 139,
+      "fixed_output_height": 132,
+      "join_top": 352,
+      "output_top": 396,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-missing",
+      "kind": "status-action",
+      "status": "缺項",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-missing",
+      "kind": "status-action",
+      "status": "缺項",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-missing",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-partial",
+      "kind": "status-action",
+      "status": "完成",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-partial",
+      "kind": "status-action",
+      "status": "失敗",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-partial",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-running",
+      "kind": "status-action",
+      "status": "執行中",
+      "distance": 78.0
+    },
+    {
+      "page": "1360-both-running",
+      "kind": "status-action",
+      "status": "等待",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-running",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-cancelled",
+      "kind": "status-action",
+      "status": "已取消",
+      "distance": 78.0
+    },
+    {
+      "page": "1360-both-cancelled",
+      "kind": "status-action",
+      "status": "已取消",
+      "distance": 78.0
+    },
+    {
+      "page": "1360-both-cancelled",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-pending",
+      "kind": "status-action",
+      "status": "保存失敗",
+      "distance": 64.0
+    },
+    {
+      "page": "1360-both-pending",
+      "kind": "status-action",
+      "status": "保存失敗",
+      "distance": 64.0
+    },
+    {
+      "page": "1360-both-pending",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-both-done",
+      "kind": "status-action",
+      "status": "完成",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-done",
+      "kind": "status-action",
+      "status": "完成",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-both-done",
+      "kind": "space-budget",
+      "source_viewport": 315,
+      "fixed_output_height": 132,
+      "join_top": 532,
+      "output_top": 576,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-short-files-fit",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-short-files-fit",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    },
+    {
+      "page": "1360-short-files-long",
+      "kind": "status-action",
+      "status": "準備",
+      "distance": 92.0
+    },
+    {
+      "page": "1360-short-files-long",
+      "kind": "space-budget",
+      "source_viewport": 359,
+      "fixed_output_height": 88,
+      "join_top": 576,
+      "output_top": 620,
+      "toolbar_content_gap": 8,
+      "full_width_action_columns": false
+    }
+  ]
+}

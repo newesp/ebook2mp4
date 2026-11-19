@@ -1,0 +1,912 @@
+[
+  {
+    "name": "native-1360x820-10pt",
+    "size": "1360x820",
+    "font_points": 10,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": false,
+    "widgets": {
+      "left_text": {
+        "x": 359,
+        "y": 249,
+        "width": 536,
+        "height": 406,
+        "mapped": true
+      },
+      "right_text": {
+        "x": 907,
+        "y": 249,
+        "width": 536,
+        "height": 406,
+        "mapped": true
+      },
+      "left_edit": {
+        "x": 767,
+        "y": 204,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "right_edit": {
+        "x": 1315,
+        "y": 204,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "pause_control": {
+        "x": 439,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 655,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 907,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 1031,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 1260,
+        "y": 797,
+        "width": 196,
+        "height": 37,
+        "mapped": true
+      },
+      "previous": {
+        "x": 1219,
+        "y": 159,
+        "width": 108,
+        "height": 37,
+        "mapped": true
+      },
+      "next": {
+        "x": 1331,
+        "y": 159,
+        "width": 112,
+        "height": 37,
+        "mapped": true
+      },
+      "main": {
+        "x": 346,
+        "y": 146,
+        "width": 1110,
+        "height": 596,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 146,
+        "width": 206,
+        "height": 596,
+        "mapped": true
+      },
+      "disclosure": {
+        "x": 349,
+        "y": 756,
+        "width": 88,
+        "height": 37,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 756,
+        "width": 217,
+        "height": 37,
+        "mapped": true
+      },
+      "detail": {
+        "x": 359,
+        "y": 204,
+        "width": 1,
+        "height": 1,
+        "mapped": false
+      }
+    },
+    "detail_yview": [
+      0.0,
+      0.011764705882352941
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  },
+  {
+    "name": "native-1360x820-10pt-expanded",
+    "size": "1360x820",
+    "font_points": 10,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": false,
+    "widgets": {
+      "left_text": {
+        "x": 359,
+        "y": 249,
+        "width": 536,
+        "height": 287,
+        "mapped": true
+      },
+      "right_text": {
+        "x": 907,
+        "y": 249,
+        "width": 536,
+        "height": 287,
+        "mapped": true
+      },
+      "left_edit": {
+        "x": 767,
+        "y": 204,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "right_edit": {
+        "x": 1315,
+        "y": 204,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "pause_control": {
+        "x": 439,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 655,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 907,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 1031,
+        "y": 663,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 1260,
+        "y": 797,
+        "width": 196,
+        "height": 37,
+        "mapped": true
+      },
+      "previous": {
+        "x": 1219,
+        "y": 159,
+        "width": 108,
+        "height": 37,
+        "mapped": true
+      },
+      "next": {
+        "x": 1331,
+        "y": 159,
+        "width": 112,
+        "height": 37,
+        "mapped": true
+      },
+      "main": {
+        "x": 346,
+        "y": 146,
+        "width": 1110,
+        "height": 596,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 146,
+        "width": 206,
+        "height": 596,
+        "mapped": true
+      },
+      "disclosure": {
+        "x": 349,
+        "y": 756,
+        "width": 88,
+        "height": 37,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 756,
+        "width": 217,
+        "height": 37,
+        "mapped": true
+      },
+      "detail": {
+        "x": 359,
+        "y": 544,
+        "width": 1084,
+        "height": 111,
+        "mapped": true
+      }
+    },
+    "detail_yview": [
+      0.0,
+      1.0
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  },
+  {
+    "name": "native-1280x720-10pt",
+    "size": "1280x720",
+    "font_points": 10,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": false,
+    "widgets": {
+      "left_text": {
+        "x": 359,
+        "y": 249,
+        "width": 496,
+        "height": 306,
+        "mapped": true
+      },
+      "right_text": {
+        "x": 867,
+        "y": 249,
+        "width": 496,
+        "height": 306,
+        "mapped": true
+      },
+      "left_edit": {
+        "x": 727,
+        "y": 204,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "right_edit": {
+        "x": 1235,
+        "y": 204,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "pause_control": {
+        "x": 439,
+        "y": 563,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 655,
+        "y": 563,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 867,
+        "y": 563,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 991,
+        "y": 563,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 1180,
+        "y": 697,
+        "width": 196,
+        "height": 37,
+        "mapped": true
+      },
+      "previous": {
+        "x": 1139,
+        "y": 159,
+        "width": 108,
+        "height": 37,
+        "mapped": true
+      },
+      "next": {
+        "x": 1251,
+        "y": 159,
+        "width": 112,
+        "height": 37,
+        "mapped": true
+      },
+      "main": {
+        "x": 346,
+        "y": 146,
+        "width": 1030,
+        "height": 496,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 154,
+        "width": 206,
+        "height": 488,
+        "mapped": true
+      },
+      "disclosure": {
+        "x": 349,
+        "y": 656,
+        "width": 88,
+        "height": 37,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 656,
+        "width": 217,
+        "height": 37,
+        "mapped": true
+      },
+      "detail": {
+        "x": 359,
+        "y": 544,
+        "width": 1084,
+        "height": 111,
+        "mapped": false
+      }
+    },
+    "detail_yview": [
+      0.0,
+      1.0
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  },
+  {
+    "name": "native-900x640-10pt",
+    "size": "900x640",
+    "font_points": 10,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": false,
+    "widgets": {
+      "left_text": {
+        "x": 141,
+        "y": 294,
+        "width": 415,
+        "height": 181,
+        "mapped": true
+      },
+      "right_text": {
+        "x": 568,
+        "y": 294,
+        "width": 415,
+        "height": 181,
+        "mapped": true
+      },
+      "left_edit": {
+        "x": 428,
+        "y": 249,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "right_edit": {
+        "x": 855,
+        "y": 249,
+        "width": 128,
+        "height": 37,
+        "mapped": true
+      },
+      "pause_control": {
+        "x": 221,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 437,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 568,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 692,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 800,
+        "y": 617,
+        "width": 196,
+        "height": 37,
+        "mapped": true
+      },
+      "previous": {
+        "x": 759,
+        "y": 204,
+        "width": 108,
+        "height": 37,
+        "mapped": true
+      },
+      "next": {
+        "x": 871,
+        "y": 204,
+        "width": 112,
+        "height": 37,
+        "mapped": true
+      },
+      "main": {
+        "x": 128,
+        "y": 191,
+        "width": 868,
+        "height": 371,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 191,
+        "width": 206,
+        "height": 496,
+        "mapped": false
+      },
+      "disclosure": {
+        "x": 349,
+        "y": 576,
+        "width": 88,
+        "height": 37,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 576,
+        "width": 217,
+        "height": 37,
+        "mapped": true
+      },
+      "detail": {
+        "x": 141,
+        "y": 589,
+        "width": 1084,
+        "height": 111,
+        "mapped": false
+      }
+    },
+    "detail_yview": [
+      0.0,
+      1.0
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  },
+  {
+    "name": "native-900x640-10pt-expanded",
+    "size": "900x640",
+    "font_points": 10,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": true,
+    "widgets": {
+      "left_text": {
+        "x": 141,
+        "y": 294,
+        "width": 415,
+        "height": 181,
+        "mapped": false
+      },
+      "right_text": {
+        "x": 568,
+        "y": 294,
+        "width": 415,
+        "height": 181,
+        "mapped": false
+      },
+      "left_edit": {
+        "x": 428,
+        "y": 249,
+        "width": 128,
+        "height": 37,
+        "mapped": false
+      },
+      "right_edit": {
+        "x": 855,
+        "y": 249,
+        "width": 128,
+        "height": 37,
+        "mapped": false
+      },
+      "pause_control": {
+        "x": 221,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 437,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 568,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 692,
+        "y": 483,
+        "width": 120,
+        "height": 37,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 800,
+        "y": 617,
+        "width": 196,
+        "height": 37,
+        "mapped": true
+      },
+      "previous": {
+        "x": 759,
+        "y": 204,
+        "width": 108,
+        "height": 37,
+        "mapped": true
+      },
+      "next": {
+        "x": 871,
+        "y": 204,
+        "width": 112,
+        "height": 37,
+        "mapped": true
+      },
+      "main": {
+        "x": 128,
+        "y": 191,
+        "width": 868,
+        "height": 371,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 191,
+        "width": 206,
+        "height": 496,
+        "mapped": false
+      },
+      "disclosure": {
+        "x": 349,
+        "y": 576,
+        "width": 88,
+        "height": 37,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 576,
+        "width": 217,
+        "height": 37,
+        "mapped": true
+      },
+      "detail": {
+        "x": 141,
+        "y": 294,
+        "width": 842,
+        "height": 181,
+        "mapped": true
+      }
+    },
+    "detail_yview": [
+      0.0,
+      1.0
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  },
+  {
+    "name": "native-900x640-13pt",
+    "size": "900x640",
+    "font_points": 13,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": false,
+    "widgets": {
+      "left_text": {
+        "x": 141,
+        "y": 319,
+        "width": 415,
+        "height": 141,
+        "mapped": true
+      },
+      "right_text": {
+        "x": 568,
+        "y": 319,
+        "width": 415,
+        "height": 141,
+        "mapped": true
+      },
+      "left_edit": {
+        "x": 428,
+        "y": 269,
+        "width": 128,
+        "height": 42,
+        "mapped": true
+      },
+      "right_edit": {
+        "x": 855,
+        "y": 269,
+        "width": 128,
+        "height": 42,
+        "mapped": true
+      },
+      "pause_control": {
+        "x": 221,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 437,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 568,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 692,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 800,
+        "y": 612,
+        "width": 196,
+        "height": 42,
+        "mapped": true
+      },
+      "previous": {
+        "x": 759,
+        "y": 219,
+        "width": 108,
+        "height": 42,
+        "mapped": true
+      },
+      "next": {
+        "x": 871,
+        "y": 219,
+        "width": 112,
+        "height": 42,
+        "mapped": true
+      },
+      "main": {
+        "x": 128,
+        "y": 206,
+        "width": 868,
+        "height": 346,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 206,
+        "width": 206,
+        "height": 491,
+        "mapped": false
+      },
+      "disclosure": {
+        "x": 409,
+        "y": 566,
+        "width": 107,
+        "height": 42,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 566,
+        "width": 277,
+        "height": 42,
+        "mapped": true
+      },
+      "detail": {
+        "x": 141,
+        "y": 319,
+        "width": 842,
+        "height": 176,
+        "mapped": false
+      }
+    },
+    "detail_yview": [
+      0.0,
+      1.0
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  },
+  {
+    "name": "native-900x640-13pt-expanded",
+    "size": "900x640",
+    "font_points": 13,
+    "dpi": 96.09458128078816,
+    "scaling": 1.334646962233169,
+    "dedicated": true,
+    "widgets": {
+      "left_text": {
+        "x": 141,
+        "y": 319,
+        "width": 415,
+        "height": 141,
+        "mapped": false
+      },
+      "right_text": {
+        "x": 568,
+        "y": 319,
+        "width": 415,
+        "height": 141,
+        "mapped": false
+      },
+      "left_edit": {
+        "x": 428,
+        "y": 269,
+        "width": 128,
+        "height": 42,
+        "mapped": false
+      },
+      "right_edit": {
+        "x": 855,
+        "y": 269,
+        "width": 128,
+        "height": 42,
+        "mapped": false
+      },
+      "pause_control": {
+        "x": 221,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "clip_control": {
+        "x": 437,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "play_button": {
+        "x": 568,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "stop_button": {
+        "x": 692,
+        "y": 468,
+        "width": 120,
+        "height": 42,
+        "mapped": true
+      },
+      "save_button": {
+        "x": 800,
+        "y": 612,
+        "width": 196,
+        "height": 42,
+        "mapped": true
+      },
+      "previous": {
+        "x": 759,
+        "y": 219,
+        "width": 108,
+        "height": 42,
+        "mapped": true
+      },
+      "next": {
+        "x": 871,
+        "y": 219,
+        "width": 112,
+        "height": 42,
+        "mapped": true
+      },
+      "main": {
+        "x": 128,
+        "y": 206,
+        "width": 868,
+        "height": 346,
+        "mapped": true
+      },
+      "documents": {
+        "x": 128,
+        "y": 206,
+        "width": 206,
+        "height": 491,
+        "mapped": false
+      },
+      "disclosure": {
+        "x": 409,
+        "y": 566,
+        "width": 107,
+        "height": 42,
+        "mapped": true
+      },
+      "ack": {
+        "x": 128,
+        "y": 566,
+        "width": 277,
+        "height": 42,
+        "mapped": true
+      },
+      "detail": {
+        "x": 141,
+        "y": 319,
+        "width": 842,
+        "height": 141,
+        "mapped": true
+      }
+    },
+    "detail_yview": [
+      0.0,
+      1.0
+    ],
+    "source_scrollbars": [
+      false,
+      false
+    ]
+  }
+]

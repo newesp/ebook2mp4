@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<stdin>", line 3, in <module>
+  File "t20-package-check", line 47, in <module>
+  File "t20-package-check", line 33, in run
+AssertionError: ebook2mp4.output_versions

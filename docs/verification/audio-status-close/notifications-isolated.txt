@@ -1,0 +1,22 @@
+test_auto_dismiss_eases_out (test_notifications.Notifications.test_auto_dismiss_eases_out) ... ok
+test_hover_and_focus_pause_then_resume_countdown (test_notifications.Notifications.test_hover_and_focus_pause_then_resume_countdown) ... ok
+test_new_message_replaces_old_timer_and_history_keeps_both (test_notifications.Notifications.test_new_message_replaces_old_timer_and_history_keeps_both) ... ok
+test_small_child_owner_long_message_and_destruction_release_timers (test_notifications.Notifications.test_small_child_owner_long_message_and_destruction_release_timers) ... ok
+test_sticky_error_close_does_not_clear_existing_blocker (test_notifications.Notifications.test_sticky_error_close_does_not_clear_existing_blocker) ... ok
+test_switching_owner_dismisses_toast_and_never_uses_global_topmost (test_notifications.Notifications.test_switching_owner_dismisses_toast_and_never_uses_global_topmost) ... ok
+test_top_center_tracks_owner_without_stealing_editor_focus (test_notifications.Notifications.test_top_center_tracks_owner_without_stealing_editor_focus) ... FAIL
+test_unmapped_owner_dismisses_and_hidden_owner_only_records_history (test_notifications.Notifications.test_unmapped_owner_dismisses_and_hidden_owner_only_records_history) ... ok
+
+======================================================================
+FAIL: test_top_center_tracks_owner_without_stealing_editor_focus (test_notifications.Notifications.test_top_center_tracks_owner_without_stealing_editor_focus)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_notifications.py", line 36, in test_top_center_tracks_owner_without_stealing_editor_focus
+    self.assertIs(self.root.focus_displayof(), self.app.editor)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <tkinter.Tk object .> is not <tkinter.Text object .!workbench.!frame2.!frame2.!panedwindow.!panedwindow.!frame.!text>
+
+----------------------------------------------------------------------
+Ran 8 tests in 15.030s
+
+FAILED (failures=1)

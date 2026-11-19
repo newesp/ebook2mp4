@@ -1,0 +1,62 @@
+Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2093, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 876, in callit
+    func(*args, **kw)
+    ~~~~^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\manuscript_desktop.py", line 790, in layout_workspace
+    self.production.sync_chrome()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 209, in sync_chrome
+    height = max(self.current.sources_panel.winfo_reqheight(), app.list_header.winfo_reqheight()) + 8
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1322, in winfo_reqheight
+    self.tk.call('winfo', 'reqheight', self._w))
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: bad window path name ".!workbench.!frame.!productionworkspace.!frame2.!voicedialog.!frame"
+.F...F..F.F............
+======================================================================
+FAIL: test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 139, in test_compact_page_keeps_controls_visible_and_only_text_scrolls
+    self.assertLessEqual(y+control.winfo_height(), d.winfo_height())
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 491 not less than or equal to 428
+
+======================================================================
+FAIL: test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 204, in test_switching_batch_does_not_write_settings_through_old_dialog
+    self.assertIn('�w����', self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '�w����' not found in '����M��w��s�F�Щ��T��ܭ���C'
+
+======================================================================
+FAIL: test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_kokoro_desktop.py", line 16, in test_local_service_reuses_controls_and_package_page_preserves_text
+    self.assertEqual(str(d.preview_button.cget('state')),'disabled')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'normal' != 'disabled'
+- normal
++ disabled
+
+
+======================================================================
+FAIL: test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 306, in test_audio_owns_primary_action_and_other_pages_restore_shared_action
+    self.assertTrue(self.app.next_button.winfo_ismapped())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not true
+
+----------------------------------------------------------------------
+Ran 23 tests in 62.811s
+
+FAILED (failures=4)

@@ -1,0 +1,30 @@
+{
+  "exe_sha256": "BFDD98C705AF4EBCC9E09AF35D17D084BA05E1D52916184750A31D6CC656D7AC",
+  "paths": [
+    {
+      "path": ".scratch/t13-source-recheck",
+      "status": "removed"
+    },
+    {
+      "path": ".scratch/build-tools",
+      "status": "removed"
+    },
+    {
+      "path": ".scratch/ocr-runtime",
+      "status": "removed"
+    },
+    {
+      "path": ".scratch/voice-runtime",
+      "status": "removed"
+    },
+    {
+      "path": ".scratch/pyinstaller-build",
+      "status": "removed"
+    },
+    {
+      "path": ".scratch/pyinstaller-cache",
+      "status": "absent"
+    }
+  ],
+  "confirmed_exit_code": 0
+}

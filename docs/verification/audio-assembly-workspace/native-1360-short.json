@@ -1,0 +1,174 @@
+{
+  "geometry": "1360x820+0+0",
+  "tk_scaling": 1.334646962233169,
+  "dpi": 96.09458128078816,
+  "widgets": {
+    "root": {
+      "x": 8,
+      "y": 31,
+      "width": 1360,
+      "height": 820,
+      "mapped": true
+    },
+    "page": {
+      "x": 244,
+      "y": 96,
+      "width": 1108,
+      "height": 653,
+      "mapped": true
+    },
+    "main": {
+      "x": 244,
+      "y": 141,
+      "width": 1108,
+      "height": 608,
+      "mapped": true
+    },
+    "toolbar": {
+      "x": 257,
+      "y": 154,
+      "width": 1082,
+      "height": 37,
+      "mapped": true
+    },
+    "table": {
+      "x": 257,
+      "y": 199,
+      "width": 1082,
+      "height": 447,
+      "mapped": true
+    },
+    "table_frame": {
+      "x": 257,
+      "y": 199,
+      "width": 1082,
+      "height": 447,
+      "mapped": true
+    },
+    "pause": {
+      "x": 369,
+      "y": 654,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "state": {
+      "x": 369,
+      "y": 699,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "join": {
+      "x": 665,
+      "y": 654,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "detail": {
+      "x": 665,
+      "y": 699,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "versions": {
+      "x": 813,
+      "y": 699,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "save": {
+      "x": 496,
+      "y": 792,
+      "width": 196,
+      "height": 37,
+      "mapped": false
+    },
+    "start": {
+      "x": 696,
+      "y": 792,
+      "width": 196,
+      "height": 37,
+      "mapped": false
+    },
+    "back": {
+      "x": 24,
+      "y": 792,
+      "width": 168,
+      "height": 37,
+      "mapped": true
+    },
+    "scrollbar": {
+      "x": 1084,
+      "y": 199,
+      "width": 15,
+      "height": 222,
+      "mapped": false
+    },
+    "files": {
+      "x": 24,
+      "y": 96,
+      "width": 220,
+      "height": 653,
+      "mapped": true
+    },
+    "header": {
+      "x": 244,
+      "y": 96,
+      "width": 1108,
+      "height": 21,
+      "mapped": true
+    },
+    "source0": {
+      "x": 369,
+      "y": 154,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "source1": {
+      "x": 517,
+      "y": 154,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "source2": {
+      "x": 665,
+      "y": 154,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "source3": {
+      "x": 813,
+      "y": 154,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    }
+  },
+  "yview": [
+    0.0,
+    1.0
+  ],
+  "rows": 4,
+  "selected": [
+    "3ab7c0b7bbdf419e837ea1ccea7f8ac6",
+    "01c97e812615437f824096d3a1e390c4",
+    "7cf166981c6f4a848847409a1701bcdf",
+    "69f9e723c7714271aabcb7b9b0a6fdab"
+  ],
+  "pause": "0.5",
+  "status": "正在檢查來源與成品版本…",
+  "errors": [],
+  "only_audio": true,
+  "source_scrollbar": false,
+  "progress": null,
+  "pause_display": "0.5 秒",
+  "empty_hint": true,
+  "rowheight": 40
+}

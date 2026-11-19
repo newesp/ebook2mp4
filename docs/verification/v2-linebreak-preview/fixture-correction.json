@@ -1,0 +1,6 @@
+{
+  "reason": "Windows write_text created CRLF; normalization is a legitimate preview change. Prepare LF manuscript for the actual no-op scenario.",
+  "product_changed": false,
+  "original_source_unchanged": true,
+  "no_op_readings_before_preview": 2
+}

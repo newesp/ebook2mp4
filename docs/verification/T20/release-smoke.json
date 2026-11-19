@@ -1,0 +1,29 @@
+{
+  "executable": "dist/ebook2mp4/ebook2mp4.exe",
+  "system_python_ffmpeg_on_path": false,
+  "observed": [
+    "隔離設定自動載入合成書籍",
+    "試聽與製作 → 全書合併 → 成品版本",
+    "三條路徑皆有效",
+    "批次影片播放：紅色 A → 藍色 B 與同版字幕",
+    "播放結束",
+    "播放後開啟來源詳情",
+    "正常關閉"
+  ],
+  "states": [
+    {
+      "route": "audio",
+      "status": "有效 · 與目前一致"
+    },
+    {
+      "route": "total-audio",
+      "status": "有效 · 與目前一致"
+    },
+    {
+      "route": "batch-videos",
+      "status": "有效 · 與目前一致"
+    }
+  ],
+  "production_lock": false,
+  "playback_temps": []
+}

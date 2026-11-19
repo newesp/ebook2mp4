@@ -1,0 +1,18 @@
+test_close_waits_for_cancel_and_changed_source_requires_new_consent (test_narration_desktop.NarrationDesktop.test_close_waits_for_cancel_and_changed_source_requires_new_consent) ... ok
+test_compact_page_has_no_outer_scroll_and_footer_stays_visible (test_narration_desktop.NarrationDesktop.test_compact_page_has_no_outer_scroll_and_footer_stays_visible) ... ok
+test_confirm_consent_produce_export_play_and_small_window (test_narration_desktop.NarrationDesktop.test_confirm_consent_produce_export_play_and_small_window) ... ok
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_close_autosaves_manuscript_without_confirmation_page (test_production_pages.ProductionPages.test_close_autosaves_manuscript_without_confirmation_page) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+test_autosaved_switch_keeps_draft_in_original_batch (test_batch_step_retention.BatchStepRetention.test_autosaved_switch_keeps_draft_in_original_batch) ... ok
+test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) ... ok
+test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) ... ok
+test_173_rows_and_countdown_follow_current_progress_without_losing_selection (test_tts_retry_desktop.RetryDesktop.test_173_rows_and_countdown_follow_current_progress_without_losing_selection) ... ok
+test_excessive_wait_stops_and_enables_resume_at_minimum_window (test_tts_retry_desktop.RetryDesktop.test_excessive_wait_stops_and_enables_resume_at_minimum_window) ... ok
+test_resume_refreshes_old_failed_row_while_next_block_waits (test_tts_retry_desktop.RetryDesktop.test_resume_refreshes_old_failed_row_while_next_block_waits) ... ok
+test_wait_status_and_cancel_at_minimum_window (test_tts_retry_desktop.RetryDesktop.test_wait_status_and_cancel_at_minimum_window) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 90.478s
+
+OK

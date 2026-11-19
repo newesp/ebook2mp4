@@ -1,0 +1,33 @@
+test_auto_dismiss_eases_out (test_notifications.Notifications.test_auto_dismiss_eases_out) ... ok
+test_hover_and_focus_pause_then_resume_countdown (test_notifications.Notifications.test_hover_and_focus_pause_then_resume_countdown) ... ok
+test_new_message_replaces_old_timer_and_history_keeps_both (test_notifications.Notifications.test_new_message_replaces_old_timer_and_history_keeps_both) ... ok
+test_small_child_owner_long_message_and_destruction_release_timers (test_notifications.Notifications.test_small_child_owner_long_message_and_destruction_release_timers) ... ok
+test_sticky_error_close_does_not_clear_existing_blocker (test_notifications.Notifications.test_sticky_error_close_does_not_clear_existing_blocker) ... ok
+test_switching_owner_dismisses_toast_and_never_uses_global_topmost (test_notifications.Notifications.test_switching_owner_dismisses_toast_and_never_uses_global_topmost) ... ok
+test_top_center_tracks_owner_without_stealing_editor_focus (test_notifications.Notifications.test_top_center_tracks_owner_without_stealing_editor_focus) ... FAIL
+test_unmapped_owner_dismisses_and_hidden_owner_only_records_history (test_notifications.Notifications.test_unmapped_owner_dismisses_and_hidden_owner_only_records_history) ... ok
+test_bad_session_record_does_not_block_manual_open (test_last_project.LastProjectJourney.test_bad_session_record_does_not_block_manual_open) ... ok
+test_cancelled_or_failed_open_keeps_last_successful_project (test_last_project.LastProjectJourney.test_cancelled_or_failed_open_keeps_last_successful_project) ... ok
+test_create_is_remembered_and_no_record_starts_empty (test_last_project.LastProjectJourney.test_create_is_remembered_and_no_record_starts_empty) ... ok
+test_missing_or_corrupt_book_leaves_usable_empty_workbench (test_last_project.LastProjectJourney.test_missing_or_corrupt_book_leaves_usable_empty_workbench) ... ok
+test_relaunch_loads_last_successfully_opened_book_and_saved_draft (test_last_project.LastProjectJourney.test_relaunch_loads_last_successfully_opened_book_and_saved_draft) ... ok
+test_unwritable_settings_does_not_fail_project_open (test_last_project.LastProjectJourney.test_unwritable_settings_does_not_fail_project_open) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_batch_video_desktop.BatchVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_batch_video_desktop.BatchVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+
+======================================================================
+FAIL: test_top_center_tracks_owner_without_stealing_editor_focus (test_notifications.Notifications.test_top_center_tracks_owner_without_stealing_editor_focus)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_notifications.py", line 36, in test_top_center_tracks_owner_without_stealing_editor_focus
+    self.assertIs(self.root.focus_displayof(), self.app.editor)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <tkinter.Tk object .> is not <tkinter.Text object .!workbench.!frame2.!frame2.!panedwindow.!panedwindow.!frame.!text>
+
+----------------------------------------------------------------------
+Ran 19 tests in 101.998s
+
+FAILED (failures=1)

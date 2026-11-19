@@ -1,0 +1,9 @@
+test_existing_details_shows_failure_reason_and_recovery (test_video_diagnostics_desktop.DiagnosticDesktop.test_existing_details_shows_failure_reason_and_recovery) ... ok
+test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes) ... ok
+test_background_mode_preview_save_return_and_render_are_connected (test_total_video_background_desktop.BackgroundDesktop.test_background_mode_preview_save_return_and_render_are_connected) ... ok
+test_required_controls_fit_sizes_and_long_background_hides_short_mode (test_total_video_background_desktop.BackgroundDesktop.test_required_controls_fit_sizes_and_long_background_hides_short_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 64.697s
+
+OK

@@ -1,0 +1,59 @@
+test_collapsed_list_releases_track_and_ratio_survives_navigation (test_manuscript_v6.ManuscriptV6.test_collapsed_list_releases_track_and_ratio_survives_navigation) ... ok
+test_long_version_diff_owns_scroll_and_editor_state_returns (test_manuscript_v6.ManuscriptV6.test_long_version_diff_owns_scroll_and_editor_state_returns) ... ok
+test_pdf_reextract_preview_and_region_retry_keep_original_manuscript (test_manuscript_v6.ManuscriptV6.test_pdf_reextract_preview_and_region_retry_keep_original_manuscript) ... ok
+test_pdf_source_open_missing_zoom_rotate_and_region_coordinates (test_manuscript_v6.ManuscriptV6.test_pdf_source_open_missing_zoom_rotate_and_region_coordinates) ... ERROR
+test_proof_menu_real_candidate_diff_restore_and_discard (test_manuscript_v6.ManuscriptV6.test_proof_menu_real_candidate_diff_restore_and_discard) ... ok
+test_reopen_list_with_hidden_source_and_narrow_window (test_manuscript_v6.ManuscriptV6.test_reopen_list_with_hidden_source_and_narrow_window) ... ok
+test_search_replace_export_reload_cleanup_new_edit_menu (test_manuscript_v6.ManuscriptV6.test_search_replace_export_reload_cleanup_new_edit_menu) ... ok
+test_three_content_edges_align_and_controls_match_height (test_manuscript_v6.ManuscriptV6.test_three_content_edges_align_and_controls_match_height) ... ok
+test_ai_commit_failure_retries_without_new_network_request (test_unified_manuscript.ManuscriptTests.test_ai_commit_failure_retries_without_new_network_request) ... ok
+test_atomic_publication_exact_text_and_deduplication (test_unified_manuscript.ManuscriptTests.test_atomic_publication_exact_text_and_deduplication) ... ok
+test_autosaved_workspace_reopens_without_reading_confirmation (test_unified_manuscript.ManuscriptTests.test_autosaved_workspace_reopens_without_reading_confirmation) ... ok
+test_cancelled_late_ai_output_keeps_original_and_can_resume (test_unified_manuscript.ManuscriptTests.test_cancelled_late_ai_output_keeps_original_and_can_resume) ... ok
+test_failed_ui_save_preserves_buffer_and_cannot_advance (test_unified_manuscript.ManuscriptTests.test_failed_ui_save_preserves_buffer_and_cannot_advance) ... ok
+test_full_ai_candidate_edit_publish_and_layout_retained (test_unified_manuscript.ManuscriptTests.test_full_ai_candidate_edit_publish_and_layout_retained) ... ok
+test_legacy_project_and_reading_survive_workspace_reopen (test_unified_manuscript.ManuscriptTests.test_legacy_project_and_reading_survive_workspace_reopen) ... ok
+test_manual_edit_publish_same_editor_and_two_navigation_steps (test_unified_manuscript.ManuscriptTests.test_manual_edit_publish_same_editor_and_two_navigation_steps) ... ok
+test_merge_retry_preserves_human_edits (test_unified_manuscript.ManuscriptTests.test_merge_retry_preserves_human_edits) ... ok
+test_new_txt_import_does_not_send_ai_or_open_window (test_unified_manuscript.ManuscriptTests.test_new_txt_import_does_not_send_ai_or_open_window) ... ok
+test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits (test_unified_manuscript.ManuscriptTests.test_partial_ai_reopen_resume_only_missing_and_preserve_candidate_edits) ... ok
+test_pdf_ai_preserves_physical_page_and_column_width (test_unified_manuscript.ManuscriptTests.test_pdf_ai_preserves_physical_page_and_column_width) ... ok
+test_publication_failure_rolls_back_both_and_keeps_workspace (test_unified_manuscript.ManuscriptTests.test_publication_failure_rolls_back_both_and_keeps_workspace) ... ok
+test_settings_model_persisted_without_credentials (test_unified_manuscript.ManuscriptTests.test_settings_model_persisted_without_credentials) ... ok
+test_source_anomaly_blocks_publication_until_explicit_resolution (test_unified_manuscript.ManuscriptTests.test_source_anomaly_blocks_publication_until_explicit_resolution) ... ok
+test_stale_ai_never_overwrites_later_manual_text (test_unified_manuscript.ManuscriptTests.test_stale_ai_never_overwrites_later_manual_text) ... ok
+test_tool_switch_preserves_search_selection_and_editor (test_unified_manuscript.ManuscriptTests.test_tool_switch_preserves_search_selection_and_editor) ... ok
+test_txt_reload_preview_and_backup_without_window (test_unified_manuscript.ManuscriptTests.test_txt_reload_preview_and_backup_without_window) ... ok
+test_version_restore_previews_then_backs_up_current_draft (test_unified_manuscript.ManuscriptTests.test_version_restore_previews_then_backs_up_current_draft) ... ok
+test_line_cleanup_preview_apply_and_single_undo (test_ui_layout.WorkbenchLayout.test_line_cleanup_preview_apply_and_single_undo) ... ok
+test_menu_export_uses_displayed_full_text (test_ui_layout.WorkbenchLayout.test_menu_export_uses_displayed_full_text) ... ok
+test_selection_survives_tools_and_source_toggle (test_ui_layout.WorkbenchLayout.test_selection_survives_tools_and_source_toggle) ... ok
+test_source_blockers_visible_in_every_tool (test_ui_layout.WorkbenchLayout.test_source_blockers_visible_in_every_tool) ... ok
+test_source_resizing_restores_two_columns_without_callback_failure (test_ui_layout.WorkbenchLayout.test_source_resizing_restores_two_columns_without_callback_failure) ... ok
+test_tools_fit_and_primary_action_stays_visible (test_ui_layout.WorkbenchLayout.test_tools_fit_and_primary_action_stays_visible) ... ok
+test_failed_save_does_not_advance_or_lose_text (test_main_workflow_desktop.MainWorkflow.test_failed_save_does_not_advance_or_lose_text) ... ok
+test_save_stays_in_manuscript_then_continue_and_return_keeps_editor (test_main_workflow_desktop.MainWorkflow.test_save_stays_in_manuscript_then_continue_and_return_keeps_editor) ... ok
+test_bad_session_record_does_not_block_manual_open (test_last_project.LastProjectJourney.test_bad_session_record_does_not_block_manual_open) ... ok
+test_cancelled_or_failed_open_keeps_last_successful_project (test_last_project.LastProjectJourney.test_cancelled_or_failed_open_keeps_last_successful_project) ... ok
+test_create_is_remembered_and_no_record_starts_empty (test_last_project.LastProjectJourney.test_create_is_remembered_and_no_record_starts_empty) ... ok
+test_missing_or_corrupt_book_leaves_usable_empty_workbench (test_last_project.LastProjectJourney.test_missing_or_corrupt_book_leaves_usable_empty_workbench) ... ok
+test_relaunch_loads_last_successfully_opened_book_and_saved_draft (test_last_project.LastProjectJourney.test_relaunch_loads_last_successfully_opened_book_and_saved_draft) ... ok
+test_unwritable_settings_does_not_fail_project_open (test_last_project.LastProjectJourney.test_unwritable_settings_does_not_fail_project_open) ... ok
+test_main_window_starts_maximized (test_startup_defaults.StartupDefaults.test_main_window_starts_maximized) ... ok
+test_autosaved_switch_keeps_draft_in_original_batch (test_batch_step_retention.BatchStepRetention.test_autosaved_switch_keeps_draft_in_original_batch) ... ok
+test_main_steps_survive_batch_switch (test_batch_step_retention.BatchStepRetention.test_main_steps_survive_batch_switch) ... ok
+test_production_subpages_survive_batch_switch_in_both_directions (test_batch_step_retention.BatchStepRetention.test_production_subpages_survive_batch_switch_in_both_directions) ... ok
+
+======================================================================
+ERROR: test_pdf_source_open_missing_zoom_rotate_and_region_coordinates (test_manuscript_v6.ManuscriptV6.test_pdf_source_open_missing_zoom_rotate_and_region_coordinates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_manuscript_v6.py", line 185, in test_pdf_source_open_missing_zoom_rotate_and_region_coordinates
+    self.assertEqual(len(app.source_selection), 4)
+                     ~~~^^^^^^^^^^^^^^^^^^^^^^
+TypeError: object of type 'NoneType' has no len()
+
+----------------------------------------------------------------------
+Ran 45 tests in 195.763s
+
+FAILED (errors=1)

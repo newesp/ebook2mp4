@@ -1,0 +1,17 @@
+test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership) ... FAIL
+{"kind": "merged-video", "batches": 3, "pause_ms": 500, "video_ms": 12800, "audio_ms": 12800}
+test_pdf_warnings_require_confirmation_and_survive_reopen (test_video_merge.MergeVideoJourney.test_pdf_warnings_require_confirmation_and_survive_reopen) ... ok
+
+======================================================================
+FAIL: test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_video_workspace.py", line 134, in test_native_geometry_components_and_scroll_ownership
+    self.assertGreater(self.app.production.scope_control.winfo_height(), before_height)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 37 not greater than 37
+
+----------------------------------------------------------------------
+Ran 2 tests in 37.626s
+
+FAILED (failures=1)

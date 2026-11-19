@@ -1,0 +1,12 @@
+test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video (test_outputs.OutputsJourney.test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video) ... ok
+test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies (test_outputs.OutputsJourney.test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies) ... ok
+test_missing_visual_publishes_audio_reopen_only_encodes_video (test_outputs.OutputsJourney.test_missing_visual_publishes_audio_reopen_only_encodes_video) ... ok
+test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual (test_outputs.OutputsJourney.test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual) ... ok
+test_source_change_during_audio_stops_next_stage_without_mixing_sources (test_outputs.OutputsJourney.test_source_change_during_audio_stops_next_stage_without_mixing_sources) ... ok
+test_validation_and_missing_sources_are_observable (test_outputs.OutputsJourney.test_validation_and_missing_sources_are_observable) ... ok
+test_video_failure_reopens_as_partial_and_cancel_releases_lease (test_outputs.OutputsJourney.test_video_failure_reopens_as_partial_and_cancel_releases_lease) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 48.127s
+
+OK

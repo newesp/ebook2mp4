@@ -1,0 +1,30 @@
+[
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-production-baseline",
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-production-package",
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+    "removed": true
+  },
+  {
+    "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-cache",
+    "removed": true
+  }
+]

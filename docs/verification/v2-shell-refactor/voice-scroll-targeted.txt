@@ -1,0 +1,15 @@
+test_voice_settings_overflow_has_its_own_reachable_viewport (test_unified_shell_integration.UnifiedShellIntegration.test_voice_settings_overflow_has_its_own_reachable_viewport) ... FAIL
+
+======================================================================
+FAIL: test_voice_settings_overflow_has_its_own_reachable_viewport (test_unified_shell_integration.UnifiedShellIntegration.test_voice_settings_overflow_has_its_own_reachable_viewport)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_shell_integration.py", line 147, in test_voice_settings_overflow_has_its_own_reachable_viewport
+    self.assertTrue(scroll.scrollbar.winfo_ismapped())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not true
+
+----------------------------------------------------------------------
+Ran 1 test in 8.190s
+
+FAILED (failures=1)

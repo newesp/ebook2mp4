@@ -1,0 +1,73 @@
+[
+  {
+    "path": ".scratch/pdf-txt-audiobook-video/v1.1/issues/18-batch-audio-to-video.md",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "AGENTS.md",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "docs/implementation-status.md",
+    "initial_added_lines_preserved": true,
+    "missing_count": 0
+  },
+  {
+    "path": "ebook2mp4/desktop.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/kokoro_desktop.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/kokoro_packages.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/narration.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/narration_desktop.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/production_desktop.py",
+    "initial_added_lines_preserved": true,
+    "missing_count": 0
+  },
+  {
+    "path": "ebook2mp4/service_desktop.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/tts_services.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/voice_desktop.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/voice_media.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "ebook2mp4/workflow.py",
+    "initial_added_lines_preserved": true,
+    "missing_count": 0
+  },
+  {
+    "path": "tests/test_kokoro_desktop.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "tests/test_production_pages.py",
+    "unchanged_from_start": true
+  },
+  {
+    "path": "tests/test_tts_providers.py",
+    "unchanged_from_start": true
+  }
+]

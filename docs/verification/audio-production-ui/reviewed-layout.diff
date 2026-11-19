@@ -1,0 +1,426 @@
+--- before/narration_desktop.py
++++ after/narration_desktop.py
+@@ -10,6 +10,7 @@
+ 
+ from .workflow import ProjectError
+ from .voice_media import PreviewPlayer
++from .ui_controls import CellTooltip, MessageLine
+ 
+ STATUS_LABELS = {'interrupted':'已中斷','cancelled':'已取消','failed':'失敗','completed':'已完成',
+                  'running':'執行中','pending':'等待','cancelling':'取消中'}
+@@ -30,104 +31,216 @@
+         self.check_job = None
+         self.check_timer = None
+         self.columnconfigure(0, weight=1)
+-        self.rowconfigure(1, weight=1, minsize=60)
+-        self.rowconfigure(3, weight=3, minsize=60)
+-        header=ttk.Frame(self)
+-        header.grid(row=0,column=0,sticky='ew',pady=(4,4))
+-        header.columnconfigure(0,weight=1)
+-        ttk.Label(header,text='朗讀稿預覽',style='Heading.TLabel').grid(row=0,column=0,sticky='w')
+-        self.info_button=ttk.Button(header,text='任務與設定詳情 ▸',command=self.toggle_info)
+-        self.info_button.grid(row=0,column=1,sticky='e')
+-        self.restore_button = ttk.Button(header, text='恢復原任務設定', command=self.restore_settings)
+-        self.restore_button.grid(row=0, column=2, padx=(8, 0))
+-        self.preview_frame=ttk.Frame(self)
+-        self.preview_frame.grid(row=1,column=0,sticky='nsew')
+-        self.preview_frame.columnconfigure(0,weight=1)
+-        self.preview_frame.rowconfigure(0,weight=1)
+-        self.outgoing=tk.Text(self.preview_frame,wrap='word',height=3,width=1,font=('Microsoft JhengHei',11))
+-        self.outgoing.grid(row=0,column=0,sticky='nsew')
+-        scroll=ttk.Scrollbar(self.preview_frame,command=self.outgoing.yview)
+-        scroll.grid(row=0,column=1,sticky='ns')
+-        self.outgoing.configure(yscrollcommand=scroll.set)
+-        self.info_frame=ttk.Frame(self)
+-        self.info_frame.columnconfigure(0,weight=1)
+-        self.info_frame.rowconfigure(0,weight=1)
+-        self.source_info=ttk.Label(self.info_frame,text='',wraplength=650)
+-        self.source_info.grid(row=0,column=0,sticky='nw')
+-        self.reload_button=ttk.Button(self.info_frame,text='重新檢查目前稿件與設定',command=self.recheck)
+-        self.reload_button.grid(row=1,column=0,sticky='w')
+-        self.info_open=False
++        # Only this content row grows. Source inspection replaces the list in
++        # place and retains each pane's selection and scroll position.
++        self.rowconfigure(1, weight=1)
+         toolbar=ttk.Frame(self)
+-        toolbar.grid(row=2,column=0,sticky='ew',pady=6)
+-        toolbar.columnconfigure(0,weight=1)
+-        toolbar.columnconfigure(1,weight=1)
++        toolbar.grid(row=0,column=0,sticky='ew',pady=(4,8))
++        toolbar.columnconfigure(2,weight=1)
++        self.files_button=ttk.Button(toolbar,text='顯示文件列表',command=self.toggle_files)
++        self.files_button.grid(row=0,column=0,padx=(0,8))
++        self.files_hint=CellTooltip(self.files_button,lambda x,y: ('files','顯示文件列表（F6）'))
++        self.files_button.bind('<FocusIn>',lambda e:self.files_hint.motion(type('Focus',(),{'x':0,'y':0})()),add='+')
++        self.files_button.bind('<FocusOut>',self.files_hint.hide,add='+')
++        ttk.Label(toolbar,text='製作任務').grid(row=0,column=1,padx=(0,8))
+         self.run_choice=tk.StringVar()
+         self.run_control=ttk.Combobox(toolbar,textvariable=self.run_choice,state='readonly',width=1)
+-        self.run_control.grid(row=0,column=0,sticky='ew',padx=(0,12))
++        self.run_control.grid(row=0,column=2,sticky='ew')
+         self.run_control.bind('<<ComboboxSelected>>',self.select_run)
+-        self.run_summary=ttk.Label(toolbar,text='',width=1,anchor='e')
+-        self.run_summary.grid(row=0,column=1,sticky='ew')
+-        table=ttk.Frame(self)
+-        table.grid(row=3,column=0,sticky='nsew')
+-        table.columnconfigure(0,weight=1)
+-        table.rowconfigure(0,weight=1)
+-        self.details=ttk.Treeview(table,columns=('block','status','attempts','reason'),show='headings',height=5)
+-        for key,label,width in (('block','區塊',60),('status','狀態',140),('attempts','嘗試次數',90),('reason','說明',170)):
++        self.info_button=ttk.Button(toolbar,text='朗讀稿與任務設定 ▸',command=self.toggle_info)
++        self.info_button.grid(row=0,column=3,padx=(8,0))
++        self.restore_button=ttk.Button(toolbar,text='恢復原任務設定',command=self.restore_settings)
++        self.restore_button.grid(row=0,column=4,padx=(8,0))
++        self.table_frame=ttk.Frame(self)
++        self.table_frame.grid(row=1,column=0,sticky='nsew')
++        self.table_frame.columnconfigure(0,weight=1)
++        self.table_frame.rowconfigure(0,weight=1)
++        self.details=ttk.Treeview(self.table_frame,columns=('block','status','attempts','reason'),show='headings',height=8)
++        for key,label,width in (('block','區塊',64),('status','狀態',120),('attempts','嘗試次數',90),('reason','說明',300)):
+             self.details.heading(key,text=label)
+-            self.details.column(key,width=width,minwidth=40)
++            self.details.column(key,width=width,minwidth=40,stretch=key=='reason')
+         self.details.grid(row=0,column=0,sticky='nsew')
+-        scroll=ttk.Scrollbar(table,command=self.details.yview)
++        scroll=ttk.Scrollbar(self.table_frame,command=self.details.yview)
+         scroll.grid(row=0,column=1,sticky='ns')
+         self.details.configure(yscrollcommand=scroll.set)
+         self.details.bind('<<TreeviewSelect>>',self.show_block_error)
+-        controls=ttk.Frame(self)
+-        controls.grid(row=4,column=0,sticky='ew',pady=6)
+-        controls.columnconfigure(0,weight=1)
+-        self.status=ttk.Label(controls,text='',wraplength=450)
+-        self.status.grid(row=0,column=0,sticky='ew',padx=(0,12))
+-        self.start_button=ttk.Button(controls,text='開始製作 MP3／SRT',command=self.start,style='Primary.TButton')
+-        self.start_button.grid(row=0,column=1,sticky='e')
+-        self.cancel_button=ttk.Button(controls,text='取消任務',command=self.cancel,state='disabled')
+-        self.cancel_button.grid(row=0,column=2,padx=(8,0))
+-        actions=ttk.Frame(controls)
+-        actions.grid(row=1,column=0,columnspan=3,sticky='ew',pady=(6,0))
+-        actions.columnconfigure(1,weight=1)
+-        ttk.Button(actions,text='← 返回語音設定',command=self.app.voice_settings).grid(row=0,column=0,sticky='w')
++        for sequence,last in (('<Home>',False),('<Control-Home>',False),('<End>',True),('<Control-End>',True)):
++            self.details.bind(sequence,lambda event,last=last:self.move_to_boundary(last))
++
++        self.info_frame=ttk.Frame(self)
++        self.info_frame.columnconfigure(0,weight=1)
++        self.info_frame.rowconfigure(1,weight=1)
++        info_header=ttk.Frame(self.info_frame)
++        info_header.grid(row=0,column=0,sticky='ew',pady=(0,8))
++        info_header.columnconfigure(1,weight=1)
++        ttk.Button(info_header,text='← 返回區塊清單',command=self.toggle_info).grid(row=0,column=0)
++        self.reload_button=ttk.Button(info_header,text='重新檢查目前稿件與設定',command=self.recheck)
++        self.reload_button.grid(row=0,column=2,sticky='e')
++        self.info_tabs=ttk.Notebook(self.info_frame)
++        self.info_tabs.grid(row=1,column=0,sticky='nsew')
++        self.preview_frame=ttk.Frame(self.info_tabs,padding=8)
++        self.preview_frame.columnconfigure(0,weight=1)
++        self.preview_frame.rowconfigure(2,weight=1)
++        self.source_info=ttk.Label(self.preview_frame,text='',wraplength=650)
++        self.source_info.grid(row=0,column=0,columnspan=2,sticky='ew',pady=(0,4))
++        self.run_summary=ttk.Label(self.preview_frame,text='',width=1)
++        self.run_summary.grid(row=1,column=0,columnspan=2,sticky='ew',pady=(0,8))
++        self.outgoing=tk.Text(self.preview_frame,wrap='word',height=4,width=1,font=('Microsoft JhengHei',11))
++        self.outgoing.grid(row=2,column=0,sticky='nsew')
++        scroll=ttk.Scrollbar(self.preview_frame,command=self.outgoing.yview)
++        scroll.grid(row=2,column=1,sticky='ns')
++        self.outgoing.configure(yscrollcommand=scroll.set)
++        self.info_tabs.add(self.preview_frame,text='朗讀稿與設定')
++        self.message_frame=ttk.Frame(self.info_tabs,padding=8)
++        self.message_frame.columnconfigure(0,weight=1)
++        self.message_frame.rowconfigure(0,weight=1)
++        self.message_text=tk.Text(self.message_frame,wrap='word',height=4,width=1,font=('Microsoft JhengHei',11),state='disabled')
++        self.message_text.grid(row=0,column=0,sticky='nsew')
++        scroll=ttk.Scrollbar(self.message_frame,command=self.message_text.yview)
++        scroll.grid(row=0,column=1,sticky='ns')
++        self.message_text.configure(yscrollcommand=scroll.set)
++        self.info_tabs.add(self.message_frame,text='狀態與錯誤詳情')
++        self.info_tabs.bind('<<NotebookTabChanged>>',self.info_tab_changed)
++        self.info_open=False
++
++        status_row=ttk.Frame(self)
++        status_row.grid(row=2,column=0,sticky='ew',pady=(6,4))
++        status_row.columnconfigure(0,weight=1)
++        # A bounded single line cannot let a verbose server error squeeze the
++        # list. The adjacent button exposes the complete, selectable message.
++        self.status=MessageLine(status_row,text='')
++        self.status.grid(row=0,column=0,sticky='ew')
++        self.progress=ttk.Progressbar(status_row,mode='indeterminate',length=96)
++        self.progress.grid(row=0,column=1,padx=8)
++        self.status_button=ttk.Button(status_row,text='狀態詳情',command=self.show_status)
++        self.status_button.grid(row=0,column=2)
++        footer=ttk.Frame(self)
++        footer.grid(row=3,column=0,sticky='ew')
++        footer.columnconfigure(0,weight=1)
++        context=ttk.Frame(footer)
++        context.grid(row=0,column=0,sticky='ew',pady=(0,4))
++        context.columnconfigure(1,weight=1)
+         self.consent=tk.BooleanVar(value=True)
+-        self.consent_control=ttk.Checkbutton(actions,text='同意傳送待處理文字（可能計費）',variable=self.consent)
+-        self.consent_control.grid(row=0,column=1,sticky='w',padx=8)
+-        self.local_notice=ttk.Label(actions,text='文字僅在本機 CPU 處理，不傳送至雲端。')
+-        self.restart_button=ttk.Button(actions,text='重新開始…',command=self.restart)
+-        self.restart_button.grid(row=0,column=2,sticky='e')
+-        self.progress=ttk.Progressbar(controls,mode='indeterminate')
+-        self.progress.grid(row=2,column=0,columnspan=3,sticky='ew',pady=(4,0))
+-        outputs=ttk.Frame(self)
+-        outputs.grid(row=5,column=0,sticky='ew')
+-        outputs.columnconfigure(0,weight=1)
+-        self.result_info=ttk.Label(outputs,text='',width=1)
+-        self.result_info.grid(row=0,column=0,sticky='ew')
+-        self.video_button = ttk.Button(outputs, text='加入素材，製作 MP4 →', command=self.app.batch_video)
+-        self.video_button.grid(row=0,column=1,sticky='e')
+-        self.play_button=ttk.Button(outputs,text='播放成品',command=self.play)
+-        self.stop_button=ttk.Button(outputs,text='停止播放',command=self.stop)
+-        self.export_button=ttk.Button(outputs,text='另存 MP3／SRT',command=self.export)
+-        self.folder_button=ttk.Button(outputs,text='開啟資料夾',command=self.open_folder)
+-        for index,button in enumerate((self.play_button,self.stop_button,self.export_button,self.folder_button)):
+-            button.grid(row=1,column=index,sticky='w',padx=(0,6),pady=4)
++        self.consent_control=ttk.Checkbutton(context,text='同意傳送待處理文字（可能計費）',variable=self.consent)
++        self.consent_control.grid(row=0,column=0,sticky='w')
++        self.local_notice=ttk.Label(context,text='本機 CPU 處理，不傳送文字。')
++        self.result_info=ttk.Label(context,text='',width=1,anchor='e')
++        self.result_info.grid(row=0,column=1,sticky='ew',padx=(12,0))
++        self.actions=ttk.Frame(footer)
++        self.actions.grid(row=1,column=0,sticky='ew')
++        self.actions.columnconfigure(1,weight=1)
++        previous=self.previous_actions=ttk.Frame(self.actions)
++        previous.grid(row=0,column=0,sticky='w')
++        self.back_button=ttk.Button(previous,text='← 語音設定',command=self.app.voice_settings)
++        self.back_button.pack(side='left')
++        self.restart_button=ttk.Button(previous,text='重新開始…',command=self.restart)
++        self.restart_button.pack(side='left',padx=(8,0))
++        self.outputs=ttk.Frame(self.actions)
++        self.outputs.grid(row=0,column=1,sticky='e',padx=12)
++        self.play_button=ttk.Button(self.outputs,text='播放成品',command=self.play)
++        self.stop_button=ttk.Button(self.outputs,text='停止播放',command=self.stop)
++        self.export_button=ttk.Button(self.outputs,text='另存 MP3／SRT',command=self.export)
++        self.folder_button=ttk.Button(self.outputs,text='開啟資料夾',command=self.open_folder)
++        self.video_button=ttk.Button(self.outputs,text='製作 MP4 →',command=self.app.batch_video)
++        self.output_button=ttk.Menubutton(self.outputs,text='成品操作 ▾')
++        self.output_menu=tk.Menu(self.output_button,tearoff=False)
++        self.output_button.configure(menu=self.output_menu)
++        for button in (self.play_button,self.stop_button,self.export_button,self.folder_button):
++            self.output_menu.add_command(label=button.cget('text'),command=button.invoke)
++        self.output_menu.add_separator()
++        self.output_menu.add_command(label='加入素材，製作 MP4 →',command=self.video_button.invoke)
++        primary=self.primary_actions=ttk.Frame(self.actions)
++        primary.grid(row=0,column=2,sticky='e')
++        self.cancel_button=ttk.Button(primary,text='取消任務',command=self.cancel,state='disabled')
++        self.cancel_button.grid(row=0,column=0,padx=(0,8))
++        self.start_button=ttk.Button(primary,text='開始製作 MP3／SRT',command=self.start,style='Primary.TButton')
++        self.start_button.grid(row=0,column=1)
++        self.output_layout=None
+         self.bind('<Configure>',self.resize_info,add='+')
+         self.load_source()
+         self.load_result()
+ 
+     def toggle_info(self):
+         self.info_open=not self.info_open
+-        self.preview_frame.grid_remove() if self.info_open else self.info_frame.grid_remove()
+-        (self.info_frame if self.info_open else self.preview_frame).grid(row=1,column=0,sticky='nsew')
+-        self.info_button.configure(text='返回朗讀稿 ▾' if self.info_open else '任務與設定詳情 ▸')
++        self.table_frame.grid_remove() if self.info_open else self.info_frame.grid_remove()
++        (self.info_frame if self.info_open else self.table_frame).grid(row=1,column=0,sticky='nsew')
++        self.info_button.configure(text='返回區塊清單 ▾' if self.info_open else '朗讀稿與任務設定 ▸')
++        if self.info_open:
++            self.info_tabs.select(self.preview_frame)
++
++    def show_status(self):
++        if not self.info_open:
++            self.toggle_info()
++        self.refresh_status_text()
++        self.info_tabs.select(self.message_frame)
++
++    def info_tab_changed(self,_event=None):
++        if self.info_tabs.select()==str(self.message_frame):
++            self.refresh_status_text()
++
++    def refresh_status_text(self):
++        message=self.status.full_text
++        if self.run is not None:
++            errors=[f'第 {i+1} 塊：{chunk["error"]}' for i,chunk in enumerate(self.run.get('progress',{}).get('chunks',[]))
++                    if chunk.get('error')]
++            if errors:
++                message+='\n\n'+'\n\n'.join(errors)
++        if self.message_text.get('1.0','end-1c') != message:
++            position=self.message_text.yview()[0]
++            self.message_text.configure(state='normal')
++            self.message_text.delete('1.0','end')
++            self.message_text.insert('1.0',message)
++            self.message_text.configure(state='disabled')
++            self.message_text.yview_moveto(position)
+ 
+     def resize_info(self,event):
+         if event.widget is self:
+-            self.status.configure(wraplength=max(180,event.width-240))
+-            self.source_info.configure(wraplength=max(180,event.width-24))
++            self.sync_files_button()
++            self.source_info.configure(wraplength=max(180,event.width-48))
++            narrow=event.width<760
++            self.previous_actions.grid(row=1 if narrow else 0,column=0,sticky='w',pady=(4,0) if narrow else 0)
++            self.outputs.grid(row=1 if narrow else 0,column=1,sticky='e',padx=(8,0) if narrow else 12,pady=(4,0) if narrow else 0)
++            self.primary_actions.grid(row=0,column=0 if narrow else 2,columnspan=2 if narrow else 1,sticky='e')
++            layout='wide' if event.width>=1450 else 'medium' if event.width>=1120 else 'compact'
++            if layout != self.output_layout:
++                self.output_layout=layout
++                for child in self.outputs.winfo_children():
++                    child.pack_forget()
++                buttons=((self.play_button,self.stop_button,self.export_button,self.folder_button,self.video_button)
++                         if layout=='wide' else (self.play_button,self.output_button,self.video_button)
++                         if layout=='medium' else (self.output_button,))
++                for button in buttons:
++                    button.pack(side='left',padx=(0,6))
++
++    def sync_files_button(self):
++        self.files_button.grid() if self.app.focus_mode else self.files_button.grid_remove()
++
++    def toggle_files(self):
++        self.app.toggle_focus()
++        self.sync_files_button()
++
++    def show_source_context(self):
++        local=bool(self.source_settings and self.source_settings['provider']=='kokoro')
++        if local:
++            self.consent_control.grid_remove()
++            self.local_notice.grid(row=0,column=0,sticky='w')
++        else:
++            self.local_notice.grid_remove()
++            self.consent_control.grid()
++        if self.outgoing.get('1.0','end-1c') != self.source_text:
++            self.outgoing.configure(state='normal')
++            self.outgoing.delete('1.0','end')
++            self.outgoing.insert('1.0',self.source_text)
++        self.outgoing.configure(state='disabled')
++
++    def move_to_boundary(self,last):
++        rows=self.details.get_children()
++        if rows:
++            row=rows[-1] if last else rows[0]
++            self.details.selection_set(row)
++            self.details.focus(row)
++            self.details.see(row)
++        return 'break'
+ 
+     def review_current(self):
+         self.recheck()
+@@ -228,9 +341,16 @@
+             self.status.configure(text=str(error))
+ 
+     def display_run(self):
++        if self.run is None:
++            self.load_source()
++        key=(('run',self.run['snapshot']['id']) if self.run is not None else
++             ('current',self.source_text,tuple(sorted((self.source_settings or {}).items()))))
++        preserve=getattr(self,'displayed_run_id',object())==key
++        selected=[self.details.index(row) for row in self.details.selection()] if preserve else []
++        position=self.details.yview()[0] if preserve else 0
++        self.displayed_run_id=key
+         self.details.delete(*self.details.get_children())
+         if self.run is None:
+-            self.load_source()
+             self.run_summary.configure(text='新任務：核對目前確認稿與語音設定。')
+             inspection = self.inspection
+             if (inspection is not None and inspection['snapshot']['text'] == self.source_text
+@@ -247,10 +367,7 @@
+             self.source_info.configure(text=f'任務 {snapshot["id"][:8]} · 朗讀稿 {snapshot["reading_id"][:8]} · '
+                 f'{self.source_settings["provider"]} {self.source_settings.get("model", "")} · {self.source_settings["voice"]} · '
+                 f'{self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]}／段落 {self.source_settings["paragraph_pause_ms"]} ms')
+-            self.outgoing.configure(state='normal')
+-            self.outgoing.delete('1.0','end')
+-            self.outgoing.insert('1.0',self.source_text)
+-            self.outgoing.configure(state='disabled')
++            self.show_source_context()
+             status=STATUS_LABELS.get(self.run['progress']['status'],'待檢查')
+             self.run_summary.configure(text=f'{status} · 共 {len(snapshot["chunks"])} 塊 · 可重用 {self.run["reusable"]} · 待處理 {self.run["remaining"]}')
+             self.status.configure(text='朗讀稿已變更；請核對稿件。' if self.run.get('reading_changed') else
+@@ -261,6 +378,9 @@
+                 self.details.insert('','end',values=(index+1,STATUS_LABELS.get(chunk['status'],'待檢查'),chunk.get('attempts',0),'查看原因' if chunk['status']=='failed' else '—'))
+             if not self.run['remaining'] and not self.run['published']:
+                 self.status.configure(text='全部區塊有效。本次只在本機組裝，不傳送文字。' if not self.run['stale'] else self.status.cget('text'))
++        rows=self.details.get_children()
++        self.details.selection_set([rows[index] for index in selected if index<len(rows)])
++        self.details.yview_moveto(position)
+         self.update_controls()
+ 
+     def restart(self):
+@@ -278,18 +398,11 @@
+                                        f'{self.source_settings["provider"]} {self.source_settings.get("model", "")} · {self.source_settings["rate"]} · 句尾 {self.source_settings["sentence_pause_ms"]} ms ／ '
+                                        f'段落 {self.source_settings["paragraph_pause_ms"]} ms · 請先儲存本批設定。')
+             local=self.source_settings['provider']=='kokoro'
+-            if local:
+-                self.consent_control.grid_remove();self.local_notice.grid(row=0,column=1,sticky='w',padx=8)
+-            else:
+-                self.local_notice.grid_remove();self.consent_control.grid()
+-            self.status.configure(text='請核對上方確認稿與音色，再開始本機製作。' if local else '請核對上方確認稿與音色，再勾選同意並產生。')
++            self.status.configure(text='請核對朗讀稿與任務設定，再開始本機製作。' if local else '請核對朗讀稿與任務設定，再開始製作。')
+         except ProjectError as error:
+             self.source_info.configure(text='目前沒有可合成的已確認稿。')
+             self.status.configure(text=str(error))
+-        self.outgoing.configure(state='normal')
+-        self.outgoing.delete('1.0', 'end')
+-        self.outgoing.insert('1.0', self.source_text)
+-        self.outgoing.configure(state='disabled')
++        self.show_source_context()
+ 
+     def start(self):
+         try:
+@@ -347,6 +460,8 @@
+         self.status.configure(text=f'{phase} · 區塊 {state.get("current", 0)}/{state.get("total", 0)} · '
+                                    f'完成 {state.get("completed", 0)} · 失敗 {state.get("failed", 0)}')
+         self.run_summary.configure(text=f'執行中 · 完成 {state.get("completed", 0)}/{state.get("total", 0)} 塊')
++        if self.info_open and self.info_tabs.select()==str(self.message_frame):
++            self.refresh_status_text()
+         chunks = state.get('chunks', [])
+         rows = self.details.get_children()
+         if len(rows) != len(chunks):
+@@ -422,6 +537,8 @@
+         else:
+             self.progress.stop()
+             self.progress.grid_remove()
++        if self.info_open and self.info_tabs.select()==str(self.message_frame):
++            self.refresh_status_text()
+ 
+     def load_result(self):
+         try:
+@@ -429,15 +546,19 @@
+             batch = next(b for b in self.flow.state['batches'] if b['id'] == self.batch_id)
+             stale = product is not None and (batch.get('current_reading') != product['reading_id'] or
+                                              self.flow.voice_settings(self.batch_id) != product['settings'])
+-            for button in (self.play_button, self.export_button, self.folder_button):
++            for button in (self.play_button, self.stop_button, self.export_button, self.folder_button):
+                 button.configure(state='normal' if product else 'disabled')
++            for index in (0,1,2,3):
++                self.output_menu.entryconfigure(index,state='normal' if product else 'disabled')
+             self.result_info.configure(text=f'{"待更新 · 上一版" if stale else "目前成品"}：{product["completed_at"][:19].replace("T", " ")} · '
+                                        f'{product["settings"]["voice"]} · {product["settings"]["rate"]} · '
+                                        f'{product["duration_ms"]/1000:.3f} 秒' if product else '尚無成功的批次成品。')
+         except ProjectError as error:
+             self.result_info.configure(text=str(error))
+-            for button in (self.play_button, self.export_button, self.folder_button):
++            for button in (self.play_button, self.stop_button, self.export_button, self.folder_button):
+                 button.configure(state='disabled')
++            for index in (0,1,2,3):
++                self.output_menu.entryconfigure(index,state='disabled')
+ 
+     def play(self):
+         try:
+--- before/production_desktop.py
++++ after/production_desktop.py
+@@ -40,7 +40,7 @@
+         self.voice_tab = ttk.Button(tabs, text='語音設定與試聽', command=app.voice_settings)
+         self.voice_tab.pack(side='left')
+         ttk.Label(tabs, text=' → ').pack(side='left')
+-        self.narration_tab = ttk.Button(tabs, text='製作與成品', command=app.narration)
++        self.narration_tab = ttk.Button(tabs, text='音訊製做', command=app.narration)
+         self.narration_tab.pack(side='left')
+         ttk.Label(tabs, text=' → ').pack(side='left')
+         self.assembly_tab = ttk.Button(tabs, text='全書合併', command=app.total_audio)
+@@ -81,6 +81,7 @@
+         self.voice_tab.configure(style='CompactActive.TButton' if kind == 'voice' else 'Compact.TButton')
+         self.narration_tab.configure(style='CompactActive.TButton' if kind == 'narration' else 'Compact.TButton')
+         self.assembly_tab.configure(style='CompactActive.TButton' if kind == 'assembly' else 'Compact.TButton')
++        self.app.sync_next_action_visibility()
+ 
+     def change_method(self, event=None):
+         from .workflow import ProjectError

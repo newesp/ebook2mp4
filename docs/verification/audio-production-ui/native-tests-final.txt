@@ -1,0 +1,36 @@
+test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action) ... ok
+test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch (test_audio_production_ui.AudioProductionWorkspace.test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch) ... ok
+test_historical_snapshot_stale_guard_and_local_consent_context (test_audio_production_ui.AudioProductionWorkspace.test_historical_snapshot_stale_guard_and_local_consent_context) ... ok
+test_multiline_failure_stays_one_line_and_full_message_is_reachable (test_audio_production_ui.AudioProductionWorkspace.test_multiline_failure_stays_one_line_and_full_message_is_reachable) ... ok
+test_no_product_keeps_video_entry_and_product_menu_gates_media (test_audio_production_ui.AudioProductionWorkspace.test_no_product_keeps_video_entry_and_product_menu_gates_media) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis (test_audio_production_ui.AudioProductionWorkspace.test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+test_background_production_disables_defaults_and_cancel_releases_controls (test_incremental_desktop.IncrementalDesktop.test_background_production_disables_defaults_and_cancel_releases_controls) ... ok
+test_incremental_plan_and_stale_product_then_offline_reassembly (test_incremental_desktop.IncrementalDesktop.test_incremental_plan_and_stale_product_then_offline_reassembly) ... ok
+test_saved_defaults_apply_to_selected_batch_in_same_window (test_incremental_desktop.IncrementalDesktop.test_saved_defaults_apply_to_selected_batch_in_same_window) ... ok
+test_one_save_loads_complete_settings_and_blocks_unsaved_navigation (test_voice_settings_ui.SavedSettingsUI.test_one_save_loads_complete_settings_and_blocks_unsaved_navigation) ... FAIL
+test_production_restore_preserves_selected_task (test_voice_settings_ui.SavedSettingsUI.test_production_restore_preserves_selected_task) ... ok
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls) ... ok
+test_batch_entry_render_return_isolation_and_sizes (test_batch_video_desktop.BatchVideoDesktop.test_batch_entry_render_return_isolation_and_sizes) ... ok
+
+======================================================================
+FAIL: test_one_save_loads_complete_settings_and_blocks_unsaved_navigation (test_voice_settings_ui.SavedSettingsUI.test_one_save_loads_complete_settings_and_blocks_unsaved_navigation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_settings_ui.py", line 59, in test_one_save_loads_complete_settings_and_blocks_unsaved_navigation
+    self.assertEqual(d.produce_button.cget('text'), '�e���s�@ ��')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '�e�����T�s�� ��' != '�e���s�@ ��'
+- �e�����T�s�� ��
+?   -- ^
++ �e���s�@ ��
+?    ^
+
+
+----------------------------------------------------------------------
+Ran 17 tests in 96.069s
+
+FAILED (failures=1)

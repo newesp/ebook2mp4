@@ -1,0 +1,20 @@
+{
+  "deleted": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-build",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-deps",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-project",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-build.txt",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-dependencies.txt",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-package-check.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-qa.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t17-button-qa.txt",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime"
+  ],
+  "formal_file_count": 1227,
+  "locked_files": [],
+  "remaining_processes": [],
+  "remaining_task_scratch": [],
+  "final_packaged_startup_and_normal_exit": true,
+  "computer_use_kernel_reset": true
+}

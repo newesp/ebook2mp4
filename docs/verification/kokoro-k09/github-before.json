@@ -1,0 +1,31 @@
+{
+  "id": 6202736430,
+  "url": "https://github.com/newesp/ebook2mp4/issues/11",
+  "title": "[Kokoro K09] 封裝交付與全書離線流程驗收",
+  "issue_number": 11,
+  "body": "# K09：封裝交付與全書離線流程驗收\n\n## Parent\n\n[規格 #2：Kokoro 官方中文版本機 CPU 語音整合](https://github.com/newesp/ebook2mp4/issues/2)\n\n## What to build\n\n交付一般 Windows 使用者可操作的主程式與選配語音包，在乾淨環境完成離線試聽、批次製作、總音訊、總字幕及 MP4，並保留完整驗收證據。\n\n## Acceptance criteria\n\n- [ ] 交付包含 Python 3.14.3 的主程式及獨立 Python 3.12 語音包；固定版本、來源修訂及必要授權通知。\n- [ ] 在未安裝 Python／開發依賴且無模型／語言資源快取的乾淨 Windows 環境 → 匯入語音包 → 封鎖網路 → 第一次試聽及正式製作成功，無終端機或手動服務。\n- [ ] 製作多個有效批次 → 選取及排序 → 合併總 MP3／SRT → 檢查批次交接停頓與字幕實測偏移。\n- [ ] 使用有效總音訊製作 MP4 → 更換視覺素材 → 確認沿用有效音訊，不新增 TTS 或重複交接停頓；缺少批次 MP4 不阻擋總音訊製片。\n- [ ] 驗收主視窗最大化及還原／縮小、內頁返回狀態、必要按鈕及文字顯示；核對全部已核准設計狀態。\n- [ ] 重開舊專案 → 檢查原服務設定與成品 → 確認既有功能相容；未安裝 Kokoro 不阻擋無關流程。\n- [ ] 試聽／製作取消、缺包／錯版／損毀、移除及關閉 → 確認可行動錯誤、舊成品保護、無自動雲端備援及無遺留程序／占用。\n- [ ] 交付可操作的短句驗收路徑、實際樣本、量測、包體大小、限制及未通過項目；不得將可播放等同人工聽感通過。\n- [ ] 清理本次測試資料、建置暫存、非成品快取及程序；保留正式成品、需求文件與最終證據，確認無遺留占用。\n\n",
+  "state": "open",
+  "user": {
+    "login": "newesp",
+    "name": "newesp",
+    "email": null,
+    "avatar_url": "https://avatars.githubusercontent.com/u/59996719?v=4",
+    "id": 59996719
+  },
+  "assignees": null,
+  "labels": [
+    {
+      "name": "ready-for-agent",
+      "color": "0E8A16",
+      "description": "Specification or ticket ready for an agent to implement"
+    }
+  ],
+  "milestone": null,
+  "state_reason": null,
+  "comments": 0,
+  "created_at": "2026-11-04T12:31:20Z",
+  "updated_at": "2026-11-04T12:31:20Z",
+  "closed_at": null,
+  "display_url": "https://github.com/newesp/ebook2mp4/issues/11",
+  "display_title": "[Kokoro K09] 封裝交付與全書離線流程驗收"
+}

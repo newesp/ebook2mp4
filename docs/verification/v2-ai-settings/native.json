@@ -1,0 +1,212 @@
+[
+  {
+    "state": "1360x820-collapsed",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "viewport": 347,
+    "content": 209,
+    "actions": [
+      "ai.save-settings",
+      "ai.test-connection"
+    ],
+    "controls": [
+      {
+        "width": 513,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 514,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 513,
+        "height": 37,
+        "y": 311
+      },
+      {
+        "width": 514,
+        "height": 37,
+        "y": 311
+      }
+    ]
+  },
+  {
+    "state": "1360x820-expanded",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "viewport": 347,
+    "content": 287,
+    "actions": [
+      "ai.save-settings",
+      "ai.test-connection"
+    ],
+    "controls": [
+      {
+        "width": 513,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 514,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 513,
+        "height": 37,
+        "y": 311
+      },
+      {
+        "width": 514,
+        "height": 37,
+        "y": 311
+      }
+    ]
+  },
+  {
+    "state": "1280x720-collapsed",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "viewport": 412,
+    "content": 209,
+    "actions": [
+      "ai.save-settings",
+      "ai.test-connection"
+    ],
+    "controls": [
+      {
+        "width": 481,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 481,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 481,
+        "height": 37,
+        "y": 311
+      },
+      {
+        "width": 481,
+        "height": 37,
+        "y": 311
+      }
+    ]
+  },
+  {
+    "state": "1280x720-expanded",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "viewport": 412,
+    "content": 287,
+    "actions": [
+      "ai.save-settings",
+      "ai.test-connection"
+    ],
+    "controls": [
+      {
+        "width": 481,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 481,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 481,
+        "height": 37,
+        "y": 311
+      },
+      {
+        "width": 481,
+        "height": 37,
+        "y": 311
+      }
+    ]
+  },
+  {
+    "state": "900x640-collapsed",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "viewport": 332,
+    "content": 209,
+    "actions": [
+      "ai.save-settings",
+      "ai.test-connection"
+    ],
+    "controls": [
+      {
+        "width": 291,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 291,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 291,
+        "height": 37,
+        "y": 311
+      },
+      {
+        "width": 291,
+        "height": 37,
+        "y": 311
+      }
+    ]
+  },
+  {
+    "state": "900x640-expanded",
+    "view": [
+      0.0,
+      1.0
+    ],
+    "viewport": 332,
+    "content": 287,
+    "actions": [
+      "ai.save-settings",
+      "ai.test-connection"
+    ],
+    "controls": [
+      {
+        "width": 291,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 291,
+        "height": 37,
+        "y": 233
+      },
+      {
+        "width": 291,
+        "height": 37,
+        "y": 311
+      },
+      {
+        "width": 291,
+        "height": 37,
+        "y": 311
+      }
+    ]
+  }
+]

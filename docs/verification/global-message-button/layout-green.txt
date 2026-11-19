@@ -1,0 +1,6 @@
+test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.617s
+
+OK

@@ -1,0 +1,10 @@
+{
+  "characters": 6843,
+  "requests": 11,
+  "max_request_bytes": 2940,
+  "exact_text": true,
+  "mp3": true,
+  "srt": true,
+  "lock_released": true,
+  "service": "mocked Edge TTS"
+}

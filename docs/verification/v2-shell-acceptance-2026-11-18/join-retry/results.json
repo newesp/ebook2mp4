@@ -1,0 +1,100 @@
+{
+  "source_sha256": "7c96877ef1eae2ad7f7d5ef8ad0eacb3622cb1e8f6d89f6e471316f47c86452a",
+  "cases": [
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green",
+      "route": "開啟音訊組裝 → 選取批次 → 檢查接點 → 量測操作列與文字區",
+      "status": "不通過",
+      "checks": [
+        "row-alignment",
+        "column-alignment",
+        "horizontal-gap",
+        "vertical-gap",
+        "viewport-matrix"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [],
+      "errors": [
+        "缺少本次證據 native-layout-regression.json",
+        "缺少本次證據 native-maximized.png"
+      ]
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract",
+      "route": "開啟檢查接點 → 輸入不同長度內容 → 量測捲動區的顯隱、比例與行程",
+      "status": "不通過",
+      "checks": [
+        "scroll-short",
+        "scroll-overflow"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [],
+      "errors": [
+        "缺少本次證據 scroll-contract.json",
+        "缺少本次證據 native-scroll.json",
+        "缺少來源布局量測",
+        "漏測：檢查接點 / 900x640 / 前批 / fit",
+        "漏測：檢查接點 / 900x640 / 前批 / long",
+        "漏測：檢查接點 / 900x640 / 前批 / overflow",
+        "漏測：檢查接點 / 900x640 / 前批 / short",
+        "漏測：檢查接點 / 900x640 / 後批 / fit",
+        "漏測：檢查接點 / 900x640 / 後批 / long",
+        "漏測：檢查接點 / 900x640 / 後批 / overflow",
+        "漏測：檢查接點 / 900x640 / 後批 / short",
+        "漏測：檢查接點 / 900x640 / 文件列表 / fit",
+        "漏測：檢查接點 / 900x640 / 文件列表 / long",
+        "漏測：檢查接點 / 900x640 / 文件列表 / overflow",
+        "漏測：檢查接點 / 900x640 / 文件列表 / short",
+        "漏測：檢查接點 / 900x640 / 警告詳情 / fit",
+        "漏測：檢查接點 / 900x640 / 警告詳情 / long",
+        "漏測：檢查接點 / 900x640 / 警告詳情 / overflow",
+        "漏測：檢查接點 / 900x640 / 警告詳情 / short"
+      ]
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context",
+      "route": "開啟檢查接點 → 捲至長文末端 → 收合及返回 → 切換空狀態",
+      "status": "不通過",
+      "checks": [
+        "scroll-short",
+        "scroll-transition",
+        "scroll-resize"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [],
+      "errors": []
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors",
+      "route": "從 PDF 文稿進入檢查接點 → 收合及展開文件列表 → 量測標頭與內容起點",
+      "status": "不通過",
+      "checks": [
+        "panel-alignment",
+        "viewport-matrix"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [],
+      "errors": [
+        "缺少本次證據 shell-anchors.json"
+      ]
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure",
+      "route": "開啟檢查接點 → 試聽 → 修改設定 → 模擬儲存失敗 → 重試儲存",
+      "status": "不通過",
+      "checks": [],
+      "category": "功能回歸",
+      "evidence": [],
+      "errors": [
+        "缺少本次證據 native-save-failed.png"
+      ]
+    }
+  ],
+  "full_ui_acceptance": "未完成",
+  "packaged_exe": "未測"
+}

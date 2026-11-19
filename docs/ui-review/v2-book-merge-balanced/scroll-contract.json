@@ -1,0 +1,954 @@
+{
+  "coverage_complete": true,
+  "regions": [
+    {
+      "page": "1360-empty",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-empty",
+      "state": "empty",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 48,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-short",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-short",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-fit",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-fit",
+      "state": "fit",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 359,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-overflow",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-overflow",
+      "state": "overflow",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 360,
+      "scrollbar_visible": true,
+      "max_offset": 1,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.9972222222222222
+    },
+    {
+      "page": "1360-long",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-long",
+      "state": "long",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 1920,
+      "scrollbar_visible": true,
+      "max_offset": 1561,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.18697916666666667
+    },
+    {
+      "page": "1360-long-end",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-long-end",
+      "state": "long",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 1920,
+      "scrollbar_visible": true,
+      "max_offset": 1561,
+      "rendered_offset": 1561,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.18697916666666667
+    },
+    {
+      "page": "1920-short",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        896
+      ],
+      "viewport_height": 775,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1920-short",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1892,
+        748
+      ],
+      "viewport_height": 539,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1280-short",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        166,
+        224,
+        616
+      ],
+      "viewport_height": 450,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1280-short",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        254,
+        1252,
+        468
+      ],
+      "viewport_height": 214,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "900-short",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        205,
+        872,
+        388
+      ],
+      "viewport_height": 183,
+      "content_height": 200,
+      "scrollbar_visible": true,
+      "max_offset": 17,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.915
+    },
+    {
+      "page": "1360-both-short",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-short",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "900-both-short",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        205,
+        872,
+        344
+      ],
+      "viewport_height": 139,
+      "content_height": 200,
+      "scrollbar_visible": true,
+      "max_offset": 61,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.695
+    },
+    {
+      "page": "1360-both-missing",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-missing",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-partial",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-partial",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-running",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-running",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-cancelled",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-cancelled",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-pending",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-pending",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-done",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-both-done",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        524
+      ],
+      "viewport_height": 315,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-short-files-fit",
+      "state": "fit",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 595,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-short-files-fit",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "state": "overflow",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 640,
+      "scrollbar_visible": true,
+      "max_offset": 45,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.9296875
+    },
+    {
+      "page": "1360-short-files-overflow",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-short-files-long",
+      "state": "long",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 2560,
+      "scrollbar_visible": true,
+      "max_offset": 1965,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.232421875
+    },
+    {
+      "page": "1360-short-files-long",
+      "state": "short",
+      "owner": "合併來源清單",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        209,
+        1332,
+        568
+      ],
+      "viewport_height": 359,
+      "content_height": 200,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-short",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-short",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        233,
+        784,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 84,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-short",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        233,
+        1332,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 84,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-fit",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-fit",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        233,
+        784,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 227,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-fit",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        233,
+        1332,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 227,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-overflow",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-overflow",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        233,
+        784,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 252,
+      "scrollbar_visible": true,
+      "max_offset": 25,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.9007936507936508
+    },
+    {
+      "page": "1360-joins-overflow",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        233,
+        1332,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 252,
+      "scrollbar_visible": true,
+      "max_offset": 25,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.9007936507936508
+    },
+    {
+      "page": "1360-joins-long",
+      "state": "short",
+      "owner": "文件清單",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        121,
+        224,
+        716
+      ],
+      "viewport_height": 595,
+      "content_height": 320,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height"
+    },
+    {
+      "page": "1360-joins-long",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        233,
+        784,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 1064,
+      "scrollbar_visible": true,
+      "max_offset": 837,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.21334586466165414
+    },
+    {
+      "page": "1360-joins-long",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        233,
+        1332,
+        460
+      ],
+      "viewport_height": 227,
+      "content_height": 1064,
+      "scrollbar_visible": true,
+      "max_offset": 837,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.21334586466165414
+    },
+    {
+      "page": "900-joins-long-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        193,
+        444,
+        304
+      ],
+      "viewport_height": 111,
+      "content_height": 1064,
+      "scrollbar_visible": true,
+      "max_offset": 953,
+      "rendered_offset": 953,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.10432330827067669
+    },
+    {
+      "page": "900-joins-long-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        193,
+        872,
+        304
+      ],
+      "viewport_height": 111,
+      "content_height": 1064,
+      "scrollbar_visible": true,
+      "max_offset": 953,
+      "rendered_offset": 953,
+      "measurement_source": "tools/draw_v2_book_merge.py: Drawing.region; same box and rendered layer height",
+      "thumb_fraction": 0.10432330827067669
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "window": {
+    "app": "process:E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4\\ebook2mp4.exe",
+    "id": 14486080,
+    "title": "語音測試 — ebook2mp4"
+  },
+  "screenshotWidth": 1702,
+  "screenshotHeight": 1065,
+  "checked": [
+    "audio narrow list entry",
+    "unique expanded list toggle",
+    "aligned header and content bands",
+    "uniform book initial wide layout",
+    "book method switch",
+    "batch material and resolution retained",
+    "local MP4 publication completed"
+  ]
+}

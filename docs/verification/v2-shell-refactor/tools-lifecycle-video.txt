@@ -1,0 +1,21 @@
+test_form_fits_and_preserves_inputs_after_failure_and_return (test_v2_ai_settings.AiSettingsTests.test_form_fits_and_preserves_inputs_after_failure_and_return) ... ok
+test_save_settings_includes_local_connection_and_project_preferences (test_v2_ai_settings.AiSettingsTests.test_save_settings_includes_local_connection_and_project_preferences) ... ok
+test_shared_host_and_connection_commands_in_both_states (test_v2_ai_settings.AiSettingsTests.test_shared_host_and_connection_commands_in_both_states) ... ok
+test_backup_has_no_delete_and_failed_restore_preserves_editor (test_v2_versions.VersionTests.test_backup_has_no_delete_and_failed_restore_preserves_editor) ... ok
+test_delete_cancel_and_restore_backup (test_v2_versions.VersionTests.test_delete_cancel_and_restore_backup) ... ok
+test_empty_short_long_and_return_to_other_inner_page (test_v2_versions.VersionTests.test_empty_short_long_and_return_to_other_inner_page) ... ok
+test_empty_issues_have_no_scroll_owner_after_processing (test_source_issue_view.SourceIssueViewTests.test_empty_issues_have_no_scroll_owner_after_processing) ... ok
+test_issue_view_and_return_to_processing (test_source_issue_view.SourceIssueViewTests.test_issue_view_and_return_to_processing) ... ok
+test_pdf_form_two_columns_fit_after_issue_transition (test_source_issue_view.SourceIssueViewTests.test_pdf_form_two_columns_fit_after_issue_transition) ... ok
+test_close_after_returning_from_audio (test_close_lifecycle.CloseLifecycle.test_close_after_returning_from_audio) ... ok
+test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page) ... ok
+test_close_cancels_running_narration_and_releases_lock (test_close_lifecycle.CloseLifecycle.test_close_cancels_running_narration_and_releases_lock) ... ok
+test_close_from_audio (test_close_lifecycle.CloseLifecycle.test_close_from_audio) ... ok
+test_close_with_service_page (test_close_lifecycle.CloseLifecycle.test_close_with_service_page) ... ok
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 121.857s
+
+OK

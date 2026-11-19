@@ -1,0 +1,8 @@
+test_native_scroll_owners_and_short_fit_overflow_contract (test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract) ... ok
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+test_preview_content_scope_stop_on_edit_and_save_failure (test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 37.070s
+
+OK

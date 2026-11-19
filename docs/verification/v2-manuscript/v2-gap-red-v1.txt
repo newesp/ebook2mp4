@@ -1,0 +1,91 @@
+test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) ... 
+  test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1536x793') ... FAIL
+  test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1360x820') ... FAIL
+  test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1280x720') ... FAIL
+  test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1100x760') ... FAIL
+  test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='900x640') ... FAIL
+
+======================================================================
+FAIL: test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1536x793')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_manuscript_shell.py", line 45, in test_pdf_action_gaps_match_editor_and_survive_source_transitions
+    self.assertEqual(gaps, [4,4,4,4], 'PDF actions must match the editor toolbar gap')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [0, 0, 0, 0] != [4, 4, 4, 4]
+
+First differing element 0:
+0
+4
+
+- [0, 0, 0, 0]
++ [4, 4, 4, 4] : PDF actions must match the editor toolbar gap
+
+======================================================================
+FAIL: test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1360x820')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_manuscript_shell.py", line 45, in test_pdf_action_gaps_match_editor_and_survive_source_transitions
+    self.assertEqual(gaps, [4,4,4,4], 'PDF actions must match the editor toolbar gap')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [0, 0, 0, 0] != [4, 4, 4, 4]
+
+First differing element 0:
+0
+4
+
+- [0, 0, 0, 0]
++ [4, 4, 4, 4] : PDF actions must match the editor toolbar gap
+
+======================================================================
+FAIL: test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1280x720')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_manuscript_shell.py", line 45, in test_pdf_action_gaps_match_editor_and_survive_source_transitions
+    self.assertEqual(gaps, [4,4,4,4], 'PDF actions must match the editor toolbar gap')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [0, 0, 0, 0] != [4, 4, 4, 4]
+
+First differing element 0:
+0
+4
+
+- [0, 0, 0, 0]
++ [4, 4, 4, 4] : PDF actions must match the editor toolbar gap
+
+======================================================================
+FAIL: test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='1100x760')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_manuscript_shell.py", line 45, in test_pdf_action_gaps_match_editor_and_survive_source_transitions
+    self.assertEqual(gaps, [4,4,4,4], 'PDF actions must match the editor toolbar gap')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [0, 0, 0, 0] != [4, 4, 4, 4]
+
+First differing element 0:
+0
+4
+
+- [0, 0, 0, 0]
++ [4, 4, 4, 4] : PDF actions must match the editor toolbar gap
+
+======================================================================
+FAIL: test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) (size='900x640')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_v2_manuscript_shell.py", line 45, in test_pdf_action_gaps_match_editor_and_survive_source_transitions
+    self.assertEqual(gaps, [4,4,4,4], 'PDF actions must match the editor toolbar gap')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [0, 0, 0, 0] != [4, 4, 4, 4]
+
+First differing element 0:
+0
+4
+
+- [0, 0, 0, 0]
++ [4, 4, 4, 4] : PDF actions must match the editor toolbar gap
+
+----------------------------------------------------------------------
+Ran 1 test in 4.646s
+
+FAILED (failures=5)

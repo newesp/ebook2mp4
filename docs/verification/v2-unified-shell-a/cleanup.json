@@ -1,0 +1,17 @@
+{
+  "stage": "A design only",
+  "owned_processes": [],
+  "locked_artifacts": [],
+  "probed_file_count": 93,
+  "test_projects_created": 0,
+  "app_processes_started": 0,
+  "build_processes_started": 0,
+  "caches_created_in_workspace": 0,
+  "cleanup_deletions": 0,
+  "v1_accessed": false,
+  "dist_updated": false,
+  "retained": "Design sources, requirements, final images and verification evidence",
+  "process_inventory_method": "Get-Process python/pythonw; all tool sessions completed with exit 0",
+  "python_processes": [],
+  "cim_query": "Access denied; replaced by Get-Process. Empty CIM result was not used as proof."
+}

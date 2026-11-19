@@ -1,0 +1,6 @@
+{
+  "fitting_content_accepted": true,
+  "overflowing_content_accepted": true,
+  "unnecessary_scrollbar_rejected": true,
+  "scope": "checker behavior only; current mock batch still failed"
+}

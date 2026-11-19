@@ -1,0 +1,322 @@
+[
+  {
+    "name": "exe-start-maximized",
+    "screen": "exe-start-maximized.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:09:35.082Z"
+  },
+  {
+    "name": "exe-production",
+    "screen": "exe-production.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:09:37.778Z"
+  },
+  {
+    "name": "exe-service-menu",
+    "screen": "exe-service-menu.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:09:44.624Z"
+  },
+  {
+    "name": "exe-package-empty",
+    "screen": "exe-package-empty.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:09:54.121Z"
+  },
+  {
+    "name": "exe-package-selected",
+    "screen": "exe-package-selected.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:10:15.367Z"
+  },
+  {
+    "name": "exe-import-running",
+    "screen": "exe-import-running.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:10:22.907Z"
+  },
+  {
+    "name": "exe-import-cancelling",
+    "screen": "exe-import-cancelling.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:10:31.831Z"
+  },
+  {
+    "name": "exe-import-cancelled",
+    "screen": "exe-import-cancelled.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:11:01.583Z"
+  },
+  {
+    "name": "exe-import-retry",
+    "screen": "exe-import-retry.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:11:12.270Z"
+  },
+  {
+    "name": "exe-import-restored",
+    "screen": "exe-import-restored.jpg",
+    "width": 1702,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:12:01.433Z"
+  },
+  {
+    "name": "exe-import-small",
+    "screen": "exe-import-small.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:12:25.994Z"
+  },
+  {
+    "name": "exe-import-progress-small",
+    "screen": "exe-import-progress-small.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:13:35.911Z"
+  },
+  {
+    "name": "exe-package-details-small",
+    "screen": "exe-package-details-small.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:13:53.001Z"
+  },
+  {
+    "name": "exe-package-details-wheel-end",
+    "screen": "exe-package-details-wheel-end.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:14:06.809Z"
+  },
+  {
+    "name": "exe-package-details-thumb-top",
+    "screen": "exe-package-details-thumb-top.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:14:19.631Z"
+  },
+  {
+    "name": "exe-import-completed-small",
+    "screen": "exe-import-completed-small.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:14:36.853Z"
+  },
+  {
+    "name": "exe-voice-return-installed",
+    "screen": "exe-voice-return-installed.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:15:02.074Z"
+  },
+  {
+    "name": "exe-preview-running-small",
+    "screen": "exe-preview-running-small.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:15:16.360Z"
+  },
+  {
+    "name": "exe-preview-running-maximized",
+    "screen": "exe-preview-running-maximized.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:16:12.961Z"
+  },
+  {
+    "name": "exe-preview-progress",
+    "screen": "exe-preview-progress.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:17:35.513Z"
+  },
+  {
+    "name": "exe-preview-status",
+    "screen": "exe-preview-status.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:19:08.000Z"
+  },
+  {
+    "name": "exe-preview-stopped",
+    "screen": "exe-preview-stopped.jpg",
+    "width": 1920,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:19:20.978Z"
+  },
+  {
+    "name": "exe-voice-restored",
+    "screen": "exe-voice-restored.jpg",
+    "width": 1127,
+    "height": 1065,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:19:34.983Z"
+  },
+  {
+    "name": "exe-voice-short-height",
+    "screen": "exe-voice-short-height.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:19:48.654Z"
+  },
+  {
+    "name": "exe-voice-minimum",
+    "screen": "exe-voice-minimum.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:20:15.752Z"
+  },
+  {
+    "name": "exe-audio-before-production",
+    "screen": "exe-audio-before-production.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:20:37.335Z"
+  },
+  {
+    "name": "exe-formal-resume",
+    "screen": "exe-formal-resume.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:20:46.860Z"
+  },
+  {
+    "name": "exe-voice-after-formal",
+    "screen": "exe-voice-after-formal.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:20:57.992Z"
+  },
+  {
+    "name": "exe-manage-menu-after-formal",
+    "screen": "exe-manage-menu-after-formal.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:21:09.690Z"
+  },
+  {
+    "name": "exe-package-before-remove",
+    "screen": "exe-package-before-remove.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:21:18.369Z"
+  },
+  {
+    "name": "exe-details-keyboard-end",
+    "screen": "exe-details-keyboard-end.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:21:35.313Z"
+  },
+  {
+    "name": "exe-remove-confirmation",
+    "screen": "exe-remove-confirmation.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:22:16.384Z"
+  },
+  {
+    "name": "exe-remove-result",
+    "screen": "exe-remove-result.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:22:26.340Z"
+  },
+  {
+    "name": "exe-package-removed",
+    "screen": "exe-package-removed.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:22:57.297Z"
+  },
+  {
+    "name": "exe-voice-missing-after-remove",
+    "screen": "exe-voice-missing-after-remove.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:23:11.538Z"
+  },
+  {
+    "name": "exe-project-menu",
+    "screen": "exe-project-menu.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:23:19.918Z"
+  },
+  {
+    "name": "exe-cloud-project-reopened",
+    "screen": "exe-cloud-project-reopened.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "K09 本機離線驗收 — ebook2mp4 v2",
+    "time": "2026-11-19T05:24:34.968Z"
+  },
+  {
+    "name": "exe-cloud-settings-without-kokoro",
+    "screen": "exe-cloud-settings-without-kokoro.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "語音測試 — ebook2mp4 v2",
+    "time": "2026-11-19T05:24:44.389Z"
+  },
+  {
+    "name": "exe-cloud-existing-output",
+    "screen": "exe-cloud-existing-output.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "語音測試 — ebook2mp4 v2",
+    "time": "2026-11-19T05:24:52.253Z"
+  },
+  {
+    "name": "exe-cloud-output-playback",
+    "screen": "exe-cloud-output-playback.jpg",
+    "width": 1127,
+    "height": 1020,
+    "window": "語音測試 — ebook2mp4 v2",
+    "time": "2026-11-19T05:25:01.663Z"
+  }
+]

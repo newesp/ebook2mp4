@@ -1,0 +1,197 @@
+"""K09 current-release host acceptance; never claims clean Windows coverage."""
+from array import array
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+import zipfile
+
+ROOT = Path(__file__).resolve().parents[2]
+WORK = ROOT / '.scratch/k09'
+EVIDENCE = ROOT / 'docs/verification/kokoro-k09'
+os.environ['EBOOK2MP4_KOKORO_HOME'] = str(WORK / 'packages')
+os.environ['EBOOK2MP4_VOICE_HOME'] = str(WORK / 'voices')
+sys.path.insert(0, str(ROOT))
+from ebook2mp4.workflow import ProjectWorkflow
+from ebook2mp4.kokoro_packages import release
+from PIL import Image
+
+records = dict(environment='existing Windows host with development tools', clean_windows=False,
+               manual_listening='pending; technical playback is not a quality approval', jobs=[])
+
+
+def save():
+    (EVIDENCE / 'host-acceptance.json').write_text(
+        json.dumps(records, ensure_ascii=False, indent=2), encoding='utf-8')
+
+
+def digest(path):
+    with path.open('rb') as stream:
+        return hashlib.file_digest(stream, 'sha256').hexdigest()
+
+
+def wait(flow, job, name, expected='completed', timeout=900):
+    start = time.monotonic()
+    previous = None
+    try:
+        while not job.wait(.2):
+            phase = flow.local_voice_status()['phase']
+            if phase != previous:
+                print(name, round(time.monotonic()-start, 2), phase, flush=True)
+                previous = phase
+            if time.monotonic()-start > timeout:
+                raise TimeoutError(dict(job.state))
+        row = dict(name=name, seconds=time.monotonic()-start, state=job.state,
+                   worker=flow.local_voice_status())
+        records['jobs'].append(row)
+        save()
+        print(name, row['seconds'], job.state, flush=True)
+        assert job.state['status'] == expected, row
+        return row
+    finally:
+        if not job.wait(0):
+            job.cancel()
+            assert job.wait(30), 'Owned job did not stop'
+
+
+def cues(path):
+    result = []
+    for block in re.split(r'\n\s*\n', path.read_text(encoding='utf-8-sig').strip()):
+        lines = block.splitlines()
+        def ms(value):
+            h, m, s, fraction = map(int, re.split('[:,]', value))
+            return ((h*60+m)*60+s)*1000+fraction
+        a, b = lines[1].split(' --> ')
+        result.append((ms(a), ms(b), '\n'.join(lines[2:])))
+    return result
+
+
+def pcm(path):
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-nostdin', '-v', 'error',
+        '-i', str(path), '-ac', '1', '-ar', '24000', '-f', 's16le', '-'])
+
+
+def main():
+    flow = ProjectWorkflow.create(WORK / 'book', 'K09 本機離線驗收')
+    archive = ROOT / json.loads((EVIDENCE / 'package.json').read_bytes())['archive']
+    try:
+        wait(flow, flow.start_voice_package_import(archive), 'fresh-import')
+        package = flow.local_voice_packages()[0]
+        assert len(package['voices']) == 100 and not any(x['verified'] for x in package['voices'])
+        runtime = Path(package['path']) / 'runtime/python.exe'
+        command = "import socket; s=socket.socket(); s.settimeout(3); code=s.connect_ex(('1.1.1.1',443)); s.close(); print(code); assert code==10013"
+        probe = subprocess.run([str(runtime), '-I', '-B', '-c', command], capture_output=True, text=True)
+        records['network_probe'] = dict(program=str(runtime), stdout=probe.stdout,
+                                        stderr=probe.stderr, exit_code=probe.returncode)
+        assert probe.returncode == 0, records['network_probe']
+        records['runtime_python'] = subprocess.check_output([str(runtime), '-I', '-B', '-c',
+            'import sys; print(sys.version)'], text=True).strip()
+        records['host_python'] = sys.version
+        save()
+        # Reject bad content and a different release without replacing the valid install.
+        marker = Path(package['path']) / 'package.json'
+        original_marker = digest(marker)
+        for name, metadata in [('corrupt', release()), ('wrong-version', dict(release(), id='kokoro-zh-cpu-0000000000000000'))]:
+            bad = WORK / (name+'.zip')
+            with zipfile.ZipFile(bad, 'w') as z:
+                z.writestr('package.json', json.dumps(metadata))
+                z.writestr('worker.py', 'damaged')
+            wait(flow, flow.start_voice_package_import(bad), name, expected='failed')
+            assert digest(marker) == original_marker and len(flow.local_voice_packages()) == 1
+        records['invalid_import_preserves_installation'] = True
+        # Real installed-resource corruption and recovery via public import.
+        (Path(package['path']) / 'worker.py').write_text('damaged', encoding='utf-8')
+        wait(flow, flow.start_voice_package_import(archive), 'repair-installed-worker')
+        records['repair_matches_release'] = digest(Path(package['path'])/'worker.py') == next(
+            e['sha256'] for e in release()['files'] if e['path']=='worker.py')
+        ids=[]
+        delivery=EVIDENCE/'products'
+        delivery.mkdir(exist_ok=True)
+        for index, text in enumerate(('第一批，臺北的圖書館。Hello world。', '第二批，今天的故事結束了。晚安。')):
+            source=WORK/f'source-{index+1}.txt'
+            source.write_text(text,encoding='utf-8')
+            batch=flow.import_txt(flow.inspect_txt(source)); ids.append(batch)
+            settings=dict(flow.voice_settings(batch), provider='kokoro',voice='zf_001',package=package['id'],
+                model=package['model'], processing='kokoro-t2s-v1')
+            flow.save_voice_settings('zf_001',batch_id=batch,settings_override=settings)
+            assert ProjectWorkflow.open(flow.root).voice_settings(batch)==settings
+            if index==0:
+                job=flow.start_voice_preview(batch,text=text,start=0,end=len(text))
+                wait(flow,job,'first-preview-offline');flow.finish_voice_preview(job)
+                shutil.copyfile(flow.voice_preview_path(batch),delivery/'preview.mp3')
+            flow.confirm_reading(batch)
+            job=flow.start_narration(batch,allow_network=False)
+            wait(flow,job,f'formal-batch-{index+1}');product=flow.finish_narration(job)
+            assert product['text']==text
+            if index==0: assert all(c['reused'] for c in product['chunks'])
+            for kind in ('mp3','srt'):
+                shutil.copyfile(flow.narration_path(batch,kind),delivery/f'batch-{index+1}.{kind}')
+        # Reverse selection deliberately tests persisted sorting and timing offsets.
+        flow.save_assembly_settings(ids[::-1],500)
+        flow=ProjectWorkflow.open(flow.root)
+        assert [x['batch_id'] for x in flow.assembly_settings()['sources']]==ids[::-1]
+        loads=flow.local_voice_status()['loads']
+        job=flow.start_total_audio();wait(flow,job,'total-audio');total=flow.finish_total_audio(job)
+        for kind in ('mp3','srt'):shutil.copyfile(flow.total_audio_path(kind),delivery/f'total.{kind}')
+        expected=[];frames=0;boundaries=[]
+        for index,source in enumerate(total['sources']):
+            batch=source['batch_id']; data=pcm(flow.narration_path(batch))
+            expected.extend((a+round(frames/24),b+round(frames/24),text) for a,b,text in cues(flow.narration_path(batch,'srt')))
+            frames+=len(data)//2
+            if index<len(total['sources'])-1:boundaries.append(frames);frames+=500*24
+        combined=pcm(flow.total_audio_path())
+        assert len(combined)//2==frames and cues(flow.total_audio_path('srt'))==expected
+        peaks=[]
+        for boundary in boundaries:
+            middle=boundary+250*24
+            peak=max(map(abs,array('h',combined[(middle-120)*2:(middle+120)*2])))
+            assert peak<=2
+            peaks.append(dict(center_ms=middle/24,window_ms=10,peak=peak))
+        records['timeline']=dict(batch_order=ids[::-1],frames=frames,duration_ms=frames/24,
+            subtitles=len(expected),exact_subtitle_offsets=True,pause_ms=500,silence=peaks)
+        sound_hash=digest(flow.total_audio_path()); subtitle_hash=digest(flow.total_audio_path('srt'))
+        audio_tracks=[]
+        for index,color in enumerate(('#315d43','#795b35')):
+            image=WORK/f'cover-{index+1}.png';Image.new('RGB',(320,180),color).save(image)
+            flow.save_total_video_settings(image=flow.inspect_total_video_image(image),resolution='720p')
+            job=flow.start_total_video();wait(flow,job,f'total-video-{index+1}');flow.finish_total_video(job)
+            assert digest(flow.total_audio_path())==sound_hash and digest(flow.total_audio_path('srt'))==subtitle_hash
+            assert not any(flow.batch_video_target(batch).total_video() for batch in ids)
+            target=delivery/f'total-image-{index+1}.mp4';shutil.copyfile(flow.total_video_path(),target)
+            subprocess.run([os.environ['EBOOK2MP4_FFMPEG'],'-nostdin','-v','error','-i',str(target),'-f','null','-'],check=True)
+            payload=subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'],'-v','error','-i',str(target),'-map','0:a','-c','copy','-f','adts','-'])
+            audio_tracks.append(hashlib.sha256(payload).hexdigest())
+        assert len(set(audio_tracks))==1 and flow.local_voice_status()['loads']==loads
+        records['video_reuse']=dict(audio_sha256=audio_tracks,no_new_model_loads=True,no_batch_mp4=True,total_audio_unchanged=True)
+        # Cancel actual inference and preserve the previous preview.
+        old_preview=digest(flow.voice_preview_path(ids[0]))
+        text='取消此段測試，原本已完成的音訊必須保留。'*30
+        job=flow.start_voice_preview(ids[0],text=text,start=0,end=len(text))
+        start=time.monotonic()
+        while flow.local_voice_status()['phase']!='本機合成':
+            if job.wait(.1) or time.monotonic()-start>650:raise RuntimeError(job.state)
+        time.sleep(.3);start=time.monotonic();job.cancel()
+        wait(flow,job,'cancel-inference',expected='cancelled',timeout=30);flow.discard_voice_preview(job)
+        assert flow.local_voice_status()['pid'] is None and digest(flow.voice_preview_path(ids[0]))==old_preview
+        records['cancel_inference_seconds']=time.monotonic()-start
+        old_product=digest(flow.narration_path(ids[0]))
+        job=flow.start_narration(ids[0],allow_network=False);job.cancel()
+        wait(flow,job,'cancel-formal',expected='cancelled',timeout=30);flow.discard_narration(job)
+        assert digest(flow.narration_path(ids[0]))==old_product
+        records['cancel_keeps_outputs']=True
+        records['products']=[dict(path=x.relative_to(EVIDENCE).as_posix(),bytes=x.stat().st_size,sha256=digest(x)) for x in delivery.iterdir()]
+        records['status']='passed host-only; clean Windows and final packaged interaction pending'
+        save()
+    finally:
+        flow.unload_local_voice()
+        records['worker_after_shutdown']=flow.local_voice_status()
+        records['temporary_worker_folders']=[str(x) for x in (WORK/'packages').glob('.worker-*')]
+        save()
+
+
+if __name__=='__main__':main()

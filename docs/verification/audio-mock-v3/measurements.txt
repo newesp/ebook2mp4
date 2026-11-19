@@ -1,0 +1,1 @@
+[{"size": [1360, 820], "text_scale": 1, "editor_lines": 23}, {"size": [900, 640], "text_scale": 1, "editor_lines": 9}, {"size": [1360, 820], "text_scale": 1.25, "editor_lines": 17}, {"size": [900, 640], "text_scale": 1.25, "editor_lines": 3}]

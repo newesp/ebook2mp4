@@ -1,0 +1,20 @@
+test_collapsed_list_releases_track_and_ratio_survives_navigation (test_manuscript_v6.ManuscriptV6.test_collapsed_list_releases_track_and_ratio_survives_navigation) ... ok
+test_long_version_diff_owns_scroll_and_editor_state_returns (test_manuscript_v6.ManuscriptV6.test_long_version_diff_owns_scroll_and_editor_state_returns) ... ok
+test_pdf_reextract_preview_and_region_retry_keep_original_manuscript (test_manuscript_v6.ManuscriptV6.test_pdf_reextract_preview_and_region_retry_keep_original_manuscript) ... ok
+test_pdf_source_open_missing_zoom_rotate_and_region_coordinates (test_manuscript_v6.ManuscriptV6.test_pdf_source_open_missing_zoom_rotate_and_region_coordinates) ... ok
+test_proof_menu_real_candidate_diff_restore_and_discard (test_manuscript_v6.ManuscriptV6.test_proof_menu_real_candidate_diff_restore_and_discard) ... ok
+test_reopen_list_with_hidden_source_and_narrow_window (test_manuscript_v6.ManuscriptV6.test_reopen_list_with_hidden_source_and_narrow_window) ... ok
+test_restored_comparison_reflows_groups_without_clipping (test_manuscript_v6.ManuscriptV6.test_restored_comparison_reflows_groups_without_clipping) ... ok
+test_search_replace_export_reload_cleanup_new_edit_menu (test_manuscript_v6.ManuscriptV6.test_search_replace_export_reload_cleanup_new_edit_menu) ... ok
+test_three_content_edges_align_and_controls_match_height (test_manuscript_v6.ManuscriptV6.test_three_content_edges_align_and_controls_match_height) ... ok
+test_line_cleanup_preview_apply_and_single_undo (test_ui_layout.WorkbenchLayout.test_line_cleanup_preview_apply_and_single_undo) ... ok
+test_menu_export_uses_displayed_full_text (test_ui_layout.WorkbenchLayout.test_menu_export_uses_displayed_full_text) ... ok
+test_selection_survives_tools_and_source_toggle (test_ui_layout.WorkbenchLayout.test_selection_survives_tools_and_source_toggle) ... ok
+test_source_blockers_visible_in_every_tool (test_ui_layout.WorkbenchLayout.test_source_blockers_visible_in_every_tool) ... ok
+test_source_resizing_restores_two_columns_without_callback_failure (test_ui_layout.WorkbenchLayout.test_source_resizing_restores_two_columns_without_callback_failure) ... ok
+test_tools_fit_and_primary_action_stays_visible (test_ui_layout.WorkbenchLayout.test_tools_fit_and_primary_action_stays_visible) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 69.325s
+
+OK

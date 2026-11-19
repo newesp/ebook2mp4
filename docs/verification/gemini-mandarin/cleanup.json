@@ -1,0 +1,9 @@
+{
+  "Removed": [
+    ".scratch\\mandarin-tools",
+    ".scratch\\mandarin-build",
+    ".scratch\\voice-runtime",
+    ".scratch\\ocr-runtime"
+  ],
+  "RemainingProcesses": []
+}

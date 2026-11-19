@@ -1,0 +1,20 @@
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes) ... ok
+test_publication_failure_retries_same_completed_media (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_publication_failure_retries_same_completed_media) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_source_reading_does_not_block_main_window_cancellation) ... ok
+Native menu caption: outer=144, required=52, old-label=8, fixed-label=52
+test_video_preferences_cannot_redirect_or_start_video (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_video_preferences_cannot_redirect_or_start_video) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+test_shared_header_and_content_anchors (test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 156.940s
+
+OK

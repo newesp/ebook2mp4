@@ -1,0 +1,127 @@
+{
+  "client": [
+    900,
+    640
+  ],
+  "dpi": 96.09458128078816,
+  "scaling": 1.334646962233169,
+  "font": "18",
+  "active_id": "manuscript.line-break-preview",
+  "result": "400 處變更 · 原稿尚未變更",
+  "callbacks": [
+    "manuscript.cleanup.apply"
+  ],
+  "widgets": {
+    "list_header": {
+      "x": 50,
+      "y": 101,
+      "width": 208,
+      "height": 37,
+      "mapped": true
+    },
+    "list": {
+      "x": 50,
+      "y": 150,
+      "width": 208,
+      "height": 456,
+      "mapped": true
+    },
+    "host": {
+      "x": 270,
+      "y": 101,
+      "width": 648,
+      "height": 505,
+      "mapped": true
+    },
+    "header": {
+      "x": 270,
+      "y": 101,
+      "width": 648,
+      "height": 37,
+      "mapped": true
+    },
+    "back": {
+      "x": 270,
+      "y": 101,
+      "width": 114,
+      "height": 37,
+      "mapped": true
+    },
+    "panel": {
+      "x": 270,
+      "y": 150,
+      "width": 648,
+      "height": 456,
+      "mapped": true
+    },
+    "context": {
+      "x": 271,
+      "y": 151,
+      "width": 646,
+      "height": 41,
+      "mapped": true
+    },
+    "content": {
+      "x": 271,
+      "y": 194,
+      "width": 646,
+      "height": 352,
+      "mapped": true
+    },
+    "result": {
+      "x": 291,
+      "y": 566,
+      "width": 480,
+      "height": 21,
+      "mapped": true
+    },
+    "actions": {
+      "x": 271,
+      "y": 548,
+      "width": 646,
+      "height": 57,
+      "mapped": true
+    },
+    "diff": {
+      "x": 291,
+      "y": 233,
+      "width": 591,
+      "height": 303,
+      "mapped": true
+    },
+    "empty": {
+      "x": 271,
+      "y": 194,
+      "width": 1,
+      "height": 1,
+      "mapped": false
+    },
+    "global_next": {
+      "x": 804,
+      "y": 614,
+      "width": 114,
+      "height": 37,
+      "mapped": false
+    },
+    "apply": {
+      "x": 783,
+      "y": 558,
+      "width": 114,
+      "height": 37,
+      "mapped": true
+    }
+  },
+  "diff_yview": [
+    0.9951264138389887,
+    1.0
+  ],
+  "cursor": "1199.11",
+  "editor_yview": [
+    0.0,
+    0.01603486776614921
+  ],
+  "selection": [],
+  "text_sha256": "d7ac29dedc704c23cbeb40d65864bbc5d0bd8129384490280d61427f20f00b84",
+  "callback_errors": [],
+  "display_lines": 9
+}

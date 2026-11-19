@@ -1,0 +1,25 @@
+{
+  "removed": [
+    ".scratch/t13-video-matrix",
+    ".scratch/build-tools",
+    ".scratch/ocr-runtime",
+    ".scratch/voice-runtime",
+    ".scratch/pyinstaller-build"
+  ],
+  "remaining_owned_folders": [],
+  "remaining_owned_processes": [],
+  "stopped_initial_stalled_test_pids": [
+    296,
+    18860
+  ],
+  "rebuilt_exe_exit_codes": [
+    0,
+    0
+  ],
+  "final_preflight_exit_code": 0,
+  "fixed_exe_sha256": "c4cb7917937813f519f8b66307c74c3f00a57fdf63a335959fb22237b63e8f4c",
+  "test_runs_retained": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ]
+}

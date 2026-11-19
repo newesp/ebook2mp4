@@ -1,0 +1,14 @@
+{
+  "formal_process_count": 0,
+  "removed": [
+    ".scratch/build-tools",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime",
+    ".scratch/pyinstaller-build",
+    ".scratch/pyinstaller-cache",
+    ".scratch/voice-spacing-exe",
+    ".scratch/voice-spacing-visual.py",
+    ".scratch/voice-spacing-deps.txt"
+  ],
+  "formal_exe_exists": true
+}

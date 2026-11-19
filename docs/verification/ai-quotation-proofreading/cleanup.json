@@ -1,0 +1,13 @@
+{
+  "executable_exclusive_access": true,
+  "removed": [
+    ".scratch/build-tools",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime",
+    ".scratch/pyinstaller-build",
+    ".scratch/pyinstaller-cache",
+    ".scratch/quote-pip-temp",
+    ".scratch/quote-test-tools"
+  ],
+  "remaining_processes": []
+}

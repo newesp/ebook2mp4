@@ -1,0 +1,6 @@
+test_shared_header_and_content_anchors (test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 55.265s
+
+OK

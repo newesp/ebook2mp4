@@ -1,0 +1,10 @@
+{
+  "exe_sha256": "c4cb7917937813f519f8b66307c74c3f00a57fdf63a335959fb22237b63e8f4c",
+  "files": 1908,
+  "application_module": "ebook2mp4.video_workspace",
+  "module_matches_source": true,
+  "bundled_files_identical": {
+    "ffmpeg": 2,
+    "tesseract": 28
+  }
+}

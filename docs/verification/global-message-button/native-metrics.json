@@ -1,0 +1,128 @@
+[
+  {
+    "geometry": "maximized",
+    "actual": "1536x793+130+5",
+    "metrics": {
+      "project": {
+        "x": 1267,
+        "y": 39,
+        "width": 131,
+        "height": 37,
+        "mapped": true
+      },
+      "messages": {
+        "x": 1406,
+        "y": 39,
+        "width": 114,
+        "height": 37,
+        "mapped": true
+      },
+      "book": {
+        "x": 272,
+        "y": 47,
+        "width": 983,
+        "height": 21,
+        "mapped": true
+      },
+      "next": {
+        "x": 1406,
+        "y": 754,
+        "width": 114,
+        "height": 37,
+        "mapped": true
+      },
+      "client": {
+        "x": 0,
+        "y": 23,
+        "width": 1536,
+        "height": 793,
+        "mapped": true
+      }
+    },
+    "scaling": 1.334646962233169
+  },
+  {
+    "geometry": "1400x820",
+    "actual": "1400x820+130+5",
+    "metrics": {
+      "project": {
+        "x": 1269,
+        "y": 52,
+        "width": 131,
+        "height": 37,
+        "mapped": true
+      },
+      "messages": {
+        "x": 1408,
+        "y": 52,
+        "width": 114,
+        "height": 37,
+        "mapped": true
+      },
+      "book": {
+        "x": 410,
+        "y": 60,
+        "width": 847,
+        "height": 21,
+        "mapped": true
+      },
+      "next": {
+        "x": 1408,
+        "y": 794,
+        "width": 114,
+        "height": 37,
+        "mapped": true
+      },
+      "client": {
+        "x": 138,
+        "y": 36,
+        "width": 1400,
+        "height": 820,
+        "mapped": true
+      }
+    },
+    "scaling": 1.334646962233169
+  },
+  {
+    "geometry": "900x640",
+    "actual": "900x640+130+5",
+    "metrics": {
+      "project": {
+        "x": 769,
+        "y": 52,
+        "width": 131,
+        "height": 37,
+        "mapped": true
+      },
+      "messages": {
+        "x": 908,
+        "y": 52,
+        "width": 114,
+        "height": 37,
+        "mapped": true
+      },
+      "book": {
+        "x": 410,
+        "y": 60,
+        "width": 347,
+        "height": 21,
+        "mapped": true
+      },
+      "next": {
+        "x": 908,
+        "y": 614,
+        "width": 114,
+        "height": 37,
+        "mapped": true
+      },
+      "client": {
+        "x": 138,
+        "y": 36,
+        "width": 900,
+        "height": 640,
+        "mapped": true
+      }
+    },
+    "scaling": 1.334646962233169
+  }
+]

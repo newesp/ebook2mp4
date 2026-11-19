@@ -1,0 +1,13 @@
+{
+  "status": "complete",
+  "unique_passed_cases": 46,
+  "remaining_failures": 0,
+  "skipped": 0,
+  "typechecked_sources": 4,
+  "matched_packaged_modules": 32,
+  "exe_sha256": "0f1c95a078cae3fc914f749b2a0f71387e5a809a5037499d6ac9fc447882cf62",
+  "formal_files": 1303,
+  "cleanup_errors": 0,
+  "locked_files": 0,
+  "remaining_processes": 0
+}

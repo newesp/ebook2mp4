@@ -1,0 +1,12 @@
+test_missing_package_explains_recovery_and_preserves_settings (test_kokoro.LocalPackageJourney.test_missing_package_explains_recovery_and_preserves_settings) ... ok
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+test_failed_restore_keeps_previous_settings_and_releases_lock (test_voice_setting_restore.SettingsRecovery.test_failed_restore_keeps_previous_settings_and_releases_lock) ... ok
+test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript (test_voice_setting_restore.SettingsRecovery.test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript) ... ok
+test_timestamp_voice_names_and_independent_records_survive_reopen (test_voice_setting_restore.SettingsRecovery.test_timestamp_voice_names_and_independent_records_survive_reopen) ... ok
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+test_cancel_failure_export_and_retry_keep_previous_artifacts (test_total_video.TotalVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 27.967s
+
+OK

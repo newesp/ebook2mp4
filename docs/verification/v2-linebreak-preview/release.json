@@ -1,0 +1,18 @@
+{
+  "functional_regression": "passed",
+  "v2_sha256": "6fc22828987f435215f01383d248e1f13f5551ec6e446f445f96b0aef3be74aa",
+  "owned_processes_remaining": 0,
+  "native_layout": "passed",
+  "v1_manifest_sha256": "5c02fa7eabfe6a2aca9f0218d215137fd0b8cf8c08a4bfacab711423ab1ca21e",
+  "v2_exe": "dist/ebook2mp4/ebook2mp4.exe",
+  "cleanup_bytes": 415299428.0,
+  "v1_sha256": "ebb679a4340c2e0f6bfb7d0ff4bee4fafc065d5bf3db606b7320f653810800c6",
+  "v1_hashes_unchanged": true,
+  "packaged_modules": 47,
+  "module_integration": "complete",
+  "v1_exe": "archives/v1/ebook2mp4/ebook2mp4.exe",
+  "other_inner_pages": "pending user direction",
+  "formal_exe": "passed",
+  "distinct_tests": 62,
+  "page": "整理換行預覽"
+}

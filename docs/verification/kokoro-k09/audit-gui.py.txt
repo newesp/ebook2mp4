@@ -1,0 +1,21 @@
+import hashlib,json,os,shutil,sys
+from pathlib import Path
+root=Path(__file__).resolve().parents[2];work=root/'.scratch/k09';ev=root/'docs/verification/kokoro-k09'
+sys.path.insert(0,str(root))
+os.environ['EBOOK2MP4_KOKORO_HOME']=str(work/'gui-packages')
+from ebook2mp4.workflow import ProjectWorkflow
+flow=ProjectWorkflow.open(work/'gui-book');batch=flow.state['batches'][0]['id']
+def sha(p):return hashlib.file_digest(p.open('rb'),'sha256').hexdigest()
+paths=dict(preview=flow.voice_preview_path(batch),mp3=flow.narration_path(batch),srt=flow.narration_path(batch,'srt'),total_mp3=flow.total_audio_path(),total_srt=flow.total_audio_path('srt'),mp4=flow.total_video_path())
+result=dict(settings=flow.voice_settings(batch),files={k:dict(path=str(p.relative_to(flow.root)),sha256=sha(p),bytes=p.stat().st_size) for k,p in paths.items()},preview=flow.voice_preview(batch),formal=flow.narration(batch),packages=[p['id'] for p in flow.local_voice_packages()])
+phase=sys.argv[1]
+if phase=='before':
+    shutil.copyfile(paths['preview'],ev/'products/exe-fixed-example.mp3')
+    for kind in ('mp3','srt'):shutil.copyfile(paths[kind],ev/f'products/exe-formal.{kind}')
+else:
+    before=json.loads((ev/'exe-products-before-remove.json').read_bytes())
+    assert result['files']==before['files'] and result['settings']==before['settings']
+    assert result['packages']==[]
+    result['all_products_and_settings_preserved']=True
+(ev/f'exe-products-{phase}-remove.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
+print(phase,'GUI product audit passed')

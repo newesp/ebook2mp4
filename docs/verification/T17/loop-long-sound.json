@@ -1,0 +1,11 @@
+{
+  "visual_ms": 300,
+  "excluded_sound_ms": 1200,
+  "output_ms": 900,
+  "pixel_at_350ms": [
+    254,
+    0,
+    0
+  ],
+  "new_tts_requests": 0
+}

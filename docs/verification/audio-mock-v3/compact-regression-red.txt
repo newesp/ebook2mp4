@@ -1,0 +1,26 @@
+test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) ... 
+  test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) (width=1360) ... FAIL
+  test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) (width=900) ... FAIL
+
+======================================================================
+FAIL: test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) (width=1360)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 71, in test_approved_header_footer_and_notebook_at_supported_sizes
+    self.assertLessEqual(max(heights)-min(heights),2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 8 not less than or equal to 2
+
+======================================================================
+FAIL: test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) (width=900)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 71, in test_approved_header_footer_and_notebook_at_supported_sizes
+    self.assertLessEqual(max(heights)-min(heights),2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 8 not less than or equal to 2
+
+----------------------------------------------------------------------
+Ran 1 test in 6.908s
+
+FAILED (failures=2)

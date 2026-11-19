@@ -1,0 +1,9 @@
+{
+  "background_processes_started": false,
+  "product_or_gui_started": false,
+  "drawing_commands_exited": true,
+  "bytecode_cache_created": false,
+  "temporary_test_data_created": false,
+  "product_and_dist_modified": false,
+  "retained": "designs, source, requirement mapping, checklist, measurements and scroll evidence"
+}

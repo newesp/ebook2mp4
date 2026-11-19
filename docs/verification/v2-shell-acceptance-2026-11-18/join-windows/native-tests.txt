@@ -1,0 +1,19 @@
+test_mock_parent_grid_and_native_red_green (test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 75.514s
+
+OK
+test_native_scroll_owners_and_short_fit_overflow_contract (test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 39.724s
+
+OK
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 138.263s
+
+OK
+test_shared_header_and_content_anchors (test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors) ... 

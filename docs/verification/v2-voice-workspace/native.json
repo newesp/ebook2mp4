@@ -1,0 +1,47 @@
+{
+  "client": [
+    1360,
+    820
+  ],
+  "toolbar": {
+    "x": 270,
+    "y": 101,
+    "width": 1108,
+    "height": 37
+  },
+  "list_toolbar": {
+    "x": 50,
+    "y": 101,
+    "width": 208,
+    "height": 37
+  },
+  "manage": {
+    "x": 1210,
+    "y": 177,
+    "width": 144,
+    "height": 37
+  },
+  "service_panel": {
+    "x": 276,
+    "y": 146,
+    "width": 1096,
+    "height": 78
+  },
+  "footer": {
+    "x": 50,
+    "y": 781,
+    "width": 1328,
+    "height": 53
+  },
+  "text_view": [
+    0.0,
+    1.0
+  ],
+  "short_scroll": false,
+  "manage_right_padding": 18,
+  "long_end_view": [
+    0.9258968316313171,
+    1.0
+  ],
+  "short_after_long_scroll": false
+}

@@ -1,0 +1,7 @@
+test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local (test_output_versions.OutputVersionsJourney.test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local) ... ok
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 60.286s
+
+OK

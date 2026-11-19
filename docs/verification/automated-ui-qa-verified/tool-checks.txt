@@ -1,0 +1,17 @@
+test_declared_complete_cannot_hide_missing_or_duplicate_case (test_ui_scroll_contract.ScrollContractCoverage.test_declared_complete_cannot_hide_missing_or_duplicate_case) ... ok
+test_detect_wrong_viewport_and_incorrect_measured_offset (test_ui_scroll_contract.ScrollContractCoverage.test_detect_wrong_viewport_and_incorrect_measured_offset) ... ok
+test_expected_cases_pass (test_ui_scroll_contract.ScrollContractCoverage.test_expected_cases_pass) ... ok
+test_legacy_contract_without_size_still_works (test_ui_scroll_contract.ScrollContractCoverage.test_legacy_contract_without_size_still_works) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.002s
+
+OK
+PASS: missing distribution
+PASS: held component blocked (WinError 32)
+PASS: preflight accepted the distribution after the handle closed
+PASS: concurrent acquisition rejected
+PASS: build lock released
+Official preflight blocked: 成品無法獨占開啟：E:\Leo\Projects\ebook2mp4\dist\ebook2mp4（Windows 錯誤 32）
+packaging/build.py: 1a984855c16801d664e3c73253b4d54fc0add6501612aaafa9c0c5a32f8dd098
+packaging/build_preflight.py: 69887b35e29178c34001ef805407bb3709881f24839c29e76602937b5f517c19

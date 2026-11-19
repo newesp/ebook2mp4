@@ -1,0 +1,1409 @@
+{
+  "source_sha256": "d64e376eeffb3a5a0e67b7fae57eba35711817db9f998596d309dea7c9b14925",
+  "checks": [
+    {
+      "page": "1360-merge-empty",
+      "role": "source-action",
+      "pair": [
+        "重新檢查來源",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-empty",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-empty",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-empty",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-empty",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-empty",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-short",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-fit",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-fit",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-fit",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-fit",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-fit",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-fit",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-overflow",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-overflow",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-overflow",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-overflow",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-overflow",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-overflow",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-long",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-long-end",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long-end",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long-end",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long-end",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long-end",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-long-end",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1920-merge-short",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1920-merge-short",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1920-merge-short",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1920-merge-short",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1920-merge-short",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1920-merge-short",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1280-merge-short",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1280-merge-short",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1280-merge-short",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1280-merge-short",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1280-merge-short",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1280-merge-short",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "900-merge-short",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 152,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-short",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 152,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-short",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 152,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-short",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-short",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-short",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-settings",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-settings",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-settings",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-settings",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "收合停頓設定"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-settings",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-settings",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "900-merge-settings",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 152,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-settings",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 152,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-settings",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 152,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-settings",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "收合停頓設定"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-settings",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-merge-settings",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-partial",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-partial",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-partial",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-partial",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-partial",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "只重試未完成輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-partial",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-running",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-running",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-running",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-running",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-running",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-done",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-done",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-done",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-done",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-done",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "輸出均已完成"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-done",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "先製作可用音訊 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "role": "source-action",
+      "pair": [
+        "選取有效批次",
+        "上移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "role": "source-action",
+      "pair": [
+        "上移",
+        "下移"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "role": "source-action",
+      "pair": [
+        "下移",
+        "來源詳情"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "role": "join-action",
+      "pair": [
+        "檢查接點",
+        "調整停頓"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "role": "footer-action",
+      "pair": [
+        "儲存合併設定",
+        "製作所選輸出 →"
+      ],
+      "width": 196,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "role": "toolbar-table",
+      "vertical_gap": 8
+    },
+    {
+      "page": "1360-joins-short",
+      "role": "pair-nav",
+      "pair": [
+        "上一個",
+        "下一個"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-short",
+      "role": "playback",
+      "pair": [
+        "播放接點試聽",
+        "停止試聽"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-short",
+      "role": "edit-excerpt",
+      "pair": [
+        "校對前批結尾",
+        "校對後批開頭"
+      ],
+      "width": 536,
+      "height": 36,
+      "gap": 12,
+      "expected_gap": 12
+    },
+    {
+      "page": "1360-joins-fit",
+      "role": "pair-nav",
+      "pair": [
+        "上一個",
+        "下一個"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-fit",
+      "role": "playback",
+      "pair": [
+        "播放接點試聽",
+        "停止試聽"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-fit",
+      "role": "edit-excerpt",
+      "pair": [
+        "校對前批結尾",
+        "校對後批開頭"
+      ],
+      "width": 536,
+      "height": 36,
+      "gap": 12,
+      "expected_gap": 12
+    },
+    {
+      "page": "1360-joins-overflow",
+      "role": "pair-nav",
+      "pair": [
+        "上一個",
+        "下一個"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-overflow",
+      "role": "playback",
+      "pair": [
+        "播放接點試聽",
+        "停止試聽"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-overflow",
+      "role": "edit-excerpt",
+      "pair": [
+        "校對前批結尾",
+        "校對後批開頭"
+      ],
+      "width": 536,
+      "height": 36,
+      "gap": 12,
+      "expected_gap": 12
+    },
+    {
+      "page": "1360-joins-long",
+      "role": "pair-nav",
+      "pair": [
+        "上一個",
+        "下一個"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-long",
+      "role": "playback",
+      "pair": [
+        "播放接點試聽",
+        "停止試聽"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "1360-joins-long",
+      "role": "edit-excerpt",
+      "pair": [
+        "校對前批結尾",
+        "校對後批開頭"
+      ],
+      "width": 536,
+      "height": 36,
+      "gap": 12,
+      "expected_gap": 12
+    },
+    {
+      "page": "900-joins-long-end",
+      "role": "pair-nav",
+      "pair": [
+        "上一個",
+        "下一個"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-joins-long-end",
+      "role": "playback",
+      "pair": [
+        "播放接點試聽",
+        "停止試聽"
+      ],
+      "width": 168,
+      "height": 36,
+      "gap": 4,
+      "expected_gap": 4
+    },
+    {
+      "page": "900-joins-long-end",
+      "role": "edit-excerpt",
+      "pair": [
+        "校對前批結尾",
+        "校對後批開頭"
+      ],
+      "width": 416,
+      "height": 36,
+      "gap": 12,
+      "expected_gap": 12
+    }
+  ],
+  "scope": "static drawing coordinates; no native UI assertion"
+}

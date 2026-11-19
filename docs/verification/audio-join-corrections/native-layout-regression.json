@@ -1,0 +1,162 @@
+{
+  "rows": [
+    {
+      "size": "1360x820",
+      "font_points": 10,
+      "peer_sizes": [
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ]
+      ],
+      "playback_gap": 4,
+      "header_gap": 8,
+      "reader": 447,
+      "line_height": 17
+    },
+    {
+      "size": "1360x820",
+      "font_points": 13,
+      "peer_sizes": [
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ]
+      ],
+      "playback_gap": 4,
+      "header_gap": 8,
+      "reader": 417,
+      "line_height": 22
+    },
+    {
+      "size": "1280x720",
+      "font_points": 10,
+      "peer_sizes": [
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ]
+      ],
+      "playback_gap": 4,
+      "header_gap": 8,
+      "reader": 347,
+      "line_height": 17
+    },
+    {
+      "size": "1280x720",
+      "font_points": 13,
+      "peer_sizes": [
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ]
+      ],
+      "playback_gap": 4,
+      "header_gap": 8,
+      "reader": 267,
+      "line_height": 22
+    },
+    {
+      "size": "900x640",
+      "font_points": 10,
+      "peer_sizes": [
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ],
+        [
+          120,
+          37
+        ]
+      ],
+      "playback_gap": 4,
+      "header_gap": 8,
+      "reader": 222,
+      "line_height": 17
+    },
+    {
+      "size": "900x640",
+      "font_points": 13,
+      "peer_sizes": [
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ],
+        [
+          120,
+          42
+        ]
+      ],
+      "playback_gap": 4,
+      "header_gap": 8,
+      "reader": 187,
+      "line_height": 22
+    }
+  ],
+  "injected_bad_gap": 6,
+  "fixed_gap": 4
+}

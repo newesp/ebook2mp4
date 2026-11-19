@@ -1,0 +1,8 @@
+test_empty_issues_have_no_scroll_owner_after_processing (test_source_issue_view.SourceIssueViewTests.test_empty_issues_have_no_scroll_owner_after_processing) ... ok
+test_issue_view_and_return_to_processing (test_source_issue_view.SourceIssueViewTests.test_issue_view_and_return_to_processing) ... ok
+test_pdf_form_two_columns_fit_after_issue_transition (test_source_issue_view.SourceIssueViewTests.test_pdf_form_two_columns_fit_after_issue_transition) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.395s
+
+OK

@@ -1,0 +1,24 @@
+{
+  "valid": true,
+  "source_count": 4,
+  "pause_ms": 500,
+  "decoded_timeline_ms": 2300,
+  "video_preferences_preserved": true,
+  "mp4_created": false,
+  "real_bundled_decode": true,
+  "media_streams": [
+    "mp3"
+  ],
+  "files": [
+    {
+      "file": "synthetic-merged.mp3",
+      "bytes": 28557,
+      "sha256": "9d4ac4fdbaf1d041b1e0ce375ebcf2c661c8f50b4cca86d37ea1a3564eadabbf"
+    },
+    {
+      "file": "synthetic-merged.srt",
+      "bytes": 184,
+      "sha256": "4f8f773a14876578eb6791ed10f8906947276a1bbf641ff44a35cf37804b4a62"
+    }
+  ]
+}

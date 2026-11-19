@@ -1,0 +1,6 @@
+test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.206s
+
+OK

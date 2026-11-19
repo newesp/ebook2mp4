@@ -1,0 +1,29 @@
+{
+  "formal_exe_sha256": "a154bbd0c342bd96dc26acab8a438a6f6e9537b9b54fffbc64fb453d45cad1cf",
+  "preserved_existing_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "remaining_project_locks": [],
+  "exclusive_open_failures": [],
+  "remaining_task_targets": [],
+  "skill_sha256": "ad0f3b07d9bea7e973622cceb7d6560a81dc136ae8f93cfe7abbb996f572a7f4",
+  "remaining_project_processes": [],
+  "distribution_files_checked": 1303,
+  "removed_targets": [
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-tools",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-visual",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup_stage.py",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-dependencies.txt",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-focused-tests.txt",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-mock.js",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-package-start.log",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-skill-baseline.json",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup-visual.log",
+    "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\cleanup_finish.ps1"
+  ],
+  "stopped_completed_test_pid": 5472,
+  "cleanup_retry_reason": "Pillow DLL held by a completed native test process"
+}

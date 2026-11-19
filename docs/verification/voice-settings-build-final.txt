@@ -1,0 +1,119 @@
+331 INFO: PyInstaller: 6.22.3, contrib hooks: 2026.9
+332 INFO: Python: 3.14.3
+364 INFO: Platform: Windows-11-10.0.26200-SP0
+365 INFO: Python environment: C:\Python314
+9615 INFO: Module search paths (PYTHONPATH):
+['E:\\Leo\\Projects\\ebook2mp4',
+ 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools',
+ 'C:\\Python314\\python314.zip',
+ 'C:\\Python314\\DLLs',
+ 'C:\\Python314\\Lib',
+ 'C:\\Python314',
+ 'C:\\Users\\Administrator\\AppData\\Roaming\\Python\\Python314\\site-packages',
+ 'C:\\Python314\\Lib\\site-packages',
+ 'E:\\Leo\\Projects\\ebook2mp4']
+11371 INFO: Appending 'binaries' from .spec
+11372 INFO: Appending 'datas' from .spec
+11408 INFO: checking Analysis
+11478 INFO: Building because excludes changed
+11478 INFO: Looking for Python shared library...
+11478 INFO: Using Python shared library: C:\Python314\python314.dll
+11478 INFO: Running Analysis Analysis-00.toc
+11478 INFO: Target bytecode optimization level: 0
+11478 INFO: Initializing module dependency graph...
+11482 INFO: Initializing module graph hook caches...
+11506 INFO: Analyzing modules for base_library.zip ...
+14112 INFO: Processing standard module hook 'hook-math.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+15128 INFO: Processing standard module hook 'hook-encodings.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+16405 INFO: Processing standard module hook 'hook-pickle.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+19540 INFO: Processing standard module hook 'hook-difflib.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+19559 INFO: Processing standard module hook 'hook-heapq.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+20353 INFO: Caching module dependency graph...
+20411 INFO: Analyzing E:\Leo\Projects\ebook2mp4\run.pyw
+20552 INFO: Processing pre-find-module-path hook 'hook-tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_find_module_path'
+20555 INFO: TclTkInfo: initializing cached Tcl/Tk info...
+21431 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+21806 INFO: Processing standard module hook 'hook-platform.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+21876 INFO: Processing standard module hook 'hook-sysconfig.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+21896 INFO: Processing standard module hook 'hook-_ctypes.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+21937 INFO: Processing standard module hook 'hook-pypdfium2.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+21976 INFO: Processing standard module hook 'hook-pypdfium2_raw.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+22269 INFO: Processing standard module hook 'hook-PIL.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+22457 INFO: Processing standard module hook 'hook-PIL.Image.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+23390 INFO: Processing standard module hook 'hook-xml.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+23426 INFO: Processing standard module hook 'hook-xml.etree.cElementTree.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+23863 INFO: Processing standard module hook 'hook-PIL.ImageFilter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+24361 INFO: Processing standard module hook 'hook-xml.dom.domreg.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+25137 INFO: Processing standard module hook 'hook-webbrowser.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+25444 INFO: Processing standard module hook 'hook-opencc.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+25789 INFO: Processing standard module hook 'hook-multiprocessing.util.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+27592 INFO: Processing standard module hook 'hook-pydantic.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+28556 INFO: Processing pre-safe-import-module hook 'hook-typing_extensions.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+28561 INFO: SetuptoolsInfo: initializing cached setuptools info...
+30532 INFO: Processing standard module hook 'hook-rich.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+31992 INFO: Processing standard module hook 'hook-pygments.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+36676 INFO: Processing standard module hook 'hook-zoneinfo.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+38629 INFO: Processing pre-safe-import-module hook 'hook-backports.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+38630 INFO: Setuptools: 'backports' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.backports'!
+38641 INFO: Processing standard module hook 'hook-setuptools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+38664 INFO: Processing pre-safe-import-module hook 'hook-distutils.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+38719 INFO: Processing pre-safe-import-module hook 'hook-jaraco.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+38721 INFO: Setuptools: 'jaraco' appears to be a full setuptools-vendored copy - creating alias to 'setuptools._vendor.jaraco'!
+38757 INFO: Processing pre-safe-import-module hook 'hook-more_itertools.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+38759 INFO: Setuptools: 'more_itertools' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.more_itertools'!
+39013 INFO: Processing standard module hook 'hook-_osx_support.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+39051 INFO: Processing pre-safe-import-module hook 'hook-packaging.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+39614 INFO: Processing standard module hook 'hook-setuptools._vendor.jaraco.text.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+39617 INFO: Processing pre-safe-import-module hook 'hook-importlib_resources.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+40577 INFO: Processing pre-safe-import-module hook 'hook-tomli.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+42391 INFO: Processing pre-safe-import-module hook 'hook-wheel.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\pre_safe_import_module'
+42393 INFO: Setuptools: 'wheel' appears to be a setuptools-vendored copy - creating alias to 'setuptools._vendor.wheel'!
+44737 INFO: Processing standard module hook 'hook-sqlite3.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+46392 INFO: Processing standard module hook 'hook-certifi.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\_pyinstaller_hooks_contrib\\stdhooks'
+47474 INFO: Analyzing hidden import 'pypdfium2.__main__'
+47494 INFO: Analyzing hidden import 'opencc.__main__'
+47498 INFO: Analyzing hidden import 'edge_tts.__main__'
+47523 INFO: Analyzing hidden import 'certifi.__main__'
+47526 INFO: Analyzing hidden import 'certifi.tests'
+47527 INFO: Analyzing hidden import 'certifi.tests.test_certify'
+47727 INFO: Processing module hooks (post-graph stage)...
+48332 WARNING: Hidden import "tzdata" not found!
+48860 INFO: Processing standard module hook 'hook-PIL.SpiderImagePlugin.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+53467 INFO: Processing standard module hook 'hook-_tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks'
+53490 INFO: Performing binary vs. data reclassification (1093 entries)
+53919 INFO: Looking for ctypes DLLs
+54067 INFO: Analyzing run-time hooks ...
+54072 INFO: Including run-time hook 'pyi_rth_inspect.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\rthooks'
+54077 INFO: Including run-time hook 'pyi_rth_pkgutil.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\rthooks'
+54082 INFO: Including run-time hook 'pyi_rth_multiprocessing.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\rthooks'
+54087 INFO: Including run-time hook 'pyi_rth__tkinter.py' from 'E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-resume-tools\\PyInstaller\\hooks\\rthooks'
+54138 INFO: Creating base_library.zip...
+54168 INFO: Looking for dynamic libraries
+56577 INFO: Extra DLL search directories (AddDllDirectory): []
+56577 INFO: Extra DLL search directories (PATH): []
+58632 INFO: Warnings written to E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-build\ebook2mp4\warn-ebook2mp4.txt
+58747 INFO: Graph cross-reference written to E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-build\ebook2mp4\xref-ebook2mp4.html
+58814 INFO: checking PYZ
+58902 INFO: Building because E:\Leo\Projects\ebook2mp4\ebook2mp4\voice_desktop.py changed
+58902 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-build\ebook2mp4\PYZ-00.pyz
+59619 INFO: Building PYZ (ZlibArchive) E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-build\ebook2mp4\PYZ-00.pyz completed successfully.
+59642 INFO: checking PKG
+59666 INFO: Building because E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-build\ebook2mp4\PYZ-00.pyz changed
+59666 INFO: Building PKG (CArchive) ebook2mp4.pkg
+59719 INFO: Building PKG (CArchive) ebook2mp4.pkg completed successfully.
+59720 INFO: Bootloader E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-tools\PyInstaller\bootloader\Windows-64bit-intel\runw.exe
+59721 INFO: checking EXE
+59748 INFO: Rebuilding EXE-00.toc because pkg is more recent
+59748 INFO: Building EXE from EXE-00.toc
+59751 INFO: Copying bootloader EXE to E:\Leo\Projects\ebook2mp4\.scratch\voice-resume-build\ebook2mp4\ebook2mp4.exe
+59942 INFO: Copying icon to EXE
+60053 INFO: Copying 0 resources to EXE
+60053 INFO: Embedding manifest in EXE
+60156 INFO: Appending PKG archive to EXE
+60293 INFO: Fixing EXE headers
+60858 INFO: Building EXE from EXE-00.toc completed successfully.
+60872 INFO: checking COLLECT
+60936 INFO: Removing dir E:\Leo\Projects\ebook2mp4\dist\ebook2mp4
+61690 INFO: Building COLLECT COLLECT-00.toc
+67995 INFO: Building COLLECT COLLECT-00.toc completed successfully.
+68015 INFO: Build complete! The results are available in: E:\Leo\Projects\ebook2mp4\dist

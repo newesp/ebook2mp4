@@ -1,0 +1,12 @@
+{
+  "v1_exe": "archives/v1/ebook2mp4/ebook2mp4.exe",
+  "v2_exe": "dist/ebook2mp4/ebook2mp4.exe",
+  "v1_sha256": "ebb679a4340c2e0f6bfb7d0ff4bee4fafc065d5bf3db606b7320f653810800c6",
+  "v2_sha256": "7965b8ebc2aa65a9560a5db99c145157ff761f3811d708676c6b6254bfed26d6",
+  "v1_archive_manifest_sha256": "5c02fa7eabfe6a2aca9f0218d215137fd0b8cf8c08a4bfacab711423ab1ca21e",
+  "both_independent_normal_exit": true,
+  "tests": 72,
+  "packaged_modules_match": 47,
+  "cleanup_bytes": 496028422.0,
+  "scope": "shared modules and manuscript first; remaining production page migration pending"
+}

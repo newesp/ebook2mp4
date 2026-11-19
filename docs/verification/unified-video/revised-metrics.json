@@ -1,0 +1,98 @@
+[
+  {
+    "size": "1536x864",
+    "collapsed": false,
+    "preview": [
+      1280,
+      528
+    ],
+    "header_y": [
+      96,
+      96
+    ],
+    "content_y": [
+      141,
+      141
+    ]
+  },
+  {
+    "size": "1536x864",
+    "collapsed": true,
+    "preview": [
+      1500,
+      528
+    ],
+    "header_y": [
+      96,
+      96
+    ],
+    "content_y": [
+      141,
+      141
+    ]
+  },
+  {
+    "size": "1280x720",
+    "collapsed": false,
+    "preview": [
+      1024,
+      403
+    ],
+    "header_y": [
+      96,
+      96
+    ],
+    "content_y": [
+      141,
+      141
+    ]
+  },
+  {
+    "size": "1280x720",
+    "collapsed": true,
+    "preview": [
+      1244,
+      403
+    ],
+    "header_y": [
+      96,
+      96
+    ],
+    "content_y": [
+      141,
+      141
+    ]
+  },
+  {
+    "size": "900x640",
+    "collapsed": false,
+    "preview": [
+      644,
+      278
+    ],
+    "header_y": [
+      141,
+      141
+    ],
+    "content_y": [
+      186,
+      186
+    ]
+  },
+  {
+    "size": "900x640",
+    "collapsed": true,
+    "preview": [
+      864,
+      278
+    ],
+    "header_y": [
+      141,
+      141
+    ],
+    "content_y": [
+      186,
+      186
+    ]
+  }
+]

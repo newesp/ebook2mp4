@@ -1,0 +1,1 @@
+Scroll geometry contract passed; visual/native verification still required.

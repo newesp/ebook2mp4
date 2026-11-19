@@ -1,0 +1,23 @@
+{
+  "implementation": "E:\\Leo\\Projects\\ebook2mp4\\archives\\v1\\source\\ebook2mp4\\workflow.py",
+  "real_ffmpeg": true,
+  "controlled_tts": "synthetic sine wave; no network or paid request",
+  "exported": true,
+  "media": {
+    "mp3": {
+      "sha256": "89262a13272c91512ff2a2d74e1882478ff82442844e74e3d71c1147c526608a",
+      "duration": "6.500000",
+      "streams": [
+        "mp3"
+      ]
+    },
+    "mp4": {
+      "sha256": "fd9ac6c1ee7b8a74056df01d67afaa8fea68f6fd5952f990e1f965cc46aae0d7",
+      "duration": "6.500000",
+      "streams": [
+        "h264",
+        "aac"
+      ]
+    }
+  }
+}

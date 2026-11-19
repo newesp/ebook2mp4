@@ -1,0 +1,39 @@
+{
+  "preserved_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "preserved": "正式成品、需求、草圖、驗收證據、既有修改、使用者 outputs 與模型",
+  "removed": [
+    {
+      "removed": true,
+      "bytes": 154201073.0,
+      "path": ".scratch/t20-work"
+    },
+    {
+      "removed": true,
+      "bytes": 202708992.0,
+      "path": ".scratch/voice-runtime"
+    },
+    {
+      "removed": true,
+      "bytes": 121410362.0,
+      "path": ".scratch/ocr-runtime"
+    },
+    {
+      "removed": true,
+      "bytes": 15843557.0,
+      "path": ".mypy_cache"
+    },
+    {
+      "removed": true,
+      "bytes": 399881.0,
+      "path": "ebook2mp4/__pycache__"
+    },
+    {
+      "removed": true,
+      "bytes": 281379.0,
+      "path": "tests/__pycache__"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+test_unknown_progress_timestamp_does_not_fail_successful_encoding (test_video_diagnostics.VideoDiagnostics.test_unknown_progress_timestamp_does_not_fail_successful_encoding) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.033s
+
+OK

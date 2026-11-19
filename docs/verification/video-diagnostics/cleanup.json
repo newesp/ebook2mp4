@@ -1,0 +1,57 @@
+{
+  "targets": [
+    {
+      "path": ".scratch/video-diagnostics",
+      "removed_bytes": 1715548,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/build-tools",
+      "removed_bytes": 94852855,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/voice-runtime",
+      "removed_bytes": 202708992,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/ocr-runtime",
+      "removed_bytes": 121410362,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/pyinstaller-build",
+      "removed_bytes": 33422984,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/pyinstaller-cache",
+      "removed_bytes": 0,
+      "remaining": false
+    },
+    {
+      "path": ".scratch/diagnostics-mypy",
+      "removed_bytes": 15585509,
+      "remaining": false
+    },
+    {
+      "path": "ebook2mp4/__pycache__",
+      "removed_bytes": 837715,
+      "remaining": false
+    },
+    {
+      "path": "tests/__pycache__",
+      "removed_bytes": 169445,
+      "remaining": false
+    },
+    {
+      "path": "packaging/__pycache__",
+      "removed_bytes": 0,
+      "remaining": false
+    }
+  ],
+  "removed_bytes": 470703410,
+  "remaining_test_build_media_processes": 0,
+  "original_project_modified": false
+}

@@ -1,0 +1,24 @@
+{
+  "source_count": 3,
+  "duration_ms": 12800,
+  "pause_ms": 500,
+  "accepted": [
+    true,
+    true
+  ],
+  "mp4_created": false,
+  "bundled_decode": true,
+  "preview_residue": [],
+  "files": [
+    {
+      "file": "synthetic-joined.mp3",
+      "sha256": "fee4a5eafc3427df77740e45f8cbeb97ce805159d07b2a1c3278b9b709b99e9f",
+      "bytes": 154701
+    },
+    {
+      "file": "synthetic-joined.srt",
+      "sha256": "b2a550826d64435aa4077aed1ebdcd74b895e92d4ad65a72b1a0b5ca2d1b372d",
+      "bytes": 1520
+    }
+  ]
+}

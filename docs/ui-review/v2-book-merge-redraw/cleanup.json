@@ -1,0 +1,8 @@
+{
+  "owned_background_processes_started": false,
+  "python_processes_remaining": false,
+  "evidence_files_exclusive_read_open": "all passed",
+  "evidence_cache_directories": [],
+  "product_and_dist_modified": false,
+  "note": "CIM unavailable; Get-Process fallback found no Python process. Drawing/check commands exited. Only this task output was cleaned."
+}

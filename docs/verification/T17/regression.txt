@@ -1,0 +1,70 @@
+test_cancel_failure_export_and_retry_keep_previous_artifacts (test_total_video.TotalVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts) ... ok
+test_changed_source_blocks_video_and_corrupt_picture_preserves_settings (test_total_video.TotalVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings) ... ok
+test_corrupted_audio_is_not_current_and_cannot_publish_video (test_total_video.TotalVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video) ... ok
+test_picture_is_copied_and_resolution_survives_reopen (test_total_video.TotalVideoJourney.test_picture_is_copied_and_resolution_survives_reopen) ... ok
+test_publication_conflict_and_disk_shortage_keep_old_video (test_total_video.TotalVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video) ... ok
+test_reopen_then_encode_without_batch_video_or_new_tts (test_total_video.TotalVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+test_loop_hold_trim_sound_and_subtitles_use_the_same_narration (test_total_video_background.BackgroundJourney.test_loop_hold_trim_sound_and_subtitles_use_the_same_narration) ... ok
+test_portrait_preview_black_padding_and_modes_survive_reopen (test_total_video_background.BackgroundJourney.test_portrait_preview_black_padding_and_modes_survive_reopen) ... ok
+test_validation_failures_cancellation_and_video_only_retry_protect_old_products (test_total_video_background.BackgroundJourney.test_validation_failures_cancellation_and_video_only_retry_protect_old_products) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_background_mode_preview_save_return_and_render_are_connected (test_total_video_background_desktop.BackgroundDesktop.test_background_mode_preview_save_return_and_render_are_connected) ... ok
+test_required_controls_fit_sizes_and_long_background_hides_short_mode (test_total_video_background_desktop.BackgroundDesktop.test_required_controls_fit_sizes_and_long_background_hides_short_mode) ... ok
+test_cancel_conflict_and_disk_shortage_preserve_previous_product (test_total_audio.TotalAudioJourney.test_cancel_conflict_and_disk_shortage_preserve_previous_product) ... ok
+test_cleanup_failure_cannot_discard_an_already_published_total (test_total_audio.TotalAudioJourney.test_cleanup_failure_cannot_discard_an_already_published_total) ... ok
+test_fractional_millisecond_sources_do_not_overlap_at_zero_pause (test_total_audio.TotalAudioJourney.test_fractional_millisecond_sources_do_not_overlap_at_zero_pause) ... ok
+test_invalid_caption_timeline_is_not_published_even_with_matching_checksum (test_total_audio.TotalAudioJourney.test_invalid_caption_timeline_is_not_published_even_with_matching_checksum) ... ok
+test_invalid_selection_and_missing_sources_are_reported (test_total_audio.TotalAudioJourney.test_invalid_selection_and_missing_sources_are_reported) ... ok
+test_media_failure_has_three_attempts_and_keeps_old_publication (test_total_audio.TotalAudioJourney.test_media_failure_has_three_attempts_and_keeps_old_publication) ... ok
+test_new_selected_audio_version_requires_explicit_saved_selection (test_total_audio.TotalAudioJourney.test_new_selected_audio_version_requires_explicit_saved_selection) ... ok
+test_one_two_three_batches_use_decoded_timeline_and_no_tts (test_total_audio.TotalAudioJourney.test_one_two_three_batches_use_decoded_timeline_and_no_tts) ... ok
+test_only_selected_sources_and_shared_settings_invalidate_total (test_total_audio.TotalAudioJourney.test_only_selected_sources_and_shared_settings_invalidate_total) ... ok
+test_output_changed_after_verification_does_not_replace_previous_total (test_total_audio.TotalAudioJourney.test_output_changed_after_verification_does_not_replace_previous_total) ... ok
+test_selection_order_and_versions_survive_reopen (test_total_audio.TotalAudioJourney.test_selection_order_and_versions_survive_reopen) ... ok
+test_zero_pause_order_and_publication_conflict_preserve_old_total (test_total_audio.TotalAudioJourney.test_zero_pause_order_and_publication_conflict_preserve_old_total) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+test_assembly_joins (unittest.loader._FailedTest.test_assembly_joins) ... ERROR
+test_assembly_joins_desktop (unittest.loader._FailedTest.test_assembly_joins_desktop) ... ERROR
+test_background_narration_keeps_owner_and_survives_navigation (test_production_pages.ProductionPages.test_background_narration_keeps_owner_and_survives_navigation) ... ok
+test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check (test_production_pages.ProductionPages.test_secondary_dialog_close_does_not_bypass_later_unsaved_text_check) ... ok
+test_voice_production_and_service_management_share_main_window (test_production_pages.ProductionPages.test_voice_production_and_service_management_share_main_window) ... ok
+
+======================================================================
+ERROR: test_assembly_joins (unittest.loader._FailedTest.test_assembly_joins)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_assembly_joins
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+======================================================================
+ERROR: test_assembly_joins_desktop (unittest.loader._FailedTest.test_assembly_joins_desktop)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_assembly_joins_desktop
+Traceback (most recent call last):
+  File "C:\Python314\Lib\unittest\loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins_desktop.py", line 11, in <module>
+    import test_assembly_joins as joins_fixture
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 12, in <module>
+    from test_pdf import pdf_bytes
+  File "E:\Leo\Projects\ebook2mp4\tests\test_pdf.py", line 9, in <module>
+    from reportlab.pdfgen import canvas
+ModuleNotFoundError: No module named 'reportlab'
+
+
+----------------------------------------------------------------------
+Ran 35 tests in 203.720s
+
+FAILED (errors=2)

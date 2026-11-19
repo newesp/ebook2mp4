@@ -1,0 +1,7 @@
+test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 13.990s
+
+OK

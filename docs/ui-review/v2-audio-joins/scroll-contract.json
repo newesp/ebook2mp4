@@ -1,0 +1,2698 @@
+{
+  "coverage_complete": true,
+  "regions": [
+    {
+      "page": "1920x1000-short",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        896
+      ],
+      "viewport_height": 776,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-short",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        1064,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-short",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        1076,
+        220,
+        1892,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-fit",
+      "state": "fit",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        896
+      ],
+      "viewport_height": 776,
+      "content_height": 750,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-fit",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        1064,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 574,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-fit",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        1076,
+        220,
+        1892,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 574,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-overflow",
+      "state": "overflow",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        896
+      ],
+      "viewport_height": 776,
+      "content_height": 816,
+      "scrollbar_visible": true,
+      "max_offset": 40,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9509803921568627
+    },
+    {
+      "page": "1920x1000-overflow",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        1064,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 596,
+      "scrollbar_visible": true,
+      "max_offset": 6,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9899328859060402
+    },
+    {
+      "page": "1920x1000-overflow",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        1076,
+        220,
+        1892,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 574,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1920x1000-long-end",
+      "state": "long",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        896
+      ],
+      "viewport_height": 776,
+      "content_height": 2664,
+      "scrollbar_visible": true,
+      "max_offset": 1888,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.2912912912912913
+    },
+    {
+      "page": "1920x1000-long-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        1064,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 3984,
+      "scrollbar_visible": true,
+      "max_offset": 3394,
+      "rendered_offset": 3394,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.14809236947791166
+    },
+    {
+      "page": "1920x1000-long-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        1076,
+        220,
+        1892,
+        810
+      ],
+      "viewport_height": 590,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-fit",
+      "state": "fit",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 552,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-fit",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 398,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-fit",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 398,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-overflow",
+      "state": "overflow",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 618,
+      "scrollbar_visible": true,
+      "max_offset": 22,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9644012944983819
+    },
+    {
+      "page": "1360x820-overflow",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 420,
+      "scrollbar_visible": true,
+      "max_offset": 10,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9761904761904762
+    },
+    {
+      "page": "1360x820-overflow",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 398,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-long-end",
+      "state": "long",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 2664,
+      "scrollbar_visible": true,
+      "max_offset": 2068,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.22372372372372373
+    },
+    {
+      "page": "1360x820-long-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 3984,
+      "scrollbar_visible": true,
+      "max_offset": 3574,
+      "rendered_offset": 3574,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.10291164658634538
+    },
+    {
+      "page": "1360x820-long-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-short",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        160,
+        224,
+        616
+      ],
+      "viewport_height": 456,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-short",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        260,
+        744,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-short",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        756,
+        260,
+        1252,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-fit",
+      "state": "fit",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        160,
+        224,
+        616
+      ],
+      "viewport_height": 456,
+      "content_height": 420,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-fit",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        260,
+        744,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 266,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-fit",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        756,
+        260,
+        1252,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 266,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-overflow",
+      "state": "overflow",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        160,
+        224,
+        616
+      ],
+      "viewport_height": 456,
+      "content_height": 486,
+      "scrollbar_visible": true,
+      "max_offset": 30,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9382716049382716
+    },
+    {
+      "page": "1280x720-overflow",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        260,
+        744,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 288,
+      "scrollbar_visible": true,
+      "max_offset": 18,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9375
+    },
+    {
+      "page": "1280x720-overflow",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        756,
+        260,
+        1252,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 266,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1280x720-long-end",
+      "state": "long",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        160,
+        224,
+        616
+      ],
+      "viewport_height": 456,
+      "content_height": 2664,
+      "scrollbar_visible": true,
+      "max_offset": 2208,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.17117117117117117
+    },
+    {
+      "page": "1280x720-long-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        260,
+        744,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 3984,
+      "scrollbar_visible": true,
+      "max_offset": 3714,
+      "rendered_offset": 3714,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.0677710843373494
+    },
+    {
+      "page": "1280x720-long-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        756,
+        260,
+        1252,
+        530
+      ],
+      "viewport_height": 270,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        444,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        444,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 178,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 178,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-overflow",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        444,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 200,
+      "scrollbar_visible": true,
+      "max_offset": 10,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.95
+    },
+    {
+      "page": "900x640-overflow",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 178,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-long-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        444,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 3984,
+      "scrollbar_visible": true,
+      "max_offset": 3794,
+      "rendered_offset": 3794,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.04769076305220884
+    },
+    {
+      "page": "900x640-long-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 3984,
+      "scrollbar_visible": true,
+      "max_offset": 3794,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.04769076305220884
+    },
+    {
+      "page": "900x640-short-18px",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        444,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 108,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short-18px",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 108,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit-18px",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        444,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 136,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit-18px",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 136,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-overflow-18px",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        444,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 164,
+      "scrollbar_visible": true,
+      "max_offset": 28,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.8292682926829268
+    },
+    {
+      "page": "900x640-overflow-18px",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 136,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-long-18px-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        444,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 5064,
+      "scrollbar_visible": true,
+      "max_offset": 4928,
+      "rendered_offset": 4928,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.026856240126382307
+    },
+    {
+      "page": "900x640-long-18px-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 5064,
+      "scrollbar_visible": true,
+      "max_offset": 4928,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.026856240126382307
+    },
+    {
+      "page": "1360x820-short-warning",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-details",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-details",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        496,
+        1332,
+        630
+      ],
+      "viewport_height": 134,
+      "content_height": 134,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-details",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-details",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-checked",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-checked",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-short-warning-checked",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short-warning",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        444,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short-warning",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-long-warning-details-end",
+      "state": "long",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 794,
+      "scrollbar_visible": true,
+      "max_offset": 604,
+      "rendered_offset": 604,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.23929471032745592
+    },
+    {
+      "page": "900x640-short-warning-details",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 134,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit-warning-details",
+      "state": "fit",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 178,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-overflow-warning-details",
+      "state": "overflow",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        260,
+        872,
+        450
+      ],
+      "viewport_height": 190,
+      "content_height": 200,
+      "scrollbar_visible": true,
+      "max_offset": 10,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.95
+    },
+    {
+      "page": "900x640-short-18px-warning",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        444,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 108,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short-18px-warning",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        456,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 108,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short-18px-warning-details",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 164,
+      "scrollbar_visible": true,
+      "max_offset": 28,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.8292682926829268
+    },
+    {
+      "page": "1360x820-fit-warning-details",
+      "state": "fit",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 552,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-fit-warning-details",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        496,
+        1332,
+        630
+      ],
+      "viewport_height": 134,
+      "content_height": 134,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-fit-warning-details",
+      "state": "fit",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 266,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-fit-warning-details",
+      "state": "fit",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 266,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit-18px-warning-details",
+      "state": "fit",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 136,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-overflow-warning-details",
+      "state": "overflow",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 618,
+      "scrollbar_visible": true,
+      "max_offset": 22,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9644012944983819
+    },
+    {
+      "page": "1360x820-overflow-warning-details",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        496,
+        1332,
+        630
+      ],
+      "viewport_height": 134,
+      "content_height": 134,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-overflow-warning-details",
+      "state": "overflow",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 288,
+      "scrollbar_visible": true,
+      "max_offset": 20,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9305555555555556
+    },
+    {
+      "page": "1360x820-overflow-warning-details",
+      "state": "overflow",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 266,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-overflow-18px-warning-details",
+      "state": "overflow",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 164,
+      "scrollbar_visible": true,
+      "max_offset": 28,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.8292682926829268
+    },
+    {
+      "page": "1360x820-long-warning-details-end",
+      "state": "long",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 2664,
+      "scrollbar_visible": true,
+      "max_offset": 2068,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.22372372372372373
+    },
+    {
+      "page": "1360x820-long-warning-details-end",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        496,
+        1332,
+        630
+      ],
+      "viewport_height": 134,
+      "content_height": 134,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-long-warning-details-end",
+      "state": "long",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 3984,
+      "scrollbar_visible": true,
+      "max_offset": 3716,
+      "rendered_offset": 3716,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.06726907630522089
+    },
+    {
+      "page": "1360x820-long-warning-details-end",
+      "state": "long",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        488
+      ],
+      "viewport_height": 268,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-long-18px-warning-details-end",
+      "state": "long",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        292,
+        872,
+        428
+      ],
+      "viewport_height": 136,
+      "content_height": 1004,
+      "scrollbar_visible": true,
+      "max_offset": 868,
+      "rendered_offset": 868,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.13545816733067728
+    },
+    {
+      "page": "1360x820-empty",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        748
+      ],
+      "viewport_height": 628,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-empty",
+      "state": "empty",
+      "owner": "接點空狀態",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        132,
+        1332,
+        736
+      ],
+      "viewport_height": 604,
+      "content_height": 0,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-preparing",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-preparing",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-preparing",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-playing",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-playing",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-playing",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-failed",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-failed",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-failed",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-cancelled",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-cancelled",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-cancelled",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-save-failed",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        16,
+        120,
+        224,
+        716
+      ],
+      "viewport_height": 596,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-save-failed",
+      "state": "short",
+      "owner": "前批結尾",
+      "direction": "vertical",
+      "bounds": [
+        248,
+        220,
+        784,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "1360x820-save-failed",
+      "state": "short",
+      "owner": "後批開頭",
+      "direction": "vertical",
+      "bounds": [
+        796,
+        220,
+        1332,
+        630
+      ],
+      "viewport_height": 410,
+      "content_height": 90,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-short-files",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        172,
+        872,
+        524
+      ],
+      "viewport_height": 352,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-fit-files",
+      "state": "fit",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        172,
+        872,
+        524
+      ],
+      "viewport_height": 352,
+      "content_height": 288,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds"
+    },
+    {
+      "page": "900x640-overflow-files",
+      "state": "overflow",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        172,
+        872,
+        524
+      ],
+      "viewport_height": 352,
+      "content_height": 354,
+      "scrollbar_visible": true,
+      "max_offset": 2,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.9943502824858758
+    },
+    {
+      "page": "900x640-long-files-end",
+      "state": "long",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "bounds": [
+        28,
+        172,
+        872,
+        524
+      ],
+      "viewport_height": 352,
+      "content_height": 2664,
+      "scrollbar_visible": true,
+      "max_offset": 2312,
+      "rendered_offset": 2312,
+      "measurement_source": "tools/draw_v2_audio_joins.py: Drawing.region; same wrapped lines, padding, line height and bounds",
+      "thumb_fraction": 0.13213213213213212
+    },
+    {
+      "page": "1920x1000-short",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        818,
+        1892,
+        884
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1920x1000-fit",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        818,
+        1892,
+        884
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1920x1000-overflow",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        818,
+        1892,
+        884
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1920x1000-long-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        818,
+        1892,
+        884
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-short",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-fit",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-overflow",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-long-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1280x720-short",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        538,
+        1252,
+        604
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1280x720-fit",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        538,
+        1252,
+        604
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1280x720-overflow",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        538,
+        1252,
+        604
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1280x720-long-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        538,
+        1252,
+        604
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-short",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-fit",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-overflow",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-long-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-short-18px",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-fit-18px",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-overflow-18px",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-long-18px-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-short-warning",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-short-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-short-warning-checked",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-short-warning",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-long-warning-details-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-short-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-fit-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-overflow-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        458,
+        872,
+        524
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-short-18px-warning",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-short-18px-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-fit-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-fit-18px-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-overflow-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-overflow-18px-warning-details",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-long-warning-details-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "900x640-long-18px-warning-details-end",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        28,
+        436,
+        872,
+        516
+      ],
+      "viewport_height": 80,
+      "content_height": 80,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-preparing",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-playing",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-failed",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-cancelled",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    },
+    {
+      "page": "1360x820-save-failed",
+      "state": "fixed-controls",
+      "owner": "設定與試聽操作列",
+      "direction": "none",
+      "bounds": [
+        248,
+        638,
+        1332,
+        704
+      ],
+      "viewport_height": 66,
+      "content_height": 66,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "rendered_offset": 0,
+      "measurement_source": "tools/draw_v2_audio_joins.py: control height + 8px gap + actual wrapped hint height"
+    }
+  ]
+}

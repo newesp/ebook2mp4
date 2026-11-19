@@ -1,0 +1,8 @@
+test_one_save_loads_complete_settings_and_blocks_unsaved_navigation (test_voice_settings_ui.SavedSettingsUI.test_one_save_loads_complete_settings_and_blocks_unsaved_navigation) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 12.396s
+
+OK

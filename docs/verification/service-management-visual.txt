@@ -1,0 +1,1 @@
+{"native_screenshots": 4, "html_checks": ["single menu, edit and delete layout 1360x820", "single menu, edit and delete layout 1040x640", "single menu, edit and delete layout 390x844", "builtins and add menu actions"], "remaining_worker_threads": ["asyncio_0"]}

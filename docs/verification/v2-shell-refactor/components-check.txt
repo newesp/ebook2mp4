@@ -1,0 +1,1 @@
+OCR button / rotation: three sizes measured; all deltas <= 2 Tk pixels.

@@ -1,0 +1,15 @@
+test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows) ... FAIL
+
+======================================================================
+FAIL: test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_manuscript_cleanup.py", line 121, in test_global_messages_align_with_project_in_normal_and_reduced_windows
+    self.assertEqual(app.message_button.master, top)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <tkinter.ttk.Frame object .!workbench.!frame3.!frame> != <tkinter.ttk.Frame object .!workbench.!frame>
+
+----------------------------------------------------------------------
+Ran 1 test in 3.635s
+
+FAILED (failures=1)

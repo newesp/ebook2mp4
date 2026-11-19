@@ -1,0 +1,24 @@
+test_unknown_progress_timestamp_does_not_fail_successful_encoding (test_video_diagnostics.VideoDiagnostics.test_unknown_progress_timestamp_does_not_fail_successful_encoding) ... ERROR
+
+======================================================================
+ERROR: test_unknown_progress_timestamp_does_not_fail_successful_encoding (test_video_diagnostics.VideoDiagnostics.test_unknown_progress_timestamp_does_not_fail_successful_encoding)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Python314\Lib\asyncio\runners.py", line 127, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Python314\Lib\asyncio\base_events.py", line 719, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_diagnostics.py", line 21, in test_unknown_progress_timestamp_does_not_fail_successful_encoding
+    result=await job.command([],phase='�s�@�v��',duration_ms=1000)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\total_video.py", line 395, in command
+    elapsed = max(0, int(values.get('out_time_us', '0'))//1000)
+                     ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'N/A'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.039s
+
+FAILED (errors=1)

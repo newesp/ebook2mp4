@@ -1,0 +1,962 @@
+[
+  {
+    "project": "empty",
+    "owner": "video-sources",
+    "state": "short",
+    "viewport_height": 249,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      260,
+      864,
+      271
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-sources",
+    "state": "fit",
+    "viewport_height": 249,
+    "content_height": 242,
+    "line_height": 22,
+    "lines": 11,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      260,
+      864,
+      271
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-sources",
+    "state": "overflow",
+    "viewport_height": 249,
+    "content_height": 264,
+    "line_height": 22,
+    "lines": 12,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.9431818181818182
+    ],
+    "end": [
+      0.056818181818181816,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 15.0,
+    "thumb_fraction": 0.9431818181818182,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      260,
+      849,
+      271
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-sources",
+    "state": "long",
+    "viewport_height": 249,
+    "content_height": 3520,
+    "line_height": 22,
+    "lines": 160,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.07073863636363636
+    ],
+    "end": [
+      0.9292613636363637,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 3271.0,
+    "thumb_fraction": 0.07073863636363631,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      260,
+      849,
+      271
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-sources",
+    "state": "short-return",
+    "viewport_height": 249,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      260,
+      864,
+      271
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-task",
+    "state": "short",
+    "viewport_height": 255,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      864,
+      277
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-task",
+    "state": "fit",
+    "viewport_height": 255,
+    "content_height": 242,
+    "line_height": 22,
+    "lines": 11,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      864,
+      277
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-task",
+    "state": "overflow",
+    "viewport_height": 255,
+    "content_height": 264,
+    "line_height": 22,
+    "lines": 12,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.9659090909090909
+    ],
+    "end": [
+      0.03409090909090909,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 9.0,
+    "thumb_fraction": 0.9659090909090909,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      849,
+      277
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-task",
+    "state": "long",
+    "viewport_height": 255,
+    "content_height": 3520,
+    "line_height": 22,
+    "lines": 160,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.07244318181818182
+    ],
+    "end": [
+      0.9275568181818182,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 3265.0,
+    "thumb_fraction": 0.07244318181818177,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      849,
+      277
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "video-task",
+    "state": "short-return",
+    "viewport_height": 255,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      864,
+      277
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "versions-details",
+    "state": "short",
+    "viewport_height": 193,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      868,
+      219
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "versions-details",
+    "state": "fit",
+    "viewport_height": 193,
+    "content_height": 176,
+    "line_height": 22,
+    "lines": 8,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      868,
+      219
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "versions-details",
+    "state": "overflow",
+    "viewport_height": 193,
+    "content_height": 198,
+    "line_height": 22,
+    "lines": 9,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.9747474747474747
+    ],
+    "end": [
+      0.025252525252525252,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 5.0,
+    "thumb_fraction": 0.9747474747474747,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      853,
+      219
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "versions-details",
+    "state": "long",
+    "viewport_height": 193,
+    "content_height": 3520,
+    "line_height": 22,
+    "lines": 160,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.05482954545454546
+    ],
+    "end": [
+      0.9451704545454546,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 3327.0,
+    "thumb_fraction": 0.054829545454545436,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      853,
+      219
+    ]
+  },
+  {
+    "project": "empty",
+    "owner": "versions-details",
+    "state": "short-return",
+    "viewport_height": 193,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      868,
+      219
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-sources",
+    "state": "short",
+    "viewport_height": 270,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      239,
+      864,
+      292
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-sources",
+    "state": "fit",
+    "viewport_height": 270,
+    "content_height": 264,
+    "line_height": 22,
+    "lines": 12,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      239,
+      864,
+      292
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-sources",
+    "state": "overflow",
+    "viewport_height": 270,
+    "content_height": 286,
+    "line_height": 22,
+    "lines": 13,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.9440559440559441
+    ],
+    "end": [
+      0.055944055944055944,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 16.0,
+    "thumb_fraction": 0.9440559440559441,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      239,
+      849,
+      292
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-sources",
+    "state": "long",
+    "viewport_height": 270,
+    "content_height": 3520,
+    "line_height": 22,
+    "lines": 160,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.07670454545454546
+    ],
+    "end": [
+      0.9232954545454546,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 3250.0,
+    "thumb_fraction": 0.07670454545454541,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      239,
+      849,
+      292
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-sources",
+    "state": "short-return",
+    "viewport_height": 270,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      239,
+      864,
+      292
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-task",
+    "state": "short",
+    "viewport_height": 255,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      864,
+      277
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-task",
+    "state": "fit",
+    "viewport_height": 255,
+    "content_height": 242,
+    "line_height": 22,
+    "lines": 11,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      864,
+      277
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-task",
+    "state": "overflow",
+    "viewport_height": 255,
+    "content_height": 264,
+    "line_height": 22,
+    "lines": 12,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.9659090909090909
+    ],
+    "end": [
+      0.03409090909090909,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 9.0,
+    "thumb_fraction": 0.9659090909090909,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      849,
+      277
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-task",
+    "state": "long",
+    "viewport_height": 255,
+    "content_height": 3520,
+    "line_height": 22,
+    "lines": 160,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.07244318181818182
+    ],
+    "end": [
+      0.9275568181818182,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 3265.0,
+    "thumb_fraction": 0.07244318181818177,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      849,
+      277
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "video-task",
+    "state": "short-return",
+    "viewport_height": 255,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      18,
+      212,
+      864,
+      277
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "versions-details",
+    "state": "short",
+    "viewport_height": 193,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      868,
+      219
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "versions-details",
+    "state": "fit",
+    "viewport_height": 193,
+    "content_height": 176,
+    "line_height": 22,
+    "lines": 8,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      868,
+      219
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "versions-details",
+    "state": "overflow",
+    "viewport_height": 193,
+    "content_height": 198,
+    "line_height": 22,
+    "lines": 9,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.9747474747474747
+    ],
+    "end": [
+      0.025252525252525252,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 5.0,
+    "thumb_fraction": 0.9747474747474747,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      853,
+      219
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "versions-details",
+    "state": "long",
+    "viewport_height": 193,
+    "content_height": 3520,
+    "line_height": 22,
+    "lines": 160,
+    "visible": true,
+    "track_width": 15,
+    "start": [
+      0.0,
+      0.05482954545454546
+    ],
+    "end": [
+      0.9451704545454546,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 3327.0,
+    "thumb_fraction": 0.054829545454545436,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      853,
+      219
+    ]
+  },
+  {
+    "project": "long",
+    "owner": "versions-details",
+    "state": "short-return",
+    "viewport_height": 193,
+    "content_height": 22,
+    "line_height": 22,
+    "lines": 1,
+    "visible": false,
+    "track_width": 0,
+    "start": [
+      0.0,
+      1.0
+    ],
+    "end": [
+      0.0,
+      1.0
+    ],
+    "last_line_visible": true,
+    "max_offset": 0.0,
+    "thumb_fraction": 1.0,
+    "horizontal": [
+      0.0,
+      1.0
+    ],
+    "text_box": [
+      16,
+      170,
+      868,
+      219
+    ]
+  }
+]

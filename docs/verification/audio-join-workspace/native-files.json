@@ -1,0 +1,209 @@
+{
+  "geometry": "900x640+0+0",
+  "dpi": 96.09458128078816,
+  "tk_scaling": 1.334646962233169,
+  "focus": ".!workbench.!frame.!productionworkspace.!frame2.!assemblypage.!joinpage.!frame2.!frame5.!treeview",
+  "pointer": [
+    63,
+    160
+  ],
+  "widgets": {
+    "left_text": {
+      "x": 37,
+      "y": 289,
+      "width": 400,
+      "height": 181,
+      "mapped": false
+    },
+    "right_text": {
+      "x": 464,
+      "y": 289,
+      "width": 400,
+      "height": 181,
+      "mapped": false
+    },
+    "left_edit": {
+      "x": 324,
+      "y": 244,
+      "width": 128,
+      "height": 37,
+      "mapped": false
+    },
+    "right_edit": {
+      "x": 751,
+      "y": 244,
+      "width": 128,
+      "height": 37,
+      "mapped": false
+    },
+    "pair_control": {
+      "x": 83,
+      "y": 199,
+      "width": 568,
+      "height": 37,
+      "mapped": false
+    },
+    "previous": {
+      "x": 655,
+      "y": 199,
+      "width": 108,
+      "height": 37,
+      "mapped": false
+    },
+    "next": {
+      "x": 767,
+      "y": 199,
+      "width": 112,
+      "height": 37,
+      "mapped": false
+    },
+    "pause_control": {
+      "x": 109,
+      "y": 478,
+      "width": 120,
+      "height": 37,
+      "mapped": false
+    },
+    "clip_control": {
+      "x": 317,
+      "y": 478,
+      "width": 120,
+      "height": 37,
+      "mapped": false
+    },
+    "play_button": {
+      "x": 464,
+      "y": 478,
+      "width": 120,
+      "height": 37,
+      "mapped": false
+    },
+    "stop_button": {
+      "x": 588,
+      "y": 478,
+      "width": 120,
+      "height": 37,
+      "mapped": false
+    },
+    "save_button": {
+      "x": 696,
+      "y": 612,
+      "width": 196,
+      "height": 37,
+      "mapped": false
+    },
+    "back_button": {
+      "x": 24,
+      "y": 612,
+      "width": 168,
+      "height": 37,
+      "mapped": true
+    },
+    "footer": {
+      "x": 24,
+      "y": 583,
+      "width": 868,
+      "height": 66,
+      "mapped": true
+    },
+    "files": {
+      "x": 24,
+      "y": 141,
+      "width": 78,
+      "height": 37,
+      "mapped": false
+    },
+    "detail": {
+      "x": 37,
+      "y": 289,
+      "width": 842,
+      "height": 181,
+      "mapped": false
+    },
+    "detail_scroll": {
+      "x": 864,
+      "y": 289,
+      "width": 15,
+      "height": 181,
+      "mapped": false
+    },
+    "disclosure": {
+      "x": 245,
+      "y": 583,
+      "width": 88,
+      "height": 37,
+      "mapped": false
+    },
+    "left_scroll": {
+      "x": 437,
+      "y": 289,
+      "width": 15,
+      "height": 181,
+      "mapped": false
+    },
+    "right_scroll": {
+      "x": 864,
+      "y": 289,
+      "width": 15,
+      "height": 181,
+      "mapped": false
+    },
+    "file_list": {
+      "x": 37,
+      "y": 199,
+      "width": 842,
+      "height": 357,
+      "mapped": true
+    },
+    "file_scroll": {
+      "x": 864,
+      "y": 199,
+      "width": 15,
+      "height": 345,
+      "mapped": false
+    },
+    "main": {
+      "x": 24,
+      "y": 186,
+      "width": 868,
+      "height": 383,
+      "mapped": true
+    },
+    "body": {
+      "x": 37,
+      "y": 244,
+      "width": 842,
+      "height": 226,
+      "mapped": false
+    }
+  },
+  "left_yview": [
+    0.9493464052287581,
+    1.0
+  ],
+  "right_yview": [
+    0.0,
+    0.05065359477124183
+  ],
+  "detail_yview": [
+    0.0,
+    1.0
+  ],
+  "file_yview": [
+    0.0,
+    1.0
+  ],
+  "selected": [
+    "9f05c86a1af3470eb1f80ce72024f886",
+    "639e0e9455b346ee9929c65364992259",
+    "8cd4c452b7fb463eae2d24c25f574f0a"
+  ],
+  "pause": "0.5",
+  "accepted": [],
+  "details": false,
+  "dedicated": false,
+  "files": true,
+  "content_kind": "source",
+  "status": "確認稿節錄。播放後顯示本次片段對應字幕文字。",
+  "errors": []
+}

@@ -1,0 +1,9 @@
+{
+  "stage": "undo",
+  "characters": 16288,
+  "sha256": "d7ac29dedc704c23cbeb40d65864bbc5d0bd8129384490280d61427f20f00b84",
+  "expected_exact": true,
+  "noop_batch_unchanged": true,
+  "new_backups": 1,
+  "original_source_hashes_unchanged": true
+}

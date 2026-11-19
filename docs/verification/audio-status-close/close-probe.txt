@@ -1,0 +1,25 @@
+{'idempotent': False, 'closed': False, 'counts': {'close': 56, 'poll': 0}, 'frame_job': False, 'playback_folder': False}
+invalid command name "1729243193792close"
+    while executing
+"1729243193792close"
+    ("after" script)
+invalid command name "1729276931712poll"
+    while executing
+"1729276931712poll"
+    ("after" script)
+invalid command name "1729241386176close"
+    while executing
+"1729241386176close"
+    ("after" script)
+can't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!workbench.!frame2.!productionworkspace.!frame.!totalvideopage.!progressbar 15 1"
+    ("after" script)
+invalid command name "1729295123520close"
+    while executing
+"1729295123520close"
+    ("after" script)
+{'idempotent': True, 'closed': True, 'counts': {'close': 2, 'poll': 1}, 'frame_job': False, 'playback_folder': False}

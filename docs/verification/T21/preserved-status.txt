@@ -1,0 +1,141 @@
+ M .scratch/pdf-txt-audiobook-video/v1.1/issues/18-batch-audio-to-video.md
+ M .scratch/pdf-txt-audiobook-video/v1.1/issues/20-route-specific-output-versions.md
+ M AGENTS.md
+ M docs/implementation-status.md
+ M ebook2mp4/assembly.py
+ M ebook2mp4/assembly_desktop.py
+ M ebook2mp4/desktop.py
+ M ebook2mp4/kokoro_desktop.py
+ M ebook2mp4/kokoro_packages.py
+ M ebook2mp4/narration.py
+ M ebook2mp4/narration_desktop.py
+ M ebook2mp4/production_desktop.py
+ M ebook2mp4/service_desktop.py
+ M ebook2mp4/total_video.py
+ M ebook2mp4/total_video_desktop.py
+ M ebook2mp4/tts_services.py
+ M ebook2mp4/video_merge.py
+ M ebook2mp4/voice_desktop.py
+ M ebook2mp4/voice_media.py
+ M ebook2mp4/workflow.py
+ M tests/test_kokoro_desktop.py
+ M tests/test_production_pages.py
+ M tests/test_tts_providers.py
+?? docs/gemini-tts-429-recovery-spec.md
+?? docs/kokoro-local-tts-spec.md
+?? docs/mock-ui/service-management-v1/
+?? docs/mock-ui/t17-background-video-v1/
+?? docs/mock-ui/t18-batch-video-v1/
+?? docs/mock-ui/t20-output-versions-v1/
+?? docs/mock-ui/t21-partial-output-v1/
+?? docs/mock-ui/voice-profile-resume-v1/
+?? docs/mock-ui/voice-profile-resume-v2/
+?? docs/tickets/
+?? docs/verification/T17-button-size/
+?? docs/verification/T17.md
+?? docs/verification/T17/
+?? docs/verification/T18.md
+?? docs/verification/T18/
+?? docs/verification/T20.md
+?? docs/verification/T20/
+?? docs/verification/batch-step-retention/
+?? docs/verification/gemini-mandarin/
+?? docs/verification/gemini-tts-429/
+?? docs/verification/kokoro-remember/
+?? docs/verification/service-management-cleanup.json
+?? docs/verification/service-management-delete.png
+?? docs/verification/service-management-edit.png
+?? docs/verification/service-management-final-tests.txt
+?? docs/verification/service-management-menu.png
+?? docs/verification/service-management-release-build.txt
+?? docs/verification/service-management-release-cleanup.json
+?? docs/verification/service-management-release-dependencies.txt
+?? docs/verification/service-management-release-package.json
+?? docs/verification/service-management-release-resource.json
+?? docs/verification/service-management-release-runtime.txt
+?? docs/verification/service-management-release-startup.json
+?? docs/verification/service-management-release-tests.txt
+?? docs/verification/service-management-release-typecheck.txt
+?? docs/verification/service-management-restored.png
+?? docs/verification/service-management-visual.txt
+?? docs/verification/service-management.md
+?? docs/verification/tts-control-build.txt
+?? docs/verification/tts-control-cleanup.json
+?? docs/verification/tts-control-dependencies.txt
+?? docs/verification/tts-control-package.json
+?? docs/verification/tts-control-test_narration_resume.txt
+?? docs/verification/tts-control-test_tts_control.txt
+?? docs/verification/tts-control-test_tts_providers.txt
+?? docs/verification/tts-control-test_tts_retry.txt
+?? docs/verification/tts-control-test_tts_retry_desktop.txt
+?? docs/verification/tts-control-typecheck.txt
+?? docs/verification/tts-control.md
+?? docs/verification/tts-cooldown-build.txt
+?? docs/verification/tts-cooldown-cleanup.json
+?? docs/verification/tts-cooldown-core-tests.txt
+?? docs/verification/tts-cooldown-countdown.png
+?? docs/verification/tts-cooldown-dependencies.txt
+?? docs/verification/tts-cooldown-native-tests.txt
+?? docs/verification/tts-cooldown-native-visual-tests.txt
+?? docs/verification/tts-cooldown-package.json
+?? docs/verification/tts-cooldown-red-core.txt
+?? docs/verification/tts-cooldown-red-desktop.txt
+?? docs/verification/tts-cooldown-stopped.png
+?? docs/verification/tts-cooldown-test_incremental_narration.txt
+?? docs/verification/tts-cooldown-test_narration.txt
+?? docs/verification/tts-cooldown-test_narration_desktop.txt
+?? docs/verification/tts-cooldown-test_narration_resume.txt
+?? docs/verification/tts-cooldown-test_production_pages.txt
+?? docs/verification/tts-cooldown-test_rhythm.txt
+?? docs/verification/tts-cooldown-test_tts_providers.txt
+?? docs/verification/tts-cooldown-test_voice.txt
+?? docs/verification/tts-cooldown-typecheck.txt
+?? docs/verification/tts-cooldown.md
+?? docs/verification/tts-retry-build.txt
+?? docs/verification/tts-retry-cleanup.json
+?? docs/verification/tts-retry-desktop-tests.txt
+?? docs/verification/tts-retry-package.json
+?? docs/verification/tts-retry-test_incremental_narration.txt
+?? docs/verification/tts-retry-test_narration.txt
+?? docs/verification/tts-retry-test_narration_resume.txt
+?? docs/verification/tts-retry-test_rhythm.txt
+?? docs/verification/tts-retry-test_tts_providers.txt
+?? docs/verification/tts-retry-test_tts_retry.txt
+?? docs/verification/tts-retry-test_voice.txt
+?? docs/verification/tts-retry-typecheck.txt
+?? docs/verification/tts-retry-wait.png
+?? docs/verification/tts-retry.md
+?? docs/verification/video-diagnostics.md
+?? docs/verification/video-diagnostics/
+?? docs/verification/voice-settings-build-final.txt
+?? docs/verification/voice-settings-cleanup.json
+?? docs/verification/voice-settings-desktop-sandbox-timeout.txt
+?? docs/verification/voice-settings-desktop-tests.txt
+?? docs/verification/voice-settings-native.png
+?? docs/verification/voice-settings-package.json
+?? docs/verification/voice-settings-production-tests.txt
+?? docs/verification/voice-settings-recovery-native.txt
+?? docs/verification/voice-settings-recovery.md
+?? docs/verification/voice-settings-release.json
+?? docs/verification/voice-settings-resume-tests.txt
+?? docs/verification/voice-settings-ui.txt
+?? docs/voice-profile-resume-plan.md
+?? ebook2mp4/output_versions.py
+?? ebook2mp4/output_versions_desktop.py
+?? ebook2mp4/tts_control.py
+?? tests/batch_video_package_check.py
+?? tests/test_batch_step_retention.py
+?? tests/test_gemini_429_desktop.py
+?? tests/test_gemini_429_recovery.py
+?? tests/test_kokoro_remember_desktop.py
+?? tests/test_output_versions.py
+?? tests/test_output_versions_desktop.py
+?? tests/test_service_management.py
+?? tests/test_tts_control.py
+?? tests/test_tts_retry.py
+?? tests/test_tts_retry_desktop.py
+?? tests/test_voice_setting_restore.py
+?? tests/test_voice_settings_ui.py
+?? tests/total_video_background_package_check.py
+?? tests/total_video_background_real_check.py
+?? tests/total_video_background_visual_fixture.py

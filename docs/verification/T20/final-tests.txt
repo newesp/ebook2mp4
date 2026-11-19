@@ -1,0 +1,25 @@
+test_empty_and_legacy_project_migration (test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration) ... ok
+test_route_matrix_retains_both_movies_exports_and_reopens (test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens) ... ok
+test_source_text_voice_new_audio_and_launch_snapshot (test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot) ... ok
+test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local (test_output_versions.OutputVersionsJourney.test_video_launch_snapshot_cancel_and_corrupt_output_are_route_local) ... ok
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... ERROR
+
+======================================================================
+ERROR: test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions_desktop.py", line 39, in test_versions_details_return_exports_playback_and_layout
+    page.table.selection_set(route)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\ttk.py", line 1421, in selection_set
+    self._selection("set", items)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tkinter\ttk.py", line 1416, in _selection
+    self.tk.call(self._w, "selection", selop, items)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: Item audio not found
+
+----------------------------------------------------------------------
+Ran 5 tests in 133.933s
+
+FAILED (errors=1)

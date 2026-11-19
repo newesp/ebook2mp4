@@ -1,0 +1,16 @@
+{
+  "remaining_task_processes": 0,
+  "temporary_script_removed": true,
+  "removed_test_directories": [
+    "tmp1q_d7ayo",
+    "tmphwxcfa9l",
+    "tmp3z1e_lzn"
+  ],
+  "preserved_preexisting_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "final_test_modules": 6,
+  "final_tests_passed": 26,
+  "rebuilt_exe": false
+}

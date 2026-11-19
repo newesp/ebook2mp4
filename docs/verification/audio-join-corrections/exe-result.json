@@ -1,0 +1,30 @@
+{
+  "duration_ms": 2200,
+  "source_count": 3,
+  "pause_ms": 500,
+  "accepted_joins": 2,
+  "media": {
+    "mp3": {
+      "bytes": 27405,
+      "sha256": "8c8649e7613960b7d598e5ae3100be4c60652b643d1a5e103ff8028682bc9794"
+    },
+    "srt": {
+      "bytes": 13401,
+      "sha256": "ae8e15cc1fa9e398008148f46223f94f4800f8d8cbdfdddbebf4f25ec7b5f0f6"
+    }
+  },
+  "decode_exit_code": 0,
+  "window": {
+    "client_physical": [
+      1125,
+      801
+    ],
+    "reported_window_dpi": 96,
+    "desktop_scale_percent": 125,
+    "client_logical_approx": [
+      900.0,
+      640.8
+    ],
+    "note": "DPI-unaware Tk window: OS physical client converted using the primary display scale; exact 900x640 is also covered by native regression."
+  }
+}

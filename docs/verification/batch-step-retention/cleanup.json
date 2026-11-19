@@ -1,0 +1,17 @@
+{
+  "removed": [
+    ".scratch/step-retention-tools",
+    ".scratch/step-retention-build",
+    ".scratch/voice-runtime",
+    ".scratch/ocr-runtime",
+    ".scratch/verify-step-retention-release.py"
+  ],
+  "remaining_task_paths": [],
+  "executable_exclusive_open_passed": true,
+  "test_run_folders": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "pip_temp_removed": [],
+  "remaining_task_processes": []
+}

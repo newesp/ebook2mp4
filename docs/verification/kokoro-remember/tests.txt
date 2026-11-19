@@ -1,0 +1,7 @@
+test_success_reopens_path_failure_preserves_it_and_missing_file_clears_it (test_kokoro_remember_desktop.RememberArchive.test_success_reopens_path_failure_preserves_it_and_missing_file_clears_it) ... ok
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.730s
+
+OK

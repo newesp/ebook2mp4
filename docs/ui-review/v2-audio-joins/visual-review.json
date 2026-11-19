@@ -1,0 +1,572 @@
+{
+  "date": "2026-11-12",
+  "scope": "設計圖；待使用者確認；原生互動與正式EXE未測",
+  "source": "tools/draw_v2_audio_joins.py",
+  "source_sha256": "12e91d14bed742cf727380b93a7bc90d1f93efccd81df7688e61858e0ca7ee5d",
+  "images": [
+    {
+      "file": "1920x1000-short.png",
+      "sha256": "078e9589985b086a291e4e420838dadef4c5bab1ff78bf0b01e1d482d241f263",
+      "size": [
+        1920,
+        1000
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1920x1000-fit.png",
+      "sha256": "eb4851fa599fcdf8165032e049362b4e6128843766f51d4ef4d2b932a9e4d838",
+      "size": [
+        1920,
+        1000
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1920x1000-overflow.png",
+      "sha256": "a51be5fde1e86c2cea4cabd9bc866ff9d9632c24bab7189acbd74d83bec13e3d",
+      "size": [
+        1920,
+        1000
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1920x1000-long-end.png",
+      "sha256": "bdf6eb4424e3093c1877cc037aaea7580fada69c821d721aa7cb057d193a0dc5",
+      "size": [
+        1920,
+        1000
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-short.png",
+      "sha256": "5f422b01a47c7c659f91022edeef9e0a121e6003f14581308b44e0d026d2541b",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-fit.png",
+      "sha256": "207755b76560104888362ca8565e805ab5c0dff461a509e959e41cf867f279b3",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-overflow.png",
+      "sha256": "feb8637c79f35dcc17e5c7a3c528bf186839ccf355fd9a073977eb0c48e1340c",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-long-end.png",
+      "sha256": "bb769149bc8c42bed1fc09e95c905a257140aead5fd3ff2add6de8fab143333d",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1280x720-short.png",
+      "sha256": "8e5b0dff7c6d18d16a3595afe73fe2b942b1e1c98208a0de598390470ac088cc",
+      "size": [
+        1280,
+        720
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1280x720-fit.png",
+      "sha256": "982001b0f8cedee9fc38a3b66a9f938c4a26ab5fd6fc00061a8a0c2a6acf9bfa",
+      "size": [
+        1280,
+        720
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1280x720-overflow.png",
+      "sha256": "9fd865b7d21b802a76891d5e289cbe1df719c5a60f6a29768e0eccbd2258d353",
+      "size": [
+        1280,
+        720
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1280x720-long-end.png",
+      "sha256": "094271d92a38e708884d055cdbb70f9098739cac70d73162b915c51e2c844b99",
+      "size": [
+        1280,
+        720
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-short.png",
+      "sha256": "87c555a299f54467a4c0a484e86ae9990f573493414e31bcee7fcf2cdeb15377",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-fit.png",
+      "sha256": "779890c4ad0f23bce7951d1fbf4675c4ffb71e6bf720e452a4074e4c38f42ef0",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-overflow.png",
+      "sha256": "f58d824a09512fcfe36fa46352502b0dc6245fac75d0c9ebfb298a8922d7ad57",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-long-end.png",
+      "sha256": "91ce154892f5e8aaeaa9089fbe9ad455ba5bbefad7afd17224192576c7f88333",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-short-18px.png",
+      "sha256": "07d7f8a0697a376757597263216bc4094e06c375786c4f9f4b870a82003d73bc",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-fit-18px.png",
+      "sha256": "c099f875cae542f6bcba9c2785fef0261906e3dad6507ccb7fb2d92b478c2e51",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-overflow-18px.png",
+      "sha256": "24b3493075574547bec9ee4aaf87938b4b3fe025762c59fa02baa56f7a3e4dfc",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-long-18px-end.png",
+      "sha256": "2b99d73664e21238da752e2aee939431871b3618e2ec171863b4fa4dabbcdc51",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-short-warning.png",
+      "sha256": "8949824c13f603138f5e02a6b4cd6386610c25a277aecf757023656fe7b5f1fc",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-short-warning-details.png",
+      "sha256": "b5d3be319936a69ff65f8f73f64a0268033606a095d8a6ccd39e37ab9b2aa425",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-short-warning-checked.png",
+      "sha256": "7224f3c326e8a973ad78b31c1b7c060a52cd57041beaae6042c2616f74b7caf4",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-short-warning.png",
+      "sha256": "30bf6064223f4dc57a823f428498e440c7b7f8394c664c4f8822743f29d014de",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-long-warning-details-end.png",
+      "sha256": "bff3f1240508ad56d94617dcbb1efa76d14871ecb1845a767b5afb82d880f1e0",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "900x640-short-warning-details.png",
+      "sha256": "acf34d1d4686ae40d290d294f7cec9acdbae8eba20eab61e0e58075ed14dfd18",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "900x640-fit-warning-details.png",
+      "sha256": "5930367507f481e570da7db0c82ec38686c7a6d7fa323a010047b264bbb93e62",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "900x640-overflow-warning-details.png",
+      "sha256": "6ed176aa09d29d94aefb911bd9b4080f9724d81ecfd7634d6e35e67948efdd8f",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "900x640-short-18px-warning.png",
+      "sha256": "b59501037482d6203d28227ca7329599c5a13b49bdcfde711479d47dd31f34d0",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-short-18px-warning-details.png",
+      "sha256": "eb74fa1f9b2bbe068f030101f539b31d1a384a20bd56a16057c14fb2153084b5",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "1360x820-fit-warning-details.png",
+      "sha256": "99f6d5cd4fa7b59abf315e9bf0be9e479bf00c7ee4b5180441a0a52a9b8b6b20",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-fit-18px-warning-details.png",
+      "sha256": "ac1c2dc9ca986e05b2b411ad13a8e2e6c0f86d0cf4a497ac9ee143eee288fe85",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "1360x820-overflow-warning-details.png",
+      "sha256": "2656934add807538b8d08b5bb170b99841b32db0922e6879692535e97ad57724",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-overflow-18px-warning-details.png",
+      "sha256": "eb74fa1f9b2bbe068f030101f539b31d1a384a20bd56a16057c14fb2153084b5",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "1360x820-long-warning-details-end.png",
+      "sha256": "63161575e7b4d7c71ee40bb5ec654dfaebf69799348af1d7d6b046d44b47d8f1",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-long-18px-warning-details-end.png",
+      "sha256": "56596405a7c850b74e0ebf0935afcc808ca54d888f0aeeef80ad5a1c3c913685",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 18,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "warning-detail"
+    },
+    {
+      "file": "1360x820-empty.png",
+      "sha256": "c555df530edd11f836a30fb36df985b04da28b9c2b06f839b95e25f61c025b28",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "empty"
+    },
+    {
+      "file": "1360x820-preparing.png",
+      "sha256": "e5d851c7d5748e7f17fd328e7e7ddeea454e2a9b78cd9c1dc1fa4c70b5e80abc",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-playing.png",
+      "sha256": "e1a1925db032c253b3d760143b94f88ae3575005cd44ecc7e34679eade4f5aad",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-failed.png",
+      "sha256": "ebb4934208461efa42759e3c888034f80de324b4f947b63c6af7dbffd40bbfee",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-cancelled.png",
+      "sha256": "f99e18c58c0f109e60eedd9555d0391d3a0a1d76736ac1448d8caf6b9ec0f622",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "1360x820-save-failed.png",
+      "sha256": "3963a54510a6f45248a6c3fa736d202184b2846d9093614567656d414b68fdaa",
+      "size": [
+        1360,
+        820
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "comparison"
+    },
+    {
+      "file": "900x640-short-files.png",
+      "sha256": "de86493249b08a53669ce2c2af795f5e4521878078d86b89aa9ed54921972c7e",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "documents"
+    },
+    {
+      "file": "900x640-fit-files.png",
+      "sha256": "de86493249b08a53669ce2c2af795f5e4521878078d86b89aa9ed54921972c7e",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "documents"
+    },
+    {
+      "file": "900x640-overflow-files.png",
+      "sha256": "ccc12ac68617345c4c444b35de63666ab362dba285b53262299383d8727756ab",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "documents"
+    },
+    {
+      "file": "900x640-long-files-end.png",
+      "sha256": "e2c4edad76b9556076a01411d51b0544c86b06151a03b7bee4b6494d8c14c14f",
+      "size": [
+        900,
+        640
+      ],
+      "font_px": 14,
+      "original_review": "通過：原尺寸逐圖核對；重出圖後複核唯一受影響 preparing 狀態",
+      "view": "documents"
+    }
+  ],
+  "geometry": {
+    "images": 46,
+    "regions": 148,
+    "scroll_contract": "通過",
+    "control_overlap": "0",
+    "peer_size_difference_px": 0,
+    "adjacent_action_gap_px": 4,
+    "header_text_gap_px": 8
+  },
+  "observations": [
+    "左右文字同高且齊頭，校對入口與各自區域同列；設定與播放依左右閱讀欄線對齊。",
+    "短內容無軌道；長內容只在所屬區域出現捲軸；圖示端點與文字末行可見。",
+    "900版文件欄釋放整欄；詳情不硬壓閱讀區；展開狀態控制仍可見。",
+    "字體18px時校對按鈕完整，最低4行閱讀空間；非原生DPI驗證。",
+    "準備中匯入、管理及衝突設定停用，取消準備與返回可見。",
+    "播放中保留既有可用設定及保存；試聽字幕標頭與原稿對照分開。"
+  ],
+  "counterexample": {
+    "label": "校對前批 →",
+    "font_px": 18,
+    "caption_width": 95.0,
+    "padding": 24,
+    "old_frame": 112,
+    "required": 119.0,
+    "new_frame": 128,
+    "old_fails": true,
+    "new_passes": true
+  },
+  "runtime": {
+    "functional_regression": "未測：本批未實作",
+    "native_layout": "未測：本批未實作",
+    "exe_acceptance": "未測：本批未實作",
+    "inputs_and_transitions": "未測：需實際滾輪、滑塊、鍵盤、焦點與保存／取消／失敗流程"
+  },
+  "product_unchanged": {
+    "checked_source_manifest": "docs/verification/audio-assembly-workspace/source-manifest.json",
+    "matched_files": 57,
+    "differences": [],
+    "exe": "dist/ebook2mp4/ebook2mp4.exe",
+    "exe_sha256": "8eb94f5e4239bab1d9ed4a9bb329a745bc2450ba34bd51617608c5a229064814"
+  },
+  "cleanup": {
+    "processes_started": "無持續執行程序；只有同步 python -B 繪圖／檢查命令",
+    "temporary_data": "沒有建立測試專案、媒體或建置暫存；保留設計原始碼、圖面、文件及檢核證據",
+    "process_inventory": {
+      "method": "Get-Process -Name python,pythonw,ebook2mp4",
+      "python_processes": [],
+      "existing_app": [
+        {
+          "name": "ebook2mp4",
+          "pid": 19488,
+          "started": "2026-11-12T17:18:31+08:00",
+          "action": "保留；本設計任務未啟動或關閉此程序"
+        }
+      ],
+      "command_line_inventory": "Win32_Process查詢拒絕存取；改用Get-Process確認，未要求升權"
+    }
+  }
+}

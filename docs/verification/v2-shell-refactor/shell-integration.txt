@@ -1,0 +1,19 @@
+test_restored_window_keeps_footer_and_confirmation_inside_page (test_service_management.ServiceManagement.test_restored_window_keeps_footer_and_confirmation_inside_page) ... ok
+test_generic_pages_use_shell_actions_without_losing_preview_draft (test_unified_shell_integration.UnifiedShellIntegration.test_generic_pages_use_shell_actions_without_losing_preview_draft) ... ok
+test_hidden_actions_dynamic_commands_and_old_project_are_guarded (test_unified_shell_integration.UnifiedShellIntegration.test_hidden_actions_dynamic_commands_and_old_project_are_guarded) ... ok
+test_real_routes_keep_fixed_parents_and_exclusive_action_port (test_unified_shell_integration.UnifiedShellIntegration.test_real_routes_keep_fixed_parents_and_exclusive_action_port) ... ok
+test_scroll_page_removes_fit_track_and_resets_after_long_content (test_unified_shell_integration.UnifiedShellIntegration.test_scroll_page_removes_fit_track_and_resets_after_long_content) ... FAIL
+
+======================================================================
+FAIL: test_scroll_page_removes_fit_track_and_resets_after_long_content (test_unified_shell_integration.UnifiedShellIntegration.test_scroll_page_removes_fit_track_and_resets_after_long_content)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_shell_integration.py", line 106, in test_scroll_page_removes_fit_track_and_resets_after_long_content
+    self.assertFalse(page.scrollbar.winfo_ismapped())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 is not false
+
+----------------------------------------------------------------------
+Ran 5 tests in 16.590s
+
+FAILED (failures=1)

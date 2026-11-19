@@ -1,0 +1,80 @@
+{
+  "rows": [
+    {
+      "size": "1360x820",
+      "dpi": 96.09458128078816,
+      "rotation": {
+        "x": 379,
+        "y": 463,
+        "width": 157,
+        "height": 37
+      },
+      "ocr_button": {
+        "x": 548,
+        "y": 463,
+        "width": 158,
+        "height": 37
+      },
+      "delta": {
+        "y": 0,
+        "width": 1,
+        "height": 0
+      },
+      "scroll": [
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "size": "1280x720",
+      "dpi": 96.09458128078816,
+      "rotation": {
+        "x": 379,
+        "y": 463,
+        "width": 138,
+        "height": 37
+      },
+      "ocr_button": {
+        "x": 529,
+        "y": 463,
+        "width": 137,
+        "height": 37
+      },
+      "delta": {
+        "y": 0,
+        "width": -1,
+        "height": 0
+      },
+      "scroll": [
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "size": "900x640",
+      "dpi": 96.09458128078816,
+      "rotation": {
+        "x": 379,
+        "y": 463,
+        "width": 280,
+        "height": 37
+      },
+      "ocr_button": {
+        "x": 671,
+        "y": 463,
+        "width": 280,
+        "height": 37
+      },
+      "delta": {
+        "y": 0,
+        "width": 0,
+        "height": 0
+      },
+      "scroll": [
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "errors": []
+}

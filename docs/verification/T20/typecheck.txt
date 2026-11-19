@@ -1,0 +1,44 @@
+ebook2mp4\output_versions.py:16: error: Need type annotation for "row"  [var-annotated]
+ebook2mp4\output_versions.py:38: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:38: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:38: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:40: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:40: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:40: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:42: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:42: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:42: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:47: error: Unsupported target for indexed assignment ("dict[Any, Any] | list[Any] | str | None")  [index]
+ebook2mp4\output_versions.py:47: error: No overload variant of "__setitem__" of "list" matches argument types "str", "str"  [call-overload]
+ebook2mp4\output_versions.py:47: note: Possible overload variants:
+ebook2mp4\output_versions.py:47: note:     def __setitem__(self, SupportsIndex, Any, /) -> None
+ebook2mp4\output_versions.py:47: note:     def __setitem__(self, slice[SupportsIndex | None, SupportsIndex | None, SupportsIndex | None], Iterable[Any], /) -> None
+ebook2mp4\output_versions.py:52: error: Unsupported target for indexed assignment ("dict[Any, Any] | list[Any] | str | None")  [index]
+ebook2mp4\output_versions.py:52: error: No overload variant of "__setitem__" of "list" matches argument types "str", "Any"  [call-overload]
+ebook2mp4\output_versions.py:52: note: Possible overload variants:
+ebook2mp4\output_versions.py:52: note:     def __setitem__(self, SupportsIndex, Any, /) -> None
+ebook2mp4\output_versions.py:52: note:     def __setitem__(self, slice[SupportsIndex | None, SupportsIndex | None, SupportsIndex | None], Iterable[Any], /) -> None
+ebook2mp4\output_versions.py:54: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:54: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:54: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:61: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:61: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:61: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:63: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:63: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:63: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:65: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:65: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:65: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:67: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:67: error: Item "str" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:67: error: Item "None" of "dict[Any, Any] | list[Any] | str | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:74: error: Value of type "dict[Any, Any] | None" is not indexable  [index]
+ebook2mp4\output_versions.py:75: error: Item "dict[Any, Any]" of "dict[Any, Any] | list[Any] | Literal[''] | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:75: error: Item "str" of "dict[Any, Any] | list[Any] | Literal[''] | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions.py:75: error: Item "None" of "dict[Any, Any] | list[Any] | Literal[''] | None" has no attribute "append"  [union-attr]
+ebook2mp4\output_versions_desktop.py:240: error: Unexpected keyword argument "method" for "export"  [call-arg]
+ebook2mp4\output_versions_desktop.py:240: note: "export" defined in "ebook2mp4.assembly"
+ebook2mp4\assembly_desktop.py:712: error: Unexpected keyword argument "method" for "export"  [call-arg]
+ebook2mp4\assembly_desktop.py:712: note: "export" defined in "ebook2mp4.assembly"
+Found 35 errors in 3 files (checked 8 source files)

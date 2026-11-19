@@ -1,0 +1,6 @@
+test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 10.548s
+
+OK

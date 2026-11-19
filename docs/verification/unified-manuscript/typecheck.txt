@@ -1,0 +1,7 @@
+ebook2mp4\voice_media.py:127: error: Argument 1 to "set" of "ContextVar" has incompatible type "tuple[None, Callable[[Any], Any] | None]"; expected "tuple[None, None]"  [arg-type]
+ebook2mp4\voice_media.py:127: error: Argument 1 to "set" of "ContextVar" has incompatible type "tuple[float | None, Callable[[Any], Any] | None]"; expected "tuple[None, None]"  [arg-type]
+ebook2mp4\voice_media.py:143: error: Item "OSError" of "OSError | ClientError | EdgeTTSException | RetryableServiceError" has no attribute "retry_after"  [union-attr]
+ebook2mp4\voice_media.py:143: error: Item "ClientError" of "OSError | ClientError | EdgeTTSException | RetryableServiceError" has no attribute "retry_after"  [union-attr]
+ebook2mp4\voice_media.py:143: error: Item "EdgeTTSException" of "OSError | ClientError | EdgeTTSException | RetryableServiceError" has no attribute "retry_after"  [union-attr]
+ebook2mp4\tts_control.py:185: error: Incompatible types in assignment (expression has type "float", variable has type "int")  [assignment]
+Found 6 errors in 2 files (checked 48 source files)

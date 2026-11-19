@@ -1,0 +1,97 @@
+[
+  {
+    "name": "exe-joins-initial",
+    "observation": "最終版本1360×820；兩層齊頭，前批90末行完整可見、後批第1行，已儲存。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-left-wheel-start",
+    "observation": "最終版：前批滾輪到首端，右批第1行及固定區域不動。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-left-wheel-end",
+    "observation": "最終版：滾輪到第90行，末行完整可見。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-left-thumb-start",
+    "observation": "最終版：滑塊拖到前批首端；右批與固定區域不動。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-left-thumb-end",
+    "observation": "最終版：滑塊拖到末端，第90行完整可見。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-left-key-start",
+    "observation": "最終版：Ctrl+Home到前批節錄首端，右批與固定操作不動。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-left-key-end",
+    "observation": "最終版：Ctrl+End到第90行，首末三種操作皆通過。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-900-normal",
+    "observation": "最終版縮小至900×640；必要控制項可見，文件列表改內頁入口；前批維持使用者閱讀位置。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-900-details",
+    "observation": "窄版詳情使用獨立內容區；六行詳情完整顯示且無多餘捲軸；校對與固定操作仍可達。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-900-details-return",
+    "observation": "收合詳情後，前批仍為相同68／69行位置、後批仍第1行。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-900-files",
+    "observation": "文件內頁完整容納四個項目，無多餘捲軸，返回入口固定。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-900-files-return",
+    "observation": "返回後前後批閱讀位置、停頓及接點皆保留，焦點回文件列表入口。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-dirty",
+    "observation": "最終版：確認接點後顯示合併設定尚未儲存，未裁切。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-second-pair",
+    "observation": "最終版900×640：新接點前批第90行完整可見，後批第1行；確認及停頓狀態保留。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-both-checked-dirty",
+    "observation": "兩個接點均已確認，但尚未保存。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-save-return",
+    "observation": "保存成功返回全書合併，2接點已檢查，製作合併音訊啟用。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-saved-reloaded",
+    "observation": "重開接點頁後兩個確認狀態與已儲存提示保留，無舊失敗或重試標籤。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-producing",
+    "observation": "正式製作中，來源／停頓控制項停用，進度及取消任務可見。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  },
+  {
+    "name": "exe-completed",
+    "observation": "三批已完成MP3／SRT，0.5秒停頓、兩接點確認；狀態已完成，成品操作可見。",
+    "exe_sha256": "a89ab2c39a92b551120a08024678a755ef536984b642dc6ac96be61096b342a3"
+  }
+]

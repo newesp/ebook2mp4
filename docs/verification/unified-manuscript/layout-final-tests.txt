@@ -1,0 +1,11 @@
+test_line_cleanup_preview_apply_and_single_undo (test_ui_layout.WorkbenchLayout.test_line_cleanup_preview_apply_and_single_undo) ... ok
+test_menu_export_uses_displayed_full_text (test_ui_layout.WorkbenchLayout.test_menu_export_uses_displayed_full_text) ... ok
+test_selection_survives_tools_and_source_toggle (test_ui_layout.WorkbenchLayout.test_selection_survives_tools_and_source_toggle) ... ok
+test_source_blockers_visible_in_every_tool (test_ui_layout.WorkbenchLayout.test_source_blockers_visible_in_every_tool) ... ok
+test_source_resizing_restores_two_columns_without_callback_failure (test_ui_layout.WorkbenchLayout.test_source_resizing_restores_two_columns_without_callback_failure) ... ok
+test_tools_fit_and_primary_action_stays_visible (test_ui_layout.WorkbenchLayout.test_tools_fit_and_primary_action_stays_visible) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 40.843s
+
+OK

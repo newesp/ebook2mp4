@@ -1,0 +1,1092 @@
+{
+  "baseline_files_checked": 216,
+  "unexpected_changes": 0,
+  "allowed_changes": [
+    ".gitignore",
+    "ebook2mp4/manuscript_desktop.py",
+    "ebook2mp4/manuscript_source.py",
+    "tests/test_manuscript_cleanup.py"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "unchanged": true,
+      "sha256": "a5bdca36580e6b8c3a20b7222aa22221a0d116df0f4b95e3a6e4c7887b6ec336"
+    },
+    {
+      "path": ".gitignore",
+      "unchanged": false,
+      "sha256": "314d51a02af84f8c576390d3d99f9c0290396714cb04256c87543148ce280b7d"
+    },
+    {
+      "path": "AGENTS.md",
+      "unchanged": true,
+      "sha256": "a87e99f3a3e6fa9b8ea4af453a63cfa8cc2fbff05fc5553825f19473a3692f69"
+    },
+    {
+      "path": "DESIGN.md",
+      "unchanged": true,
+      "sha256": "5189ed16c3b11e202dfd35bae586b8dfe8935461295c890b813c239ce29f072c"
+    },
+    {
+      "path": "ebook2mp4/__init__.py",
+      "unchanged": true,
+      "sha256": "a4ce08e864aed2b06985ddc488d6b3f00b0df9c73c7ae511954693a5c7e6e647"
+    },
+    {
+      "path": "ebook2mp4/__main__.py",
+      "unchanged": true,
+      "sha256": "6fd8dad002430249837b362534af468cbdbabf054ef7647a6c15a8e89c1b210e"
+    },
+    {
+      "path": "ebook2mp4/app_session.py",
+      "unchanged": true,
+      "sha256": "da49affd36ba0438a99ec23adbaa8ca1c90ee9c732d58fe0f366f99cdbc49453"
+    },
+    {
+      "path": "ebook2mp4/assembly.py",
+      "unchanged": true,
+      "sha256": "a1f6db74f292cbe15475b11dd57ca3730b270f7447d8b0e2edd44654b1dd4c72"
+    },
+    {
+      "path": "ebook2mp4/assembly_desktop.py",
+      "unchanged": true,
+      "sha256": "c8c867e2b42273bb83594d06626eec88cc802ddf7780449366ed8cca91059e54"
+    },
+    {
+      "path": "ebook2mp4/assembly_joins.py",
+      "unchanged": true,
+      "sha256": "bc328d54a1216e5bd855e0af76a9f061eb5c93789840e046bc9d84814e921f2e"
+    },
+    {
+      "path": "ebook2mp4/assembly_joins_desktop.py",
+      "unchanged": true,
+      "sha256": "ef09daee0fddafc43ad9635630be9675cd03c053110a83d03557e7b2ed959827"
+    },
+    {
+      "path": "ebook2mp4/desktop.py",
+      "unchanged": true,
+      "sha256": "e1c3ef77ce1c98b9c26def5e8293ca8ca6216cd6700a8b3b06fbe5fb27ec8b02"
+    },
+    {
+      "path": "ebook2mp4/gemini.py",
+      "unchanged": true,
+      "sha256": "d289722f5656defeb6e940946c369ae465d504d4c099b5d102de92a28d687bb5"
+    },
+    {
+      "path": "ebook2mp4/gemini_desktop.py",
+      "unchanged": true,
+      "sha256": "e7121645aa622fcaafac9db20bde72f92a1ae8b1788d7245e5a004edb4242298"
+    },
+    {
+      "path": "ebook2mp4/kokoro_desktop.py",
+      "unchanged": true,
+      "sha256": "451beabb3f8bc67c473989ffb02c5c181ffe589e2e36e0bd88479a36df4ee73f"
+    },
+    {
+      "path": "ebook2mp4/kokoro_packages.py",
+      "unchanged": true,
+      "sha256": "b90917dd99392583247a573ea32eee778cad99e9dd57deeb1d06c2a8614f4712"
+    },
+    {
+      "path": "ebook2mp4/kokoro_release.json",
+      "unchanged": true,
+      "sha256": "1c625820f274023d4a9d6852221dbe6dfc6195d7c596d58d110bc6e114e44595"
+    },
+    {
+      "path": "ebook2mp4/kokoro_runtime.py",
+      "unchanged": true,
+      "sha256": "74d1fb9e2bfab7844a41c6def80ecdfccc5a14e9c1301681034637870dbd9dfc"
+    },
+    {
+      "path": "ebook2mp4/kokoro_worker.py",
+      "unchanged": true,
+      "sha256": "7454d3a822d1296aeb141947286f574646bf1ddebfa4786d077479f5195bf1dd"
+    },
+    {
+      "path": "ebook2mp4/manuscript.py",
+      "unchanged": true,
+      "sha256": "4a3a3b9a438c77d52bf2a92904baa2c3425564655ed61fda5f387aab46b54002"
+    },
+    {
+      "path": "ebook2mp4/manuscript_cleanup.py",
+      "unchanged": true,
+      "sha256": "89ef6a0c7a6229588c863005ad1a5d6bd00fe1bda58164b7c90460bba5553679"
+    },
+    {
+      "path": "ebook2mp4/manuscript_desktop.py",
+      "unchanged": false,
+      "sha256": "37907151b5454af2556447f9cc4c43c03f4336cfc7011a3688a6b09c9b11e9e2"
+    },
+    {
+      "path": "ebook2mp4/manuscript_drop.py",
+      "unchanged": true,
+      "sha256": "23f49acf61da45b3b355a17a72c3492c262970631d54c98e8f0c972bc5a4dbf4"
+    },
+    {
+      "path": "ebook2mp4/manuscript_source.py",
+      "unchanged": false,
+      "sha256": "b1fad0f35b9c84ab376b750d7c206eb43f270c700790f115efa98f4945585bd3"
+    },
+    {
+      "path": "ebook2mp4/movie_playback.py",
+      "unchanged": true,
+      "sha256": "087fb8f02a88b30dbb54cdac169be3bc00c1e46eaafc293e3d0abca44daa06f9"
+    },
+    {
+      "path": "ebook2mp4/narration.py",
+      "unchanged": true,
+      "sha256": "5fd82f6bc44e1a0c50ec5b9543f56602a1f9d85cece6aa7f21bbd7bbb944ac92"
+    },
+    {
+      "path": "ebook2mp4/narration_desktop.py",
+      "unchanged": true,
+      "sha256": "1f1ea1ff42ea29f148ee4193e93233826830cb111800c3d1c63e22ef83dbe74c"
+    },
+    {
+      "path": "ebook2mp4/ocr.py",
+      "unchanged": true,
+      "sha256": "b6d469de12390171272348b10dd117b524fcf6e74b31954dcd510260a354f360"
+    },
+    {
+      "path": "ebook2mp4/output_versions.py",
+      "unchanged": true,
+      "sha256": "d6fbb371049f9042a5311c728c9459dc12d4c4a4a96ebec71161ae9b806ee7f4"
+    },
+    {
+      "path": "ebook2mp4/output_versions_desktop.py",
+      "unchanged": true,
+      "sha256": "92b1933c78e83d487c89c8cb89114b095ea54bae2b91188382151161a5e18295"
+    },
+    {
+      "path": "ebook2mp4/outputs.py",
+      "unchanged": true,
+      "sha256": "0b171ae5a0729618d90a5f5dd45fa088f382bd0849beb882a35fc2587938abfa"
+    },
+    {
+      "path": "ebook2mp4/outputs_desktop.py",
+      "unchanged": true,
+      "sha256": "ee6fc0267a1fee02c685d1ec707351004ad8f7e40ddae2d4b119ba4062078d3d"
+    },
+    {
+      "path": "ebook2mp4/pdf.py",
+      "unchanged": true,
+      "sha256": "791f505dc772a1dc6b671f8ac88752ca99d200bc590c9be31fd6c500553d64cf"
+    },
+    {
+      "path": "ebook2mp4/pdf_desktop.py",
+      "unchanged": true,
+      "sha256": "776010b15152e43edbddc23cd94d23433b5ff6da426a53e246a890d20f28875d"
+    },
+    {
+      "path": "ebook2mp4/production_desktop.py",
+      "unchanged": true,
+      "sha256": "848ae9bcb560705cffd095e356644a988f14a98f9217f0df8a6ddaac1230abeb"
+    },
+    {
+      "path": "ebook2mp4/production_lock.py",
+      "unchanged": true,
+      "sha256": "468f313b27f49c84e8ca71c167d8f717aa9b930d957916597703861755ce2fb8"
+    },
+    {
+      "path": "ebook2mp4/proofreading.py",
+      "unchanged": true,
+      "sha256": "02d8d94e59f60f48b20bc318ed96c8f2b0e18ddf6674fe9e6a17667c4e0cd476"
+    },
+    {
+      "path": "ebook2mp4/service_desktop.py",
+      "unchanged": true,
+      "sha256": "57ac929bce44636c5ba1dc669444579f4ec8dbdc192b1aa9d6140de8088bdbe1"
+    },
+    {
+      "path": "ebook2mp4/total_video.py",
+      "unchanged": true,
+      "sha256": "668e18d309d3543d6a28b371ae60ec800951bbcc9ae3da97ca06c420300701cd"
+    },
+    {
+      "path": "ebook2mp4/total_video_desktop.py",
+      "unchanged": true,
+      "sha256": "97a8d64563b00f0c9711c3612eb47d83bff9967207fdc93e70267a9217ba0662"
+    },
+    {
+      "path": "ebook2mp4/tts_backend.py",
+      "unchanged": true,
+      "sha256": "6203a9380e18ea30ee64d03f2f1a2b2ceb8f2a146209ddb0bac58642d1775b80"
+    },
+    {
+      "path": "ebook2mp4/tts_control.py",
+      "unchanged": true,
+      "sha256": "ac9416c08430321ec7ec351dbc2866f7a35cabdee37a8e1c7bbfabeb3db6c671"
+    },
+    {
+      "path": "ebook2mp4/tts_services.py",
+      "unchanged": true,
+      "sha256": "066fc52f9ce96b7bcbda8eaee08039e705256afbccab5f12aefe03c3c7e65476"
+    },
+    {
+      "path": "ebook2mp4/ui_controls.py",
+      "unchanged": true,
+      "sha256": "38d40d80264beedd11b4e07d028698ab4c2272e288d26184e49193d635aa9f9c"
+    },
+    {
+      "path": "ebook2mp4/ui_mock.py",
+      "unchanged": true,
+      "sha256": "c1dd5f44453846a61a1d12c8367c5bb33ad12bb2a7847b88d0d08bd100caeae3"
+    },
+    {
+      "path": "ebook2mp4/video_diagnostics.py",
+      "unchanged": true,
+      "sha256": "032d3053f39e4b1d3eebbf6e5b158ae3d96c7f7376bbb7e1e88f4206af64ad7c"
+    },
+    {
+      "path": "ebook2mp4/video_merge.py",
+      "unchanged": true,
+      "sha256": "3a8fc2d91ffab7be0f94ad08784893fe14b818d7a2a2fcd510aa419a60794b48"
+    },
+    {
+      "path": "ebook2mp4/video_target.py",
+      "unchanged": true,
+      "sha256": "d38859d1bdb84ac54cb48dce6ff98945fdb0995ab401c8604a76672f4ab72ba0"
+    },
+    {
+      "path": "ebook2mp4/video_workspace.py",
+      "unchanged": true,
+      "sha256": "96fa1a185808f37656ce3ca5470d1b9bb0501e579b9fa804c0017f2bc2f9b6f7"
+    },
+    {
+      "path": "ebook2mp4/voice.py",
+      "unchanged": true,
+      "sha256": "ea0556dea51bdecba28680ca68fab34eabeb96c39dfc063887ac71a99769cd25"
+    },
+    {
+      "path": "ebook2mp4/voice_defaults_desktop.py",
+      "unchanged": true,
+      "sha256": "30f67c4e4e488ffc274756be3b887280eb55f870a3863f21d5424e48e99a918b"
+    },
+    {
+      "path": "ebook2mp4/voice_desktop.py",
+      "unchanged": true,
+      "sha256": "4151a1e7c9b5ccf6bcd439a0145fe922a97b63cf40ec8d7fc5a84baacf85ef61"
+    },
+    {
+      "path": "ebook2mp4/voice_media.py",
+      "unchanged": true,
+      "sha256": "2476557f44465d90c5c4e7fc96f2c59bd484c7050fbfa06c5570febb12402d63"
+    },
+    {
+      "path": "ebook2mp4/window_layout.py",
+      "unchanged": true,
+      "sha256": "b3bd5f9a2331b174bffb9dd047087280139b8078c0e3c8ab24df416db6c8d0c4"
+    },
+    {
+      "path": "ebook2mp4/workflow.py",
+      "unchanged": true,
+      "sha256": "cff01dfcf9cb1efd239e242699405e597a280f4741a6431a513d429fa20cc081"
+    },
+    {
+      "path": "GLOSSARY.md",
+      "unchanged": true,
+      "sha256": "8554d98c6c4da3dded75fdf4a606c97c3382d5371c2c43eb6219b60d1310caf5"
+    },
+    {
+      "path": "LICENSE",
+      "unchanged": true,
+      "sha256": "c089fe770c9d850ebeb1da366a104b5340ffb4a442001383bdcfd00d66c36144"
+    },
+    {
+      "path": "packaging/build.py",
+      "unchanged": true,
+      "sha256": "27e9dd237becef0cbd357239a2ca395803422d2cd64173cf4315365007fe3e24"
+    },
+    {
+      "path": "packaging/ebook2mp4.spec",
+      "unchanged": true,
+      "sha256": "a0c22606180dd08cdf3569caad0d9ea72bb5266cec85c47108b4f23459932dde"
+    },
+    {
+      "path": "packaging/installer.iss",
+      "unchanged": true,
+      "sha256": "35f6c651ce6158a9181735a16ee005ec88744b89f87596ab38026b6a8e8e01b5"
+    },
+    {
+      "path": "packaging/licenses/Edge-TTS-LICENSE.txt",
+      "unchanged": true,
+      "sha256": "3613045a46a5bce847f80eadbbf013e4260ef19d728ffd061d61e792689ec3a8"
+    },
+    {
+      "path": "packaging/licenses/FFmpeg-BUILD.txt",
+      "unchanged": true,
+      "sha256": "af90ccd9d705c74cadb9c36918664353de0533eade19f7ccd5cbe6081c262001"
+    },
+    {
+      "path": "packaging/licenses/FFmpeg-LICENSE.txt",
+      "unchanged": true,
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "path": "packaging/licenses/OpenCC-Python-LICENSE.txt",
+      "unchanged": true,
+      "sha256": "18f3fedf9eac72e6054260489c764c1e54f63cf2b16055523f561ffeec7bc908"
+    },
+    {
+      "path": "packaging/NORMALIZATION-NOTICES.md",
+      "unchanged": true,
+      "sha256": "1d12b69a8ea37bcb725170d64a532cc13cc472affb39ee11898c5902f197a2a3"
+    },
+    {
+      "path": "packaging/OCR-NOTICES.md",
+      "unchanged": true,
+      "sha256": "a2d9099b7fa3e65b4d9bad88aa02dab85680cb1e1d4363a539a1e73b8e3cab2c"
+    },
+    {
+      "path": "packaging/prepare_kokoro.py",
+      "unchanged": true,
+      "sha256": "6ba43b4851beba1f7a8e980cd2a9c01634d865b91ad6fca5b5387e8d5321e6dc"
+    },
+    {
+      "path": "packaging/prepare_ocr.py",
+      "unchanged": true,
+      "sha256": "aa45d2bf2e7b7f2f7043e10628127ea35abcc4fc5eb6c962b383aa7ece9c09c8"
+    },
+    {
+      "path": "packaging/prepare_voice.py",
+      "unchanged": true,
+      "sha256": "a83ec727e35443ceadb2f197ae75cf98c944361716c4dd8035e9a4234f7b45a0"
+    },
+    {
+      "path": "packaging/requirements-build.txt",
+      "unchanged": true,
+      "sha256": "2de1e3a7deb66b07286644283721fb4161b70bd6aa0ea26d8cb4b7f7043ff378"
+    },
+    {
+      "path": "packaging/requirements-dev.txt",
+      "unchanged": true,
+      "sha256": "40a1e93684a31b1e7b2a2b6388958e1dcd8132264948e851e9cedc3d3133ac7f"
+    },
+    {
+      "path": "packaging/requirements-runtime.txt",
+      "unchanged": true,
+      "sha256": "d59134cda6127a3cdb309078f87962ee8fb73974902b31f1eb8a541abcb7148c"
+    },
+    {
+      "path": "packaging/VOICE-NOTICES.md",
+      "unchanged": true,
+      "sha256": "0bb409c84871bde55f60e379fa6490eab35337d2a646253d65240f3f5f682872"
+    },
+    {
+      "path": "PRODUCT.md",
+      "unchanged": true,
+      "sha256": "097ada5663ef5f0d7a0a0ab4643fca4c5679cef6010ae4656c0ce68e58e1be32"
+    },
+    {
+      "path": "prototype-notes.md",
+      "unchanged": true,
+      "sha256": "4e40269388b27e37112e33b2e255bfe43564fb75695138feb6d1b4ca35ce7c67"
+    },
+    {
+      "path": "prototype.css",
+      "unchanged": true,
+      "sha256": "ecd8804546e65dc44f8a4371d4c99fd4cb2915599ba6cf56fc79408e206f64ca"
+    },
+    {
+      "path": "prototype.html",
+      "unchanged": true,
+      "sha256": "803ec059cad4018e33ef68a87a7ede66c68945df5d5eb96346f126d176cc62e8"
+    },
+    {
+      "path": "prototype.js",
+      "unchanged": true,
+      "sha256": "62ac5d5ec6fbb3c11c5b524869eef70e209e235fa9f8be108000391d2ebdd600"
+    },
+    {
+      "path": "prototype_server.py",
+      "unchanged": true,
+      "sha256": "51e6b1eddf89aa7a37b73ff1114c79027eecfd74a09c4fcd163698351961d2b5"
+    },
+    {
+      "path": "README.md",
+      "unchanged": true,
+      "sha256": "da5930db47eb6ec50eeac4db269809cf0081a3db2abb62af13cd441f97d86c8a"
+    },
+    {
+      "path": "run.pyw",
+      "unchanged": true,
+      "sha256": "d4df8664ac039fea9128aeef79829552da9c41ab0f63dc2283c5bc8b0c53198f"
+    },
+    {
+      "path": "tests/audio_production_fixture.py",
+      "unchanged": true,
+      "sha256": "4f0ed14a66cdc99c1d2956fe150d609746eafd7d3b822cd83ad486029b43d4c8"
+    },
+    {
+      "path": "tests/audio_production_package_check.py",
+      "unchanged": true,
+      "sha256": "0d698dfdfb3d34b53f2b973b6944f0eefd0871fb5705eb9b155f607d5a9f4815"
+    },
+    {
+      "path": "tests/batch_video_package_check.py",
+      "unchanged": true,
+      "sha256": "9aca696dba20715a4d952d3498161ff2b0f2c357e80ad7dd2f7d55ac029520bd"
+    },
+    {
+      "path": "tests/cleanup_package_start.py",
+      "unchanged": true,
+      "sha256": "c6abc4d4abab377b267cbb32003d63f0ca42cc24b8e60c569cc48d521dda7697"
+    },
+    {
+      "path": "tests/cleanup_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "abe4da4bd8fa1900584bf80598f9f439beb1bcda1d9f660f31b0055b1e2d05a6"
+    },
+    {
+      "path": "tests/gemini_real_check.py",
+      "unchanged": true,
+      "sha256": "895181826e756bad618417c6a17f150183e58b4b6d97d4089ad0fc8824ffc628"
+    },
+    {
+      "path": "tests/gemini_resume_real_check.py",
+      "unchanged": true,
+      "sha256": "87624070988290ebb7fda2a2e89e5918c6bb3edc78c54a15dd560f817194437a"
+    },
+    {
+      "path": "tests/gemini_resume_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "dcd042557cb80618d7ab142e9c41f457ce0cb7e0d2cc6f3d4fe571b98fc2ebbf"
+    },
+    {
+      "path": "tests/gemini_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "4a3e1cb34a513bc231510a4948426d27b2c1128146cfd7265f3544891796c485"
+    },
+    {
+      "path": "tests/kokoro_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "5b6ae6fdcbbb6c528a6a0702057f97f0893917e1b34d2b3217673680c1c9873e"
+    },
+    {
+      "path": "tests/legacy_manuscript_fixture.py",
+      "unchanged": true,
+      "sha256": "c30de547f82544a35018251a343c3b9443140b8304ec0a55ddd30e05fe2fa49b"
+    },
+    {
+      "path": "tests/manuscript_v6_package_start.py",
+      "unchanged": true,
+      "sha256": "bfdff1e172f860fa0680fe32ff7500defdd9df9982f5b81e882796a50eb351b9"
+    },
+    {
+      "path": "tests/manuscript_v6_visual.py",
+      "unchanged": true,
+      "sha256": "4558b0588e336ef46363b10bf602f92e26f605ab2b66a31b30fe4d903b9bba34"
+    },
+    {
+      "path": "tests/mixed_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "6616cffd5f14f3df63f86a00f47f88261b61e2e559a7efa6c278634a2fd41e53"
+    },
+    {
+      "path": "tests/narration_real_check.py",
+      "unchanged": true,
+      "sha256": "0cbe830fed72d4230e96a87a307bf05f4b84f5d85ed5bfeeb7e673ded50dff5a"
+    },
+    {
+      "path": "tests/narration_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "07bbd3865fd887132a074a1af6d58778c81cf8b0b0715a856962e05a41fc61fb"
+    },
+    {
+      "path": "tests/notifications_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "f67991b0f82c9c430bd728d0b9312ebb3d4a471590fd14930d19a58fac2d9763"
+    },
+    {
+      "path": "tests/ocr_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "cb49a57e2d057f0e25ca918ea8762604ca0ead70ae128955179fdc323e6d8049"
+    },
+    {
+      "path": "tests/optimization_real_check.py",
+      "unchanged": true,
+      "sha256": "0c485de5493b4e4bdf57e34ef0cf18e47b5d8fc50e870e671883ba4baa36d5f7"
+    },
+    {
+      "path": "tests/pdf_refinement_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "e77af9c40d5c3799138148a2ce687a7c8570ecd46b55eabc18f9dfd573a209fb"
+    },
+    {
+      "path": "tests/pdf_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "a66cafeb9e94a2c1ef697b39ebcdd702aa77ec2f5fc6ce8ccf1efadbd4cafac1"
+    },
+    {
+      "path": "tests/rhythm_real_check.py",
+      "unchanged": true,
+      "sha256": "7f850d2df959c1ae61d16c2489f21afc774ed8782ce7c352074a3ca641809e69"
+    },
+    {
+      "path": "tests/run_suite.py",
+      "unchanged": true,
+      "sha256": "ed3092b05556b5f8b68f2a34f41ff360d0a794e83f468d89d5b20087573b8f51"
+    },
+    {
+      "path": "tests/status_help_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "66434d41bf085872f5a9633fa444bdff39d228ef725e291de4189b45f485ed12"
+    },
+    {
+      "path": "tests/t12_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "1e57d2972fe70b229c6cadaf63943bae0164c96ac24d4b2b51bd6878a6d20563"
+    },
+    {
+      "path": "tests/t21_package_check.py",
+      "unchanged": true,
+      "sha256": "51e004760892425603fc96b07549db360e9ce08e369ae95d5505dfc6309a74e7"
+    },
+    {
+      "path": "tests/t21_package_fixture.py",
+      "unchanged": true,
+      "sha256": "856b50ee1d28d7f1dfb3cab80a93128a73e3298da6bbebb7c8e379c0f19a0f0c"
+    },
+    {
+      "path": "tests/t21_package_result.py",
+      "unchanged": true,
+      "sha256": "a21d6b8f68d2b6120ebcf32db4f55b39d3ceebb910ab9ef5ea0cdb29b04679c5"
+    },
+    {
+      "path": "tests/test_assembly_joins.py",
+      "unchanged": true,
+      "sha256": "e9e1e9ac814b2c742e199ec4910920e86c0e37c52a55d98c86788aa29fb46280"
+    },
+    {
+      "path": "tests/test_assembly_joins_desktop.py",
+      "unchanged": true,
+      "sha256": "16cf368c0838b72c36cdf30f2c970cd50ffcf5a5b8d602b1a1dd608d5e4f9b88"
+    },
+    {
+      "path": "tests/test_audio_production_ui.py",
+      "unchanged": true,
+      "sha256": "6335da8eb125216155279423bd524e7750a9390685be2a6605b056e7e636bd02"
+    },
+    {
+      "path": "tests/test_batch_step_retention.py",
+      "unchanged": true,
+      "sha256": "cd4b063f5f225fc10ac2cbb73bc95b938be5670b9632a45e42d1d3bb6c941483"
+    },
+    {
+      "path": "tests/test_batch_video.py",
+      "unchanged": true,
+      "sha256": "5fe9ede7d18958a7d5650620317f6389595cae70dbc85e03b64131dd1c10f4c3"
+    },
+    {
+      "path": "tests/test_batch_video_desktop.py",
+      "unchanged": true,
+      "sha256": "128db4730f4310c4a707b070221def75cff172731ecb0e9c14829ec79e06385c"
+    },
+    {
+      "path": "tests/test_close_lifecycle.py",
+      "unchanged": true,
+      "sha256": "adab0e5351b7dfcd0a52a3008ea6eb30178241997c0abf6694a804e2d3b0c061"
+    },
+    {
+      "path": "tests/test_desktop.py",
+      "unchanged": true,
+      "sha256": "22e8b9b053e2b34e5f413eed7b2c975d13fb71b80b81db3a1ecfcde4cf1a8f90"
+    },
+    {
+      "path": "tests/test_gemini.py",
+      "unchanged": true,
+      "sha256": "b90c0f5468cf8ee5903ce8f7d28112221525c0ba7c4be679db20dde634beb2ee"
+    },
+    {
+      "path": "tests/test_gemini_429_desktop.py",
+      "unchanged": true,
+      "sha256": "627cea4b9d33d5740b5a7dbacc2db1c3a5e7abe5f11dac947ef3942a568b50ce"
+    },
+    {
+      "path": "tests/test_gemini_429_recovery.py",
+      "unchanged": true,
+      "sha256": "057be1758ce8c5f6c58f46fcd8efe7f39a4253bbe5e793bb2764b30b266f3736"
+    },
+    {
+      "path": "tests/test_gemini_desktop.py",
+      "unchanged": true,
+      "sha256": "894fb4c1a5751d8d5a4c2b8ce04ff1e79462dda76fe6d2599da680f1c92cbed0"
+    },
+    {
+      "path": "tests/test_gemini_resume.py",
+      "unchanged": true,
+      "sha256": "4fe726370bffa2538a6e43d3359d160b2c566b2e012974d523ea238df74a3cc0"
+    },
+    {
+      "path": "tests/test_gemini_resume_desktop.py",
+      "unchanged": true,
+      "sha256": "46ece6462929027280032632e6b4499b78d37b9a0f21de8ec9434b8e1c2705d8"
+    },
+    {
+      "path": "tests/test_incremental_desktop.py",
+      "unchanged": true,
+      "sha256": "f3c7e2c1d2f98f946beb5d6ff5417551f38df8eb4a7c56390f49897a0f1e0d2b"
+    },
+    {
+      "path": "tests/test_incremental_narration.py",
+      "unchanged": true,
+      "sha256": "5fb1255154e9b0c118bdf6e6df8ea26b94a665b5a39726c29989df798a59eb39"
+    },
+    {
+      "path": "tests/test_kokoro.py",
+      "unchanged": true,
+      "sha256": "4e3ace5dc22b3f5d86b062add574dd31b33667a8e6edadabf19b66d608a8558a"
+    },
+    {
+      "path": "tests/test_kokoro_desktop.py",
+      "unchanged": true,
+      "sha256": "9a0e126f80437ac5ba49507139a591a9a8c0976469c5245040a25b16754f4dd2"
+    },
+    {
+      "path": "tests/test_kokoro_remember_desktop.py",
+      "unchanged": true,
+      "sha256": "b18b0a8d2e43b1278709f0cd8b6a9659d8cceefd5538a9d88a82430a9fc78da3"
+    },
+    {
+      "path": "tests/test_last_project.py",
+      "unchanged": true,
+      "sha256": "6fb697768786215942f95cd1a2cda20d6c8ac8d1f15452ba30e11166baa73340"
+    },
+    {
+      "path": "tests/test_main_workflow_desktop.py",
+      "unchanged": true,
+      "sha256": "2c15f3a0db26d2b1cae7591822809cee74f843b553734273e7800eb4aecb4972"
+    },
+    {
+      "path": "tests/test_manuscript_cleanup.py",
+      "unchanged": false,
+      "sha256": "f1458c820b938ad0b7be280e03c35c9b3dbb104714edf4e6f05c53c61f4a24be"
+    },
+    {
+      "path": "tests/test_manuscript_v6.py",
+      "unchanged": true,
+      "sha256": "80fdd9230873d3575e0d7bc4c9a262fe2873f0dd5d2d713f6e53ad6f41edad7e"
+    },
+    {
+      "path": "tests/test_mixed_desktop.py",
+      "unchanged": true,
+      "sha256": "8a81e06703463ae7c73392f54214140112915e9010298880f371fd6908bddf60"
+    },
+    {
+      "path": "tests/test_mixed_pdf.py",
+      "unchanged": true,
+      "sha256": "9ae549a2215c2e197af5e522d8c11a6ee789a7be0b8f08507a0e8fe985b44039"
+    },
+    {
+      "path": "tests/test_narration.py",
+      "unchanged": true,
+      "sha256": "e7ec4408114d538e352f2d6eb765d5f2340be013522c7dcaac1bc82c18a5d3e6"
+    },
+    {
+      "path": "tests/test_narration_desktop.py",
+      "unchanged": true,
+      "sha256": "5ecf55f30f6650b33ca1b8d31e1ef12860040316643f9dadbd76c0e7303303f3"
+    },
+    {
+      "path": "tests/test_narration_quote_splitting.py",
+      "unchanged": true,
+      "sha256": "0c7c5f8ee96605aa39df0b9909c5f6461808941be64c3aa76db61f6f0cf62ef1"
+    },
+    {
+      "path": "tests/test_narration_resume.py",
+      "unchanged": true,
+      "sha256": "342d64df693fd94847bb5d323ae969788b37a447fa834fcaad2336eb75b16143"
+    },
+    {
+      "path": "tests/test_notifications.py",
+      "unchanged": true,
+      "sha256": "25143125d8750bce162bfd3f426b4e3c643f6220e1be3c838ddd2bf064183997"
+    },
+    {
+      "path": "tests/test_ocr.py",
+      "unchanged": true,
+      "sha256": "ceb464184bbe83dd540bc95dc0748f4648193ecaa063f920f195588ad82b55b4"
+    },
+    {
+      "path": "tests/test_ocr_desktop.py",
+      "unchanged": true,
+      "sha256": "69ca301379ccf7db5317235f81d18d574557220b35b93027f8fb05806b7a80fd"
+    },
+    {
+      "path": "tests/test_ocr_optimization.py",
+      "unchanged": true,
+      "sha256": "966b5b9ad77e905dcc605275f5682bacb06f0d586a2d3a937af35d1cdc441521"
+    },
+    {
+      "path": "tests/test_optimization_desktop.py",
+      "unchanged": true,
+      "sha256": "957d4e892b34993a184fec52c10689e85611e7b5a18e7c73cb670ab257eb4a60"
+    },
+    {
+      "path": "tests/test_output_versions.py",
+      "unchanged": true,
+      "sha256": "c7a6ac2ee677291f918141bf1d217e8272286084e919fe1e1a0872aa8da81ea7"
+    },
+    {
+      "path": "tests/test_output_versions_desktop.py",
+      "unchanged": true,
+      "sha256": "a4750c9840d1dcecb089e6712645226e5d776984fccd2357d30f5bf0ec7b610f"
+    },
+    {
+      "path": "tests/test_outputs.py",
+      "unchanged": true,
+      "sha256": "ceb3091d2b82fd63fb5bcdfc71f59c51d8d1c49a9ad5c447e8aa9b0364ec4503"
+    },
+    {
+      "path": "tests/test_outputs_desktop.py",
+      "unchanged": true,
+      "sha256": "8f23e0745dd4b0a8db96ce1c67d00a61199714c3796852a4cb57533c3ff20571"
+    },
+    {
+      "path": "tests/test_pdf.py",
+      "unchanged": true,
+      "sha256": "88fbe669c3b0d8ff892ff6158f21df1501c8734f67f35d0f53d05e36e4ef2a89"
+    },
+    {
+      "path": "tests/test_pdf_candidate_refinement.py",
+      "unchanged": true,
+      "sha256": "ada7c44e1c42d3f775d66b62ac63747392ea76b06a6463cb3577e42f15813ee6"
+    },
+    {
+      "path": "tests/test_pdf_refinement_desktop.py",
+      "unchanged": true,
+      "sha256": "7adcc9343e0e072af4c655d969bd6c164d513286939ab9846b1b7e37dba07f1e"
+    },
+    {
+      "path": "tests/test_production_pages.py",
+      "unchanged": true,
+      "sha256": "ed799eb1e4a5425762e12d30873a0d075abb766d7bfdf684c6c59ac0890ec256"
+    },
+    {
+      "path": "tests/test_proofreading_optimization.py",
+      "unchanged": true,
+      "sha256": "a66e1a3f41a214daa31b56ad7ec010c958c4d38b672f3f110d563397c1139630"
+    },
+    {
+      "path": "tests/test_rhythm.py",
+      "unchanged": true,
+      "sha256": "380e1d2d33f1f1656dc29648527b4a90a4c5c3ba8aae45ed0c82cae71e17560e"
+    },
+    {
+      "path": "tests/test_rhythm_desktop.py",
+      "unchanged": true,
+      "sha256": "8e7d338a2fb0ecfe90c31dea91a2e28eec9575a75f978c096718b04a7cb10489"
+    },
+    {
+      "path": "tests/test_service_form.py",
+      "unchanged": true,
+      "sha256": "c048d7e8c7e43749b75da5f073977115ba9f60969ebc040da7ac8b2831edbdff"
+    },
+    {
+      "path": "tests/test_service_management.py",
+      "unchanged": true,
+      "sha256": "85a875fabc77b598bbaf9c5e9310f01afa8b07743f3f6a92a74a881f4b3ee9ce"
+    },
+    {
+      "path": "tests/test_startup_defaults.py",
+      "unchanged": true,
+      "sha256": "4cf28207089e07a557d2808fca6655f6f591496ba73cf4ee386946cd180c2560"
+    },
+    {
+      "path": "tests/test_status_help.py",
+      "unchanged": true,
+      "sha256": "56127e9f317fc5566ddc3084385b32ccc18ecbcec95ca2b6b893539d4f579f31"
+    },
+    {
+      "path": "tests/test_terminology_desktop.py",
+      "unchanged": true,
+      "sha256": "de1770195c79c379a2b28cd764346e295f50112565dbe89b33a4d8f30946bf3a"
+    },
+    {
+      "path": "tests/test_total_audio.py",
+      "unchanged": true,
+      "sha256": "718ba327b648f7d9cdc6cad155259d2521eb06c33b7f6d74b8dab5998e89259f"
+    },
+    {
+      "path": "tests/test_total_audio_desktop.py",
+      "unchanged": true,
+      "sha256": "b85b6fe0760b5b5b6041bf1e2a651a93f0b46dac2cbb514f32f3c5f660e578bc"
+    },
+    {
+      "path": "tests/test_total_video.py",
+      "unchanged": true,
+      "sha256": "5c6c7904798fb3d74ed306d59fd3692c52ebc6221c520e39edc5b7fb34310515"
+    },
+    {
+      "path": "tests/test_total_video_background.py",
+      "unchanged": true,
+      "sha256": "39916cc17ab940ad7eb426846fe69d1428dba9425620bcf33924da978e7fdea4"
+    },
+    {
+      "path": "tests/test_total_video_background_desktop.py",
+      "unchanged": true,
+      "sha256": "f2d8aa94e96b0b2ba5eb1fc0b129acb94150e44072636cba50acfb6ed6bb2c00"
+    },
+    {
+      "path": "tests/test_total_video_desktop.py",
+      "unchanged": true,
+      "sha256": "8dd6c1e2c9a2ecf845ac7bdd6773c5f9817b50001a5542b68109ad0eb11ae9da"
+    },
+    {
+      "path": "tests/test_tts_capabilities.py",
+      "unchanged": true,
+      "sha256": "6d38c53e6dac996ce50b0c075a7c8e7186a71e33ba65bdecf986e2fbff402498"
+    },
+    {
+      "path": "tests/test_tts_control.py",
+      "unchanged": true,
+      "sha256": "9ba17f8b7b3b9406be2ea001c4d5d57260847d54feb2e43b5f2d200c1fdec75f"
+    },
+    {
+      "path": "tests/test_tts_providers.py",
+      "unchanged": true,
+      "sha256": "028d665c1a4a586b83cc6ab19d69f88d12c8e23fe3f0c588e5fb9ce6799ef0da"
+    },
+    {
+      "path": "tests/test_tts_retry.py",
+      "unchanged": true,
+      "sha256": "42437f4fe7ad2b4591a8ec1c1cf29a0e571d30d369d2c20d822fe547fffaf0ba"
+    },
+    {
+      "path": "tests/test_tts_retry_desktop.py",
+      "unchanged": true,
+      "sha256": "1670d2dee25535aa9fe3710ebc00395773238fcfdd30e988da46f3a83e4969c4"
+    },
+    {
+      "path": "tests/test_ui_layout.py",
+      "unchanged": true,
+      "sha256": "1e75ac3b4a15ac9188ea0cd079a03e75d92a5a8dbba1851214a80775b81b5deb"
+    },
+    {
+      "path": "tests/test_ui_layout_gemini.py",
+      "unchanged": true,
+      "sha256": "5668807c625ba94d412c2f6f6a5e91b1d5b0c5b9429966dba8a16a59b7f65f72"
+    },
+    {
+      "path": "tests/test_ui_layout_pdf.py",
+      "unchanged": true,
+      "sha256": "c0cb83e22886b8f5b5f46df82b19a6e85e400911c7d546b4521a046164e2ecfb"
+    },
+    {
+      "path": "tests/test_unified_manuscript.py",
+      "unchanged": true,
+      "sha256": "c666fd6592ca831527d658b772eeb8454aaaa916bce43b2a49d8a8ebab37f3e0"
+    },
+    {
+      "path": "tests/test_unified_video_workspace.py",
+      "unchanged": true,
+      "sha256": "42379db4536027595efd8ecd9e60f5f97f12f286653d5bc5386ccbc346662711"
+    },
+    {
+      "path": "tests/test_video_diagnostics.py",
+      "unchanged": true,
+      "sha256": "6348482a218987a3dd9a33e040db1109324acf5c20c208297946addb8911144a"
+    },
+    {
+      "path": "tests/test_video_diagnostics_desktop.py",
+      "unchanged": true,
+      "sha256": "872c18c49ffe8495e0e0344185ac24fa4da6f1fad46344516016568fb927a579"
+    },
+    {
+      "path": "tests/test_video_layout_revision.py",
+      "unchanged": true,
+      "sha256": "6a74007926452a09be2c05604d03269200792dc0114893931bdefdbe88c175aa"
+    },
+    {
+      "path": "tests/test_video_merge.py",
+      "unchanged": true,
+      "sha256": "8e78d684f278401a02aad3ca099167c9981683285ba98a3df3e39bcc830282a1"
+    },
+    {
+      "path": "tests/test_video_merge_desktop.py",
+      "unchanged": true,
+      "sha256": "28ef3caa0e304c24a6041641e3f35f0b664cd3342e6c95ece46998230185764d"
+    },
+    {
+      "path": "tests/test_voice.py",
+      "unchanged": true,
+      "sha256": "cc75ffaed691ec253b399a99b09ac19581b4f472343cc28a6b9492bd05c290cf"
+    },
+    {
+      "path": "tests/test_voice_desktop.py",
+      "unchanged": true,
+      "sha256": "f781afb4a3729dda2054651582f57b2e459cc49a4218cc1fde2c4fcac4076562"
+    },
+    {
+      "path": "tests/test_voice_setting_restore.py",
+      "unchanged": true,
+      "sha256": "67ec58575cd7381750294e29c5161218d299023901482761b2b6de4471016c3e"
+    },
+    {
+      "path": "tests/test_voice_settings_ui.py",
+      "unchanged": true,
+      "sha256": "0d01aeeee280e0f39dff3a330e1c6d7ebd49a49779e7fa8b405103ecaa67e276"
+    },
+    {
+      "path": "tests/test_workflow.py",
+      "unchanged": true,
+      "sha256": "de9a33a76440b4291622f2bc64e0838418fc8b055d80fe922df5c20788dad74a"
+    },
+    {
+      "path": "tests/total_audio_real_check.py",
+      "unchanged": true,
+      "sha256": "b4cec7536bf813ad20043ff973571175c505d99fc40072b0e9396c0776551aed"
+    },
+    {
+      "path": "tests/total_audio_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "f07a6b640e527670b8ef4c855ad4da822f47f9f9d27a972caf45d196bc79c8a1"
+    },
+    {
+      "path": "tests/total_video_background_package_check.py",
+      "unchanged": true,
+      "sha256": "2a5a0b7928a152d1ef0e8a557df984abb35d04a3b9a4765d16eeff370b01ec6d"
+    },
+    {
+      "path": "tests/total_video_background_real_check.py",
+      "unchanged": true,
+      "sha256": "b7322e92bef1c5eafaab66011f1b4f9c90cf56e6c686d3b0f71521340ef7ffe6"
+    },
+    {
+      "path": "tests/total_video_background_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "d21ab39f2035d1a480ffc9020aafe930df87851c23c2d2567e55f2136a5c558a"
+    },
+    {
+      "path": "tests/total_video_real_check.py",
+      "unchanged": true,
+      "sha256": "a8a842d580c8da9fca2c940c4441fd9cdb83af00f6e68217e5dc954406a1cb51"
+    },
+    {
+      "path": "tests/total_video_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "5f5ad60b049919257c55a3d63f2833074af325fbb80ca09e22ed8f3167d29264"
+    },
+    {
+      "path": "tests/ui_layout_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "16d0ab13ceb291c1abbc051f6296eb313cf64b9680fd2ddd2561e9558d4659b8"
+    },
+    {
+      "path": "tests/unified_package_check.py",
+      "unchanged": true,
+      "sha256": "dff5a0307bdc772b68af4063983e6f30b76e6a6c99d1587644491790bf6c990e"
+    },
+    {
+      "path": "tests/unified_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "dc5bc5593e2edf5528f3f27256c3f205f8d63804ef5eb3ab8a793acb94ff9bde"
+    },
+    {
+      "path": "tests/visual_fixture.py",
+      "unchanged": true,
+      "sha256": "3061c2d93e03bf2c3bada2951ff3bfaac663e7958b8ecf185a588c35698aa349"
+    },
+    {
+      "path": "tests/voice_real_check.py",
+      "unchanged": true,
+      "sha256": "fc2f5f39dada2f6a12998b2248aea6476ed7f9338d364fdc3c13f03092e2c230"
+    },
+    {
+      "path": "tests/voice_visual_fixture.py",
+      "unchanged": true,
+      "sha256": "587f2dae2f75019024ce6c375ef013d4bcf1833a9357f8c0c3f524d23a940e51"
+    },
+    {
+      "path": "tools/kokoro_acceptance.py",
+      "unchanged": true,
+      "sha256": "dfdcf1d6848606b789fdea6ee524e4d61fd85d4ae100db9eb2c8dbe879d43f00"
+    },
+    {
+      "path": "tools/kokoro_idle_check.py",
+      "unchanged": true,
+      "sha256": "ada6a6619f0f048d4a105e11cc8cb5b98947b795a13176368be91db7b25102b6"
+    },
+    {
+      "path": "tools/kokoro_k01/cleanup.ps1",
+      "unchanged": true,
+      "sha256": "1f5ff4468be318560a4348c4fdcfe35381c28aca0f014850da06b787c84618e8"
+    },
+    {
+      "path": "tools/kokoro_k01/draw_integration_design.py",
+      "unchanged": true,
+      "sha256": "dc5b1228dc04efb1f5f2e8bd32cfb5f2ddaf1ceebfd9bf619d769ebdce6a8b3c"
+    },
+    {
+      "path": "tools/kokoro_k01/extra.py",
+      "unchanged": true,
+      "sha256": "ef09cb2f02c31b133bc54b07bcb34d215918f4f3b5c6213334bb76b3de82e457"
+    },
+    {
+      "path": "tools/kokoro_k01/finalize.py",
+      "unchanged": true,
+      "sha256": "74cd170b46ac4e0dc43dd159807dd230f4feebb8116425f3cadc2be89f3eff08"
+    },
+    {
+      "path": "tools/kokoro_k01/prepare.py",
+      "unchanged": true,
+      "sha256": "ccebb0f9134513be6fd1bde29b7cbccca16154195d20f197bca919e6c46f9f26"
+    },
+    {
+      "path": "tools/kokoro_k01/README.md",
+      "unchanged": true,
+      "sha256": "05b8e8df9eb69f2574719e835fb142f8d90f9aa62fcfe8cb6f97efc604ef5e4c"
+    },
+    {
+      "path": "tools/kokoro_k01/run.py",
+      "unchanged": true,
+      "sha256": "763e18b1d8f74b3e816332332964eda39416227727b2ccd9e9636b95b8242cdf"
+    },
+    {
+      "path": "tools/kokoro_k01/samples.json",
+      "unchanged": true,
+      "sha256": "a7ae00dc478321384bedf2141645ec1f86bf35ff850f4dc984ee2b21997f49fa"
+    },
+    {
+      "path": "tools/kokoro_k01/verify.ps1",
+      "unchanged": true,
+      "sha256": "267474f70f62d0f289ab96794e8c39f98815679891b6501f478d1cf8350d7cf4"
+    },
+    {
+      "path": "tools/kokoro_k01/worker.py",
+      "unchanged": true,
+      "sha256": "1c1e176c051183cb27eb895465c4770c641a9c7f1efc85da36d336d60c054bdc"
+    },
+    {
+      "path": "tools/kokoro_multiline_check.py",
+      "unchanged": true,
+      "sha256": "f13f2f062c7150393ccdccb4631bae2d64c6c04abf6069831a531a8d4bd47cc7"
+    },
+    {
+      "path": "tools/kokoro_real_check.py",
+      "unchanged": true,
+      "sha256": "e26013394c84673048af053cd48c75edf371f77feac88b64dc1f2bd14e29b7a9"
+    },
+    {
+      "path": "tools/v1_baseline.py",
+      "unchanged": true,
+      "sha256": "1639c4f9db13329741acb7f449d23a1e28ebf521a1e1959a4caaa5d5f91566d6"
+    },
+    {
+      "path": "tools/verify_kokoro_offline.ps1",
+      "unchanged": true,
+      "sha256": "7a65895b1b93ced28de623254ccf69553599e8839b773ce861252d2f0ce342bf"
+    },
+    {
+      "path": "tools/verify_kokoro_products.py",
+      "unchanged": true,
+      "sha256": "8acfc8269806edb37662ce40623158b66f80af03a2dcbe0da7598a934c563aa9"
+    },
+    {
+      "path": "ui_mock.pyw",
+      "unchanged": true,
+      "sha256": "9336a9ece571bf354bf16273e29dcdf87316fff300a38ae9e51ea1886e013d7c"
+    }
+  ]
+}

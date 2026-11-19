@@ -1,0 +1,26 @@
+import hashlib,json,os,shutil,subprocess,time
+from pathlib import Path
+root=Path(__file__).resolve().parents[2]
+work=root/'.scratch/k09'; evidence=root/'docs/verification/kokoro-k09'
+book=work/'gui-book'
+if book.exists():raise SystemExit('Owned GUI fixture already exists')
+shutil.copytree(work/'book',book)
+home=work/'gui-home';home.mkdir()
+(home/'session.json').write_text(json.dumps(dict(last_project=str(book))),encoding='utf-8')
+env=dict(os.environ,PATH=r'C:\Windows\System32;C:\Windows',
+    EBOOK2MP4_APP_HOME=str(home),EBOOK2MP4_KOKORO_HOME=str(work/'gui-packages'),
+    EBOOK2MP4_VOICE_HOME=str(work/'gui-voices'),EBOOK2MP4_OCR_HOME=str(work/'gui-ocr'),
+    LOCALAPPDATA=str(home/'local'),APPDATA=str(home/'roaming'))
+for key in ('PYTHONPATH','PYTHONHOME','EBOOK2MP4_FFMPEG','EBOOK2MP4_FFPROBE'):env.pop(key,None)
+exe=root/'dist/ebook2mp4/ebook2mp4.exe'
+record=dict(exe=str(exe),sha256=hashlib.file_digest(exe.open('rb'),'sha256').hexdigest(),
+    path=env['PATH'],system_python_required=False,uses_bundled_media_tools=True,
+    clean_windows=False,started=time.time())
+process=subprocess.Popen([str(exe)],cwd=exe.parent,env=env)
+record['pid']=process.pid
+(evidence/'exe-launch.json').write_text(json.dumps(record,indent=2),encoding='utf-8')
+print('K09 formal EXE pid',process.pid,flush=True)
+record['exit_code']=process.wait()
+record['finished']=time.time()
+(evidence/'exe-launch.json').write_text(json.dumps(record,indent=2),encoding='utf-8')
+print('K09 formal EXE exited',record['exit_code'],flush=True)

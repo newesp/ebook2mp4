@@ -1,0 +1,120 @@
+{
+  "name": "narrow-reopened",
+  "tk_scaling": 1.334646962233169,
+  "dpi": 96.09458128078816,
+  "windows_scale_percent": 125,
+  "source_image_ready": true,
+  "source_image_items": 1,
+  "geometry": "900x640+20+20",
+  "pid": 2384,
+  "font_linespace": 30,
+  "visible_lines": [
+    11
+  ],
+  "characters": 22690,
+  "selection": [],
+  "cursor": "799.54",
+  "yview": [
+    0.0,
+    0.007258760725171338
+  ],
+  "panes": [
+    ".!workbench.!frame2.!frame2.!panedwindow.!panedwindow"
+  ],
+  "source_ratio": null,
+  "tools_open": false,
+  "reading_ready": true,
+  "metrics": {
+    "client": {
+      "x": 28,
+      "y": 51,
+      "width": 900,
+      "height": 640,
+      "mapped": true
+    },
+    "body": {
+      "x": 44,
+      "y": 116,
+      "width": 868,
+      "height": 497,
+      "mapped": true
+    },
+    "list": {
+      "x": 44,
+      "y": 165,
+      "width": 208,
+      "height": 448,
+      "mapped": true
+    },
+    "source": {
+      "x": 264,
+      "y": 165,
+      "width": 749,
+      "height": 601,
+      "mapped": false
+    },
+    "source_pane": {
+      "x": 264,
+      "y": 116,
+      "width": 749,
+      "height": 650,
+      "mapped": false
+    },
+    "editor_pane": {
+      "x": 264,
+      "y": 116,
+      "width": 648,
+      "height": 497,
+      "mapped": true
+    },
+    "editor": {
+      "x": 264,
+      "y": 165,
+      "width": 633,
+      "height": 448,
+      "mapped": true
+    },
+    "center": {
+      "x": 264,
+      "y": 116,
+      "width": 648,
+      "height": 497,
+      "mapped": true
+    },
+    "tool": {
+      "x": 264,
+      "y": 116,
+      "width": 868,
+      "height": 497,
+      "mapped": false
+    },
+    "next": {
+      "x": 779,
+      "y": 625,
+      "width": 133,
+      "height": 37,
+      "mapped": true
+    },
+    "button": {
+      "x": 670,
+      "y": 122,
+      "width": 42,
+      "height": 37,
+      "mapped": false
+    },
+    "entry": {
+      "x": 712,
+      "y": 123,
+      "width": 52,
+      "height": 35,
+      "mapped": false
+    },
+    "combo": {
+      "x": 823,
+      "y": 123,
+      "width": 115,
+      "height": 35,
+      "mapped": false
+    }
+  }
+}

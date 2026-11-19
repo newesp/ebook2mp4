@@ -1,0 +1,9 @@
+{
+  "before_chars": 7888,
+  "after_chars": 7290,
+  "expected_chars": 7290,
+  "before_newlines": 598,
+  "after_newlines": 398,
+  "matches_preview": true,
+  "sha256": "e2e1bef7cba8700549d71549c1bbc45f4a77216892f8970e31e8494eca92da1c"
+}

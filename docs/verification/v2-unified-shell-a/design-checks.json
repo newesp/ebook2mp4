@@ -1,0 +1,882 @@
+[
+  {
+    "id": "manuscript--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "manuscript--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "cleanup--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "cleanup--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "versions--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "versions--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "ai--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "ai--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "pdf--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "pdf--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "pdf-region--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "pdf-region--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "txt--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "txt--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "issues--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "issues--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "project-info--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "project-info--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "voice--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "voice--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "narration--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "narration--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "narration-detail--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "narration-detail--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "assembly--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "assembly--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "joins--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "joins--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "join-detail--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "join-detail--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-batch--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-batch--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-book--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-book--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-merge--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-merge--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-joins--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-joins--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "outputs--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "outputs--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "output-detail--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "output-detail--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "services--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "services--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "packages--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "packages--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "defaults--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "defaults--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "create--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "create--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "imports--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "imports--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "messages--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "messages--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "movie-player--normal",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "movie-player--reduced",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "manuscript--max-reference",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1276,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "narration--1280",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1020,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "joins--1280",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1020,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "video-book--1280",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1020,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "ai--1280-expanded",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1020,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "manuscript--collapsed",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "voice--collapsed",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "joins--collapsed",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "manuscript--18pt",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "cleanup--18pt",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "versions--18pt",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1020,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "joins--18pt",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "voice--18pt",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "voice--local",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      1100,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "voice--reduced-preview",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "ai--expanded",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "ai--connection-error",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "packages--expanded",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "services--delete",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "issues--empty",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "cleanup--empty",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "narration--busy",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "assembly--failed",
+    "errors": [],
+    "header": [
+      16,
+      100,
+      868,
+      60
+    ],
+    "content_origin": 168
+  },
+  {
+    "id": "packages--cancelled",
+    "errors": [],
+    "header": [
+      244,
+      100,
+      640,
+      60
+    ],
+    "content_origin": 168
+  }
+]

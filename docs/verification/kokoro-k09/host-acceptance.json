@@ -1,0 +1,446 @@
+{
+  "environment": "existing Windows host with development tools",
+  "clean_windows": false,
+  "manual_listening": "pending; technical playback is not a quality approval",
+  "jobs": [
+    {
+      "name": "fresh-import",
+      "seconds": 165.78300230007153,
+      "state": {
+        "status": "completed",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 0,
+        "package": null,
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": null
+      }
+    },
+    {
+      "name": "corrupt",
+      "seconds": 0.06136180006433278,
+      "state": {
+        "status": "failed",
+        "error": "語音包損毀、不完整或版本不相容。請重新下載與本程式相符的完整語音包。"
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 0,
+        "package": null,
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": null
+      }
+    },
+    {
+      "name": "wrong-version",
+      "seconds": 0.02033970004413277,
+      "state": {
+        "status": "failed",
+        "error": "語音包損毀、不完整或版本不相容。請重新下載與本程式相符的完整語音包。"
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 0,
+        "package": null,
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": null
+      }
+    },
+    {
+      "name": "repair-installed-worker",
+      "seconds": 199.18067670008168,
+      "state": {
+        "status": "completed",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 0,
+        "package": null,
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": null
+      }
+    },
+    {
+      "name": "first-preview-offline",
+      "seconds": 373.6434384000022,
+      "state": {
+        "status": "completed",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 21224,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-78fb4b82d084294e",
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "name": "formal-batch-1",
+      "seconds": 0.7442554000299424,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "current": 1,
+        "total": 1,
+        "completed": 1,
+        "failed": 0,
+        "chunks": [
+          {
+            "id": "3059f95bb0eb3b633d757b10849aaf80b1246465f31eaed915ae8bc40b59b359",
+            "order": 0,
+            "text": "第一批，臺北的圖書館。Hello world。",
+            "separator_after": "",
+            "text_sha256": "d0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084",
+            "pause_after_ms": 0,
+            "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+            "rules_sha256": "ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417",
+            "status": "completed",
+            "attempts": 0,
+            "duration_ms": 4050,
+            "reused": true,
+            "frames": 97200,
+            "start_ms": 0,
+            "end_ms": 4050
+          }
+        ],
+        "duration_ms": 4050
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 21224,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-78fb4b82d084294e",
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "name": "formal-batch-2",
+      "seconds": 5.077052699984051,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "current": 1,
+        "total": 1,
+        "completed": 1,
+        "failed": 0,
+        "chunks": [
+          {
+            "id": "12e4522f99d7472ce7fe03f5a7badf8893a9b1c1b5a24f746b263060c6d162a2",
+            "order": 0,
+            "text": "第二批，今天的故事結束了。晚安。",
+            "separator_after": "",
+            "text_sha256": "bb8fc92743846bd8b9f29286c6d4dcb9b218dca2e6f07c35581955871ef67143",
+            "pause_after_ms": 0,
+            "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+            "rules_sha256": "ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417",
+            "status": "completed",
+            "attempts": 1,
+            "duration_ms": 3925,
+            "reused": false,
+            "frames": 94200,
+            "start_ms": 0,
+            "end_ms": 3925
+          }
+        ],
+        "retry_deadline": null,
+        "duration_ms": 3925
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 21224,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-78fb4b82d084294e",
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "name": "total-audio",
+      "seconds": 1.368024899973534,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "current": 2,
+        "total": 2,
+        "completed": 2,
+        "sources": [
+          {
+            "batch_id": "33d97a890c5b4ab09c1f1ffdcd5d36c8",
+            "status": "completed",
+            "attempts": 1,
+            "frames": 94200,
+            "start_ms": 0,
+            "duration_ms": 3925
+          },
+          {
+            "batch_id": "79dbad963d60443aad34558de3871702",
+            "status": "completed",
+            "attempts": 1,
+            "frames": 97200,
+            "start_ms": 4425,
+            "duration_ms": 4050
+          }
+        ],
+        "attempt": 1,
+        "duration_ms": 8475,
+        "frames": 203400,
+        "planned_frames": 203400,
+        "artifacts": {
+          "mp3": {
+            "path": "assembly/run-08d22a6d08bc4a53828393401c3aff6d/media/total.mp3",
+            "sha256": "b504b392d395a7d8373b6c797725d9bdc3d938b0a60c1c9dc1b3db08d57c76cf"
+          },
+          "srt": {
+            "path": "assembly/run-08d22a6d08bc4a53828393401c3aff6d/media/total.srt",
+            "sha256": "ed411aab4fa294a95afdbd724a80b937ce954d69121ffb4bdbdf2b7bfdfc8aa9"
+          }
+        },
+        "artifact_stats": {
+          "mp3": [
+            102861,
+            1795064891503805300,
+            1795064891428649000
+          ],
+          "srt": [
+            163,
+            1795064891516810300,
+            1795064891515806000
+          ]
+        }
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 21224,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-78fb4b82d084294e",
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "name": "total-video-1",
+      "seconds": 4.722868999931961,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "completed": 100,
+        "total": 100
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 21224,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-78fb4b82d084294e",
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "name": "total-video-2",
+      "seconds": 4.2876897000242025,
+      "state": {
+        "status": "completed",
+        "error": "",
+        "phase": "等待保存",
+        "completed": 100,
+        "total": 100
+      },
+      "worker": {
+        "busy": false,
+        "phase": "本機合成完成",
+        "pid": 21224,
+        "loads": 1,
+        "package": "kokoro-zh-cpu-78fb4b82d084294e",
+        "idle_seconds": 120,
+        "last_error": "",
+        "device": "cpu"
+      }
+    },
+    {
+      "name": "cancel-inference",
+      "seconds": 1.6706767999567091,
+      "state": {
+        "status": "cancelled",
+        "error": ""
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 1,
+        "package": null,
+        "idle_seconds": 120,
+        "last_error": "CancelledError",
+        "device": null
+      }
+    },
+    {
+      "name": "cancel-formal",
+      "seconds": 0.062351100030355155,
+      "state": {
+        "status": "cancelled",
+        "error": "",
+        "phase": "準備",
+        "current": 0,
+        "total": 1,
+        "completed": 0,
+        "failed": 0,
+        "chunks": [
+          {
+            "id": "3059f95bb0eb3b633d757b10849aaf80b1246465f31eaed915ae8bc40b59b359",
+            "order": 0,
+            "text": "第一批，臺北的圖書館。Hello world。",
+            "separator_after": "",
+            "text_sha256": "d0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084",
+            "pause_after_ms": 0,
+            "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+            "rules_sha256": "ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417",
+            "status": "pending",
+            "attempts": 0,
+            "duration_ms": null
+          }
+        ]
+      },
+      "worker": {
+        "busy": false,
+        "phase": "模型已卸載",
+        "pid": null,
+        "loads": 1,
+        "package": null,
+        "idle_seconds": 120,
+        "last_error": "CancelledError",
+        "device": null
+      }
+    }
+  ],
+  "network_probe": {
+    "program": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\k09\\packages\\kokoro-zh-cpu-78fb4b82d084294e\\runtime\\python.exe",
+    "stdout": "10013\n",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "runtime_python": "3.12.15 (main, Oct 21 2026, 17:48:33) [MSC v.1944 64 bit (AMD64)]",
+  "host_python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "invalid_import_preserves_installation": true,
+  "repair_matches_release": true,
+  "timeline": {
+    "batch_order": [
+      "33d97a890c5b4ab09c1f1ffdcd5d36c8",
+      "79dbad963d60443aad34558de3871702"
+    ],
+    "frames": 203400,
+    "duration_ms": 8475.0,
+    "subtitles": 2,
+    "exact_subtitle_offsets": true,
+    "pause_ms": 500,
+    "silence": [
+      {
+        "center_ms": 4175.0,
+        "window_ms": 10,
+        "peak": 0
+      }
+    ]
+  },
+  "video_reuse": {
+    "audio_sha256": [
+      "f10d9163fa8d74a2abe96490e24010187f5a9f3b090fbcd40b075b753d7fcb20",
+      "f10d9163fa8d74a2abe96490e24010187f5a9f3b090fbcd40b075b753d7fcb20"
+    ],
+    "no_new_model_loads": true,
+    "no_batch_mp4": true,
+    "total_audio_unchanged": true
+  },
+  "cancel_inference_seconds": 1.6763904000399634,
+  "cancel_keeps_outputs": true,
+  "products": [
+    {
+      "path": "products/batch-1.mp3",
+      "bytes": 49581,
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4"
+    },
+    {
+      "path": "products/batch-1.srt",
+      "bytes": 81,
+      "sha256": "6abbbabd78be1a2a7d9579267cba1997c93197e2dd7624bf0b5b414d3d92b140"
+    },
+    {
+      "path": "products/batch-2.mp3",
+      "bytes": 48141,
+      "sha256": "a976527404c7774411bfe958e816a1fb01df6979139145b147dd01692497e6e7"
+    },
+    {
+      "path": "products/batch-2.srt",
+      "bytes": 82,
+      "sha256": "7e6db23c5347184d420e2b450bed126b2226b73d923699f489688d3ef98a1f15"
+    },
+    {
+      "path": "products/preview.mp3",
+      "bytes": 49581,
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4"
+    },
+    {
+      "path": "products/total-image-1.mp4",
+      "bytes": 213773,
+      "sha256": "5349572fb60a074ddd35b77b1488b54e56d7c3fbafc7e67cc60c6cad00bb3d82"
+    },
+    {
+      "path": "products/total-image-2.mp4",
+      "bytes": 213775,
+      "sha256": "93403372072fed05128b5fc5921c3f05839fbf0dc1c296451b1348efe7b69076"
+    },
+    {
+      "path": "products/total.mp3",
+      "bytes": 102861,
+      "sha256": "b504b392d395a7d8373b6c797725d9bdc3d938b0a60c1c9dc1b3db08d57c76cf"
+    },
+    {
+      "path": "products/total.srt",
+      "bytes": 163,
+      "sha256": "ed411aab4fa294a95afdbd724a80b937ce954d69121ffb4bdbdf2b7bfdfc8aa9"
+    }
+  ],
+  "status": "passed host-only; clean Windows and final packaged interaction pending",
+  "worker_after_shutdown": {
+    "busy": false,
+    "phase": "模型已卸載",
+    "pid": null,
+    "loads": 1,
+    "package": null,
+    "idle_seconds": 120,
+    "last_error": "CancelledError",
+    "device": null
+  },
+  "temporary_worker_folders": []
+}

@@ -1,0 +1,3 @@
+open form 1 scroll (0.0, 1.0) preview 0 actions {'source.view'}
+preview form 0 scroll (0.0, 1.0) preview 1 actions {'source.view', 'source.discard', 'source.apply'}
+discarded form 1 scroll (0.0, 1.0) preview 0 actions {'source.view'}

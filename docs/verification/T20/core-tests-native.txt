@@ -1,0 +1,8 @@
+test_empty_and_legacy_project_migration (test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration) ... ok
+test_route_matrix_retains_both_movies_exports_and_reopens (test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens) ... ok
+test_source_text_voice_new_audio_and_launch_snapshot (test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 52.132s
+
+OK

@@ -1,0 +1,60 @@
+{
+  "v1_archive_files": 4052,
+  "v1_hashes_unchanged": true,
+  "preserved_other_product_sources": true,
+  "changed_product_sources": [
+    "ebook2mp4/desktop_shell.py",
+    "ebook2mp4/manuscript_cleanup.py",
+    "ebook2mp4/manuscript_desktop.py",
+    "ebook2mp4/ui_controls.py",
+    "ebook2mp4/workspace_layout.py"
+  ],
+  "native_geometry": [
+    {
+      "name": "native-max",
+      "client": [
+        1536,
+        793
+      ],
+      "header_gap": 0,
+      "content_gap": 0,
+      "diff_height": 456,
+      "display_lines": 22
+    },
+    {
+      "name": "native-1360",
+      "client": [
+        1360,
+        820
+      ],
+      "header_gap": 0,
+      "content_gap": 0,
+      "diff_height": 483,
+      "display_lines": 23
+    },
+    {
+      "name": "native-1280",
+      "client": [
+        1280,
+        720
+      ],
+      "header_gap": 0,
+      "content_gap": 0,
+      "diff_height": 383,
+      "display_lines": 18
+    },
+    {
+      "name": "native-900-end",
+      "client": [
+        900,
+        640
+      ],
+      "header_gap": 0,
+      "content_gap": 0,
+      "diff_height": 303,
+      "display_lines": 9
+    }
+  ],
+  "keyboard_end_reachable": true,
+  "wheel_only_moves_diff": true
+}

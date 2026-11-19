@@ -1,0 +1,32 @@
+FFF
+======================================================================
+FAIL: test_action_to_content_gap (test_voice_spacing.VoiceSpacing.test_action_to_content_gap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_spacing.py", line 57, in test_action_to_content_gap
+    self.assertEqual(m['content_vertical_gap'], 2*TOOLBAR_GAP, m)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 8 : {'first': {'x': 785, 'y': 265, 'width': 130, 'height': 37}, 'second': {'x': 919, 'y': 265, 'width': 114, 'height': 37}, 'save': {'x': 1274, 'y': 789, 'width': 114, 'height': 37}, 'next': {'x': 1388, 'y': 789, 'width': 120, 'height': 37}, 'textarea': {'x': 785, 'y': 302, 'width': 703, 'height': 287}, 'width_difference': 16, 'top_horizontal_gap': 4, 'footer_horizontal_gap': 0, 'content_vertical_gap': 0}
+
+======================================================================
+FAIL: test_adjacent_action_gaps (test_voice_spacing.VoiceSpacing.test_adjacent_action_gaps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_spacing.py", line 53, in test_adjacent_action_gaps
+    self.assertEqual(m['footer_horizontal_gap'], TOOLBAR_GAP, m)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 4 : {'first': {'x': 789, 'y': 265, 'width': 130, 'height': 37}, 'second': {'x': 923, 'y': 265, 'width': 114, 'height': 37}, 'save': {'x': 1278, 'y': 789, 'width': 114, 'height': 37}, 'next': {'x': 1392, 'y': 789, 'width': 120, 'height': 37}, 'textarea': {'x': 789, 'y': 302, 'width': 703, 'height': 287}, 'width_difference': 16, 'top_horizontal_gap': 4, 'footer_horizontal_gap': 0, 'content_vertical_gap': 0}
+
+======================================================================
+FAIL: test_same_group_button_dimensions (test_voice_spacing.VoiceSpacing.test_same_group_button_dimensions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_spacing.py", line 47, in test_same_group_button_dimensions
+    self.assertLessEqual(m['width_difference'], 2, m)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 16 not less than or equal to 2 : {'first': {'x': 655, 'y': 265, 'width': 130, 'height': 37}, 'second': {'x': 789, 'y': 265, 'width': 114, 'height': 37}, 'save': {'x': 1144, 'y': 789, 'width': 114, 'height': 37}, 'next': {'x': 1258, 'y': 789, 'width': 120, 'height': 37}, 'textarea': {'x': 655, 'y': 302, 'width': 703, 'height': 287}, 'width_difference': 16, 'top_horizontal_gap': 4, 'footer_horizontal_gap': 0, 'content_vertical_gap': 0}
+
+----------------------------------------------------------------------
+Ran 3 tests in 7.665s
+
+FAILED (failures=3)

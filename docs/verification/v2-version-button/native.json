@@ -1,0 +1,16 @@
+[
+  {
+    "size": "1360x820",
+    "label": "版本紀錄",
+    "type": "TButton",
+    "height": 37,
+    "save_height": 37
+  },
+  {
+    "size": "900x640",
+    "label": "版本紀錄",
+    "type": "TButton",
+    "height": 37,
+    "save_height": 37
+  }
+]

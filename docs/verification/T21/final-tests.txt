@@ -1,0 +1,20 @@
+test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video (test_outputs.OutputsJourney.test_audio_failure_does_not_block_batch_movies_and_retry_preserves_video) ... ok
+test_batch_mp4_only_uses_movies_without_original_mp3_or_total_audio (test_outputs.OutputsJourney.test_batch_mp4_only_uses_movies_without_original_mp3_or_total_audio) ... ok
+test_failed_publication_waits_for_explicit_retry_and_preserves_other_format (test_outputs.OutputsJourney.test_failed_publication_waits_for_explicit_retry_and_preserves_other_format) ... ok
+test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies (test_outputs.OutputsJourney.test_missing_batch_movie_does_not_block_audio_and_default_route_ignores_movies) ... ok
+test_missing_visual_publishes_audio_reopen_only_encodes_video (test_outputs.OutputsJourney.test_missing_visual_publishes_audio_reopen_only_encodes_video) ... ok
+test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual (test_outputs.OutputsJourney.test_mp4_only_prepares_audio_and_mp3_only_needs_no_visual) ... ok
+test_source_change_during_audio_stops_next_stage_without_mixing_sources (test_outputs.OutputsJourney.test_source_change_during_audio_stops_next_stage_without_mixing_sources) ... ok
+test_validation_and_missing_sources_are_observable (test_outputs.OutputsJourney.test_validation_and_missing_sources_are_observable) ... ok
+test_video_failure_reopens_as_partial_and_cancel_releases_lease (test_outputs.OutputsJourney.test_video_failure_reopens_as_partial_and_cancel_releases_lease) ... ok
+test_video_worker_failure_and_cancellation_preserve_successful_audio (test_outputs.OutputsJourney.test_video_worker_failure_and_cancellation_preserve_successful_audio) ... ok
+test_partial_retry_material_return_and_window_sizes (test_outputs_desktop.OutputsDesktop.test_partial_retry_material_return_and_window_sizes) ... ok
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 130.869s
+
+OK

@@ -1,0 +1,189 @@
+{
+  "coverage_complete": true,
+  "regions": [
+    {
+      "page": "native-900x640-前批-short",
+      "state": "short",
+      "owner": "前批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 17,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-前批-fit",
+      "state": "fit",
+      "owner": "前批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 187,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-前批-overflow",
+      "state": "overflow",
+      "owner": "前批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 204,
+      "scrollbar_visible": true,
+      "max_offset": 8,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.9607843137254902
+    },
+    {
+      "page": "native-900x640-前批-long",
+      "state": "long",
+      "owner": "前批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 3060,
+      "scrollbar_visible": true,
+      "max_offset": 2864,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.06405228758169934
+    },
+    {
+      "page": "native-900x640-後批-short",
+      "state": "short",
+      "owner": "後批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 17,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-後批-fit",
+      "state": "fit",
+      "owner": "後批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 187,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-後批-overflow",
+      "state": "overflow",
+      "owner": "後批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 204,
+      "scrollbar_visible": true,
+      "max_offset": 8,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.9607843137254902
+    },
+    {
+      "page": "native-900x640-後批-long",
+      "state": "long",
+      "owner": "後批",
+      "direction": "vertical",
+      "viewport_height": 196,
+      "content_height": 3060,
+      "scrollbar_visible": true,
+      "max_offset": 2864,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.06405228758169934
+    },
+    {
+      "page": "native-900x640-警告詳情-short",
+      "state": "short",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "viewport_height": 155,
+      "content_height": 17,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-警告詳情-fit",
+      "state": "fit",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "viewport_height": 155,
+      "content_height": 153,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-警告詳情-overflow",
+      "state": "overflow",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "viewport_height": 155,
+      "content_height": 170,
+      "scrollbar_visible": true,
+      "max_offset": 15,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.9117647058823529
+    },
+    {
+      "page": "native-900x640-警告詳情-long",
+      "state": "long",
+      "owner": "警告詳情",
+      "direction": "vertical",
+      "viewport_height": 155,
+      "content_height": 3060,
+      "scrollbar_visible": true,
+      "max_offset": 2905,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.05065359477124183
+    },
+    {
+      "page": "native-900x640-文件列表-short",
+      "state": "short",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "viewport_height": 340,
+      "content_height": 68,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-文件列表-fit",
+      "state": "fit",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "viewport_height": 340,
+      "content_height": 340,
+      "scrollbar_visible": false,
+      "max_offset": 0,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview"
+    },
+    {
+      "page": "native-900x640-文件列表-overflow",
+      "state": "overflow",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "viewport_height": 340,
+      "content_height": 408,
+      "scrollbar_visible": true,
+      "max_offset": 68,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.8333333333333334
+    },
+    {
+      "page": "native-900x640-文件列表-long",
+      "state": "long",
+      "owner": "文件列表",
+      "direction": "vertical",
+      "viewport_height": 340,
+      "content_height": 2720,
+      "scrollbar_visible": true,
+      "max_offset": 2380,
+      "measurement_source": "test_audio_join_workspace: native Text.count(ypixels), padding and font; Treeview whole-row viewport; actual Tk yview",
+      "thumb_fraction": 0.125
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+test_categories_have_actionable_guidance_and_bounded_evidence (test_video_diagnostics.VideoDiagnostics.test_categories_have_actionable_guidance_and_bounded_evidence) ... ok
+test_failed_ffmpeg_preserves_reason_and_specific_recovery (test_video_diagnostics.VideoDiagnostics.test_failed_ffmpeg_preserves_reason_and_specific_recovery) ... ok
+test_unknown_progress_timestamp_does_not_fail_successful_encoding (test_video_diagnostics.VideoDiagnostics.test_unknown_progress_timestamp_does_not_fail_successful_encoding) ... ok
+test_unknown_python_error_is_not_reported_as_network_failure (test_video_diagnostics.VideoDiagnostics.test_unknown_python_error_is_not_reported_as_network_failure) ... ok
+test_background_modes_cancel_and_wrong_target_publication (test_batch_video.BatchVideoJourney.test_background_modes_cancel_and_wrong_target_publication) ... ok
+test_batch_image_offline_isolation_and_stale_source (test_batch_video.BatchVideoJourney.test_batch_image_offline_isolation_and_stale_source) ... ok
+test_cancel_failure_export_and_retry_keep_previous_artifacts (test_batch_video.BatchVideoJourney.test_cancel_failure_export_and_retry_keep_previous_artifacts) ... ok
+test_changed_source_blocks_video_and_corrupt_picture_preserves_settings (test_batch_video.BatchVideoJourney.test_changed_source_blocks_video_and_corrupt_picture_preserves_settings) ... ok
+test_corrupted_audio_is_not_current_and_cannot_publish_video (test_batch_video.BatchVideoJourney.test_corrupted_audio_is_not_current_and_cannot_publish_video) ... ok
+test_picture_is_copied_and_resolution_survives_reopen (test_batch_video.BatchVideoJourney.test_picture_is_copied_and_resolution_survives_reopen) ... ok
+test_publication_conflict_and_disk_shortage_keep_old_video (test_batch_video.BatchVideoJourney.test_publication_conflict_and_disk_shortage_keep_old_video) ... ok
+test_reopen_then_encode_without_batch_video_or_new_tts (test_batch_video.BatchVideoJourney.test_reopen_then_encode_without_batch_video_or_new_tts) ... ok
+test_long_excluded_sound_does_not_delay_visual_loops (test_total_video_background.BackgroundJourney.test_long_excluded_sound_does_not_delay_visual_loops) ... ok
+test_loop_hold_trim_sound_and_subtitles_use_the_same_narration (test_total_video_background.BackgroundJourney.test_loop_hold_trim_sound_and_subtitles_use_the_same_narration) ... ok
+test_portrait_preview_black_padding_and_modes_survive_reopen (test_total_video_background.BackgroundJourney.test_portrait_preview_black_padding_and_modes_survive_reopen) ... ok
+test_validation_failures_cancellation_and_video_only_retry_protect_old_products (test_total_video_background.BackgroundJourney.test_validation_failures_cancellation_and_video_only_retry_protect_old_products) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 102.168s
+
+OK

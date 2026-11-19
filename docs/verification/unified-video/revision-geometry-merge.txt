@@ -1,0 +1,8 @@
+test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership) ... ok
+test_switch_from_total_video_keeps_latest_shared_draft (test_video_merge_desktop.MergeVideoDesktop.test_switch_from_total_video_keeps_latest_shared_draft) ... ok
+test_switch_shared_selection_merge_preview_and_restore (test_video_merge_desktop.MergeVideoDesktop.test_switch_shared_selection_merge_preview_and_restore) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 49.852s
+
+OK

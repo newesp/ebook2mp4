@@ -1,0 +1,17 @@
+test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) ... ok
+test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action) ... ok
+test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch (test_audio_production_ui.AudioProductionWorkspace.test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch) ... ok
+test_historical_snapshot_stale_guard_and_local_consent_context (test_audio_production_ui.AudioProductionWorkspace.test_historical_snapshot_stale_guard_and_local_consent_context) ... ok
+test_multiline_failure_stays_one_line_and_full_message_is_reachable (test_audio_production_ui.AudioProductionWorkspace.test_multiline_failure_stays_one_line_and_full_message_is_reachable) ... ok
+test_no_product_keeps_video_entry_and_product_menu_gates_media (test_audio_production_ui.AudioProductionWorkspace.test_no_product_keeps_video_entry_and_product_menu_gates_media) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_same_play_button_stops_finishes_and_recovers_from_failure (test_audio_production_ui.AudioProductionWorkspace.test_same_play_button_stops_finishes_and_recovers_from_failure) ... ok
+test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis (test_audio_production_ui.AudioProductionWorkspace.test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 89.561s
+
+OK

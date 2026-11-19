@@ -1,0 +1,50 @@
+{
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\v2-work",
+      "bytes": 17597305.0,
+      "files": 100,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "bytes": 104474248.0,
+      "files": 6422,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "bytes": 33944806.0,
+      "files": 16,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 202708992.0,
+      "files": 2,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362.0,
+      "files": 28,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.mypy_cache",
+      "bytes": 15892709.0,
+      "files": 18,
+      "removed": true
+    }
+  ],
+  "all_removed": true,
+  "old_test_directories_preserved": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "failed_pip_temp_paths_remaining": 0,
+  "archives_preserved": true,
+  "formal_dist_preserved": true,
+  "final_owned_processes_remaining": 0,
+  "resource_check": "resource-check.json"
+}

@@ -1,0 +1,15 @@
+test_first_load_long_real_sources_after_footer_layout (test_audio_join_corrections.JoinCorrections.test_first_load_long_real_sources_after_footer_layout) ... FAIL
+
+======================================================================
+FAIL: test_first_load_long_real_sources_after_footer_layout (test_audio_join_corrections.JoinCorrections.test_first_load_long_real_sources_after_footer_layout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_join_corrections.py", line 114, in test_first_load_long_real_sources_after_footer_layout
+    self.assertAlmostEqual(j.left_text.yview()[1],1.)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.9145394006659268 != 1.0 within 7 places (0.08546059933407324 difference)
+
+----------------------------------------------------------------------
+Ran 1 test in 16.691s
+
+FAILED (failures=1)

@@ -1,0 +1,9 @@
+{
+  "origin": "Existing Edge-TTS settings schema; synthetic cached media; no real cloud request",
+  "missing_kokoro": true,
+  "reopened_settings_preserved": true,
+  "provider": "edge-tts",
+  "voice": "zh-TW-TestNeural",
+  "mp3_sha256": "57fc14dcc376c5750166184c6174fb8dc9cdf2ea076c6b0d4940d0cb84ab2795",
+  "batch": "5cc53d11bc5747a8b6dc0a819c84ca88"
+}

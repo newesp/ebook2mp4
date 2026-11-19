@@ -1,0 +1,80 @@
+{
+  "kind": "static design; not native measurements",
+  "drawings": [
+    {
+      "name": "normal",
+      "client": [
+        1536,
+        793
+      ],
+      "list_collapsed": false,
+      "unchanged": false,
+      "content_font_pt": 12,
+      "header_controls_top": 72,
+      "header_controls_height": 37,
+      "left_and_right_content_top": 121,
+      "content_bottom": 728,
+      "diff_height": 441
+    },
+    {
+      "name": "reduced-18pt",
+      "client": [
+        900,
+        640
+      ],
+      "list_collapsed": false,
+      "unchanged": false,
+      "content_font_pt": 18,
+      "header_controls_top": 72,
+      "header_controls_height": 37,
+      "left_and_right_content_top": 121,
+      "content_bottom": 575,
+      "diff_height": 288
+    },
+    {
+      "name": "collapsed-18pt",
+      "client": [
+        900,
+        640
+      ],
+      "list_collapsed": true,
+      "unchanged": false,
+      "content_font_pt": 18,
+      "header_controls_top": 72,
+      "header_controls_height": 37,
+      "left_and_right_content_top": 121,
+      "content_bottom": 575,
+      "diff_height": 288
+    },
+    {
+      "name": "unchanged",
+      "client": [
+        1360,
+        820
+      ],
+      "list_collapsed": false,
+      "unchanged": true,
+      "content_font_pt": 12,
+      "header_controls_top": 72,
+      "header_controls_height": 37,
+      "left_and_right_content_top": 121,
+      "content_bottom": 755,
+      "diff_height": null
+    },
+    {
+      "name": "save-failure",
+      "client": [
+        900,
+        640
+      ],
+      "list_collapsed": false,
+      "unchanged": false,
+      "content_font_pt": 12,
+      "header_controls_top": 72,
+      "header_controls_height": 37,
+      "left_and_right_content_top": 121,
+      "content_bottom": 575,
+      "diff_height": 288
+    }
+  ]
+}

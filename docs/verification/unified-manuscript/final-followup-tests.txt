@@ -1,0 +1,9 @@
+test_dirty_and_stale_warnings_survive_success_messages (test_ui_layout_gemini.GeminiLayout.test_dirty_and_stale_warnings_survive_success_messages) ... ok
+test_failed_pdf_import_publication_retains_candidate_for_retry (test_desktop.DesktopJourney.test_failed_pdf_import_publication_retains_candidate_for_retry) ... ok
+test_create_is_remembered_and_no_record_starts_empty (test_last_project.LastProjectJourney.test_create_is_remembered_and_no_record_starts_empty) ... ok
+test_manual_edit_publish_same_editor_and_two_navigation_steps (test_unified_manuscript.ManuscriptTests.test_manual_edit_publish_same_editor_and_two_navigation_steps) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 14.435s
+
+OK

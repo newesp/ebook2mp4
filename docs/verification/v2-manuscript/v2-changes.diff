@@ -1,0 +1,954 @@
+--- v1/.gitignore
++++ v2/.gitignore
+@@ -1,6 +1,8 @@
+ __pycache__/
+ *.pyc
+ dist/
++archives/
++.scratch/v2-work/
+ .scratch/test-runs/
+ .scratch/t01-visual/
+ .scratch/build-tools/
+--- v1/ebook2mp4/manuscript_desktop.py
++++ v2/ebook2mp4/manuscript_desktop.py
+@@ -42,8 +42,8 @@
+         def __getattr__(self, name: str) -> Any: ...  # Shared Workbench commands.
+ 
+     def _build(self):
+-        from .desktop import text_pane, GREEN, MUTED
+-        from .ui_controls import MenuAction, MessageLine, CellTooltip, command_menu
++        from .desktop import text_pane
++        from .ui_controls import MenuAction, CellTooltip, command_menu
+         self.workspace_job = self.connection_job = self.source_job = None
+         self.workspace_review = None
+         self.allow_partial = False
+@@ -58,61 +58,18 @@
+         self.source_sash = None
+         self.loaded_identity = None
+         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='Manuscript source')
+-        self.workspace_header = top = ttk.Frame(self)
+-        top.grid(row=0, column=0, sticky='ew', pady=(0, 12))
+-        top.columnconfigure(2, weight=1)
+-        nav = ttk.Frame(top)
+-        nav.grid(row=0, column=0, sticky='w')
+-        self.steps = []
+-        for i, (label, step) in enumerate((('1 文稿', 1), ('2 試聽與製作', 4))):
+-            button = ttk.Button(nav, text=label, command=partial(self.show_step, step), style='Compact.TButton')
+-            button.grid(row=0, column=i, padx=(0, 8))
+-            self.steps.append(button)
+-        self.book = ttk.Label(top, width=1, anchor='e')
+-        self.book.grid(row=0, column=2, sticky='ew', padx=12)
+-        project, self.project_menu = command_menu(top, '專案')
+-        project.grid(row=0, column=3)
+-        self.message_button = ttk.Button(top, text='訊息記錄', command=self.show_messages, style='Workspace.TButton')
+-        self.message_button.grid(row=0, column=4, padx=(8, 0))
+-        MenuAction(self.project_menu, '建立書籍專案', self.create)
+-        MenuAction(self.project_menu, '開啟專案', self.open)
+-        self.folder_button = MenuAction(self.project_menu, '開啟專案資料夾', self.open_folder)
+-        MenuAction(self.project_menu, '專案位置與來源資訊', self.show_source_info)
+-        self.body = body = ttk.Frame(self)
+-        body.grid(row=2, column=0, sticky='nsew')
+-        body.rowconfigure(0, weight=1)
+-        body.columnconfigure(1, weight=1)
+-        self.left_panel = left = ttk.Frame(body, padding=(0, 0, 12, 0))
+-        left.columnconfigure(0, weight=1)
+-        left.rowconfigure(1, weight=1)
+-        self.list_header = ttk.Frame(left)
+-        self.list_header.grid(row=0, column=0, sticky='ew')
+-        self.focus_button = ttk.Button(self.list_header, text='‹', width=2, command=self.toggle_focus, style='Workspace.TButton')
+-        self.focus_button.pack(side='left')
+-        self.import_control, self.import_menu = command_menu(self.list_header, '匯入')
+-        self.import_control.configure(width=4)
+-        self.import_control.pack(side='left', padx=4)
+-        self.import_button = MenuAction(self.import_menu, '匯入 TXT', self.import_txt)
+-        self.pdf_button = MenuAction(self.import_menu, '匯入 PDF', self.import_pdf)
+-        management, self.management_menu = command_menu(self.list_header, '管理')
+-        management.configure(width=4)
+-        management.pack(side='left')
+-        self.rename_button = MenuAction(self.management_menu, '重新命名', self.rename_batch)
+-        self.up_button = MenuAction(self.management_menu, '上移', partial(self.move_batch, -1))
+-        self.down_button = MenuAction(self.management_menu, '下移', partial(self.move_batch, 1))
+-        self.management_menu.add_separator()
+-        self.remove_pdf_button = MenuAction(self.management_menu, '移除 PDF 批次…', self.remove_pdf)
+-        self.batch_summary = ttk.Label(left)  # Shared summary is rendered in the footer.
+-        self.batch_list = ttk.Treeview(left, columns=('status',), displaycolumns=(), show='tree', selectmode='browse', height=6, style='Manuscript.Treeview')
+-        self.batch_list.column('#0', width=204, minwidth=60)
+-        self.batch_list.column('status', width=60, stretch=False)
+-        self.batch_list.grid(row=1, column=0, sticky='nsew')
+-        self.batch_list.bind('<<TreeviewSelect>>', self.select_batch)
+-        self.batch_tooltip = CellTooltip(self.batch_list, self.batch_status_help)
+-        self.center = center = ttk.Frame(body)
+-        center.grid(row=0, column=1, sticky='nsew')
+-        center.columnconfigure(0, weight=1)
+-        center.rowconfigure(2, weight=1)
++        from .desktop_shell import DesktopShell
++        self.shell = DesktopShell(self, dict(
++            manuscript=partial(self.show_step, 1), production=partial(self.show_step, 4),
++            messages=self.show_messages, create=self.create, open=self.open,
++            folder=self.open_folder, source_info=self.show_source_info,
++            toggle_files=self.toggle_focus, import_txt=self.import_txt, import_pdf=self.import_pdf,
++            rename=self.rename_batch, move_up=partial(self.move_batch, -1),
++            move_down=partial(self.move_batch, 1), remove_pdf=self.remove_pdf,
++            select_batch=self.select_batch, batch_help=self.batch_status_help,
++            next=self.publish_or_continue))
++        self.shell.install_legacy_handles(self)
++        center = self.center
+         self.metadata = ttk.Frame(center)  # Compatibility only; no extra toolbar band.
+         self.source_meta = ttk.Label(center, width=1)
+         self.panes = panes = ttk.Panedwindow(center, orient='horizontal')
+@@ -218,6 +175,13 @@
+         MenuAction(self.version_menu, '開啟歷史 AI 候選', self.gemini_history)
+         self.save_button = ttk.Button(self.editor_actions, text='暫存草稿', command=self.save, style='Workspace.TButton')
+         self.save_button.pack(side='left')
++        from .workspace_layout import ManuscriptLayout
++        self.manuscript_layout = ManuscriptLayout(
++            self.source_title, self.pdf_controls, self.editor_title, self.editor_actions,
++            (self.source_toggle, self.edit_control, self.proof_control, self.version_control, self.save_button),
++            ((self.pdf_previous,), (self.page_entry, self.page_total), (self.pdf_next,), (self.zoom_control,)),
++            self.source_control)
++        self.manuscript_layout.show_pdf_controls(True)
+         self.right_stack.add(self.editor_frame, weight=1)
+         panes.add(self.right_stack, weight=1)
+         self.editor.configure(exportselection=False)
+@@ -297,14 +261,6 @@
+         self.import_pdf_cta.pack(side='left', padx=6)
+         self.import_txt_cta = ttk.Button(imports, text='匯入 TXT', command=self.import_txt)
+         self.import_txt_cta.pack(side='left')
+-        self.actions = ttk.Frame(self, padding=(0, 6))
+-        self.actions.grid(row=5, column=0, sticky='ew')
+-        self.actions.columnconfigure(0, weight=1)
+-        self.reading_status = ttk.Label(self.actions, text='', width=1)
+-        self.footer_actions = ttk.Frame(self.actions)
+-        self.footer_actions.grid(row=0, column=1, rowspan=2, sticky='e', padx=(12, 0))
+-        self.next_button = ttk.Button(self.footer_actions, text='儲存為朗讀稿', command=self.publish_or_continue, style='Primary.TButton')
+-        self.next_button.grid(row=0, column=1)
+         self.job_bar = ttk.Frame(self)
+         self.job_bar.grid(row=3, column=0, sticky='ew')
+         self.job_bar.columnconfigure(0, weight=1)
+@@ -319,10 +275,6 @@
+         self.cancel_job_button = ttk.Button(self.partial_actions, text='取消', command=self.cancel_workspace_job)
+         self.cancel_job_button.grid(row=0, column=2)
+         self.job_bar.grid_remove()
+-        self.stats = ttk.Label(self.actions, width=1)
+-        self.stats.grid(row=0, column=0, sticky='ew')
+-        self.status = MessageLine(self.actions, text='', foreground=MUTED)
+-        self.status.grid(row=1, column=0, sticky='ew')
+         self.notice = self.status
+         self.list_hints = []
+         for control in (self.focus_button, self.source_reopen, self.editor_reopen, self.tool_reopen):
+@@ -424,8 +376,7 @@
+         if not hasattr(self, 'production'):
+             return
+         production = self.step == 4
+-        self.steps[0].configure(style='Workspace.TButton' if production else 'WorkspaceActive.TButton')
+-        self.steps[1].configure(style='WorkspaceActive.TButton' if production else 'Workspace.TButton')
++        self.shell.navigation.select(self.step)
+         if production:
+             self.center.grid_remove()
+             self.production.grid(row=0, column=1, sticky='nsew')
+@@ -448,12 +399,7 @@
+             else:
+                 self.panes.grid_remove()
+                 self.import_panel.grid(row=2, column=0, sticky='nsew')
+-        if not self.focus_mode:
+-            self.left_panel.grid(row=0, column=0, sticky='nsew')
+-            self.body.columnconfigure(0, minsize=self.left_panel.winfo_reqwidth())
+-        else:
+-            self.left_panel.grid_remove()
+-            self.body.columnconfigure(0, minsize=0, weight=0, pad=0)
++        self.shell.show_documents(not self.focus_mode)
+         for control in (self.source_reopen, self.editor_reopen, self.tool_reopen):
+             control.pack_forget()
+             if self.focus_mode:
+@@ -609,16 +555,19 @@
+         if batch and batch['kind'] == 'pdf':
+             pdf = batch['pdf']
+             source_summary = f'PDF {pdf["start"]}–{pdf["end"]} · '
+-        self.stats.configure(text=(f'{batch["name"]} · ' if batch else '') + source_summary + f'文稿 v{batch["revision"] if batch else 0} · {len(self.current_text):,} 字元'
++        summary = ((f'{batch["name"]} · ' if batch else '') + source_summary + f'文稿 v{batch["revision"] if batch else 0} · {len(self.current_text):,} 字元'
+             + (f' · 來源異常 {len(blockers)} 項' if blockers else '')
+             + (' · 已儲存，可朗讀' if ready else '')
+             + (' · 文稿已更新，語音尚未更新' if batch and batch.get('narration') and not ready else ''))
+         self.reading_status.configure(text='已儲存，可朗讀' if ready else
+             f'來源異常 {len(blockers)} 項，請先處理' if blockers else
+             '尚有未校對範圍' if partial else '尚未儲存為朗讀稿')
+-        self.next_button.configure(text='前往試聽與製作 →' if ready else '儲存為朗讀稿',
+-            state='normal' if batch and self.current_text.strip() and not busy and not blockers
+-                  and (not partial or self.allow_partial) else 'disabled')
++        from .desktop_shell import ActionSpec, PagePresentation
++        self.shell.footer.present(PagePresentation(self.step, '文稿', summary, (
++            ActionSpec('manuscript.next', '前往試聽與製作 →' if ready else '儲存為朗讀稿',
++                       'primary', self.publish_or_continue,
++                       bool(batch and self.current_text.strip() and not blockers
++                            and (not partial or self.allow_partial))),), busy=busy))
+         self.sync_next_action_visibility()
+         self.save_button.configure(state='normal' if batch and not busy else 'disabled')
+         for control in (self.edit_control, self.proof_control, self.version_control):
+@@ -646,7 +595,7 @@
+                 if self.batch_list.exists(item['id']):
+                     self.batch_list.item(item['id'], text=self.batch_label(item), values=(self.batch_status(item),))
+             self.batch_summary.configure(text=f'{len(self.flow.state["batches"])} 個文件')
+-        self.root.title((self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4')
++        self.root.title((self.flow.state['name'] if self.flow else '書籍製作工作台') + ' — ebook2mp4 v2')
+         self.retry_button.grid() if partial and not busy else self.retry_button.grid_remove()
+         self.keep_partial_button.grid() if partial and not busy else self.keep_partial_button.grid_remove()
+         self.keep_partial_button.configure(state='disabled' if self.allow_partial else 'normal')
+@@ -771,23 +720,7 @@
+         two = len(self.panes.panes()) == 2
+         editor_width = self.right_stack.winfo_width() if two else width
+         source_width = self.source_frame.winfo_width() if two else width
+-        controls = (self.source_toggle, self.edit_control, self.proof_control, self.version_control, self.save_button)
+-        natural_width = sum(w.winfo_reqwidth()+4 for w in controls)
+-        editor_wrap = self.editor_title.winfo_reqwidth() + natural_width + 16 > editor_width
+-        source_wrap = self.source_title.winfo_reqwidth() + self.pdf_controls.winfo_reqwidth() + 16 > source_width
+-        self.editor_actions.grid_configure(row=1 if editor_wrap else 0, column=0 if editor_wrap else 1, sticky='e')
+-        available = editor_width if editor_wrap else max(1, editor_width-self.editor_title.winfo_reqwidth()-16)
+-        row = column = used = 0
+-        for control in controls:
+-            control.pack_forget()
+-        for control in controls:
+-            width = control.winfo_reqwidth()+4
+-            if used and used+width > available:
+-                row, column, used = row+1, 0, 0
+-            control.grid(row=row, column=column, padx=2, pady=2)
+-            used += width
+-            column += 1
+-        self.pdf_controls.grid_configure(row=1 if source_wrap else 0, column=0 if source_wrap else 1, sticky='e')
++        self.manuscript_layout.reflow(source_width, editor_width)
+         audio = (self.step == 4 and self.production.current is not None
+                  and self.production.current is getattr(self, 'narration_dialog', None))
+         video = self.step == 4 and self.production.is_video()
+--- v1/ebook2mp4/manuscript_source.py
++++ v2/ebook2mp4/manuscript_source.py
+@@ -310,12 +310,7 @@
+         self.layout_preview()
+         batch = app.flow._batch(app.batch_id) if app.batch_id else None
+         is_pdf = bool(app.import_preview) or (batch and batch['kind'] == 'pdf')
+-        controls = (app.pdf_previous, app.page_entry, app.page_total, app.pdf_next, app.zoom_control)
+-        for control in controls:
+-            control.pack_forget()
+-        if is_pdf:
+-            for control in controls:
+-                control.pack(side='left', before=app.source_control)
++        app.manuscript_layout.show_pdf_controls(is_pdf)
+         if not is_pdf:
+             app.image_frame.grid_remove()
+             app.source_text_frame.grid()
+--- v1/tests/test_manuscript_cleanup.py
++++ v2/tests/test_manuscript_cleanup.py
+@@ -116,7 +116,7 @@
+             root.geometry(geometry)
+             root.update()
+             top = app.book.master
+-            project = top.grid_slaves(row=0, column=2)[0]
++            project = app.project_menu.master
+             buttons = (project, app.message_button)
+             self.assertEqual(app.message_button.master, top)
+             self.assertLessEqual(abs(buttons[0].winfo_rooty()-buttons[1].winfo_rooty()), 2)
+--- /dev/null
++++ v2/ebook2mp4/desktop_shell.py
+@@ -0,0 +1,190 @@
++"""Stable native chrome. Content pages supply commands and presentation data."""
++from collections.abc import Callable, Mapping
++from dataclasses import dataclass
++from functools import partial
++from typing import Literal
++from tkinter import ttk
++
++from .ui_controls import CellTooltip, MenuAction, MessageLine, command_menu
++
++
++@dataclass(frozen=True)
++class ActionSpec:
++    id: str
++    label: str
++    role: Literal['back', 'secondary', 'destructive', 'primary']
++    command: Callable[[], object]
++    enabled: bool = True
++    available_while_busy: bool = False
++
++
++@dataclass(frozen=True)
++class PagePresentation:
++    step: int
++    title: str
++    summary: str
++    actions: tuple[ActionSpec, ...]
++    busy: bool = False
++
++
++class NavigationBar(ttk.Frame):
++    def __init__(self, parent, commands):
++        super().__init__(parent)
++        self.grid(row=0, column=0, sticky='ew', pady=(0, 12))
++        self.columnconfigure(2, weight=1)
++        nav = ttk.Frame(self)
++        nav.grid(row=0, column=0, sticky='w')
++        self.steps = []
++        for i, (label, command) in enumerate((('1 文稿', 'manuscript'), ('2 試聽與製作', 'production'))):
++            button = ttk.Button(nav, text=label, command=commands[command], style='Workspace.TButton')
++            button.grid(row=0, column=i, padx=(0, 8))
++            self.steps.append(button)
++        self.book = ttk.Label(self, width=1, anchor='e')
++        self.book.grid(row=0, column=2, sticky='ew', padx=12)
++        self.project_control, self.project_menu = command_menu(self, '專案')
++        self.project_control.grid(row=0, column=3)
++        self.message_button = ttk.Button(self, text='訊息記錄', command=commands['messages'], style='Workspace.TButton')
++        self.message_button.grid(row=0, column=4, padx=(8, 0))
++        MenuAction(self.project_menu, '建立書籍專案', commands['create'])
++        MenuAction(self.project_menu, '開啟專案', commands['open'])
++        self.folder_button = MenuAction(self.project_menu, '開啟專案資料夾', commands['folder'])
++        MenuAction(self.project_menu, '專案位置與來源資訊', commands['source_info'])
++
++    def select(self, step):
++        for button, active in zip(self.steps, (step != 4, step == 4)):
++            button.configure(style='WorkspaceActive.TButton' if active else 'Workspace.TButton')
++
++
++class DocumentList(ttk.Frame):
++    def __init__(self, parent, commands):
++        super().__init__(parent, padding=(0, 0, 12, 0))
++        self.columnconfigure(0, weight=1)
++        self.rowconfigure(1, weight=1)
++        self.list_header = ttk.Frame(self)
++        self.list_header.grid(row=0, column=0, sticky='ew')
++        self.focus_button = ttk.Button(self.list_header, text='‹', width=2, command=commands['toggle_files'], style='Workspace.TButton')
++        self.focus_button.pack(side='left')
++        self.import_control, self.import_menu = command_menu(self.list_header, '匯入')
++        self.import_control.configure(width=4)
++        self.import_control.pack(side='left', padx=4)
++        self.import_button = MenuAction(self.import_menu, '匯入 TXT', commands['import_txt'])
++        self.pdf_button = MenuAction(self.import_menu, '匯入 PDF', commands['import_pdf'])
++        self.management, self.management_menu = command_menu(self.list_header, '管理')
++        self.management.configure(width=4)
++        self.management.pack(side='left')
++        self.rename_button = MenuAction(self.management_menu, '重新命名', commands['rename'])
++        self.up_button = MenuAction(self.management_menu, '上移', commands['move_up'])
++        self.down_button = MenuAction(self.management_menu, '下移', commands['move_down'])
++        self.management_menu.add_separator()
++        self.remove_pdf_button = MenuAction(self.management_menu, '移除 PDF 批次…', commands['remove_pdf'])
++        self.batch_summary = ttk.Label(self)
++        self.batch_list = ttk.Treeview(self, columns=('status',), displaycolumns=(), show='tree', selectmode='browse', height=6, style='Manuscript.Treeview')
++        self.batch_list.column('#0', width=204, minwidth=60)
++        self.batch_list.column('status', width=60, stretch=False)
++        self.batch_list.grid(row=1, column=0, sticky='nsew')
++        self.batch_list.bind('<<TreeviewSelect>>', commands['select_batch'])
++        self.batch_tooltip = CellTooltip(self.batch_list, commands['batch_help'])
++
++
++class WorkspaceFrame(ttk.Frame):
++    """The content port; the shell owns its position, the page owns its children."""
++    def __init__(self, parent):
++        super().__init__(parent)
++        self.grid(row=0, column=1, sticky='nsew')
++        self.columnconfigure(0, weight=1)
++        self.rowconfigure(2, weight=1)
++
++
++class ActionBar(ttk.Frame):
++    def __init__(self, parent):
++        super().__init__(parent, padding=(0, 6))
++        self.grid(row=5, column=0, sticky='ew')
++        self.columnconfigure(0, weight=1)
++        self.reading_status = ttk.Label(self, text='', width=1)
++        self.footer_actions = ttk.Frame(self)
++        self.footer_actions.grid(row=0, column=1, rowspan=2, sticky='e', padx=(12, 0))
++        self.stats = ttk.Label(self, width=1)
++        self.stats.grid(row=0, column=0, sticky='ew')
++        self.status = MessageLine(self, text='', foreground='#58695f')
++        self.status.grid(row=1, column=0, sticky='ew')
++        self.buttons: dict[str, ttk.Button] = {}
++        self.callbacks: dict[str, Callable[[], object]] = {}
++        self.back_actions = ttk.Frame(self)
++
++    def invoke_action(self, identity: str) -> object:
++        command = self.callbacks.get(identity)
++        if command is not None:
++            return command()
++        return None
++
++    def present(self, presentation: PagePresentation):
++        ids = [action.id for action in presentation.actions]
++        if len(ids) != len(set(ids)):
++            raise ValueError('Action identifiers must be unique within a page.')
++        self.callbacks = {a.id: a.command for a in presentation.actions
++                          if a.enabled and (not presentation.busy or a.available_while_busy)}
++        self.stats.configure(text=presentation.summary)
++        for button in self.buttons.values():
++            button.grid_remove()
++            # One Tcl dispatcher per widget; repeated status refreshes must not
++            # register more Tcl commands or retain callbacks from hidden pages.
++            button.configure(state='disabled')
++        left = [a for a in presentation.actions if a.role == 'back']
++        right = [a for a in presentation.actions if a.role != 'back']
++        if left:
++            self.back_actions.grid(row=2, column=0, sticky='w', pady=(8, 0))
++            self.footer_actions.grid_configure(row=2, rowspan=1)
++        else:
++            self.back_actions.grid_remove()
++            self.footer_actions.grid_configure(row=0, rowspan=2)
++        for column, action in enumerate(left+right):
++            action_button = self.buttons.get(action.id)
++            parent = self.back_actions if action.role == 'back' else self.footer_actions
++            if action_button is not None and action_button.master is not parent:
++                action_button.destroy()
++                action_button = None
++            if action_button is None:
++                action_button = self.buttons[action.id] = ttk.Button(parent,
++                    command=partial(self.invoke_action, action.id))
++            style = {'primary': 'Primary.TButton', 'destructive': 'Destructive.TButton'}.get(action.role, 'Workspace.TButton')
++            action_button.configure(text=action.label, style=style,
++                state='normal' if action.enabled and (not presentation.busy or action.available_while_busy) else 'disabled')
++            action_button.grid(row=0, column=column+1, padx=(4 if column else 0, 0))
++
++
++class DesktopShell:
++    def __init__(self, host, commands: Mapping[str, Callable]):
++        self.navigation = NavigationBar(host, commands)
++        self.body = ttk.Frame(host)
++        self.body.grid(row=2, column=0, sticky='nsew')
++        self.body.rowconfigure(0, weight=1)
++        self.body.columnconfigure(1, weight=1)
++        self.documents = DocumentList(self.body, commands)
++        self.workspace = WorkspaceFrame(self.body)
++        self.footer = ActionBar(host)
++        self.footer.present(PagePresentation(1, '文稿', '', (
++            ActionSpec('manuscript.next', '儲存為朗讀稿', 'primary', commands['next']),)))
++
++    def show_documents(self, visible):
++        if visible:
++            self.documents.grid(row=0, column=0, sticky='nsew')
++            self.body.columnconfigure(0, minsize=self.documents.winfo_reqwidth())
++        else:
++            self.documents.grid_remove()
++            self.body.columnconfigure(0, minsize=0, weight=0, pad=0)
++
++    def install_legacy_handles(self, app):
++        """Temporary bridge for existing controllers, not a new page API.
++
++        Production pages will migrate separately. Keep old entry points working
++        without duplicating widgets or moving them to new parents.
++        """
++        for owner, names in ((self.navigation, ('steps', 'book', 'project_menu', 'message_button', 'folder_button')),
++            (self.documents, ('list_header', 'focus_button', 'import_control', 'import_menu', 'import_button', 'pdf_button',
++             'management_menu', 'rename_button', 'up_button', 'down_button', 'remove_pdf_button', 'batch_summary', 'batch_list', 'batch_tooltip')),
++            (self.footer, ('reading_status', 'footer_actions', 'stats', 'status'))):
++            for name in names:
++                setattr(app, name, getattr(owner, name))
++        app.workspace_header = self.navigation
++        app.body, app.left_panel, app.center, app.actions = self.body, self.documents, self.workspace, self.footer
++        app.next_button = self.footer.buttons['manuscript.next']
+--- /dev/null
++++ v2/ebook2mp4/workspace_layout.py
+@@ -0,0 +1,53 @@
++"""Shared toolbar spacing and native content header layout; no domain state."""
++
++TOOLBAR_GAP = 4
++
++
++class ToolbarLayout:
++    @staticmethod
++    def pack_groups(groups):
++        """Keep a page number and its total together, with gaps between actions."""
++        for group in groups:
++            for i, control in enumerate(group):
++                control.pack(side='left', padx=(TOOLBAR_GAP//2 if i == 0 else 0,
++                                              TOOLBAR_GAP//2 if i == len(group)-1 else 0))
++
++    @staticmethod
++    def wrap(controls, available):
++        for control in controls:
++            control.pack_forget()
++        row = column = used = 0
++        for control in controls:
++            width = control.winfo_reqwidth()+TOOLBAR_GAP
++            if used and used+width > available:
++                row, column, used = row+1, 0, 0
++            control.grid(row=row, column=column, padx=TOOLBAR_GAP//2, pady=2)
++            used += width
++            column += 1
++
++
++class ManuscriptLayout:
++    def __init__(self, source_title, source_tools, editor_title, editor_tools, editor_actions, pdf_groups, source_menu):
++        self.source_title, self.source_tools = source_title, source_tools
++        self.editor_title, self.editor_tools = editor_title, editor_tools
++        self.editor_actions, self.pdf_groups = editor_actions, pdf_groups
++        self.source_menu = source_menu
++
++    def show_pdf_controls(self, visible):
++        for group in self.pdf_groups:
++            for control in group:
++                control.pack_forget()
++        groups = self.pdf_groups if visible else ()
++        # The source menu also applies to TXT; keep its fixed parent/order.
++        menu = self.source_menu
++        menu.pack_forget()
++        ToolbarLayout.pack_groups((*groups, (menu,)))
++
++    def reflow(self, source_width, editor_width):
++        natural = sum(w.winfo_reqwidth()+TOOLBAR_GAP for w in self.editor_actions)
++        editor_wrap = self.editor_title.winfo_reqwidth()+natural+16 > editor_width
++        source_wrap = self.source_title.winfo_reqwidth()+self.source_tools.winfo_reqwidth()+16 > source_width
++        self.editor_tools.grid_configure(row=1 if editor_wrap else 0, column=0 if editor_wrap else 1, sticky='e')
++        available = editor_width if editor_wrap else max(1, editor_width-self.editor_title.winfo_reqwidth()-16)
++        ToolbarLayout.wrap(self.editor_actions, available)
++        self.source_tools.grid_configure(row=1 if source_wrap else 0, column=0 if source_wrap else 1, sticky='e')
+--- /dev/null
++++ v2/tests/test_v2_manuscript_shell.py
+@@ -0,0 +1,172 @@
++"""v2 chrome ownership and measured manuscript layout regression contracts."""
++import unittest
++import json
++from unittest.mock import patch
++from tkinter import ttk
++
++import test_unified_manuscript as unified
++
++
++class ManuscriptShellTests(unittest.TestCase):
++    setUp = unified.ManuscriptTests.setUp
++    app = unified.ManuscriptTests.app
++    spin = unified.ManuscriptTests.spin
++
++    def pdf_app(self):
++        from test_pdf import pdf_bytes
++        path = self.folder/'source.pdf'
++        path.write_bytes(pdf_bytes(3))
++        job = self.flow.start_pdf_extraction(self.flow.inspect_pdf(path), 1, 3)
++        self.assertTrue(job.wait(10))
++        self.batch = self.flow.finish_pdf_extraction(job)
++        root, app = self.app()
++        self.spin(root, lambda: app.source_image is not None)
++        return root, app
++
++    def settle(self, root, app, size):
++        root.state('normal')
++        root.geometry(size)
++        root.update()
++        app.layout_workspace()
++        root.update()
++
++    def test_pdf_action_gaps_match_editor_and_survive_source_transitions(self):
++        root, app = self.pdf_app()
++        for size in ('1536x793', '1360x820', '1280x720', '1100x760', '900x640'):
++            with self.subTest(size=size):
++                self.settle(root, app, size)
++                if size == '900x640':
++                    app.narrow_source = True
++                    app.adapt_source()
++                app.render_source_page()
++                self.spin(root, lambda: app.source_tools.image_future is None)
++                self.settle(root, app, size)
++                pairs = ((app.pdf_previous, app.page_entry), (app.page_total, app.pdf_next),
++                         (app.pdf_next, app.zoom_control), (app.zoom_control, app.source_control))
++                gaps = [b.winfo_rootx()-a.winfo_rootx()-a.winfo_width() for a,b in pairs]
++                self.assertEqual(gaps, [4,4,4,4], 'PDF actions must match the editor toolbar gap')
++                heights = [w.winfo_height() for w in (app.pdf_previous, app.page_entry, app.zoom_control, app.source_control)]
++                self.assertLessEqual(max(heights)-min(heights), 2)
++                self.assertLessEqual(app.source_control.winfo_rootx()+app.source_control.winfo_width(),
++                                     app.source_frame.winfo_rootx()+app.source_frame.winfo_width())
++        # TXT must release the hidden PDF controls; returning must restore gaps.
++        txt = next(b['id'] for b in app.flow.state['batches'] if b['kind']=='txt')
++        app.batch_id = txt
++        app.refresh()
++        root.update()
++        self.assertFalse(app.pdf_previous.winfo_ismapped())
++        self.assertTrue(app.source_control.winfo_ismapped())
++
++    def test_shell_survives_tools_production_and_collapsing_without_losing_editor(self):
++        root, app = self.app()
++        self.settle(root, app, '1360x820')
++        app.confirm_reading()
++        shell = app.shell
++        widgets = tuple(map(str, (shell.navigation, shell.documents, shell.workspace, shell.footer, app.editor)))
++        app.editor.insert('end', '\n未保存人工稿。')
++        root.update()
++        app.editor.mark_set('insert', '2.3')
++        app.editor.tag_add('sel', '1.0', '1.3')
++        before = app.current_text
++        app.show_versions()
++        app.close_tools()
++        app.confirm_reading()
++        app.show_step(4)
++        root.update()
++        app.show_step(1)
++        app.focus_button.invoke()
++        self.settle(root, app, '1360x820')
++        self.assertEqual(app.center.winfo_x(), 0)
++        self.assertEqual(app.center.winfo_width(), app.body.winfo_width())
++        self.assertEqual(tuple(map(str, (shell.navigation, shell.documents, shell.workspace, shell.footer, app.editor))), widgets)
++        self.assertEqual(app.current_text, before)
++        self.assertEqual(str(app.next_button.master), str(shell.footer.footer_actions))
++        self.assertEqual(str(app.batch_list.master), str(shell.documents))
++
++    def test_wide_collapsed_editor_toolbar_stays_inside_its_pane(self):
++        from ebook2mp4.desktop import make_app
++        from ebook2mp4.workflow import ProjectWorkflow
++        from test_pdf import pdf_bytes
++        source=self.folder/'auto.pdf'
++        source.write_bytes(pdf_bytes(3))
++        flow=ProjectWorkflow.create(self.folder/'auto-book','恢復收合書籍')
++        job=flow.start_pdf_extraction(flow.inspect_pdf(source),1,3)
++        self.assertTrue(job.wait(10))
++        batch=flow.finish_pdf_extraction(job)
++        flow.save_reading_manuscript(batch,'\n\n'.join(f'第 {i} 段。保留長文。' for i in range(400)))
++        manifest=flow.state
++        manifest['manuscript_view']=dict(list_collapsed=True,source_visible=True,source_ratio=.5)
++        flow._commit(manifest,[])
++        home=self.folder/'app-home'
++        home.mkdir()
++        (home/'session.json').write_text(json.dumps(dict(last_project=str(flow.root.resolve()))),encoding='utf-8')
++        with patch.dict('os.environ',EBOOK2MP4_APP_HOME=str(home.resolve())):
++            root,app=make_app(restore_last_project=True)
++            self.addCleanup(lambda: app.close() if root.winfo_exists() else None)
++            root.after(1000,root.quit)
++            root.mainloop()
++        controls=(app.source_toggle, app.edit_control, app.proof_control, app.version_control, app.save_button)
++        end=app.right_stack.winfo_rootx()+app.right_stack.winfo_width()
++        for control in controls:
++            self.assertTrue(control.winfo_ismapped())
++            self.assertGreaterEqual(control.winfo_width(),control.winfo_reqwidth()-2)
++            self.assertGreaterEqual(control.winfo_rootx(),app.right_stack.winfo_rootx())
++            self.assertGreaterEqual(control.winfo_rooty(),app.editor_nav.winfo_rooty())
++            self.assertLessEqual(control.winfo_rooty()+control.winfo_height(),app.editor.winfo_rooty(),
++                (control.grid_info(),app.editor_actions.grid_info(),app.editor_nav.winfo_height()))
++            self.assertLessEqual(control.winfo_rootx()+control.winfo_width(),end,
++                (str(control),control.winfo_rootx(),end,app.editor_actions.grid_info()))
++            ancestor=control.master
++            while ancestor is not app.editor_frame:
++                self.assertGreaterEqual(control.winfo_rootx(),ancestor.winfo_rootx())
++                self.assertLessEqual(control.winfo_rootx()+control.winfo_width(),ancestor.winfo_rootx()+ancestor.winfo_width(),
++                    (str(ancestor),ancestor.winfo_width(),ancestor.winfo_reqwidth()))
++                self.assertLessEqual(control.winfo_rooty()+control.winfo_height(),ancestor.winfo_rooty()+ancestor.winfo_height())
++                ancestor=ancestor.master
++
++    def test_action_replacement_removes_old_callback_and_busy_disables_current(self):
++        from ebook2mp4.desktop_shell import ActionBar, ActionSpec, PagePresentation
++        root, app = self.app()
++        frame = ttk.Frame(root)
++        bar = ActionBar(frame)
++        calls = []
++        bar.present(PagePresentation(1, 'A', '第一頁', (
++            ActionSpec('first', '第一動作', 'primary', lambda: calls.append('A')),)))
++        first = bar.buttons['first']
++        dispatcher = first.cget('command')
++        for _ in range(50):
++            bar.present(PagePresentation(1, 'A', '更新狀態', (
++                ActionSpec('first', '第一動作', 'primary', lambda: calls.append('A')),)))
++        self.assertEqual(first.cget('command'), dispatcher, 'Status refresh must reuse its Tcl dispatcher')
++        bar.present(PagePresentation(1, 'B', '第二頁', (
++            ActionSpec('second', '第二動作', 'primary', lambda: calls.append('B')),)))
++        first.invoke()
++        bar.buttons['second'].invoke()
++        self.assertEqual(calls, ['B'])
++        bar.present(PagePresentation(1, 'B', '處理中', (
++            ActionSpec('second', '第二動作', 'primary', lambda: calls.append('busy')),), busy=True))
++        bar.buttons['second'].invoke()
++        self.assertEqual(calls, ['B'])
++        frame.destroy()
++
++    def test_return_stays_left_and_busy_cancel_remains_available(self):
++        from ebook2mp4.desktop_shell import ActionBar, ActionSpec, PagePresentation
++        root, app = self.app()
++        frame = ttk.Frame(root)
++        frame.place(x=0, y=100, width=800, height=160)
++        frame.columnconfigure(0, weight=1)
++        bar = ActionBar(frame)
++        calls = []
++        bar.present(PagePresentation(1, '任務', '處理中', (
++            ActionSpec('return', '返回', 'back', lambda: None),
++            ActionSpec('cancel', '取消', 'primary', lambda: calls.append('cancel'), available_while_busy=True)), busy=True))
++        root.update()
++        back, cancel = bar.buttons['return'], bar.buttons['cancel']
++        self.assertLess(back.winfo_rootx(), cancel.winfo_rootx())
++        cancel.invoke()
++        self.assertEqual(calls, ['cancel'])
++        frame.destroy()
++
++
++if __name__ == '__main__':
++    unittest.main()
+--- /dev/null
++++ v2/tests/v2_manuscript_visual.py
+@@ -0,0 +1,84 @@
++"""Native v2 acceptance surface with test-only sizing and measurement commands."""
++from pathlib import Path
++import ctypes
++import hashlib
++import json
++import os
++import tkinter.font as tkfont
++
++from ebook2mp4.workflow import ProjectWorkflow
++from ebook2mp4.desktop import make_app
++from test_pdf import pdf_bytes
++
++BASE = Path('.scratch/v2-work/visual').resolve()
++EVIDENCE = Path('docs/verification/v2-manuscript').resolve()
++
++
++def main():
++    BASE.mkdir(parents=True, exist_ok=True)
++    EVIDENCE.mkdir(parents=True, exist_ok=True)
++    source = BASE/'source.pdf'
++    source.write_bytes(pdf_bytes(3))
++    book = BASE/'book'
++    if not book.exists():
++        flow = ProjectWorkflow.create(book, 'v2 合成文稿驗收')
++        job = flow.start_pdf_extraction(flow.inspect_pdf(source), 1, 3)
++        assert job.wait(10)
++        batch = flow.finish_pdf_extraction(job)
++        text = '\n\n'.join(f'第 {i} 段。清晨陽光照進書房。保留來源，檢查人工文稿與版本。Hello original text.' for i in range(1,401))
++        flow.save_draft(batch, text)
++        flow.save_reading_manuscript(batch, text)
++        extra = BASE/'extra.txt'
++        extra.write_text('另一份獨立文件。', encoding='utf-8')
++        flow.import_txt(flow.inspect_txt(extra))
++        flow.save_workspace(batch, text.replace('來源', '原稿'))
++    else:
++        flow = ProjectWorkflow.open(book)
++        batch = flow.state['batches'][0]['id']
++    root, app = make_app()
++    app.flow, app.batch_id = flow, batch
++    app.refresh()
++    errors = []
++    root.report_callback_exception = lambda kind, value, trace: errors.append(str(value))
++
++    def measure(name):
++        controls = dict(client=root, source=app.source_frame, editor_pane=app.right_stack,
++            editor=app.editor, list=app.batch_list, center=app.center, body=app.body,
++            next=app.next_button, source_menu=app.source_control,
++            previous=app.pdf_previous, page=app.page_entry, total=app.page_total,
++            next_page=app.pdf_next, zoom=app.zoom_control, tool=app.tool_host,
++            tool_back=app.tool_back, project=app.project_menu.master, messages=app.message_button)
++        metrics = {key: dict(x=w.winfo_rootx(),y=w.winfo_rooty(),width=w.winfo_width(),
++            height=w.winfo_height(),mapped=bool(w.winfo_ismapped())) for key,w in controls.items()}
++        pairs=(('previous','page'),('total','next_page'),('next_page','zoom'),('zoom','source_menu'))
++        gaps=[metrics[b]['x']-metrics[a]['x']-metrics[a]['width'] for a,b in pairs]
++        font=tkfont.Font(root=root,font=app.editor.cget('font'))
++        record=dict(name=name,pid=os.getpid(),geometry=root.geometry(),
++            tk_scaling=root.tk.call('tk','scaling'),dpi=root.winfo_fpixels('1i'),
++            windows_scale_percent=ctypes.windll.shcore.GetScaleFactorForDevice(0),
++            font_linespace=font.metrics('linespace'),
++            visible_lines=app.editor.count('@0,0',f'@0,{app.editor.winfo_height()}','displaylines'),
++            characters=len(app.current_text), text_sha256=hashlib.sha256(app.current_text.encode()).hexdigest(),
++            cursor=app.editor.index('insert'),selection=list(map(str,app.editor.tag_ranges('sel'))),
++            yview=app.editor.yview(),tools_open=app.tools_open,gaps=gaps,metrics=metrics,errors=errors)
++        (EVIDENCE/(name+'.json')).write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
++
++    def poll():
++        command=BASE/'command.json'
++        if command.exists():
++            data=json.loads(command.read_text(encoding='utf-8'))
++            command.unlink()
++            if data['action']=='measure':measure(data['name'])
++            elif data['action']=='size':
++                root.state('normal');root.geometry(data['geometry'])
++            elif data['action']=='font':
++                app.font_size.set(data['size']);app.save_manuscript_settings()
++            elif data['action']=='maximize':root.state('zoomed')
++            elif data['action']=='close':app.close();return
++        root.after(100,poll)
++    root.after(100,poll)
++    root.mainloop()
++    (EVIDENCE/'source-exit.json').write_text(json.dumps(dict(normal_exit=True,errors=errors)),encoding='utf-8')
++
++
++if __name__=='__main__':main()
+--- /dev/null
++++ v2/tools/v2_acceptance.py
+@@ -0,0 +1,114 @@
++"""Isolated synthetic fixtures and genuine source/EXE launch evidence."""
++from pathlib import Path
++import argparse
++import hashlib
++import json
++import os
++import shutil
++import subprocess
++import sys
++
++ROOT = Path(__file__).resolve().parents[1]
++BASE = ROOT/'.scratch/v2-work'
++DEPS = ROOT/'.scratch/build-tools'
++
++
++def environment(home, *, package=False):
++    home.mkdir(parents=True, exist_ok=True)
++    env = dict(os.environ, PYTHONDONTWRITEBYTECODE='1', PYTHONPATH=str(DEPS),
++        EBOOK2MP4_APP_HOME=str(home), EBOOK2MP4_VOICE_HOME=str(home/'voice'),
++        EBOOK2MP4_KOKORO_HOME=str(home/'kokoro'), EBOOK2MP4_OCR_HOME=str(home/'ocr'),
++        LOCALAPPDATA=str(home/'local'), APPDATA=str(home/'roaming'))
++    if package:
++        env['PATH'] = r'C:\Windows\System32;C:\Windows'
++        for key in ('EBOOK2MP4_FFMPEG', 'EBOOK2MP4_FFPROBE', 'EBOOK2MP4_TESSERACT', 'PYTHONPATH'):
++            env.pop(key, None)
++    return env
++
++
++def fixtures():
++    # Only the frozen source/test tree may implement this baseline journey.
++    source = ROOT/'archives/v1/source'
++    sys.path[:0] = [str(source), str(source/'tests')]
++    tools = ROOT/'archives/v1/ebook2mp4/_internal/tools/ffmpeg'
++    os.environ.update(environment(BASE/'fixture-home'))
++    os.environ['PATH'] = str(tools)+os.pathsep+os.environ['PATH']
++    os.environ['EBOOK2MP4_FFMPEG'] = str(tools/'ffmpeg.exe')
++    os.environ['EBOOK2MP4_FFPROBE'] = str(tools/'ffprobe.exe')
++    from test_outputs import OutputsJourney
++    import ebook2mp4.workflow as workflow
++    case = OutputsJourney('test_missing_visual_publishes_audio_reopen_only_encodes_video')
++    case.setUp()
++    try:
++        wave = case.path/'controlled.mp3'
++        subprocess.run([str(tools/'ffmpeg.exe'), '-v', 'error', '-f', 'lavfi', '-i',
++                        'sine=frequency=440:duration=3', str(wave)], check=True)
++        case.plan(case.prepare(2, audio=wave.read_bytes()))
++        case.visual()
++        result = case.run_outputs()
++        assert result['status'] == 'completed'
++        export = BASE/'export'
++        export.mkdir(parents=True, exist_ok=True)
++        for folder in (export/'audio', export/'video'):
++            if folder.exists() and not any(folder.iterdir()):
++                folder.rmdir()
++        case.flow.export_total_audio(export/'audio')
++        case.flow.export_total_video(export/'video')
++        media = {}
++        for kind, path in (('mp3', case.flow.total_audio_path()), ('mp4', case.flow.total_video_path())):
++            probe = json.loads(subprocess.check_output([str(tools/'ffprobe.exe'), '-v', 'error',
++                '-show_streams', '-show_format', '-of', 'json', str(path)]))
++            subprocess.run([str(tools/'ffmpeg.exe'), '-v', 'error', '-i', str(path), '-f', 'null', '-'], check=True)
++            destination = ROOT/'docs/verification/v1-baseline'/('synthetic.'+kind)
++            shutil.copy2(path, destination)
++            media[kind] = dict(sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
++                              duration=probe['format']['duration'],
++                              streams=[s['codec_name'] for s in probe['streams']])
++        shutil.copy2(case.flow.total_video_path('srt'), ROOT/'docs/verification/v1-baseline/synthetic.srt')
++        for name in ('v1-source', 'v1-package', 'v2-package'):
++            target = BASE/name
++            shutil.copytree(case.flow.root, target/'book')
++            home = target/'home'
++            home.mkdir()
++            (home/'session.json').write_text(json.dumps(dict(last_project=str(target/'book'))), encoding='utf-8')
++        evidence = dict(implementation=str(workflow.__file__), real_ffmpeg=True,
++                        controlled_tts='synthetic sine wave; no network or paid request',
++                        exported=True, media=media)
++        (ROOT/'docs/verification/v1-baseline/media.json').write_text(json.dumps(evidence, indent=2), encoding='utf-8')
++        print(json.dumps(evidence))
++    finally:
++        case.doCleanups()
++
++
++def launch(name):
++    target = BASE/name
++    package = name != 'v1-source'
++    cwd = ROOT/'archives/v1/source' if name == 'v1-source' else target
++    exe = (ROOT/'archives/v1/ebook2mp4/ebook2mp4.exe' if name == 'v1-package'
++           else ROOT/'dist/ebook2mp4/ebook2mp4.exe')
++    cmd = [str(exe)] if package else [sys.executable, '-m', 'ebook2mp4']
++    env = environment(target/'home', package=package)
++    if not package:
++        tools = ROOT/'archives/v1/ebook2mp4/_internal/tools'
++        env.update(EBOOK2MP4_FFMPEG=str(tools/'ffmpeg/ffmpeg.exe'),
++                   EBOOK2MP4_FFPROBE=str(tools/'ffmpeg/ffprobe.exe'))
++    evidence = ROOT/('docs/verification/v1-baseline' if name.startswith('v1') else 'docs/verification/v2-manuscript')
++    evidence.mkdir(parents=True, exist_ok=True)
++    with (evidence/(name+'-stderr.txt')).open('w', encoding='utf-8') as errors:
++        child = subprocess.Popen(cmd, cwd=cwd, env=env, stderr=errors)
++        record = dict(command=cmd, cwd=str(cwd), pid=child.pid, isolated_settings=True,
++                      system_only_path=package, book=str(target/'book'))
++        output = evidence/(name+'-launch.json')
++        output.write_text(json.dumps(record, indent=2), encoding='utf-8')
++        print(json.dumps(record), flush=True)
++        record['exit_code'] = child.wait()
++        record['normal_exit'] = record['exit_code'] == 0
++        output.write_text(json.dumps(record, indent=2), encoding='utf-8')
++        print(json.dumps(record), flush=True)
++
++
++if __name__ == '__main__':
++    parser = argparse.ArgumentParser()
++    parser.add_argument('action', choices=('fixtures', 'v1-source', 'v1-package', 'v2-package'))
++    args = parser.parse_args()
++    fixtures() if args.action == 'fixtures' else launch(args.action)
+--- /dev/null
++++ v2/tools/draw_v2_layout.py
+@@ -0,0 +1,76 @@
++"""Reproducible structural drawings; native screenshots are separate evidence."""
++from pathlib import Path
++from PIL import Image, ImageDraw, ImageFont
++
++OUT = Path(__file__).resolve().parents[1]/'docs/ui-review'
++BG, INK, LINE, GREEN = '#f5f6f2', '#263d34', '#c7d2c6', '#315d43'
++
++
++def draw(name, w, h, tool=False):
++    im = Image.new('RGB', (w, h), BG)
++    d = ImageDraw.Draw(im)
++    font = ImageFont.truetype('C:/Windows/Fonts/msjh.ttc', 14)
++    title = ImageFont.truetype('C:/Windows/Fonts/msjh.ttc', 18)
++    def text(x, y, value, color=INK, f=font):
++        d.text((x, y), value, font=f, fill=color)
++    def button(x, y, label, width=None, primary=False, active=False):
++        width = width or int(d.textlength(label, font=font))+28
++        d.rectangle((x, y, x+width, y+37), fill=GREEN if primary else '#e2ebdf' if active else 'white', outline=LINE)
++        dropdown = '▾' in label
++        text(x+12, y+9, label.replace(' ▾',''), 'white' if primary else INK)
++        if dropdown:d.polygon(((x+width-18,y+16),(x+width-8,y+16),(x+width-13,y+22)),fill=INK)
++        return x+width+4
++    def panel(x, y, right, bottom):
++        d.rectangle((x,y,right,bottom),fill='white',outline=LINE)
++    text(16, 8, f'v2 文稿 · 沿用 v1 結構設計 · {w}×{h}', f=title)
++    x=button(16,42,'1 文稿',active=True)
++    button(x,42,'2 試聽與製作')
++    x=button(w-258,42,'專案 ▾',110)
++    button(x,42,'訊息記錄',128)
++    left=188 if w<1000 else 220
++    x=button(16,100,'‹',38);x=button(x,100,'匯入 ▾',72);button(x,100,'管理 ▾',72)
++    panel(16,164,left,h-88)
++    for i,label in enumerate(('合成 PDF · 1–3','第二份 TXT','第三份 TXT')):
++        if i==0:d.rectangle((17,165,left-1,237),fill='#e7efe4')
++        text(28,180+i*80,label);text(28,202+i*80,'已確認')
++    start=left+12
++    if tool:
++        button(start,100,'← 返回文稿')
++        text(start+160,109,'版本紀錄')
++        panel(start,164,w-16,h-142)
++        text(start+20,183,'選取版本  文稿 v3    還原前先備份現稿')
++        for i in range(6):text(start+20,224+i*36,f'第 {i+1} 段。版本差異內容只在此區捲動。')
++        button(w-200,h-130,'還原到編輯稿',184,primary=True)
++    elif w<950:
++        text(start,109,'文稿')
++        x=start+75
++        for label in ('原稿','編輯 ▾','校對 ▾','版本 ▾','暫存草稿'): x=button(x,100,label)
++        panel(start,164,w-16,h-88)
++        for i in range(8):text(start+20,184+i*38,f'第 {i+1} 段。文稿取得剩餘寬度。')
++        text(start, h-115,'原稿與文稿沿用 v1 窄版切換')
++    else:
++        middle=(start+w-16)//2
++        text(start,109,'PDF 原稿')
++        x=middle-374
++        for label,width in (('‹',38),('1 / 3',72),('›',38),('符合頁寬 ▾',126),('來源 ▾',76)):
++            x=button(x,100,label,width)
++        text(middle+4,109,'文稿')
++        labels=('隱藏原稿','編輯 ▾','校對 ▾','版本 ▾','暫存草稿')
++        x=w-16-sum(int(d.textlength(label,font=font))+32 for label in labels)
++        for label in labels:x=button(x,100,label)
++        panel(start,164,middle-4,h-88);panel(middle+2,164,w-16,h-88)
++        text(start+24,203,'合成 PDF 原頁')
++        for i in range(8):
++            text(start+24,244+i*42,'原頁內容與文稿並列。')
++            text(middle+24,203+i*42,f'第 {i+1} 段。保留 v1 編輯與工具入口。')
++        text(start, h-115,'相鄰操作控制項間隔 4 Tk 單位；頁碼為一個群組')
++    text(16,h-71,'合成文件 · 文稿 v3 · 已儲存，可朗讀')
++    text(16,h-44,'結構設計圖；實際元件以 Tk 原生驗收為準。')
++    button(w-206,h-62,'前往試聽與製作 →',190,primary=True)
++    im.save(OUT/(name+'.png'))
++
++
++if __name__=='__main__':
++    draw('v2-manuscript-normal',1536,864)
++    draw('v2-manuscript-reduced',900,640)
++    draw('v2-manuscript-tools',1280,720,True)

@@ -1,0 +1,110 @@
+{
+  "source_sha256": "e4e99551d66051af7cf43e25f8b821486ac8966a0d36c9fcdea51a2a8c50ae51",
+  "cases": [
+    {
+      "page": "試聽區",
+      "test": "test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes",
+      "route": "開啟語音設定 → 切換視窗尺寸與字級 → 量測試聽列及底部操作列",
+      "status": "通過",
+      "checks": [
+        "button-size",
+        "horizontal-gap",
+        "vertical-gap",
+        "viewport-matrix"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [
+        "voice/native-layout-regression.json"
+      ],
+      "errors": []
+    },
+    {
+      "page": "試聽區",
+      "test": "test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider",
+      "route": "開啟語音設定 → 切換服務 → 輸入自訂值 → 儲存 → 重開設定",
+      "status": "通過",
+      "checks": [],
+      "category": "功能回歸",
+      "evidence": [],
+      "errors": []
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green",
+      "route": "開啟音訊組裝 → 選取批次 → 檢查接點 → 量測操作列與文字區",
+      "status": "通過",
+      "checks": [
+        "row-alignment",
+        "column-alignment",
+        "horizontal-gap",
+        "vertical-gap",
+        "viewport-matrix"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [
+        "join/native-layout-regression.json",
+        "join/native-maximized.png"
+      ],
+      "errors": []
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract",
+      "route": "開啟檢查接點 → 輸入不同長度內容 → 量測捲動區的顯隱、比例與行程",
+      "status": "通過",
+      "checks": [
+        "scroll-short",
+        "scroll-overflow"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [
+        "join/scroll-contract.json",
+        "join/native-scroll.json"
+      ],
+      "errors": []
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context",
+      "route": "開啟檢查接點 → 捲至長文末端 → 收合及返回 → 切換空狀態",
+      "status": "通過",
+      "checks": [
+        "scroll-short",
+        "scroll-transition",
+        "scroll-resize"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [],
+      "errors": []
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors",
+      "route": "從 PDF 文稿進入檢查接點 → 收合及展開文件列表 → 量測標頭與內容起點",
+      "status": "通過",
+      "checks": [
+        "panel-alignment",
+        "viewport-matrix"
+      ],
+      "category": "原生布局與捲動",
+      "evidence": [
+        "join/shell-anchors.json"
+      ],
+      "errors": []
+    },
+    {
+      "page": "檢查接點",
+      "test": "test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure",
+      "route": "開啟檢查接點 → 試聽 → 修改設定 → 模擬儲存失敗 → 重試儲存",
+      "status": "通過",
+      "checks": [],
+      "category": "功能回歸",
+      "evidence": [
+        "join/native-save-failed.png"
+      ],
+      "errors": []
+    }
+  ],
+  "full_ui_acceptance": "未完成",
+  "packaged_exe": "未測"
+}

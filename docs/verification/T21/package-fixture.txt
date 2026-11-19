@@ -1,0 +1,1 @@
+{"project": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\t21-package\\���y", "before": {"audio_id": "697196102b2d4fa4a38308d35ed6f4a2", "audio_sha256": "715b30ac4933eec0d722cc6e911c2b109887e2110a4f43115edca6f05f032323", "narration_counts": [1, 1], "expected_duration_ms": 900, "source": "synthetic sine-wave TTS substitute; no real service"}}

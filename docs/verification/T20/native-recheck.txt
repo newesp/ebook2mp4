@@ -1,0 +1,15 @@
+test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout) ... FAIL
+
+======================================================================
+FAIL: test_versions_details_return_exports_playback_and_layout (test_output_versions_desktop.OutputVersionsDesktop.test_versions_details_return_exports_playback_and_layout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions_desktop.py", line 44, in test_versions_details_return_exports_playback_and_layout
+    self.assertIn('sha256', page.text.get('1.0', 'end'))
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'sha256' not found in '�`�v�� �P �`���T�s�� �P ���� �P �P�ثe�@�P\n\n�P�ثe�������\n�ӷ��P�ثe�]�w�@�P�C\n\n�o�����~�ϥΪ��ӷ�\n�����ɶ��G2026-11-06T02:38:10.437907+00:00\n�ɪ��G900 �@��\n1. ��Z �P �ӷ����� 97db4847e878\n2. ��Z �P �ӷ����� 4ac78239faaf\n��Z�Gzh-TW-TestNeural �P �y�t +0% �P �y�� 0 �@�� �P �q�� 500 �@��\n��Z�Gzh-TW-TestNeural �P �y�t +0% �P �y�� 0 �@�� �P �q�� 500 �@��\n�`���T�����G09ac1d0753a8\n\n���~�]�w\n�ѪR�סG720p\n�����G����.png\n\n�ثe�]�w\n�ѪR�סG720p\n�����G����.png\n\n�̪���ȡGcompleted �P ���ݫO�s\n���ȨϥαҰʮɪ��ӷ��P�]�w�ַӡC\n'
+
+----------------------------------------------------------------------
+Ran 1 test in 16.338s
+
+FAILED (failures=1)

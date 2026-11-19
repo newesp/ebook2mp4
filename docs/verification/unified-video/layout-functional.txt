@@ -1,0 +1,8 @@
+test_failed_publication_waits_for_explicit_save_retry (test_total_video_desktop.TotalVideoDesktop.test_failed_publication_waits_for_explicit_save_retry) ... ok
+test_two_steps_encode_and_return_keep_picture_and_resolution (test_total_video_desktop.TotalVideoDesktop.test_two_steps_encode_and_return_keep_picture_and_resolution) ... ok
+test_partial_retry_material_return_and_window_sizes (test_outputs_desktop.OutputsDesktop.test_partial_retry_material_return_and_window_sizes) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 39.207s
+
+OK

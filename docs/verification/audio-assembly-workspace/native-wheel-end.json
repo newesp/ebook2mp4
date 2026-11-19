@@ -1,0 +1,174 @@
+{
+  "geometry": "900x640+0+0",
+  "tk_scaling": 1.334646962233169,
+  "dpi": 96.09458128078816,
+  "widgets": {
+    "root": {
+      "x": 8,
+      "y": 31,
+      "width": 900,
+      "height": 640,
+      "mapped": true
+    },
+    "page": {
+      "x": 24,
+      "y": 141,
+      "width": 868,
+      "height": 428,
+      "mapped": true
+    },
+    "main": {
+      "x": 24,
+      "y": 186,
+      "width": 868,
+      "height": 383,
+      "mapped": true
+    },
+    "toolbar": {
+      "x": 37,
+      "y": 199,
+      "width": 842,
+      "height": 37,
+      "mapped": true
+    },
+    "table": {
+      "x": 37,
+      "y": 244,
+      "width": 827,
+      "height": 222,
+      "mapped": true
+    },
+    "table_frame": {
+      "x": 37,
+      "y": 244,
+      "width": 842,
+      "height": 222,
+      "mapped": true
+    },
+    "pause": {
+      "x": 149,
+      "y": 474,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "state": {
+      "x": 149,
+      "y": 519,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "join": {
+      "x": 445,
+      "y": 474,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "detail": {
+      "x": 445,
+      "y": 519,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "versions": {
+      "x": 593,
+      "y": 519,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "save": {
+      "x": 496,
+      "y": 612,
+      "width": 196,
+      "height": 37,
+      "mapped": true
+    },
+    "start": {
+      "x": 696,
+      "y": 612,
+      "width": 196,
+      "height": 37,
+      "mapped": true
+    },
+    "back": {
+      "x": 24,
+      "y": 612,
+      "width": 168,
+      "height": 37,
+      "mapped": true
+    },
+    "scrollbar": {
+      "x": 864,
+      "y": 244,
+      "width": 15,
+      "height": 222,
+      "mapped": true
+    },
+    "files": {
+      "x": 24,
+      "y": 141,
+      "width": 220,
+      "height": 473,
+      "mapped": false
+    },
+    "header": {
+      "x": 24,
+      "y": 141,
+      "width": 868,
+      "height": 37,
+      "mapped": true
+    },
+    "source0": {
+      "x": 149,
+      "y": 199,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "source1": {
+      "x": 297,
+      "y": 199,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "source2": {
+      "x": 445,
+      "y": 199,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    },
+    "source3": {
+      "x": 593,
+      "y": 199,
+      "width": 144,
+      "height": 37,
+      "mapped": true
+    }
+  },
+  "yview": [
+    0.75,
+    1.0
+  ],
+  "rows": 16,
+  "selected": [
+    "3ab7c0b7bbdf419e837ea1ccea7f8ac6",
+    "01c97e812615437f824096d3a1e390c4",
+    "7cf166981c6f4a848847409a1701bcdf",
+    "69f9e723c7714271aabcb7b9b0a6fdab"
+  ],
+  "pause": "0.5",
+  "status": "請依序選批次、設定交接停頓，再製作總音訊。",
+  "errors": [],
+  "only_audio": true,
+  "source_scrollbar": true,
+  "progress": null,
+  "pause_display": "0.5 秒",
+  "empty_hint": false,
+  "rowheight": 40
+}

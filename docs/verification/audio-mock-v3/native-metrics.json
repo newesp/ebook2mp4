@@ -1,0 +1,18 @@
+{
+  "pid": 24612,
+  "scenario": "failed",
+  "geometry": "1280x720+0+0",
+  "tk_scaling": 1.334646962233169,
+  "rows": 173,
+  "visible_rows": 17,
+  "page_width": 1028,
+  "page_height": 561,
+  "table_height": 469,
+  "fixture_root": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\audio-ui-aa7esnnq",
+  "task_choice_height": 37,
+  "task_info_height": 37,
+  "task_choice_top": 96,
+  "task_info_top": 96,
+  "product_menu_label": "成品操作",
+  "native_menu_indicators": 1
+}

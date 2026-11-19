@@ -1,0 +1,15 @@
+test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows) ... FAIL
+
+======================================================================
+FAIL: test_global_messages_align_with_project_in_normal_and_reduced_windows (test_manuscript_cleanup.CleanupWorkspace.test_global_messages_align_with_project_in_normal_and_reduced_windows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\archives\v1\source\tests\test_manuscript_cleanup.py", line 122, in test_global_messages_align_with_project_in_normal_and_reduced_windows
+    self.assertLessEqual(abs(buttons[0].winfo_rooty()-buttons[1].winfo_rooty()), 2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 8 not less than or equal to 2
+
+----------------------------------------------------------------------
+Ran 1 test in 2.517s
+
+FAILED (failures=1)

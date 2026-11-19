@@ -1,0 +1,82 @@
+[
+  {
+    "size": "1040x640",
+    "page": "assembly",
+    "text": "① 合併音訊",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "CompactActive.TButton"
+  },
+  {
+    "size": "1040x640",
+    "page": "assembly",
+    "text": "② 製作影片",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "Compact.TButton"
+  },
+  {
+    "size": "1040x640",
+    "page": "video",
+    "text": "① 合併音訊",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "Compact.TButton"
+  },
+  {
+    "size": "1040x640",
+    "page": "video",
+    "text": "② 製作影片",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "CompactActive.TButton"
+  },
+  {
+    "size": "1360x800",
+    "page": "assembly",
+    "text": "① 合併音訊",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "CompactActive.TButton"
+  },
+  {
+    "size": "1360x800",
+    "page": "assembly",
+    "text": "② 製作影片",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "Compact.TButton"
+  },
+  {
+    "size": "1360x800",
+    "page": "video",
+    "text": "① 合併音訊",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "Compact.TButton"
+  },
+  {
+    "size": "1360x800",
+    "page": "video",
+    "text": "② 製作影片",
+    "width": 114,
+    "height": 29,
+    "reference_width": 114,
+    "reference_height": 29,
+    "style": "CompactActive.TButton"
+  }
+]

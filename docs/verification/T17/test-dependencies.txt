@@ -1,0 +1,9 @@
+Collecting reportlab
+  Downloading reportlab-5.1.0-py3-none-any.whl.metadata (1.6 kB)
+Downloading reportlab-5.1.0-py3-none-any.whl (2.0 MB)
+   ---------------------------------------- 2.0/2.0 MB 8.3 MB/s  0:00:00
+Installing collected packages: reportlab
+Successfully installed reportlab-5.1.0
+
+[notice] A new release of pip is available: 26.2 -> 26.3
+[notice] To update, run: python.exe -m pip install --upgrade pip

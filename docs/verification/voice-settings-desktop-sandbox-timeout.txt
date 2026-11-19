@@ -1,0 +1,72 @@
+Fcan't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!workbench.!frame3.!productionworkspace.!frame2.!voicedialog.!frame2.!labelframe2.!progressbar 12 1"
+    ("after" script)
+invalid command name "2418814205312poll"
+    while executing
+"2418814205312poll"
+    ("after" script)
+.Fcan't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!workbench.!frame3.!productionworkspace.!frame2.!voicedialog.!frame2.!labelframe2.!progressbar 12 1"
+    ("after" script)
+invalid command name "2418831907840poll"
+    while executing
+"2418831907840poll"
+    ("after" script)
+..F
+======================================================================
+FAIL: test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 152, in test_close_cancels_background_request_and_releases_timer
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 49, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 44, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x000002332C7EBE00> is not None : ���b���o�u�W����M��K
+
+======================================================================
+FAIL: test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 95, in test_editable_text_uses_current_settings_and_automatically_plays
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 49, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 44, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x000002332C953610> is not None : ���b���o�u�W����M��K
+
+======================================================================
+FAIL: test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 195, in test_switching_batch_does_not_write_settings_through_old_dialog
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 49, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 44, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x000002332C953390> is not None : ���b���o�u�W����M��K
+
+----------------------------------------------------------------------
+Ran 6 tests in 43.353s
+
+FAILED (failures=3)

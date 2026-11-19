@@ -1,0 +1,15 @@
+{
+  "drawings": 60,
+  "overview": 1,
+  "local_links_checked": 61,
+  "missing_links": [],
+  "exe_unchanged": true,
+  "phase": "design only; approval pending",
+  "product_implementation": false,
+  "native_and_exe_acceptance": "pending after implementation",
+  "owned_background_processes_started": false,
+  "ui_scroll_review": "failed",
+  "ui_compliance": "not established; corrections required",
+  "approval_ready": false,
+  "scroll_check": "scroll-check.txt"
+}

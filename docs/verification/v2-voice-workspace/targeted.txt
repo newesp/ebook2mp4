@@ -1,0 +1,88 @@
+Fcan't invoke "winfo" command: application has been destroyed
+    while executing
+"winfo exists $pb"
+    (procedure "ttk::progressbar::Autoincrement" line 4)
+    invoked from within
+"ttk::progressbar::Autoincrement .!workbench.!frame.!productionworkspace.!frame2.!voicedialog.!frame2.!labelframe2.!progressbar 12 1"
+    ("after" script)
+invalid command name "2503028211968poll"
+    while executing
+"2503028211968poll"
+    ("after" script)
+FFFF
+======================================================================
+FAIL: test_one_save_loads_complete_settings_and_blocks_unsaved_navigation (test_voice_settings_ui.SavedSettingsUI.test_one_save_loads_complete_settings_and_blocks_unsaved_navigation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_settings_ui.py", line 50, in test_one_save_loads_complete_settings_and_blocks_unsaved_navigation
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 49, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 44, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x00000246CB58ECF0> is not None : ���b���o�u�W����M��K
+
+======================================================================
+FAIL: test_production_restore_preserves_selected_task (test_voice_settings_ui.SavedSettingsUI.test_production_restore_preserves_selected_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_settings_ui.py", line 16, in test_production_restore_preserves_selected_task
+    self.choose()
+    ~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 49, in choose
+    self.poll()
+    ~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 44, in poll
+    self.assertIsNone(self.dialog.job, self.dialog.status.cget('text'))
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: <ebook2mp4.voice.VoiceJob object at 0x00000246CB6EA850> is not None : ���b���o�u�W����M��K
+
+======================================================================
+FAIL: test_failed_restore_keeps_previous_settings_and_releases_lock (test_voice_setting_restore.SettingsRecovery.test_failed_restore_keeps_previous_settings_and_releases_lock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_setting_restore.py", line 53, in test_failed_restore_keeps_previous_settings_and_releases_lock
+    snapshot, _ = self.make_run()
+                  ~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_setting_restore.py", line 14, in make_run
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript (test_voice_setting_restore.SettingsRecovery.test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_setting_restore.py", line 40, in test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript
+    snapshot, original = self.make_run()
+                         ~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_setting_restore.py", line 14, in make_run
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_timestamp_voice_names_and_independent_records_survive_reopen (test_voice_setting_restore.SettingsRecovery.test_timestamp_voice_names_and_independent_records_survive_reopen)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_setting_restore.py", line 29, in test_timestamp_voice_names_and_independent_records_survive_reopen
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 5 tests in 42.614s
+
+FAILED (failures=5)

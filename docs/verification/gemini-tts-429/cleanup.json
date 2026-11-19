@@ -1,0 +1,14 @@
+{
+  "Removed": [
+    ".scratch\\gemini-build-tools",
+    ".scratch\\gemini-build",
+    ".scratch\\voice-runtime",
+    ".scratch\\ocr-runtime"
+  ],
+  "RemainingPython": [],
+  "TemporaryTestFolders": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "PackageExists": true
+}

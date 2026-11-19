@@ -1,0 +1,11 @@
+{
+  "pid": 19356,
+  "before_any_activation_or_restore": true,
+  "windows": [
+    {
+      "hwnd": 1838252,
+      "title": "語音測試 — ebook2mp4 v2",
+      "maximized": true
+    }
+  ]
+}

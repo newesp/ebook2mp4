@@ -1,0 +1,111 @@
+{
+  "format_version": 1,
+  "id": "db95546bb48f41dd8d3fbf381f95f807",
+  "name": "v2 換行預覽合成驗收",
+  "created_at": "2026-11-11T02:03:32.478566+00:00",
+  "updated_at": "2026-11-11T02:07:44.354963+00:00",
+  "batches": [
+    {
+      "id": "5470fc50dfc14091898c97d88cee334b",
+      "kind": "txt",
+      "name": "第一章 · 換行整理範例",
+      "revision": 1,
+      "source": {
+        "path": "sources/5470fc50dfc14091898c97d88cee334b.txt",
+        "original_name": "第一章 · 換行整理範例.txt",
+        "size": 40288,
+        "encoding": "UTF-8",
+        "sha256": "d7ac29dedc704c23cbeb40d65864bbc5d0bd8129384490280d61427f20f00b84"
+      },
+      "draft": {
+        "path": "batches/5470fc50dfc14091898c97d88cee334b/draft-698d4c4ba165447e93be14e9da05f6f2.txt",
+        "sha256": "d7ac29dedc704c23cbeb40d65864bbc5d0bd8129384490280d61427f20f00b84"
+      },
+      "voice_settings": {
+        "provider": "edge-tts",
+        "voice": "",
+        "rate": "+0%",
+        "processing": "identity-v1",
+        "sentence_pause_ms": 0,
+        "paragraph_pause_ms": 500
+      },
+      "draft_copies": [
+        {
+          "id": "28d81dd31fd4428b8e98d5e98bf65fe2",
+          "path": "batches/5470fc50dfc14091898c97d88cee334b/copy-28d81dd31fd4428b8e98d5e98bf65fe2.txt",
+          "sha256": "d7ac29dedc704c23cbeb40d65864bbc5d0bd8129384490280d61427f20f00b84",
+          "created_at": "2026-11-11T02:07:15.842291+00:00",
+          "label": "換行整理前編輯稿"
+        }
+      ],
+      "workspace": {
+        "text_ref": {
+          "path": "batches/5470fc50dfc14091898c97d88cee334b/workspace-7182c7e7bf4e4c0e8572de16bd2f7b75.txt",
+          "sha256": "d7ac29dedc704c23cbeb40d65864bbc5d0bd8129384490280d61427f20f00b84"
+        },
+        "review_id": null,
+        "allow_partial": false
+      }
+    },
+    {
+      "id": "0e83f1900cca4b66b758519ee059457a",
+      "kind": "txt",
+      "name": "第二章 · 無須整理範例",
+      "revision": 2,
+      "source": {
+        "path": "sources/0e83f1900cca4b66b758519ee059457a.txt",
+        "original_name": "第二章 · 無須整理範例.txt",
+        "size": 58,
+        "encoding": "UTF-8",
+        "sha256": "885dbd2e46cdaf9c0fdc01517bb2b74e1351e93ad9a3838a24c2a5ac19a0e4f7"
+      },
+      "draft": {
+        "path": "batches/0e83f1900cca4b66b758519ee059457a/draft-1c49ff91e343450090fe02f84d4bf154.txt",
+        "sha256": "074357163853c0a64bb70a54faeab1474c43f48f10c0b49211f3f03200d06ed8"
+      },
+      "voice_settings": {
+        "provider": "edge-tts",
+        "voice": "",
+        "rate": "+0%",
+        "processing": "identity-v1",
+        "sentence_pause_ms": 0,
+        "paragraph_pause_ms": 500
+      },
+      "readings": [
+        {
+          "id": "a40f233200ea4af7b5ce2f5e513263c0",
+          "revision": 1,
+          "confirmed_at": "2026-11-11T02:03:32.896283+00:00",
+          "path": "batches/0e83f1900cca4b66b758519ee059457a/reading-a40f233200ea4af7b5ce2f5e513263c0.txt",
+          "sha256": "885dbd2e46cdaf9c0fdc01517bb2b74e1351e93ad9a3838a24c2a5ac19a0e4f7",
+          "review_id": null,
+          "partial_ai": false
+        },
+        {
+          "id": "f1fb23395e8d4427811b2e59dfbcd4cf",
+          "revision": 2,
+          "confirmed_at": "2026-11-11T02:28:08.195852+00:00",
+          "path": "batches/0e83f1900cca4b66b758519ee059457a/reading-f1fb23395e8d4427811b2e59dfbcd4cf.txt",
+          "sha256": "074357163853c0a64bb70a54faeab1474c43f48f10c0b49211f3f03200d06ed8",
+          "review_id": null,
+          "partial_ai": false
+        }
+      ],
+      "current_reading": "f1fb23395e8d4427811b2e59dfbcd4cf",
+      "draft_copies": [
+        {
+          "id": "11cc9447567041f2800d933ce4f79cbf",
+          "path": "batches/0e83f1900cca4b66b758519ee059457a/draft-300184c8a1034fe3825dbc452e7dde64.txt",
+          "sha256": "885dbd2e46cdaf9c0fdc01517bb2b74e1351e93ad9a3838a24c2a5ac19a0e4f7",
+          "created_at": "2026-11-11T02:28:08.195792+00:00",
+          "label": "儲存前文稿"
+        }
+      ]
+    }
+  ],
+  "manuscript_view": {
+    "source_visible": true,
+    "source_ratio": null,
+    "list_collapsed": false
+  }
+}

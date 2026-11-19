@@ -1,0 +1,48 @@
+{
+  "preexisting_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "processes_remaining": [],
+  "product_files_checked": 1905,
+  "removed": [
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-cache"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-mock-v3-package"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-ui-red-check.py"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-ui-measure.py"
+    },
+    {
+      "removed": true,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-ui-package-check.py"
+    }
+  ],
+  "exclusive_product_open": true,
+  "exe_sha256": "3879FCC5FB3070FACA3091B539382AE4895ED9D105D149E5E3BBFAC9761C4125"
+}

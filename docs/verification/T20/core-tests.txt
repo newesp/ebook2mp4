@@ -1,0 +1,62 @@
+test_empty_and_legacy_project_migration (test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration) ... FAIL
+test_route_matrix_retains_both_movies_exports_and_reopens (test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens) ... FAIL
+test_source_text_voice_new_audio_and_launch_snapshot (test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot) ... FAIL
+
+======================================================================
+FAIL: test_empty_and_legacy_project_migration (test_output_versions.OutputVersionsJourney.test_empty_and_legacy_project_migration)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions.py", line 128, in test_empty_and_legacy_project_migration
+    ids = self.movies(1)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 21, in movies
+    ids = self.prepare(count)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 22, in prepare
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_route_matrix_retains_both_movies_exports_and_reopens (test_output_versions.OutputVersionsJourney.test_route_matrix_retains_both_movies_exports_and_reopens)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions.py", line 45, in test_route_matrix_retains_both_movies_exports_and_reopens
+    a, b, c = self.ready()
+              ~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions.py", line 29, in ready
+    ids = self.movies(3)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 21, in movies
+    ids = self.prepare(count)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 22, in prepare
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_source_text_voice_new_audio_and_launch_snapshot (test_output_versions.OutputVersionsJourney.test_source_text_voice_new_audio_and_launch_snapshot)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions.py", line 89, in test_source_text_voice_new_audio_and_launch_snapshot
+    a,b,c = self.ready()
+            ~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_output_versions.py", line 29, in ready
+    ids = self.movies(3)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_video_merge.py", line 21, in movies
+    ids = self.prepare(count)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 22, in prepare
+    self.refresh_voices()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice.py", line 36, in refresh_voices
+    self.assertTrue(job.wait(5))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 3 tests in 17.171s
+
+FAILED (failures=3)

@@ -1,0 +1,17 @@
+{
+  "coverage_complete": false,
+  "status": "failed; existing drawings require scroll redesign",
+  "regions": [
+    {
+      "page": "settings",
+      "state": "1360x820 / connection collapsed",
+      "owner": "preferences form",
+      "measurement_source": "draw_v2_manuscript_tools.py: content crop top=165, foot=693; final form cursor=422; track=177..681; fixed thumb=42. Static drawing coordinates, not native measurements.",
+      "viewport_height": 528,
+      "content_height": 257,
+      "scrollbar_visible": true,
+      "max_offset": 0,
+      "thumb_fraction": 0.0833333333
+    }
+  ]
+}

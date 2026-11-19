@@ -1,0 +1,120 @@
+{
+  "scope": "screenshot and source review only; no native interaction",
+  "screenshot_sha256": "733f8c7d5ec620f0ab086a8ba582624a574dfc7d3a8727a869b6f0385c96bf03",
+  "image_size": [
+    1917,
+    1015
+  ],
+  "units": "screenshot pixels; not Tk coordinates",
+  "annotation_red_y": [
+    178,
+    182
+  ],
+  "right_panel_top_approx_y": 167,
+  "left_list_top_estimate_y": [
+    176,
+    178
+  ],
+  "red_annotation_occludes_part_of_left_border": true,
+  "border_samples": {
+    "21": {
+      "166": [
+        231,
+        235,
+        229
+      ],
+      "167": [
+        245,
+        246,
+        242
+      ],
+      "168": [
+        245,
+        246,
+        242
+      ],
+      "175": [
+        245,
+        246,
+        242
+      ],
+      "176": [
+        214,
+        213,
+        208
+      ],
+      "177": [
+        196,
+        193,
+        187
+      ],
+      "178": [
+        237,
+        28,
+        36
+      ],
+      "182": [
+        237,
+        28,
+        36
+      ],
+      "183": [
+        214,
+        211,
+        205
+      ]
+    },
+    "294": {
+      "166": [
+        233,
+        237,
+        231
+      ],
+      "167": [
+        223,
+        229,
+        221
+      ],
+      "168": [
+        224,
+        230,
+        222
+      ],
+      "175": [
+        228,
+        233,
+        226
+      ],
+      "176": [
+        228,
+        233,
+        226
+      ],
+      "177": [
+        228,
+        233,
+        226
+      ],
+      "178": [
+        237,
+        28,
+        36
+      ],
+      "182": [
+        237,
+        28,
+        36
+      ],
+      "183": [
+        228,
+        233,
+        226
+      ]
+    }
+  },
+  "source_hashes": {
+    "ebook2mp4/assembly_join_workspace.py": "43c3176a7013eb936f255bc3db9cedcf322bfbe4f43c8b36bf0abac7641fd37e",
+    "ebook2mp4/assembly_joins_desktop.py": "4a501cd5ca36026c6cc6d9acedc9e7a8d71c4735af7fe2b567aec35f858bccff",
+    "ebook2mp4/manuscript_desktop.py": "e262ad47db4fd034be862bf4fee807ae64919e05cb2434b788bccab92e47a3bc"
+  }
+}

@@ -1,0 +1,6 @@
+test_same_play_button_stops_finishes_and_recovers_from_failure (test_audio_production_ui.AudioProductionWorkspace.test_same_play_button_stops_finishes_and_recovers_from_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.584s
+
+OK

@@ -1,0 +1,29 @@
+test_txt_preview_updates_commands_without_a_window_resize (test_unified_manuscript.ManuscriptTests.test_txt_preview_updates_commands_without_a_window_resize) ... FAIL
+test_txt_preview_button_stays_mapped_during_a_layout_refresh (test_unified_manuscript.ManuscriptTests.test_txt_preview_button_stays_mapped_during_a_layout_refresh) ... FAIL
+
+======================================================================
+FAIL: test_txt_preview_updates_commands_without_a_window_resize (test_unified_manuscript.ManuscriptTests.test_txt_preview_updates_commands_without_a_window_resize)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 187, in test_txt_preview_updates_commands_without_a_window_resize
+    self.assertEqual(actions.visible_ids, {'source.apply', 'source.discard'})
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'source.view'
+Items in the second set but not the first:
+'source.apply'
+'source.discard'
+
+======================================================================
+FAIL: test_txt_preview_button_stays_mapped_during_a_layout_refresh (test_unified_manuscript.ManuscriptTests.test_txt_preview_button_stays_mapped_during_a_layout_refresh)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_manuscript.py", line 213, in test_txt_preview_button_stays_mapped_during_a_layout_refresh
+    self.assertTrue(button.winfo_ismapped())
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 is not true
+
+----------------------------------------------------------------------
+Ran 2 tests in 6.852s
+
+FAILED (failures=2)

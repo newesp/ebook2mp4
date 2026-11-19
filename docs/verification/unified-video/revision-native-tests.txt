@@ -1,0 +1,31 @@
+test_background_timeline_and_context_fields (test_video_layout_revision.VideoLayoutRevision.test_background_timeline_and_context_fields) ... ok
+test_mock_structure_and_alignment (test_video_layout_revision.VideoLayoutRevision.test_mock_structure_and_alignment) ... ok
+test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership) ... FAIL
+test_approved_header_footer_and_notebook_at_supported_sizes (test_audio_production_ui.AudioProductionWorkspace.test_approved_header_footer_and_notebook_at_supported_sizes) ... ok
+test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action) ... ok
+test_background_task_track_never_covers_footer_and_releases_space (test_audio_production_ui.AudioProductionWorkspace.test_background_task_track_never_covers_footer_and_releases_space) ... ok
+test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch (test_audio_production_ui.AudioProductionWorkspace.test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch) ... ok
+test_historical_snapshot_stale_guard_and_local_consent_context (test_audio_production_ui.AudioProductionWorkspace.test_historical_snapshot_stale_guard_and_local_consent_context) ... ok
+test_multiline_failure_stays_one_line_and_full_message_is_reachable (test_audio_production_ui.AudioProductionWorkspace.test_multiline_failure_stays_one_line_and_full_message_is_reachable) ... ok
+test_no_product_keeps_video_entry_and_product_menu_gates_media (test_audio_production_ui.AudioProductionWorkspace.test_no_product_keeps_video_entry_and_product_menu_gates_media) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_same_play_button_stops_finishes_and_recovers_from_failure (test_audio_production_ui.AudioProductionWorkspace.test_same_play_button_stops_finishes_and_recovers_from_failure) ... ok
+test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis (test_audio_production_ui.AudioProductionWorkspace.test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+test_summary_reclaims_status_column_but_keeps_errors_visible (test_audio_production_ui.AudioProductionWorkspace.test_summary_reclaims_status_column_but_keeps_errors_visible) ... ok
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... ok
+
+======================================================================
+FAIL: test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_video_workspace.py", line 120, in test_native_geometry_components_and_scroll_ownership
+    self.assertGreater(page.task_text.yview()[0], .8)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0.7414860681114551 not greater than 0.8
+
+----------------------------------------------------------------------
+Ran 17 tests in 68.023s
+
+FAILED (failures=1)

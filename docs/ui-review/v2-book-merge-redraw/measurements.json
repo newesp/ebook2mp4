@@ -1,0 +1,5239 @@
+{
+  "images": [
+    {
+      "name": "1360-merge-empty",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-short",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-fit",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-overflow",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-long",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-long-end",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1920-merge-short",
+      "size": [
+        1920,
+        1000
+      ]
+    },
+    {
+      "name": "1280-merge-short",
+      "size": [
+        1280,
+        720
+      ]
+    },
+    {
+      "name": "900-merge-short",
+      "size": [
+        900,
+        640
+      ]
+    },
+    {
+      "name": "1360-merge-settings",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "900-merge-settings",
+      "size": [
+        900,
+        640
+      ]
+    },
+    {
+      "name": "1360-merge-partial",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-running",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-done",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-short-route-menu",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-short-batch-videos",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-short-files-fit",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-short-files-overflow",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-merge-short-files-long",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-joins-short",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-joins-fit",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-joins-overflow",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-joins-long",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "900-joins-long-end",
+      "size": [
+        900,
+        640
+      ]
+    },
+    {
+      "name": "1360-source-short",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-source-fit",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-source-overflow",
+      "size": [
+        1360,
+        820
+      ]
+    },
+    {
+      "name": "1360-source-long",
+      "size": [
+        1360,
+        820
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "page": "1360-merge-empty",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "重新檢查來源",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-short",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-fit",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-overflow",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-long",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-long-end",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1920-merge-short",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1684,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1796,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 1208,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 1380,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 1552,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1724,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 1552,
+          "y": 706,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1724,
+          "y": 706,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1724,
+          "y": 754,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1724,
+          "y": 796,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 1552,
+          "y": 840,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1724,
+          "y": 840,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 940,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 1508,
+          "y": 940,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1708,
+          "y": 940,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1280-merge-short",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 16,
+          "y": 64,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 200,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 340,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 476,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1044,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1156,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 117,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 117,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 117,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 568,
+          "y": 178,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 740,
+          "y": 178,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 912,
+          "y": 178,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1084,
+          "y": 178,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 912,
+          "y": 426,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1084,
+          "y": 426,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1084,
+          "y": 474,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1084,
+          "y": 516,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 912,
+          "y": 560,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1084,
+          "y": 560,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 868,
+          "y": 660,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1068,
+          "y": 660,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "900-merge-short",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 16,
+          "y": 64,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 200,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 340,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 476,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 664,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 776,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "›",
+          "x": 16,
+          "y": 117,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 252,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 408,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 564,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 720,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 532,
+          "y": 346,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 704,
+          "y": 346,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 704,
+          "y": 394,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 704,
+          "y": 436,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 532,
+          "y": 480,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 704,
+          "y": 480,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 580,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 488,
+          "y": 580,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 688,
+          "y": 580,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-settings",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "0.5",
+          "x": 352,
+          "y": 526,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "收合停頓設定",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "900-merge-settings",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 16,
+          "y": 64,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 200,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 340,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 476,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 664,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 776,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "›",
+          "x": 16,
+          "y": 117,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 252,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 408,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 564,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 720,
+          "y": 178,
+          "width": 152,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "0.5",
+          "x": 132,
+          "y": 346,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "檢查接點",
+          "x": 532,
+          "y": 346,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "收合停頓設定",
+          "x": 704,
+          "y": 346,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 704,
+          "y": 394,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 704,
+          "y": 436,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 532,
+          "y": 480,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 704,
+          "y": 480,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 580,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 488,
+          "y": 580,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 688,
+          "y": 580,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-partial",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "成品操作",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "只重試未完成輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-running",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "取消任務",
+          "x": 1176,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-done",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "成品操作",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "成品操作",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "輸出均已完成",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-short-route-menu",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-short-batch-videos",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "沿用各批影片",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "檢查批次影片",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "先製作可用音訊 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-short-files-fit",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-short-files-overflow",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-merge-short-files-long",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "選取有效批次",
+          "x": 648,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "上移",
+          "x": 820,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "下移",
+          "x": 992,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "來源詳情",
+          "x": 1164,
+          "y": 133,
+          "width": 168,
+          "height": 36,
+          "role": "source-action"
+        },
+        {
+          "label": "檢查接點",
+          "x": 992,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "調整停頓",
+          "x": 1164,
+          "y": 526,
+          "width": 168,
+          "height": 36,
+          "role": "join-action"
+        },
+        {
+          "label": "成品版本",
+          "x": 1164,
+          "y": 574,
+          "width": 168,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "輸出詳情",
+          "x": 1164,
+          "y": 616,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "統一素材",
+          "x": 992,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "video-route"
+        },
+        {
+          "label": "素材設定",
+          "x": 1164,
+          "y": 660,
+          "width": 168,
+          "height": 36,
+          "role": "output-action"
+        },
+        {
+          "label": "← 返回音訊製做",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存合併設定",
+          "x": 948,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        },
+        {
+          "label": "製作所選輸出 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-joins-short",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "1／3　第一章 → 第二章",
+          "x": 248,
+          "y": 161,
+          "width": 740,
+          "height": 36,
+          "role": "pair"
+        },
+        {
+          "label": "上一個",
+          "x": 992,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "下一個",
+          "x": 1164,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "校對前批結尾",
+          "x": 248,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "校對後批開頭",
+          "x": 796,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "0.5",
+          "x": 356,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "5",
+          "x": 1196,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "播放接點試聽",
+          "x": 248,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "停止試聽",
+          "x": 420,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存設定並返回 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-joins-fit",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "1／3　第一章 → 第二章",
+          "x": 248,
+          "y": 161,
+          "width": 740,
+          "height": 36,
+          "role": "pair"
+        },
+        {
+          "label": "上一個",
+          "x": 992,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "下一個",
+          "x": 1164,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "校對前批結尾",
+          "x": 248,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "校對後批開頭",
+          "x": 796,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "0.5",
+          "x": 356,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "5",
+          "x": 1196,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "播放接點試聽",
+          "x": 248,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "停止試聽",
+          "x": 420,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存設定並返回 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-joins-overflow",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "1／3　第一章 → 第二章",
+          "x": 248,
+          "y": 161,
+          "width": 740,
+          "height": 36,
+          "role": "pair"
+        },
+        {
+          "label": "上一個",
+          "x": 992,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "下一個",
+          "x": 1164,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "校對前批結尾",
+          "x": 248,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "校對後批開頭",
+          "x": 796,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "0.5",
+          "x": 356,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "5",
+          "x": 1196,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "播放接點試聽",
+          "x": 248,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "停止試聽",
+          "x": 420,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存設定並返回 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-joins-long",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "1／3　第一章 → 第二章",
+          "x": 248,
+          "y": 161,
+          "width": 740,
+          "height": 36,
+          "role": "pair"
+        },
+        {
+          "label": "上一個",
+          "x": 992,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "下一個",
+          "x": 1164,
+          "y": 161,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "校對前批結尾",
+          "x": 248,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "校對後批開頭",
+          "x": 796,
+          "y": 468,
+          "width": 536,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "0.5",
+          "x": 356,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "5",
+          "x": 1196,
+          "y": 566,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "播放接點試聽",
+          "x": 248,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "停止試聽",
+          "x": 420,
+          "y": 668,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存設定並返回 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "900-joins-long-end",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 16,
+          "y": 64,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 200,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 340,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 476,
+          "y": 64,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 664,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 776,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "1／3　第一章 → 第二章",
+          "x": 28,
+          "y": 121,
+          "width": 500,
+          "height": 36,
+          "role": "pair"
+        },
+        {
+          "label": "上一個",
+          "x": 532,
+          "y": 121,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "下一個",
+          "x": 704,
+          "y": 121,
+          "width": 168,
+          "height": 36,
+          "role": "pair-nav"
+        },
+        {
+          "label": "校對前批結尾",
+          "x": 28,
+          "y": 312,
+          "width": 416,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "校對後批開頭",
+          "x": 456,
+          "y": 312,
+          "width": 416,
+          "height": 36,
+          "role": "edit-excerpt"
+        },
+        {
+          "label": "0.5",
+          "x": 136,
+          "y": 410,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "5",
+          "x": 736,
+          "y": 410,
+          "width": 92,
+          "height": 36,
+          "role": "input"
+        },
+        {
+          "label": "播放接點試聽",
+          "x": 28,
+          "y": 472,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "停止試聽",
+          "x": 200,
+          "y": 472,
+          "width": 168,
+          "height": 36,
+          "role": "playback"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 580,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "儲存設定並返回 →",
+          "x": 688,
+          "y": 580,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-source-short",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "前往此批次製作 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-source-fit",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "前往此批次製作 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-source-overflow",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "前往此批次製作 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    },
+    {
+      "page": "1360-source-long",
+      "controls": [
+        {
+          "label": "1 文稿",
+          "x": 16,
+          "y": 16,
+          "width": 104,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "2 試聽與製作",
+          "x": 124,
+          "y": 16,
+          "width": 140,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "語音設定與試聽",
+          "x": 280,
+          "y": 16,
+          "width": 156,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "音訊製做",
+          "x": 464,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "全書合併",
+          "x": 604,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "影片製作",
+          "x": 740,
+          "y": 16,
+          "width": 112,
+          "height": 36,
+          "role": "navigation"
+        },
+        {
+          "label": "專案",
+          "x": 1124,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "訊息記錄",
+          "x": 1236,
+          "y": 16,
+          "width": 108,
+          "height": 36,
+          "role": "global"
+        },
+        {
+          "label": "‹",
+          "x": 16,
+          "y": 72,
+          "width": 36,
+          "height": 36,
+          "role": "icon"
+        },
+        {
+          "label": "匯入",
+          "x": 56,
+          "y": 72,
+          "width": 80,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "管理",
+          "x": 140,
+          "y": 72,
+          "width": 84,
+          "height": 36,
+          "role": "action"
+        },
+        {
+          "label": "← 返回全書合併",
+          "x": 16,
+          "y": 760,
+          "width": 168,
+          "height": 36,
+          "role": "footer-back"
+        },
+        {
+          "label": "前往此批次製作 →",
+          "x": 1148,
+          "y": 760,
+          "width": 196,
+          "height": 36,
+          "role": "footer-action"
+        }
+      ]
+    }
+  ],
+  "source_sha256": "d64e376eeffb3a5a0e67b7fae57eba35711817db9f998596d309dea7c9b14925"
+}

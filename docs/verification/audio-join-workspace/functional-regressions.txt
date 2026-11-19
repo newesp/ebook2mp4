@@ -1,0 +1,234 @@
+test_each_pdf_warning_requires_explicit_confirmation (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_each_pdf_warning_requires_explicit_confirmation) ... ok
+test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_edit_return_uses_current_book_when_two_books_have_pending_returns) ... ok
+test_join_page_save_preview_edit_return_and_sizes (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_join_page_save_preview_edit_return_and_sizes) ... ok
+test_leave_during_preparation_never_starts_hidden_audio (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_leave_during_preparation_never_starts_hidden_audio) ... ok
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+test_each_pdf_warning_requires_explicit_confirmation (test_audio_join_workspace.AudioJoinWorkspace.test_each_pdf_warning_requires_explicit_confirmation) ... ok
+test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_audio_join_workspace.AudioJoinWorkspace.test_edit_return_uses_current_book_when_two_books_have_pending_returns) ... ok
+test_join_page_save_preview_edit_return_and_sizes (test_audio_join_workspace.AudioJoinWorkspace.test_join_page_save_preview_edit_return_and_sizes) ... ok
+test_leave_during_preparation_never_starts_hidden_audio (test_audio_join_workspace.AudioJoinWorkspace.test_leave_during_preparation_never_starts_hidden_audio) ... ok
+test_mock_parent_grid_and_native_red_green (test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green) ... ok
+test_preview_content_scope_stop_on_edit_and_save_failure (test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure) ... ok
+test_cancel_and_changed_manuscript_do_not_leave_preview_resources (test_assembly_joins.AssemblyJoinJourney.test_cancel_and_changed_manuscript_do_not_leave_preview_resources) ... ok
+test_fractional_clip_boundary_does_not_create_empty_caption (test_assembly_joins.AssemblyJoinJourney.test_fractional_clip_boundary_does_not_create_empty_caption) ... ERROR
+test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) ... 
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=0, count=1) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=0, count=2) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=0, count=3) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=500, count=1) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=500, count=2) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=500, count=3) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=5000, count=1) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=5000, count=2) ... ERROR
+  test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=5000, count=3) ... ERROR
+test_pause_bounds_and_reopen (test_assembly_joins.AssemblyJoinJourney.test_pause_bounds_and_reopen) ... ok
+test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions (test_assembly_joins.AssemblyJoinJourney.test_pdf_warning_confirmation_is_bound_to_order_and_audio_versions) ... ok
+test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) ... 
+  test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=0) ... ERROR
+  test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=500) ... ERROR
+  test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=5000) ... ERROR
+test_source_changed_after_preview_preparation_is_not_played (test_assembly_joins.AssemblyJoinJourney.test_source_changed_after_preview_preparation_is_not_played) ... ok
+test_txt_and_single_batch_have_no_page_warnings (test_assembly_joins.AssemblyJoinJourney.test_txt_and_single_batch_have_no_page_warnings) ... ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_mock_alignment_scroll_geometry_and_footer_at_supported_sizes) ... ok
+test_publication_failure_retries_same_completed_media (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_publication_failure_retries_same_completed_media) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_source_reading_does_not_block_main_window_cancellation) ... ok
+Native menu caption: outer=144, required=52, old-label=8, fixed-label=52
+test_video_preferences_cannot_redirect_or_start_video (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_video_preferences_cannot_redirect_or_start_video) ... Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2093, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 876, in callit
+    func(*args, **kw)
+    ~~~~^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\manuscript_desktop.py", line 790, in layout_workspace
+    self.production.sync_chrome()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 230, in sync_chrome
+    self.current.assembly_workspace.resized()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\assembly_workspace.py", line 180, in resized
+    elif not self.header_hint.winfo_manager():self.header_hint.pack(side='left',padx=20)
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1281, in winfo_manager
+    return self.tk.call('winfo', 'manager', self._w)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: bad window path name ".!workbench.!frame.!productionworkspace.!frame2.!assemblypage.!frame.!label2"
+ok
+test_damaged_old_total_does_not_block_rebuilding_from_valid_batches (test_total_audio_desktop.TotalAudioDesktop.test_damaged_old_total_does_not_block_rebuilding_from_valid_batches) ... ok
+test_gui_selection_save_reorder_and_production_stay_in_main_window (test_total_audio_desktop.TotalAudioDesktop.test_gui_selection_save_reorder_and_production_stay_in_main_window) ... ok
+test_leaving_page_cancels_pending_playback_verification (test_total_audio_desktop.TotalAudioDesktop.test_leaving_page_cancels_pending_playback_verification) ... ok
+test_main_window_busy_guard_invalid_source_and_minimum_size (test_total_audio_desktop.TotalAudioDesktop.test_main_window_busy_guard_invalid_source_and_minimum_size) ... ok
+test_source_reading_does_not_block_main_window_cancellation (test_total_audio_desktop.TotalAudioDesktop.test_source_reading_does_not_block_main_window_cancellation) ... ok
+
+======================================================================
+ERROR: test_fractional_clip_boundary_does_not_create_empty_caption (test_assembly_joins.AssemblyJoinJourney.test_fractional_clip_boundary_does_not_create_empty_caption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 191, in test_fractional_clip_boundary_does_not_create_empty_caption
+    subprocess.run([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(wav),
+                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=0, count=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=0, count=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=0, count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=500, count=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=500, count=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=500, count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=5000, count=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=5000, count=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_one_two_three_batches_at_all_pause_limits (test_assembly_joins.AssemblyJoinJourney.test_one_two_three_batches_at_all_pause_limits) (pause=5000, count=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 121, in test_one_two_three_batches_at_all_pause_limits
+    self.assertEqual(len(self.pcm(self.flow.total_audio_path()))//48, expected)
+                         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 95, in test_preview_reuses_audio_matches_total_timeline_and_releases_files
+    pcm = self.pcm(path)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=500)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 95, in test_preview_reuses_audio_matches_total_timeline_and_releases_files
+    pcm = self.pcm(path)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+======================================================================
+ERROR: test_preview_reuses_audio_matches_total_timeline_and_releases_files (test_assembly_joins.AssemblyJoinJourney.test_preview_reuses_audio_matches_total_timeline_and_releases_files) (pause=5000)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_assembly_joins.py", line 95, in test_preview_reuses_audio_matches_total_timeline_and_releases_files
+    pcm = self.pcm(path)
+  File "E:\Leo\Projects\ebook2mp4\tests\test_total_audio.py", line 50, in pcm
+    return subprocess.check_output([os.environ['EBOOK2MP4_FFMPEG'], '-v', 'error', '-i', str(path),
+                                    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "<frozen os>", line 709, in __getitem__
+KeyError: 'EBOOK2MP4_FFMPEG'
+
+----------------------------------------------------------------------
+Ran 32 tests in 402.012s
+
+FAILED (errors=13)

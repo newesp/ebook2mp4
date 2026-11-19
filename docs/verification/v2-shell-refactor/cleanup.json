@@ -1,0 +1,48 @@
+{
+  "release": "dist/ebook2mp4/ebook2mp4.exe",
+  "workspace": "E:\\Leo\\Projects\\ebook2mp4",
+  "time": "2026-11-13T16:59:17.5950156+08:00",
+  "exclusive_release_files": 1905,
+  "normal_ui_exit": true,
+  "remaining_processes": [],
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "files": 4498
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "files": 2
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "files": 28
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "files": 16
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\v2-shell-refactor",
+      "files": 206
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmp5lqsodyb",
+      "files": 5
+    }
+  ],
+  "retained_older_test_directories": [
+    {
+      "Name": "tmp5ck14ky0",
+      "CreationTime": "2026-11-02T22:48:31.8170124+08:00"
+    },
+    {
+      "Name": "tmpk70kv66w",
+      "CreationTime": "2026-11-02T22:51:32.8334827+08:00"
+    }
+  ],
+  "lock_failures": [],
+  "v1_actions": "No build, launch, test or dedicated hash verification",
+  "exe_sha256": "F2433EE9E6BDAB00C067058C0797F145F5E1545B70ED59E49B4552C5A5015890",
+  "ownership": "Explicit task directories created during this session; failed fixture tmp5lqsodyb matched the 2026-11-13 13:13:28 test and synthetic project before removal."
+}

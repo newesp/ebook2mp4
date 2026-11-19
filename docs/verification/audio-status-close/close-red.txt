@@ -1,0 +1,33 @@
+test_close_after_returning_from_audio (test_close_lifecycle.CloseLifecycle.test_close_after_returning_from_audio) ... ok
+test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page) ... FAIL
+test_close_from_audio (test_close_lifecycle.CloseLifecycle.test_close_from_audio) ... invalid command name "2336720444288close"
+    while executing
+"2336720444288close"
+    ("after" script)
+invalid command name "2336720339776poll"
+    while executing
+"2336720339776poll"
+    ("after" script)
+invalid command name "2336686968832close"
+    while executing
+"2336686968832close"
+    ("after" script)
+ok
+test_close_with_service_page (test_close_lifecycle.CloseLifecycle.test_close_with_service_page) ... ok
+
+======================================================================
+FAIL: test_close_after_video_page (test_close_lifecycle.CloseLifecycle.test_close_after_video_page)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_close_lifecycle.py", line 48, in test_close_after_video_page
+    self.close_window()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\tests\test_close_lifecycle.py", line 29, in close_window
+    self.assertFalse(alive,repr(errors))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false : []
+
+----------------------------------------------------------------------
+Ran 4 tests in 12.768s
+
+FAILED (failures=1)

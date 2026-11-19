@@ -1,0 +1,563 @@
+{
+  "native_frames": 66,
+  "headers": [
+    {
+      "name": "manuscript-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "versions-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "versions-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "versions-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "versions-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "ai-settings-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "ai-settings-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "ai-settings-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "ai-settings-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "source-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "source-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "source-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "source-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "voice-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "voice-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "voice-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "voice-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "audio-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "audio-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "audio-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "audio-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "assembly-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "assembly-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-batch-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-batch-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-batch-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-batch-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-book-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-book-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-book-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-book-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-merge-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-merge-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-merge-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-merge-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "outputs-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "outputs-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "outputs-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "outputs-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "services-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "services-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "services-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "services-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "packages-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "packages-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "packages-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "packages-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "defaults-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "defaults-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "defaults-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "defaults-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-joins-1360x820",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-joins-1280x720",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-joins-900x640",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "video-joins-maximized",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-18pt",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "manuscript-18pt",
+      "delta": [
+        0,
+        0
+      ]
+    },
+    {
+      "name": "versions-18pt",
+      "delta": [
+        0,
+        0
+      ]
+    }
+  ],
+  "fixed_instances": {
+    "navigation": true,
+    "documents": true,
+    "workspace": true,
+    "footer": true,
+    "editor": true
+  },
+  "tests": [
+    {
+      "suite": "test_close_lifecycle",
+      "count": 5,
+      "skipped": 0
+    },
+    {
+      "suite": "test_kokoro",
+      "count": 3,
+      "skipped": 1
+    },
+    {
+      "suite": "test_kokoro_desktop",
+      "count": 1,
+      "skipped": 0
+    },
+    {
+      "suite": "test_kokoro_remember_desktop",
+      "count": 1,
+      "skipped": 0
+    },
+    {
+      "suite": "test_manuscript_cleanup",
+      "count": 9,
+      "skipped": 0
+    },
+    {
+      "suite": "test_ocr_desktop",
+      "count": 1,
+      "skipped": 1
+    },
+    {
+      "suite": "test_output_versions",
+      "count": 4,
+      "skipped": 0
+    },
+    {
+      "suite": "test_service_management",
+      "count": 8,
+      "skipped": 0
+    },
+    {
+      "suite": "test_source_issue_view",
+      "count": 3,
+      "skipped": 0
+    },
+    {
+      "suite": "test_total_audio",
+      "count": 12,
+      "skipped": 0
+    },
+    {
+      "suite": "test_total_video",
+      "count": 6,
+      "skipped": 0
+    },
+    {
+      "suite": "test_ui_scroll_contract",
+      "count": 4,
+      "skipped": 0
+    },
+    {
+      "suite": "test_unified_manuscript",
+      "count": 21,
+      "skipped": 0
+    },
+    {
+      "suite": "test_unified_shell_integration",
+      "count": 6,
+      "skipped": 0
+    },
+    {
+      "suite": "test_v2_ai_settings",
+      "count": 3,
+      "skipped": 0
+    },
+    {
+      "suite": "test_v2_cleanup_shell",
+      "count": 10,
+      "skipped": 0
+    },
+    {
+      "suite": "test_v2_manuscript_shell",
+      "count": 5,
+      "skipped": 0
+    },
+    {
+      "suite": "test_v2_versions",
+      "count": 3,
+      "skipped": 0
+    },
+    {
+      "suite": "test_video_merge",
+      "count": 8,
+      "skipped": 0
+    },
+    {
+      "suite": "test_voice_setting_restore",
+      "count": 3,
+      "skipped": 0
+    }
+  ],
+  "executed": 114
+}

@@ -1,0 +1,16 @@
+{
+  "date": "2026-11-19",
+  "os": "Microsoft Windows 11 家用版",
+  "version": "10.0.26200",
+  "architecture": "64-bit",
+  "model": "Aspire A514-53G",
+  "hypervisor_present": true,
+  "virtual_machine_platform": "Enabled",
+  "windows_sandbox_executable_present": false,
+  "vmware_workstation_executable_present": false,
+  "virtualbox_executable_present": false,
+  "connected_remote_device": "Offline",
+  "clean_windows_available": false,
+  "user_decision": "沒有，請先完成本機可做的部分",
+  "scope": "Existing development host only; cannot satisfy clean Windows criterion."
+}

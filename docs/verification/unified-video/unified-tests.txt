@@ -1,0 +1,19 @@
+test_merge_without_total_audio_keeps_task_and_tab_content (test_unified_video_workspace.UnifiedVideoWorkspace.test_merge_without_total_audio_keeps_task_and_tab_content) ... ok
+test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership) ... FAIL
+test_routes_keep_drafts_native_tabs_and_real_products (test_unified_video_workspace.UnifiedVideoWorkspace.test_routes_keep_drafts_native_tabs_and_real_products) ... ok
+
+======================================================================
+FAIL: test_native_geometry_components_and_scroll_ownership (test_unified_video_workspace.UnifiedVideoWorkspace.test_native_geometry_components_and_scroll_ownership)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_unified_video_workspace.py", line 92, in test_native_geometry_components_and_scroll_ownership
+    self.assertIs(self.root.winfo_containing(page.canvas.winfo_rootx()+page.canvas.winfo_width()//2,
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                  page.canvas.winfo_rooty()+page.canvas.winfo_height()//2), page.canvas)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None is not <tkinter.Canvas object .!workbench.!frame2.!productionworkspace.!frame2.!totalvideopage.!frame3.!frame2.!canvas>
+
+----------------------------------------------------------------------
+Ran 3 tests in 50.078s
+
+FAILED (failures=1)

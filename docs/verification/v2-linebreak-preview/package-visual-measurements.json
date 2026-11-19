@@ -1,0 +1,25 @@
+{
+  "image": [
+    1920,
+    1020
+  ],
+  "encoding": "JPEG",
+  "unit": "approximate physical screenshot pixels; separate from Tk coordinates",
+  "header_top": [
+    110,
+    110
+  ],
+  "content_top": [
+    171,
+    171
+  ],
+  "button_height": [
+    46,
+    46
+  ],
+  "minor_raster_uncertainty": "Lossy tool capture; exact native Tk values are recorded separately.",
+  "minimum_window_image": [
+    1127,
+    840
+  ]
+}

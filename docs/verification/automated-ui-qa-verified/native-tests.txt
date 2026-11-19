@@ -1,0 +1,52 @@
+test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) ... 
+  test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) (size='900x640', font_points=13) ... FAIL
+
+======================================================================
+FAIL: test_spacing_at_acceptance_sizes (test_voice_spacing.VoiceSpacing.test_spacing_at_acceptance_sizes) (size='900x640', font_points=13)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_spacing.py", line 94, in test_spacing_at_acceptance_sizes
+    self.assertTrue(viewable, '試聽文字框應可見')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : 試聽文字框應可見
+
+----------------------------------------------------------------------
+Ran 1 test in 8.986s
+
+FAILED (failures=1)
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.131s
+
+OK
+test_mock_parent_grid_and_native_red_green (test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 12.310s
+
+OK
+test_native_scroll_owners_and_short_fit_overflow_contract (test_audio_join_workspace.AudioJoinWorkspace.test_native_scroll_owners_and_short_fit_overflow_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 10.718s
+
+OK
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 21.275s
+
+OK
+test_shared_header_and_content_anchors (test_audio_join_corrections.JoinCorrections.test_shared_header_and_content_anchors) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 50.750s
+
+OK
+test_preview_content_scope_stop_on_edit_and_save_failure (test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 9.882s
+
+OK

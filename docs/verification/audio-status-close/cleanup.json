@@ -1,0 +1,50 @@
+{
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-cache",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-status-close",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\status-close-package.py",
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\close-probe.py",
+      "removed": true
+    }
+  ],
+  "exe_sha256": "C71CD78968DE941A0C6E15895233948B19DCA165BF5D0F783A6DC4E210EF9A6B",
+  "exclusive_product_open": true,
+  "product_files_checked": 1905,
+  "remaining_test_directories": [
+    {
+      "Name": "tmp5ck14ky0",
+      "CreationTime": "2026-11-02T22:48:31.8170124+08:00"
+    },
+    {
+      "Name": "tmpk70kv66w",
+      "CreationTime": "2026-11-02T22:51:32.8334827+08:00"
+    }
+  ],
+  "processes_remaining": []
+}

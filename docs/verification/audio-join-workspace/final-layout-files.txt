@@ -1,0 +1,8 @@
+test_file_selection_uses_existing_document_command_without_changing_join_order (test_audio_join_workspace.AudioJoinWorkspace.test_file_selection_uses_existing_document_command_without_changing_join_order) ... ok
+test_mock_parent_grid_and_native_red_green (test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green) ... ok
+test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_audio_join_workspace.AudioJoinWorkspace.test_edit_return_uses_current_book_when_two_books_have_pending_returns) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 31.933s
+
+OK

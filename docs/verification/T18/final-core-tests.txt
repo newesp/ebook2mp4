@@ -1,0 +1,7 @@
+test_batch_image_offline_isolation_and_stale_source (test_batch_video.BatchVideoJourney.test_batch_image_offline_isolation_and_stale_source) ... ok
+test_background_modes_cancel_and_wrong_target_publication (test_batch_video.BatchVideoJourney.test_background_modes_cancel_and_wrong_target_publication) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 14.042s
+
+OK

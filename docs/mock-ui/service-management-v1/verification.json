@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "single menu, edit and delete layout 1360x820",
+    "single menu, edit and delete layout 1040x640",
+    "single menu, edit and delete layout 390x844",
+    "builtins and add menu actions"
+  ],
+  "console_errors": [],
+  "result": "passed",
+  "note": "supersedes button-based mock verification"
+}

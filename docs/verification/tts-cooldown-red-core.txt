@@ -1,0 +1,22 @@
+test_excessive_retry_after_stops_instead_of_waiting_21_hours (test_tts_retry.RetryRecovery.test_excessive_retry_after_stops_instead_of_waiting_21_hours) ... FAIL
+
+======================================================================
+FAIL: test_excessive_retry_after_stops_instead_of_waiting_21_hours (test_tts_retry.RetryRecovery.test_excessive_retry_after_stops_instead_of_waiting_21_hours)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_tts_retry.py", line 160, in test_excessive_retry_after_stops_instead_of_waiting_21_hours
+    self.assertEqual(sleeps, [], 'A 21-hour cooldown must not keep production busy')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [77813.0, 77813.0] != []
+
+First list contains 2 additional elements.
+First extra element 0:
+77813.0
+
+- [77813.0, 77813.0]
++ [] : A 21-hour cooldown must not keep production busy
+
+----------------------------------------------------------------------
+Ran 1 test in 2.310s
+
+FAILED (failures=1)

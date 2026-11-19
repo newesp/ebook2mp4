@@ -1,0 +1,9 @@
+test_action_replacement_removes_old_callback_and_busy_disables_current (test_v2_manuscript_shell.ManuscriptShellTests.test_action_replacement_removes_old_callback_and_busy_disables_current) ... ok
+test_pdf_action_gaps_match_editor_and_survive_source_transitions (test_v2_manuscript_shell.ManuscriptShellTests.test_pdf_action_gaps_match_editor_and_survive_source_transitions) ... ok
+test_return_stays_left_and_busy_cancel_remains_available (test_v2_manuscript_shell.ManuscriptShellTests.test_return_stays_left_and_busy_cancel_remains_available) ... ok
+test_shell_survives_tools_production_and_collapsing_without_losing_editor (test_v2_manuscript_shell.ManuscriptShellTests.test_shell_survives_tools_production_and_collapsing_without_losing_editor) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 16.471s
+
+OK

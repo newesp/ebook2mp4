@@ -1,0 +1,31 @@
+fresh-import 0.28 模型已卸載
+fresh-import 165.78300230007153 {'status': 'completed', 'error': ''}
+corrupt 0.06136180006433278 {'status': 'failed', 'error': '語音包損毀、不完整或版本不相容。請重新下載與本程式相符的完整語音包。'}
+wrong-version 0.02033970004413277 {'status': 'failed', 'error': '語音包損毀、不完整或版本不相容。請重新下載與本程式相符的完整語音包。'}
+repair-installed-worker 0.29 模型已卸載
+repair-installed-worker 199.18067670008168 {'status': 'completed', 'error': ''}
+first-preview-offline 0.22 模型已卸載
+first-preview-offline 3.17 檢查語音包
+first-preview-offline 3.37 檢查語音包 0/997
+first-preview-offline 26.98 檢查語音包 200/997
+first-preview-offline 31.87 檢查語音包 400/997
+first-preview-offline 36.57 檢查語音包 600/997
+first-preview-offline 44.99 檢查語音包 800/997
+first-preview-offline 63.78 載入本機模型
+first-preview-offline 294.57 本機合成
+first-preview-offline 372.45 本機合成完成
+first-preview-offline 373.6434384000022 {'status': 'completed', 'error': ''}
+formal-batch-1 0.22 本機合成完成
+formal-batch-1 0.7442554000299424 {'status': 'completed', 'error': '', 'phase': '等待保存', 'current': 1, 'total': 1, 'completed': 1, 'failed': 0, 'chunks': [{'id': '3059f95bb0eb3b633d757b10849aaf80b1246465f31eaed915ae8bc40b59b359', 'order': 0, 'text': '第一批，臺北的圖書館。Hello world。', 'separator_after': '', 'text_sha256': 'd0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084', 'pause_after_ms': 0, 'settings_sha256': '9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839', 'rules_sha256': 'ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417', 'status': 'completed', 'attempts': 0, 'duration_ms': 4050, 'reused': True, 'frames': 97200, 'start_ms': 0, 'end_ms': 4050}], 'duration_ms': 4050}
+formal-batch-2 0.2 本機合成
+formal-batch-2 4.4 本機合成完成
+formal-batch-2 5.077052699984051 {'status': 'completed', 'error': '', 'phase': '等待保存', 'current': 1, 'total': 1, 'completed': 1, 'failed': 0, 'chunks': [{'id': '12e4522f99d7472ce7fe03f5a7badf8893a9b1c1b5a24f746b263060c6d162a2', 'order': 0, 'text': '第二批，今天的故事結束了。晚安。', 'separator_after': '', 'text_sha256': 'bb8fc92743846bd8b9f29286c6d4dcb9b218dca2e6f07c35581955871ef67143', 'pause_after_ms': 0, 'settings_sha256': '9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839', 'rules_sha256': 'ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417', 'status': 'completed', 'attempts': 1, 'duration_ms': 3925, 'reused': False, 'frames': 94200, 'start_ms': 0, 'end_ms': 3925}], 'retry_deadline': None, 'duration_ms': 3925}
+total-audio 0.2 本機合成完成
+total-audio 1.368024899973534 {'status': 'completed', 'error': '', 'phase': '等待保存', 'current': 2, 'total': 2, 'completed': 2, 'sources': [{'batch_id': '33d97a890c5b4ab09c1f1ffdcd5d36c8', 'status': 'completed', 'attempts': 1, 'frames': 94200, 'start_ms': 0, 'duration_ms': 3925}, {'batch_id': '79dbad963d60443aad34558de3871702', 'status': 'completed', 'attempts': 1, 'frames': 97200, 'start_ms': 4425, 'duration_ms': 4050}], 'attempt': 1, 'duration_ms': 8475, 'frames': 203400, 'planned_frames': 203400, 'artifacts': {'mp3': {'path': 'assembly/run-08d22a6d08bc4a53828393401c3aff6d/media/total.mp3', 'sha256': 'b504b392d395a7d8373b6c797725d9bdc3d938b0a60c1c9dc1b3db08d57c76cf'}, 'srt': {'path': 'assembly/run-08d22a6d08bc4a53828393401c3aff6d/media/total.srt', 'sha256': 'ed411aab4fa294a95afdbd724a80b937ce954d69121ffb4bdbdf2b7bfdfc8aa9'}}, 'artifact_stats': {'mp3': (102861, 1795064891503805300, 1795064891428649000), 'srt': (163, 1795064891516810300, 1795064891515806000)}}
+total-video-1 0.2 本機合成完成
+total-video-1 4.722868999931961 {'status': 'completed', 'error': '', 'phase': '等待保存', 'completed': 100, 'total': 100}
+total-video-2 0.21 本機合成完成
+total-video-2 4.2876897000242025 {'status': 'completed', 'error': '', 'phase': '等待保存', 'completed': 100, 'total': 100}
+cancel-inference 1.67 模型已卸載
+cancel-inference 1.6706767999567091 {'status': 'cancelled', 'error': ''}
+cancel-formal 0.062351100030355155 {'status': 'cancelled', 'error': '', 'phase': '準備', 'current': 0, 'total': 1, 'completed': 0, 'failed': 0, 'chunks': [{'id': '3059f95bb0eb3b633d757b10849aaf80b1246465f31eaed915ae8bc40b59b359', 'order': 0, 'text': '第一批，臺北的圖書館。Hello world。', 'separator_after': '', 'text_sha256': 'd0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084', 'pause_after_ms': 0, 'settings_sha256': '9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839', 'rules_sha256': 'ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417', 'status': 'pending', 'attempts': 0, 'duration_ms': None}]}

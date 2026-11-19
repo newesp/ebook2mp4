@@ -1,0 +1,6 @@
+test_join_page_save_preview_edit_return_and_sizes (test_assembly_joins_desktop.AssemblyJoinsDesktop.test_join_page_save_preview_edit_return_and_sizes) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 14.719s
+
+OK

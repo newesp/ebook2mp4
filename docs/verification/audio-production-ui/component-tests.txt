@@ -1,0 +1,95 @@
+
+EXPECTED DEFECT REJECTION: default_combobox_height
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... 
+  test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1536, height=864) ... FAIL
+  test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1280, height=720) ... FAIL
+  test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=900, height=640) ... FAIL
+
+======================================================================
+FAIL: test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1536, height=864)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 38, in test_toolbar_controls_align_and_product_menu_has_one_native_indicator
+    self.assertLessEqual(abs(choice.winfo_height()-peer.winfo_height()),2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 14 not less than or equal to 2
+
+======================================================================
+FAIL: test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1280, height=720)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 38, in test_toolbar_controls_align_and_product_menu_has_one_native_indicator
+    self.assertLessEqual(abs(choice.winfo_height()-peer.winfo_height()),2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 14 not less than or equal to 2
+
+======================================================================
+FAIL: test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=900, height=640)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 38, in test_toolbar_controls_align_and_product_menu_has_one_native_indicator
+    self.assertLessEqual(abs(choice.winfo_height()-peer.winfo_height()),2)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 14 not less than or equal to 2
+
+----------------------------------------------------------------------
+Ran 1 test in 3.817s
+
+FAILED (failures=3)
+Confirmed: measured regression assertions rejected the original defect at all three sizes.
+
+EXPECTED DEFECT REJECTION: duplicate_menu_arrow
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... 
+  test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1536, height=864) ... FAIL
+  test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1280, height=720) ... FAIL
+  test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=900, height=640) ... FAIL
+
+======================================================================
+FAIL: test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1536, height=864)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 54, in test_toolbar_controls_align_and_product_menu_has_one_native_indicator
+    self.assertEqual(groups+manual_indicators,1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=1280, height=720)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 54, in test_toolbar_controls_align_and_product_menu_has_one_native_indicator
+    self.assertEqual(groups+manual_indicators,1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+======================================================================
+FAIL: test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) (width=900, height=640)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_audio_production_ui.py", line 54, in test_toolbar_controls_align_and_product_menu_has_one_native_indicator
+    self.assertEqual(groups+manual_indicators,1)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 2 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 2.751s
+
+FAILED (failures=3)
+Confirmed: measured regression assertions rejected the original defect at all three sizes.
+
+FIXED SOURCE: complete affected audio workspace suite
+test_audio_owns_primary_action_and_other_pages_restore_shared_action (test_audio_production_ui.AudioProductionWorkspace.test_audio_owns_primary_action_and_other_pages_restore_shared_action) ... ok
+test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch (test_audio_production_ui.AudioProductionWorkspace.test_cancelled_cloud_consent_survives_recheck_and_blocks_dispatch) ... ok
+test_historical_snapshot_stale_guard_and_local_consent_context (test_audio_production_ui.AudioProductionWorkspace.test_historical_snapshot_stale_guard_and_local_consent_context) ... ok
+test_multiline_failure_stays_one_line_and_full_message_is_reachable (test_audio_production_ui.AudioProductionWorkspace.test_multiline_failure_stays_one_line_and_full_message_is_reachable) ... ok
+test_no_product_keeps_video_entry_and_product_menu_gates_media (test_audio_production_ui.AudioProductionWorkspace.test_no_product_keeps_video_entry_and_product_menu_gates_media) ... ok
+test_primary_list_budget_busy_controls_and_minimum_fallback (test_audio_production_ui.AudioProductionWorkspace.test_primary_list_budget_busy_controls_and_minimum_fallback) ... ok
+test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis (test_audio_production_ui.AudioProductionWorkspace.test_save_retry_keeps_previous_product_and_does_not_repeat_synthesis) ... ok
+test_sidebar_releases_track_and_reopens_from_audio_page (test_audio_production_ui.AudioProductionWorkspace.test_sidebar_releases_track_and_reopens_from_audio_page) ... ok
+test_source_and_navigation_retain_selection_scroll_and_parent_tab (test_audio_production_ui.AudioProductionWorkspace.test_source_and_navigation_retain_selection_scroll_and_parent_tab) ... ok
+test_toolbar_controls_align_and_product_menu_has_one_native_indicator (test_audio_production_ui.AudioProductionWorkspace.test_toolbar_controls_align_and_product_menu_has_one_native_indicator) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 26.948s
+
+OK

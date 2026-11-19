@@ -1,0 +1,150 @@
+{
+  "settings": {
+    "provider": "kokoro",
+    "voice": "zf_001",
+    "rate": "+0%",
+    "processing": "kokoro-t2s-v1",
+    "sentence_pause_ms": 0,
+    "paragraph_pause_ms": 500,
+    "package": "kokoro-zh-cpu-78fb4b82d084294e",
+    "model": "01e7505bd6a7a2ac4975463114c3a7650a9f7218"
+  },
+  "files": {
+    "preview": {
+      "path": "batches\\79dbad963d60443aad34558de3871702\\voice-preview-e3108da38388452bbb864666b2049c53.mp3",
+      "sha256": "a2365ea052f804830ceb3b4c753ec720ed25a4bf43354577d6cb8f072b89f775",
+      "bytes": 83565
+    },
+    "mp3": {
+      "path": "batches\\79dbad963d60443aad34558de3871702\\narration-affa0555634940c2afd55b16daf976fb\\media\\narration.mp3",
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4",
+      "bytes": 49581
+    },
+    "srt": {
+      "path": "batches\\79dbad963d60443aad34558de3871702\\narration-affa0555634940c2afd55b16daf976fb\\media\\narration.srt",
+      "sha256": "6abbbabd78be1a2a7d9579267cba1997c93197e2dd7624bf0b5b414d3d92b140",
+      "bytes": 81
+    },
+    "total_mp3": {
+      "path": "assembly\\run-08d22a6d08bc4a53828393401c3aff6d\\media\\total.mp3",
+      "sha256": "b504b392d395a7d8373b6c797725d9bdc3d938b0a60c1c9dc1b3db08d57c76cf",
+      "bytes": 102861
+    },
+    "total_srt": {
+      "path": "assembly\\run-08d22a6d08bc4a53828393401c3aff6d\\media\\total.srt",
+      "sha256": "ed411aab4fa294a95afdbd724a80b937ce954d69121ffb4bdbdf2b7bfdfc8aa9",
+      "bytes": 163
+    },
+    "mp4": {
+      "path": "video\\run-1c4e492476044b8e904bbeab751c869d\\media\\total.mp4",
+      "sha256": "93403372072fed05128b5fc5921c3f05839fbf0dc1c296451b1348efe7b69076",
+      "bytes": 213775
+    }
+  },
+  "preview": {
+    "id": "e3108da38388452bbb864666b2049c53",
+    "batch_id": "79dbad963d60443aad34558de3871702",
+    "created_at": "2026-11-19T05:15:13.721788+00:00",
+    "text": "今天，讓我們一起聽一本好書。Hello, welcome to your audiobook. 這是語音試聽範例。",
+    "source": "selection",
+    "start": 0,
+    "end": 57,
+    "revision": 1,
+    "settings": {
+      "provider": "kokoro",
+      "voice": "zf_001",
+      "rate": "+0%",
+      "processing": "kokoro-t2s-v1",
+      "sentence_pause_ms": 0,
+      "paragraph_pause_ms": 500,
+      "package": "kokoro-zh-cpu-78fb4b82d084294e",
+      "model": "01e7505bd6a7a2ac4975463114c3a7650a9f7218"
+    },
+    "rules": {
+      "version": "rhythm-block-v3",
+      "request_escaped_utf8_bytes": 240,
+      "sentence_pause_ms": 0,
+      "paragraph_pause_ms": 500,
+      "timing": "measured-block-pcm",
+      "sample_rate": 24000,
+      "max_attempts": 1
+    },
+    "chunks": [
+      {
+        "id": "f640cbd235a3bd45e1fea184b702e9d848e803c6a1387e3f8436d3fdec59e0d9",
+        "order": 0,
+        "text": "今天，讓我們一起聽一本好書。Hello, welcome to your audiobook. 這是語音試聽範例。",
+        "separator_after": "",
+        "text_sha256": "13963ad916eeb03495cb0e6aa42d37a1fa7c93dbd19164204dc4e2ba883acf4c",
+        "pause_after_ms": 0,
+        "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+        "rules_sha256": "ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417"
+      }
+    ],
+    "audio": {
+      "path": "batches/79dbad963d60443aad34558de3871702/voice-preview-e3108da38388452bbb864666b2049c53.mp3",
+      "sha256": "a2365ea052f804830ceb3b4c753ec720ed25a4bf43354577d6cb8f072b89f775"
+    }
+  },
+  "formal": {
+    "id": "affa0555634940c2afd55b16daf976fb",
+    "batch_id": "79dbad963d60443aad34558de3871702",
+    "reading_id": "10464866507c408f9c53056deba43c59",
+    "created_at": "2026-11-19T05:08:25.968098+00:00",
+    "text": "第一批，臺北的圖書館。Hello world。",
+    "text_sha256": "d0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084",
+    "settings": {
+      "provider": "kokoro",
+      "voice": "zf_001",
+      "rate": "+0%",
+      "processing": "kokoro-t2s-v1",
+      "sentence_pause_ms": 0,
+      "paragraph_pause_ms": 500,
+      "package": "kokoro-zh-cpu-78fb4b82d084294e",
+      "model": "01e7505bd6a7a2ac4975463114c3a7650a9f7218"
+    },
+    "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+    "rules": {
+      "version": "rhythm-block-v3",
+      "request_escaped_utf8_bytes": 240,
+      "sentence_pause_ms": 0,
+      "paragraph_pause_ms": 500,
+      "timing": "measured-block-pcm",
+      "sample_rate": 24000,
+      "max_attempts": 1
+    },
+    "rules_sha256": "ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417",
+    "chunks": [
+      {
+        "id": "3059f95bb0eb3b633d757b10849aaf80b1246465f31eaed915ae8bc40b59b359",
+        "order": 0,
+        "text": "第一批，臺北的圖書館。Hello world。",
+        "separator_after": "",
+        "text_sha256": "d0091ef798f762d3ffbc92aec9612a267ec164759a3606d2f5f1903d6c765084",
+        "pause_after_ms": 0,
+        "settings_sha256": "9a03350b11a33bf304e9dc1bc3d97b8c88827e23456f3629118939ac37a41839",
+        "rules_sha256": "ff2181ab5613c14dbb109e90193fbff89c0ac06475cd7b3afa73e20241d48417",
+        "status": "completed",
+        "attempts": 0,
+        "duration_ms": 4050,
+        "reused": true,
+        "frames": 97200,
+        "start_ms": 0,
+        "end_ms": 4050
+      }
+    ],
+    "duration_ms": 4050,
+    "completed_at": "2026-11-19T05:20:45.356587+00:00",
+    "mp3": {
+      "path": "batches/79dbad963d60443aad34558de3871702/narration-affa0555634940c2afd55b16daf976fb/media/narration.mp3",
+      "sha256": "b1b1f38f84fbd8576dd9e497b2b7202380f38e9c7f2bd6c4868ddf7946349dd4"
+    },
+    "srt": {
+      "path": "batches/79dbad963d60443aad34558de3871702/narration-affa0555634940c2afd55b16daf976fb/media/narration.srt",
+      "sha256": "6abbbabd78be1a2a7d9579267cba1997c93197e2dd7624bf0b5b414d3d92b140"
+    }
+  },
+  "packages": [
+    "kokoro-zh-cpu-78fb4b82d084294e"
+  ]
+}

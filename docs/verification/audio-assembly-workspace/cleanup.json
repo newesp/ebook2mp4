@@ -1,0 +1,68 @@
+{
+  "removed": [
+    {
+      "removed": true,
+      "files": 18,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\assembly-mypy",
+      "bytes": 15929573
+    },
+    {
+      "removed": true,
+      "files": 167,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\audio-assembly-review",
+      "bytes": 369982
+    },
+    {
+      "removed": true,
+      "files": 4089,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "bytes": 47761671
+    },
+    {
+      "removed": true,
+      "files": 2558,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-tools",
+      "bytes": 73585391
+    },
+    {
+      "removed": true,
+      "files": 2,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "bytes": 202708992
+    },
+    {
+      "removed": true,
+      "files": 28,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "bytes": 121410362
+    },
+    {
+      "removed": true,
+      "files": 16,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "bytes": 34060263
+    },
+    {
+      "removed": true,
+      "files": 35,
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\test-runs\\tmpkqz_w9r8",
+      "bytes": 68333
+    }
+  ],
+  "release_unlocked": true,
+  "removed_bytes": 495894567.0,
+  "preserved": [
+    "dist/ebook2mp4",
+    "archives/v1",
+    "docs/verification/audio-assembly-workspace"
+  ],
+  "release": "E:\\Leo\\Projects\\ebook2mp4\\dist\\ebook2mp4",
+  "timestamp": "2026-11-12T14:07:16.0290711+08:00",
+  "processes": [],
+  "exclusive_release_files_checked": 1905,
+  "remaining_media_test_processes": 0,
+  "older_test_runs_preserved": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ]
+}

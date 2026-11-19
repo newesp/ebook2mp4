@@ -1,0 +1,10 @@
+{
+  "stage": "applied",
+  "characters": 15090,
+  "sha256": "82d92ee193bd5bb5a62ac27ff5bc3ae7f09ce29d2991b031ef109a6e78dc1659",
+  "expected_exact": true,
+  "noop_versions_and_readiness_unchanged": true,
+  "noop_exit_autosave_only_change": true,
+  "new_backups": 2,
+  "original_source_hashes_unchanged": true
+}

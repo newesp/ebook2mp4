@@ -1,0 +1,32 @@
+test_disclosures_scroll_and_empty_transitions_preserve_context (test_audio_join_workspace.AudioJoinWorkspace.test_disclosures_scroll_and_empty_transitions_preserve_context) ... ok
+test_each_pdf_warning_requires_explicit_confirmation (test_audio_join_workspace.AudioJoinWorkspace.test_each_pdf_warning_requires_explicit_confirmation) ... ok
+test_edit_return_uses_current_book_when_two_books_have_pending_returns (test_audio_join_workspace.AudioJoinWorkspace.test_edit_return_uses_current_book_when_two_books_have_pending_returns) ... Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2093, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 876, in callit
+    func(*args, **kw)
+    ~~~~^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\manuscript_desktop.py", line 790, in layout_workspace
+    self.production.sync_chrome()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 200, in sync_chrome
+    joins = assembly and self.current.join_page is not None and self.current.join_page.winfo_manager()
+                                                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1281, in winfo_manager
+    return self.tk.call('winfo', 'manager', self._w)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_tkinter.TclError: bad window path name ".!workbench.!frame.!productionworkspace.!frame2.!assemblypage2.!joinpage"
+ok
+test_join_page_save_preview_edit_return_and_sizes (test_audio_join_workspace.AudioJoinWorkspace.test_join_page_save_preview_edit_return_and_sizes) ... ok
+test_leave_during_preparation_never_starts_hidden_audio (test_audio_join_workspace.AudioJoinWorkspace.test_leave_during_preparation_never_starts_hidden_audio) ... ok
+test_mock_parent_grid_and_native_red_green (test_audio_join_workspace.AudioJoinWorkspace.test_mock_parent_grid_and_native_red_green) ... ok
+test_preview_content_scope_stop_on_edit_and_save_failure (test_audio_join_workspace.AudioJoinWorkspace.test_preview_content_scope_stop_on_edit_and_save_failure) ... ok
+Native menu caption: outer=144, required=52, old-label=8, fixed-label=52
+test_video_preferences_cannot_redirect_or_start_video (test_audio_assembly_workspace.AudioAssemblyWorkspace.test_video_preferences_cannot_redirect_or_start_video) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 199.650s
+
+OK
