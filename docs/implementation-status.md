@@ -1,3 +1,7 @@
+# 2026-11-20 K04 離線語音包管理結案
+
+修正 [#6／K04](https://github.com/newesp/ebook2mp4/issues/6) 的重匯入問題。既有安裝可用時仍會校驗新選的 ZIP，拒絕同大小但內容不符的資源。有效資源的安裝清單遺失或損毀時，用通過驗證的 ZIP 恢復清單。移除在取得語音包鎖後確認目標。正式 EXE 目錄的封裝前檢查回報 Windows 錯誤 32，這次交付來源修正。[驗收與範圍](verification/kokoro-k04/closeout.md)。下一張為 [#7／K05](https://github.com/newesp/ebook2mp4/issues/7)。
+
 # 2026-11-20 K02 共用合成接點結案
 
 修正 [#4／K02](https://github.com/newesp/ebook2mp4/issues/4) 的舊版合成計畫相容性。重開時依原規則版本驗證計畫，離線續作用舊 PCM 快取產出 MP3／SRT。現有服務採模擬回應驗證，含取消、續作、不同意傳送與舊成品保護。正式 EXE 目錄無法獨占開啟，這次交付來源修正。[驗收與範圍](verification/kokoro-k02/closeout.md)。下一張為 [#6／K04](https://github.com/newesp/ebook2mp4/issues/6)。

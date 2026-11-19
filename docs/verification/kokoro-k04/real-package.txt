@@ -1,0 +1,6 @@
+Fresh import: started
+Fresh import: completed in 85.07s
+Repair missing receipt: started
+Repair missing receipt: completed in 493.15s
+100 voices restored; worker unchanged; removal and project reopen passed
+Isolated test package and project removed.

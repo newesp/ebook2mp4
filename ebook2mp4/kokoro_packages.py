@@ -1,5 +1,6 @@
 """Trusted, optional offline voice packages. No project data lives here."""
 import asyncio
+from contextlib import ExitStack
 from copy import deepcopy
 from functools import lru_cache
 import hashlib
@@ -117,8 +118,29 @@ async def verify(folder,metadata,*,runtime_only=False,progress=None):
             raise ProjectError(f'語音包檔案缺少或校驗失敗：{entry["path"]}。請重新匯入完整語音包。') from None
 
 
+async def _verify_archive_files(source, entries, folder=None):
+    """Verify every archived file, optionally writing it to an isolated staging folder."""
+    for entry in entries:
+        digest = hashlib.sha256()
+        with ExitStack() as files:
+            incoming = files.enter_context(source.open(entry['path']))
+            outgoing = None
+            if folder is not None:
+                output = folder/entry['path']
+                output.parent.mkdir(parents=True, exist_ok=True)
+                outgoing = files.enter_context(output.open('wb'))
+            while data := incoming.read(1024*1024):
+                digest.update(data)
+                if outgoing is not None:
+                    outgoing.write(data)
+                await asyncio.sleep(0)
+        if digest.hexdigest() != entry['sha256']:
+            raise ValueError()
+
+
 async def install(archive):
     from .kokoro_runtime import engine
+    from .workflow import ProjectWorkflow, encode
     engine().stop_if_idle()
     lease=PackageLease()
     try:
@@ -143,20 +165,23 @@ async def install(archive):
                     raise ProjectError('語音包位置包含外部連結，請先移除該連結再匯入。')
                 try:
                     await verify(target,metadata)
-                    return metadata['id']
                 except ProjectError:
                     pass  # Stage a complete replacement before touching the damaged installation.
+                else:
+                    # Even a no-op import must check the selected archive. Only a
+                    # verified archive can restore a missing or damaged receipt.
+                    await _verify_archive_files(source, metadata['files'])
+                    try:
+                        package(metadata['id'])
+                    except ProjectError:
+                        ProjectWorkflow._atomic(target/'package.json', encode(metadata))
+                        _receipt_matches.cache_clear()
+                    return metadata['id']
             if shutil.disk_usage(home()).free < sum(e['bytes'] for e in metadata['files'])+25_000_000:
                 raise ProjectError('磁碟空間不足，請釋放空間後重新匯入語音包。')
             with tempfile.TemporaryDirectory(prefix='.install-',dir=home()) as temporary:
                 folder=Path(temporary)/'package';folder.mkdir()
-                for entry in metadata['files']:
-                    output=folder/entry['path'];output.parent.mkdir(parents=True,exist_ok=True)
-                    digest=hashlib.sha256()
-                    with source.open(entry['path']) as incoming,output.open('wb') as outgoing:
-                        while data:=incoming.read(1024*1024):
-                            digest.update(data);outgoing.write(data);await asyncio.sleep(0)
-                    if digest.hexdigest()!=entry['sha256']:raise ValueError()
+                await _verify_archive_files(source, metadata['files'], folder)
                 (folder/'package.json').write_text(json.dumps(metadata,ensure_ascii=False,sort_keys=True),encoding='utf-8')
                 backup=Path(temporary)/'old'
                 if target.exists():target.replace(backup)
@@ -173,10 +198,10 @@ async def install(archive):
 
 def remove(identity):
     from .kokoro_runtime import engine
-    folder,_=package(identity)
     engine().stop_if_idle()
     lease=PackageLease()
     try:
+        folder,_=package(identity)
         if folder.resolve().parent!=home().resolve():raise ProjectError('語音包安裝位置無效，無法移除。')
         shutil.rmtree(folder)
     except OSError:raise ProjectError('語音包檔案仍被占用，請關閉其他程式後重試移除。') from None

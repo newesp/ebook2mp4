@@ -1,10 +1,13 @@
 """Kokoro journeys through the agreed ProjectWorkflow seam."""
+import hashlib
+import json
 import os
 from pathlib import Path
 import tempfile
 import time
 import unittest
 from unittest.mock import patch
+import zipfile
 
 from ebook2mp4.workflow import ProjectWorkflow, ProjectError
 
@@ -30,7 +33,6 @@ class LocalPackageJourney(unittest.TestCase):
         self.flow=ProjectWorkflow.create(self.path/'book','本機語音')
 
     def test_invalid_package_does_not_activate_or_leave_installation(self):
-        import zipfile
         archive=self.path/'bad.zip'
         with zipfile.ZipFile(archive,'w') as target:
             target.writestr('../escaped.txt',b'not a package')
@@ -40,6 +42,61 @@ class LocalPackageJourney(unittest.TestCase):
         self.assertEqual(self.flow.local_voice_packages(),[])
         self.assertFalse((self.path/'escaped.txt').exists())
         self.assertFalse(list((self.path/'packages').glob('.install-*')))
+
+    def test_reimport_repairs_missing_receipt_and_rejects_corrupt_input(self):
+        from ebook2mp4.kokoro_packages import PackageLease
+
+        payload = b'trusted resource'
+        identity = 'kokoro-zh-cpu-0000000000000001'
+        metadata = dict(id=identity, model='test-revision', voices=[dict(id='zf_001', verified=False)],
+                        files=[dict(path='worker.py', bytes=len(payload),
+                                    sha256=hashlib.sha256(payload).hexdigest())])
+        valid = self.path/'valid.zip'
+        broken = self.path/'broken.zip'
+        for archive, content in ((valid, payload), (broken, b'!' + payload[1:])):
+            with zipfile.ZipFile(archive, 'w') as package:
+                package.writestr('package.json', json.dumps(metadata))
+                package.writestr('worker.py', content)
+        with patch('ebook2mp4.kokoro_packages.release', return_value=metadata):
+            installed = self.flow.start_voice_package_import(valid)
+            self.wait_for(installed, 10)
+            self.assertEqual(installed.state['status'], 'completed', installed.state)
+            reopened = ProjectWorkflow.open(self.flow.root)
+            folder = Path(reopened.local_voice_packages()[0]['path'])
+            receipt = folder/'package.json'
+            original = receipt.read_bytes()
+
+            rejected = reopened.start_voice_package_import(broken)
+            self.wait_for(rejected, 10)
+            self.assertEqual(rejected.state['status'], 'failed', rejected.state)
+            self.assertEqual(receipt.read_bytes(), original)
+            self.assertEqual((folder/'worker.py').read_bytes(), payload)
+
+            for damaged in (None, b'not json'):
+                if damaged is None:
+                    receipt.unlink()
+                else:
+                    receipt.write_bytes(damaged)
+                self.assertEqual(reopened.local_voice_packages(), [])
+                rejected = reopened.start_voice_package_import(broken)
+                self.wait_for(rejected, 10)
+                self.assertEqual(rejected.state['status'], 'failed', rejected.state)
+                self.assertEqual(reopened.local_voice_packages(), [])
+                repair = reopened.start_voice_package_import(valid)
+                self.wait_for(repair, 10)
+                self.assertEqual(repair.state['status'], 'completed', repair.state)
+                self.assertEqual(reopened.local_voice_packages()[0]['id'], identity)
+
+            lease = PackageLease()
+            try:
+                with self.assertRaisesRegex(ProjectError, '正在使用'):
+                    reopened.remove_voice_package(identity)
+                self.assertEqual(reopened.local_voice_packages()[0]['id'], identity)
+            finally:
+                lease.close()
+            reopened.remove_voice_package(identity)
+            self.assertEqual(ProjectWorkflow.open(self.flow.root).local_voice_packages(), [])
+            self.assertFalse(list(folder.parent.glob('.install-*')))
 
     def test_missing_package_explains_recovery_and_preserves_settings(self):
         original=self.flow.voice_settings()
