@@ -1,0 +1,7 @@
+{
+  "provider": "kokoro",
+  "voice": "zf_001",
+  "rate": "-10%",
+  "preview_sha256": "4b183a9b7744df1907cc351b1723a35254b1300ce09263b36e44a7ecd42e7b03",
+  "preview_preserved": true
+}

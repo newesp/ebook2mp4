@@ -1,3 +1,7 @@
+# 2026-11-20 K05 Kokoro 試聽結案
+
+修正 [#7／K05](https://github.com/newesp/ebook2mp4/issues/7) 的播放狀態及取消後關頁回呼。查明錯誤 32 來自檔案總管視窗，正常關閉後重新封裝至固定目錄。正式版驗證重播、停止及語速保存。窄版服務欄問題與全頁未驗項目保留。[驗收與範圍](verification/kokoro-k05/closeout.md)。下一張為 [#8／K06](https://github.com/newesp/ebook2mp4/issues/8)。
+
 # 2026-11-20 K04 離線語音包管理結案
 
 修正 [#6／K04](https://github.com/newesp/ebook2mp4/issues/6) 的重匯入問題。既有安裝可用時仍會校驗新選的 ZIP，拒絕同大小但內容不符的資源。有效資源的安裝清單遺失或損毀時，用通過驗證的 ZIP 恢復清單。移除在取得語音包鎖後確認目標。正式 EXE 目錄的封裝前檢查回報 Windows 錯誤 32，這次交付來源修正。[驗收與範圍](verification/kokoro-k04/closeout.md)。下一張為 [#7／K05](https://github.com/newesp/ebook2mp4/issues/7)。

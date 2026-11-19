@@ -9,6 +9,9 @@ from .voice import EXAMPLE, RATES
 from .voice_media import PreviewPlayer
 
 
+PLAYING_PREVIEW = '正在播放上次成功試聽。'
+
+
 class VoiceDialog(ttk.Frame):
     page_id = 'voice.preview'
     def __init__(self, app):
@@ -390,6 +393,8 @@ class VoiceDialog(ttk.Frame):
             if self.player.playing():
                 self.schedule()
                 return
+            if self.status.cget('text') == PLAYING_PREVIEW:
+                self.status.configure(text='試聽播放完畢。')
         except ProjectError as error:
             self.status.configure(text=str(error))
             self.stop()
@@ -467,7 +472,7 @@ class VoiceDialog(ttk.Frame):
     def play(self):
         try:
             self.player.play(self.flow.voice_preview_path(self.batch_id))
-            self.status.configure(text='正在播放上次成功試聽。')
+            self.status.configure(text=PLAYING_PREVIEW)
             self.schedule()
         except ProjectError as error:
             self.status.configure(text=str(error))
@@ -475,6 +480,8 @@ class VoiceDialog(ttk.Frame):
     def stop(self):
         try:
             self.player.stop()
+            if self.status.cget('text') == PLAYING_PREVIEW:
+                self.status.configure(text='已停止播放；上次成功試聽保留。')
         except ProjectError as error:
             self.status.configure(text=str(error))
 
@@ -513,5 +520,9 @@ class VoiceDialog(ttk.Frame):
             self.after_cancel(self.timer)
             self.timer = None
         self.progress.stop()
-        self.app.voice_dialog = None
+        if self.app.voice_dialog is self:
+            self.app.voice_dialog = None
+        if self.app.production.current is self:
+            self.app.production.current = None
+        self.app.shell.unregister(self)
         self.destroy()

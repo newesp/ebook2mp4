@@ -107,10 +107,20 @@ class VoiceDesktop(unittest.TestCase):
                 requests.append((text, voice, options['rate']))
             async def stream(self): yield dict(type='audio', data=audio)
         with patch('edge_tts.Communicate', Service), patch.object(self.dialog.player, 'play') as play, \
-                patch.object(self.dialog.player, 'playing', return_value=False):
+                patch.object(self.dialog.player, 'playing', return_value=True) as playing:
             self.dialog.preview_button.invoke()
             self.poll()
             play.assert_called_once()
+            self.assertIn('正在播放', self.dialog.status.cget('text'))
+            self.dialog.stop_button.invoke()
+            self.assertIn('已停止播放', self.dialog.status.cget('text'))
+            self.dialog.play_button.invoke()
+            playing.return_value = False
+            deadline = time.monotonic() + 2
+            while '正在播放' in self.dialog.status.cget('text') and time.monotonic() < deadline:
+                self.root.update()
+                time.sleep(.02)
+            self.assertIn('播放完畢', self.dialog.status.cget('text'))
         self.assertEqual(requests, [('自訂 Hello。', 'zh-TW-TestNeural', '-10%')])
         self.assertEqual(self.app.flow.voice_settings(self.app.batch_id), original)
         self.assertEqual(self.app.current_text, draft)
@@ -153,6 +163,8 @@ class VoiceDesktop(unittest.TestCase):
     def test_close_cancels_background_request_and_releases_timer(self):
         self.choose()
         self.dialog.consent.set(True)
+        callback_errors = []
+        self.root.report_callback_exception = lambda *error: callback_errors.append(error[1])
         class Service:
             def __init__(self, *args, **kwargs): pass
             async def stream(self):
@@ -177,6 +189,8 @@ class VoiceDesktop(unittest.TestCase):
             self.assertIsNone(self.app.voice_dialog)
             self.assertTrue(job.wait(0))
             self.assertEqual(job.state['status'], 'cancelled')
+            self.app.production.sync_chrome()
+            self.assertEqual(callback_errors, [])
 
     def test_normal_dialog_is_centered_and_popover_keeps_anchor(self):
         dialog = tk.Toplevel(self.root)

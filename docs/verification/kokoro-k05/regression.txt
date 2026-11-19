@@ -1,0 +1,69 @@
+test_close_cancels_background_request_and_releases_timer (test_voice_desktop.VoiceDesktop.test_close_cancels_background_request_and_releases_timer) ... Exception in Tkinter callback
+Traceback (most recent call last):
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2093, in __call__
+    return self.func(*args)
+           ~~~~~~~~~^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 876, in callit
+    func(*args, **kw)
+    ~~~~^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\manuscript_desktop.py", line 741, in layout_workspace
+    self.production.sync_chrome()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\production_desktop.py", line 223, in sync_chrome
+    app.shell.present(ShellPresentation(
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+        page_id=getattr(owner,'page_id',type(owner).__name__)+('.batch' if getattr(page,'batch_id',None) else '.book'),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        document_commands_enabled=not bool(joining and (getattr(owner,'job',None) or getattr(owner,'info_job',None))),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        collapse_documents_below=1050 if layout is not None else 0))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop_shell.py", line 554, in present
+    self.align_headers(presentation.bands)
+    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\desktop_shell.py", line 571, in align_headers
+    band.parent.rowconfigure(band.row,minsize=height)
+    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 2009, in grid_rowconfigure
+    return self._grid_configure('rowconfigure', index, cnf, kw)
+           ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python314\Lib\tkinter\__init__.py", line 1966, in _grid_configure
+    res = self.tk.call(
+              ('grid', command, self._w, index)
+              + options)
+_tkinter.TclError: bad window path name ".!workbench.!frame.!workspaceframe.!productionworkspace.!frame2.!voicedialog"
+ok
+test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls) ... FAIL
+test_editable_text_uses_current_settings_and_automatically_plays (test_voice_desktop.VoiceDesktop.test_editable_text_uses_current_settings_and_automatically_plays) ... ok
+test_normal_dialog_is_centered_and_popover_keeps_anchor (test_voice_desktop.VoiceDesktop.test_normal_dialog_is_centered_and_popover_keeps_anchor) ... ok
+test_service_controls_and_editable_models_follow_selected_provider (test_voice_desktop.VoiceDesktop.test_service_controls_and_editable_models_follow_selected_provider) ... ok
+test_switching_batch_does_not_write_settings_through_old_dialog (test_voice_desktop.VoiceDesktop.test_switching_batch_does_not_write_settings_through_old_dialog) ... ok
+test_local_service_reuses_controls_and_package_page_preserves_text (test_kokoro_desktop.LocalDesktop.test_local_service_reuses_controls_and_package_page_preserves_text) ... ok
+test_failed_restore_keeps_previous_settings_and_releases_lock (test_voice_setting_restore.SettingsRecovery.test_failed_restore_keeps_previous_settings_and_releases_lock) ... ok
+test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript (test_voice_setting_restore.SettingsRecovery.test_restore_uses_task_snapshot_and_does_not_restore_changed_manuscript) ... ok
+test_timestamp_voice_names_and_independent_records_survive_reopen (test_voice_setting_restore.SettingsRecovery.test_timestamp_voice_names_and_independent_records_survive_reopen) ... ok
+test_cancel_failure_and_unavailable_voice_keep_last_success (test_voice.VoiceJourney.test_cancel_failure_and_unavailable_voice_keep_last_success) ... ok
+test_corrupt_audio_and_conflicting_save_keep_previous_success (test_voice.VoiceJourney.test_corrupt_audio_and_conflicting_save_keep_previous_success) ... ok
+test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing (test_voice.VoiceJourney.test_invalid_ranges_missing_tools_and_dependencies_do_not_block_editing) ... ok
+test_live_catalog_cache_and_independent_batch_defaults_survive_reopen (test_voice.VoiceJourney.test_live_catalog_cache_and_independent_batch_defaults_survive_reopen) ... ok
+test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause (test_voice.VoiceJourney.test_paragraph_processing_keeps_words_and_adds_only_one_interior_pause) ... ok
+test_repeated_cancel_waits_for_service_resource_cleanup (test_voice.VoiceJourney.test_repeated_cancel_waits_for_service_resource_cleanup) ... ok
+test_selected_preview_snapshots_requests_and_reopens_playable_result (test_voice.VoiceJourney.test_selected_preview_snapshots_requests_and_reopens_playable_result) ... ok
+test_all_cloud_services_refuse_uncached_narration_without_consent (test_tts_capabilities.ServiceJourneys.test_all_cloud_services_refuse_uncached_narration_without_consent) ... ok
+test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline (test_tts_capabilities.ServiceJourneys.test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline) ... ok
+test_uninstalled_local_service_is_not_advertised_as_usable (test_tts_capabilities.ServiceJourneys.test_uninstalled_local_service_is_not_advertised_as_usable) ... ok
+
+======================================================================
+FAIL: test_compact_page_keeps_controls_visible_and_only_text_scrolls (test_voice_desktop.VoiceDesktop.test_compact_page_keeps_controls_visible_and_only_text_scrolls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_voice_desktop.py", line 138, in test_compact_page_keeps_controls_visible_and_only_text_scrolls
+    self.assertFalse(any(isinstance(w, tk.Canvas) for w in descendants(d)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 20 tests in 61.772s
+
+FAILED (failures=1)
