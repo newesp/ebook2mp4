@@ -22,6 +22,8 @@ from .voice_media import media_command, speech_block
 RULES: dict = dict(version='natural-block-v1', request_escaped_utf8_bytes=3000,
              sentence_pause_ms=0, paragraph_pause_ms=500, timing='measured-block-pcm',
              sample_rate=24000, max_attempts=3)
+LEGACY_RHYTHM_VERSION = 'rhythm-block-v2'
+RHYTHM_VERSION = 'rhythm-block-v3'
 PARAGRAPH = re.compile(r'(?:\r?\n)[ \t]*(?:\r?\n)(?:[ \t]*\r?\n)*')
 CLOSERS = '\"\'”’」』）)]}》】'
 ABBREVIATIONS = frozenset(('dr.', 'mr.', 'mrs.', 'ms.', 'prof.', 'sr.', 'jr.', 'st.',
@@ -122,14 +124,15 @@ def safe_boundaries(text: str, *, split_quotes: bool = False) -> tuple[list[int]
     return sorted(set(result)), sorted(complete_sentences), clauses
 
 
-def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
+def plan(text: str, settings: dict, reading_id: str, batch_id: str, *,
+         rule_version: str = RHYTHM_VERSION) -> dict:
     if any(ord(c) < 32 and c not in '\r\n\t' for c in text):
         raise ProjectError('朗讀稿含語音服務不支援的控制字元，請修正後重新確認。')
     from .voice import settings as validate_settings
     settings = validate_settings(settings)
     from .tts_backend import capabilities
     policy = capabilities(settings['provider'])
-    rules = dict(RULES, version='rhythm-block-v3', sentence_pause_ms=settings['sentence_pause_ms'],
+    rules = dict(RULES, version=rule_version, sentence_pause_ms=settings['sentence_pause_ms'],
                  paragraph_pause_ms=settings['paragraph_pause_ms'],
                  request_escaped_utf8_bytes=policy.request_escaped_utf8_bytes, max_attempts=policy.max_attempts)
     chunks: list[dict] = []
@@ -167,7 +170,7 @@ def plan(text: str, settings: dict, reading_id: str, batch_id: str) -> dict:
                     end = clauses[clause]
                 else:
                     end = boundaries[at] if at >= 0 else offset
-                if end <= offset:
+                if end <= offset and rule_version == RHYTHM_VERSION:
                     if quote_boundaries is None:
                         _, quote_sentences, quote_clauses = safe_boundaries(paragraph, split_quotes=True)
                         quote_boundaries = (quote_sentences, quote_clauses)
@@ -340,8 +343,16 @@ class NarrationJob(VoiceJob):
 
 
 def validate_plan(snapshot: dict):
-    expected = plan(snapshot['text'], snapshot['settings'], snapshot['reading_id'], snapshot['batch_id'])
-    if snapshot['rules'] == RULES and snapshot['settings']['sentence_pause_ms'] == 0 and snapshot['settings']['paragraph_pause_ms'] == 500:
+    original_rules = (snapshot['rules'] == RULES and snapshot['settings']['sentence_pause_ms'] == 0
+                      and snapshot['settings']['paragraph_pause_ms'] == 500)
+    version = snapshot['rules']['version']
+    if original_rules:
+        version = LEGACY_RHYTHM_VERSION
+    if version not in (LEGACY_RHYTHM_VERSION, RHYTHM_VERSION):
+        raise ProjectError('合成計畫版本無法驗證，請還原專案備份。')
+    expected = plan(snapshot['text'], snapshot['settings'], snapshot['reading_id'], snapshot['batch_id'],
+                    rule_version=version)
+    if original_rules:
         # T10 used the same natural rhythm under its original rule-version name.
         expected['rules'] = dict(RULES)
         expected['rules_sha256'] = digest(encode(RULES))
@@ -358,8 +369,7 @@ def read_run(flow: ProjectWorkflow, ref: dict, *, verify_audio=True) -> dict:
         progress = json.loads(flow._path(ref['progress_path']).read_bytes())
         from .production_lock import production_active
         from .voice_media import cached_block
-        if verify_audio:
-            validate_plan(snapshot)
+        validate_plan(snapshot)
         if progress['status'] not in ('pending', 'running', 'cancelling', 'cancelled', 'failed', 'completed'):
             raise ValueError()
         if progress['status'] in ('pending', 'running', 'cancelling') and not production_active(flow.root / '.production.lock'):

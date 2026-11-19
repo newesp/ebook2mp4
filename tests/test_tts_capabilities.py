@@ -1,9 +1,13 @@
 """Public workflow regression for the built-in service capability seam."""
+import json
+from pathlib import Path
+import subprocess
 import unittest
 from unittest.mock import patch
 
 import test_voice as fixture
 from ebook2mp4.tts_services import save_profile
+from ebook2mp4.voice_media import ffmpeg
 from ebook2mp4.workflow import ProjectWorkflow, ProjectError, digest, encode
 
 
@@ -48,23 +52,36 @@ class ServiceJourneys(unittest.TestCase):
         self.flow.confirm_reading(self.batch)
         # Frozen identity from the pre-K02 block format. Populate a complete PCM
         # cache as an older application would, then observe only public behavior.
-        import subprocess
-        import shutil
         cache = self.flow.root/'batches'/self.batch/'voice-blocks'
         cache.mkdir(parents=True,exist_ok=True)
         key = '46545532b103c3a4885e16c143cb6e5b87e61ca3eaa24a01ed883a60f80f2002'
         pcm = cache/(key+'.wav')
-        subprocess.run([shutil.which('ffmpeg'), '-v','error','-f','lavfi','-i',
+        subprocess.run([ffmpeg(), '-v','error','-f','lavfi','-i',
                         'sine=frequency=440:duration=0.2','-ac','1','-ar','24000',
                         '-c:a','pcm_s16le','-y',str(pcm)], check=True)
         (cache/(key+'.json')).write_bytes(encode(dict(sha256=digest(pcm.read_bytes()))))
+        # Snapshot captured from 871b3a9a, when rhythm-block-v2 was current.
+        fixture_path = Path(__file__).with_name('fixtures')/'k02-rhythm-block-v2.json'
+        snapshot = json.loads(fixture_path.read_text(encoding='utf-8'))
+        manifest = self.flow.state
+        snapshot.update(batch_id=self.batch, reading_id=manifest['batches'][0]['current_reading'])
+        folder = f'batches/{self.batch}/narration-{snapshot["id"]}'
+        plan_path = f'{folder}/plan.json'
+        progress_path = f'{folder}/progress.json'
+        data = encode(snapshot)
+        manifest['batches'][0]['narration_runs'] = [
+            dict(id=snapshot['id'], path=plan_path, progress_path=progress_path, sha256=digest(data))]
+        self.flow._commit(manifest, [(plan_path, data), (progress_path, encode(dict(status='cancelled', chunks=[])))])
         reopened = ProjectWorkflow.open(self.flow.root)
         inspected = reopened.inspect_narration(self.batch)
         self.assertEqual(inspected['reusable'],1)
-        self.assertEqual(inspected['snapshot']['rules_sha256'],
-                         'cf79d3f4f61dd4fa9bd18e78d4437c590c565bebdbd38538e4dbb6419c4546af')
+        run, = reopened.narration_runs(self.batch)
+        self.assertEqual(run['snapshot'], snapshot)
+        self.assertEqual(run['reusable'], 1)
+        self.assertFalse(run['stale'])
+        self.assertTrue(any(s.get('run_id') == snapshot['id'] for s in reopened.voice_setting_sources(self.batch)))
         with patch('edge_tts.Communicate') as transport:
-            job = reopened.start_narration(self.batch,allow_network=False)
+            job = reopened.resume_narration(self.batch,snapshot['id'],allow_network=False)
             published = False
             try:
                 self.assertTrue(job.wait(15),job.state)
@@ -78,6 +95,7 @@ class ServiceJourneys(unittest.TestCase):
             transport.assert_not_called()
         self.assertTrue(product['chunks'][0]['reused'])
         self.assertEqual(product['text'],'第一段。')
+        reopened = ProjectWorkflow.open(self.flow.root)
         self.assertTrue(reopened.narration_path(self.batch).is_file())
         self.assertIn('第一段。',reopened.narration_path(self.batch,'srt').read_text(encoding='utf-8-sig'))
 

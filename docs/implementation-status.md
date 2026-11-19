@@ -1,3 +1,7 @@
+# 2026-11-20 K02 共用合成接點結案
+
+修正 [#4／K02](https://github.com/newesp/ebook2mp4/issues/4) 的舊版合成計畫相容性。重開時依原規則版本驗證計畫，離線續作用舊 PCM 快取產出 MP3／SRT。現有服務採模擬回應驗證，含取消、續作、不同意傳送與舊成品保護。正式 EXE 目錄無法獨占開啟，這次交付來源修正。[驗收與範圍](verification/kokoro-k02/closeout.md)。下一張為 [#6／K04](https://github.com/newesp/ebook2mp4/issues/6)。
+
 # 2026-11-20 K01 可行性結案
 
 覆核 [#3／K01](https://github.com/newesp/ebook2mp4/issues/3) 的官方 CPU、隔離離線、效能與資源釋放證據。在驗證工具修正標準千位金額、帶前導零的編號及電話分機讀法，保留正式語音包的現行政策。多音字、中英混讀與額外人工覆核依使用者決定不處理。[結果與音檔](verification/kokoro-k01/closeout.md)。下一張為 [#4／K02](https://github.com/newesp/ebook2mp4/issues/4)。

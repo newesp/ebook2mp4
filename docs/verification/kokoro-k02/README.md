@@ -1,5 +1,7 @@
 # K02 共用語音服務接點驗證
 
+> 2026-11-20 的相容性修正及最新驗收見 [結案覆核](closeout.md)。下文保留原始驗證。
+
 2026-11-04。使用者已在 K01 結果交付後確認「可以繼續整合」；記錄見 [整合決定](../kokoro-k01/integration-decision.md)。本次已讀取 [#4](https://github.com/newesp/ebook2mp4/issues/4)、[#5](https://github.com/newesp/ebook2mp4/issues/5) 正文與留言，兩票留言均為 0。
 
 ## 已完成
