@@ -1,0 +1,40 @@
+{
+  "removed": [
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\build-tools",
+      "existed": true,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\voice-runtime",
+      "existed": true,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\ocr-runtime",
+      "existed": true,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-build",
+      "existed": true,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\.scratch\\pyinstaller-cache",
+      "existed": false,
+      "removed": true
+    },
+    {
+      "path": "E:\\Leo\\Projects\\ebook2mp4\\ebook2mp4\\__pycache__",
+      "existed": true,
+      "removed": true
+    }
+  ],
+  "preserved_test_directories": [
+    "tmp5ck14ky0",
+    "tmpk70kv66w"
+  ],
+  "production_exe": true,
+  "voice_zip": false
+}

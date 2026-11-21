@@ -1,0 +1,6 @@
+test_resume_rejects_a_project_changed_in_another_window (test_narration_resume.NarrationRecovery.test_resume_rejects_a_project_changed_in_another_window) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 2.555s
+
+OK

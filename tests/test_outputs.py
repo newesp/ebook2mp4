@@ -14,6 +14,30 @@ class OutputsJourney(unittest.TestCase):
     picture = fixture.MergeVideoJourney.picture
     movies = fixture.MergeVideoJourney.movies
 
+    def test_moved_partial_project_finishes_video_without_new_speech(self):
+        self.plan(self.prepare(2))
+        self.assertEqual(self.run_outputs()['status'], 'partial')
+        original_audio = self.flow.total_audio_path().read_bytes()
+        original_srt = self.flow.total_audio_path('srt').read_bytes()
+        original_id = self.flow.total_audio()['id']
+        previous_root = self.flow.root.resolve()
+        destination = previous_root.with_name('搬移 書籍（T22）')
+        self.assertTrue(previous_root.is_relative_to(self.path.resolve()))
+        self.assertTrue(destination.is_relative_to(self.path.resolve()))
+        self.assertFalse(destination.exists())
+        previous_root.rename(destination)
+        self.flow = ProjectWorkflow.open(destination)
+        self.assertEqual(self.flow.inspect_outputs()['status'], 'partial')
+        self.assertEqual(self.flow.output_formats(), ['mp3', 'mp4'])
+        self.visual()
+        with patch('ebook2mp4.assembly.start', side_effect=AssertionError('moved valid audio must be reused')):
+            self.assertEqual(self.run_outputs()['status'], 'completed')
+        self.assertEqual(self.flow.total_audio()['id'], original_id)
+        self.assertEqual(self.flow.total_audio_path().read_bytes(), original_audio)
+        self.assertEqual(self.flow.total_video_path('srt').read_bytes(), original_srt)
+        self.assertTrue(self.flow.total_video_path().is_file())
+        self.assertFalse(previous_root.exists())
+
     def plan(self, ids, formats=('mp3', 'mp4'), method='total-audio'):
         self.flow.save_total_video_method(method)
         self.flow.save_output_plan(ids, resolution='720p')

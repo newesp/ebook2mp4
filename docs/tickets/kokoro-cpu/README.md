@@ -1,5 +1,7 @@
 # Kokoro CPU 工作票與實作入口
 
+2026-11-21 最終核對：K01～K09 已完成可修正部分及排除紀錄，原始拆分與阻擋順序保留如下，不再以「先做 #3」作為目前工作。現行結果見 [剩餘工單結案](../../verification/remaining-tickets/README.md) 及各票 closeout；乾淨 Windows 不測、K09 聽感已由使用者確認，其他未執行驗收不標為通過。
+
 2026-11-04。依使用者核准的九票拆分發布。父規格為 [#2](https://github.com/newesp/ebook2mp4/issues/2)。所有票均標記 ready-for-agent；標籤不表示可跳過阻擋關係、可行性結果審閱或 UI 設計圖確認。
 
 | 工作票 | 交付 | 被哪些票阻擋 |

@@ -1,0 +1,39 @@
+Public workflow wait: 0.03s; completed
+Public workflow wait: 0.00s; failed
+Public workflow wait: 3.17s; completed
+test_confirmed_snapshot_local_chunks_cues_and_conflicts (test_kokoro_narration.LocalNarration.test_confirmed_snapshot_local_chunks_cues_and_conflicts) ... ok
+Public workflow wait: 0.05s; completed
+Public workflow wait: 3.52s; completed
+Public workflow wait: 0.62s; completed
+test_local_cancel_corrupt_cache_resume_and_pause_reuse (test_kokoro_narration.LocalNarration.test_local_cancel_corrupt_cache_resume_and_pause_reuse) ... ok
+test_assembly_cancel_joins_media_process_and_resumes_without_tts (test_narration_resume.NarrationRecovery.test_assembly_cancel_joins_media_process_and_resumes_without_tts) ... ERROR
+test_cancel_reopen_resume_reuses_successful_blocks (test_narration_resume.NarrationRecovery.test_cancel_reopen_resume_reuses_successful_blocks) ... ok
+test_corrupt_cache_is_not_reused (test_narration_resume.NarrationRecovery.test_corrupt_cache_is_not_reused) ... ok
+test_failed_assembly_resumes_offline_and_preserves_previous_product (test_narration_resume.NarrationRecovery.test_failed_assembly_resumes_offline_and_preserves_previous_product) ... ok
+test_hard_exit_recovers_lease_and_rejects_changed_settings (test_narration_resume.NarrationRecovery.test_hard_exit_recovers_lease_and_rejects_changed_settings) ... ok
+test_offline_permission_is_enforced_after_cache_changes (test_narration_resume.NarrationRecovery.test_offline_permission_is_enforced_after_cache_changes) ... ok
+test_resume_rejects_a_project_changed_in_another_window (test_narration_resume.NarrationRecovery.test_resume_rejects_a_project_changed_in_another_window) ... ok
+test_defaults_apply_only_to_explicit_batches_and_survive_reopen (test_incremental_narration.IncrementalNarration.test_defaults_apply_only_to_explicit_batches_and_survive_reopen) ... ok
+test_edit_insert_and_pause_changes_reuse_actual_requests (test_incremental_narration.IncrementalNarration.test_edit_insert_and_pause_changes_reuse_actual_requests) ... ok
+test_new_revision_cancel_and_cache_loss_preserve_old_product (test_incremental_narration.IncrementalNarration.test_new_revision_cancel_and_cache_loss_preserve_old_product) ... ok
+test_all_cloud_services_refuse_uncached_narration_without_consent (test_tts_capabilities.ServiceJourneys.test_all_cloud_services_refuse_uncached_narration_without_consent) ... ok
+test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline (test_tts_capabilities.ServiceJourneys.test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline) ... ok
+test_uninstalled_local_service_is_not_advertised_as_usable (test_tts_capabilities.ServiceJourneys.test_uninstalled_local_service_is_not_advertised_as_usable) ... ok
+
+======================================================================
+ERROR: test_assembly_cancel_joins_media_process_and_resumes_without_tts (test_narration_resume.NarrationRecovery.test_assembly_cancel_joins_media_process_and_resumes_without_tts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_resume.py", line 245, in test_assembly_cancel_joins_media_process_and_resumes_without_tts
+    job=self.flow.resume_narration(self.batch,run['snapshot']['id'],allow_network=False)
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 1020, in resume_narration
+    self._check_current()
+    ~~~~~~~~~~~~~~~~~~~^^
+  File "E:\Leo\Projects\ebook2mp4\ebook2mp4\workflow.py", line 258, in _check_current
+    raise ProjectError('專案已由另一個視窗變更。請保留目前編輯內容，再重新開啟專案。')
+ebook2mp4.workflow.ProjectError: 專案已由另一個視窗變更。請保留目前編輯內容，再重新開啟專案。
+
+----------------------------------------------------------------------
+Ran 15 tests in 42.927s
+
+FAILED (errors=1)

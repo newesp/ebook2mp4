@@ -1,0 +1,16 @@
+Public workflow wait: 0.04s; completed
+Public workflow wait: 0.00s; failed
+Public workflow wait: 3.51s; completed
+test_confirmed_snapshot_local_chunks_cues_and_conflicts (test_kokoro_narration.LocalNarration.test_confirmed_snapshot_local_chunks_cues_and_conflicts) ... ok
+Public workflow wait: 0.03s; completed
+Public workflow wait: 3.60s; completed
+Public workflow wait: 0.84s; completed
+test_local_cancel_corrupt_cache_resume_and_pause_reuse (test_kokoro_narration.LocalNarration.test_local_cancel_corrupt_cache_resume_and_pause_reuse) ... ok
+test_defaults_apply_only_to_explicit_batches_and_survive_reopen (test_incremental_narration.IncrementalNarration.test_defaults_apply_only_to_explicit_batches_and_survive_reopen) ... ok
+test_edit_insert_and_pause_changes_reuse_actual_requests (test_incremental_narration.IncrementalNarration.test_edit_insert_and_pause_changes_reuse_actual_requests) ... ok
+test_new_revision_cancel_and_cache_loss_preserve_old_product (test_incremental_narration.IncrementalNarration.test_new_revision_cancel_and_cache_loss_preserve_old_product) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 24.998s
+
+OK

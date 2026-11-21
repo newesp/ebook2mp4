@@ -1,0 +1,11 @@
+test_resume_rejects_a_project_changed_in_another_window (test_narration_resume.NarrationRecovery.test_resume_rejects_a_project_changed_in_another_window) ... ok
+Public workflow wait: 0.05s; completed
+Public workflow wait: 3.50s; completed
+Public workflow wait: 0.96s; completed
+test_local_cancel_corrupt_cache_resume_and_pause_reuse (test_kokoro_narration.LocalNarration.test_local_cancel_corrupt_cache_resume_and_pause_reuse) ... ok
+test_moved_partial_project_finishes_video_without_new_speech (test_outputs.OutputsJourney.test_moved_partial_project_finishes_video_without_new_speech) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 17.660s
+
+OK

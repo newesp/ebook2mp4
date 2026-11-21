@@ -1,0 +1,15 @@
+test_resume_rejects_a_project_changed_in_another_window (test_narration_resume.NarrationRecovery.test_resume_rejects_a_project_changed_in_another_window) ... FAIL
+
+======================================================================
+FAIL: test_resume_rejects_a_project_changed_in_another_window (test_narration_resume.NarrationRecovery.test_resume_rejects_a_project_changed_in_another_window)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration_resume.py", line 178, in test_resume_rejects_a_project_changed_in_another_window
+    with self.assertRaisesRegex(ProjectError, '另一個視窗'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ProjectError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 4.141s
+
+FAILED (failures=1)

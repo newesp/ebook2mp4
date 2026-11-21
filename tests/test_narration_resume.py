@@ -157,6 +157,36 @@ os._exit(2)
             reopened.finish_narration(job)
         self.assertEqual(len(requests),1)
 
+    def test_resume_rejects_a_project_changed_in_another_window(self):
+        self.prepare('第一段。')
+        audio = self.audio()
+        class Service:
+            def __init__(self, *args, **kwargs): pass
+            async def stream(self): yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service):
+            job = self.flow.start_narration(self.batch)
+            self.assertTrue(job.wait(15), job.state)
+            self.flow.discard_narration(job)
+        run = self.flow.narration_runs(self.batch)[-1]
+        stale = ProjectWorkflow.open(self.flow.root)
+        updated = ProjectWorkflow.open(self.flow.root)
+        updated.save_draft(self.batch, '另一視窗已改稿。')
+        updated.confirm_reading(self.batch)
+        with patch('edge_tts.Communicate') as transport:
+            resumed = None
+            try:
+                with self.assertRaisesRegex(ProjectError, '另一個視窗'):
+                    resumed = stale.resume_narration(self.batch, run['snapshot']['id'])
+            finally:
+                if resumed is not None:
+                    resumed.cancel()
+                    self.assertTrue(resumed.wait(10))
+                    stale.discard_narration(resumed)
+            transport.assert_not_called()
+        self.assertFalse((self.flow.root/'.production.lock').exists())
+        reopened = ProjectWorkflow.open(self.flow.root)
+        self.assertEqual(reopened.reading_text(self.batch), '另一視窗已改稿。')
+
     def test_offline_permission_is_enforced_after_cache_changes(self):
         self.prepare('第一段。')
         audio=self.audio()
@@ -166,6 +196,15 @@ os._exit(2)
         with patch('edge_tts.Communicate',Service):
             job=self.flow.start_narration(self.batch)
             self.assertTrue(job.wait(15))
+            self.flow.discard_narration(job)
+        run=self.flow.narration_runs(self.batch)[-1]
+        self.assertEqual(run['remaining'],0)
+        next((self.flow.root/'batches'/self.batch/'voice-blocks').glob('*.wav')).unlink()
+        with patch('edge_tts.Communicate',side_effect=AssertionError('must not transmit')):
+            job=self.flow.resume_narration(self.batch,run['snapshot']['id'],allow_network=False)
+            self.assertTrue(job.wait(15))
+            self.assertEqual(job.state['status'],'failed')
+            self.assertIn('同意',job.state['error'])
             self.flow.discard_narration(job)
 
     def test_assembly_cancel_joins_media_process_and_resumes_without_tts(self):
@@ -208,15 +247,6 @@ os._exit(2)
             job=reopened.resume_narration(self.batch,run['snapshot']['id'],allow_network=False)
             self.assertTrue(job.wait(15))
             reopened.finish_narration(job)
-        run=self.flow.narration_runs(self.batch)[-1]
-        self.assertEqual(run['remaining'],0)
-        next((self.flow.root/'batches'/self.batch/'voice-blocks').glob('*.wav')).unlink()
-        with patch('edge_tts.Communicate',side_effect=AssertionError('must not transmit')):
-            job=self.flow.resume_narration(self.batch,run['snapshot']['id'],allow_network=False)
-            self.assertTrue(job.wait(15))
-            self.assertEqual(job.state['status'],'failed')
-            self.assertIn('同意',job.state['error'])
-            self.flow.discard_narration(job)
 
 
 if __name__ == '__main__':

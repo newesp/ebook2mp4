@@ -1017,6 +1017,7 @@ class ProjectWorkflow(ManuscriptWorkflow):
         lock_path = self.root / '.production.lock'
         lease = ProductionLease(lock_path)
         try:
+            self._check_current()
             folder = self._path(ref['path']).parent
             job = NarrationJob(run['snapshot'], folder, tool, lease, lock_path, previous=run['progress'],allow_network=allow_network)
             self._narration_job = job
