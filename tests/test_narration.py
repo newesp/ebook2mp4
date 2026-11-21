@@ -70,6 +70,41 @@ class NarrationJourney(unittest.TestCase):
         self.flow.save_draft(self.batch, text)
         self.flow.confirm_reading(self.batch)
 
+    def test_changed_staged_media_cannot_replace_a_successful_product(self):
+        self.prepare()
+        audio = self.audio()
+        class Service:
+            def __init__(self, *args, **options): pass
+            async def stream(self):
+                yield dict(type='audio', data=audio)
+        with patch('edge_tts.Communicate', Service):
+            first = self.flow.start_narration(self.batch)
+            self.assertTrue(first.wait(15), first.state)
+            previous = self.flow.finish_narration(first)
+        original_files = {kind: self.flow.narration_path(self.batch, kind).read_bytes()
+                          for kind in ('mp3', 'srt')}
+        for kind in ('mp3', 'srt'):
+            with self.subTest(kind=kind):
+                job = self.flow.start_narration(self.batch, allow_network=False)
+                try:
+                    self.assertTrue(job.wait(15), job.state)
+                    staged = job.folder/'media'/('narration.'+kind)
+                    valid = staged.read_bytes()
+                    staged.write_bytes(b'corrupt staged output')
+                    with self.assertRaisesRegex(ProjectError, '變更|校驗'):
+                        self.flow.finish_narration(job)
+                    reopened = ProjectWorkflow.open(self.flow.root)
+                    self.assertEqual(reopened.narration(self.batch)['id'], previous['id'])
+                    for format_, data in original_files.items():
+                        self.assertEqual(reopened.narration_path(self.batch, format_).read_bytes(), data)
+                    self.assertFalse(reopened.narration_runs(self.batch)[-1]['published'])
+                    staged.write_bytes(valid)
+                    # Restore the verified bytes and retry publishing the same job.
+                    previous = self.flow.finish_narration(job)
+                finally:
+                    if self.flow._narration_job is job:
+                        self.flow.discard_narration(job)
+
     def test_failed_retries_cancel_and_conflict_keep_previous_product(self):
         self.prepare()
         audio = self.audio()

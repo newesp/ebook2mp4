@@ -1,0 +1,6 @@
+test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.325s
+
+OK

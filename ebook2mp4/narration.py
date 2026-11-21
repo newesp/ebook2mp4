@@ -305,7 +305,10 @@ class NarrationJob(VoiceJob):
                 raise ProjectError('MP3 成品為空，請重試。')
             ProjectWorkflow._atomic(media / 'narration.srt', ''.join(cues).encode('utf-8'))
             assembled_path.unlink()
-            self.save_progress(status='completed', phase='等待保存', duration_ms=round(frames / 24))
+            media_sha256 = {kind: digest((media/('narration.'+kind)).read_bytes())
+                            for kind in ('mp3', 'srt')}
+            self.save_progress(status='completed', phase='等待保存', duration_ms=round(frames / 24),
+                               media_sha256=media_sha256)
             success = True
             return deepcopy(self.report)
         except asyncio.CancelledError:

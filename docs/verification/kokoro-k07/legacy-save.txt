@@ -1,0 +1,6 @@
+test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline (test_tts_capabilities.ServiceJourneys.test_legacy_pcm_cache_and_snapshot_rules_remain_usable_offline) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 3.225s
+
+OK

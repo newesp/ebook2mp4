@@ -1042,7 +1042,9 @@ class ProjectWorkflow(ManuscriptWorkflow):
         snapshot.update(chunks=report['chunks'], duration_ms=report['duration_ms'], completed_at=now())
         for kind in ('mp3', 'srt'):
             path = job.folder / 'media' / ('narration.' + kind)
-            snapshot[kind] = dict(path=path.relative_to(self.root).as_posix(), sha256=digest(path.read_bytes()))
+            ref = dict(path=path.relative_to(self.root).as_posix(), sha256=report['media_sha256'][kind])
+            self._read(ref)
+            snapshot[kind] = ref
         manifest = self.state
         batch = next(b for b in manifest['batches'] if b['id'] == batch_id)
         batch['narration'] = snapshot

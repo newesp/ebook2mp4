@@ -1,0 +1,10 @@
+test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) ... ok
+Public workflow wait: 0.03s; completed
+Public workflow wait: 0.00s; failed
+Public workflow wait: 3.80s; completed
+test_confirmed_snapshot_local_chunks_cues_and_conflicts (test_kokoro_narration.LocalNarration.test_confirmed_snapshot_local_chunks_cues_and_conflicts) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 13.933s
+
+OK

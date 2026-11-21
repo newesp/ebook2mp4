@@ -1,3 +1,7 @@
+# 2026-11-21 K07 正式成品保存保護
+
+修正 [#9／K07](https://github.com/newesp/ebook2mp4/issues/9) 的等待保存階段。完成時固定 MP3／SRT 校驗值，保存時內容變更即拒絕發布，保留上一份成功成品。以本機子程序及實際媒體處理驗證快照、分塊、字幕與衝突保護。[結果與範圍](verification/kokoro-k07/closeout.md)。下一張為 [#10／K08](https://github.com/newesp/ebook2mp4/issues/10)。
+
 # 2026-11-21 K06 程序生命週期結案
 
 修正 [#8／K06](https://github.com/newesp/ebook2mp4/issues/8) 的閒置計時競爭。舊計時器即使回呼已排隊，也無法卸載後來試聽留下的模型。以公開工作流程及真實 Windows 子程序／後代程序驗證取消、崩潰重試、閒置卸載、再次載入及使用中移除保護。真實模型量測沿用歷史證據。[結果與範圍](verification/kokoro-k06/closeout.md)。下一張為 [#9／K07](https://github.com/newesp/ebook2mp4/issues/9)。

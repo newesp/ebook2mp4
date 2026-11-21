@@ -1,0 +1,26 @@
+test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) ...
+  test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) (kind='mp3') ... FAIL
+  test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) (kind='srt') ... FAIL
+
+======================================================================
+FAIL: test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) (kind='mp3')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 94, in test_changed_staged_media_cannot_replace_a_successful_product
+    with self.assertRaisesRegex(ProjectError, '變更|校驗'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ProjectError not raised
+
+======================================================================
+FAIL: test_changed_staged_media_cannot_replace_a_successful_product (test_narration.NarrationJourney.test_changed_staged_media_cannot_replace_a_successful_product) (kind='srt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_narration.py", line 94, in test_changed_staged_media_cannot_replace_a_successful_product
+    with self.assertRaisesRegex(ProjectError, '變更|校驗'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ProjectError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 4.970s
+
+FAILED (failures=2)
