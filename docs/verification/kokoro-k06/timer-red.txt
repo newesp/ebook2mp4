@@ -1,0 +1,18 @@
+Public workflow wait: 0.04s; completed
+Public workflow wait: 3.64s; completed
+Public workflow wait: 0.60s; completed
+test_expired_timer_cannot_unload_a_newer_preview (test_kokoro_lifecycle.WorkerLifecycle.test_expired_timer_cannot_unload_a_newer_preview) ... FAIL
+
+======================================================================
+FAIL: test_expired_timer_cannot_unload_a_newer_preview (test_kokoro_lifecycle.WorkerLifecycle.test_expired_timer_cannot_unload_a_newer_preview)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\Leo\Projects\ebook2mp4\tests\test_kokoro_lifecycle.py", line 109, in test_expired_timer_cannot_unload_a_newer_preview
+    self.assertEqual(self.flow.local_voice_status()['pid'], before['pid'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: None != 16400
+
+----------------------------------------------------------------------
+Ran 1 test in 5.072s
+
+FAILED (failures=1)

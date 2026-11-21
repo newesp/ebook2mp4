@@ -1,3 +1,7 @@
+# 2026-11-21 K06 程序生命週期結案
+
+修正 [#8／K06](https://github.com/newesp/ebook2mp4/issues/8) 的閒置計時競爭。舊計時器即使回呼已排隊，也無法卸載後來試聽留下的模型。以公開工作流程及真實 Windows 子程序／後代程序驗證取消、崩潰重試、閒置卸載、再次載入及使用中移除保護。真實模型量測沿用歷史證據。[結果與範圍](verification/kokoro-k06/closeout.md)。下一張為 [#9／K07](https://github.com/newesp/ebook2mp4/issues/9)。
+
 # 2026-11-20 K05 Kokoro 試聽結案
 
 修正 [#7／K05](https://github.com/newesp/ebook2mp4/issues/7) 的播放狀態及取消後關頁回呼。查明錯誤 32 來自檔案總管視窗，正常關閉後重新封裝至固定目錄。正式版驗證重播、停止及語速保存。窄版服務欄問題與全頁未驗項目保留。[驗收與範圍](verification/kokoro-k05/closeout.md)。下一張為 [#8／K06](https://github.com/newesp/ebook2mp4/issues/8)。

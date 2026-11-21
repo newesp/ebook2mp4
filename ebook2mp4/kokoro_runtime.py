@@ -67,6 +67,7 @@ class Engine:
         self.tree: ProcessTree | None=None
         self.lease: PackageLease | None=None
         self.timer: threading.Timer | None=None
+        self.idle_generation=0
         self.temp: tempfile.TemporaryDirectory[str] | None=None
         self.reader: threading.Thread | None=None
         self.messages: queue.Queue[dict]=queue.Queue()
@@ -85,12 +86,13 @@ class Engine:
             if self.busy:raise ProjectError('本機語音工作進行中，請先取消或等待完成後管理語音包。')
             self.stop()
 
-    def unload_idle(self):
+    def unload_idle(self,generation):
         with self.guard:
-            if not self.busy:self.stop()
+            if generation==self.idle_generation and not self.busy:self.stop()
 
     def stop(self):
         with self.guard:
+            self.idle_generation+=1
             if self.timer:self.timer.cancel();self.timer=None
             if self.tree:self.tree.close();self.tree=None
             if self.process:
@@ -120,6 +122,7 @@ class Engine:
         with self.guard:
             if self.busy:raise ProjectError('已有本機語音工作，請等待或取消後再開始。')
             self.busy=True;self.owner=threading.get_ident()
+            self.idle_generation+=1
             self.last_error=''
             if self.timer:self.timer.cancel();self.timer=None
         try:yield
@@ -132,7 +135,7 @@ class Engine:
             with self.guard:
                 self.busy=False;self.owner=None
                 if self.process:
-                    self.timer=threading.Timer(IDLE_SECONDS,self.unload_idle)
+                    self.timer=threading.Timer(IDLE_SECONDS,self.unload_idle,args=(self.idle_generation,))
                     self.timer.daemon=True;self.timer.start()
 
     def send(self,value):

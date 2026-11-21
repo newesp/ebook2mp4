@@ -1,0 +1,15 @@
+Public workflow wait: 0.07s; completed
+Public workflow wait: 2.51s; completed
+Public workflow wait: 0.34s; failed
+Public workflow wait: 2.40s; completed
+Public workflow wait: 0.79s; completed
+test_busy_idle_cancel_failure_and_retry_release_process_tree (test_kokoro_lifecycle.WorkerLifecycle.test_busy_idle_cancel_failure_and_retry_release_process_tree) ... ok
+Public workflow wait: 0.08s; completed
+Public workflow wait: 0.87s; completed
+Public workflow wait: 0.58s; completed
+test_expired_timer_cannot_unload_a_newer_preview (test_kokoro_lifecycle.WorkerLifecycle.test_expired_timer_cannot_unload_a_newer_preview) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 10.087s
+
+OK
