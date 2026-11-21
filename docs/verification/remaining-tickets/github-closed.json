@@ -1,0 +1,37 @@
+{
+  "issues": [
+    {
+      "number": 10,
+      "title": "[Kokoro K08] 中斷續作與模型版本變更保護",
+      "html_url": "https://github.com/newesp/ebook2mp4/issues/10",
+      "state": "closed",
+      "state_reason": "completed",
+      "closed_at": "2026-11-21T08:25:26Z"
+    },
+    {
+      "number": 1,
+      "title": "[Spec] 首版 PDF／TXT 書籍校對、總 MP3 與 MP4 製作",
+      "html_url": "https://github.com/newesp/ebook2mp4/issues/1",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "closed_at": "2026-11-21T08:25:30Z"
+    },
+    {
+      "number": 2,
+      "title": "[Spec] Kokoro 官方中文版本機 CPU 語音包與桌面整合",
+      "html_url": "https://github.com/newesp/ebook2mp4/issues/2",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "closed_at": "2026-11-21T08:25:33Z"
+    },
+    {
+      "number": 12,
+      "title": "[Spec v2] 全頁統一共用外框與元件，再整合專屬 UI／功能",
+      "html_url": "https://github.com/newesp/ebook2mp4/issues/12",
+      "state": "closed",
+      "state_reason": "not_planned",
+      "closed_at": "2026-11-21T08:25:36Z"
+    }
+  ],
+  "remaining_open": []
+}

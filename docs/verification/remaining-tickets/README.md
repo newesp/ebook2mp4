@@ -11,6 +11,10 @@
 
 合計本輪最終選定測試 120 項：111 項通過、9 項跳過。首次診斷與重跑不重複計數。既有歷史證據保留原版本和限制。
 
+## 遠端結案結果
+
+程式與測試修正已推送至 `main`，提交 `2f2102e8`。#10 以 `completed` 關閉；#1、#2、#12 三張規格總票以 `not_planned` 關閉，明列未執行條件，不宣稱原規格全部通過。原正文完整保留於各票結案說明下方。[結案前讀回](github-before-close.json) · [結案後讀回](github-closed.json)。最後查詢開放工單為空。
+
 ## #1：首版產品規格
 
 下列故事編號對應原票 101 項 User Stories；實作決策編號對應原票 23 項 Implementation Decisions。
@@ -70,5 +74,9 @@ Testing Decisions 1～11 及 14～15 的流程、版本與媒體契約由上表�
 標準 `python -B packaging/build.py` 更新固定正式目錄。[建置前檢查](build-preflight.txt) · [建置紀錄](build.txt) · [來源與正式包比對](package.json)。未另產生主程式目錄。收尾的清理及遠端工單狀態另記本目錄。
 
 53 個正式包內應用模組與目前來源一致，內附 FFmpeg／FFprobe 執行通過。另從正式 EXE 讀取 workflow 程式碼，以開發 Python 執行過期視窗、本機恢復及搬移三項測試，全部通過；這三項是上述案例的封裝補驗，不重複加入 120 項統計。[補驗結果](packaged-regression.txt) · [可重現腳本](verify_packaged.py)。這不是正式 EXE 主視窗操作或乾淨 Windows 測試。
+
+收尾檢查發現本機 `dist/kokoro` 沒有選配語音 ZIP，已由保留的 K01 資源重建 `kokoro-zh-cpu-78fb4b82d084294e.zip`。寫入前校驗來源，再讀回 ZIP 內全部 28,966 個資源比對 SHA-256，均符合正式固定清單；沒有下載、更換模型或改動 `kokoro_release.json`。新 ZIP 為 657,291,073 bytes，SHA-256 `adf469e2d1c013289896bb2c3612f1d09a84285e084fa9f5aa80501a82a5a472`。封裝容器與歷史 K09 ZIP 的 bytes／SHA 不同，內容識別相同；歷史紀錄不改寫。[本次 ZIP](voice-archive.json) · [重建紀錄](voice-archive.txt) · [重建腳本](restore_voice_archive.py)。
+
+本輪測試書、依賴、建置暫存、快取及工單更新暫存已清理。兩個工作前既有的測試目錄保留；其他工作產生的 `docs/f5-tts-assessment.md` 沒有修改或納入提交。正式程式與語音 ZIP 保留。[清理](cleanup.json) · [最後占用檢查](final-preflight.txt) · [程序檢查](processes.json)。
 
 本批完成後沒有下一張既有開放工單。後續如遇可重現的新問題，再依實際操作及錯誤建立修正範圍；不要求使用者補做上述已決定不執行的測試。

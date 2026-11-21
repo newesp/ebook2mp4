@@ -36,5 +36,9 @@
     "tmpk70kv66w"
   ],
   "production_exe": true,
-  "voice_zip": false
+  "voice_zip_before_restore": false,
+  "voice_zip": true,
+  "voice_zip_verification": "voice-archive.json",
+  "issue_update_script_removed": true,
+  "partial_archives": []
 }
